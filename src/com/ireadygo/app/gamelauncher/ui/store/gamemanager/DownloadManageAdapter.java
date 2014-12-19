@@ -661,6 +661,7 @@ public class DownloadManageAdapter extends HExpandableListAdapter {
 		FrameLayout gameStatusLayout;
 		ProgressBar progressBar;
 		LinearLayout downloadDisplayLayout;
+		TextView downloadBg;
 		TextView downloadSpeed;
 		TextView downloadSize;
 		ImageView gameDelete;
@@ -772,19 +773,26 @@ public class DownloadManageAdapter extends HExpandableListAdapter {
 		PropertyValuesHolder bgScaleXHolder = PropertyValuesHolder.ofFloat(View.SCALE_X, 1.24f);
 		PropertyValuesHolder bgScaleYHolder = PropertyValuesHolder.ofFloat(View.SCALE_Y, 1.24f);
 		ObjectAnimator bgScaleAnimator = ObjectAnimator.ofPropertyValuesHolder(viewHolder.background, bgScaleXHolder, bgScaleYHolder);
-		
+
 		// 游戏海报动画
 		PropertyValuesHolder gameIconXAnim = PropertyValuesHolder.ofFloat(View.SCALE_X, 1.13f);
 		PropertyValuesHolder gameIconYAnim = PropertyValuesHolder.ofFloat(View.SCALE_Y, 1.13f);
 		ObjectAnimator gameIconAnim = ObjectAnimator.ofPropertyValuesHolder(viewHolder.icon, gameIconXAnim,
 				gameIconYAnim);
-		
+
+		PropertyValuesHolder downloadBgXAnim = PropertyValuesHolder.ofFloat(View.SCALE_X, 1.13f);
+        PropertyValuesHolder downloadBgYAnim = PropertyValuesHolder.ofFloat(View.SCALE_Y, 1.13f);
+        ObjectAnimator downloadBgAnim = ObjectAnimator.ofPropertyValuesHolder(viewHolder.downloadDisplayLayout, downloadBgXAnim,
+                downloadBgYAnim);
+
+        PropertyValuesHolder txtXAnim = PropertyValuesHolder.ofFloat(View.SCALE_X, 1.13f);
+        PropertyValuesHolder txtYAnim = PropertyValuesHolder.ofFloat(View.SCALE_Y, 1.13f);
 		PropertyValuesHolder txtTranslateYHolder = PropertyValuesHolder.ofFloat(View.TRANSLATION_Y,
 				Config.StoreDetail.DOWNLOAD_MANAGE_TITLE_SELECTED_TRANSLATE_Y);
 		ObjectAnimator gameNameAnim = ObjectAnimator.ofPropertyValuesHolder(viewHolder.gameNameLayout,
-				txtTranslateYHolder);
+				txtTranslateYHolder,txtXAnim,txtYAnim);
 
-		animSet.playTogether(bgScaleAnimator,gameNameAnim,gameIconAnim);
+		animSet.playTogether(bgScaleAnimator,gameNameAnim,gameIconAnim,downloadBgAnim);
 		animSet.setInterpolator(new AccelerateInterpolator());
 		animSet.addListener(new AnimatorListenerAdapter() {
 
@@ -815,12 +823,19 @@ public class DownloadManageAdapter extends HExpandableListAdapter {
 		PropertyValuesHolder gameIconYAnim = PropertyValuesHolder.ofFloat(View.SCALE_Y, 1f);
 		ObjectAnimator gameIconAnim = ObjectAnimator.ofPropertyValuesHolder(viewHolder.icon, gameIconXAnim,
 				gameIconYAnim);
+		
+		PropertyValuesHolder downloadBgXAnim = PropertyValuesHolder.ofFloat(View.SCALE_X, 1f);
+        PropertyValuesHolder downloadBgYAnim = PropertyValuesHolder.ofFloat(View.SCALE_Y, 1f);
+        ObjectAnimator downloadBgAnim = ObjectAnimator.ofPropertyValuesHolder(viewHolder.downloadDisplayLayout, downloadBgXAnim,
+                downloadBgYAnim);
 
+        PropertyValuesHolder txtXAnim = PropertyValuesHolder.ofFloat(View.SCALE_X, 1f);
+        PropertyValuesHolder txtYAnim = PropertyValuesHolder.ofFloat(View.SCALE_Y, 1f);
 		PropertyValuesHolder txtTranslateYHolder = PropertyValuesHolder.ofFloat(View.TRANSLATION_Y, 0);
 		ObjectAnimator gameNameAnim = ObjectAnimator.ofPropertyValuesHolder(viewHolder.gameNameLayout,
-				txtTranslateYHolder);
+				txtTranslateYHolder,txtXAnim,txtYAnim);
 
-		animSet.playTogether(gameNameAnim,bgScaleAnimator,gameIconAnim);
+		animSet.playTogether(gameNameAnim,bgScaleAnimator,gameIconAnim,downloadBgAnim);
 		animSet.setInterpolator(new AccelerateInterpolator());
 		animSet.addListener(new AnimatorListenerAdapter() {
 			@Override
