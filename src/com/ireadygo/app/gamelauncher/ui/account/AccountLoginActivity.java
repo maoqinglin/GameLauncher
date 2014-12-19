@@ -2,13 +2,11 @@ package com.ireadygo.app.gamelauncher.ui.account;
 
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.ireadygo.app.gamelauncher.R;
-import com.ireadygo.app.gamelauncher.ui.SnailKeyCode;
 import com.ireadygo.app.gamelauncher.ui.activity.BaseAccountActivity;
 
 public class AccountLoginActivity extends BaseAccountActivity {
@@ -78,12 +76,16 @@ public class AccountLoginActivity extends BaseAccountActivity {
 		} else if (mRegisterBtn.hasFocus()) {
 			onClick(mRegisterBtn);
 		}
-		return true;
+		return super.onSunKey();
 	}
 	
 	@Override
 	public boolean onBackKey() {
-		finish();
-		return true;
+		return super.onBackKey();
+	}
+
+	@Override
+	public boolean onMoonKey() {
+		return onBackKey();
 	}
 }

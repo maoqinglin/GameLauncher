@@ -81,6 +81,7 @@ public class AppPlatFormConfig {
 	public static final String PARAMETER_ID = "id";
 
 	public static final String DEFAULT_HTTP_HOST = "http://api.app.snail.com";
+	public static final String DEFAULT_APP_ID = "2";
 
 	/** Http Open Api Host */
 	public static String HTTP_HOST = DEFAULT_HTTP_HOST;

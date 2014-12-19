@@ -118,7 +118,7 @@ public class AppPlatFormService implements IAppPlatFormService {
 	 * @param map
 	 */
 	private void addAuthentication(HashMap<String, String> map) {
-		map.put(PARAMETER_NAPPID, "2");
+		map.put(PARAMETER_NAPPID, AppPlatFormConfig.DEFAULT_APP_ID);
 		map.put(PARAMETER_NUSERID, mAccountManager.getLoginUni(mContext) == null ? "" : mAccountManager.getLoginUni(mContext));
 		map.put(PARAMETER_CIDENTITY, mAccountManager.getSessionId(mContext) == null ? "" : mAccountManager.getSessionId(mContext));
 	}

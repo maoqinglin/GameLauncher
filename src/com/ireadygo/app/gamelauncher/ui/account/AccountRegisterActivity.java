@@ -96,21 +96,18 @@ public class AccountRegisterActivity extends BaseAccountActivity{
 		return true;
 	}
 
+
 	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		switch (keyCode) {
-		case SnailKeyCode.SUN_KEY:
-			if (mRegisterBtn.hasFocus()) {
-				onClick(mRegisterBtn);
-			}
-			return true;
-		case SnailKeyCode.MOON_KEY:
-		case SnailKeyCode.BACK_KEY:
-			finish();
-			return true;
-		default:
-			break;
+	public boolean onSunKey() {
+		if (mRegisterBtn.hasFocus()) {
+			onClick(mRegisterBtn);
 		}
-		return super.onKeyDown(keyCode, event);
+		return super.onSunKey();
 	}
+
+	@Override
+	public boolean onMoonKey() {
+		return super.onBackKey();
+	}
+
 }

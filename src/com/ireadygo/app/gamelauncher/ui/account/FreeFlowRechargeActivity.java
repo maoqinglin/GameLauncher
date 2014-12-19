@@ -132,7 +132,6 @@ public class FreeFlowRechargeActivity extends BaseAccountActivity implements OnC
 			} else if (mPrivilegeBtn.hasFocus()) {
 				onClick(mPrivilegeBtn);
 			}
-			return true;
 		}else if(keyCode == SnailKeyCode.BACK_KEY || keyCode == SnailKeyCode.MOON_KEY){
 			onGobackClick();
 		}
