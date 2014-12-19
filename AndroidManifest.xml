@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.ireadygo.app.gamelauncher"
+    android:versionCode="200001"
+    android:versionName="2.0.1"
+    tools:ignore="OldTargetApi" >
+
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.DELETE_PACKAGES" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.SET_WALLPAPER" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.CHANGE_COMPONENT_ENABLED_STATE" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="getui.permission.GetuiService" />
+    <uses-permission android:name="android.permission.WRITE_APN_SETTINGS" />
+
+    <permission
+        android:name="getui.permission.GetuiService"
+        android:protectionLevel="normal" >
+    </permission>
+    <uses-sdk
+        android:minSdkVersion="17"
+        android:targetSdkVersion="17" />
+
+    <application
+        android:name="com.ireadygo.app.gamelauncher.GameLauncherApplication"
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:persistent="true"
+        android:debuggable="true"
+        android:theme="@style/AppTheme"
+        android:allowClearUserData = "false">
+        <meta-data
+            android:name="PUSH_APPID"
+            android:value="pBeBWRkaqE892HvalVEbj7" /> <!-- 替换为第三方应用的APPID -->
+        <meta-data
+            android:name="PUSH_APPKEY"
+            android:value="v046XwM6zqAoc2JjAdJG89" /> <!-- 替换为第三方应用的APPKEY -->
+        <meta-data
+            android:name="PUSH_APPSECRET"
+            android:value="RyM9kFHrjg7Z63oA8trI03" /> <!-- 替换为第三方应用的APPSECRET -->
+        <meta-data
+            android:name="PUSH_GROUPID"
+            android:value="" /><!-- 配置SDK核心服务 -->
+        <service
+            android:name="com.igexin.sdk.PushService"
+            android:exported="true"
+            android:label="NotificationCenter"
+            android:process=":pushservice" >
+        </service>
+
+        <receiver android:name="com.igexin.sdk.PushReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="com.igexin.sdk.action.refreshls" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.igexin.sdk.PushManagerReceiver"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.igexin.sdk.action.pushmanager" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name="com.ireadygo.app.gamelauncher.widget.GeTuiReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.igexin.sdk.action.pBeBWRkaqE892HvalVEbj7" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="com.igexin.sdk.PushActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:process=":pushservice"
+            android:taskAffinity="com.igexin.sdk.PushActivityTask"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
+        <!-- 配置弹框activity -->
+        <activity
+            android:name="com.igexin.getuiext.activity.GetuiExtActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:process=":pushservice"
+            android:taskAffinity="android.task.myServicetask"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <receiver
+            android:name="com.igexin.getuiext.service.PayloadReceiver"
+            android:exported="false" >
+            <intent-filter>
+
+                <!-- 这个com.igexin.sdk.action.7fjUl2Z3LH6xYy7NQK4ni4固定，不能修改 -->
+                <action android:name="com.igexin.sdk.action.7fjUl2Z3LH6xYy7NQK4ni4" />
+                <!-- 替换为android:name="com.igexin.sdk.action.第三方的appId" -->
+                <action android:name="com.igexin.sdk.action.pBeBWRkaqE892HvalVEbj7" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.igexin.getuiext.service.GetuiExtService"
+            android:process=":pushservice" />
+        <!-- 个推download模块配置 -->
+        <service
+            android:name="com.igexin.download.DownloadService"
+            android:process=":pushservice" />
+
+        <receiver android:name="com.igexin.download.DownloadReceiver" >
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <provider
+            android:name="com.igexin.download.DownloadProvider"
+            android:authorities="downloads.com.ireadygo.app.gamelauncher"
+            android:process=":pushservice" />
+        <!-- 替换为downloads.第三方包名 -->
+
+		<provider
+            android:name="com.ireadygo.app.gamelauncher.account.pushmsg.SnailPushMessageProvider"
+            android:authorities="com.ireadygo.app.gamelauncher.message.provider"
+            />
+
+		<activity
+            android:name="com.ireadygo.app.gamelauncher.ui.GameLauncherActivity"
+            android:clearTaskOnLaunch="true"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/app_name"
+            android:launchMode="singleInstance"
+            android:screenOrientation="landscape"
+            android:stateNotNeeded="true"
+            android:theme="@style/CustomerTheme" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.HOME" />
+               <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.MONKEY" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.ireadygo.app.gamelauncher.LaunchNotifier" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.ireadygo.app.gamelauncher.ui.detail.GameDetailActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/CustomerTheme" >
+        </activity>
+        <activity
+            android:name="com.ireadygo.app.gamelauncher.ui.store.StoreDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="landscape"
+            android:theme="@style/CustomerTheme" >
+        </activity>
+        <activity
+            android:name="com.ireadygo.app.gamelauncher.ui.detail.ScreenPictureActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/CustomerTheme" >
+        </activity>
+
+        <service android:name="com.ireadygo.app.gamelauncher.service.GameLauncherService" />
+
+        <activity
+            android:name="com.ireadygo.app.gamelauncher.wallpaper.WallpaperChooser"
+            android:finishOnCloseSystemDialogs="true"
+            android:icon="@mipmap/ic_gamelauncher_wallpaper"
+            android:label="@string/pick_wallpaper"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Holo.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.SET_WALLPAPER" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.wallpaper.preview"
+                android:resource="@xml/wallpaper_picker_preview" />
+        </activity>
+        <activity
+            android:name="com.ireadygo.app.gamelauncher.ui.store.collection.CollectionDetailActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/CustomerTheme" >
+        </activity>
+        <activity
+            android:name="com.ireadygo.app.gamelauncher.ui.slot.SlotBuyActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="landscape"
+            android:theme="@style/CustomerTheme" >
+        </activity>
+        <activity
+            android:name="com.ireadygo.app.gamelauncher.ui.account.AccountDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="landscape"
+            android:theme="@style/CustomerTheme" >
+        </activity>
+        <activity
+            android:name="com.ireadygo.app.gamelauncher.ui.account.AccountLoginActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/CustomerTheme" >
+        </activity>
+        <activity
+            android:name="com.ireadygo.app.gamelauncher.ui.account.AccountRegisterActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/CustomerTheme" >
+        </activity>
+        <activity
+            android:name="com.ireadygo.app.gamelauncher.ui.account.OneKeyLoginActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/CustomerTheme" >
+        </activity>
+        <activity
+            android:name="com.ireadygo.app.gamelauncher.ui.activity.AccountTraiffActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/CustomerTheme" />
+        <activity
+            android:name="com.ireadygo.app.gamelauncher.ui.activity.AccountStoreActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/CustomerTheme" />
+        <activity
+            android:name="com.ireadygo.app.gamelauncher.ui.account.FreeFlowRechargeActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/CustomerTheme" />
+
+        <provider
+            android:name="com.ireadygo.app.gamelauncher.account.AccountProvider"
+            android:authorities="com.ireadygo.app.gamelauncher.account.AccountProvider"
+            android:exported="true" >
+        </provider>
+        <provider
+            android:name="com.ireadygo.app.gamelauncher.mygame.data.GameLauncherProvider"
+            android:authorities="com.ireadygo.app.gamelauncher"
+            android:exported="true"
+            android:readPermission="com.ireadygo.app.gamelauncher.permission.READ_SETTINGS"
+            android:writePermission="com.ireadygo.app.gamelauncher.permission.WRITE_SETTINGS" />
+
+        <receiver android:name="com.ireadygo.app.gamelauncher.GameLauncherReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+                <action android:name="android.intent.action.PACKAGE_REPLACED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.EXTERNAL_APPLICATIONS_AVAILABLE" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.ireadygo.app.gamelauncher.armservice.ARMReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="ireadygo.intent.action.APP_START_ACTION" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.ireadygo.app.gamelauncher.widget.SMSObserver" >
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+        <service
+            android:name="com.ireadygo.app.gamelauncher.aidl.GameLauncherRemoteService"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="com.ireadygo.app.gamelauncher.GamelauncherRemoteService" />
+            </intent-filter>
+
+        </service>
+
+        <!-- 蜗牛SDK -->
+        <activity
+            android:name="com.snailgame.mobilesdk.aas.ui.UserCenterActivity"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity android:name="com.snail.pay.Payment" >
+        </activity>
+        <activity
+            android:name="com.snailgame.mobilesdk.GetAccountActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" >
+            <intent-filter>
+                <action android:name="com.snail.store.logindata" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.alipay.android.mini.window.sdk.MiniPayActivity"
+            android:configChanges="orientation"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:label="@string/msp_app_name"
+            android:launchMode="singleTop"
+            android:process="com.alipay.sdk"
+            android:theme="@style/MspAppTheme"
+            android:windowSoftInputMode="adjustResize|stateHidden" >
+            <intent-filter android:priority="800" >
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.alipay.android.mini.window.sdk.MiniWebActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:process="com.alipay.sdk"
+            android:theme="@style/MspAppTheme" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="com.alipay.android.app.MspService"
+            android:exported="false"
+            android:process="com.alipay.sdk" >
+            <intent-filter android:priority="800" />
+        </service>
+
+        <activity android:name="com.alipay.android.app.sdk.WapPayActivity" >
+        </activity>
+        <activity
+            android:name="com.umpay.creditcard.android.UmpayActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity android:name="com.unionpay.upomp.lthj.plugin.ui.SplashActivity" >
+            <intent-filter>
+                <action android:name="com.unionpay.upomp.lthj.android.plugin.init.test" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.unionpay.upomp.lthj.plugin.ui.IndexActivityGroup" >
+            <intent-filter>
+                <action android:name="com.unionpay.upomp.lthj.android.plugin.index.test" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.unionpay.upomp.lthj.plugin.ui.HomeActivity" >
+        </activity>
+        <activity android:name="com.unionpay.upomp.lthj.plugin.ui.PayActivity" >
+        </activity>
+        <activity android:name="com.unionpay.upomp.lthj.plugin.ui.AccountActivity" >
+        </activity>
+        <activity android:name="com.unionpay.upomp.lthj.plugin.ui.BankCardInfoActivity" >
+        </activity>
+        <activity android:name="com.unionpay.upomp.lthj.plugin.ui.SupportCardActivity" >
+        </activity>
+        <activity android:name="com.unionpay.upomp.lthj.plugin.ui.UserProtocolActivity" >
+        </activity>
+        <activity android:name="com.unionpay.upomp.lthj.plugin.ui.AboutActivity" >
+        </activity>
+        <activity
+            android:name="com.umpay.huafubao.ui.BillingActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:excludeFromRecents="true" >
+        </activity>
+
+        <service android:name="com.umpay.huafubao.service.AppUpgradeService" />
+        <service android:name="com.snail.statistics.SdkTimingService" />
+
+        <!-- 蜗牛SDK end -->
+        <service android:name="com.umpay.huafubao.service.AppUpgradeService" />
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="53db0c90fd98c55551018744" >
+        </meta-data>
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="MUCH_SNAIL_OFFICAL" />
+
+        <activity
+            android:name="com.ireadygo.app.gamelauncher.ui.gamecommunity.AnnouncementActivity"
+            android:theme="@style/CustomerTheme" >
+        </activity>
+         <service
+            android:name="com.ireadygo.app.gamelauncher.statusbar.StatusBarService"
+            android:exported="false" />
+    </application>
+
+</manifest>

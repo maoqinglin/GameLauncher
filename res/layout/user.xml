@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ireadygo.app.gamelauncher.ui.widget.animator.AnimatorLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/content_fragment_height"
+    android:clipChildren="false"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/content_padding_left_default"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/UserTextStyleWithCup"
+            android:id="@+id/goldenCup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/user_golden_cup"
+            android:text="0" />
+
+        <TextView
+            style="@style/UserTextStyleWithCup"
+            android:id="@+id/sliverCup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/user_cup_marginleft"
+            android:drawableLeft="@drawable/user_silver_cup"
+            android:text="0" />
+
+        <TextView
+            style="@style/UserTextStyleWithCup"
+            android:id="@+id/copperCup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/user_cup_marginleft"
+            android:drawableLeft="@drawable/user_copper_cup"
+            android:text="0" />
+
+        <com.ireadygo.app.gamelauncher.ui.widget.DigitTextView
+            android:id="@+id/dayNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/user_num_text_size"
+            android:layout_marginLeft="@dimen/user_day_num_marginleft" >
+        </com.ireadygo.app.gamelauncher.ui.widget.DigitTextView>
+
+        <com.ireadygo.app.gamelauncher.ui.widget.DigitTextView
+            android:id="@+id/gamesNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/user_num_text_size"
+            android:layout_marginLeft="@dimen/user_game_num_marginleft" >
+        </com.ireadygo.app.gamelauncher.ui.widget.DigitTextView>
+
+        <com.ireadygo.app.gamelauncher.ui.widget.DigitTextView
+            android:id="@+id/rabbitNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/user_num_text_size"
+            android:layout_marginLeft="@dimen/user_rabbit_num_marginleft" >
+        </com.ireadygo.app.gamelauncher.ui.widget.DigitTextView>
+
+        <com.ireadygo.app.gamelauncher.ui.widget.DigitTextView
+            android:id="@+id/rabbitQuanNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/user_num_text_size"
+            android:layout_marginLeft="@dimen/user_rabbit_quan_num_marginleft" >
+        </com.ireadygo.app.gamelauncher.ui.widget.DigitTextView>
+
+        <com.ireadygo.app.gamelauncher.ui.widget.DigitTextView
+            android:id="@+id/integralNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/user_num_text_size"
+            android:layout_marginLeft="@dimen/user_integral_num_marginleft" >
+        </com.ireadygo.app.gamelauncher.ui.widget.DigitTextView>
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:id="@+id/userAppList"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/user_applist_height"
+        android:layout_marginTop="@dimen/user_applist_margintop"
+        android:background="@drawable/bg_corner_selector"
+        android:focusable="true"
+        android:nextFocusUp="@+id/menu_my" >
+    </HorizontalScrollView>
+
+    <com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout
+        android:id="@+id/tipsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tips_height"
+        android:layout_marginTop="@dimen/tips_margin_top" >
+    </com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout>
+
+</com.ireadygo.app.gamelauncher.ui.widget.animator.AnimatorLinearLayout>

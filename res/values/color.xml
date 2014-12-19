@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="white">#FFFFFFFF</color>
+    <color name="white_first_transparency">#7FFFFFFF</color>
+    <color name="white_second_transparency">#4CFFFFFF</color>
+	<color name="black">#FF1c1c1c</color>
+    <color name="black_first_transparency">#7F1c1c1c</color>
+    <color name="black_second_transparency">#4C1c1c1c</color>
+    <color name="red_normal">#fc5353</color>
+    <color name="orange_normal">#DF43E5</color>
+    
+    <color name="orange">#ffbb00</color>
+    <color name="settings_item_blur">#27a2f2</color>
+    <color name="app_item_bg_green">#3ec922</color>
+    <color name="semitransparent_game_download_bg">#7f000000</color>
+    <color name="announcement_item_bg_orange">#ff943d</color>
+    <color name="announcement_createdate_text_color">#7b7b7b</color>
+    <color name="announcement_content_text_color">#b3b3bc</color>
+    
+</resources>

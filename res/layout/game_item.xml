@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ireadygo.app.gamelauncher.ui.widget.GameIconView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/game_view"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:gravity="center" >
+
+    <ImageView
+        android:id="@+id/game_view_bg"
+        android:layout_width="@dimen/mygame_game_width"
+        android:layout_height="@dimen/mygame_game_bg_height"
+        android:src="@drawable/corner_black_shape" />
+
+    <RelativeLayout
+        android:id="@+id/game_icon_rl"
+        android:layout_width="@dimen/mygame_game_width"
+        android:layout_height="@dimen/mygame_game_height" >
+
+        <ImageView
+            android:id="@+id/game_icon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter" />
+
+        <!-- <ImageView
+        android:id="@+id/iv_game_delete_bg"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/store_download_item_undo_bg_height"
+        android:layout_alignBottom="@+id/game_name_ll"
+        android:layout_alignLeft="@id/game_icon"
+        android:layout_alignRight="@id/game_icon"
+        android:layout_alignTop="@id/game_icon"
+        android:visibility="invisible" /> -->
+
+    <ImageView
+        android:id="@+id/iv_game_uninstall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/game_icon"
+        android:layout_alignTop="@id/game_icon"
+        android:src="@drawable/ic_gametask_delete"
+        android:visibility="invisible" />
+        <ImageView
+            android:id="@+id/game_slot_selected_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/all_app_slot_selected"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+     <ImageView
+        android:id="@+id/iv_game_delete_bg"
+        android:layout_width="@dimen/mygame_game_width"
+        android:layout_height="@dimen/mygame_game_bg_height"
+        android:layout_alignLeft="@id/game_icon"
+        android:layout_alignTop="@id/game_icon"
+        android:visibility="invisible" />
+    <FrameLayout
+        android:layout_width="@dimen/mygame_game_width"
+        android:layout_height="@dimen/mygame_game_name_height"
+        android:layout_below="@id/game_icon_rl" >
+
+        <TextView
+            android:id="@+id/game_name"
+            style="@style/mygame_game_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
+            android:layout_gravity="center"
+            android:gravity="center" />
+    </FrameLayout>
+
+</com.ireadygo.app.gamelauncher.ui.widget.GameIconView>

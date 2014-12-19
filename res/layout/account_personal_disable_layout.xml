@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/account_layout_disable"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/nicknameLabel"
+        style="@style/TextLabelSmallDark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/personal_label_margin_bottom"
+        android:text="@string/personal_nickname" />
+
+    <TextView
+        android:id="@+id/nickname_disable"
+        style="@style/AccountEdittextDisable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/nicknameLabel"
+        android:layout_below="@id/nicknameLabel"
+        android:layout_marginRight="@dimen/personal_label_x_distance" 
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:id="@+id/phoneNumberLabel"
+        style="@style/TextLabelSmallDark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="@dimen/personal_label_margin_bottom"
+        android:layout_toRightOf="@id/nickname_disable"
+        android:text="@string/personal_phone_number" />
+
+    <TextView
+        android:id="@+id/phoneNumber_disable"
+        style="@style/AccountEdittextDisable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/phoneNumberLabel"
+        android:layout_below="@id/phoneNumberLabel"
+        android:layout_marginRight="@dimen/personal_label_margin_bottom" 
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:id="@+id/unbindPhoneNumber"
+        style="@style/AccountButtonNormal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/phoneNumberLabel"
+        android:layout_marginBottom="@dimen/personal_label_y_distance"
+        android:layout_toRightOf="@id/phoneNumber_disable"
+        android:nextFocusUp="@+id/accountPersonalBtn"
+        android:nextFocusDown="@+id/modify_account_pwd"
+        android:nextFocusLeft="@+id/account_edit"
+        android:text="@string/personal_unbind_phone_number" />
+
+    <TextView
+        android:id="@+id/ageLabel"
+        style="@style/TextLabelSmallDark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/nickname_disable"
+        android:layout_marginBottom="@dimen/personal_label_margin_bottom"
+        android:layout_marginTop="@dimen/personal_label_y_distance"
+        android:text="@string/personal_age" />
+
+    <TextView
+        android:id="@+id/age_disable"
+        style="@style/AccountEdittextDisable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/ageLabel"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/ageLabel" 
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:id="@+id/sexLabel"
+        style="@style/TextLabelSmallDark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/ageLabel"
+        android:layout_marginBottom="@dimen/personal_label_margin_bottom"
+        android:layout_marginLeft="@dimen/personal_label_x_distance"
+        android:layout_toRightOf="@id/age_disable"
+        android:text="@string/personal_sex" />
+
+    <TextView
+        android:id="@+id/sex_disable"
+        style="@style/AccountEdittextDisable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/sexLabel"
+        android:layout_below="@id/sexLabel"
+        android:layout_marginRight="@dimen/personal_age_sex_margin_right" 
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:id="@+id/modify_account_pwd"
+        style="@style/AccountButtonNormal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/unbindPhoneNumber"
+        android:layout_alignTop="@id/sexLabel"
+        android:layout_marginTop="@dimen/personal_age_pwd_margin_top"
+        android:layout_toRightOf="@id/sex_disable"
+        android:nextFocusUp="@+id/unbindPhoneNumber"
+        android:nextFocusLeft="@+id/account_edit"
+        android:nextFocusDown="@+id/modify_account_pwd"
+        android:text="@string/personal_modify_password" />
+
+</RelativeLayout>

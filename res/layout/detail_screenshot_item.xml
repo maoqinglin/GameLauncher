@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/detail_screenshot_width"
+    android:layout_height="@dimen/detail_screenshot_height"
+    android:background="@color/white_first_transparency"
+    android:padding="@dimen/detail_screenshot_padding"
+    android:clipChildren="false"
+    android:clipToPadding="false" >
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@android:color/transparent" />
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/detail_screenshot_default_h" />
+
+</FrameLayout>

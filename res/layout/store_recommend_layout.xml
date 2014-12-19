@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ireadygo.app.gamelauncher.ui.widget.HListView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/storeRecommendList"
+    style="@style/StoreListView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:nextFocusDown="@id/storeRecommendList"
+    android:nextFocusLeft="@+id/storeRecommendList"
+    android:nextFocusRight="@id/storeRecommendList"
+    android:nextFocusUp="@+id/storeOptionsRecommend"
+    android:paddingBottom="@dimen/store_detail_padding_bottom"
+    android:layout_marginTop="@dimen/recommend_list_margin_top"
+    android:paddingTop="@dimen/store_detail_padding_top" >
+
+</com.ireadygo.app.gamelauncher.ui.widget.HListView>

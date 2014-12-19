@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_announcement"
+    android:layout_width="@dimen/announcement_item_width"
+    android:layout_height="@dimen/announcement_item_height"
+    android:background="@drawable/announcement_item_selector">
+
+    <ImageView
+        android:id="@+id/iv_announcement_poster"
+        android:layout_width="@dimen/announcement_poster_width"
+        android:layout_height="@dimen/announcement_poster_height"
+        android:src="@drawable/icon_announcement_poster" />
+
+    <TextView
+        android:id="@+id/tv_announcement_content"
+        android:layout_width="@dimen/announcement_content_width"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/iv_announcement_poster"
+        android:layout_marginLeft="@dimen/announcement_content_margin_left"
+        android:layout_marginTop="@dimen/announcement_content_margin_top"
+        android:layout_toRightOf="@+id/iv_announcement_poster"
+        android:maxLines="2"
+        android:textColor="@color/announcement_content_text_color"
+         />
+
+    <TextView
+        android:id="@+id/tv_announcement_report_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/iv_announcement_poster"
+        android:layout_alignLeft="@id/tv_announcement_content"
+        android:layout_below="@id/tv_announcement_content"
+        android:singleLine="true"
+        android:textColor="@color/announcement_createdate_text_color" />
+
+    <ImageView
+        android:id="@+id/iv_annountcement_detail_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/announcement_arrow_margin_right"
+        android:layout_toRightOf="@id/tv_announcement_content"
+        android:src="@drawable/icon_announcement_detail_arrow" />
+
+</RelativeLayout>

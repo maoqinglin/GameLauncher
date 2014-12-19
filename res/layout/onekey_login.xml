@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/guideLayout"
+        layout="@layout/starting_guide_title_layout" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:clipChildren="false"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/onekeyLogin"
+            style="@style/ClickBtnNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/account_green_btn_bg_selector"
+            android:text="@string/onekey_login"
+            android:focusable="true"
+            android:textSize="@dimen/onekey_btn_text_size" />
+
+        <TextView
+            android:id="@+id/accountLogin"
+            style="@style/ClickBtnNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/onekey_account_login_margin_left"
+            android:background="@drawable/account_blue_btn_bg_selector"
+            android:text="@string/account_login"
+            android:focusable="true"
+            android:textSize="@dimen/onekey_btn_text_size" />
+    </LinearLayout>
+
+</RelativeLayout>

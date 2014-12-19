@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_background"
+    android:paddingTop="@dimen/account_detail_padding_top" >
+
+    <com.ireadygo.app.gamelauncher.ui.account.AccountOptionsLayout
+        android:id="@+id/accountMenuLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/account_detail_padding_left" >
+    </com.ireadygo.app.gamelauncher.ui.account.AccountOptionsLayout>
+
+    <com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout
+        android:id="@+id/operationTipsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tips_height"
+        android:layout_alignParentBottom="true" >
+    </com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout>
+
+    <com.ireadygo.app.gamelauncher.ui.widget.CustomFrameLayout
+        android:id="@+id/accountContentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/operationTipsLayout"
+        android:layout_below="@id/accountMenuLayout"
+        android:layout_marginTop="@dimen/account_detail_content_margin_top"
+        android:paddingLeft="@dimen/account_detail_padding_left"
+        android:paddingRight="@dimen/account_detail_padding_left" >
+    </com.ireadygo.app.gamelauncher.ui.widget.CustomFrameLayout>
+
+</RelativeLayout>

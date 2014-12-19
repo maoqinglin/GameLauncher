@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <style name="CustomerTheme" parent="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen">
+        <item name="android:dropDownListViewStyle">@style/SearchDropdownList</item>
+    </style>
+</resources>

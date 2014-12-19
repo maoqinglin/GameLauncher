@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ireadygo.app.gamelauncher.ui.widget.HListView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.ireadygo.app.gamelauncher"
+    android:id="@+id/storeCollectionList"
+    style="@style/StoreListView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:layout_marginTop="@dimen/store_collection_list_margin_top"
+    android:nextFocusDown="@id/storeCollectionList"
+    android:nextFocusLeft="@+id/storeCollectionList"
+    android:nextFocusRight="@id/storeCollectionList"
+    android:nextFocusUp="@+id/storeOptionsCollection"
+    android:paddingBottom="@dimen/store_detail_padding_bottom"
+    android:paddingTop="@dimen/store_detail_padding_top" >
+
+</com.ireadygo.app.gamelauncher.ui.widget.HListView>

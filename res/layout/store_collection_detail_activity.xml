@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/goback"
+        style="@style/GobackBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/detail_goback_margin_left"
+        android:text="@string/goback" />
+
+    <View
+        android:id="@+id/focusView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:nextFocusDown="@+id/storeCollectionDetailList"
+        android:nextFocusLeft="@+id/storeCollectionDetailList"
+        android:nextFocusRight="@+id/storeCollectionDetailList"
+        android:nextFocusUp="@+id/storeCollectionDetailList" />
+
+    <com.ireadygo.app.gamelauncher.ui.widget.HListView
+        android:id="@+id/storeCollectionDetailList"
+        style="@style/StoreListView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/collection_detail_list_height"
+        android:layout_centerInParent="true"
+        android:nextFocusDown="@id/storeCollectionDetailList"
+        android:nextFocusLeft="@+id/storeCollectionDetailList"
+        android:nextFocusRight="@id/storeCollectionDetailList"
+        android:nextFocusUp="@id/storeCollectionDetailList" >
+    </com.ireadygo.app.gamelauncher.ui.widget.HListView>
+
+    <com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout
+        android:id="@+id/tipsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tips_height"
+        android:layout_alignParentBottom="true" >
+    </com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout>
+
+</RelativeLayout>

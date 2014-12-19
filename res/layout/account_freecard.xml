@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        style="@style/TextLabelSmallLight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/freecard_label_light_margin_left"
+        android:drawableLeft="@drawable/freecard_mark_one"
+        android:drawablePadding="@dimen/freecard_mark_drawable_padding"
+        android:gravity="center_vertical"
+        android:text="@string/freecard_input_phone_number" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/freecard_content_padding_bottom"
+        android:paddingLeft="@dimen/freecard_content_padding_left"
+        android:paddingTop="@dimen/freecard_content_padding_top" >
+
+        <com.ireadygo.app.gamelauncher.ui.widget.CustomerEditText
+            android:id="@+id/freecardPhoneNumber"
+            style="@style/AccountEdittextNormal"
+            android:layout_width="@dimen/freecard_phone_number_width"
+            android:layout_height="@dimen/freecard_phone_number_height"
+            android:background="@drawable/recharge_edittext_bg_selector"
+            android:nextFocusDown="@+id/voicePackage"
+            android:nextFocusLeft="@id/freecardPhoneNumber"
+            android:nextFocusRight="@+id/bindPhoneNumber"
+            android:nextFocusUp="@+id/accountFreecardBtn"
+            android:textColor="@color/white"
+            android:textSize="@dimen/freecard_phone_number_text_size" />
+
+        <TextView
+            android:id="@+id/bindPhoneNumber"
+            style="@style/AccountButtonNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/freecard_confirm_number_margin_left"
+            android:layout_marginRight="@dimen/freecard_confirm_number_margin_right"
+            android:layout_toRightOf="@id/freecardPhoneNumber"
+            android:nextFocusDown="@+id/flowPackage"
+            android:nextFocusLeft="@id/freecardPhoneNumber"
+            android:nextFocusRight="@+id/inputFreecardOffice"
+            android:nextFocusUp="@+id/accountFreecardBtn"
+            android:text="@string/freecard_confirm_number"
+            android:textSize="@dimen/freecard_btn_size" />
+
+        <TextView
+            android:id="@+id/inputFreecardOffice"
+            style="@style/AccountButtonNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/bindPhoneNumber"
+            android:nextFocusDown="@+id/smsPackage"
+            android:nextFocusLeft="@id/bindPhoneNumber"
+            android:nextFocusRight="@+id/inputFreecardOffice"
+            android:nextFocusUp="@+id/accountFreecardBtn"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/freecard_input_office"
+            android:textSize="@dimen/freecard_btn_size" />
+    </RelativeLayout>
+
+    <TextView
+        style="@style/TextLabelSmallDark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/freecard_label_dark_margin_top"
+        android:paddingLeft="@dimen/freecard_content_padding_left"
+        android:text="@string/freecard_phone_number_bind_prompt" />
+
+    <TextView
+        style="@style/TextLabelSmallLight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/freecard_label_light_margin_left"
+        android:layout_marginTop="@dimen/freecard_tariff_margin_top"
+        android:drawableLeft="@drawable/freecard_mark_two"
+        android:drawablePadding="@dimen/freecard_mark_drawable_padding"
+        android:gravity="center_vertical"
+        android:text="@string/freecard_buy_tariff_package" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/freecard_content_padding_bottom"
+        android:paddingLeft="@dimen/freecard_content_padding_left"
+        android:paddingTop="@dimen/freecard_content_padding_top" >
+
+        <LinearLayout
+            android:id="@+id/voicePackage"
+            style="@style/FreecardPackageLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/freecard_package_margin_right"
+            android:background="@drawable/freecard_voice_package_bg_selector"
+            android:nextFocusDown="@+id/voicePackage"
+            android:nextFocusLeft="@id/voicePackage"
+            android:nextFocusRight="@+id/flowPackage"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:nextFocusUp="@+id/freecardPhoneNumber" >
+
+            <TextView
+                android:id="@+id/voicePackageContent"
+                style="@style/FreecardPackageContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="@string/freecard_voice_package" />
+
+            <TextView
+                android:id="@+id/voicePackagePay"
+                style="@style/FreecardPackagePay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/freecard_package_pay_margin_top"
+                android:singleLine="true"
+                android:text="@string/freecard_package_pay_unit" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/flowPackage"
+            style="@style/FreecardPackageLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/freecard_package_margin_right"
+            android:background="@drawable/freecard_flow_package_bg_selector"
+            android:nextFocusDown="@+id/flowPackage"
+            android:nextFocusLeft="@id/voicePackage"
+            android:nextFocusRight="@+id/smsPackage"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:nextFocusUp="@+id/confirmPhoneNumber" >
+
+            <TextView
+                android:id="@+id/flowPackageContent"
+                style="@style/FreecardPackageContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/freecard_flow_package" />
+
+            <TextView
+                android:id="@+id/flowPackagePay"
+                style="@style/FreecardPackagePay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/freecard_package_pay_margin_top"
+                android:text="@string/freecard_package_pay_unit" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/smsPackage"
+            style="@style/FreecardPackageLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/freecard_package_margin_right"
+            android:background="@drawable/freecard_sms_package_bg_selector"
+            android:nextFocusDown="@+id/smsPackage"
+            android:nextFocusLeft="@id/flowPackage"
+            android:nextFocusRight="@+id/smsPackage"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:nextFocusUp="@+id/inputFreecardOffice" >
+
+            <TextView
+                android:id="@+id/smsPackageContent"
+                style="@style/FreecardPackageContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/freecard_sms_package" />
+
+            <TextView
+                android:id="@+id/smsPackagePay"
+                style="@style/FreecardPackagePay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/freecard_package_pay_margin_top"
+                android:text="@string/freecard_package_pay_unit" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

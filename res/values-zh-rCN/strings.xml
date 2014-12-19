@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">蜗牛桌面</string>
+    <string name="action_settings">设置壁纸</string>
+    <string name="goback">返回</string>
+
+    <!-- 壁纸 -->
+    <string name="wallpaper_instructions">设置壁纸</string>
+    <string name="pick_wallpaper">蜗牛壁纸</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+
+    <!-- 下载 -->
+    <string name="Toast_disable_3G_prompt">免商店已经禁止使用移动网络进行下载！</string>
+    <string name="using_3G_download">正在使用移动网络下载！</string>
+
+    <!-- 卡槽 -->
+    <string name="Toast_slot_overdue">\t个卡槽已过期</string>
+    <string name="Notification_slot_expired_big_title">卡槽过期提示</string>
+    <string name="Notification_slot_expired_little_title">您的卡槽还有%1$d天到期，到期后，部分应用将被解绑回“全部应用”中，请及时购买新卡槽。</string>
+    <string name="Notification_slot_expired_today_title">您的卡槽今天到期，到期后，部分应用将被解绑回“全部应用”中，请及时购买新卡槽。</string>
+
+    <!-- Download -->
+    <string name="launch_error">启动失败：无法启动应用，请重新下载！</string>
+    <string name="launch_disable_error">启动失败：应用已禁止！</string>
+
+    <!-- Menu -->
+    <string name="menu_store">游戏商店</string>
+    <string name="menu_game">我的游戏</string>
+    <string name="menu_community">游戏社区</string>
+    <string name="menu_app">应用</string>
+    <string name="menu_call">通话</string>
+    <string name="menu_settings">设定</string>
+
+    <!-- 应用详情 -->
+    <string name="detail_game_introduce">应用介绍</string>
+    <string name="detail_version">版本:%1$s</string>
+    <string name="detail_size">大小:%1$s</string>
+    <string name="detail_play_numbers">在玩用户</string>
+    <string name="detail_download">下&#160;&#160;载</string>
+    <string name="detail_continue">继&#160;&#160;续</string>
+    <string name="detail_pause">暂&#160;&#160;停</string>
+    <string name="detail_queue">等 &#160;&#160;待</string>
+    <string name="detail_install">安&#160;&#160;装</string>
+    <string name="detail_installing">安装中</string>
+    <string name="detail_error">出 &#160;&#160;错</string>
+    <string name="detail_launch">启&#160;&#160;动</string>
+    <string name="detail_update">更&#160;&#160;新</string>
+    <string name="detail_game_detail">游戏详情</string>
+    <string name="detail_player_comment">玩家评论</string>
+
+    <!-- 商店-选项 -->
+    <string name="store_options_search">搜索</string>
+    <string name="store_options_recommend">推荐</string>
+    <string name="store_options_collection">合集</string>
+    <string name="store_options_category">分类</string>
+    <string name="store_options_game_manager">游戏管理</string>
+    <string name="store_options_settings">商店设置</string>
+
+        <!-- 商店-选项缩写-->
+    <string name="store_options_search_short">搜索</string>
+    <string name="store_options_recommend_short">推荐</string>
+    <string name="store_options_collection_short">合集</string>
+    <string name="store_options_category_short">分类</string>
+    <string name="store_options_game_manager_short">游戏管理</string>
+    <string name="store_options_settings_short">商店设置</string>
+
+    <!-- 商店-搜索 -->
+    <string name="store_search">搜&#160;&#160;索</string>
+
+    <!-- 免商店-分类 -->
+    <string-array name="category_titles">
+        <item>创意休闲</item>
+        <item>单机游戏</item>
+        <item>动作射击</item>
+        <item>角色扮演</item>
+        <item>经营策略</item>
+        <item>竞技飞行</item>
+        <item>体育竞技</item>
+        <item>益智棋牌</item>
+        <item>宝岛精选</item>
+    </string-array>
+    <string-array name="category_intros">
+        <item>切东西/找茬/减压/宠物/答题/音乐节奏</item>
+        <item>回合制/即时战略/养成/武侠/魔幻/动漫</item>
+        <item>横版/射击/3D/飞行/坦克/狙击</item>
+        <item>回合制/即时战斗/养成/武侠/魔幻/动漫</item>
+        <item>纸牌/战棋/经营/历史/战争/DOTA</item>
+        <item>跑酷/赛车/摩托/赛艇/飞机</item>
+        <item>街机/篮球/足球/网球/台球/其他球类</item>
+        <item>斗地主/棋类/麻将/桌游/德州扑克/纸牌</item>
+        <item>来自宝岛台湾的游戏精选</item>
+    </string-array>
+
+    <string-array name="store_settings_titles">
+        <item>只在WIFI环境下下载</item>
+        <item>安装完成后自动删除安装包</item>
+        <item>游戏更新提醒</item>
+        <item>允许空投游戏自动下载安装</item>
+    </string-array>
+
+    <string-array name="account_age_array">
+        <item>请选择您的年龄段</item>
+        <item>16岁~20岁</item>
+        <item>21岁~25岁</item>
+        <item>26岁~30岁</item>
+        <item>31岁~35岁</item>
+        <item>36岁~40岁</item>
+        <item>41岁~45岁</item>
+        <item>46岁~50岁</item>
+        <item>51岁~55岁</item>
+        <item>56岁~60岁</item>
+    </string-array>
+
+    <!-- 免商店：下载管理 -->
+    <string name="store_dld_manager_downloading">下载中</string>
+    <string name="store_dld_manager_updatable">可更新</string>
+    <string name="store_dld_manager_launchable">已安装</string>
+    <string name="store_dld_manager_empty">还没发现好玩的？去找找好玩的游戏吧。</string>
+    <string name="store_dld_manager_cur_version">版本：%1$s</string>
+    <string name="store_dld_manager_detail_not_found">暂时没有该应用信息</string>
+    <string name="delete_task_prompt">删除任务记录</string>
+    <string name="delete_task_msg">是否删除您的下载任务？</string>
+
+    <!-- 卡槽购买页面 -->
+    <string name="slot_title">购买卡槽</string>
+    <string name="slot_balance">余额：%1$d</string>
+    <string name="slot_currency">兔兔币</string>
+    <string name="slot_ticket">兔兔礼券</string>
+    <string name="slot_open_number">开通数量：</string>
+    <string name="slot_number">个</string>
+    <string name="slot_pay_method">付费模式：</string>
+    <string name="slot_pay_method_month">按月付费</string>
+    <string name="slot_pay_method_year">按年付费</string>
+    <string name="slot_open_duration">开通时长：</string>
+    <string name="slot_month">月</string>
+    <string name="slot_year">年</string>
+    <string name="slot_buy_dialog_prompt">是否购买卡槽？</string>
+    <string name="slot_pay_amount">应付金额：</string>
+    <string name="slot_recharge">充  值</string>
+    <string name="slot_buy_now">立即购买</string>
+    <string name="slot_meal_1">套餐一：</string>
+    <string name="slot_meal_2">套餐二：</string>
+    <string name="slot_meal_3">套餐三：</string>
+    <string name="slot_meal_text_1">30个卡槽包月20兔兔币（兔兔礼券）</string>
+    <string name="slot_meal_text_2">30个卡槽包年180兔兔币（兔兔礼券）</string>
+    <string name="slot_query_balance_prompt">查询余额失败!</string>
+    <string name="user_identity_overdue">用户身份过期或不存在，请重新登录</string>
+    <string name="slot_should_login">请先登录免账号！</string>
+    <string name="slot_buy_success">卡槽购买成功！</string>
+    <string name="slot_buy_failed">卡槽购买失败！</string>
+
+    <!-- 状态 -->
+    <string name="status_download">下 载</string>
+    <string name="status_transfering">继 续</string>
+    <string name="status_pause">暂 停</string>
+    <string name="status_queue">等 待</string>
+    <string name="status_install">安 装</string>
+    <string name="status_installing">安装中</string>
+    <string name="status_error">出 错</string>
+    <string name="status_launch">启 动</string>
+    <string name="status_update">更 新</string>
+
+    <!-- 游戏详情 -->
+    <string name="detail_title">游戏详情</string>
+    <string name="detail_game_size">大小：</string>
+    <string name="detail_game_version">版本：</string>
+
+    <!-- 免账号 -->
+    <string name="account_mywealth">我的资产</string>
+    <string name="account_personal">个人信息</string>
+    <string name="account_recharge">充值</string>
+    <string name="account_freecard">免卡</string>
+    <string name="account_logout">退出账户</string>
+
+    <!-- 免账号-个人信息 -->
+    <string name="personal_edit_account">编辑资料</string>
+    <string name="personal_nickname">昵称</string>
+    <string name="personal_phone_number">已绑定手机号</string>
+    <string name="personal_age">年龄</string>
+    <string name="personal_sex">性别</string>
+    <string name="personal_open_freeflow">开通免流量</string>
+    <string name="personal_modify_password">修改密码</string>
+    <string name="personal_unbind_phone_number">解绑</string>
+    <string name="personal_save">保存</string>
+    <string name="personal_female">女</string>
+    <string name="personal_male">男</string>
+    <string name="personal_empty_phone_number">无</string>
+    <string name="personal_no_bind_phone_number">未绑定</string>
+    <string name="account_saving">保存中...</string>
+    <string name="account_save_success">保存成功！</string>
+    <string name="account_save_failed">保存失败！</string>
+    <string name="account_outdate">用户身份过期，请重新登录</string>
+    <string name="logout_confirm_prompt">退出确认</string>
+    <string name="logout_confirm_msg">确定注销当前账号吗？</string>
+    <string name="from_system">系统头像</string>
+    <string name="from_camera">拍照</string>
+    <string name="from_gallery">从相册选择</string>
+    <string name="system_photo_dialog_title">系统头像</string>
+
+    <!-- 免账号-充值 -->
+    <string name="recharge_current_account">当前账户</string>
+    <string name="recharge_my_balance">我的余额</string>
+    <string name="recharge_rubbit_currency">兔兔币</string>
+    <string name="recharge_rubbit_ticket">兔兔礼券</string>
+    <string name="recharge_rubbit_recharge">兔兔币充值</string>
+    <string name="recharge_ticket_recharge">礼券充值</string>
+    <string name="recharge_ticket_type_prompt">请选择礼券类型</string>
+    <string name="recharge_ticket_code_prompt">请输入礼券码</string>
+    <string name="recharge_confirm">确认充值</string>
+    <string name="recharge_input_not_empty">礼券码不能为空</string>
+    <string name="recharge_input_contain_illegality">礼券码含有非法字符</string>
+    <string name="recharge_succeed">充值成功</string>
+    <string name="recharge_rabbit_ticket_used">充值失败，兔兔礼券码已经使用</string>
+    <string name="recharge_rabbit_ticket_not_exist">充值失败，兔兔礼券码不存在</string>
+    <string name="recharge_rabbit_ticket_password_wrong">充值失败，兔兔礼券密码验证错误</string>
+    <string name="recharge_rabbit_ticket_type_match">充值失败，免机设备类型与兔兔礼券类型不匹配</string>
+    <string name="recharge_rabbit_ticket_one_bind">充值失败，免机设备只能绑定一张1999兔兔礼券</string>
+    <string name="recharge_slot_ticket_used">充值失败，卡槽礼券码已经使用</string>
+    <string name="recharge_slot_ticket_not_exist">充值失败，卡槽礼券码不存在</string>
+    <string name="recharge_slot_ticket_type_match">充值失败，设备类型与卡槽礼券类型不匹配</string>
+    <string name="recharge_slot_ticket_one_bind">充值失败，绑定卡槽礼券失败</string>
+    <string name="recharge_money_not_enough">充值失败，账户余额不足</string>
+    <string name="recharge_imei_unknown">充值失败，未知设备号</string>
+    <string name="account_recharge_rabbit_ticket">兔兔礼券充值</string>
+    <string name="account_change_account">更换账号</string>
+    <string name="account_recharge_account">充值账号：%1$s \n 否对进行充值</string>
+    <string name="slot_insufficient_balance_prompt">您的账户余额不足，请先充值兔兔币</string>
+    <string name="recharge_account_empty">充值免卡账号为空</string>
+    <string name="rabbit_coin">兔兔币</string>
+    <string name="rabbit_ticket">兔兔礼券</string>
+    <string name="money_not_enough">账户余额不足</string>
+    <string name="recharge_phone_not_bind">充值失败，免机手机号未绑定</string>
+    <string name="recharge_phone_fee_limint">充值失败，购买资费数量超过上限</string>
+    <string name="purpose_phone_recharge">免卡充值</string>
+    <string name="purpose_game_recharge">游戏充值</string>
+    <string name="purpose_buy_slot">购买卡槽</string>
+    <string name="rabbit_ticket_recharged_tip">已充值%1$d兔兔礼券</string>
+    <string name="rabbit_ticket_recharged_done">完成！</string>
+    <string name="rabbit_ticket_purpose_title">兔兔礼券可用于：</string>
+    <string name="arm_ticket_recharged_tip">已充值%1$d个卡槽，有效时长：%2$d天</string>
+    <string name="arm_ticket_recharged_tip_permanent">已充值%1$d个卡槽，有效时长：永久</string>
+    <string name="arm_ticket_purpose_title">卡槽礼券可用于：在“我的应用”桌面上，增加更多第三方应用</string>
+    <string name="arm_ticket_recharge_title">卡槽礼券充值</string>
+    <string name="account_traiff_recharge">资费充值</string>
+
+    <string-array name="recharge_ticket_types">
+        <item>兔兔礼券</item>
+        <item>卡槽礼券</item>
+    </string-array>
+
+        <!-- 免账号- 我的资产 -->
+    <string name="mywealth_game_counts">游戏</string>
+    <string name="mywealth_game_points">积分</string>
+
+    <!-- 免账号-免卡 -->
+    <string name="freecard_input_phone_number">填写免卡号码</string>
+    <string name="freecard_confirm_number">确认号码</string>
+    <string name="freecard_phone_number_bind_prompt">提示：兔兔礼券只能充值给第一次绑定的免卡手机号</string>
+    <string name="freecard_buy_tariff_package">购买资费包</string>
+    <string name="freecard_input_office">进入免卡营业厅</string>
+    <string name="freecard_voice_package">60分钟语音包</string>
+    <string name="freecard_package_pay_unit">兔兔币(兔兔券)</string>
+    <string name="freecard_flow_package">45MB流量包</string>
+    <string name="freecard_sms_package">50条短信包</string>
+    <string name="phone_bind">绑定</string>
+    <string name="phone_unbind">解绑</string>
+    <string name="bind_phone_not_empty">手机号码不能为空</string>
+    <string name="bind_phone_length_wrong">手机号长度有误</string>
+    <string name="rabbit_coin_or_ticket">兔兔币(兔兔礼券)</string>
+    <string name="account_free_card_rule">充值免卡规则</string>
+    <string name="account_rule_msg">首次绑定免卡时，您的“兔兔礼券”将默认只能对此免卡进行资费充值，自后绑定的其他免卡需要兔兔币充值</string>
+    <string name="account_confirm_bind">确认绑定</string>
+    <string name="bind_failed_illegality_bss_account">绑定失败，非法的BSS账号</string>
+    <string name="bind_failed_already_bind">绑定失败，免机已绑定该手机号</string>
+    <string name="bind_failed_phone_wrong">绑定失败，免机手机号绑定失败</string>
+    <string name="bind_failed_without_recharge">绑定失败，请进行兔兔礼券充值</string>
+    <string name="account_recharge_free_card">充值免卡：</string>
+    <string name="account_should_pay_money">应付金额：</string>
+    <string name="account_celerity_payment">立即支付</string>
+
+
+    <!-- 错误显示 -->
+    <string name="unknown_error">未知错误</string>
+    <string name="manage_download_error">下载出错</string>
+    <string name="manage_install_error">安装出错</string>
+
+    <!-- Install And Unstall -->
+    <string name="package_not_found">安装失败：文件不存在，请重新下载</string>
+    <string name="package_unreadable">安装失败：文件受损，请重新下载</string>
+    <string name="install_silently_not_compatible">安装失败：未知错误</string>
+    <string name="invalid_apk">安装失败：文件受损，请重新下载</string>
+    <string name="insufficient_storage">安装失败：存储空间不足</string>
+    <string name="inconsistent_certificates">安装失败：签名冲突</string>
+    <string name="no_certificates">安装失败：应用无签名</string>
+    <string name="unknow_apk_install_error">安装失败：未知错误</string>
+    <string name="error_zip_package">安装失败：解压错误</string>
+    <string name="storage_system_error">安装失败：未知错误</string>
+    <string name="external_storage_unmounted">安装失败：未检测到SD卡</string>
+    <string name="illegal_apk_with_data">安装失败：文件受损</string>
+    <string name="uninstall_failed_invalid_package">卸载失败：应用不存在</string>
+    <string name="uninstall_failed_internal_error">卸载失败：未知错误</string>
+    <string name="uninstall_failed_permission_denied">卸载失败：未知错误</string>
+
+    <!-- Download -->
+    <string name="network_unavaible">下载失败：网络不可用</string>
+    <string name="insufficient_storage_space">下载失败：存储空间不足</string>
+    <string name="can_not_create_download_path">下载失败：文件读写错误</string>
+    <string name="download_path_can_not_write">下载失败：文件读写错误</string>
+    <string name="server_error">下载失败：服务器错误</string>
+    <string name="url_error">下载失败：下载链接错误</string>
+    <string name="io_error">下载失败：未知错误</string>
+
+    <!-- 更新 -->
+    <string name="notification_downloading_big_title">\t个应用正在下载</string>
+    <string name="notification_downloading_apps">\t个下载中</string>
+    <string name="notification_pause_apps">\t个暂停</string>
+    <string name="notification_queue_apps">\t个等待</string>
+    <string name="notification_failed_apps">\t个失败</string>
+    <string name="notification_downloaded_big_title">免商店下载完成</string>
+    <string name="notification_downloaded_little_title">\t个应用下载完成</string>
+    <string name="notification_upgrade_big_title">应用升级提示</string>
+    <string name="notification_upgrade_little_title">\t个应用可进行更新</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_test_main">TestMainActivity</string>
+    <string name="settings_systemupgrade">系统升级</string>
+    <string name="settings_personalized">个性化</string>
+    <string name="settings_language">语言</string>
+    <string name="settings_store">存储</string>
+    <string name="settings_secure">安全</string>
+    <string name="settings_help">帮助</string>
+    <string name="settings_more">更多</string>
+    <string name="settings_wifi">WIFI</string>
+
+    <!-- 按键提示层 -->
+    <string name="key_sun">启动</string>
+    <string name="key_mountain">详情</string>
+    <string name="key_water">删除</string>
+    <string name="key_moon">返回</string>
+
+    <!-- 网络 -->
+    <string name="no_network">请连接网络</string>
+    <string name="all_app_moon_explain">返回</string>
+
+    <!-- 开机引导 -->
+    <string name="starting_guide_key_title">按键说明</string>
+
+    <!-- 账号登录、注册 -->
+    <string name="account_one_key_logining_prompt">一键登录中...</string>
+    <string name="account_logining_prompt">账号登录中...</string>
+    <string name="account_registing_prompt">账号注册中...</string>
+ <!-- 充值 -->
+    <string name="rabbit_ticket_recharge_title">兔兔礼券充值</string>
+    <string name="login_username_hint">请输入蜗牛通行证/邮箱</string>
+    <string name="login_password_hint">请输入密码</string>
+    <string name="login">登 &#160;&#160;录</string>
+    <!-- 一键登录 -->
+    <string name="onekey_login">一键登录</string>
+    <string name="account_login">账号登录</string>
+    <string name="onekey_goback_btn">账号设定</string>
+    <string name="login_username_empty_prompt">用户名不能为空</string>
+    <string name="login_password_empty_prompt">密码不能为空</string>
+    <!-- 注册 -->
+    <string name="account_register">账号注册</string>
+    <string name="register">注&#160;&#160;册</string>
+    <string name="login_register_prompt">还没有账号？请点击注册</string>
+    <string name="register_username_hint">请输入6-25位字符</string>
+    <string name="register_password_hint">请输入密码</string>
+    <string name="register_password_repeat_hint">请确认密码</string>
+    <string name="register_password_prompt">您的密码长度必须为8-16个字符，且必须含一个数字，一个字母，字母区分大小。</string>
+    <string name="account_username_length_error">账号长度必须为6-25个字符！</string>
+    <string name="account_login_success">登录成功</string>
+    <string name="account_one_key_login_failed">一键登录失败，请手动登录账号！</string>
+    <string name="account_username_empty_prmopt">用户名或密码为空！</string>
+    <string name="account_password_length_error">密码长度必须为8-16个字符！</string>
+    <string name="account_password_digit_error">密码必须包含字母和数字</string>
+    <string name="account_password_repeat_error">两次输入的密码不一致！</string>
+    <string name="account_email_error">邮箱格式不正确！</string>
+    <string name="account_login_failed">登录失败，请重试！</string>
+    <string name="account_login_server_phonenumber">客服电话：(0512)67621007</string>
+    <string name="myapp_folder_title_system">系统文件夹</string>
+    <!-- 全部应用 -->
+    <string name="all_app">全部应用</string>
+    <string name="all_app_description">请选择需要显示在桌面上的应用</string>
+    <string name="all_app_count">全部应用：</string>
+    <string name="all_app_used_slot">已使用卡槽：</string>
+    <string name="all_app_device_not_support">操作失败！设备不支持！</string>
+    <string name="all_app_slot_has_bind">此应用已经绑定卡槽，可以正常使用！</string>
+    <string name="all_app_network_error">网络异常！</string>
+    <string name="all_app_no_slot_title">提示</string>
+    <string name="all_app_no_slot_msg">没有多余卡槽，请充值购买！</string>
+    <!-- 我的游戏推荐下载 -->
+    <string name="mygame_recommend_app_download">推荐下载</string>
+
+    <!-- 游戏社区 -->
+    <string name="game_community_account">账号</string>
+    <string name="game_community_Announcement">公告</string>
+    <string name="game_community">社区</string>
+    <string name="account_no_account_login_prompt">您尚未登录账户</string>
+
+ <!-- 免流量开通 -->
+    <string name="free_flow_privilege_title">免流量特权</string>
+    <string name="free_flow_privilege_tip">免流量特权：免费开通后，可在免商店下载游戏、畅玩部分指定游戏不产生流量费用。</string>
+    <string name="free_flow_privilege_remark">开通免流量特权的免账号，需绑定本机手机号才可生效</string>
+    <string name="free_flow_bind_phone_title">免流量手机号：</string>
+    <string name="free_flow_bind_phone_tip">如果此号码非本机手机号，请点击“ 解绑 ”，重新绑定本机手机号</string>
+    <string name="free_flow_bind_phone_hint">请输入SIM卡1的手机号</string>
+    <string name="free_flow_bind_phone_status">获取验证码</string>
+    <string name="free_flow_unbind_phone_status">解&#160;&#160;&#160;绑</string>
+    <string name="free_flow_auto_code_title">短信验证码：</string>
+    <string name="free_flow_auto_code_hine">输入验证码</string>
+    <string name="free_flow_warm_tip">温馨提示：免流量特权需要每月领取</string>
+    <string name="free_flow_get_title">领取免流量特权</string>
+    <string name="free_flow_get_tip">您的手机号尚未支持此特权。</string>
+    <string name="free_flow_get">领&#160;&#160;&#160;取</string>
+    <string name="free_flow_has_get">已&#160;领&#160;取</string>
+    <string name="free_flow_not_open_btn_title">免流量未开通</string>
+    <string name="free_flow_has_open_btn_title">免流量已开通</string>
+    <string name="free_flow_phone_conflict_prompt">已绑定免流量手机号与本机不符，\t\n如需正常使用“免流量”特权，请更换绑定号码！</string>
+    <string name="free_flow_phone_empty_prompt">您的免帐号未绑定手机号，如需正常使用“免流量”特权，请绑定本机手机号码！</string>
+    <string name="free_flow_reget_sms_code">重新获取(%1$d)</string>
+    <string name="free_flow_sms_use_out">此手机号今日获取短信验证码次数已用完！</string>
+    <string name="free_flow_sms_getting">短信验证码请求中……</string>
+    <string name="free_flow_phone_binding">手机号码绑定中……</string>
+    <string name="free_flow_phone_unbinding">手机号码解绑中……</string>
+    <string name="free_flow_enabling">免流量特权领取中……</string>
+    <string name="free_flow_phone_empty">请输入手机号码</string>
+    <string name="free_flow_phone_format_error">输入手机号码有误，请重新输入！</string>
+    <string name="free_flow_sms_code_empty">请输入短信验证码</string>
+    <string name="free_flow_bind_phone_success">手机号码绑定成功</string>
+    <string name="free_flow_get_success">免流量特权领取成功</string>
+    <string name="free_flow_unbind_phone_success">手机号码解绑成功</string>
+    <string name="free_flow_get_sms_failed">获取验证码失败</string>
+    <string name="free_flow_bind_phone_failed">绑定手机号码失败</string>
+    <string name="free_flow_unbind_phone_failed">解绑手机号码失败</string>
+    <string name="free_flow_sms_code_not_match">验证码错误</string>
+    <string name="free_flow_enable_failed">领取免流量特权失败</string>
+    <string name="free_flow_expired">免流量特权已过期</string>
+    <string name="free_flow_auto_get_success">自动领取免流量特权成功</string>
+    <string name="free_flow_auto_get_failed">领取免流量特权失败</string>
+    <string name="free_flow_confirm_prompt">免流量提示</string>
+
+    <string name="shortcut_confirm">确定</string>
+    <string name="shortcut_detail">详情</string>
+    <string name="shortcut_back">返回</string>
+    <string name="shortcut_uninstall">卸载</string>
+
+    <!-- Extend -->
+    <string name="extend_install_error">服务器数据错误，请重新下载！</string>
+    <string name="extend_install_success">安装成功</string>
+    <string name="extend_nearly_open">即将开放，敬请期待！</string>
+</resources>

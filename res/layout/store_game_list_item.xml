@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <ImageView
+        android:contentDescription="@null"
+        android:id="@+id/background"
+        android:layout_width="@dimen/store_download_item_icon_width"
+        android:layout_height="@dimen/store_download_item_height"
+        android:src="@drawable/corner_black_shape" />
+
+    <ImageView
+        android:contentDescription="@null"
+        android:id="@+id/game_icon"
+        android:layout_width="@dimen/store_download_item_icon_width"
+        android:layout_height="@dimen/store_download_item_icon_height"
+        android:scaleType="fitCenter" />
+
+    <LinearLayout
+        android:id="@+id/ll_game_download_speed_size_display"
+        android:layout_width="@dimen/store_download_item_icon_width"
+        android:layout_height="@dimen/store_download_item_icon_height"
+        android:layout_alignLeft="@id/game_icon"
+        android:layout_alignTop="@id/game_icon"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_game_download_speed"
+            android:textColor="@color/white"
+            android:textSize="@dimen/store_download_speed_text_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_game_download_size"
+            android:textColor="@color/white"
+            android:textSize="@dimen/store_download_speed_text_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/game_name_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/game_icon"
+        android:layout_below="@id/game_icon"
+        android:orientation="vertical" >
+
+        <TextView
+            style="@style/TextLabelSmallLight"
+            android:id="@+id/game_name"
+            android:layout_width="@dimen/store_download_item_icon_width"
+            android:layout_height="@dimen/store_download_item_name_height"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:paddingLeft="@dimen/store_download_item_name_padding"
+            android:paddingRight="@dimen/store_download_item_name_padding" />
+
+        <FrameLayout
+            android:id="@+id/game_state_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/store_download_item_status_height" >
+
+            <ProgressBar
+                android:id="@+id/game_download_progress"
+                style="@style/progressBarHorizontalColor"
+                android:layout_width="@dimen/store_download_item_icon_width"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/game_download_state"
+                style="@style/TextLabelSmallLight"
+                android:layout_width="@dimen/store_download_item_icon_width"
+                android:layout_height="match_parent"
+                android:gravity="center" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_game_delete_bg"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/store_download_item_undo_bg_height"
+        android:layout_alignBottom="@+id/game_name_ll"
+        android:layout_alignLeft="@id/game_icon"
+        android:layout_alignRight="@id/game_icon"
+        android:layout_alignTop="@id/game_icon"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/iv_gametask_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/game_icon"
+        android:layout_alignTop="@id/game_icon"
+        android:src="@drawable/ic_gametask_delete"
+        android:visibility="invisible" />
+
+</RelativeLayout>

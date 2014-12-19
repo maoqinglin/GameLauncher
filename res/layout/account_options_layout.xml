@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.ireadygo.app.gamelauncher"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <com.ireadygo.app.gamelauncher.ui.base.OptionsItem
+        android:id="@+id/accountWealthBtn"
+        style="@style/Options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:nextFocusDown="@+id/nickname"
+        android:nextFocusLeft="@id/accountWealthBtn"
+        android:nextFocusRight="@+id/accountPersonalBtn"
+        android:nextFocusUp="@id/accountWealthBtn"
+        app:store_icon="@drawable/account_detail_mywealth_icon"
+        app:store_title="@string/account_mywealth" />
+
+    <com.ireadygo.app.gamelauncher.ui.base.OptionsItem
+        android:id="@+id/accountPersonalBtn"
+        style="@style/Options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:nextFocusDown="@+id/nickname"
+        android:nextFocusLeft="@id/accountWealthBtn"
+        android:nextFocusRight="@+id/accountRechargeBtn"
+        android:nextFocusUp="@id/accountPersonalBtn"
+        app:store_icon="@drawable/account_detail_personal_icon"
+        app:store_title="@string/account_personal" />
+
+    <com.ireadygo.app.gamelauncher.ui.base.OptionsItem
+        android:id="@+id/accountRechargeBtn"
+        style="@style/Options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:nextFocusDown="@+id/rabbitRecharge"
+        android:nextFocusLeft="@id/accountPersonalBtn"
+        android:nextFocusRight="@+id/accountFreecardBtn"
+        android:nextFocusUp="@id/accountRechargeBtn"
+        app:store_icon="@drawable/account_detail_recharge_icon"
+        app:store_title="@string/account_recharge" />
+
+    <com.ireadygo.app.gamelauncher.ui.base.OptionsItem
+        android:id="@+id/accountFreecardBtn"
+        style="@style/Options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:nextFocusDown="@+id/freecardPhoneNumber"
+        android:nextFocusLeft="@id/accountRechargeBtn"
+        android:nextFocusRight="@+id/accountLogoutBtn"
+        android:nextFocusUp="@id/accountFreecardBtn"
+        app:store_icon="@drawable/account_detail_freecard_icon"
+        app:store_title="@string/account_freecard" />
+
+</LinearLayout>

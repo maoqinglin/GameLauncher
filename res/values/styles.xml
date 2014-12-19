@@ -1,0 +1,309 @@
+<resources xmlns:app="http://schemas.android.com/apk/res/com.ireadygo.app.gamelauncher" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="AppTheme" parent="android:Theme.Light"></style>
+
+    <style name="MenuTitle" parent="@android:style/Widget.TextView">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:shadowColor">#1F000000</item>
+        <item name="android:shadowDx">2</item>
+        <item name="android:shadowDy">50</item>
+        <item name="android:shadowRadius">10</item>
+    </style>
+    <!-- 商店选项 -->
+    <style name="Options">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:ellipsize">none</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <!-- 商店选项获取焦点 -->
+    <style name="OptionsFocused" parent="@style/Options">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!-- 商店选项被选中 -->
+    <style name="OptionsSelected" parent="@style/Options">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!-- 商店选项未选中，未获取焦点状态 -->
+    <style name="OptionsNormal" parent="@style/Options">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/white_second_transparency</item>
+    </style>
+
+    <style name="HListView">
+        <item name="android:clipChildren">false</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:focusable">true</item>
+        <item name="android:divider">@android:color/transparent</item>
+        <item name="android:overScrollMode">never</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingBottom">20dp</item>
+        <item name="hlv_dividerWidth">6dp</item>
+    </style>
+
+    <style name="WindowHListView" parent="@style/HListView">
+        <item name="android:padding">15dp</item>
+    </style>
+
+    <style name="StoreListView" parent="@style/HListView">
+        <item name="android:paddingLeft">@dimen/content_padding_left_default</item>
+    </style>
+
+    <style name="AppListView" parent="@style/HListView">
+        <item name="android:paddingTop">65dp</item>
+    </style>
+
+    <style name="mygame_app_text_style">
+        <item name="android:textSize">@dimen/mygame_app_text_size</item>
+        <item name="android:textColor">@drawable/game_item_color_selector</item>
+    </style>
+
+    <style name="mygame_game_text_style">
+        <item name="android:textSize">@dimen/mygame_game_text_size</item>
+        <item name="android:textColor">@drawable/game_item_color_selector</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">none</item>
+        <item name="android:paddingLeft">@dimen/mygame_game_name_padding</item>
+        <item name="android:paddingRight">@dimen/mygame_game_name_padding</item>
+    </style>
+
+    <style name="Label">
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="TextLabelSmallDark" parent="@style/Label">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/white_first_transparency</item>
+    </style>
+
+    <style name="TextLabelSmallLight" parent="@style/Label">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TextLabelBigLight" parent="@style/Label">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TextLabelMiddleLight" parent="@style/Label">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TextLabelMiddleDark" parent="@style/Label">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white_first_transparency</item>
+    </style>
+
+    <style name="TextLabelLight">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="StoreButtonNormal">
+        <item name="android:background">@drawable/store_search_btn_bg_selector</item>
+        <item name="android:gravity">center</item>
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:textColor">@color/store_btn_normal_color_selector</item>
+        <item name="android:textSize">@dimen/store_search_input_btn_size</item>
+    </style>
+
+    <style name="AccountButtonNormal">
+        <item name="android:background">@drawable/account_btn_bg_selector_normal</item>
+        <item name="android:gravity">center</item>
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:textColor">@color/account_btn_normal_color_selector</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="AccountTextNormal">
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/account_txt_normal_color_selector</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:ellipsize">none</item>
+    </style>
+
+    <style name="AccountEdittextNormal" parent="@android:style/Widget.EditText">
+        <item name="android:paddingLeft">@dimen/account_edittext_padding_left</item>
+        <item name="android:paddingRight">@dimen/account_edittext_padding_left</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="AccountEdittextDisable" parent="@android:style/Widget.EditText">
+        <item name="android:gravity">top|left</item>
+        <item name="android:background">@drawable/account_personal_disable_bg</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="RubbitCurrency">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="FreecardPackageContent">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="FreecardPackagePay">
+        <item name="android:textColor">#E6FFFFFF</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="FreecardPackageLayout">
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">right</item>
+        <item name="android:clipChildren">false</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:paddingRight">@dimen/freecard_package_padding_right</item>
+        <item name="android:paddingTop">@dimen/freecard_package_padding_top</item>
+        <item name="android:paddingLeft">@dimen/freecard_package_padding_right</item>
+        <item name="android:scaleX">0.85</item>
+        <item name="android:scaleY">0.85</item>
+    </style>
+
+    <style name="AccountSpinner">
+        <item name="android:background">@drawable/account_edittext_bg_selector</item>
+        <item name="android:spinnerMode">dropdown</item>
+    </style>
+
+    <style name="SearchDropdownList" parent="@android:style/Widget.ListView.DropDown">
+        <item name="android:divider">#2F000000</item>
+        <item name="android:dividerHeight">1dp</item>
+        <item name="android:scrollbars">none</item>
+    </style>
+
+    <style name="SearchInputView" parent="@android:style/Widget.AutoCompleteTextView">
+        <item name="android:completionThreshold">1</item>
+        <item name="android:popupBackground">@drawable/corner_white_shape</item>
+        <item name="android:dropDownVerticalOffset">3dp</item>
+        <item name="android:dropDownHorizontalOffset">0dip</item>
+        <item name="android:background">@drawable/store_search_input_bg_selector</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="MainMenuImageStyle">
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="ClickBtnNormal">
+        <item name="android:textColor">@color/text_btn_color_normal_selector</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="TextNormal" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="GobackBtn" parent="@android:style/Widget.TextView">
+        <item name="android:drawablePadding">5dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:drawableLeft">@drawable/detail_goback</item>
+        <item name="android:focusable">false</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="customDialog" parent="@android:Theme.Dialog">
+        <item name="android:width">250dp</item>
+        <item name="android:height">200dp</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowBackground">@drawable/confirm_dialog_bg</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="UserTextStyleWithCup">
+        <item name="android:drawablePadding">@dimen/user_cup_drawable_padding</item>
+        <item name="android:textSize">@dimen/user_cup_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="LoginEdittext" parent="@style/TextLabelMiddleLight">
+        <item name="android:width">@dimen/login_edittext_width</item>
+        <item name="android:height">@dimen/login_edittext_height</item>
+        <item name="android:background">@drawable/login_edittext_bg_selector</item>
+        <item name="android:drawablePadding">@dimen/login_edittext_drawable_padding</item>
+        <item name="android:paddingLeft">@dimen/login_edittext_padding_left</item>
+        <item name="android:textColorHint">@color/white_first_transparency</item>
+    </style>
+
+    <style name="LoginBtn">
+        <item name="android:width">@dimen/login_edittext_width</item>
+        <item name="android:height">@dimen/login_edittext_height</item>
+        <item name="android:textColor">@color/text_btn_color_normal_selector</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="AccountErrorPrompt">
+        <item name="android:textColor">@color/red_normal</item>
+        <item name="android:focusable">false</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="FolderPopWinStyle">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <style name="CommonStyle">
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="AllAppTipStyle" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="progressBarHorizontalColor" parent="android:Widget.ProgressBar.Horizontal">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/progressbar_store_game_download</item>
+        <item name="android:minHeight">5dip</item>
+        <item name="android:maxHeight">5dip</item>
+    </style>
+
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/storeSettingsList"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/content_padding_left_default"
+    android:focusable="true"
+    android:layout_marginRight="@dimen/store_settings_listview_margin_right"
+    android:nextFocusDown="@id/storeSettingsList"
+    android:nextFocusLeft="@+id/storeSettingsList"
+    android:nextFocusRight="@id/storeSettingsList"
+    android:nextFocusUp="@+id/storeOptionsSettings"
+    android:paddingTop="@dimen/store_detail_padding_top" >
+
+</ListView>

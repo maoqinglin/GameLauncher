@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ireadygo.app.gamelauncher.ui.widget.animator.AnimatorLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/store_recommend_item_bg_selector"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="@dimen/recommend_item_padding" >
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="@dimen/recommend_item_width"
+        android:layout_height="@dimen/recommend_item_height"
+        android:src="@drawable/store_app_icon_mid" />
+
+    <RelativeLayout
+        android:id="@+id/nameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/recommend_item_name_padding_bottom" >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            style="@style/TextLabelSmallLight"
+            android:text="太极熊猫" />
+
+        <TextView
+            android:id="@+id/playNumbersPrompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            style="@style/TextLabelSmallLight"
+            android:text="在玩用户" />
+
+        <TextView
+            android:id="@+id/playNumbers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/playNumbersPrompt"
+            style="@style/TextLabelSmallLight"
+            android:text="45405645" />
+    </RelativeLayout>
+
+</com.ireadygo.app.gamelauncher.ui.widget.animator.AnimatorLinearLayout>

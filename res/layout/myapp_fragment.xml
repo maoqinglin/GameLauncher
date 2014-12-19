@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mygame_root"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/content_fragment_height"
+    android:clipChildren="false" >
+
+    <com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout
+        android:id="@+id/tipsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tips_height"
+        android:layout_alignParentBottom="true">
+    </com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout>
+
+    <com.ireadygo.app.gamelauncher.ui.widget.HListView
+        android:id="@+id/h_listview_myapp_fragment"
+        style="@style/AppListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/tipsLayout"
+        android:nextFocusLeft="@id/h_listview_myapp_fragment"
+        android:nextFocusRight="@id/h_listview_myapp_fragment"
+        android:nextFocusUp="@+id/menu_app"
+        android:paddingLeft="@dimen/content_padding_left_default" />
+
+</RelativeLayout>

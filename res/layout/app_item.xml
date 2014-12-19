@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/game_view"
+    style="@style/mygame_app_text_style"
+    android:layout_width="@dimen/mygame_app_width"
+    android:layout_height="@dimen/mygame_app_height"
+    android:layout_centerHorizontal="true"
+    android:drawablePadding="@dimen/mygame_app_drawable_padding"
+    android:ellipsize="end"
+    android:gravity="center"
+    android:singleLine="true"
+    android:textSize="12sp" />

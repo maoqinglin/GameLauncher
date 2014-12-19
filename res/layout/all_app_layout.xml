@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/game_folder"
+    style="@style/FolderPopWinStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/all_app_bg" />
+
+    <TextView
+        android:id="@+id/all_app_description_tv"
+        style="@style/AllAppTipStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/all_app_title_margin_left"
+        android:layout_marginTop="@dimen/all_app_title_margin_top"
+        android:text="@string/all_app_description" />
+
+    <TextView
+        android:id="@+id/all_app_count_tv"
+        style="@style/AllAppTipStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/all_app_description_tv"
+        android:layout_marginLeft="@dimen/all_app_count_margin_left"
+        android:layout_toRightOf="@id/all_app_description_tv"
+        android:text="@string/all_app_count" />
+
+    <TextView
+        android:id="@+id/all_app_used_slot_tv"
+        style="@style/AllAppTipStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/all_app_description_tv"
+        android:layout_marginLeft="@dimen/all_app_used_slot_margin_left"
+        android:layout_toRightOf="@id/all_app_count_tv"
+        android:text="@string/all_app_used_slot" />
+
+    <com.ireadygo.app.gamelauncher.ui.widget.HListView
+        android:id="@+id/all_app_hlist"
+        style="@style/WindowHListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/all_app_description_tv"
+        android:nextFocusLeft="@+id/all_app_hlist" />
+
+</RelativeLayout>

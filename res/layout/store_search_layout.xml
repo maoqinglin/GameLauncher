@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.ireadygo.app.gamelauncher"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/store_detail_padding_top" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/content_padding_left_default" >
+
+        <AutoCompleteTextView
+            android:id="@+id/storeSearchInput"
+            style="@style/SearchInputView"
+            android:layout_width="@dimen/store_search_input_text_width"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionDone"
+            android:nextFocusDown="@+id/storeSearchList"
+            android:nextFocusLeft="@+id/storeSearchInput"
+            android:nextFocusRight="@+id/storeSearchBtn"
+            android:nextFocusUp="@+id/storeOptionsSearch"
+            android:paddingBottom="@dimen/store_search_padding_bottom"
+            android:paddingLeft="@dimen/store_search_padding_left"
+            android:paddingRight="@dimen/store_search_padding_right"
+            android:paddingTop="@dimen/store_search_padding_top"
+            android:textColor="@color/white"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/storeSearchBtn"
+            style="@style/StoreButtonNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/store_search_input_btn_margin_left"
+            android:nextFocusDown="@+id/storeSearchList"
+            android:nextFocusLeft="@+id/storeSearchInput"
+            android:nextFocusRight="@+id/storeSearchBtn"
+            android:nextFocusUp="@+id/storeOptionsSearch"
+            android:text="@string/store_search" />
+    </LinearLayout>
+
+    <com.ireadygo.app.gamelauncher.ui.widget.HListView
+        android:id="@+id/storeSearchList"
+        style="@style/StoreListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/store_search_listview_margin_top"
+        android:nextFocusDown="@id/storeSearchList"
+        android:nextFocusLeft="@+id/storeOptionsSearch"
+        android:nextFocusRight="@id/storeSearchList"
+        android:nextFocusUp="@id/storeSearchInput"
+        app:hlv_dividerWidth="@dimen/search_listview_item_space" >
+    </com.ireadygo.app.gamelauncher.ui.widget.HListView>
+
+</LinearLayout>

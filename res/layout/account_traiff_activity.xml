@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/starting_guide_title_layout" />
+
+    <LinearLayout
+        android:layout_width="@dimen/account_login_item_width"
+        android:layout_height="@dimen/account_login_item_height"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/traiff_layout_margin_left"
+        android:layout_marginTop="@dimen/traiff_layout_margin_top"
+        android:gravity="center" >
+
+        <TextView
+            style="@style/TextLabelBigLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/account_recharge_free_card"
+            />
+
+        <TextView
+            style="@style/TextLabelBigLight"
+            android:id="@+id/freeCardNumber"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:maxLength="25"
+            android:singleLine="true"
+            />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="@dimen/account_login_item_width"
+        android:layout_height="@dimen/account_login_item_height"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/traiff_layout_margin_left"
+        android:layout_marginTop="@dimen/traiff_layout_margin_top" >
+
+        <TextView
+            android:id="@+id/subtractBtn"
+            style="@style/MainMenuImageStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="@dimen/traiff_layout_text_margin_right"
+            android:background="@drawable/account_subtract_btn_selector" />
+
+        <TextView
+            android:id="@+id/addBtn"
+            style="@style/MainMenuImageStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/account_add_btn_selector" />
+
+        <TextView
+            android:id="@+id/freeCardTraiffType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            style="@style/TextLabelBigLight"/>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="@dimen/account_login_item_width"
+        android:layout_height="@dimen/account_login_item_height"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/traiff_layout_margin_left"
+        android:layout_marginTop="@dimen/traiff_layout_margin_top">
+
+    <LinearLayout
+        android:id="@+id/cost_coin_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_vertical"
+        android:visibility="visible" >"
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/traiff_layout_text_margin_right"
+            android:text="@string/account_should_pay_money"
+            style="@style/TextLabelBigLight" />
+
+        <TextView
+            android:id="@+id/accountCoin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/traiff_layout_text_margin_right"
+            style="@style/TextLabelBigLight" />
+
+        <TextView
+            android:id="@+id/accountTicket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/traiff_layout_text_margin_right"
+            style="@style/TextLabelBigLight" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/traiffPayPrompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/slot_insufficient_balance_prompt"
+        android:textColor="#7FFFFFFF"
+        android:textSize="@dimen/traiff_layout_text_size"
+        android:visibility="gone" />
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/accountPayBtn"
+        style="@style/ClickBtnNormal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/traiff_layout_margin_top"
+        android:background="@drawable/account_login_btn_bg_selector"
+        android:nextFocusDown="@+id/accountRegisterBtn"
+        android:nextFocusLeft="@+id/registerGobackBtn"
+        android:nextFocusRight="@+id/accountRegisterBtn"
+        android:nextFocusUp="@+id/accountPasswordRepeatEdit"
+        android:text="@string/account_celerity_payment" />
+
+</LinearLayout>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/account_item_init_width"
+    android:layout_height="@dimen/account_item_init_height"
+    android:clipChildren="false"
+    android:clipToPadding="false" >
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/account_item_init_bg_shape" />
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="@dimen/account_item_icon_width"
+        android:layout_height="@dimen/account_item_icon_width"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/account_item_icon_margin_top"
+        android:src="@drawable/account_personal_icon_focused" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
+        android:text="@string/account_personal"
+        android:textColor="@color/white"
+        android:scaleX="0.7"
+        android:scaleY="0.7"
+        android:textSize="@dimen/account_item_title_size" />
+
+</RelativeLayout>

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/detailRootView"
+    android:scrollbars="none"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/detail_padding_top" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/detail_title_margin_bottom" >
+
+            <ImageView
+                android:id="@+id/goback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/detail_goback_margin_left"
+                android:paddingBottom="@dimen/detail_goback_padding_top"
+                android:paddingLeft="@dimen/detail_goback_padding_left"
+                android:paddingRight="@dimen/detail_goback_padding_right"
+                android:paddingTop="@dimen/detail_goback_padding_top"
+                android:src="@drawable/detail_goback" />
+
+            <TextView
+                style="@style/TextLabelMiddleLight"
+                android:layout_width="@dimen/detail_title_width"
+                android:layout_height="@dimen/detail_title_height"
+                android:layout_centerInParent="true"
+                android:background="#4c000000"
+                android:gravity="center"
+                android:text="@string/detail_game_introduce" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" >
+
+            <LinearLayout
+                android:id="@+id/iconLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/detail_padding_left" >
+
+                <ImageView
+                    android:id="@+id/icon"
+                    android:layout_width="@dimen/detail_icon_width"
+                    android:layout_height="@dimen/detail_icon_height"
+                    android:layout_marginRight="@dimen/detail_icon_margin_right"
+                    android:layout_marginTop="@dimen/detail_icon_margin_top"
+                    android:src="@drawable/store_app_icon_normal" />
+
+                <LinearLayout
+                    android:layout_width="@dimen/detail_name_layout_width"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/detail_name_margin_right"
+                    android:gravity="bottom"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/name"
+                        style="@style/TextLabelBigLight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/detail_name_margin_bottom"
+                        android:text="太极熊猫" />
+
+                    <TextView
+                        android:id="@+id/version"
+                        style="@style/TextLabelSmallDark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/detail_name_margin_bottom"
+                        android:text="@string/detail_version" />
+
+                    <TextView
+                        android:id="@+id/size"
+                        style="@style/TextLabelSmallDark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/detail_name_margin_bottom"
+                        android:text="@string/detail_size" />
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" >
+
+                        <TextView
+                            android:id="@+id/playNumbersLabel"
+                            style="@style/TextLabelSmallDark"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/detail_play_numbers" />
+
+                        <TextView
+                            android:id="@+id/playNumbers"
+                            style="@style/TextLabelSmallLight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/playNumbersLabel"
+                            android:layout_marginTop="@dimen/detail_player_number_margin_top"
+                            android:gravity="bottom"
+                            android:text="55484645" />
+
+                        <TextView
+                            android:id="@+id/downloadBtn"
+                            style="@style/StoreButtonNormal"
+                            android:layout_width="@dimen/detail_download_btn_width"
+                            android:layout_height="@dimen/detail_download_btn_height"
+                            android:layout_alignBottom="@id/playNumbers"
+                            android:layout_alignParentRight="true"
+                            android:layout_gravity="bottom"
+                            android:text="@string/detail_download" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <com.ireadygo.app.gamelauncher.ui.widget.HListView
+                android:id="@+id/pictureList"
+                style="@style/StoreListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/iconLayout"
+                android:layout_gravity="center_vertical"
+                android:nextFocusDown="@id/pictureList"
+                android:nextFocusLeft="@id/pictureList"
+                android:nextFocusRight="@id/pictureList"
+                android:nextFocusUp="@id/downloadBtn"
+                android:paddingTop="@dimen/detail_list_padding_top_h"
+                android:paddingBottom="@dimen/detail_list_padding_bottom"
+                android:paddingLeft="@dimen/detail_padding_left" >
+            </com.ireadygo.app.gamelauncher.ui.widget.HListView>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/detail_intro_margin_right"
+                android:layout_toRightOf="@id/iconLayout"
+                android:orientation="vertical" >
+
+                <TextView
+                    style="@style/TextLabelMiddleLight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/detail_game_detail" />
+
+                <ScrollView
+                    android:id="@+id/introLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/detail_intro_height_normal"
+                    android:layout_marginTop="@dimen/detail_intro_margin_top"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:nextFocusDown="@id/introLayout"
+                    android:nextFocusLeft="@id/downloadBtn"
+                    android:nextFocusRight="@id/introLayout"
+                    android:nextFocusUp="@id/introLayout"
+                    android:padding="@dimen/detail_intro_padding"
+                    android:scrollbarThumbVertical="@drawable/detail_intro_scrollbar" >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingRight="@dimen/detail_intro_padding_right" >
+
+                        <com.ireadygo.app.gamelauncher.ui.widget.JustifyTextView
+                            android:id="@+id/intro"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingExtra="@dimen/detail_intro_line_spacing"
+                            android:text="　　在Android中，用户往往会把所有的字符串保存在string.xml中，目的是方便统一管理，并且利于国际化，但是在这些字符串中直接输入一些符号是不起任何效果的，比如空格，换行，大于号小于号等，这就需要使用转义字符来进行转移，这样才能在使用时正确显示字符。在Android中，用户往往会把所有的字符串保存在string.xml中，目的是方便统一管理，并且利于国际化，但是在这些字符串中直接输入一些符号是不起任何效果的，比如空格，换行，大于号小于号等，这就需要使用转义字符来进行转移，这样才能在使用时正确显示字符。用户往往会把所有的字符串保存在string.xml中，目的是方便统一管理，并且利于国际化，但是在这些字符串中直接输入一些符号是不起任何效果的，比如空格，换行，大于号小于号等，这就需要使用转义字符来进行转移，这样才能在使用时正确显示字符。在Android中，用户往往会把所有的字符串保存在string.xml中，目的是方便统一管理，并且利于国际化，但是在这些字符串中直接输入一些符号是不起任何效果的，比如空格，换行，大于号小于号等，这就需要使用转义字符来进行转移，这样才能在使用时正确显示字符。"
+                            android:textColor="@color/white_first_transparency"
+                            android:textSize="@dimen/detail_intro_text_size" />
+                    </LinearLayout>
+                </ScrollView>
+
+                <ImageView
+                    android:id="@+id/introDownArrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="@dimen/detail_down_arrow_margin_right"
+                    android:layout_marginTop="@dimen/detail_down_arrow_margin_top"
+                    android:src="@drawable/detail_down_arrow_dark" />
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+</ScrollView>

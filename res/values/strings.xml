@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Snail Launcher</string>
+    <string name="action_settings">Set WallPaper</string>
+    <string name="goback">Back</string>
+
+    <!-- 壁纸 -->
+    <string name="wallpaper_instructions">Set wallpaper</string>
+    <string name="pick_wallpaper">Snail Wallpapers</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- 下载 -->
+    <string name="Toast_disable_3G_prompt">App Store has disabled downloading in 3G network!</string>
+    <string name="using_3G_download">Downloading with 3G network now!</string>
+
+    <!-- 卡槽 -->
+    <string name="Toast_slot_overdue">\tslot has expired!</string>
+    <string name="Notification_slot_expired_big_title">Slots Expired Prompt</string>
+    <string name="Notification_slot_expired_little_title">Your slots there are %1$d days expire, after the expiration, some applications will be unbundling back to "All Applications", please purchase a timely new slot.</string>
+    <string name="Notification_slot_expired_today_title">Your slots will expire today, after the expiration, some applications will be unbundling back to "All Applications", please purchase a timely new slot.</string>
+
+    <!-- Download -->
+    <string name="launch_error">Error:Application failed to start,Please download again!</string>
+    <string name="launch_disable_error">Error:Application has been disabled!</string>
+
+    <!-- Menu -->
+    <string name="menu_store">Store</string>
+    <string name="menu_game">Games</string>
+    <string name="menu_community">Social</string>
+    <string name="menu_app">Apps</string>
+    <string name="menu_call">Phone</string>
+    <string name="menu_settings">Settings</string>
+
+    <!-- 应用详情 -->
+    <string name="detail_game_introduce">Instruction</string>
+    <string name="detail_version">Version:%1$s</string>
+    <string name="detail_size">Size:%1$s</string>
+    <string name="detail_play_numbers">Online Players</string>
+    <string name="detail_download">Download</string>
+    <string name="detail_continue">Continue</string>
+    <string name="detail_pause">Pause</string>
+    <string name="detail_queue">Waiting</string>
+    <string name="detail_install">Install</string>
+    <string name="detail_installing">Installing</string>
+    <string name="detail_error">Error</string>
+    <string name="detail_launch">Launch</string>
+    <string name="detail_update">Upgrade</string>
+    <string name="detail_game_detail">Game Detail</string>
+    <string name="detail_player_comment">Comments</string>
+
+    <!-- 商店-选项 -->
+    <string name="store_options_search">Search</string>
+    <string name="store_options_recommend">Recommend</string>
+    <string name="store_options_collection">Album</string>
+    <string name="store_options_category">Category</string>
+    <string name="store_options_game_manager">Game Manager</string>
+    <string name="store_options_settings">Store Settings</string>
+
+        <!-- 商店-选项缩写 -->
+    <string name="store_options_search_short">Search</string>
+    <string name="store_options_recommend_short">RCMD</string>
+    <string name="store_options_collection_short">Album</string>
+    <string name="store_options_category_short">Category</string>
+    <string name="store_options_game_manager_short">Manager</string>
+    <string name="store_options_settings_short">Settings</string>
+
+    <!-- 商店-搜索 -->
+    <string name="store_search">Search</string>
+
+    <!-- 免商店-分类 -->
+    <string-array name="category_titles">
+        <item>SLG</item>
+        <item>Off-Line Game</item>
+        <item>STG</item>
+        <item>RPG</item>
+        <item>SIM</item>
+        <item>RSG</item>
+        <item>SPT</item>
+        <item>PZL</item>
+        <item>ETC</item>
+    </string-array>
+
+    <string-array name="category_intros">
+        <item>Quickspot/Decompression/Pet/Answer/Music</item>
+        <item>SLG/RTS/Kongfu/Magic/Animation</item>
+        <item>Shoting/3D/SSG/Tank/Sniper</item>
+        <item>SLG/RTS/Kongfu/Magic/Animation</item>
+        <item>Card/Chess/SIM/History/War/DOTA</item>
+        <item>Parkour/Race/Motorcycle/Rowing/Plane</item>
+        <item>Arcade/BasketBall/Soccer/Tennis/Billiards/ETC</item>
+        <item>Dou Di Zhu/Chess/Mahjong/BRPG/Dezhou Poker/Card</item>
+        <item>Game form Taiwan</item>
+    </string-array>
+
+    <string-array name="store_settings_titles">
+        <item>Download only when WIFI connected</item>
+        <item>Enable installed package automatically delete</item>
+        <item>Enable game upgrade notification</item>
+        <item>Enable remote game auto-installation</item>
+    </string-array>
+
+    <string-array name="account_age_array">
+        <item>Please choose your age</item>
+        <item>16~20</item>
+        <item>21~25</item>
+        <item>26~30</item>
+        <item>31~35</item>
+        <item>36~40</item>
+        <item>41~45</item>
+        <item>46~50</item>
+        <item>51~55</item>
+        <item>56~60</item>
+    </string-array>
+
+    <!-- 免商店：下载管理 -->
+    <string name="store_dld_manager_downloading">Downloading</string>
+    <string name="store_dld_manager_updatable">Upgrade</string>
+    <string name="store_dld_manager_launchable">Installed</string>
+    <string name="store_dld_manager_empty">There is no game,Go and find one in store!</string>
+    <string name="store_dld_manager_cur_version">Version：%1$s</string>
+    <string name="store_dld_manager_detail_not_found">No information about this application!</string>
+    <string name="delete_task_prompt">Delete Task</string>
+    <string name="delete_task_msg">Are you sure to delete the download task？</string>
+
+    <!-- 卡槽购买页面 -->
+    <string name="slot_title">Buy Slot</string>
+    <string name="slot_balance">Balance:%1$d</string>
+    <string name="slot_currency">Rabbit Coin</string>
+    <string name="slot_ticket">Rabbit Certificate</string>
+    <string name="slot_open_number">Purchase Quantity：</string>
+    <string name="slot_number"></string>
+    <string name="slot_pay_method">Charge Mode:</string>
+    <string name="slot_pay_method_month">Pay by Months</string>
+    <string name="slot_pay_method_year">Pay by Years</string>
+    <string name="slot_open_duration">Purchase Time：</string>
+    <string name="slot_month">Month</string>
+    <string name="slot_year">Year</string>
+    <string name="slot_buy_dialog_prompt">Are you sure to buy slot？</string>
+    <string name="slot_pay_amount">Amount Payable：</string>
+    <string name="slot_recharge">Deposit</string>
+    <string name="slot_buy_now">Buy Now</string>
+    <string name="slot_meal_1">Package 1：</string>
+    <string name="slot_meal_2">Package 2：</string>
+    <string name="slot_meal_3">Package 3：</string>
+    <string name="slot_meal_text_1">30 slots for 1 month,20 Rabbit-Coin</string>
+    <string name="slot_meal_text_2">30 slots for 1 year,\t180 Rabbit-Coin</string>
+    <string name="slot_query_balance_prompt">Failed to query balance!</string>
+    <string name="user_identity_overdue">Account state expired,please login again!</string>
+    <string name="slot_should_login">Please login first!</string>
+    <string name="slot_buy_success">Buy slot success!</string>
+    <string name="slot_buy_failed">Failed to but slot!</string>
+
+    <!-- 状态 -->
+    <string name="status_download">Download</string>
+    <string name="status_transfering">Continue</string>
+    <string name="status_pause">Pause</string>
+    <string name="status_queue">Wait</string>
+    <string name="status_install">Install</string>
+    <string name="status_installing">Installing</string>
+    <string name="status_error">Error</string>
+    <string name="status_launch">Launch</string>
+    <string name="status_update">Upgrade</string>
+
+    <!-- 游戏详情 -->
+    <string name="detail_title">Detail</string>
+    <string name="detail_game_size">Size：</string>
+    <string name="detail_game_version">Version：</string>
+
+    <!-- 免账号 -->
+    <string name="account_mywealth">Assets</string>
+    <string name="account_personal">INFO</string>
+    <string name="account_recharge">Deposit</string>
+    <string name="account_freecard">M-Card</string>
+    <string name="account_logout">Logout</string>
+
+    <!-- 免账号- 我的资产 -->
+    <string name="mywealth_game_counts">Games</string>
+    <string name="mywealth_game_points">Points</string>
+
+    <!-- 免账号-个人信息 -->
+    <string name="personal_edit_account">Edit</string>
+    <string name="personal_nickname">Nickname</string>
+    <string name="personal_phone_number">Phone</string>
+    <string name="personal_age">Age</string>
+    <string name="personal_sex">Gender</string>
+    <string name="personal_open_freeflow">Enable Free-Flux</string>
+    <string name="personal_modify_password">Change PWD</string>
+    <string name="personal_unbind_phone_number">Unbind Phone</string>
+    <string name="personal_save">Save</string>
+    <string name="personal_female">F</string>
+    <string name="personal_male">M</string>
+    <string name="personal_empty_phone_number"></string>
+    <string name="personal_no_bind_phone_number">Unbind</string>
+    <string name="account_saving">Saving</string>
+    <string name="account_save_success">Save successfully!</string>
+    <string name="account_save_failed">Save failed!</string>
+    <string name="account_outdate">Account state expired,please login again!</string>
+    <string name="logout_confirm_prompt">Logout confirm</string>
+    <string name="logout_confirm_msg">Are you sure to logout?</string>
+    <string name="from_system">From System</string>
+    <string name="from_camera">From Camera</string>
+    <string name="from_gallery">Form Gallery</string>
+    <string name="system_photo_dialog_title">System Figure</string>
+
+    <!-- 免账号-充值 -->
+    <string name="recharge_current_account">Account</string>
+    <string name="recharge_my_balance">Balance</string>
+    <string name="recharge_rubbit_currency">Rabbit Coin</string>
+    <string name="recharge_rubbit_ticket">Rabbit Certificate</string>
+    <string name="recharge_rubbit_recharge">Rabbit Deposit</string>
+    <string name="recharge_ticket_recharge">Certificate Recharge</string>
+    <string name="recharge_ticket_type_prompt">Certificate Type</string>
+    <string name="recharge_ticket_code_prompt">Certificate Number</string>
+    <string name="recharge_confirm">Confirm</string>
+    <string name="recharge_input_not_empty">Error:Certificate number is empty!</string>
+    <string name="recharge_input_contain_illegality">Error:Certificate number has illegal</string>
+    <string name="recharge_succeed">Deposit Success!</string>
+    <string name="recharge_rabbit_ticket_used">Deposit error，Rabbit Certificate has been used!</string>
+    <string name="recharge_rabbit_ticket_not_exist">Deposit error，Invalid Rabbit Certificate!</string>
+    <string name="recharge_rabbit_ticket_password_wrong">Deposit error，Rabbit Certificate PWD error!</string>
+    <string name="recharge_rabbit_ticket_type_match">Deposit error，Rabbit Certificate is not match the device type!</string>
+    <string name="recharge_rabbit_ticket_one_bind">Deposit error，Device has been deposited!</string>
+    <string name="recharge_slot_ticket_used">Deposit error，Slot Certificate has been used!</string>
+    <string name="recharge_slot_ticket_not_exist">Deposit error，Invalid Slot Certificate!</string>
+    <string name="recharge_slot_ticket_type_match">Deposit error，Slot Certificate is not match the device type!</string>
+    <string name="recharge_slot_ticket_one_bind">Deposit error，Bind Slot Certificate failed!</string>
+    <string name="recharge_money_not_enough">Deposit error，Insufficient balance</string>
+    <string name="recharge_imei_unknown">Deposit error，Unknown device</string>
+    <string name="account_recharge_rabbit_ticket">Rabbit Certificate Deposit</string>
+    <string name="account_change_account">Change Account</string>
+    <string name="account_recharge_account">Account：%1$s \n Confirm to deposit</string>
+    <string name="slot_insufficient_balance_prompt">Insufficient balance</string>
+    <string name="recharge_account_empty">Account is empty!</string>
+    <string name="rabbit_coin">Rabbit Coin</string>
+    <string name="rabbit_ticket">Rabbit Certificate</string>
+    <string name="money_not_enough">Not enough money!</string>
+    <string name="recharge_phone_not_bind">Phone number has not been bound!</string>
+    <string name="recharge_phone_fee_limint">Can not buy any more!</string>
+    <string name="purpose_phone_recharge">Mian-card deposit</string>
+    <string name="purpose_game_recharge">Game deposit</string>
+    <string name="purpose_buy_slot">Buy slots</string>
+    <string name="rabbit_ticket_recharged_tip">Deposit%1$d Rabbit Certificate</string>
+    <string name="rabbit_ticket_recharged_done">Success!</string>
+    <string name="rabbit_ticket_purpose_title">Rabbit Certificate is used to:</string>
+    <string name="arm_ticket_recharged_tip">Deposit%1$d slots，effective time：%2$ddays</string>
+    <string name="arm_ticket_recharged_tip_permanent">Deposit%1$d slots，effective time：forever</string>
+    <string name="arm_ticket_purpose_title">Slot Certificate is used to make more app display on the destop</string>
+    <string name="arm_ticket_recharge_title">Slot Certificate Deposit</string>
+    <string name="account_traiff_recharge">Deposit</string>
+
+    <string-array name="recharge_ticket_types">
+        <item>Rabbit Certificate</item>
+        <item>Slot Certificate</item>
+    </string-array>
+
+    <!-- 免账号-免卡 -->
+    <string name="freecard_input_phone_number">Enter phone number</string>
+    <string name="freecard_confirm_number">Confirm</string>
+    <string name="freecard_phone_number_bind_prompt">Rabbit Certificate can be used to deposit the first bound phone number only</string>
+    <string name="freecard_buy_tariff_package">Buy Package</string>
+    <string name="freecard_input_office">Enter Mian-card Hall</string>
+    <string name="freecard_voice_package">60MNT Call</string>
+    <string name="freecard_package_pay_unit">Rabbit-Coin</string>
+    <string name="freecard_flow_package">45MB Data</string>
+    <string name="freecard_sms_package">50 SMS</string>
+    <string name="phone_bind">Bind</string>
+    <string name="phone_unbind">Unbind</string>
+    <string name="bind_phone_not_empty">Phone number is empty!</string>
+    <string name="bind_phone_length_wrong">Invalid phone number</string>
+    <string name="rabbit_coin_or_ticket">Rabbit-Coin</string>
+    <string name="account_free_card_rule">Mian-card deposit rule</string>
+    <string name="account_rule_msg">Rabbit Certificate can be used to deposit the first bound phone number only</string>
+    <string name="account_confirm_bind">Confirm</string>
+    <string name="bind_failed_illegality_bss_account">Invalid bss account!</string>
+    <string name="bind_failed_already_bind">This phone number has been bound!</string>
+    <string name="bind_failed_phone_wrong">Failed to bind phone number!</string>
+    <string name="bind_failed_without_recharge">Please deposit Rabbit Certificate first!</string>
+    <string name="account_recharge_free_card">Mian-card deposit：</string>
+    <string name="account_should_pay_money">Amount payable：</string>
+    <string name="account_celerity_payment">Pay</string>
+
+    <!-- Settings -->
+    <string name="setting_wifi_title">WIFI</string>
+    <string name="setting_bt_title">BLUETOOTH</string>
+    <string name="setting_air_plane_mode_title">AIRPLANE MODE</string>
+    <string name="setting_data_connection_title">DATA CONNECTION</string>
+    <string name="setting_data_usage_title">DATA USAGE</string>
+    <string name="setting_timeout_title">TIMEOUT</string>
+    <string name="setting_auto_rotation_title">AUTO ROTATION</string>
+    <string name="setting_auto_rotation_horizontal_title">HORIZONTAL</string>
+    <string name="setting_auto_rotation_vetical_title">VERTICAL</string>
+    <string name="setting_gps_title">GPS</string>
+    <string name="setting_more_title">More Settings</string>
+    <string name="setting_brightness_auto">Auto</string>
+    <string name="setting_brightness_max">Maximum</string>
+    <string name="setting_brightness_min">Minimum</string>
+    <string name="setting_brightness_med">Medium</string>
+    <string name="setting_scene_normal">Normal</string>
+    <string name="setting_scene_meeting">Meeting</string>
+    <string name="setting_scene_outdoor">Outdoor</string>
+    <string name="setting_scene_silent">Silent</string>
+    <string name="setting_battery_level">%1$d</string>
+    <string name="setting_battery_charge_level">Charging:%1$d</string>
+    <string name="setting_lcd_timeout">Screen timeout:%1$d seconds</string>
+
+    <!-- 错误显示 -->
+    <string name="unknown_error">Unknown Error!</string>
+    <string name="manage_download_error">Download Error!</string>
+    <string name="manage_install_error">Install Error!</string>
+
+    <!-- Install And Unstall -->
+    <string name="package_not_found">Install Error：Invalid file</string>
+    <string name="package_unreadable">Install Error:file is corrupted</string>
+    <string name="install_silently_not_compatible">Install Error：Unknown</string>
+    <string name="invalid_apk">Install Error：File is corrupted</string>
+    <string name="insufficient_storage">Install Error：Storage insufficient</string>
+    <string name="inconsistent_certificates">Install Error：Signature conflict</string>
+    <string name="no_certificates">Install Error：Application has no Signature</string>
+    <string name="unknow_apk_install_error">Install Error：Unknown error</string>
+    <string name="error_zip_package">Install Error：Decompression error</string>
+    <string name="storage_system_error">Install Error：Unknow error</string>
+    <string name="external_storage_unmounted">Install Error：No SD card</string>
+    <string name="illegal_apk_with_data">Install Error：File unavailable</string>
+    <string name="uninstall_failed_invalid_package">Uninstall Error：</string>
+    <string name="uninstall_failed_internal_error">Uninstall Error：Unknow error</string>
+    <string name="uninstall_failed_permission_denied">Uninstall Error：Unknow error</string>
+
+    <!-- Download -->
+    <string name="network_unavaible"> Download Error：Network error</string>
+    <string name="insufficient_storage_space">Download Error：Storage insufficient</string>
+    <string name="can_not_create_download_path">Download Error：Storage can not read</string>
+    <string name="download_path_can_not_write">Download Error：File can not write</string>
+    <string name="server_error">Download Error：Server error</string>
+    <string name="url_error">Download Error：Download Url error</string>
+    <string name="io_error">Download Error:Unknown Error</string>
+
+    <!-- 更新 -->
+    <string name="notification_downloading_big_title">\tapps are Downloading</string>
+    <string name="notification_downloading_apps">\tapp is downloading</string>
+    <string name="notification_pause_apps">\tapp is paused</string>
+    <string name="notification_queue_apps">\tapp is queuing</string>
+    <string name="notification_failed_apps">\tapp is failed</string>
+    <string name="notification_downloaded_big_title">Free Store download completed</string>
+    <string name="notification_downloaded_little_title">\tapps are download completed</string>
+    <string name="notification_upgrade_big_title">Apps upgrade promotion</string>
+    <string name="notification_upgrade_little_title">\tapps have new version to be upgraded</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_test_main">TestMainActivity</string>
+    <string name="settings_systemupgrade">Upgrade</string>
+    <string name="settings_personalized">Customized</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_store">Storage</string>
+    <string name="settings_secure">Safety</string>
+    <string name="settings_help">Help</string>
+    <string name="settings_more">More</string>
+    <string name="settings_wifi">WIFI</string>
+
+    <!-- 按键提示层 -->
+    <string name="key_sun">Confirm</string>
+    <string name="key_mountain">Detail</string>
+    <string name="key_water">Delete</string>
+    <string name="key_moon">Back</string>
+
+    <!-- 网络 -->
+    <string name="no_network">Please connect network!</string>
+    <string name="all_app_moon_explain">Back</string>
+
+    <!-- 开机引导 -->
+    <string name="starting_guide_key_title">Key Instruction</string>
+
+    <!-- 账号登录、注册 -->
+    <string name="account_one_key_logining_prompt">Qick login...</string>
+    <string name="account_logining_prompt">Login...</string>
+    <string name="account_registing_prompt">Register...</string>
+ <!-- 充值 -->
+    <string name="rabbit_ticket_recharge_title">Rebbit Certificate Deposit</string>
+    <string name="login_username_hint">Enter Account</string>
+    <string name="login_password_hint">Enter PWD</string>
+    <string name="login">Login</string>
+    <!-- 一键登录 -->
+    <string name="onekey_login">Qick Login</string>
+    <string name="account_login">Login</string>
+    <string name="onekey_goback_btn">Account Settings</string>
+    <string name="login_username_empty_prompt">Account is empty</string>
+    <string name="login_password_empty_prompt">PWD is empty</string>
+    <!-- 注册 -->
+    <string name="account_register">Account Register</string>
+    <string name="register">Register</string>
+    <string name="login_register_prompt">Has no account yet？Please register!</string>
+    <string name="register_username_hint">Please enter 6 to 25 letters</string>
+    <string name="register_password_hint">Please enter PWD</string>
+    <string name="register_password_repeat_hint">Please Confirm PWD</string>
+    <string name="register_password_prompt">PWD length must between 8 to 16 letters and contain one number and letter at least.</string>
+    <string name="account_username_length_error">Account length must between 6 to 25 letters!</string>
+    <string name="account_login_success">Login success</string>
+    <string name="account_one_key_login_failed">Quick login failed，Please use normal login!</string>
+    <string name="account_username_empty_prmopt">Account or PWD is empty!</string>
+    <string name="account_password_length_error">PWD length must between 8 to 16 letters!</string>
+    <string name="account_password_digit_error">PWD must contain letters and numbers!</string>
+    <string name="account_password_repeat_error">PWD is not accordance!</string>
+    <string name="account_email_error">Email format error!</string>
+    <string name="account_login_failed">Login failed,Please try again!</string>
+    <string name="account_login_server_phonenumber">Customer service：(0512)67621007</string>
+    <string name="myapp_folder_title_system">System</string>
+    <!-- 全部应用 -->
+    <string name="all_app">All App</string>
+    <string name="all_app_description">Please mark to display on the destop</string>
+    <string name="all_app_count">All App：</string>
+    <string name="all_app_used_slot">Used：</string>
+    <string name="all_app_device_not_support">Error:Device is not supported!</string>
+    <string name="all_app_slot_has_bind">This application has bound slot!</string>
+    <string name="all_app_network_error">Network error!</string>
+    <string name="all_app_no_slot_title">Prompt</string>
+    <string name="all_app_no_slot_msg">There is no empty slot,Pleasr buy more!</string>
+    <!-- 我的游戏推荐下载 -->
+    <string name="mygame_recommend_app_download">Recommend</string>
+
+    <!-- 游戏社区 -->
+    <string name="game_community_account">Account</string>
+    <string name="game_community_Announcement">Notice</string>
+    <string name="game_community">Forum</string>
+    <string name="account_no_account_login_prompt">You should login first!</string>
+
+ <!-- 免流量开通 -->
+    <string name="free_flow_privilege_title">Free-Flux privileges</string>
+    <string name="free_flow_privilege_tip">Free-Flux privileges：Download and play the specific game without any mobile flux cost!</string>
+    <string name="free_flow_privilege_remark">You should bind you phone number before access Free-Flux privileges</string>
+    <string name="free_flow_bind_phone_title">Free-Flux Phone：</string>
+    <string name="free_flow_bind_phone_tip">If it is not your phone number,please bind yours again!</string>
+    <string name="free_flow_bind_phone_hint">Enter Phone number in SIM Card 1</string>
+    <string name="free_flow_bind_phone_status">Get Code</string>
+    <string name="free_flow_unbind_phone_status">Unbind</string>
+    <string name="free_flow_auto_code_title">Verification Code：</string>
+    <string name="free_flow_auto_code_hine">Enter verification code</string>
+    <string name="free_flow_warm_tip">Note：Free-Flux privileges need to access every month</string>
+    <string name="free_flow_get_title">Access Free-Flux privileges</string>
+    <string name="free_flow_get_tip">Your phone number can not access these privileges yet!</string>
+    <string name="free_flow_get">Access</string>
+    <string name="free_flow_has_get">Accessed</string>
+    <string name="free_flow_not_open_btn_title">Free-Flux Unabled</string>
+    <string name="free_flow_has_open_btn_title">Free-Flux Enabled</string>
+    <string name="free_flow_phone_conflict_prompt">The bound Free-Flux phone number is not match with this phone，\t\nPlease bind the phone number again to access Free-Flux privileges.</string>
+    <string name="free_flow_phone_empty_prompt">Your Snail Account has not bound phone number,Please bind your phone number to access Free-Flux privileges!</string>
+    <string name="free_flow_reget_sms_code">Again(%1$d)</string>
+    <string name="free_flow_sms_use_out">Verification code has exhausted!</string>
+    <string name="free_flow_sms_getting">Get verification code&#8230;</string>
+    <string name="free_flow_phone_binding">Bind phone number&#8230;</string>
+    <string name="free_flow_phone_unbinding">Unbind phone number&#8230;</string>
+    <string name="free_flow_enabling">Access Free-Flux privileges&#8230;</string>
+    <string name="free_flow_phone_empty">Enter phone number</string>
+    <string name="free_flow_phone_format_error">Phone number error!</string>
+    <string name="free_flow_sms_code_empty">Enter verification code</string>
+    <string name="free_flow_bind_phone_success">Bind phone success!</string>
+    <string name="free_flow_get_success">Access Free-Flux privileges success!</string>
+    <string name="free_flow_unbind_phone_success">Unbind phone success!</string>
+    <string name="free_flow_get_sms_failed">Failed to get verification code</string>
+    <string name="free_flow_bind_phone_failed">Failed to bind phone!</string>
+    <string name="free_flow_unbind_phone_failed">Failed to unbind phone!</string>
+    <string name="free_flow_sms_code_not_match">Verification code error!</string>
+    <string name="free_flow_enable_failed">Access Free-Flux privileges failed!</string>
+    <string name="free_flow_expired">Free-Flux privileges expire!</string>
+    <string name="free_flow_auto_get_success">Access Free-Flux privileges success!</string>
+    <string name="free_flow_auto_get_failed">Access Free-Flux privileges failed!</string>
+    <string name="free_flow_confirm_prompt">Free-Flux Promot</string>
+
+    <string name="shortcut_confirm">Confirm</string>
+    <string name="shortcut_detail">Detail</string>
+    <string name="shortcut_back">Back</string>
+    <string name="shortcut_uninstall">Uninstall</string>
+
+    <!-- Extend -->
+    <string name="extend_install_error">Server data error,Please try again!</string>
+    <string name="extend_install_success">install success</string>
+    <string name="extend_nearly_open">It is comming soon!</string>
+</resources>

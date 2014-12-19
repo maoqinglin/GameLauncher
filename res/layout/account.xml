@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:accountItem="http://schemas.android.com/apk/res/com.ireadygo.app.gamelauncher"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/content_fragment_height"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/content_padding_left_default"
+    android:paddingTop="@dimen/account_padding_top" >
+
+    <com.ireadygo.app.gamelauncher.ui.account.AccountItem
+        android:id="@+id/accountMyWealth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/account_item_margin_right"
+        accountItem:account_background="@drawable/account_item_init_bg_shape"
+        accountItem:account_selected_icon="@drawable/account_personal_icon_focused"
+        accountItem:account_title="@string/account_personal"
+        accountItem:account_unselected_icon="@drawable/account_personal_icon"
+        android:nextFocusLeft="@+id/accountMyWealth"
+        android:nextFocusRight="@+id/accountPersonal"
+        android:nextFocusUp="@+id/menu_account" >
+    </com.ireadygo.app.gamelauncher.ui.account.AccountItem>
+
+    <com.ireadygo.app.gamelauncher.ui.account.AccountItem
+        android:id="@+id/accountPersonal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/account_item_margin_right"
+        accountItem:account_background="@drawable/account_item_init_bg_shape"
+        accountItem:account_selected_icon="@drawable/account_personal_icon_focused"
+        accountItem:account_title="@string/account_personal"
+        accountItem:account_unselected_icon="@drawable/account_personal_icon"
+        android:nextFocusDown="@+id/accountPersonal"
+        android:nextFocusLeft="@+id/accountMyWealth"
+        android:nextFocusRight="@+id/accountRecharge"
+        android:nextFocusUp="@+id/menu_call" >
+    </com.ireadygo.app.gamelauncher.ui.account.AccountItem>
+
+    <com.ireadygo.app.gamelauncher.ui.account.AccountItem
+        android:id="@+id/accountRecharge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/account_item_margin_right"
+        android:layout_toRightOf="@+id/accountPersonal"
+        accountItem:account_background="@drawable/account_item_init_bg_shape"
+        accountItem:account_selected_icon="@drawable/account_recharge_icon_focused"
+        accountItem:account_title="@string/account_recharge"
+        accountItem:account_unselected_icon="@drawable/account_recharge_icon"
+        android:nextFocusDown="@+id/accountRecharge"
+        android:nextFocusLeft="@+id/accountPersonal"
+        android:nextFocusRight="@+id/accountFreecard"
+        android:nextFocusUp="@+id/menu_account" >
+    </com.ireadygo.app.gamelauncher.ui.account.AccountItem>
+
+    <com.ireadygo.app.gamelauncher.ui.account.AccountItem
+        android:id="@+id/accountFreecard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/account_item_margin_right"
+        android:layout_toRightOf="@+id/accountRecharge"
+        accountItem:account_background="@drawable/account_item_init_bg_shape"
+        accountItem:account_selected_icon="@drawable/account_freecard_icon_focused"
+        accountItem:account_title="@string/account_freecard"
+        accountItem:account_unselected_icon="@drawable/account_freecard_icon"
+        android:nextFocusDown="@+id/accountFreecard"
+        android:nextFocusLeft="@+id/accountRecharge"
+        android:nextFocusUp="@+id/menu_account" >
+    </com.ireadygo.app.gamelauncher.ui.account.AccountItem>
+
+    <com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout
+        android:id="@+id/tipsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tips_height"
+        android:paddingLeft="0dp"
+        android:layout_alignParentBottom="true" >
+    </com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout>
+
+</RelativeLayout>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:background="@drawable/main_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <include layout="@layout/starting_guide_title_layout" />
+
+        <TextView
+            android:id="@+id/errorPrompt"
+            style="@style/AccountErrorPrompt"
+            android:layout_width="@dimen/login_edittext_width"
+            android:layout_marginTop="@dimen/register_error_prompt_margin_top"
+            android:layout_height="wrap_content" />
+
+        <com.ireadygo.app.gamelauncher.ui.widget.CustomerEditText
+            android:id="@+id/username"
+            style="@style/LoginEdittext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/register_margin_top_first"
+            android:drawableLeft="@drawable/account_username_icon"
+            android:hint="@string/register_username_hint" />
+
+        <TextView
+            style="@style/TextLabelSmallDark"
+            android:layout_width="@dimen/login_edittext_width"
+            android:layout_height="@dimen/register_password_prompt_height"
+            android:ellipsize="none"
+            android:gravity="center_vertical"
+            android:minLines="2"
+            android:singleLine="false"
+            android:text="@string/register_password_prompt" />
+
+        <com.ireadygo.app.gamelauncher.ui.widget.CustomerEditText
+            android:id="@+id/password"
+            style="@style/LoginEdittext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:drawableLeft="@drawable/account_password_icon"
+            android:hint="@string/register_password_hint" />
+
+        <com.ireadygo.app.gamelauncher.ui.widget.CustomerEditText
+            android:id="@+id/passwordRepeat"
+            style="@style/LoginEdittext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:layout_marginTop="@dimen/register_margin_top_normal"
+            android:drawableLeft="@drawable/account_password_icon"
+            android:hint="@string/register_password_repeat_hint" />
+
+        <TextView
+            android:id="@+id/registerBtn"
+            style="@style/LoginBtn"
+            android:layout_width="@dimen/login_edittext_width"
+            android:layout_height="@dimen/login_edittext_height"
+            android:layout_marginTop="@dimen/register_margin_top_normal"
+            android:background="@drawable/register_btn_bg_selector"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:text="@string/register" />
+    </LinearLayout>
+
+    <com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tips_height"
+        android:layout_gravity="bottom" >
+    </com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout>
+
+</FrameLayout>

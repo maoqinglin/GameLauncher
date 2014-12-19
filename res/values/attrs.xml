@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="CustomAbsSpinner">
+        <attr name="entries" format="reference" />
+    </declare-styleable>
+
+    <attr name="customAbsSpinnerStyle" format="reference" />
+
+    <declare-styleable name="CustomViewPager">
+        <attr name="orientation">
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+    </declare-styleable>
+
+    <!-- XML attributes used by default_workspace.xml -->
+    <declare-styleable name="Favorite">
+        <attr name="className" format="string" />
+        <attr name="packageName" format="string" />
+        <attr name="container" format="string" />
+        <attr name="screen" format="string" />
+        <attr name="x" format="string" />
+        <attr name="y" format="string" />
+        <attr name="spanX" format="string" />
+        <attr name="spanY" format="string" />
+        <attr name="icon" format="reference" />
+        <attr name="title" format="reference" />
+        <attr name="uri" format="string" />
+        <attr name="cellSortId" format="string" />
+        <attr name="appType" format="string" />
+    </declare-styleable>
+    <declare-styleable name="Extra">
+        <attr name="key" format="string" />
+        <attr name="value" format="string" />
+    </declare-styleable>
+    <declare-styleable name="Include">
+        <attr name="workspace" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="MenuItem">
+        <attr name="menu_background" format="reference"></attr>
+        <attr name="menu_highlight" format="reference"></attr>
+        <attr name="menu_icon" format="reference"></attr>
+        <attr name="menu_title" format="reference|string"></attr>
+    </declare-styleable>
+    <declare-styleable name="AccountItem">
+        <attr name="account_selected_icon" format="reference"></attr>
+        <attr name="account_unselected_icon" format="reference"></attr>
+        <attr name="account_title" format="reference|string"></attr>
+        <attr name="account_background" format="reference"></attr>
+    </declare-styleable>
+    <declare-styleable name="SwitchEditText">
+        <attr name="text" format="reference|string"></attr>
+        <attr name="textSize" format="reference|dimension"></attr>
+        <attr name="textColor" format="reference|color"></attr>
+        <attr name="editable" format="boolean"></attr>
+        <attr name="normalBackground" format="reference"></attr>
+        <attr name="focusBackground" format="reference"></attr>
+        <attr name="padding" format="reference|dimension"></attr>
+        <attr name="paddingLeft" format="reference|dimension"></attr>
+        <attr name="paddingRight" format="reference|dimension"></attr>
+        <attr name="paddingTop" format="reference|dimension"></attr>
+        <attr name="paddingBottom" format="reference|dimension"></attr>
+    </declare-styleable>
+    <declare-styleable name="DigitText">
+        <attr name="unit" format="reference|string"></attr>
+        <attr name="digit" format="reference|string"></attr>
+    </declare-styleable>
+	<declare-styleable name="OptionsItem">
+	    <attr name="store_icon" format="reference"></attr>
+        <attr name="store_title" format="reference|string"></attr>
+	</declare-styleable>
+</resources>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.ireadygo.app.gamelauncher"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/store_options_margin_top"
+    android:orientation="horizontal" >
+
+
+    <com.ireadygo.app.gamelauncher.ui.base.OptionsItem
+        android:id="@+id/storeOptionsRecommend"
+        style="@style/Options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:nextFocusDown="@+id/storeRecommendList"
+        android:nextFocusLeft="@id/storeOptionsRecommend"
+        android:nextFocusRight="@+id/storeOptionsCategory"
+        android:nextFocusUp="@+id/focusView"
+        app:store_icon="@drawable/store_options_icon_recommend"
+        app:store_title="@string/store_options_recommend_short" />
+
+    <com.ireadygo.app.gamelauncher.ui.base.OptionsItem
+        android:id="@+id/storeOptionsCategory"
+        style="@style/Options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/store_options_margin_left"
+        android:nextFocusDown="@+id/storeCategoryList"
+        android:nextFocusLeft="@id/storeOptionsRecommend"
+        android:nextFocusRight="@+id/storeOptionsCollection"
+        android:nextFocusUp="@+id/focusView"
+        app:store_icon="@drawable/store_options_icon_category"
+        app:store_title="@string/store_options_category_short" />
+
+    <com.ireadygo.app.gamelauncher.ui.base.OptionsItem
+        android:id="@+id/storeOptionsCollection"
+        style="@style/Options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/store_options_margin_left"
+        android:nextFocusDown="@+id/storeCollectionList"
+        android:nextFocusLeft="@id/storeOptionsCategory"
+        android:nextFocusRight="@+id/storeOptionsSearch"
+        android:nextFocusUp="@+id/focusView"
+        app:store_icon="@drawable/store_options_icon_collection"
+        app:store_title="@string/store_options_collection_short" />
+
+    <com.ireadygo.app.gamelauncher.ui.base.OptionsItem
+        android:id="@+id/storeOptionsSearch"
+        style="@style/Options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/store_options_margin_left"
+        android:nextFocusDown="@+id/storeSearchInput"
+        android:nextFocusLeft="@id/storeOptionsCollection"
+        android:nextFocusRight="@+id/storeOptionsGameManage"
+        android:nextFocusUp="@+id/focusView"
+        app:store_icon="@drawable/store_options_icon_search"
+        app:store_title="@string/store_options_search_short" />
+
+    <com.ireadygo.app.gamelauncher.ui.base.OptionsItem
+        android:id="@+id/storeOptionsGameManage"
+        style="@style/Options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/store_options_margin_left"
+        android:nextFocusDown="@+id/store_gamemanager_expandlist"
+        android:nextFocusLeft="@+id/storeOptionsSearch"
+        android:nextFocusRight="@+id/storeOptionsSettings"
+        android:nextFocusUp="@+id/focusView"
+        app:store_icon="@drawable/store_options_icon_download_manage"
+        app:store_title="@string/store_options_game_manager_short" />
+
+    <com.ireadygo.app.gamelauncher.ui.base.OptionsItem
+        android:id="@+id/storeOptionsSettings"
+        style="@style/Options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/store_options_margin_left"
+        android:nextFocusDown="@+id/storeSettingsList"
+        android:nextFocusLeft="@id/storeOptionsGameManage"
+        android:nextFocusRight="@+id/storeOptionsSettings"
+        android:nextFocusUp="@+id/focusView"
+        app:store_icon="@drawable/store_options_icon_settings"
+        app:store_title="@string/store_options_settings_short" />
+
+</LinearLayout>
