@@ -61,4 +61,14 @@ public class AccountOptionsLayout extends BaseOptionsLayout {
 			return mWealthBtn;
 		}
 	}
+
+	@Override
+	public boolean onWaterKey() {
+		return true;
+	}
+
+	@Override
+	public boolean onMountKey() {
+		return true;
+	}
 }

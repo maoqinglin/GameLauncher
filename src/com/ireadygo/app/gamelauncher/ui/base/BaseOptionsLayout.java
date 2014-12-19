@@ -134,6 +134,16 @@ public abstract class BaseOptionsLayout extends KeyEventLayout implements OnFocu
 		return onR1Key();
 	}
 
+	@Override
+	public boolean onWaterKey() {//屏蔽系统山水键响应二级导航栏
+		return true;
+	}
+
+	@Override
+	public boolean onMountKey() {
+		return true;
+	}
+
 	public void requestFocusToLeft() {
 		int curMenuIdx = mOptionList.indexOf(mCurrentFocusedBtn);
 		if (curMenuIdx > 0) {

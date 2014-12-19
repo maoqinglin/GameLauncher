@@ -6,6 +6,8 @@ import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -96,17 +98,37 @@ public class StatusBarView extends LinearLayout {
 	}
 
 	private void updateNetworkIcon(int type) {
+		mNetWorkView.setVisibility(View.VISIBLE);
 		if (ConnectivityManager.TYPE_ETHERNET == type) {
 			mNetWorkView.setImageResource(R.drawable.icon_statusbar_network_ethernet);
 		} else if (ConnectivityManager.TYPE_WIFI == type) {
 			mNetWorkView.setImageResource(R.drawable.icon_statusbar_network_wifi);
 		} else {
-			mNetWorkView.setImageResource(R.drawable.icon_statusbar_network_noconnect);
+			mNetWorkView.setImageResource(R.drawable.icon_statusbar_ethernet_disconnect);
 		}
 	}
 
 	public void updateNetWorkState(int type) {
 		updateNetworkIcon(type);
+	}
+	
+	public void updateDisconnectState(int lastNeetworkType, int currentType){
+		if(currentType == -1){
+			if(ConnectivityManager.TYPE_ETHERNET == lastNeetworkType){
+				mNetWorkView.setImageResource(R.drawable.icon_statusbar_ethernet_disconnect);
+			}else if(ConnectivityManager.TYPE_WIFI == lastNeetworkType){
+				mNetWorkView.setImageResource(R.drawable.icon_statusbar_wifi_disconnect);
+				mNetWorkView.postDelayed(new Runnable() {
+					
+					@Override
+					public void run() {
+						Animation anim = AnimationUtils.loadAnimation(getContext(), R.animator.wif_disconnect);
+						mNetWorkView.startAnimation(anim);
+						mNetWorkView.setVisibility(View.GONE);
+					}
+				},50);
+			}
+		}
 	}
 
 	private void initBluetoothState() {

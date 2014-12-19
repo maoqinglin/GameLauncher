@@ -141,6 +141,16 @@ public abstract class BaseContentFragment extends BaseFragment {
 	};
 	
 	@Override
+	public boolean onWaterKey() {
+		return true;
+	};
+
+	@Override
+	public boolean onMountKey() {
+		return true;
+	}
+
+	@Override
 	public int getOutAnimatorDuration() {
 		return Config.Animator.DURATION_SHORT;
 	}

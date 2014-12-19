@@ -223,6 +223,8 @@ public class AccountDetailActivity extends BaseActivity {
 			} else if (SnailKeyCode.R1_KEY == keyCode || SnailKeyCode.RIGHT_KEY == keyCode) {
 				requestFocusToRight();
 				return true;
+			}else if(SnailKeyCode.WATER_KEY == keyCode || SnailKeyCode.MOUNT_KEY == keyCode){
+				return true;
 			}
 		}
 		if (mCurrentContentChild != null) {

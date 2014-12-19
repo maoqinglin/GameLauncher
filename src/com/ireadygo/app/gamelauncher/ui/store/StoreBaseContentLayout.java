@@ -89,5 +89,14 @@ public abstract class StoreBaseContentLayout extends KeyEventLayout {
 	public boolean onBackKey() {
 		return false;
 	}
+	
+	@Override
+	public boolean onWaterKey() {//屏蔽系统山水键处理
+		return true;
+	}
 
+	@Override
+	public boolean onMountKey() {
+		return true;
+	}
 }

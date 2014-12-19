@@ -5,3 +5,5 @@ temp/
 .svn/
 ./*/.git/
 local.properties
+project.properties
+.settings/

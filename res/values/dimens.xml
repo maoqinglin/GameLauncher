@@ -73,7 +73,6 @@
     <dimen name="detail_screenshot_divide_width_vertical">32dp</dimen>
     <dimen name="detail_screenshot_padding_top_vertical">20dp</dimen>
     <dimen name="detail_screenshot_scale_padding">3dp</dimen>
-    <dimen name="store_download_speed_text_size">10sp</dimen>
 
     <!-- 免商店 -->
     <dimen name="store_item_title_height">32dp</dimen>

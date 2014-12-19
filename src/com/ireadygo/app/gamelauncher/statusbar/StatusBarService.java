@@ -12,12 +12,13 @@ import android.os.Message;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
+import android.net.ConnectivityManager;
+import android.widget.Toast;
 
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.download.Network;
 import com.ireadygo.app.gamelauncher.appstore.download.Network.NetworkListener;
 import com.ireadygo.app.gamelauncher.utils.NetworkUtils;
-import com.lthj.unipay.plugin.ac;
 
 public class StatusBarService extends Service {
 	public static final String ACTION_UNDISPLAY = "com.ireadygo.app.gamelauncher.ACTION_UNDISPLAY";
@@ -31,7 +32,7 @@ public class StatusBarService extends Service {
     private Network mNetWork;
     private BluetoothController mBluetoothController;
     private boolean mIsShow = false;
-
+    private int mLastNetworkType = -1;
     public StatusBarService() {
     }
 
@@ -62,7 +63,7 @@ public class StatusBarService extends Service {
             mIsShow = true;
         }
         mStatusBarView.init();
-
+        mLastNetworkType = NetworkUtils.getNetWorkType(this);
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -134,7 +135,7 @@ public class StatusBarService extends Service {
         @Override
         public void onNetworkDisconnected() {
             if (mStatusBarView != null) {
-                mStatusBarView.updateNetWorkState(-1);
+            	mStatusBarView.updateDisconnectState(mLastNetworkType, -1);
             }
         }
 
@@ -144,6 +145,7 @@ public class StatusBarService extends Service {
             if (mStatusBarView != null) {
                 mStatusBarView.updateNetWorkState(type);
             }
+            mLastNetworkType = type;
         }
     };
 
