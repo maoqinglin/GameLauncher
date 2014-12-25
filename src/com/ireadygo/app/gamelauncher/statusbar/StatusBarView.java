@@ -15,10 +15,10 @@ import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.utils.NetworkUtils;
 
 public class StatusBarView extends LinearLayout {
-	private static final int HANDLE_BLUE = 0;
-	private static final int HANDLE_ORANGE = 1;
-	private static final int HANDLE_PURPLE = 2;
-	private static final int HANDLE_CYAN = 3;
+	public static final int HANDLE_BLUE = 0;
+	public static final int HANDLE_ORANGE = 1;
+	public static final int HANDLE_PURPLE = 2;
+	public static final int HANDLE_CYAN = 3;
 	private final ImageView mBlueToothView;
 	private final ImageView mNetWorkView;
 	private ImageView mHandleBlue, mHandleOrange, mHandlePurple, mHandleCyan;
@@ -59,12 +59,16 @@ public class StatusBarView extends LinearLayout {
 		blueHolder.handle = mHandleBlue;
 		blueHolder.handle.setImageResource(R.drawable.icon_handle_blue_connected);
 		blueHolder.state = HandleState.CONNECTED;
+		blueHolder.handle.setVisibility(View.GONE);
+		blueHolder.handleIndex = HANDLE_BLUE;
 		mHandles.put(HANDLE_BLUE, blueHolder);
 
 		HandleHolder orangeHolder = new HandleHolder();
 		orangeHolder.handle = mHandleOrange;
 		orangeHolder.handle.setImageResource(R.drawable.icon_handle_orange_connected);
 		orangeHolder.state = HandleState.CONNECTED;
+		orangeHolder.handleIndex = HANDLE_ORANGE;
+		orangeHolder.handle.setVisibility(View.GONE);
 		mHandles.put(HANDLE_ORANGE, orangeHolder);
 
 		HandleHolder purpleHolder = new HandleHolder();
@@ -72,13 +76,32 @@ public class StatusBarView extends LinearLayout {
 		purpleHolder.handle.setImageResource(R.drawable.icon_handle_purple_connected);
 		purpleHolder.handle.setVisibility(View.GONE);
 		purpleHolder.state = HandleState.CONNECTED;
+		purpleHolder.handleIndex = HANDLE_PURPLE;
 		mHandles.put(HANDLE_PURPLE, purpleHolder);
 
 		HandleHolder cyanHolder = new HandleHolder();
 		cyanHolder.handle = mHandleCyan;
 		cyanHolder.handle.setImageResource(R.drawable.icon_handle_cyan_connected);
 		cyanHolder.state = HandleState.CONNECTED;
+		cyanHolder.handleIndex = HANDLE_CYAN;
+		cyanHolder.handle.setVisibility(View.GONE);
 		mHandles.put(HANDLE_CYAN, cyanHolder);
+	}
+
+	public void handleConnected(int index) {
+		HandleHolder holder = mHandles.get(index);
+		if (holder != null) {
+			holder.state = HandleState.CONNECTED;
+			holder.handle.setVisibility(View.VISIBLE);
+		}
+	}
+
+	public void handleDisconnected(int index) {
+		HandleHolder holder = mHandles.get(index);
+		if (holder != null) {
+			holder.state = HandleState.DISCONNECTED;
+			holder.handle.setVisibility(View.GONE);
+		}
 	}
 
 	private void setClockStart() {
@@ -171,6 +194,7 @@ public class StatusBarView extends LinearLayout {
 	public static class HandleHolder {
 		ImageView handle;
 		HandleState state;
+		int handleIndex;
 	}
 
 	public enum HandleState {
