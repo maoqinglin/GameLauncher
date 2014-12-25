@@ -137,20 +137,20 @@ public class StatusBarView extends LinearLayout {
 	
 	public void updateDisconnectState(int lastNeetworkType, int currentType){
 		if(currentType == -1){
-			if(ConnectivityManager.TYPE_ETHERNET == lastNeetworkType){
-				mNetWorkView.setImageResource(R.drawable.icon_statusbar_ethernet_disconnect);
-			}else if(ConnectivityManager.TYPE_WIFI == lastNeetworkType){
-				mNetWorkView.setImageResource(R.drawable.icon_statusbar_wifi_disconnect);
-				mNetWorkView.postDelayed(new Runnable() {
-					
-					@Override
-					public void run() {
-						Animation anim = AnimationUtils.loadAnimation(getContext(), R.animator.wif_disconnect);
-						mNetWorkView.startAnimation(anim);
-						mNetWorkView.setVisibility(View.GONE);
-					}
-				},50);
-			}
+			mNetWorkView.setImageResource(R.drawable.icon_statusbar_ethernet_disconnect);
+//			if(ConnectivityManager.TYPE_ETHERNET == lastNeetworkType){
+//				mNetWorkView.setImageResource(R.drawable.icon_statusbar_ethernet_disconnect);
+//			}else if(ConnectivityManager.TYPE_WIFI == lastNeetworkType){
+//				mNetWorkView.setImageResource(R.drawable.icon_statusbar_wifi_disconnect);
+//				mNetWorkView.postDelayed(new Runnable() {
+//					@Override
+//					public void run() {
+//						Animation anim = AnimationUtils.loadAnimation(getContext(), R.animator.wif_disconnect);
+//						mNetWorkView.startAnimation(anim);
+//						mNetWorkView.setVisibility(View.GONE);
+//					}
+//				},50);
+//			}
 		}
 	}
 
@@ -161,9 +161,9 @@ public class StatusBarView extends LinearLayout {
 
 	public void updateBluetoothState(boolean state) {
 		if (state) {
-			mBlueToothView.setVisibility(View.VISIBLE);
-		} else {
 			mBlueToothView.setVisibility(View.GONE);
+		} else {
+			mBlueToothView.setVisibility(View.VISIBLE);
 		}
 	}
 

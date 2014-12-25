@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:contentDescription="@null"
         android:paddingRight="@dimen/statusbar_padding_right"
-        android:src="@drawable/icon_statusbar_bluetooth" />
+        android:src="@drawable/icon_statusbar_bluetooth_disconnect" />
 
     <ImageView
         android:id="@+id/status_bar_network"
