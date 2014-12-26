@@ -18,6 +18,7 @@ package com.ireadygo.app.gamelauncher.wallpaper;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import android.R.integer;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
@@ -34,6 +35,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -45,7 +47,9 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.SpinnerAdapter;
 
+import com.ireadygo.app.gamelauncher.GameLauncherApplication;
 import com.ireadygo.app.gamelauncher.R;
+import com.ireadygo.app.gamelauncher.ui.SnailKeyCode;
 
 public class WallpaperChooserDialogFragment extends DialogFragment implements AdapterView.OnItemSelectedListener,
 		AdapterView.OnItemClickListener {
@@ -57,13 +61,16 @@ public class WallpaperChooserDialogFragment extends DialogFragment implements Ad
 	private Bitmap mBitmap = null;
 
 	private ArrayList<Integer> mThumbs;
-	private ArrayList<Integer> mImages;
+	private static ArrayList<Integer> mImages;
 	private WallpaperLoader mLoader;
 	private WallpaperDrawable mWallpaperDrawable = new WallpaperDrawable();
+	private static int mSelectPos = -1;
+	private static Activity mActivity;
 
-	public static WallpaperChooserDialogFragment newInstance() {
+	public static WallpaperChooserDialogFragment newInstance(Activity activity) {
 		WallpaperChooserDialogFragment fragment = new WallpaperChooserDialogFragment();
 		fragment.setCancelable(true);
+		mActivity = activity;
 		return fragment;
 	}
 
@@ -101,6 +108,9 @@ public class WallpaperChooserDialogFragment extends DialogFragment implements Ad
 		super.onDestroy();
 
 		cancelLoader();
+		if (mActivity != null) {
+			mActivity.finish();
+		}
 	}
 
 	@Override
@@ -163,11 +173,11 @@ public class WallpaperChooserDialogFragment extends DialogFragment implements Ad
 	@SuppressLint("ServiceCast")
 	private void selectWallpaper(int position) {
 		try {
-			WallpaperManager wpm = (WallpaperManager) getActivity().getSystemService(Context.WALLPAPER_SERVICE);
+			WallpaperManager wpm = (WallpaperManager) GameLauncherApplication.getApplication().getSystemService(Context.WALLPAPER_SERVICE);
 			wpm.setResource(mImages.get(position));
-			Activity activity = getActivity();
-			activity.setResult(Activity.RESULT_OK);
-			activity.finish();
+			if (mActivity != null) {
+				mActivity.finish();
+			}
 		} catch (IOException e) {
 			Log.e(TAG, "Failed to set wallpaper: " + e);
 		}
@@ -186,10 +196,46 @@ public class WallpaperChooserDialogFragment extends DialogFragment implements Ad
 			mLoader.cancel();
 		}
 		mLoader = (WallpaperLoader) new WallpaperLoader().execute(position);
+		mSelectPos = position;
 	}
 
 	@Override
 	public void onNothingSelected(AdapterView<?> parent) {
+		mSelectPos = -1;
+	}
+
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (isCurrentFocus()) {
+			switch (event.getKeyCode()) {
+			case SnailKeyCode.SUN_KEY:
+			case KeyEvent.KEYCODE_DPAD_CENTER:
+				return onSunKey(keyCode, event);
+			case SnailKeyCode.MOON_KEY:
+			case SnailKeyCode.BACK_KEY:
+				return onMoonKey(keyCode, event);
+			default:
+				break;
+			}
+		}
+		return false;
+	}
+
+	private boolean isCurrentFocus() {
+		return true;
+	}
+
+	private boolean onSunKey(int keyCode, KeyEvent keyEvent) {
+		if (mSelectPos != -1) {
+			selectWallpaper(mSelectPos);
+		}
+		return false;
+	}
+
+	private boolean onMoonKey(int keyCode, KeyEvent keyEvent) {
+		if (mActivity != null) {
+			mActivity.finish();
+		}
+		return false;
 	}
 
 	private void findWallpapers() {

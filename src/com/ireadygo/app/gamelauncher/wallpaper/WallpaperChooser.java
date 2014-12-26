@@ -20,17 +20,20 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.view.KeyEvent;
 
 import com.ireadygo.app.gamelauncher.R;
 
 public class WallpaperChooser extends Activity {
 	@SuppressWarnings("unused")
 	private static final String TAG = "Launcher.WallpaperChooser";
+	WallpaperChooserDialogFragment mFragment;
 
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 		setContentView(R.layout.wallpaper_chooser_base);
+		mFragment = WallpaperChooserDialogFragment.newInstance(WallpaperChooser.this);
 
 		Fragment fragmentView = getFragmentManager().findFragmentById(R.id.wallpaper_chooser_fragment);
 		// TODO: The following code is currently not exercised. Leaving it here
@@ -41,8 +44,15 @@ public class WallpaperChooser extends Activity {
 			 * When the screen is XLarge, the fragment is not included in the
 			 * layout, so show it as a dialog
 			 */
-			DialogFragment fragment = WallpaperChooserDialogFragment.newInstance();
-			fragment.show(getFragmentManager(), "dialog");
+			mFragment.show(getFragmentManager(), "dialog");
 		}
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (mFragment.onKeyDown(keyCode, event)) {
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 }

@@ -44,9 +44,11 @@ public class SettingsFragment extends BaseContentFragment {
 	protected boolean mIsAttach;
 	private boolean mIsViewDestory = false;
 	private SettingsAdapter mSettingsAdapter;
+	private Activity mActivity;
 
 	public SettingsFragment(Activity activity, MenuFragment menuFragment) {
 		super(activity, menuFragment);
+		mActivity = activity;
 	}
 
 	@Override
@@ -79,8 +81,10 @@ public class SettingsFragment extends BaseContentFragment {
 		}
 		settingsList.add(new SettingsItemEntity(getResources().getDrawable(R.drawable.settings_language_selector),
 				getResources().getString(R.string.settings_language), SettingsIntentAction.LANGUAGE));
-		settingsList.add(new SettingsItemEntity(getResources().getDrawable(R.drawable.settings_store_selector),
-				getResources().getString(R.string.settings_store), SettingsIntentAction.STORE));
+//		settingsList.add(new SettingsItemEntity(getResources().getDrawable(R.drawable.settings_store_selector),
+//				getResources().getString(R.string.settings_store), SettingsIntentAction.STORE));
+		settingsList.add(new SettingsItemEntity(getResources().getDrawable(R.drawable.settings_wallpaper_selector),
+				getResources().getString(R.string.settings_wallpaper), SettingsIntentAction.WALL_PAPER));
 		settingsList.add(new SettingsItemEntity(getResources().getDrawable(R.drawable.settings_help_selector),
 				getResources().getString(R.string.settings_help), null));
 		settingsList.add(new SettingsItemEntity(getResources().getDrawable(R.drawable.settings_secure_selector),
@@ -107,6 +111,10 @@ public class SettingsFragment extends BaseContentFragment {
 				if (entity != null) {
 					String action = entity.getIntentAction();
 					if (!TextUtils.isEmpty(action)) {
+						if (Intent.ACTION_SET_WALLPAPER.equals(action)) {
+							setWallPaper();
+							return;
+						}
 						try {
 							Utilities.startActivitySafely(view, new Intent(action), null);
 						} catch (ActivityNotFoundException e) {
@@ -142,6 +150,7 @@ public class SettingsFragment extends BaseContentFragment {
 		public static final String HELP = "";
 		public static final String WIFI = Settings.ACTION_WIFI_SETTINGS;
 		public static final String SETTINGS = Settings.ACTION_SETTINGS;
+		public static final String WALL_PAPER = Intent.ACTION_SET_WALLPAPER;
 	}
 
 	@Override
@@ -187,5 +196,11 @@ public class SettingsFragment extends BaseContentFragment {
 	@Override
 	public int getOutAnimatorDuration() {
 		return mSettingsAdapter.getOutAnimatorDuration();
+	}
+
+	private void setWallPaper() {
+		final Intent pickWallpaper = new Intent(Intent.ACTION_SET_WALLPAPER);
+		Intent chooser = Intent.createChooser(pickWallpaper, "chooser_wallpaper");
+		mActivity.startActivity(chooser);
 	}
 }

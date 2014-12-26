@@ -357,6 +357,7 @@
     <string name="settings_help">Help</string>
     <string name="settings_more">More</string>
     <string name="settings_wifi">WIFI</string>
+    <string name="settings_wallpaper">Wallpaper</string>
 
     <!-- 按键提示层 -->
     <string name="key_sun">Confirm</string>

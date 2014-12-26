@@ -326,6 +326,7 @@
     <string name="settings_help">幫助</string>
     <string name="settings_more">更多</string>
     <string name="settings_wifi">WIFI</string>
+    <string name="settings_wallpaper">壁纸</string>
 
     <!-- 按鍵提示層 -->
     <string name="key_sun">啟動</string>
