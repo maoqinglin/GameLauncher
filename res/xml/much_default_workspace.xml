@@ -28,14 +28,6 @@
         <favorite
             launcher:appType="0"
             launcher:cellSortId="4"
-            launcher:className="com.android.providers.downloads.ui.DownloadList"
-            launcher:packageName="com.android.providers.downloads.ui"
-            launcher:screen="0"
-            launcher:x="3"
-            launcher:y="0" />
-        <favorite
-            launcher:appType="0"
-            launcher:cellSortId="5"
             launcher:className="com.android.calculator2.Calculator"
             launcher:packageName="com.android.calculator2"
             launcher:screen="1"
@@ -43,7 +35,7 @@
             launcher:y="1" />
         <favorite
             launcher:appType="0"
-            launcher:cellSortId="6"
+            launcher:cellSortId="5"
             launcher:className="com.android.deskclock.DeskClock"
             launcher:packageName="com.android.deskclock"
             launcher:screen="1"
@@ -51,7 +43,7 @@
             launcher:y="2" />
         <favorite
             launcher:appType="0"
-            launcher:cellSortId="7"
+            launcher:cellSortId="6"
             launcher:className="com.android.settings.Settings$WifiSettingsActivity"
             launcher:packageName="com.android.settings"
             launcher:screen="0"
@@ -59,7 +51,7 @@
             launcher:y="0" />
         <favorite
             launcher:appType="0"
-            launcher:cellSortId="8"
+            launcher:cellSortId="7"
             launcher:className="com.android.soundrecorder.SoundRecorder"
             launcher:packageName="com.android.soundrecorder"
             launcher:screen="0"
@@ -67,7 +59,7 @@
             launcher:y="0" />
         <favorite
             launcher:appType="0"
-            launcher:cellSortId="9"
+            launcher:cellSortId="8"
             launcher:className="com.mediatek.FMRadio.FMRadioActivity"
             launcher:packageName="com.mediatek.FMRadio"
             launcher:screen="0"
@@ -75,7 +67,7 @@
             launcher:y="0" />
         <favorite
             launcher:appType="0"
-            launcher:cellSortId="10"
+            launcher:cellSortId="9"
             launcher:className="com.android.flashlight.FlashLight"
             launcher:packageName="com.android.flashlight"
             launcher:screen="1"
@@ -83,7 +75,7 @@
             launcher:y="1" />
         <favorite
             launcher:appType="0"
-            launcher:cellSortId="11"
+            launcher:cellSortId="10"
             launcher:className="com.mediatek.todos.TodosActivity"
             launcher:packageName="com.mediatek.todos"
             launcher:screen="3"
@@ -91,7 +83,7 @@
             launcher:y="0" />
         <favorite
             launcher:appType="0"
-            launcher:cellSortId="12"
+            launcher:cellSortId="11"
             launcher:className="com.android.email.activity.Welcome"
             launcher:packageName="com.android.email"
             launcher:screen="1"
@@ -99,7 +91,7 @@
             launcher:y="2" />
         <favorite
             launcher:appType="0"
-            launcher:cellSortId="13"
+            launcher:cellSortId="12"
             launcher:className="com.android.quicksearchbox.SearchActivity"
             launcher:packageName="com.android.quicksearchbox"
             launcher:screen="3"
@@ -107,7 +99,7 @@
             launcher:y="0" />
         <favorite
             launcher:appType="0"
-            launcher:cellSortId="14"
+            launcher:cellSortId="13"
             launcher:className="com.ireadygo.app.key.guide.Appstart"
             launcher:packageName="com.ireadygo.app.key.ui"
             launcher:screen="0"
@@ -115,7 +107,7 @@
             launcher:y="3" />
         <favorite
             launcher:appType="0"
-            launcher:cellSortId="15"
+            launcher:cellSortId="14"
             launcher:className="com.android.contacts.activities.DialtactsActivity"
             launcher:packageName="com.android.contacts"
             launcher:screen="0"
@@ -123,7 +115,7 @@
             launcher:y="0" />
         <favorite
             launcher:appType="0"
-            launcher:cellSortId="16"
+            launcher:cellSortId="15"
             launcher:className="com.android.mms.ui.BootActivity"
             launcher:packageName="com.android.mms"
             launcher:screen="0"
@@ -131,7 +123,7 @@
             launcher:y="0" />
         <favorite
             launcher:appType="0"
-            launcher:cellSortId="17"
+            launcher:cellSortId="16"
             launcher:className="com.android.camera.CameraLauncher"
             launcher:packageName="com.android.gallery3d"
             launcher:screen="0"
@@ -139,23 +131,7 @@
             launcher:y="3" />
         <favorite
             launcher:appType="0"
-            launcher:cellSortId="18"
-            launcher:className="com.android.gallery3d.app.Gallery"
-            launcher:packageName="com.android.gallery3d"
-            launcher:screen="1"
-            launcher:x="1"
-            launcher:y="2" />
-        <favorite
-            launcher:appType="0"
-            launcher:cellSortId="19"
-            launcher:className="com.android.browser.BrowserActivity"
-            launcher:packageName="com.android.browser"
-            launcher:screen="0"
-            launcher:x="4"
-            launcher:y="0" />
-        <favorite
-            launcher:appType="0"
-            launcher:cellSortId="20"
+            launcher:cellSortId="17"
             launcher:className="com.android.music.MusicBrowserActivity"
             launcher:packageName="com.android.music"
             launcher:screen="1"
@@ -163,7 +139,7 @@
             launcher:y="2" />
         <favorite
             launcher:appType="0"
-            launcher:cellSortId="21"
+            launcher:cellSortId="18"
             launcher:className="com.mediatek.videoplayer.BootActivity"
             launcher:packageName="com.mediatek.videoplayer"
             launcher:screen="0"
@@ -171,7 +147,7 @@
             launcher:y="0" />
         <favorite
             launcher:appType="0"
-            launcher:cellSortId="22"
+            launcher:cellSortId="19"
             launcher:className="com.ireadygo.settings.breathinglight.ui.MainActivity"
             launcher:packageName="com.android.settings"
             launcher:screen="0"
@@ -179,7 +155,7 @@
             launcher:y="0" />
         <favorite
             launcher:appType="0"
-            launcher:cellSortId="23"
+            launcher:cellSortId="20"
             launcher:className="com.android.settings.Settings"
             launcher:packageName="com.android.settings"
             launcher:screen="0"
@@ -187,7 +163,7 @@
             launcher:y="3" />
         <favorite
             launcher:appType="0"
-            launcher:cellSortId="24"
+            launcher:cellSortId="21"
             launcher:className="com.mediatek.filemanager.FileManagerOperationActivity"
             launcher:packageName="com.mediatek.filemanager"
             launcher:screen="0"
@@ -195,7 +171,7 @@
             launcher:y="0" />
         <favorite
             launcher:appType="0"
-            launcher:cellSortId="25"
+            launcher:cellSortId="22"
             launcher:className="com.ireadygo.app.systemupgrade.activity.UpgradeHomeActivity"
             launcher:packageName="com.ireadygo.app.systemupgrade"
             launcher:screen="1"
@@ -203,16 +179,15 @@
             launcher:y="0" />
         <favorite
             launcher:appType="0"
-            launcher:cellSortId="26"
+            launcher:cellSortId="23"
             launcher:className="com.mediatek.datatransfer.BootActivity"
             launcher:packageName="com.mediatek.datatransfer"
             launcher:screen="3"
             launcher:x="3"
             launcher:y="0" />
-        
         <favorite
             launcher:appType="0"
-            launcher:cellSortId="27"
+            launcher:cellSortId="24"
             launcher:className="com.android.dialer.DialtactsActivity"
             launcher:packageName="com.android.dialer"
             launcher:screen="3"
@@ -220,7 +195,7 @@
             launcher:y="0" />
         <favorite
             launcher:appType="0"
-            launcher:cellSortId="28"
+            launcher:cellSortId="25"
             launcher:className="com.android.mms.ui.ConversationList"
             launcher:packageName="com.android.mms"
             launcher:screen="3"
@@ -228,7 +203,7 @@
             launcher:y="0" />
         <favorite
             launcher:appType="0"
-            launcher:cellSortId="29"
+            launcher:cellSortId="26"
             launcher:className="com.android.gallery3d.app.GalleryActivity"
             launcher:packageName="com.android.gallery3d"
             launcher:screen="3"
@@ -236,7 +211,7 @@
             launcher:y="0" />
         <favorite
             launcher:appType="0"
-            launcher:cellSortId="30"
+            launcher:cellSortId="27"
             launcher:className="com.nvidia.ota.LauncherActivity"
             launcher:packageName="com.nvidia.ota"
             launcher:screen="3"
@@ -244,7 +219,7 @@
             launcher:y="0" />
         <favorite
             launcher:appType="0"
-            launcher:cellSortId="31"
+            launcher:cellSortId="28"
             launcher:className="com.android.development.Development"
             launcher:packageName="com.android.development"
             launcher:screen="3"
@@ -252,7 +227,7 @@
             launcher:y="0" />
         <favorite
             launcher:appType="0"
-            launcher:cellSortId="32"
+            launcher:cellSortId="29"
             launcher:className="icera.DebugAgent.IceraDebugAgentActivity"
             launcher:packageName="icera.DebugAgent"
             launcher:screen="3"
@@ -260,7 +235,7 @@
             launcher:y="0" />
         <favorite
             launcher:appType="0"
-            launcher:cellSortId="33"
+            launcher:cellSortId="30"
             launcher:className="com.android.mira4u.SettingsActivity"
             launcher:packageName="com.android.mira4u"
             launcher:screen="3"
@@ -268,7 +243,7 @@
             launcher:y="0" />
         <favorite
             launcher:appType="0"
-            launcher:cellSortId="34"
+            launcher:cellSortId="31"
             launcher:className="com.android.speechrecorder.SpeechRecorderActivity"
             launcher:packageName="com.android.speechrecorder"
             launcher:screen="3"
@@ -276,12 +251,37 @@
             launcher:y="0" />
         <favorite
             launcher:appType="0"
-            launcher:cellSortId="35"
+            launcher:cellSortId="32"
             launcher:className="com.android.wfd.MainActivity"
             launcher:packageName="com.android.wfd"
             launcher:screen="3"
             launcher:x="3"
             launcher:y="0" />
     </folder>
+
+    <favorite
+        launcher:appType="0"
+        launcher:cellSortId="33"
+        launcher:className="com.android.browser.BrowserActivity"
+        launcher:packageName="com.android.browser"
+        launcher:screen="0"
+        launcher:x="4"
+        launcher:y="0" />
+    <favorite
+        launcher:appType="0"
+        launcher:cellSortId="34"
+        launcher:className="com.android.gallery3d.app.Gallery"
+        launcher:packageName="com.android.gallery3d"
+        launcher:screen="1"
+        launcher:x="1"
+        launcher:y="2" />
+    <favorite
+        launcher:appType="0"
+        launcher:cellSortId="35"
+        launcher:className="com.android.providers.downloads.ui.DownloadList"
+        launcher:packageName="com.android.providers.downloads.ui"
+        launcher:screen="0"
+        launcher:x="3"
+        launcher:y="0" />
 
 </favorites>
