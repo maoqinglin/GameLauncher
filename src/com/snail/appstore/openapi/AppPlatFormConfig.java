@@ -26,20 +26,20 @@ public class AppPlatFormConfig {
 	/**
 	 * 请求地址
 	 */
-	public final static String GAME_LIST_URL = "/much/user/game/list";// 游戏搜索请求地址
-	public final static String KEYWORD_LIST_URL = "/much/user/game/keyword/list"; // 关键字请求地址
-	public final static String KEYWORD_AMOUNT_URL = "/much/user/game/keyword/info";// 关键字信息请求地址
-	public final static String GAME_CATEGORY_URL = "/much/user/game/category";// 游戏分类信息请求地址
-	public final static String GAME_COLLECTION_URL = "/much/user/game/collection";// 游戏合集信息请求地址
-	public final static String GAME_BY_CATEGORY_URL = "/much/user/game/category/list";// 分类游戏列表请求地址
-	public final static String GAME_DETAIL_URL = "/much/user/game";// 游戏详情请求地址
-	public final static String GAME_DOWNLOAD_URL = "/much/user/game/downloadurl";// 游戏下载请求地址
+	public final static String GAME_LIST_URL = "/obox/cms/game/list";// 
+	public final static String KEYWORD_LIST_URL = "/obox/cms/game/keyword/list"; // 关键字请求地址
+	public final static String KEYWORD_AMOUNT_URL = "/obox/cms/game/keyword/info";// 关键字信息请求地址
+	public final static String GAME_CATEGORY_URL = "/obox/cms/game/category";// 游戏分类信息请求地址
+	public final static String GAME_COLLECTION_URL = "/obox/cms/game/collection";// 游戏合集信息请求地址
+	public final static String GAME_BY_CATEGORY_URL = "/obox/cms/game/category/list";// 分类游戏列表请求地址
+	public final static String GAME_DETAIL_URL = "/obox/cms/game";// 游戏详情请求地址
+	public final static String GAME_DOWNLOAD_URL = "/obox/cms/game/downloadurl";// 游戏下载请求地址
 	public final static String USER_ACCOUNT_URL = "/much/user/account/info";// 用户账号请求地址
-	public final static String GAME_BANNER_LIST_URL = "/much/user/banner/list";// 获取推荐页
-	public final static String GAME_UPDATE_LIST_URL = "/much/user/game/update/list";// 获取更新列表
-	public final static String GAME_MAPPING_LIST_URL = "/much/user/game/mapping/list";// 获取匹配列表
+	public final static String GAME_BANNER_LIST_URL = "/obox/cms/banner/list";// 获取推荐页
+	public final static String GAME_UPDATE_LIST_URL = "/obox/cms/game/update/list";// 获取更新列表
+	public final static String GAME_MAPPING_LIST_URL = "/obox/cms/game/mapping/list";// 获取匹配列表
 	public final static String ACCOUT_NICKNAME_URL = "/much/user/nickname";// 获取昵称
-	public final static String USERHEADER_LIST_URL = "/much/user/header/list";// 获取用户头像列表
+	public final static String USERHEADER_LIST_URL = "/obox/cms/header/list";// 获取用户头像列表
 	public final static String ACCOUNT_SAVE_URL = "/much/user/info";// 保存账号信息
 
 	public final static String MUCH_CONFIG_URL = "/much/user/slot/config";// 卡槽配置
@@ -65,12 +65,21 @@ public class AppPlatFormConfig {
 	public final static String MUCH_USER_FLOW_SUBSCRIBE = "/much/user/flow/subscribe";//开通免流量
 	public final static String MUCH_USER_AGENT_APP = "/much/user/agent/app";//获取代理模式的应用列表
 	public final static String MUCH_USER_AGENT_DOWNURL = "/much/user/agent/downurl";//获取代理应用的下载地址
-	public final static String MUCH_PRELOAD_LIST = "/much/user/preload/list";
+	public final static String MUCH_PRELOAD_LIST = "/obox/cms/preload/list";//获取预装列表
 
+	//主机以租代售接口
+	public final static String ACTIVATE_BOX_URL = "/obox/client/active";//激活
+	public final static String RENT_RELIEF_APP_LIST_URL = "/obox/cms/rentReliefApp/list";//减免租金应用列表
+	public final static String RENT_RELIEF_APP_TIME_URL = "/obox/client/rentReliefAppTime";//获取游戏时长
+	public final static String SAVE_APP_TIME_URL = "/obox/client/saveAppTimeLog";//设置游戏时长
+	public final static String RENEWAL_BOX = "/obox/client/renewal";//续费
+	public final static String APP_PAYMENT_URL = "/obox/client/appPayment";//主机应用支付
+	
 	public final static String PARAMETER_SKEYWORD = "sKeyWord"; // 关键字参数
 	public final static String PARAMETER_NUSERID = "nUserId";// 用户ID
 	public final static String PARAMETER_CIDENTITY = "cIdentity";// 身份串
 	public final static String PARAMETER_NAPPID = "nAppId";// 附加id
+	
 
 	public final static String PARAMETER_CURRENTPAGE = "currentPage";// 当前页码
 	public final static String PARAMETER_NUMBER = "number";// 每页显示条数

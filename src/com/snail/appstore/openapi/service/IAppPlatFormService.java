@@ -429,4 +429,61 @@ public interface IAppPlatFormService {
 	 * @throws Exception
 	 */
 	public ResultVO getPreLoadList() throws HttpStatusCodeException,Exception;
+	
+	/**
+	 * 激活主机
+	 * @return
+	 * @throws HttpStatusCodeException
+	 * @throws Exception
+	 */
+	public ResultVO activateBox() throws HttpStatusCodeException,Exception;
+	
+	/**
+	 * 获取减免租金应用列表
+	 * @return
+	 * @throws HttpStatusCodeException
+	 * @throws Exception
+	 */
+	public ResultVO getRentReliefAppList() throws HttpStatusCodeException,Exception;
+	
+	/**
+	 * 获取游戏时长
+	 * @return
+	 * @throws HttpStatusCodeException
+	 * @throws Exception
+	 */
+	public ResultVO getRentReliefAppTime() throws HttpStatusCodeException,Exception;
+	
+	/**
+	 * 设置游戏时长
+	 * @return
+	 * @throws HttpStatusCodeException
+	 * @throws Exception
+	 */
+	public ResultVO saveAppTime(String cPackage,Long nAppTime) throws HttpStatusCodeException,Exception;
+	
+	/**
+	 * 续费
+	 * @return
+	 * @throws HttpStatusCodeException
+	 * @throws Exception
+	 */
+	public ResultVO renewalBox() throws HttpStatusCodeException,Exception;
+	
+	/**
+	 * 主机应用支付
+	 * @param nAppId       应用id
+	 * @param cAppOrder    应用订单
+	 * @param cAppAccuntId 应用帐号
+	 * @param cGoodId      物品id
+	 * @param sGoodName    物品名称
+	 * @param iGoodNum     物品数量
+	 * @param nMoney       金额
+	 * @return
+	 * @throws HttpStatusCodeException
+	 * @throws Exception
+	 */
+	
+	public ResultVO appPayment(String nAppId,String cAppOrder,String cAppAccuntId,String cGoodId,String sGoodName,Integer iGoodNum,Integer nMoney) throws HttpStatusCodeException,Exception;
+	
 }

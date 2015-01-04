@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.ireadygo.app.gamelauncher.GameLauncherConfig;
 import com.ireadygo.app.gamelauncher.appstore.data.GameData;
@@ -22,6 +23,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.GameState;
 import com.ireadygo.app.gamelauncher.appstore.info.item.KeywordItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.QuotaItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.RechargePhoneItem;
+import com.ireadygo.app.gamelauncher.appstore.info.item.RentReliefItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.SlotConfigItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.SubscribeResultItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserHeaderImgItem;
@@ -54,6 +56,8 @@ import com.snail.appstore.openapi.vo.MuchUserAppSlotVO;
 import com.snail.appstore.openapi.vo.PreLoadItemVO;
 import com.snail.appstore.openapi.vo.QuotaVO;
 import com.snail.appstore.openapi.vo.RechargePhoneVO;
+import com.snail.appstore.openapi.vo.RentReliefAppTime;
+import com.snail.appstore.openapi.vo.RentReliefAppVO;
 import com.snail.appstore.openapi.vo.SlotRechargeVO;
 import com.snail.appstore.openapi.vo.SubscribeResultVO;
 import com.snail.appstore.openapi.vo.UserBasicVO;
@@ -1546,6 +1550,144 @@ public class RemoteInfo implements IGameInfo {
 					}
 				}
 				return result;
+			}
+			String errMsg = processRemoteResultCode(resultVO.getCode());
+			throw new InfoSourceException(errMsg);
+		} catch (InfoSourceException e) {
+			throw e;
+		} catch (HttpStatusCodeException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_NETWORK_ERROR,e.getCause());
+		} catch (JSONException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_CLIENT_ERROR,e.getCause());
+		} catch (Exception e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_ERROR,e.getCause());
+		}
+	}
+
+	@Override
+	public void activateBox() throws InfoSourceException {
+		try {
+			ResultVO resultVO = mAppPlatFormService.activateBox();
+			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
+				return;
+			}
+			String errMsg = processRemoteResultCode(resultVO.getCode());
+			throw new InfoSourceException(errMsg);
+		} catch (InfoSourceException e) {
+			throw e;
+		} catch (HttpStatusCodeException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_NETWORK_ERROR,e.getCause());
+		} catch (Exception e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_ERROR,e.getCause());
+		}
+	}
+
+	@Override
+	public List<String> getRentReliefAppList() throws InfoSourceException {
+		try {
+			ResultVO resultVO = mAppPlatFormService.getRentReliefAppList();
+			
+			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
+				List<String> results = new ArrayList<String>();
+				if (resultVO.getObj() != null) {
+					List<RentReliefAppVO> appRentReliefVOs = (List<RentReliefAppVO>)resultVO.getObj();
+					for (RentReliefAppVO item : appRentReliefVOs) {
+						if (!TextUtils.isEmpty(item.getSPackage())) {
+							results.add(item.getSPackage());
+						}
+					}
+				}
+				return results;
+			}
+			String errMsg = processRemoteResultCode(resultVO.getCode());
+			throw new InfoSourceException(errMsg);
+		} catch (InfoSourceException e) {
+			throw e;
+		} catch (HttpStatusCodeException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_NETWORK_ERROR,e.getCause());
+		} catch (JSONException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_CLIENT_ERROR,e.getCause());
+		} catch (Exception e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_ERROR,e.getCause());
+		}
+	}
+
+	@Override
+	public RentReliefItem getRentReliefAppTime() throws InfoSourceException {
+		try {
+			ResultVO resultVO = mAppPlatFormService.getRentReliefAppTime();
+			
+			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
+				RentReliefItem item = new RentReliefItem();
+				if (resultVO.getObj() != null) {
+					RentReliefAppTime rentAppTime = (RentReliefAppTime)resultVO.getObj();
+					item.setAppTime(Long.valueOf(rentAppTime.getNAppTime()));
+					item.setAppRemainTime(Long.valueOf(rentAppTime.getNAppRemainTime()));
+					item.setRenewalMoney(rentAppTime.getCRenewalMoney());
+					Log.d("lmq", "rentAppTime= "+rentAppTime.getNAppTime()+"---remainTime = "+rentAppTime.getNAppRemainTime()+"--rentmoney = "+rentAppTime.getCRenewalMoney());
+				}
+				return item;
+			}
+			String errMsg = processRemoteResultCode(resultVO.getCode());
+			throw new InfoSourceException(errMsg);
+		} catch (InfoSourceException e) {
+			throw e;
+		} catch (HttpStatusCodeException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_NETWORK_ERROR,e.getCause());
+		} catch (JSONException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_CLIENT_ERROR,e.getCause());
+		} catch (Exception e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_ERROR,e.getCause());
+		}
+	}
+
+	@Override
+	public void saveAppTime(String cPackage, Long nAppTime) throws InfoSourceException {
+		try {
+			ResultVO resultVO = mAppPlatFormService.saveAppTime(cPackage, nAppTime);
+			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
+				return;
+			}
+			String errMsg = processRemoteResultCode(resultVO.getCode());
+			throw new InfoSourceException(errMsg);
+		} catch (InfoSourceException e) {
+			throw e;
+		} catch (HttpStatusCodeException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_NETWORK_ERROR,e.getCause());
+		} catch (JSONException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_CLIENT_ERROR,e.getCause());
+		} catch (Exception e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_ERROR,e.getCause());
+		}
+	}
+
+	@Override
+	public void renewalBox() throws InfoSourceException {
+		try {
+			ResultVO resultVO = mAppPlatFormService.renewalBox();
+			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
+				return;
+			}
+			String errMsg = processRemoteResultCode(resultVO.getCode());
+			throw new InfoSourceException(errMsg);
+		} catch (InfoSourceException e) {
+			throw e;
+		} catch (HttpStatusCodeException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_NETWORK_ERROR,e.getCause());
+		} catch (JSONException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_CLIENT_ERROR,e.getCause());
+		} catch (Exception e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_ERROR,e.getCause());
+		}
+	}
+
+	@Override
+	public void appPayment(String nAppId, String cAppOrder, String cAppAccuntId, String cGoodId, String sGoodName,
+			Integer iGoodNum, Integer nMoney) throws InfoSourceException {
+		try {
+			ResultVO resultVO = mAppPlatFormService.appPayment(nAppId, cAppOrder, cAppAccuntId, cGoodId, sGoodName, iGoodNum, nMoney);
+			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
+				return;
 			}
 			String errMsg = processRemoteResultCode(resultVO.getCode());
 			throw new InfoSourceException(errMsg);

@@ -73,6 +73,8 @@ import com.snail.appstore.openapi.vo.MuchUserAppSlotVO;
 import com.snail.appstore.openapi.vo.PreLoadItemVO;
 import com.snail.appstore.openapi.vo.QuotaVO;
 import com.snail.appstore.openapi.vo.RechargePhoneVO;
+import com.snail.appstore.openapi.vo.RentReliefAppTime;
+import com.snail.appstore.openapi.vo.RentReliefAppVO;
 import com.snail.appstore.openapi.vo.SlotRechargeVO;
 import com.snail.appstore.openapi.vo.SubscribeResultVO;
 import com.snail.appstore.openapi.vo.UserBasicVO;
@@ -682,5 +684,74 @@ public class AppPlatFormService implements IAppPlatFormService {
 		addAuthentication(parameterMap);
 		String sResultJson = HttpUtil.doGet(UrlParameterUtil.generateGetUrl(AppPlatFormConfig.MUCH_PRELOAD_LIST, parameterMap));
 		return new JSONResultVO(sResultJson, PreLoadItemVO.class);
+	}
+
+	@Override
+	public ResultVO activateBox() throws HttpStatusCodeException, Exception {
+		HashMap<String, String> parameterMap = new HashMap<String, String>();
+		addAuthentication(parameterMap);
+		String sResultJson = HttpUtil.doPost(
+				UrlParameterUtil.generateUrl(AppPlatFormConfig.ACTIVATE_BOX_URL, parameterMap), parameterMap);
+		return new JSONResultVO(sResultJson, null);
+	}
+
+	@Override
+	public ResultVO getRentReliefAppList() throws HttpStatusCodeException, Exception {
+		HashMap<String, String> parameterMap = new HashMap<String, String>();
+		addAuthentication(parameterMap);
+		String sResultJson = HttpUtil.doGet(UrlParameterUtil.generateGetUrl(AppPlatFormConfig.RENT_RELIEF_APP_LIST_URL, parameterMap));
+		return new JSONResultVO(sResultJson, RentReliefAppVO.class);
+	}
+
+	@Override
+	public ResultVO getRentReliefAppTime() throws HttpStatusCodeException, Exception {
+		if(isAccountIdAndSessionIdNull()) {
+			throw new NullPointerException("the parameter should not be null");
+		}
+		HashMap<String, String> parameterMap = new HashMap<String, String>();
+		addAuthentication(parameterMap);
+		String sResultJson = HttpUtil.doGet(UrlParameterUtil.generateGetUrl(AppPlatFormConfig.RENT_RELIEF_APP_TIME_URL,
+				parameterMap));
+		return new JSONResultVO(sResultJson, RentReliefAppTime.class);
+	}
+
+	@Override
+	public ResultVO saveAppTime(String cPackage, Long nAppTime) throws HttpStatusCodeException,Exception {
+		HashMap<String, String> parameterMap = new HashMap<String, String>();
+		parameterMap.put("cPackage", cPackage);
+		parameterMap.put("nAppTime", String.valueOf(nAppTime));
+
+		addAuthentication(parameterMap);
+		
+		String sResultJson = HttpUtil.doPost(
+				UrlParameterUtil.generateUrl(AppPlatFormConfig.SAVE_APP_TIME_URL, parameterMap), parameterMap);
+		return new JSONResultVO(sResultJson, null);
+	}
+
+	@Override
+	public ResultVO renewalBox() throws HttpStatusCodeException, Exception {
+		HashMap<String, String> parameterMap = new HashMap<String, String>();
+		addAuthentication(parameterMap);
+		String sResultJson = HttpUtil.doPost(
+				UrlParameterUtil.generateUrl(AppPlatFormConfig.RENEWAL_BOX, parameterMap), parameterMap);
+		return new JSONResultVO(sResultJson, null);
+	}
+
+	@Override
+	public ResultVO appPayment(String nAppId, String cAppOrder, String cAppAccuntId, String cGoodId, String sGoodName,
+			Integer iGoodNum, Integer nMoney) throws HttpStatusCodeException, Exception {
+		HashMap<String, String> parameterMap = new HashMap<String, String>();
+		parameterMap.put("nAppId", String.valueOf(nAppId));
+		parameterMap.put("cAppOrder", cAppOrder);
+		parameterMap.put("cAppAccuntId", cAppAccuntId);
+		parameterMap.put("cGoodId", cGoodId);
+		parameterMap.put("sGoodName", sGoodName);
+		parameterMap.put("iGoodNum", String.valueOf(iGoodNum));
+		parameterMap.put("nMoney", String.valueOf(nMoney));
+
+		addAuthentication(parameterMap);
+		String sResultJson = HttpUtil.doPost(
+				UrlParameterUtil.generateUrl(AppPlatFormConfig.APP_PAYMENT_URL, parameterMap), parameterMap);
+		return new JSONResultVO(sResultJson, null);
 	}
 }

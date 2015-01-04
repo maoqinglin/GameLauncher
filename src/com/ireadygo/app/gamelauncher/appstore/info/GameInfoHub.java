@@ -20,6 +20,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.FreeFlowStatusItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.KeywordItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.QuotaItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.RechargePhoneItem;
+import com.ireadygo.app.gamelauncher.appstore.info.item.RentReliefItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.SlotConfigItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.SubscribeResultItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserHeaderImgItem;
@@ -418,6 +419,37 @@ public class GameInfoHub implements IGameInfo {
 	@Override
 	public List<AppEntity> getPreLoadList() throws InfoSourceException {
 		return mRemoteInfo.getPreLoadList();
+	}
+
+	@Override
+	public void activateBox() throws InfoSourceException {
+		mRemoteInfo.activateBox();
+	}
+
+	@Override
+	public List<String> getRentReliefAppList() throws InfoSourceException {
+		return mRemoteInfo.getRentReliefAppList();
+	}
+
+	@Override
+	public RentReliefItem getRentReliefAppTime() throws InfoSourceException {
+		return mRemoteInfo.getRentReliefAppTime();
+	}
+
+	@Override
+	public void saveAppTime(String cPackage, Long nAppTime) throws InfoSourceException {
+		mRemoteInfo.saveAppTime(cPackage, nAppTime);
+	}
+
+	@Override
+	public void renewalBox() throws InfoSourceException {
+		mRemoteInfo.renewalBox();
+	}
+
+	@Override
+	public void appPayment(String nAppId, String cAppOrder, String cAppAccuntId, String cGoodId, String sGoodName,
+			Integer iGoodNum, Integer nMoney) throws InfoSourceException {
+		mRemoteInfo.appPayment(nAppId, cAppOrder, cAppAccuntId, cGoodId, sGoodName, iGoodNum, nMoney);
 	}
 
 }

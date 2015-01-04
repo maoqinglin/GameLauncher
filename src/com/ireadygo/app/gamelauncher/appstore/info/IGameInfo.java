@@ -13,6 +13,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.FreeFlowStatusItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.KeywordItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.QuotaItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.RechargePhoneItem;
+import com.ireadygo.app.gamelauncher.appstore.info.item.RentReliefItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.SlotConfigItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.SubscribeResultItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserHeaderImgItem;
@@ -143,6 +144,25 @@ public interface IGameInfo {
 
 	//获取预装列表
 	List<AppEntity> getPreLoadList() throws InfoSourceException;
+
+	// 激活OBOX
+	void activateBox() throws InfoSourceException;
+
+	// 减免租金应用列表
+	List<String> getRentReliefAppList() throws InfoSourceException;
+
+	// 获取游戏时长
+	RentReliefItem getRentReliefAppTime() throws InfoSourceException;
+
+	// 设置游戏时长
+	void saveAppTime(String cPackage, Long nAppTime) throws InfoSourceException;
+
+	// 续费
+	void renewalBox() throws InfoSourceException;
+
+	// 主机应用支付
+	void appPayment(String nAppId, String cAppOrder, String cAppAccuntId, String cGoodId, String sGoodName,
+			Integer iGoodNum, Integer nMoney) throws InfoSourceException;
 
 	//清除缓存
 	void cleanCached();

@@ -15,6 +15,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -247,6 +248,12 @@ public class GameAllAppLayout extends KeyEventLayout implements View.OnFocusChan
 				return onMoonKey();
 			case SnailKeyCode.WATER_KEY:
 				return onWaterKey();
+			case KeyEvent.KEYCODE_0:
+				break;
+			case KeyEvent.KEYCODE_1:
+				break;
+			case KeyEvent.KEYCODE_2:
+				break;
 			}
 			return false;
 		}
