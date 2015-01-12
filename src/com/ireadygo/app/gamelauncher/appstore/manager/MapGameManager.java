@@ -121,7 +121,7 @@ public class MapGameManager {
 		if (isInstall) {
 			mGameData.addGame(mContext, pkgName,!notOccupySlot);
 			GameLauncherAppState.getInstance(mContext).getModel()
-			.handleGameAddOrUpdate(pkgName, Favorites.DONOT_DISPLAY, Favorites.APP_TYPE_APPLICATION);
+			.handleGameAddOrUpdate(pkgName, Favorites.DISPLAY, Favorites.APP_TYPE_APPLICATION);
 		} else {
 			GameLauncherAppState.getInstance(mContext).getModel()
 			.updateInstalledAppInfo(pkgName, checkPkgDisplayState(pkgName), Favorites.APP_TYPE_APPLICATION);
