@@ -1,5 +1,7 @@
 package com.snail.appstore.openapi;
 
+import android.gesture.OrientedBoundingBox;
+
 /**
  * 免商店OPEN-API平台配置
  * 
@@ -22,24 +24,29 @@ public class AppPlatFormConfig {
 	public static final String PARAMETER_API_KEY = "apiKey";
 	/** 请求时间 */
 	public static final String PARAMETER_REQ_TIME = "reqTime";
-
+	/**
+	 * 区分终端
+	 */
+	public static final boolean DEVICE_OBOX = false;
 	/**
 	 * 请求地址
 	 */
-	public final static String GAME_LIST_URL = "/obox/cms/game/list";// 
-	public final static String KEYWORD_LIST_URL = "/obox/cms/game/keyword/list"; // 关键字请求地址
-	public final static String KEYWORD_AMOUNT_URL = "/obox/cms/game/keyword/info";// 关键字信息请求地址
-	public final static String GAME_CATEGORY_URL = "/obox/cms/game/category";// 游戏分类信息请求地址
-	public final static String GAME_COLLECTION_URL = "/obox/cms/game/collection";// 游戏合集信息请求地址
-	public final static String GAME_BY_CATEGORY_URL = "/obox/cms/game/category/list";// 分类游戏列表请求地址
-	public final static String GAME_DETAIL_URL = "/obox/cms/game";// 游戏详情请求地址
-	public final static String GAME_DOWNLOAD_URL = "/obox/cms/game/downloadurl";// 游戏下载请求地址
+	public final static String GAME_LIST_URL = DEVICE_OBOX ? OBoxUrl.GAME_LIST_URL : MuchUrl.GAME_LIST_URL;// 游戏搜索
+	public final static String KEYWORD_LIST_URL = DEVICE_OBOX ? OBoxUrl.KEYWORD_LIST_URL : MuchUrl.KEYWORD_LIST_URL; // 关键字请求地址
+	public final static String KEYWORD_AMOUNT_URL = DEVICE_OBOX ? OBoxUrl.KEYWORD_AMOUNT_URL : MuchUrl.KEYWORD_AMOUNT_URL;// 关键字信息请求地址
+	public final static String GAME_CATEGORY_URL = DEVICE_OBOX ? OBoxUrl.GAME_CATEGORY_URL : MuchUrl.GAME_CATEGORY_URL;// 游戏分类信息请求地址
+	public final static String GAME_COLLECTION_URL = DEVICE_OBOX ? OBoxUrl.GAME_COLLECTION_URL : MuchUrl.GAME_COLLECTION_URL;// 游戏合集信息请求地址
+	public final static String GAME_BY_CATEGORY_URL = DEVICE_OBOX ? OBoxUrl.GAME_BY_CATEGORY_URL : MuchUrl.GAME_BY_CATEGORY_URL;// 分类游戏列表请求地址
+	public final static String GAME_DETAIL_URL = DEVICE_OBOX ? OBoxUrl.GAME_DETAIL_URL : MuchUrl.GAME_DETAIL_URL;// 游戏详情请求地址
+	public final static String GAME_DOWNLOAD_URL = DEVICE_OBOX ? OBoxUrl.GAME_DOWNLOAD_URL : MuchUrl.GAME_DOWNLOAD_URL;// 游戏下载请求地址
+	public final static String MUCH_PRELOAD_LIST = DEVICE_OBOX ? OBoxUrl.MUCH_PRELOAD_LIST : MuchUrl.MUCH_PRELOAD_LIST;// 获取预装列表
+	public final static String GAME_BANNER_LIST_URL = DEVICE_OBOX ? OBoxUrl.GAME_BANNER_LIST_URL : MuchUrl.GAME_BANNER_LIST_URL;// 获取推荐页
+	public final static String GAME_UPDATE_LIST_URL = DEVICE_OBOX ? OBoxUrl.GAME_UPDATE_LIST_URL : MuchUrl.GAME_UPDATE_LIST_URL;// 获取更新列表
+	public final static String GAME_MAPPING_LIST_URL = DEVICE_OBOX ? OBoxUrl.GAME_MAPPING_LIST_URL : MuchUrl.GAME_MAPPING_LIST_URL;// 获取匹配列表
+	public final static String USERHEADER_LIST_URL = DEVICE_OBOX ? OBoxUrl.USERHEADER_LIST_URL : MuchUrl.USERHEADER_LIST_URL;// 获取用户头像列表
+
 	public final static String USER_ACCOUNT_URL = "/much/user/account/info";// 用户账号请求地址
-	public final static String GAME_BANNER_LIST_URL = "/obox/cms/banner/list";// 获取推荐页
-	public final static String GAME_UPDATE_LIST_URL = "/obox/cms/game/update/list";// 获取更新列表
-	public final static String GAME_MAPPING_LIST_URL = "/obox/cms/game/mapping/list";// 获取匹配列表
 	public final static String ACCOUT_NICKNAME_URL = "/much/user/nickname";// 获取昵称
-	public final static String USERHEADER_LIST_URL = "/obox/cms/header/list";// 获取用户头像列表
 	public final static String ACCOUNT_SAVE_URL = "/much/user/info";// 保存账号信息
 
 	public final static String MUCH_CONFIG_URL = "/much/user/slot/config";// 卡槽配置
@@ -53,33 +60,31 @@ public class AppPlatFormConfig {
 	public final static String MUCH_TICKET_RECHARGE = "/much/user/rabbitticket/recharge";// 兔兔券充值
 	public final static String MUCH_TICKET_PHONE_BIND = "/much/user/rabbitticket/bind";// 绑定手机号
 	public final static String MUCH_TICKET_QUOTA = "/much/user/rabbitticket/quota";// 计算兔兔券和兔兔币配额
-	public final static String MUCH_TICKET_GET_BIND_PHONE = "/much/user/rabbitticket/phonenum"; //获取绑定手机号
-	public final static String MUCH_TICKET_FEE_CONFIG = "/much/user/rabbitticket/fee/config";//免机170资费配置
-	public final static String MUCH_TICKET_PHONE_RECHARGE = "/much/user/rabbitticket/phone/recharge"; //170充值
-	public final static String MUCH_BSS_ACCOUNT_CHECK = "/much/user//bss/account/check";//BSS账号验证
-	public final static String MUCH_UPLOAD_GETUI_INFO = "/much/user/msg/getui";//个推配置上传接口
-	public final static String MUCH_USER_SMSCODE = "/much/user/smscode";//获取短信验证码
-	public final static String MUCH_USER_PHONENUM_BIND = "/much/user/phonenum/bind";//绑定免流量手机号
-	public final static String MUCH_USER_PHONENUM_UNBIND = "/much/user/phonenum/unbind";//解绑免流量手机号
-	public final static String MUCH_USER_FLOW_STATUS = "/much/user/flow/status";//查询免流量状态
-	public final static String MUCH_USER_FLOW_SUBSCRIBE = "/much/user/flow/subscribe";//开通免流量
-	public final static String MUCH_USER_AGENT_APP = "/much/user/agent/app";//获取代理模式的应用列表
-	public final static String MUCH_USER_AGENT_DOWNURL = "/much/user/agent/downurl";//获取代理应用的下载地址
-	public final static String MUCH_PRELOAD_LIST = "/obox/cms/preload/list";//获取预装列表
+	public final static String MUCH_TICKET_GET_BIND_PHONE = "/much/user/rabbitticket/phonenum"; // 获取绑定手机号
+	public final static String MUCH_TICKET_FEE_CONFIG = "/much/user/rabbitticket/fee/config";// 免机170资费配置
+	public final static String MUCH_TICKET_PHONE_RECHARGE = "/much/user/rabbitticket/phone/recharge"; // 170充值
+	public final static String MUCH_BSS_ACCOUNT_CHECK = "/much/user//bss/account/check";// BSS账号验证
+	public final static String MUCH_UPLOAD_GETUI_INFO = "/much/user/msg/getui";// 个推配置上传接口
+	public final static String MUCH_USER_SMSCODE = "/much/user/smscode";// 获取短信验证码
+	public final static String MUCH_USER_PHONENUM_BIND = "/much/user/phonenum/bind";// 绑定免流量手机号
+	public final static String MUCH_USER_PHONENUM_UNBIND = "/much/user/phonenum/unbind";// 解绑免流量手机号
+	public final static String MUCH_USER_FLOW_STATUS = "/much/user/flow/status";// 查询免流量状态
+	public final static String MUCH_USER_FLOW_SUBSCRIBE = "/much/user/flow/subscribe";// 开通免流量
+	public final static String MUCH_USER_AGENT_APP = "/much/user/agent/app";// 获取代理模式的应用列表
+	public final static String MUCH_USER_AGENT_DOWNURL = "/much/user/agent/downurl";// 获取代理应用的下载地址
 
-	//主机以租代售接口
-	public final static String ACTIVATE_BOX_URL = "/obox/client/active";//激活
-	public final static String RENT_RELIEF_APP_LIST_URL = "/obox/cms/rentReliefApp/list";//减免租金应用列表
-	public final static String RENT_RELIEF_APP_TIME_URL = "/obox/client/rentReliefAppTime";//获取游戏时长
-	public final static String SAVE_APP_TIME_URL = "/obox/client/saveAppTimeLog";//设置游戏时长
-	public final static String RENEWAL_BOX = "/obox/client/renewal";//续费
-	public final static String APP_PAYMENT_URL = "/obox/client/appPayment";//主机应用支付
-	
+	// 主机以租代售接口
+	public final static String ACTIVATE_BOX_URL = "/obox/client/active";// 激活
+	public final static String RENT_RELIEF_APP_LIST_URL = "/obox/cms/rentReliefApp/list";// 减免租金应用列表
+	public final static String RENT_RELIEF_APP_TIME_URL = "/obox/client/rentReliefAppTime";// 获取游戏时长
+	public final static String SAVE_APP_TIME_URL = "/obox/client/saveAppTimeLog";// 设置游戏时长
+	public final static String RENEWAL_BOX = "/obox/client/renewal";// 续费
+	public final static String APP_PAYMENT_URL = "/obox/client/appPayment";// 主机应用支付
+
 	public final static String PARAMETER_SKEYWORD = "sKeyWord"; // 关键字参数
 	public final static String PARAMETER_NUSERID = "nUserId";// 用户ID
 	public final static String PARAMETER_CIDENTITY = "cIdentity";// 身份串
 	public final static String PARAMETER_NAPPID = "nAppId";// 附加id
-	
 
 	public final static String PARAMETER_CURRENTPAGE = "currentPage";// 当前页码
 	public final static String PARAMETER_NUMBER = "number";// 每页显示条数
@@ -90,7 +95,7 @@ public class AppPlatFormConfig {
 	public static final String PARAMETER_ID = "id";
 
 	public static final String DEFAULT_HTTP_HOST = "http://api.app.snail.com";
-	public static final String DEFAULT_APP_ID = "2";
+	public static final String DEFAULT_APP_ID = DEVICE_OBOX ? "5" : "2";
 
 	/** Http Open Api Host */
 	public static String HTTP_HOST = DEFAULT_HTTP_HOST;
@@ -120,4 +125,35 @@ public class AppPlatFormConfig {
 		APP_SECRET = appSecret;
 	}
 
+	private static final class OBoxUrl{
+		public final static String GAME_LIST_URL = "/obox/cms/game/list";//游戏搜索
+		public final static String KEYWORD_LIST_URL = "/obox/cms/game/keyword/list"; // 关键字请求地址
+		public final static String KEYWORD_AMOUNT_URL = "/obox/cms/game/keyword/info";// 关键字信息请求地址
+		public final static String GAME_CATEGORY_URL = "/obox/cms/game/category";// 游戏分类信息请求地址
+		public final static String GAME_COLLECTION_URL = "/obox/cms/game/collection";// 游戏合集信息请求地址
+		public final static String GAME_BY_CATEGORY_URL = "/obox/cms/game/category/list";// 分类游戏列表请求地址
+		public final static String GAME_DETAIL_URL = "/obox/cms/game";// 游戏详情请求地址
+		public final static String GAME_DOWNLOAD_URL = "/obox/cms/game/downloadurl";// 游戏下载请求地址
+		public final static String GAME_BANNER_LIST_URL = "/obox/cms/banner/list";// 获取推荐页
+		public final static String GAME_UPDATE_LIST_URL = "/obox/cms/game/update/list";// 获取更新列表
+		public final static String GAME_MAPPING_LIST_URL = "/obox/cms/game/mapping/list";// 获取匹配列表
+		public final static String USERHEADER_LIST_URL = "/obox/cms/header/list";// 获取用户头像列表
+		public final static String MUCH_PRELOAD_LIST = "/obox/cms/preload/list";// 获取预装列表
+	}
+	
+	private static final class MuchUrl{
+		public final static String GAME_LIST_URL = "/much/user/game/list";//游戏搜索
+		public final static String KEYWORD_LIST_URL = "/much/user/game/keyword/list"; // 关键字请求地址
+		public final static String KEYWORD_AMOUNT_URL = "/much/user/game/keyword/info";// 关键字信息请求地址
+		public final static String GAME_CATEGORY_URL = "/much/user/game/category";// 游戏分类信息请求地址
+		public final static String GAME_COLLECTION_URL = "/much/user/game/collection";// 游戏合集信息请求地址
+		public final static String GAME_BY_CATEGORY_URL = "/much/user/game/category/list";// 分类游戏列表请求地址
+		public final static String GAME_DETAIL_URL = "/much/user/game";// 游戏详情请求地址
+		public final static String GAME_DOWNLOAD_URL = "/much/user/game/downloadurl";// 游戏下载请求地址
+		public final static String GAME_BANNER_LIST_URL = "/much/user/banner/list";// 获取推荐页
+		public final static String GAME_UPDATE_LIST_URL = "/much/user/game/update/list";// 获取更新列表
+		public final static String GAME_MAPPING_LIST_URL = "/much/user/game/mapping/list";// 获取匹配列表
+		public final static String USERHEADER_LIST_URL = "/much/user/header/list";// 获取用户头像列表
+		public final static String MUCH_PRELOAD_LIST = "/much/user/preload/list";// 获取预装列表
+	}
 }
