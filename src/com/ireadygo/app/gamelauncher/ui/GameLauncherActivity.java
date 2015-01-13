@@ -252,7 +252,9 @@ public class GameLauncherActivity extends BaseActivity {
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
-		Log.d("liu.js", "onWindowFocusChanged--" + hasFocus);
+		if (!hasFocus) {
+			mFocusView.requestFocus();
+		}
 	}
 
 	public static class Page {
