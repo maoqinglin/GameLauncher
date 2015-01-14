@@ -32,7 +32,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.CHANGE_COMPONENT_ENABLED_STATE" />
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="getui.permission.GetuiService" />
     <uses-permission android:name="android.permission.WRITE_APN_SETTINGS" />
 
@@ -40,6 +40,7 @@
         android:name="getui.permission.GetuiService"
         android:protectionLevel="normal" >
     </permission>
+
     <uses-sdk
         android:minSdkVersion="17"
         android:targetSdkVersion="17" />
@@ -47,13 +48,13 @@
     <application
         android:name="com.ireadygo.app.gamelauncher.GameLauncherApplication"
         android:allowBackup="true"
+        android:allowClearUserData="false"
+        android:debuggable="true"
         android:hardwareAccelerated="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:persistent="true"
-        android:debuggable="true"
-        android:theme="@style/AppTheme"
-        android:allowClearUserData = "false">
+        android:theme="@style/AppTheme" >
         <meta-data
             android:name="PUSH_APPID"
             android:value="pBeBWRkaqE892HvalVEbj7" /> <!-- 替换为第三方应用的APPID -->
@@ -65,7 +66,7 @@
             android:value="RyM9kFHrjg7Z63oA8trI03" /> <!-- 替换为第三方应用的APPSECRET -->
         <meta-data
             android:name="PUSH_GROUPID"
-            android:value="" /><!-- 配置SDK核心服务 -->
+            android:value="" /> <!-- 配置SDK核心服务 -->
         <service
             android:name="com.igexin.sdk.PushService"
             android:exported="true"
@@ -88,9 +89,9 @@
                 <action android:name="com.igexin.sdk.action.pushmanager" />
             </intent-filter>
         </receiver>
-
-        <receiver android:name="com.ireadygo.app.gamelauncher.widget.GeTuiReceiver"
-            android:exported="false">
+        <receiver
+            android:name="com.ireadygo.app.gamelauncher.widget.GeTuiReceiver"
+            android:exported="false" >
             <intent-filter>
                 <action android:name="com.igexin.sdk.action.pBeBWRkaqE892HvalVEbj7" />
             </intent-filter>
@@ -146,15 +147,14 @@
             android:process=":pushservice" />
         <!-- 替换为downloads.第三方包名 -->
 
-		<provider
+        <provider
             android:name="com.ireadygo.app.gamelauncher.account.pushmsg.SnailPushMessageProvider"
-            android:authorities="com.ireadygo.app.gamelauncher.message.provider"
-            />
+            android:authorities="com.ireadygo.app.gamelauncher.message.provider" />
 
-		<activity
+        <activity
             android:name="com.ireadygo.app.gamelauncher.ui.GameLauncherActivity"
             android:clearTaskOnLaunch="true"
-            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:configChanges="keyboardHidden|orientation|screenSize|navigation"
             android:label="@string/app_name"
             android:launchMode="singleInstance"
             android:screenOrientation="landscape"
@@ -162,8 +162,9 @@
             android:theme="@style/CustomerTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.HOME" />
-               <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+                <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.MONKEY" />
             </intent-filter>
@@ -291,13 +292,13 @@
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
+
         <service
             android:name="com.ireadygo.app.gamelauncher.aidl.GameLauncherRemoteService"
             android:exported="true" >
             <intent-filter>
                 <action android:name="com.ireadygo.app.gamelauncher.GamelauncherRemoteService" />
             </intent-filter>
-
         </service>
 
         <!-- 蜗牛SDK -->
@@ -413,7 +414,8 @@
             android:name="com.ireadygo.app.gamelauncher.ui.gamecommunity.AnnouncementActivity"
             android:theme="@style/CustomerTheme" >
         </activity>
-         <service
+
+        <service
             android:name="com.ireadygo.app.gamelauncher.statusbar.StatusBarService"
             android:exported="false" />
     </application>

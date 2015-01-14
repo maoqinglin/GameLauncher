@@ -14,6 +14,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -27,6 +28,12 @@ import com.ireadygo.app.gamelauncher.utils.NetworkUtils;
 import com.lthj.unipay.plugin.ac;
 
 public class StatusBarService extends Service {
+	public static final String ACTION_GET_BATTERY = "com.ireadygo.app.devicemanager.ACTION_GET_BATTERY";
+	public static final String ACTION_HANDLE_CONNECTED = "com.ireadygo.app.devicemanager.ACTION_HANDLE_CONNECTED";
+	public static final String ACTION_HANDLE_DISCONNECTED = "com.ireadygo.app.devicemanager.ACTION_HANDLE_DISCONNECTED";
+	public static final String EXTRA_LED_COLOR_INDEX = "com.ireadygo.app.devicemanager.EXTRA_LED_COLOR";
+	public static final String EXTRA_BATTERY = "com.ireadygo.app.devicemanager.EXTRA_BATTERY";
+	
 	public static final String ACTION_UNDISPLAY = "com.ireadygo.app.gamelauncher.ACTION_UNDISPLAY";
 	public static final String ACTION_DISPLAY = "com.ireadygo.app.gamelauncher.ACTION_DISPLAY";
 	private static final String HANDLE_NAME = "OBox Controller 1";
@@ -40,7 +47,6 @@ public class StatusBarService extends Service {
 	private BluetoothController mBluetoothController;
 	private boolean mIsShow = false;
 	private int mLastNetworkType = -1;
-	private ArrayList<HandleColorItem> mColorItems = new ArrayList<StatusBarService.HandleColorItem>();
 
 	public StatusBarService() {
 	}
@@ -56,13 +62,13 @@ public class StatusBarService extends Service {
 		mBluetoothController = new BluetoothController(this);
 		mBluetoothController.addStateChangedCallback(new BoxBluetoothStateChangeCallback());
 
-		initColorItem();
 		sIsRunning = true;
 		IntentFilter intentFilter = new IntentFilter();
 		intentFilter.addAction(ACTION_DISPLAY);
 		intentFilter.addAction(ACTION_UNDISPLAY);
-		intentFilter.addAction(BluetoothDevice.ACTION_ACL_CONNECTED);
-		intentFilter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED);
+		intentFilter.addAction(ACTION_HANDLE_CONNECTED);
+		intentFilter.addAction(ACTION_HANDLE_DISCONNECTED);
+		intentFilter.addAction(ACTION_GET_BATTERY);
 		registerReceiver(mReceiver, intentFilter);
 	}
 
@@ -88,69 +94,23 @@ public class StatusBarService extends Service {
 				}
 			} else if (ACTION_DISPLAY.equals(action)) {
 					postMsg(MSG_DISPLAY_STATUS_BAR, 100);
-			} else if (BluetoothDevice.ACTION_ACL_CONNECTED.equals(action)) {
+			} else if (ACTION_HANDLE_CONNECTED.equals(action)) {
 				BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-				if (device != null && HANDLE_NAME.equals(device.getName())) {
-					HandleColorItem item = getFreeColorItem();
-					if (item != null) {
-						mStatusBarView.handleConnected(item.index);
-						item.handleAddr = device.getAddress();
-						item.isOccupy = true;
-					}
+				int index = intent.getIntExtra(EXTRA_LED_COLOR_INDEX, -1);
+				Log.d("liu.js", "Launcher--ACTION_HANDLE_CONNECTED--index=" + index);
+				if(index >= 0){ 
+					mStatusBarView.handleConnected(index);
 				}
-			} else if (BluetoothDevice.ACTION_ACL_DISCONNECTED.equals(action)) {
+			} else if (ACTION_HANDLE_DISCONNECTED.equals(action)) {
 				BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-				if (device != null && HANDLE_NAME.equals(device.getName())) {
-					HandleColorItem item = getHandleColorItemByAddr(device.getAddress());
-					if (item != null) {
-						mStatusBarView.handleDisconnected(item.index);
-						item.isOccupy = false;
-						item.handleAddr = null;
-					}
+				int index = intent.getIntExtra(EXTRA_LED_COLOR_INDEX, -1);
+				Log.d("liu.js", "Launcher--ACTION_HANDLE_DISCONNECTED--index=" + index);
+				if(index >= 0){
+					mStatusBarView.handleDisconnected(index);
 				}
 			}
 		};
 	};
-
-	private void initColorItem() {
-		HandleColorItem blueColorItem = new HandleColorItem(StatusBarView.HANDLE_BLUE, false);
-		mColorItems.add(blueColorItem);
-		HandleColorItem orangeColorItem = new HandleColorItem(StatusBarView.HANDLE_ORANGE, false);
-		mColorItems.add(orangeColorItem);
-		HandleColorItem purpleColorItem = new HandleColorItem(StatusBarView.HANDLE_PURPLE, false);
-		mColorItems.add(purpleColorItem);
-		HandleColorItem cyanColorItem = new HandleColorItem(StatusBarView.HANDLE_CYAN, false);
-		mColorItems.add(cyanColorItem);
-	}
-
-	private HandleColorItem getFreeColorItem() {
-		for (HandleColorItem item : mColorItems) {
-			if (!item.isOccupy) {
-				return item;
-			}
-		}
-		return null;
-	}
-
-	private HandleColorItem getHandleColorItemByAddr(String addr) {
-		for (HandleColorItem item : mColorItems) {
-			if (!TextUtils.isEmpty(addr) && addr.equals(item.handleAddr)) {
-				return item;
-			}
-		}
-		return null;
-	}
-
-	private class HandleColorItem {
-		int index;
-		boolean isOccupy;
-		String handleAddr;
-
-		public HandleColorItem(int index,boolean occupy) {
-			this.index = index;
-			this.isOccupy = occupy;
-		}
-	}
 
 	private void postMsg(int msgTag, long delay) {
 		if (mHandler.hasMessages(MSG_DISPLAY_STATUS_BAR)) {
