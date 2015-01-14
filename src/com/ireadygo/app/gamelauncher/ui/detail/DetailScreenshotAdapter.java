@@ -84,8 +84,8 @@ public class DetailScreenshotAdapter extends BaseAnimatorAdapter {
 			ImageLoader.getInstance().loadImage(mUrlList.get(position), new SimpleImageLoadingListener() {
 				@Override
 				public void onLoadingComplete(String url, View view, Bitmap bitmap) {
-					Log.d("liu.js", "onLoadingComplete--W=" + bitmap.getWidth() + "|H=" + bitmap.getHeight() + "|dir="
-							+ mAppEntity.isScreenshotVertical());
+//					Log.d("liu.js", "onLoadingComplete--W=" + bitmap.getWidth() + "|H=" + bitmap.getHeight() + "|dir="
+//							+ mAppEntity.isScreenshotVertical());
 					int padding = mContext.getResources().getDimensionPixelOffset(R.dimen.detail_screenshot_padding);
 					// 计算图片的宽高
 					int widthMax = mScreenshotMaxHeight - padding * 2;// 由于服务器传过来的图片都是宽450，高800，宽<高

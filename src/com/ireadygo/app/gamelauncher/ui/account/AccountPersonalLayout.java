@@ -524,7 +524,7 @@ public class AccountPersonalLayout extends AccountBaseContentLayout implements O
 
 		@Override
 		public View getDropDownView(int position, View convertView, ViewGroup parent) {
-			Log.d("liu.js", "getDropDownView--position=" + position + "|parent=" + parent);
+//			Log.d("liu.js", "getDropDownView--position=" + position + "|parent=" + parent);
 			final View view = super.getDropDownView(position, convertView, parent);
 			if (position == 0) {
 				TextView promptView = (TextView) view.findViewById(R.id.accountAgeItem);

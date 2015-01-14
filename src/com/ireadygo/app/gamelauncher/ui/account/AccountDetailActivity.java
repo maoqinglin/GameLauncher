@@ -184,7 +184,7 @@ public class AccountDetailActivity extends BaseActivity {
 	private void menuRequestFocusByIntent(Intent intent) {
 		Anchor anchor = (Anchor) intent.getSerializableExtra(Anchor.EXTRA_ANCHOR);
 		if (anchor != null) {
-			Log.d("liu.js", "Anchor=" + anchor.getDestination() + "|" + this);
+//			Log.d("liu.js", "Anchor=" + anchor.getDestination() + "|" + this);
 			Destination destination = anchor.getDestination();
 			mOptionsLayout.requestOptionsFocusByTag(destination);
 		}

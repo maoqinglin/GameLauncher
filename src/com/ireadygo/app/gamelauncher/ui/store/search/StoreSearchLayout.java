@@ -235,7 +235,7 @@ public class StoreSearchLayout extends StoreBaseContentLayout implements OnClick
 		}
 
 		protected void onPostExecute(List<String> result) {
-			Log.d("liu.js", "searchKeyword--onPostExecute--result=" + result);
+//			Log.d("liu.js", "searchKeyword--onPostExecute--result=" + result);
 			if (isCancelled()) {
 				return;
 			}

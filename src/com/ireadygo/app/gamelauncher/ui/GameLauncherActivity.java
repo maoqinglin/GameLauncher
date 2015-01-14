@@ -40,6 +40,7 @@ public class GameLauncherActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Log.d("liu.js", "GameLauncherActivity--onCreate");
 		mFragmentManager = new CustomFragmentManager(this);
 		setContentView(R.layout.main);
 		mMainLayout = (CustomFrameLayout) findViewById(R.id.main_layout);
@@ -49,7 +50,7 @@ public class GameLauncherActivity extends BaseActivity {
 
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
-				Log.d("liu.js", "Main Focus View change focus--hasFocus=" + hasFocus);
+//				Log.d("liu.js", "Main Focus View change focus--hasFocus=" + hasFocus);
 				if (hasFocus) {
 
 				}
@@ -71,6 +72,7 @@ public class GameLauncherActivity extends BaseActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		Log.d("liu.js", "GameLauncherActivity--onResume");
 		// 上报应用置前台的时间
 		getCustomFragmentManager().onResume();
 		StaticsUtils.onResume();

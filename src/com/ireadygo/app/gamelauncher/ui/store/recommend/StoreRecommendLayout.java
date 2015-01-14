@@ -135,7 +135,7 @@ public class StoreRecommendLayout extends StoreBaseContentLayout {
 				return null;
 			}
 			int page = params[0];
-			Log.d("liu.js", "LoadRecommendTask--page=" + page);
+//			Log.d("liu.js", "LoadRecommendTask--page=" + page);
 			if (page < 0) {
 				return null;
 			}

@@ -672,7 +672,7 @@ public class DownloadManageAdapter extends HExpandableListAdapter {
 
 	public void expandAllGroup() {
 		int groupCount = getGroupCount();
-		Log.d("liu.js", "expandAllGroup-groupCount=" + groupCount);
+//		Log.d("liu.js", "expandAllGroup-groupCount=" + groupCount);
 		for (int i = 0; i < groupCount; i++) {
 			mListView.expandGroup(i);
 		}

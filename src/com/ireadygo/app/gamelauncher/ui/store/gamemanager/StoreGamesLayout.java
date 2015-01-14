@@ -157,7 +157,7 @@ public class StoreGamesLayout extends StoreBaseContentLayout {
 
 		@Override
 		public void onDownloadStateChange(AppEntity app) {
-			Log.d("liu.js", "onDownloadStateChange--app=" + app.getName() + "|state=" + app.getGameState());
+//			Log.d("liu.js", "onDownloadStateChange--app=" + app.getName() + "|state=" + app.getGameState());
 			switch (app.getGameState()) {
 			case UPGRADEABLE:// 删除可更新应用
 			case DEFAULT:// 删除普通下载任务
@@ -176,7 +176,7 @@ public class StoreGamesLayout extends StoreBaseContentLayout {
 
 		@Override
 		public void onDownloadItemAdd(AppEntity app) {
-			Log.d("liu.js", "onDownloadItemAdd--app=" + app.getName() + "|state=" + app.getGameState());
+//			Log.d("liu.js", "onDownloadItemAdd--app=" + app.getName() + "|state=" + app.getGameState());
 			if (app.getIsUpdateable() == AppEntity.CAN_UPGRADE) {
 				mAdapter.refreshData();
 			}
@@ -192,7 +192,7 @@ public class StoreGamesLayout extends StoreBaseContentLayout {
 
 		@Override
 		public void onInstallStateChange(AppEntity app) {
-			Log.d("liu.js", "onInstallStateChange--app=" + app.getName() + "|state=" + app.getGameState());
+//			Log.d("liu.js", "onInstallStateChange--app=" + app.getName() + "|state=" + app.getGameState());
 			switch (app.getGameState()) {
 			case LAUNCHABLE:// 安装成功
 				mAdapter.refreshData();

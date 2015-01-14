@@ -273,7 +273,7 @@ public class SlotBuyActivity extends BaseActivity implements OnClickListener {
 	}
 
 	private void hideProgressDialog() {
-		Log.d("liu.js", "hideProgressDialog");
+//		Log.d("liu.js", "hideProgressDialog");
 		if (mPromptDialog != null) {
 			mPromptDialog.dismiss();
 		}
@@ -351,7 +351,7 @@ public class SlotBuyActivity extends BaseActivity implements OnClickListener {
 
 		@Override
 		protected void onPostExecute(QuotaItem quotaItem) {
-			Log.d("liu.js", "CheckQuotaTask--onPostExecute--result=" + quotaItem);
+//			Log.d("liu.js", "CheckQuotaTask--onPostExecute--result=" + quotaItem);
 			if (mHandler.hasMessages(WHAT_SHOW_PROGRESS)) {
 				mHandler.removeMessages(WHAT_SHOW_PROGRESS);
 			}

@@ -78,7 +78,7 @@ public class AccountStoreActivity extends BaseActivity {
 			if (TextUtils.isEmpty(account)) {
 				return "";
 			}
-			Log.d("liu.js", "getAccount--" + account);
+//			Log.d("liu.js", "getAccount--" + account);
 			return account;
 		}
 
@@ -86,7 +86,7 @@ public class AccountStoreActivity extends BaseActivity {
 			if (!isLogined()) {
 				return false;
 			}
-			Log.d("liu.js", "getBssAccount--" + PreferenceUtils.isBSSAccount());
+//			Log.d("liu.js", "getBssAccount--" + PreferenceUtils.isBSSAccount());
 			return PreferenceUtils.isBSSAccount();
 		}
 

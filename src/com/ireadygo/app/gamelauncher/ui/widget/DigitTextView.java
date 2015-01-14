@@ -35,7 +35,7 @@ public class DigitTextView extends TextView {
 	}
 
 	private void initAttrs(Context context, AttributeSet attrs) {
-		Log.d("liu.js", "initAttrs--");
+//		Log.d("liu.js", "initAttrs--");
 		TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.DigitText);
 		mUnit = ta.getString(R.styleable.DigitText_unit);
 		mDigit = ta.getString(R.styleable.DigitText_digit);
@@ -71,7 +71,7 @@ public class DigitTextView extends TextView {
 	}
 
 	private void setTextByStyle(String digit, String unit) {
-		Log.d("liu.js", "setText--digit=" + digit + "|unit=" + unit);
+//		Log.d("liu.js", "setText--digit=" + digit + "|unit=" + unit);
 		SpannableStringBuilder ssb = new SpannableStringBuilder(digit + DIGIT_UNIT_DIVIDE_STRING + unit);
 		ssb.setSpan(new TextAppearanceSpan(getContext(), R.style.TextLabelMiddleLight), 0, digit.length(),
 				Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);

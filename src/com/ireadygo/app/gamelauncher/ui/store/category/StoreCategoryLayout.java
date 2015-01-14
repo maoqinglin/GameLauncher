@@ -94,7 +94,7 @@ public class StoreCategoryLayout extends StoreBaseContentLayout {
 
 	@Override
 	public boolean onWaterKey() {
-		Log.d("liu.js", "Category--onWaterKey");
+//		Log.d("liu.js", "Category--onWaterKey");
 		return super.onWaterKey();
 	}
 
