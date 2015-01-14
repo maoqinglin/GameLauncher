@@ -1,5 +1,9 @@
 package com.ireadygo.app.gamelauncher.statusbar;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.util.AttributeSet;
@@ -15,14 +19,15 @@ import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.utils.NetworkUtils;
 
 public class StatusBarView extends LinearLayout {
+	private static final int LOW_BATTERY_LIMIT = 50;
 	public static final int HANDLE_BLUE = 0;
 	public static final int HANDLE_ORANGE = 1;
 	public static final int HANDLE_PURPLE = 2;
 	public static final int HANDLE_CYAN = 3;
 	private final ImageView mBlueToothView;
 	private final ImageView mNetWorkView;
-	private ImageView mHandleBlue, mHandleOrange, mHandlePurple, mHandleCyan;
 	private final MyDigitalClock mTimeTextView;
+	private Map<String, HandleHolder> mConnectedHandles = new HashMap<String, StatusBarView.HandleHolder>();
 	private SparseArray<HandleHolder> mHandles = new SparseArray<HandleHolder>();
 
 	public StatusBarView(Context context) {
@@ -40,10 +45,6 @@ public class StatusBarView extends LinearLayout {
 
 		mBlueToothView = (ImageView) findViewById(R.id.status_bar_bluetooth);
 		mNetWorkView = (ImageView) findViewById(R.id.status_bar_network);
-		mHandleBlue = (ImageView) findViewById(R.id.status_bar_handle_blue);
-		mHandleOrange = (ImageView) findViewById(R.id.status_bar_handle_orange);
-		mHandlePurple = (ImageView) findViewById(R.id.status_bar_handle_purple);
-		mHandleCyan = (ImageView) findViewById(R.id.status_bar_handle_cyan);
 		mTimeTextView = (MyDigitalClock) findViewById(R.id.status_bar_clock_textview);
 	}
 
@@ -56,51 +57,97 @@ public class StatusBarView extends LinearLayout {
 
 	private void initAllHandle() {
 		HandleHolder blueHolder = new HandleHolder();
-		blueHolder.handle = mHandleBlue;
-		blueHolder.handle.setImageResource(R.drawable.icon_handle_blue_connected);
-		blueHolder.state = HandleState.CONNECTED;
-		blueHolder.handle.setVisibility(View.GONE);
+		blueHolder.handle = (ImageView) findViewById(R.id.status_bar_handle_blue);
+		blueHolder.state = HandleState.IDLE;
 		blueHolder.handleIndex = HANDLE_BLUE;
+		blueHolder.connectedId = R.drawable.icon_handle_blue_connected;
+		blueHolder.disconnectedId = R.drawable.icon_handle_blue_disconnected;
+		blueHolder.lowBatteryId = R.drawable.icon_handle_blue_low_battery;
 		mHandles.put(HANDLE_BLUE, blueHolder);
 
 		HandleHolder orangeHolder = new HandleHolder();
-		orangeHolder.handle = mHandleOrange;
-		orangeHolder.handle.setImageResource(R.drawable.icon_handle_orange_connected);
-		orangeHolder.state = HandleState.CONNECTED;
+		orangeHolder.handle = (ImageView) findViewById(R.id.status_bar_handle_orange);
+		orangeHolder.state = HandleState.IDLE;
 		orangeHolder.handleIndex = HANDLE_ORANGE;
-		orangeHolder.handle.setVisibility(View.GONE);
+		orangeHolder.connectedId = R.drawable.icon_handle_orange_connected;
+		orangeHolder.disconnectedId = R.drawable.icon_handle_orange_disconnected;
+		orangeHolder.lowBatteryId = R.drawable.icon_handle_orange_low_battery;
 		mHandles.put(HANDLE_ORANGE, orangeHolder);
 
 		HandleHolder purpleHolder = new HandleHolder();
-		purpleHolder.handle = mHandlePurple;
-		purpleHolder.handle.setImageResource(R.drawable.icon_handle_purple_connected);
-		purpleHolder.handle.setVisibility(View.GONE);
-		purpleHolder.state = HandleState.CONNECTED;
+		purpleHolder.handle = (ImageView) findViewById(R.id.status_bar_handle_purple);
+		purpleHolder.state = HandleState.IDLE;
 		purpleHolder.handleIndex = HANDLE_PURPLE;
+		purpleHolder.connectedId = R.drawable.icon_handle_purple_connected;
+		purpleHolder.disconnectedId = R.drawable.icon_handle_purple_disconnected;
+		purpleHolder.lowBatteryId = R.drawable.icon_handle_purple_low_battery;
 		mHandles.put(HANDLE_PURPLE, purpleHolder);
 
 		HandleHolder cyanHolder = new HandleHolder();
-		cyanHolder.handle = mHandleCyan;
-		cyanHolder.handle.setImageResource(R.drawable.icon_handle_cyan_connected);
-		cyanHolder.state = HandleState.CONNECTED;
+		cyanHolder.handle = (ImageView) findViewById(R.id.status_bar_handle_cyan);
+		cyanHolder.state = HandleState.IDLE;
 		cyanHolder.handleIndex = HANDLE_CYAN;
-		cyanHolder.handle.setVisibility(View.GONE);
+		cyanHolder.connectedId = R.drawable.icon_handle_cyan_connected;
+		cyanHolder.disconnectedId = R.drawable.icon_handle_cyan_disconnected;
+		cyanHolder.lowBatteryId = R.drawable.icon_handle_cyan_low_battery;
 		mHandles.put(HANDLE_CYAN, cyanHolder);
+
+		invalidateAllHandle();
 	}
 
-	public void handleConnected(int index) {
-		HandleHolder holder = mHandles.get(index);
-		if (holder != null) {
-			holder.state = HandleState.CONNECTED;
-			holder.handle.setVisibility(View.VISIBLE);
+	private void invalidateAllHandle() {
+		for (int i = 0; i < mHandles.size(); i++) {
+			HandleHolder holder = mHandles.valueAt(i);
+			invalidateHandle(holder);
 		}
 	}
 
-	public void handleDisconnected(int index) {
+	private void invalidateHandle(HandleHolder holder) {
+		switch (holder.state) {
+		case IDLE:
+			holder.handle.setVisibility(View.GONE);
+			break;
+		case CONNECTED:
+			holder.handle.setImageResource(holder.connectedId);
+			holder.handle.setVisibility(View.VISIBLE);
+			break;
+		case LOW_BATTERY:
+			holder.handle.setImageResource(holder.lowBatteryId);
+			holder.handle.setVisibility(View.VISIBLE);
+			break;
+		case DISCONNECTED:
+			holder.handle.setVisibility(View.GONE);
+			break;
+		}
+	}
+
+	public void handleConnected(BluetoothDevice device, int index) {
+		HandleHolder holder = mHandles.get(index);
+		if (holder != null) {
+			holder.state = HandleState.CONNECTED;
+			invalidateHandle(holder);
+			mConnectedHandles.put(device.getAddress(), holder);
+		}
+	}
+
+	public void handleDisconnected(BluetoothDevice device, int index) {
 		HandleHolder holder = mHandles.get(index);
 		if (holder != null) {
 			holder.state = HandleState.DISCONNECTED;
-			holder.handle.setVisibility(View.GONE);
+			invalidateHandle(holder);
+			mConnectedHandles.remove(device.getAddress());
+		}
+	}
+
+	public void handleGetBattery(BluetoothDevice device, int battery) {
+		HandleHolder holder = mConnectedHandles.get(device.getAddress());
+		if (holder != null) {
+			if (battery <= LOW_BATTERY_LIMIT) {
+				holder.state = HandleState.LOW_BATTERY;
+			} else {
+				holder.state = HandleState.CONNECTED;
+			}
+			invalidateHandle(holder);
 		}
 	}
 
@@ -134,23 +181,24 @@ public class StatusBarView extends LinearLayout {
 	public void updateNetWorkState(int type) {
 		updateNetworkIcon(type);
 	}
-	
-	public void updateDisconnectState(int lastNeetworkType, int currentType){
-		if(currentType == -1){
+
+	public void updateDisconnectState(int lastNeetworkType, int currentType) {
+		if (currentType == -1) {
 			mNetWorkView.setImageResource(R.drawable.icon_statusbar_ethernet_disconnect);
-//			if(ConnectivityManager.TYPE_ETHERNET == lastNeetworkType){
-//				mNetWorkView.setImageResource(R.drawable.icon_statusbar_ethernet_disconnect);
-//			}else if(ConnectivityManager.TYPE_WIFI == lastNeetworkType){
-//				mNetWorkView.setImageResource(R.drawable.icon_statusbar_wifi_disconnect);
-//				mNetWorkView.postDelayed(new Runnable() {
-//					@Override
-//					public void run() {
-//						Animation anim = AnimationUtils.loadAnimation(getContext(), R.animator.wif_disconnect);
-//						mNetWorkView.startAnimation(anim);
-//						mNetWorkView.setVisibility(View.GONE);
-//					}
-//				},50);
-//			}
+			// if(ConnectivityManager.TYPE_ETHERNET == lastNeetworkType){
+			// mNetWorkView.setImageResource(R.drawable.icon_statusbar_ethernet_disconnect);
+			// }else if(ConnectivityManager.TYPE_WIFI == lastNeetworkType){
+			// mNetWorkView.setImageResource(R.drawable.icon_statusbar_wifi_disconnect);
+			// mNetWorkView.postDelayed(new Runnable() {
+			// @Override
+			// public void run() {
+			// Animation anim = AnimationUtils.loadAnimation(getContext(),
+			// R.animator.wif_disconnect);
+			// mNetWorkView.startAnimation(anim);
+			// mNetWorkView.setVisibility(View.GONE);
+			// }
+			// },50);
+			// }
 		}
 	}
 
@@ -167,26 +215,6 @@ public class StatusBarView extends LinearLayout {
 		}
 	}
 
-	public void showHandle() {
-		HandleHolder holder = null;
-		for (int pos = 0; pos < mHandles.size(); pos++) {
-			holder = mHandles.get(pos);
-			if (holder.state != HandleState.NONE) {
-				continue;
-			}
-		}
-		if (holder != null) {
-			holder.handle.setVisibility(View.VISIBLE);
-		}
-	}
-
-	public void hideHandle(int pos) {
-		HandleHolder holder = mHandles.valueAt(pos);
-		if (holder != null) {
-			holder.handle.setVisibility(View.GONE);
-		}
-	}
-
 	public void updateHandleState(int pos, HandleState state) {
 
 	}
@@ -195,9 +223,12 @@ public class StatusBarView extends LinearLayout {
 		ImageView handle;
 		HandleState state;
 		int handleIndex;
+		int connectedId;
+		int disconnectedId;
+		int lowBatteryId;
 	}
 
 	public enum HandleState {
-		CONNECTED, DISCONNECTED, LOW_BATTERY, NONE
+		CONNECTED, DISCONNECTED, LOW_BATTERY, IDLE
 	}
 }

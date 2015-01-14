@@ -33,7 +33,7 @@ public class StatusBarService extends Service {
 	public static final String ACTION_HANDLE_DISCONNECTED = "com.ireadygo.app.devicemanager.ACTION_HANDLE_DISCONNECTED";
 	public static final String EXTRA_LED_COLOR_INDEX = "com.ireadygo.app.devicemanager.EXTRA_LED_COLOR";
 	public static final String EXTRA_BATTERY = "com.ireadygo.app.devicemanager.EXTRA_BATTERY";
-	
+
 	public static final String ACTION_UNDISPLAY = "com.ireadygo.app.gamelauncher.ACTION_UNDISPLAY";
 	public static final String ACTION_DISPLAY = "com.ireadygo.app.gamelauncher.ACTION_DISPLAY";
 	private static final String HANDLE_NAME = "OBox Controller 1";
@@ -88,25 +88,29 @@ public class StatusBarService extends Service {
 	private BroadcastReceiver mReceiver = new BroadcastReceiver() {
 		public void onReceive(Context context, Intent intent) {
 			String action = intent.getAction();
-			if (ACTION_UNDISPLAY.equals(action)) {
+			if (ACTION_GET_BATTERY.equals(action)) {
+				BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+				int battery = intent.getIntExtra(EXTRA_BATTERY, 100);
+				mStatusBarView.handleGetBattery(device, battery);
+			} else if (ACTION_UNDISPLAY.equals(action)) {
 				if (!mHandler.hasMessages(MSG_DISPLAY_STATUS_BAR)) {
 					postMsg(MSG_UNDISPLAY_STATUS_BAR, 300);
 				}
 			} else if (ACTION_DISPLAY.equals(action)) {
-					postMsg(MSG_DISPLAY_STATUS_BAR, 100);
+				postMsg(MSG_DISPLAY_STATUS_BAR, 100);
 			} else if (ACTION_HANDLE_CONNECTED.equals(action)) {
 				BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
 				int index = intent.getIntExtra(EXTRA_LED_COLOR_INDEX, -1);
 				Log.d("liu.js", "Launcher--ACTION_HANDLE_CONNECTED--index=" + index);
-				if(index >= 0){ 
-					mStatusBarView.handleConnected(index);
+				if (index >= 0) {
+					mStatusBarView.handleConnected(device,index);
 				}
 			} else if (ACTION_HANDLE_DISCONNECTED.equals(action)) {
 				BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
 				int index = intent.getIntExtra(EXTRA_LED_COLOR_INDEX, -1);
 				Log.d("liu.js", "Launcher--ACTION_HANDLE_DISCONNECTED--index=" + index);
-				if(index >= 0){
-					mStatusBarView.handleDisconnected(index);
+				if (index >= 0) {
+					mStatusBarView.handleDisconnected(device,index);
 				}
 			}
 		};
