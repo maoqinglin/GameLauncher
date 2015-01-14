@@ -77,17 +77,15 @@ public class Network {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			if (mIsConnected != isNetworkConnected()) {
-				mIsConnected = isNetworkConnected();
-				synchronized (mListeners) {
-					if (mIsConnected) {
-						for (NetworkListener listener : mListeners) {
-							listener.onNetworkConnected();
-						}
-					} else {
-						for (NetworkListener listener : mListeners) {
-							listener.onNetworkDisconnected();
-						}
+			mIsConnected = isNetworkConnected();
+			synchronized (mListeners) {
+				if (mIsConnected) {
+					for (NetworkListener listener : mListeners) {
+						listener.onNetworkConnected();
+					}
+				} else {
+					for (NetworkListener listener : mListeners) {
+						listener.onNetworkDisconnected();
 					}
 				}
 			}
