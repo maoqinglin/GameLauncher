@@ -1,5 +1,11 @@
 package com.ireadygo.app.gamelauncher.utils;
 
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Enumeration;
+
 import android.content.Context;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -34,7 +40,6 @@ public class DeviceUtil {
 	public static String getDevicePhoneNum(Context context) {
 		TelephonyManager tm = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
 		String deviceNum = tm.getLine1Number();
-		//È¥³ýºÅÂëÇ°µÄ+86
 		if (!TextUtils.isEmpty(deviceNum) && deviceNum.contains(PHONE_NUM_PRIFIX)) {
 			return deviceNum.replace(PHONE_NUM_PRIFIX, "");
 		}
@@ -48,5 +53,25 @@ public class DeviceUtil {
 			return info.getIpAddress();
 		}
 		return 0;
+	}
+
+	public static String getLocalIpAddress() {
+		String networkIp = "";
+		try {
+			Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces();
+			while (en.hasMoreElements()) {
+				NetworkInterface ni = en.nextElement();
+				Enumeration<InetAddress> enIp = ni.getInetAddresses();
+				while (enIp.hasMoreElements()) {
+					InetAddress inet = enIp.nextElement();
+					if (!inet.isLoopbackAddress() && (inet instanceof Inet4Address)) {
+						networkIp = inet.getHostAddress().toString();
+					}
+				}
+			}
+		} catch (SocketException e) {
+			e.printStackTrace();
+		}
+		return networkIp;
 	}
 }

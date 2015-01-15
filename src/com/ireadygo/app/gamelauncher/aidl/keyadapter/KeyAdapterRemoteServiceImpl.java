@@ -1,4 +1,4 @@
-package com.ireadygo.app.gamelauncher.aidl;
+package com.ireadygo.app.gamelauncher.aidl.keyadapter;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -15,17 +15,17 @@ import com.ireadygo.app.gamelauncher.ui.account.AccountDetailActivity;
 import com.ireadygo.app.gamelauncher.ui.activity.BaseAccountActivity;
 import com.ireadygo.app.gamelauncher.widget.GameLauncherThreadPool;
 
-public class GamelauncherRemoteServiceImpl extends IGamelauncherAidlService.Stub {
+public class KeyAdapterRemoteServiceImpl extends IKeyAdapterAidlService.Stub {
 
 	private static final int MSG_NICKNAME_RESULT = 1;
 	private static final int MSG_LOGIN_ACCOUNT_CHANGE = 2;
 	private static final String DIVIDER = ",";
 	private static final String INNER_DIVIDER = "-";
 
-	private final RemoteCallbackList<IGameLauncherAidlCallback> mCallbackList = new RemoteCallbackList<IGameLauncherAidlCallback>();
+	private final RemoteCallbackList<IKeyAdapterAidlCallback> mCallbackList = new RemoteCallbackList<IKeyAdapterAidlCallback>();
 	private Context mContext;
 
-	public GamelauncherRemoteServiceImpl(Context context) {
+	public KeyAdapterRemoteServiceImpl(Context context) {
 		mContext = context;
 		IntentFilter intentFilter = new IntentFilter();
 		intentFilter.addAction(BaseAccountActivity.ACTION_ACCOUNT_LOGIN);
@@ -77,7 +77,7 @@ public class GamelauncherRemoteServiceImpl extends IGamelauncherAidlService.Stub
 	}
 
 	@Override
-	public void registerCallback(IGameLauncherAidlCallback callback) throws RemoteException {
+	public void registerCallback(IKeyAdapterAidlCallback callback) throws RemoteException {
 		if (callback != null) {
 			synchronized (mCallbackList) {
 				mCallbackList.register(callback);
@@ -86,7 +86,7 @@ public class GamelauncherRemoteServiceImpl extends IGamelauncherAidlService.Stub
 	}
 
 	@Override
-	public void unregisterCallback(IGameLauncherAidlCallback callback) throws RemoteException {
+	public void unregisterCallback(IKeyAdapterAidlCallback callback) throws RemoteException {
 		if (callback != null) {
 			synchronized (mCallbackList) {
 				mCallbackList.unregister(callback);

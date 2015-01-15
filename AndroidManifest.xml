@@ -297,7 +297,8 @@
             android:name="com.ireadygo.app.gamelauncher.aidl.GameLauncherRemoteService"
             android:exported="true" >
             <intent-filter>
-                <action android:name="com.ireadygo.app.gamelauncher.GamelauncherRemoteService" />
+                <action android:name="com.ireadygo.app.gamelauncher.aidl.keyadapter" />
+                <action android:name="com.ireadygo.app.gamelauncher.aidl.wx" />
             </intent-filter>
         </service>
 
