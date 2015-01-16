@@ -1,8 +1,5 @@
 package com.ireadygo.app.gamelauncher.statusbar;
 
-import java.util.ArrayList;
-
-import android.R.color;
 import android.app.Service;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
@@ -13,19 +10,14 @@ import android.graphics.PixelFormat;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.View;
 import android.view.WindowManager;
-import android.net.ConnectivityManager;
-import android.widget.Toast;
 
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.download.Network;
 import com.ireadygo.app.gamelauncher.appstore.download.Network.NetworkListener;
 import com.ireadygo.app.gamelauncher.utils.NetworkUtils;
-import com.lthj.unipay.plugin.ac;
 
 public class StatusBarService extends Service {
 	public static final String ACTION_GET_BATTERY = "com.ireadygo.app.devicemanager.ACTION_GET_BATTERY";
@@ -45,7 +37,6 @@ public class StatusBarService extends Service {
 	private static StatusBarView mStatusBarView;
 	private Network mNetWork;
 	private BluetoothController mBluetoothController;
-	private boolean mIsShow = false;
 	private int mLastNetworkType = -1;
 
 	public StatusBarService() {
@@ -78,9 +69,7 @@ public class StatusBarService extends Service {
 		if (mStatusBarView == null) {
 			mStatusBarView = new StatusBarView(this);
 			mWindowManager.addView(mStatusBarView, getWindowManagerParams());
-			mIsShow = true;
 		}
-		mStatusBarView.init();
 		mLastNetworkType = NetworkUtils.getNetWorkType(this);
 		return super.onStartCommand(intent, flags, startId);
 	}
@@ -131,21 +120,13 @@ public class StatusBarService extends Service {
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case MSG_DISPLAY_STATUS_BAR:
-				if (mStatusBarView == null) {
-					return;
-				}
-				if (!mIsShow) {
-					mStatusBarView.setVisibility(View.VISIBLE);
-					mIsShow = true;
+				if(mStatusBarView != null){
+					mStatusBarView.display();
 				}
 				break;
 			case MSG_UNDISPLAY_STATUS_BAR:
-				if (mStatusBarView == null) {
-					return;
-				}
-				if (mIsShow) {
-					mStatusBarView.setVisibility(View.INVISIBLE);
-					mIsShow = false;
+				if (mStatusBarView != null) {
+					mStatusBarView.undisplay();
 				}
 				break;
 			default:

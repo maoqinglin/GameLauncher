@@ -1,17 +1,18 @@
 package com.ireadygo.app.gamelauncher.statusbar;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.os.Handler;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -19,16 +20,37 @@ import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.utils.NetworkUtils;
 
 public class StatusBarView extends LinearLayout {
-	private static final int LOW_BATTERY_LIMIT = 50;
+	private static final int WHAT_INVALIDATE_CHILD_VISIBILITY = 1;
+	private static final int LOW_BATTERY_LIMIT = 5;
 	public static final int HANDLE_BLUE = 0;
 	public static final int HANDLE_ORANGE = 1;
 	public static final int HANDLE_PURPLE = 2;
 	public static final int HANDLE_CYAN = 3;
-	private final ImageView mBlueToothView;
-	private final ImageView mNetWorkView;
-	private final MyDigitalClock mTimeTextView;
+
+	private static final String KEY_CLOCK = "CLOCK";
+	private static final String KEY_BLUETOOTH = "BLUETOOTH";
+	private static final String KEY_NETWORK = "NETWORK";
+	private static final String KEY_HANDLE_BLUE = "HANDLE_BLUE";
+	private static final String KEY_HANDLE_ORANGE = "HANDLE_ORANGE";
+	private static final String KEY_HANDLE_PURPLE = "HANDLE_PURPLE";
+	private static final String KEY_HANDLE_CYAN = "HANDLE_CYAN";
+
 	private Map<String, HandleHolder> mConnectedHandles = new HashMap<String, StatusBarView.HandleHolder>();
 	private SparseArray<HandleHolder> mHandles = new SparseArray<HandleHolder>();
+	private Map<String, StatusBarItem> mItemMap = new HashMap<String, StatusBarView.StatusBarItem>();
+	private boolean mIsDisplay = true;
+
+	private Handler mHandler = new Handler() {
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case WHAT_INVALIDATE_CHILD_VISIBILITY:
+				doInvalidateChildVisibility();
+				break;
+			default:
+				break;
+			}
+		};
+	};
 
 	public StatusBarView(Context context) {
 		this(context, null, 0);
@@ -40,15 +62,17 @@ public class StatusBarView extends LinearLayout {
 
 	public StatusBarView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-
 		LayoutInflater.from(context).inflate(R.layout.status_bar, this);
-
-		mBlueToothView = (ImageView) findViewById(R.id.status_bar_bluetooth);
-		mNetWorkView = (ImageView) findViewById(R.id.status_bar_network);
-		mTimeTextView = (MyDigitalClock) findViewById(R.id.status_bar_clock_textview);
+		View view = findViewById(R.id.status_bar_bluetooth);
+		mItemMap.put(KEY_BLUETOOTH, new StatusBarItem(view));
+		view = findViewById(R.id.status_bar_network);
+		mItemMap.put(KEY_NETWORK, new StatusBarItem(view));
+		view = findViewById(R.id.status_bar_clock_textview);
+		mItemMap.put(KEY_CLOCK, new StatusBarItem(view));
+		init();
 	}
 
-	public void init() {
+	private void init() {
 		setClockStart();
 		initNetWorkState();
 		initBluetoothState();
@@ -57,7 +81,9 @@ public class StatusBarView extends LinearLayout {
 
 	private void initAllHandle() {
 		HandleHolder blueHolder = new HandleHolder();
-		blueHolder.handle = (ImageView) findViewById(R.id.status_bar_handle_blue);
+		View view = (ImageView) findViewById(R.id.status_bar_handle_blue);
+		blueHolder.item = new StatusBarItem(view);
+		mItemMap.put(KEY_HANDLE_BLUE, blueHolder.item);
 		blueHolder.state = HandleState.IDLE;
 		blueHolder.handleIndex = HANDLE_BLUE;
 		blueHolder.connectedId = R.drawable.icon_handle_blue_connected;
@@ -66,7 +92,9 @@ public class StatusBarView extends LinearLayout {
 		mHandles.put(HANDLE_BLUE, blueHolder);
 
 		HandleHolder orangeHolder = new HandleHolder();
-		orangeHolder.handle = (ImageView) findViewById(R.id.status_bar_handle_orange);
+		view = (ImageView) findViewById(R.id.status_bar_handle_orange);
+		orangeHolder.item = new StatusBarItem(view);
+		mItemMap.put(KEY_HANDLE_ORANGE, orangeHolder.item);
 		orangeHolder.state = HandleState.IDLE;
 		orangeHolder.handleIndex = HANDLE_ORANGE;
 		orangeHolder.connectedId = R.drawable.icon_handle_orange_connected;
@@ -75,7 +103,9 @@ public class StatusBarView extends LinearLayout {
 		mHandles.put(HANDLE_ORANGE, orangeHolder);
 
 		HandleHolder purpleHolder = new HandleHolder();
-		purpleHolder.handle = (ImageView) findViewById(R.id.status_bar_handle_purple);
+		view = (ImageView) findViewById(R.id.status_bar_handle_purple);
+		purpleHolder.item = new StatusBarItem(view);
+		mItemMap.put(KEY_HANDLE_PURPLE, purpleHolder.item);
 		purpleHolder.state = HandleState.IDLE;
 		purpleHolder.handleIndex = HANDLE_PURPLE;
 		purpleHolder.connectedId = R.drawable.icon_handle_purple_connected;
@@ -84,14 +114,15 @@ public class StatusBarView extends LinearLayout {
 		mHandles.put(HANDLE_PURPLE, purpleHolder);
 
 		HandleHolder cyanHolder = new HandleHolder();
-		cyanHolder.handle = (ImageView) findViewById(R.id.status_bar_handle_cyan);
+		view = (ImageView) findViewById(R.id.status_bar_handle_cyan);
+		cyanHolder.item = new StatusBarItem(view);
+		mItemMap.put(KEY_HANDLE_CYAN, cyanHolder.item);
 		cyanHolder.state = HandleState.IDLE;
 		cyanHolder.handleIndex = HANDLE_CYAN;
 		cyanHolder.connectedId = R.drawable.icon_handle_cyan_connected;
 		cyanHolder.disconnectedId = R.drawable.icon_handle_cyan_disconnected;
 		cyanHolder.lowBatteryId = R.drawable.icon_handle_cyan_low_battery;
 		mHandles.put(HANDLE_CYAN, cyanHolder);
-
 		invalidateAllHandle();
 	}
 
@@ -103,22 +134,28 @@ public class StatusBarView extends LinearLayout {
 	}
 
 	private void invalidateHandle(HandleHolder holder) {
+		StatusBarItem item = holder.item;
 		switch (holder.state) {
 		case IDLE:
-			holder.handle.setVisibility(View.GONE);
+			item.isShowInDisplay = false;
+			item.isShowInUndisplay = false;
 			break;
 		case CONNECTED:
-			holder.handle.setImageResource(holder.connectedId);
-			holder.handle.setVisibility(View.VISIBLE);
+			((ImageView) item.view).setImageResource(holder.connectedId);
+			item.isShowInDisplay = true;
+			item.isShowInUndisplay = false;
 			break;
 		case LOW_BATTERY:
-			holder.handle.setImageResource(holder.lowBatteryId);
-			holder.handle.setVisibility(View.VISIBLE);
+			((ImageView) item.view).setImageResource(holder.lowBatteryId);
+			item.isShowInDisplay = true;
+			item.isShowInUndisplay = true;
 			break;
 		case DISCONNECTED:
-			holder.handle.setVisibility(View.GONE);
+			item.isShowInDisplay = false;
+			item.isShowInUndisplay = false;
 			break;
 		}
+		invalidateChildVisibility();
 	}
 
 	public void handleConnected(BluetoothDevice device, int index) {
@@ -152,11 +189,13 @@ public class StatusBarView extends LinearLayout {
 	}
 
 	private void setClockStart() {
-		mTimeTextView.resume();
+		MyDigitalClock clock = (MyDigitalClock) getItemView(KEY_CLOCK);
+		clock.resume();
 	}
 
 	public void setClockStop() {
-		mTimeTextView.stop();
+		MyDigitalClock clock = (MyDigitalClock) getItemView(KEY_CLOCK);
+		clock.stop();
 	}
 
 	private void initNetWorkState() {
@@ -168,14 +207,17 @@ public class StatusBarView extends LinearLayout {
 	}
 
 	private void updateNetworkIcon(int type) {
-		mNetWorkView.setVisibility(View.VISIBLE);
+		StatusBarItem item = getItem(KEY_NETWORK);
+		ImageView view = (ImageView) item.view;
+		item.isShowInDisplay = true;
 		if (ConnectivityManager.TYPE_ETHERNET == type) {
-			mNetWorkView.setImageResource(R.drawable.icon_statusbar_network_ethernet);
+			view.setImageResource(R.drawable.icon_statusbar_network_ethernet);
 		} else if (ConnectivityManager.TYPE_WIFI == type) {
-			mNetWorkView.setImageResource(R.drawable.icon_statusbar_network_wifi);
+			view.setImageResource(R.drawable.icon_statusbar_network_wifi);
 		} else {
-			mNetWorkView.setImageResource(R.drawable.icon_statusbar_ethernet_disconnect);
+			view.setImageResource(R.drawable.icon_statusbar_ethernet_disconnect);
 		}
+		invalidateChildVisibility();
 	}
 
 	public void updateNetWorkState(int type) {
@@ -184,7 +226,11 @@ public class StatusBarView extends LinearLayout {
 
 	public void updateDisconnectState(int lastNeetworkType, int currentType) {
 		if (currentType == -1) {
-			mNetWorkView.setImageResource(R.drawable.icon_statusbar_ethernet_disconnect);
+			StatusBarItem item = getItem(KEY_NETWORK);
+			ImageView view = (ImageView) item.view;
+			item.isShowInDisplay = true;
+			view.setImageResource(R.drawable.icon_statusbar_ethernet_disconnect);
+			invalidateChildVisibility();
 			// if(ConnectivityManager.TYPE_ETHERNET == lastNeetworkType){
 			// mNetWorkView.setImageResource(R.drawable.icon_statusbar_ethernet_disconnect);
 			// }else if(ConnectivityManager.TYPE_WIFI == lastNeetworkType){
@@ -208,11 +254,13 @@ public class StatusBarView extends LinearLayout {
 	}
 
 	public void updateBluetoothState(boolean state) {
+		StatusBarItem item = getItem(KEY_BLUETOOTH);
 		if (state) {
-			mBlueToothView.setVisibility(View.GONE);
+			item.isShowInDisplay = false;
 		} else {
-			mBlueToothView.setVisibility(View.VISIBLE);
+			item.isShowInDisplay = true;
 		}
+		invalidateChildVisibility();
 	}
 
 	public void updateHandleState(int pos, HandleState state) {
@@ -220,7 +268,7 @@ public class StatusBarView extends LinearLayout {
 	}
 
 	public static class HandleHolder {
-		ImageView handle;
+		StatusBarItem item;
 		HandleState state;
 		int handleIndex;
 		int connectedId;
@@ -230,5 +278,61 @@ public class StatusBarView extends LinearLayout {
 
 	public enum HandleState {
 		CONNECTED, DISCONNECTED, LOW_BATTERY, IDLE
+	}
+
+	public void undisplay() {
+		mIsDisplay = false;
+		invalidateChildVisibility();
+	}
+
+	public void display() {
+		mIsDisplay = true;
+		invalidateChildVisibility();
+	}
+
+	private static class StatusBarItem {
+		View view;
+		boolean isShowInDisplay = true;
+		boolean isShowInUndisplay;
+
+		public StatusBarItem(View view) {
+			this.view = view;
+		}
+	}
+
+	private StatusBarItem getItem(String key) {
+		return mItemMap.get(key);
+	}
+
+	private View getItemView(String key) {
+		return getItem(key).view;
+	}
+
+	private void invalidateChildVisibility() {
+		if (mHandler.hasMessages(WHAT_INVALIDATE_CHILD_VISIBILITY)) {
+			mHandler.removeMessages(WHAT_INVALIDATE_CHILD_VISIBILITY);
+		}
+		mHandler.sendEmptyMessage(WHAT_INVALIDATE_CHILD_VISIBILITY);
+	}
+
+	private void doInvalidateChildVisibility() {
+		boolean isDisplay = mIsDisplay;
+		Iterator<StatusBarItem> it = mItemMap.values().iterator();
+		while (it.hasNext()) {
+			StatusBarItem item = it.next();
+			if (isDisplay) {
+				if (item.isShowInDisplay) {
+					item.view.setVisibility(View.VISIBLE);
+				} else {
+					item.view.setVisibility(View.GONE);
+				}
+			} else {
+				if (item.isShowInUndisplay) {
+					item.view.setVisibility(View.VISIBLE);
+				} else {
+					item.view.setVisibility(View.GONE);
+				}
+			}
+		}
 	}
 }
