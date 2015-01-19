@@ -33,6 +33,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.snail.appstore.openapi.vo.AppTimeUploadResultVO;
 
 public class GameInfoHub implements IGameInfo {
 
@@ -422,8 +423,8 @@ public class GameInfoHub implements IGameInfo {
 	}
 
 	@Override
-	public void activateBox() throws InfoSourceException {
-		mRemoteInfo.activateBox();
+	public void activateBox(String activateCode) throws InfoSourceException {
+		mRemoteInfo.activateBox(activateCode);
 	}
 
 	@Override
@@ -437,8 +438,8 @@ public class GameInfoHub implements IGameInfo {
 	}
 
 	@Override
-	public void saveAppTime(String cPackage, Long nAppTime) throws InfoSourceException {
-		mRemoteInfo.saveAppTime(cPackage, nAppTime);
+	public AppTimeUploadResultVO saveAppTime(String cPackage, long nAppTime,String cReqId,String sign) throws InfoSourceException {
+		return mRemoteInfo.saveAppTime(cPackage, nAppTime,cReqId,sign);
 	}
 
 	@Override

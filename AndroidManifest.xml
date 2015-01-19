@@ -311,6 +311,13 @@
                 <action android:name="com.ireadygo.app.gamelauncher.aidl.wx" />
             </intent-filter>
         </service>
+	<service
+	    android:name="com.ireadygo.app.gamelauncher.rentfree.aidl.RentFreeRemoteService"
+	    android:exported="true" >
+	    <intent-filter>
+	        <action android:name="com.ireadygo.app.gamelauncher.rentfree.RentFreeRemoteService" />
+	    </intent-filter>
+	</service>
 
         <!-- 蜗牛SDK -->
         <activity

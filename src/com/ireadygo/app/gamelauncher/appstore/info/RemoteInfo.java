@@ -46,6 +46,7 @@ import com.snail.appstore.openapi.vo.AppDownUrlVO;
 import com.snail.appstore.openapi.vo.AppHotwordVO;
 import com.snail.appstore.openapi.vo.AppListItemVO;
 import com.snail.appstore.openapi.vo.AppMappingVO;
+import com.snail.appstore.openapi.vo.AppTimeUploadResultVO;
 import com.snail.appstore.openapi.vo.AppUpdateVO;
 import com.snail.appstore.openapi.vo.BindPhoneVO;
 import com.snail.appstore.openapi.vo.FeeConfigVO;
@@ -1565,9 +1566,9 @@ public class RemoteInfo implements IGameInfo {
 	}
 
 	@Override
-	public void activateBox() throws InfoSourceException {
+	public void activateBox(String activateCode) throws InfoSourceException {
 		try {
-			ResultVO resultVO = mAppPlatFormService.activateBox();
+			ResultVO resultVO = mAppPlatFormService.activateBox(activateCode);
 			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
 				return;
 			}
@@ -1642,11 +1643,14 @@ public class RemoteInfo implements IGameInfo {
 	}
 
 	@Override
-	public void saveAppTime(String cPackage, Long nAppTime) throws InfoSourceException {
+	public AppTimeUploadResultVO saveAppTime(String cPackage, long nAppTime,String cReqId,String sign) throws InfoSourceException {
 		try {
-			ResultVO resultVO = mAppPlatFormService.saveAppTime(cPackage, nAppTime);
+			ResultVO resultVO = mAppPlatFormService.saveAppTime(cPackage, nAppTime,cReqId,sign);
 			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
-				return;
+				AppTimeUploadResultVO uploadResult = new AppTimeUploadResultVO();
+				uploadResult.setPackageName(cPackage);
+				uploadResult.setResult(AppTimeUploadResultVO.SUCCESS);
+				return uploadResult;
 			}
 			String errMsg = processRemoteResultCode(resultVO.getCode());
 			throw new InfoSourceException(errMsg);

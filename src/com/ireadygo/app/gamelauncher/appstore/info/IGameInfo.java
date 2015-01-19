@@ -19,6 +19,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.SubscribeResultItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserHeaderImgItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserInfoItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserSlotInfoItem;
+import com.snail.appstore.openapi.vo.AppTimeUploadResultVO;
 
 public interface IGameInfo {
 
@@ -146,7 +147,7 @@ public interface IGameInfo {
 	List<AppEntity> getPreLoadList() throws InfoSourceException;
 
 	// 激活OBOX
-	void activateBox() throws InfoSourceException;
+	void activateBox(String activateCode) throws InfoSourceException;
 
 	// 减免租金应用列表
 	List<String> getRentReliefAppList() throws InfoSourceException;
@@ -155,7 +156,7 @@ public interface IGameInfo {
 	RentReliefItem getRentReliefAppTime() throws InfoSourceException;
 
 	// 设置游戏时长
-	void saveAppTime(String cPackage, Long nAppTime) throws InfoSourceException;
+	AppTimeUploadResultVO saveAppTime(String cPackage, long nAppTime,String cReqId,String sign) throws InfoSourceException;
 
 	// 续费
 	void renewalBox() throws InfoSourceException;

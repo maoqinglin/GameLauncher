@@ -23,6 +23,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.UserHeaderImgItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserInfoItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserSlotInfoItem;
 import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
+import com.snail.appstore.openapi.vo.AppTimeUploadResultVO;
 
 public class MemoryInfo implements IGameInfo {
 
@@ -426,7 +427,7 @@ public class MemoryInfo implements IGameInfo {
 	}
 
 	@Override
-	public void activateBox() throws InfoSourceException {
+	public void activateBox(String activateCode) throws InfoSourceException {
 		// TODO Auto-generated method stub
 		
 	}
@@ -444,9 +445,8 @@ public class MemoryInfo implements IGameInfo {
 	}
 
 	@Override
-	public void saveAppTime(String cPackage, Long nAppTime) throws InfoSourceException {
-		// TODO Auto-generated method stub
-		
+	public AppTimeUploadResultVO saveAppTime(String cPackage, long nAppTime,String cReqId,String sign) throws InfoSourceException {
+		return null;
 	}
 
 	@Override

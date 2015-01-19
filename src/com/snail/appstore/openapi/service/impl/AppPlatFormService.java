@@ -687,9 +687,10 @@ public class AppPlatFormService implements IAppPlatFormService {
 	}
 
 	@Override
-	public ResultVO activateBox() throws HttpStatusCodeException, Exception {
+	public ResultVO activateBox(String activateCode) throws HttpStatusCodeException, Exception {
 		HashMap<String, String> parameterMap = new HashMap<String, String>();
 		addAuthentication(parameterMap);
+		parameterMap.put("cActiveCode", activateCode);
 		String sResultJson = HttpUtil.doPost(
 				UrlParameterUtil.generateUrl(AppPlatFormConfig.ACTIVATE_BOX_URL, parameterMap), parameterMap);
 		return new JSONResultVO(sResultJson, null);
@@ -700,6 +701,7 @@ public class AppPlatFormService implements IAppPlatFormService {
 		HashMap<String, String> parameterMap = new HashMap<String, String>();
 		addAuthentication(parameterMap);
 		String sResultJson = HttpUtil.doGet(UrlParameterUtil.generateGetUrl(AppPlatFormConfig.RENT_RELIEF_APP_LIST_URL, parameterMap));
+		Log.d("lmq", "sResultJson = "+sResultJson);
 		return new JSONResultVO(sResultJson, RentReliefAppVO.class);
 	}
 
@@ -716,12 +718,13 @@ public class AppPlatFormService implements IAppPlatFormService {
 	}
 
 	@Override
-	public ResultVO saveAppTime(String cPackage, Long nAppTime) throws HttpStatusCodeException,Exception {
+	public ResultVO saveAppTime(String cPackage, long nAppTime,String cReqId,String sign) throws HttpStatusCodeException,Exception {
 		HashMap<String, String> parameterMap = new HashMap<String, String>();
+		addAuthentication(parameterMap);
 		parameterMap.put("cPackage", cPackage);
 		parameterMap.put("nAppTime", String.valueOf(nAppTime));
-
-		addAuthentication(parameterMap);
+		parameterMap.put("cReqId", cReqId);
+		parameterMap.put("cSign", sign);
 		
 		String sResultJson = HttpUtil.doPost(
 				UrlParameterUtil.generateUrl(AppPlatFormConfig.SAVE_APP_TIME_URL, parameterMap), parameterMap);

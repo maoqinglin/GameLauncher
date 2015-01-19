@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
@@ -47,8 +48,10 @@ import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.ConfirmDialog;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
+import com.ireadygo.app.gamelauncher.utils.Md5Util;
 import com.ireadygo.app.gamelauncher.utils.PackageUtils;
 import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
+import com.ireadygo.app.gamelauncher.widget.GameLauncherThreadPool;
 
 public class GameAllAppLayout extends KeyEventLayout implements View.OnFocusChangeListener {
 
@@ -242,11 +245,14 @@ public class GameAllAppLayout extends KeyEventLayout implements View.OnFocusChan
 			}
 			switch (keyCode) {
 			case SnailKeyCode.SUN_KEY:
+				testActvateBox();
 				return onSunKey();
 			case SnailKeyCode.MOON_KEY:
 			case SnailKeyCode.BACK_KEY:
 				return onMoonKey();
+			case 82:
 			case SnailKeyCode.WATER_KEY:
+				testSaveTime();
 				return onWaterKey();
 			case KeyEvent.KEYCODE_0:
 				break;
@@ -259,6 +265,43 @@ public class GameAllAppLayout extends KeyEventLayout implements View.OnFocusChan
 		}
 
 	};
+
+	private void testActvateBox(){
+		GameLauncherThreadPool.getFixedThreadPool().execute(new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				try {
+					GameInfoHub.instance(mContext).activateBox("test1");
+				} catch (InfoSourceException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	private void testSaveTime(){
+		GameLauncherThreadPool.getFixedThreadPool().execute(new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				try {
+					long reqId = System.currentTimeMillis();
+					String packageName = "com.tencent.mm";
+					long playTime = 100;
+					String seed = "T6b749cX";
+					String sign = new StringBuffer().append(packageName).append(playTime).append(reqId).append(seed).toString();
+					GameInfoHub.instance(mContext).saveAppTime(packageName, playTime,String.valueOf(reqId),Md5Util.getMD5(sign));
+				} catch (InfoSourceException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	private void showNotEnoughDialog() {
 		final ConfirmDialog dialog = new ConfirmDialog(mContext);

@@ -436,7 +436,7 @@ public interface IAppPlatFormService {
 	 * @throws HttpStatusCodeException
 	 * @throws Exception
 	 */
-	public ResultVO activateBox() throws HttpStatusCodeException,Exception;
+	public ResultVO activateBox(String activateCode) throws HttpStatusCodeException,Exception;
 	
 	/**
 	 * 获取减免租金应用列表
@@ -460,7 +460,7 @@ public interface IAppPlatFormService {
 	 * @throws HttpStatusCodeException
 	 * @throws Exception
 	 */
-	public ResultVO saveAppTime(String cPackage,Long nAppTime) throws HttpStatusCodeException,Exception;
+	public ResultVO saveAppTime(String cPackage,long nAppTime,String cReqId,String sign) throws HttpStatusCodeException,Exception;
 	
 	/**
 	 * 续费

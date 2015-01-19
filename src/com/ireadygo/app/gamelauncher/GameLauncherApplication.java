@@ -21,6 +21,7 @@ public class GameLauncherApplication extends Application {
 	private GameLauncherActivity mGameLauncherActivity;
 	private UserInfoItem mUserInfoItem;
 	private SoundPoolManager mSoundPoolManager;
+	private static final String RENT_FREE_STATISTIC_ACTION = "com.ireadygo.app.rentfree.playtimestatisticservice.start";
 
 	@Override
 	public void onCreate() {
@@ -44,6 +45,12 @@ public class GameLauncherApplication extends Application {
 
 		Intent service = new Intent(this, StatusBarService.class);
 		startService(service);
+		
+		startRemoteStatisticService();
+	}
+
+	private void startRemoteStatisticService() {
+		sendBroadcast(new Intent(RENT_FREE_STATISTIC_ACTION));
 	}
 
 	public static GameLauncherApplication getApplication() {
