@@ -5,13 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
+import android.os.Message;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.igexin.sdk.PushManager;
 import com.ireadygo.app.gamelauncher.GameLauncherApplication;
@@ -26,6 +26,7 @@ import com.ireadygo.app.gamelauncher.ui.widget.CustomFrameLayout;
 import com.ireadygo.app.gamelauncher.utils.StaticsUtils;
 
 public class GameLauncherActivity extends BaseActivity {
+	private static final int MSG_FOCUS_REQUEST = 100;
 	private int mPage = Page.MAIN;
 	private CustomFrameLayout mMainLayout;
 	private View mFocusView;
@@ -40,7 +41,6 @@ public class GameLauncherActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Log.d("liu.js", "GameLauncherActivity--onCreate");
 		mFragmentManager = new CustomFragmentManager(this);
 		setContentView(R.layout.main);
 		mMainLayout = (CustomFrameLayout) findViewById(R.id.main_layout);
@@ -50,7 +50,6 @@ public class GameLauncherActivity extends BaseActivity {
 
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
-//				Log.d("liu.js", "Main Focus View change focus--hasFocus=" + hasFocus);
 				if (hasFocus) {
 
 				}
@@ -72,7 +71,6 @@ public class GameLauncherActivity extends BaseActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		Log.d("liu.js", "GameLauncherActivity--onResume");
 		// 上报应用置前台的时间
 		getCustomFragmentManager().onResume();
 		StaticsUtils.onResume();
@@ -114,7 +112,6 @@ public class GameLauncherActivity extends BaseActivity {
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		Log.i("chen.r", "The onKeyDown " + event.toString());
 		if (KeyEventFragment.ALLOW_KEY_DELAY && mLastKeyCode != -1
 				&& (keyCode == SnailKeyCode.LEFT_KEY || keyCode == SnailKeyCode.RIGHT_KEY)) {
 			if (System.currentTimeMillis() - mLastKeyTime <= KeyEventFragment.KEY_DELAY) {
@@ -254,8 +251,11 @@ public class GameLauncherActivity extends BaseActivity {
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
+		if (mHandler.hasMessages(MSG_FOCUS_REQUEST)) {
+			mHandler.removeMessages(MSG_FOCUS_REQUEST);
+		}
 		if (!hasFocus) {
-			mFocusView.requestFocus();
+			postRequestFocus();
 		}
 	}
 
@@ -264,7 +264,22 @@ public class GameLauncherActivity extends BaseActivity {
 		public static final int STORE_DETAIL = 0x02;
 	}
 
-	private void clearFocus() {
-
+	private void postRequestFocus() {
+		Message msg = mHandler.obtainMessage(MSG_FOCUS_REQUEST);
+		mHandler.sendMessageDelayed(msg, 2000);
 	}
+
+
+	private Handler mHandler = new Handler() {
+		public void handleMessage(android.os.Message msg) {
+			switch (msg.what) {
+			case MSG_FOCUS_REQUEST:
+				mFocusView.requestFocus();
+				break;
+
+			default:
+				break;
+			}
+		};
+	};
 }
