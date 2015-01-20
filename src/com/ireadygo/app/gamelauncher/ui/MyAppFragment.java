@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.ireadygo.app.gamelauncher.GameLauncherConfig;
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.account.AccountManager;
 import com.ireadygo.app.gamelauncher.mygame.adapter.GameModel;
@@ -69,9 +70,11 @@ public class MyAppFragment extends BaseContentFragment {
 			Toast.makeText(getRootActivity(),getRootActivity().getString(R.string.account_no_account_login_prompt), Toast.LENGTH_SHORT).show();
 			return;
 		}
-		mGameAllAppLayout = null;
-		mGameAllAppLayout = new GameAllAppLayout(getRootActivity());
-		mGameAllAppLayout.openAllApp(getRootActivity(), mAllAppShowStateListener);
+		if (GameLauncherConfig.SLOT_ENABLE) {
+			mGameAllAppLayout = null;
+			mGameAllAppLayout = new GameAllAppLayout(getRootActivity());
+			mGameAllAppLayout.openAllApp(getRootActivity(), mAllAppShowStateListener);
+		}
 	}
 
 	AppWindowShowStateListener mAllAppShowStateListener = new AppWindowShowStateListener(){

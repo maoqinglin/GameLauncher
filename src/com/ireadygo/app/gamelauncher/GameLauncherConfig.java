@@ -16,6 +16,7 @@ public class GameLauncherConfig {
 	public static final boolean ONLINE_DOWNLOAD_OPEN = true;//使能远程推送下载功能
 	public static final boolean ENABLE_FREE_FLOW = true;//使能免流量功能
 	public static final boolean IGNORE_NETWORTYPE = OBOX_VERSION;//是否忽略网络类型，主机上不需要关注网络类型，掌机需要关注
+	public static final boolean SLOT_ENABLE = !OBOX_VERSION;//是否启用卡槽
 
 	public static final long CATEGORY_CACHED_EXPIRED_TIME = 1 * 24 * 60 * 60 * 1000;//1 day
 	public static final long COLLECTION_CACHED_EXPIRED_TIME = 4 * 60 * 60 * 1000;//4 hours

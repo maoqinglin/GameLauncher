@@ -80,9 +80,11 @@ public class GameManager {
 		mGameLauncherNotification = new GameLauncherNotification(mContext,mGameStateManager);
 		mUpdateManager = new UpdateManager(mContext,mGameLauncherNotification);
 		mMapGameManager = MapGameManager.getInstance(mContext);
-		mAppRestrictionManager = AppRestrictionManager.getInstance(mContext);
-		mAppRestrictionManager.setGameLauncherNotification(mGameLauncherNotification);
-		mGameData.addDataLoadCallback(mAppRestrictionManager);
+		if (GameLauncherConfig.SLOT_ENABLE) {
+			mAppRestrictionManager = AppRestrictionManager.getInstance(mContext);
+			mAppRestrictionManager.setGameLauncherNotification(mGameLauncherNotification);
+			mGameData.addDataLoadCallback(mAppRestrictionManager);
+		}
 		mGameData.addDataLoadCallback(mGameStateManager);
 		mGameData.addDataLoadCallback(mUpdateManager);
 		mGameData.initGameData(mContext);
@@ -226,9 +228,11 @@ public class GameManager {
 		Intent intent = pm.getLaunchIntentForPackage(pkgName);
 		if (intent == null) {
 			//应用未使能，提示用户
-			if (mAppRestrictionManager.isAppDisable(mContext,pkgName)) {
+			if (AppRestrictionManager.isAppDisable(mContext,pkgName)) {
 				AppEntity app = mGameData.getGameByPkgName(pkgName);
-				if (app != null && AppEntity.NOT_OCCUPY_SLOT == app.getIsOccupySlot()) {
+				if (GameLauncherConfig.SLOT_ENABLE
+						&&app != null 
+						&& AppEntity.NOT_OCCUPY_SLOT == app.getIsOccupySlot()) {
 					mAppRestrictionManager.setAppEnableWithoutRecord(pkgName, true);
 					return true;
 				} else {
@@ -277,8 +281,9 @@ public class GameManager {
 		mDldOperator.shutdown();
 		mGameLauncherNotification.shutdown();
 		mMapGameManager.shutdown();
-//		mARMManager.shutdown();
-		mAppRestrictionManager.shutdown();
+		if (GameLauncherConfig.SLOT_ENABLE) {
+			mAppRestrictionManager.shutdown();
+		}
 		if (GameLauncherConfig.ENABLE_FREE_FLOW) {
 			mFreeFlowManager.shutdown();
 		}

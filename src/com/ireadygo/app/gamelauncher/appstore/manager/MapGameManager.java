@@ -116,12 +116,12 @@ public class MapGameManager {
 
 	//对外部安装游戏的匹配
 	private void mapOutsideGame(final String pkgName,final boolean isInstall) {
-		final boolean notOccupySlot = GameLauncherConfig.isInSlotWhiteList(pkgName)
-		|| (isInstall && AppRestrictionManager.getInstance(mContext).isSnailCtrlEnableApp(pkgName));//在白名单或免商店安装的应用，不占卡槽
+		final boolean notOccupySlot = GameLauncherConfig.SLOT_ENABLE ? GameLauncherConfig.isInSlotWhiteList(pkgName)
+				|| (isInstall && AppRestrictionManager.getInstance(mContext).isSnailCtrlEnableApp(pkgName)) : true;//在白名单或免商店安装的应用，不占卡槽;
 		if (isInstall) {
 			mGameData.addGame(mContext, pkgName,!notOccupySlot);
 			GameLauncherAppState.getInstance(mContext).getModel()
-			.handleGameAddOrUpdate(pkgName, Favorites.DISPLAY, Favorites.APP_TYPE_APPLICATION);
+			.handleGameAddOrUpdate(pkgName, checkPkgDisplayState(pkgName), Favorites.APP_TYPE_APPLICATION);
 		} else {
 			GameLauncherAppState.getInstance(mContext).getModel()
 			.updateInstalledAppInfo(pkgName, checkPkgDisplayState(pkgName), Favorites.APP_TYPE_APPLICATION);
@@ -131,7 +131,7 @@ public class MapGameManager {
 			@Override
 			public void run() {
 				doMapOutsideGame(pkgName, isInstall,!notOccupySlot);
-				if(isInstall && notOccupySlot){
+				if(GameLauncherConfig.SLOT_ENABLE && isInstall && notOccupySlot){
 					AppRestrictionManager.getInstance(mContext).setAppEnableWithoutRecord(pkgName, true);
 				}
 			}
@@ -141,8 +141,9 @@ public class MapGameManager {
 	//对免商店安装游戏的匹配
 	private void mapFreeStoreGame(final AppEntity app) {
 		//免商店下载的应用，统一使能
-		AppRestrictionManager.getInstance(mContext).setAppEnableWithoutMapAndRecord(app.getPkgName(), true);
-
+		if (GameLauncherConfig.SLOT_ENABLE) {
+			AppRestrictionManager.getInstance(mContext).setAppEnableWithoutMapAndRecord(app.getPkgName(), true);
+		}
 		new Handler(mMapHandlerThread.getLooper()).postDelayed(new Runnable() {
 			@Override
 			public void run() {
