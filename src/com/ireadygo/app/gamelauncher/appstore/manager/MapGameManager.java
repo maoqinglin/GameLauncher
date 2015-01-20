@@ -180,6 +180,9 @@ public class MapGameManager {
 	private void doMapOutsideGame(String pkgName,boolean isInstall,boolean isOccupySlot) {
 		List<AppEntity> gameList = new ArrayList<AppEntity>();
 		PackageInfo pkgInfo = PackageUtils.getPkgInfo(mContext, pkgName);
+		if (pkgInfo == null) {
+			return;
+		}
 		AppEntity app = new AppEntity();
 		app.setPkgName(pkgName);
 		app.setVersionCode(pkgInfo.versionCode);
@@ -203,7 +206,7 @@ public class MapGameManager {
 					game.setIsOccupySlot(AppEntity.OCCUPY_SLOT);
 				}
 				mGameData.updateMappedAppData(game);
-				if (isInstall && isOccupySlot) {
+				if (GameLauncherConfig.SLOT_ENABLE && isInstall && isOccupySlot) {
 					GameLauncherAppState.getInstance(mContext).getModel()
 					.handleGameAddOrUpdate(pkgName, Favorites.DONOT_DISPLAY,Favorites.APP_TYPE_GAME);
 				} else {
