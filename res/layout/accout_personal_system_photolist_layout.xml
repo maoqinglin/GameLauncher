@@ -3,25 +3,25 @@
     android:layout_height="wrap_content"
     android:layout_width="wrap_content"
     android:orientation="vertical" >
-    <TextView 
+
+    <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="15dp"
-        android:text="@string/system_photo_dialog_title"
-        
-        />
-    <GridView 
+        android:layout_marginTop="@dimen/photo_list_title_margin_top"
+        android:gravity="center"
+        style="@style/TextLabelSmallLight"
+        android:text="@string/system_photo_dialog_title" />
+
+    <GridView
         android:id="@+id/sytem_photo_grid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:horizontalSpacing="15dp"
-        android:verticalSpacing="15dp"
-        android:numColumns="3"
         android:gravity="center"
-        android:padding="20dp"
-        />
+        android:horizontalSpacing="@dimen/photo_list_grid_spacing"
+        android:numColumns="3"
+        android:padding="@dimen/photo_list_padding"
+        android:verticalSpacing="@dimen/photo_list_grid_spacing" />
 
 </LinearLayout>

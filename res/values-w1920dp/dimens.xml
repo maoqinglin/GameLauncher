@@ -303,6 +303,11 @@
     <dimen name="grid_vertical_spacing">60dp</dimen>
     <dimen name="gird_padding">45dp</dimen>
 
+    <!-- 头像列表 -->
+    <dimen name="photo_list_title_margin_top">45dp</dimen>
+    <dimen name="photo_list_grid_spacing">45dp</dimen>
+    <dimen name="photo_list_padding">60dp</dimen>
+
     <!-- 账号-一键登录 -->
     <dimen name="onekey_account_login_margin_left">90dp</dimen>
     <dimen name="onekey_btn_text_size">54sp</dimen>

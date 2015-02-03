@@ -392,21 +392,26 @@ public class AccountPersonalLayout extends AccountBaseContentLayout implements O
 
 				@Override
 				public boolean onKey(View v, int keyCode, KeyEvent event) {
-					switch (keyCode) {
-					case SnailKeyCode.SUN_KEY:
-						PhotoHolder holder = (PhotoHolder) ((GridView) v).getSelectedView().getTag();
-						if (holder != null) {
-							accountPhoto.setImageBitmap(holder.imgItem.getBitmap());
-							accountPhoto.setTag(holder.imgItem.getImgUrl());
+					if (KeyEvent.ACTION_DOWN == event.getAction()) {
+						switch (keyCode) {
+						case SnailKeyCode.SUN_KEY:
+							View view = ((GridView) v).getSelectedView();
+							if (view != null) {
+								PhotoHolder holder = (PhotoHolder) view.getTag();
+								if (holder != null) {
+									accountPhoto.setImageBitmap(holder.imgItem.getBitmap());
+									accountPhoto.setTag(holder.imgItem.getImgUrl());
+								}
+							systemPhotoDialog.dismiss();
+							}
+							break;
+						case SnailKeyCode.MOON_KEY:
+						case SnailKeyCode.BACK_KEY:
+							systemPhotoDialog.dismiss();
+							break;
+						default:
+							break;
 						}
-						systemPhotoDialog.dismiss();
-						break;
-					case SnailKeyCode.MOON_KEY:
-					case SnailKeyCode.BACK_KEY:
-						systemPhotoDialog.dismiss();
-						break;
-					default:
-						break;
 					}
 					return false;
 				}
