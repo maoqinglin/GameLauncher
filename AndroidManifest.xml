@@ -254,6 +254,16 @@
             android:name="com.ireadygo.app.gamelauncher.ui.account.FreeFlowRechargeActivity"
             android:screenOrientation="landscape"
             android:theme="@style/CustomerTheme" />
+        <activity
+            android:name="com.ireadygo.app.gamelauncher.ui.activity.HelperActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/CustomerTheme">
+            <intent-filter>
+                <action android:name="com.ireadygo.app.gamelauncher.ui.activity.HelperActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <provider
             android:name="com.ireadygo.app.gamelauncher.account.AccountProvider"

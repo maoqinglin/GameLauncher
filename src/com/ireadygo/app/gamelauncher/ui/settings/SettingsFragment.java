@@ -86,7 +86,7 @@ public class SettingsFragment extends BaseContentFragment {
 		settingsList.add(new SettingsItemEntity(getResources().getDrawable(R.drawable.settings_joystick_selector),
 				getResources().getString(R.string.settings_joystic_battery), SettingsIntentAction.JOYSTICK));
 		settingsList.add(new SettingsItemEntity(getResources().getDrawable(R.drawable.settings_help_selector),
-				getResources().getString(R.string.settings_help), null));
+				getResources().getString(R.string.settings_help), SettingsIntentAction.HELP));
 		settingsList.add(new SettingsItemEntity(getResources().getDrawable(R.drawable.settings_secure_selector),
 				getResources().getString(R.string.settings_more), SettingsIntentAction.SETTINGS));
 		return settingsList;
@@ -132,7 +132,7 @@ public class SettingsFragment extends BaseContentFragment {
 		public static final String LANGUAGE = Settings.ACTION_LOCALE_SETTINGS;
 		public static final String STORE = Settings.ACTION_INTERNAL_STORAGE_SETTINGS;
 		public static final String SECURE = Settings.ACTION_SECURITY_SETTINGS;
-		public static final String HELP = "";
+		public static final String HELP = "com.ireadygo.app.gamelauncher.ui.activity.HelperActivity";
 		public static final String WIFI = Settings.ACTION_WIFI_SETTINGS;
 		public static final String SETTINGS = Settings.ACTION_SETTINGS;
 		public static final String WALL_PAPER = Intent.ACTION_SET_WALLPAPER;
