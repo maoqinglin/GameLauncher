@@ -57,17 +57,11 @@ public class AccountDetailActivity extends BaseActivity {
 			public void onChildFocusChange(int index, View v, boolean hasFocus) {
 				if (hasFocus) {
 					switch (v.getId()) {
-					case R.id.accountWealthBtn:
-						replaceContentLayout(LayoutTag.WEALTH);
-						break;
 					case R.id.accountPersonalBtn:
 						replaceContentLayout(LayoutTag.PERSONAL);
 						break;
 					case R.id.accountRechargeBtn:
 						replaceContentLayout(LayoutTag.RECHARGE);
-						break;
-					case R.id.accountFreecardBtn:
-						replaceContentLayout(LayoutTag.FREECARD);
 						break;
 					}
 				}
@@ -101,17 +95,11 @@ public class AccountDetailActivity extends BaseActivity {
 	private AccountBaseContentLayout createContentLayoutByTag(int layoutTag) {
 		AccountBaseContentLayout contentLayout = null;
 		switch (layoutTag) {
-		case LayoutTag.WEALTH:
-			contentLayout = new AccountMyWealthLayout(this, layoutTag);
-			break;
 		case LayoutTag.PERSONAL:
-			contentLayout = new AccountPersonalLayout(this, layoutTag);
+			contentLayout = new PersonalLayout(this, layoutTag);
 			break;
 		case LayoutTag.RECHARGE:
 			contentLayout = new AccountRechargeLayout(this, layoutTag);
-			break;
-		case LayoutTag.FREECARD:
-			contentLayout = new AccountFreecardLayout(this, layoutTag);
 			break;
 		}
 		return contentLayout;
@@ -133,6 +121,7 @@ public class AccountDetailActivity extends BaseActivity {
 					@Override
 					public void onClick(View v) {
 						AccountManager.getInstance().logout(AccountDetailActivity.this);
+						GameLauncherApplication.getApplication().setUserInfoItem(null);
 						sendLogoutBroadcast();
 						mShouldRequestOnDismiss = false;
 						dialog.dismiss();

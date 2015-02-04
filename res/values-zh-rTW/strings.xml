@@ -100,7 +100,6 @@
         <item>允許空投遊戲自動下載安裝</item>
     </string-array>
     <string-array name="account_age_array">
-        <item>請選擇您的年齡段</item>
         <item>16歲~20歲</item>
         <item>21歲~25歲</item>
         <item>26歲~30歲</item>
@@ -111,7 +110,10 @@
         <item>51歲~55歲</item>
         <item>56歲~60歲</item>
     </string-array>
-
+	<string-array name="personal_sex_array">
+        <item>男</item>
+        <item>女</item>
+    </string-array>
     <!-- 免商店：下載管理 -->
     <string name="store_dld_manager_downloading">下載中</string>
     <string name="store_dld_manager_updatable">可更新</string>
@@ -175,10 +177,10 @@
 
     <!-- 免帳號-個人資訊 -->
     <string name="personal_edit_account">編輯資料</string>
-    <string name="personal_nickname">昵稱</string>
+    <string name="personal_nickname">昵稱:</string>
     <string name="personal_phone_number">已綁定手機號</string>
-    <string name="personal_age">年齡</string>
-    <string name="personal_sex">性別</string>
+    <string name="personal_age">年齡:</string>
+    <string name="personal_sex">性別:</string>
     <string name="personal_open_freeflow">開通免流量</string>
     <string name="personal_modify_password">修改密碼</string>
     <string name="personal_unbind_phone_number">解綁</string>

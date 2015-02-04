@@ -198,10 +198,10 @@
     </style>
 
     <style name="AccountSpinner" parent="@android:style/Widget.Spinner.DropDown">
-        <item name="android:background">@drawable/account_edittext_bg_selector</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:popupBackground">@drawable/corner_white_shape</item>
         <item name="android:spinnerMode">dropdown</item>
-        <item name="android:paddingLeft">@dimen/rechage_spinner_padding_left</item>
-        <item name="android:paddingRight">@dimen/rechage_spinner_padding_right</item>
+        <item name="android:dropDownVerticalOffset">10dp</item>
     </style>
 
     <style name="SearchDropdownList" parent="@android:style/Widget.ListView.DropDown">

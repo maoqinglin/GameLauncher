@@ -27,7 +27,6 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.appstore.info.item.FreeFlowStatusItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.FreeFlowType;
 import com.ireadygo.app.gamelauncher.ui.account.AccountDetailActivity;
-import com.ireadygo.app.gamelauncher.ui.account.FreeFlowRechargeActivity;
 import com.ireadygo.app.gamelauncher.ui.activity.BaseAccountActivity;
 import com.ireadygo.app.gamelauncher.ui.widget.SimpleConfirmDialog;
 import com.ireadygo.app.gamelauncher.utils.DeviceUtil;
@@ -163,11 +162,11 @@ public class FreeFlowManager {
 				.setConfirmClickListener(new OnClickListener() {
 							@Override
 							public void onClick(View v) {
-								Intent intent = new Intent(mContext,FreeFlowRechargeActivity.class);
-								intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-								currentActivity.startActivity(intent);
-								SoundPoolManager.instance(mContext).play(SoundPoolManager.SOUND_ENTER);
-								dialog.dismiss();
+//								Intent intent = new Intent(mContext,FreeFlowRechargeActivity.class);
+//								intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//								currentActivity.startActivity(intent);
+//								SoundPoolManager.instance(mContext).play(SoundPoolManager.SOUND_ENTER);
+//								dialog.dismiss();
 							}
 						});
 				dialog.show();

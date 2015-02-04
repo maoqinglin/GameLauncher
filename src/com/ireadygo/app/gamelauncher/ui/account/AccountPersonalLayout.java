@@ -59,7 +59,6 @@ public class AccountPersonalLayout extends AccountBaseContentLayout implements O
 	private static final int SAVE_FAILED = 2;
 	private static final int IMAGE_LOAD_SUCCESS = 3;// 加载完成一张图片
 
-	private Context mContext;
 	private TextView changePwd;
 	private ImageView accountPhoto;
 	private List<UserHeaderImgItem> mUserPhotoLists = new ArrayList<UserHeaderImgItem>();
@@ -122,8 +121,7 @@ public class AccountPersonalLayout extends AccountBaseContentLayout implements O
 	}
 
 	private void init(Context context) {
-		mContext = context;
-		LayoutInflater.from(context).inflate(R.layout.account_personal_layout, this, true);
+		LayoutInflater.from(context).inflate(R.layout.personal_layout, this, true);
 		mUserInfoItem = GameLauncherApplication.getApplication().getUserInfoItem();
 		initView();
 	}
@@ -136,7 +134,7 @@ public class AccountPersonalLayout extends AccountBaseContentLayout implements O
 		changePwd = (TextView) findViewById(R.id.modify_account_pwd);
 		changePwd.setOnClickListener(this);
 		changePwd.setOnFocusChangeListener(this);
-		mLogoutTxt = (TextView) findViewById(R.id.account_logout);
+		mLogoutTxt = (TextView) findViewById(R.id.personal_logout_btn);
 		mLogoutTxt.setOnClickListener(this);
 		mLogoutTxt.setOnFocusChangeListener(this);
 
@@ -199,7 +197,7 @@ public class AccountPersonalLayout extends AccountBaseContentLayout implements O
 			String photoUrl = userInfo.getCPhoto();
 			if (!TextUtils.isEmpty(photoUrl)) {
 				accountPhoto.setTag(photoUrl);
-				GameInfoHub.instance(mContext).getImageLoader().loadImage(photoUrl, new ImageLoadingListener() {
+				GameInfoHub.instance(getContext()).getImageLoader().loadImage(photoUrl, new ImageLoadingListener() {
 
 					@Override
 					public void onLoadingStarted(String arg0, View arg1) {
@@ -316,7 +314,7 @@ public class AccountPersonalLayout extends AccountBaseContentLayout implements O
 
 			saveUserInfo();
 			break;
-		case R.id.account_logout:
+		case R.id.personal_logout_btn:
 			((AccountDetailActivity) mActivity).showLogoutDialog();
 			break;
 		default:
@@ -422,8 +420,8 @@ public class AccountPersonalLayout extends AccountBaseContentLayout implements O
 			// 设置对话框大小
 			Window win = systemPhotoDialog.getWindow();
 			WindowManager.LayoutParams p = win.getAttributes();// 获取对话框当前的参数值
-			p.height = mContext.getResources().getDimensionPixelSize(R.dimen.system_photo_dialog_height);
-			p.width = mContext.getResources().getDimensionPixelSize(R.dimen.system_photo_dialog_width);
+			p.height = getResources().getDimensionPixelSize(R.dimen.system_photo_dialog_height);
+			p.width = getResources().getDimensionPixelSize(R.dimen.system_photo_dialog_width);
 			win.setAttributes(p);
 		}
 		systemPhotoDialog.show();

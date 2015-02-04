@@ -103,7 +103,6 @@
     </string-array>
 
     <string-array name="account_age_array">
-        <item>Please choose your age</item>
         <item>16~20</item>
         <item>21~25</item>
         <item>26~30</item>
@@ -113,6 +112,11 @@
         <item>46~50</item>
         <item>51~55</item>
         <item>56~60</item>
+    </string-array>
+    
+    <string-array name="personal_sex_array">
+        <item>Male</item>
+        <item>Female</item>
     </string-array>
 
     <!-- 免商店：下载管理 -->
@@ -182,10 +186,10 @@
 
     <!-- 免账号-个人信息 -->
     <string name="personal_edit_account">Edit</string>
-    <string name="personal_nickname">Nickname</string>
+    <string name="personal_nickname">Nickname:</string>
     <string name="personal_phone_number">Phone</string>
-    <string name="personal_age">Age</string>
-    <string name="personal_sex">Gender</string>
+    <string name="personal_age">Age:</string>
+    <string name="personal_sex">Gender:</string>
     <string name="personal_open_freeflow">Enable Free-Flux</string>
     <string name="personal_modify_password">Change PWD</string>
     <string name="personal_unbind_phone_number">Unbind Phone</string>
@@ -479,4 +483,6 @@
     <string name="extend_install_error">Server data error,Please try again!</string>
     <string name="extend_install_success">install success</string>
     <string name="extend_nearly_open">It is comming soon!</string>
+    
+    <string name="store_empty_title">空空如也，快去免商店转转吧～！</string>
 </resources>

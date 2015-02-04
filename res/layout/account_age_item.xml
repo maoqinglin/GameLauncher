@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="@dimen/personal_age_item_height"
+    android:background="@drawable/account_edittext_bg_selector"
+    android:gravity="center_vertical" >
 
     <TextView
-        style="@style/TextLabelSmallLight"
         android:id="@+id/accountAgeItem"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/personal_age_item_height"
-        android:paddingLeft="@dimen/personal_age_item_padding_left"
+        style="@style/TextLabelSmallLight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:gravity="center_vertical"
-        android:textColor="@android:color/black" />
+        android:paddingLeft="@dimen/personal_item_text_padding_left"
+        android:textColor="@android:color/black"
+        android:paddingBottom="@dimen/personal_age_item_padding_bottom"
+        android:paddingTop="@dimen/personal_age_item_padding_top" />
 
     <ImageView
-        android:contentDescription="@null"
         android:id="@+id/iv_ticket_selected"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/personal_age_item_margin_right"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
+        android:contentDescription="@null"
         android:src="@drawable/icon_ticket_selected"
         android:visibility="invisible" />
 
-</RelativeLayout>
+</LinearLayout>

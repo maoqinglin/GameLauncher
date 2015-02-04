@@ -8,9 +8,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.AttributeSet;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.ireadygo.app.gamelauncher.GameLauncher;
 import com.ireadygo.app.gamelauncher.GameLauncherApplication;
@@ -26,6 +27,7 @@ import com.ireadygo.app.gamelauncher.appstore.manager.UpdateManager;
 import com.ireadygo.app.gamelauncher.ui.SnailKeyCode;
 import com.ireadygo.app.gamelauncher.ui.store.StoreBaseContentLayout;
 import com.ireadygo.app.gamelauncher.ui.store.StoreDetailActivity;
+import com.ireadygo.app.gamelauncher.ui.store.StoreEmptyView;
 import com.ireadygo.app.gamelauncher.ui.store.gamemanager.DownloadManageAdapter.DldManagerViewHolder;
 import com.ireadygo.app.gamelauncher.ui.store.gamemanager.DownloadManageAdapter.OnDataRefreshListener;
 import com.ireadygo.app.gamelauncher.ui.store.gamemanager.DownloadManageAdapter.UpdateType;
@@ -84,6 +86,15 @@ public class StoreGamesLayout extends StoreBaseContentLayout {
 		List<AppEntity> launchableList = mGameData.getLauncherAbleGames();
 
 		mStoreGameManagerExpandList = (ExpandableHListView) findViewById(R.id.store_gamemanager_expandlist);
+		View emptyView = new StoreEmptyView(mContext);
+		LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		params.gravity = Gravity.CENTER;
+		emptyView.setLayoutParams(params);
+		emptyView.setVisibility(View.GONE);
+		if(emptyView.getParent() == null){
+			((ViewGroup)mStoreGameManagerExpandList.getParent()).addView(emptyView);
+		}
+		mStoreGameManagerExpandList.setEmptyView(emptyView);
 		mAdapter = new DownloadManageAdapter(mContext, mStoreGameManagerExpandList, downloadingList, updatableList,
 				launchableList);
 		mAdapter.setDataRefreshListener(mDataRefreshListener);

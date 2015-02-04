@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:layout_width="@dimen/personal_left_layout_width"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/personal_photo"
+            android:layout_width="@dimen/personal_photo_width"
+            android:layout_height="@dimen/personal_photo_width"
+            android:background="@drawable/personal_photo_bg_selector"
+            android:focusable="true"
+            android:nextFocusDown="@+id/personal_logout_btn"
+            android:nextFocusLeft="@+id/personal_photo"
+            android:nextFocusRight="@+id/personal_nickname"
+            android:nextFocusUp="@+id/accountPersonalBtn"
+            android:src="@drawable/account_photo_default" />
+
+        <TextView
+            android:id="@+id/personal_logout_btn"
+            style="@style/AccountButtonNormal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/personal_item_height"
+            android:layout_marginTop="@dimen/personal_logout_btn_margin_top"
+            android:gravity="center"
+            android:nextFocusDown="@+id/personal_logout_btn"
+            android:nextFocusLeft="@+id/personal_logout_btn"
+            android:nextFocusRight="@+id/personal_age"
+            android:nextFocusUp="@+id/personal_photo"
+            android:text="@string/account_logout" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/personal_center_layout_margin_right"
+        android:layout_marginRight="@dimen/personal_center_layout_margin_right"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="@dimen/personal_item_width"
+            android:layout_height="@dimen/personal_item_height"
+            android:layout_marginBottom="@dimen/personal_item_space"
+            android:background="@drawable/personal_item_bg_selector"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/personal_item_padding_left"
+            android:paddingRight="@dimen/personal_item_padding_left" >
+
+            <TextView
+                style="@style/TextLabelMiddleLight"
+                android:layout_width="@dimen/personal_item_title_width"
+                android:layout_height="wrap_content"
+                android:ellipsize="none"
+                android:gravity="right"
+                android:text=" ID :" />
+
+            <TextView
+                android:id="@+id/personal_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/personal_item_text_padding_left"
+                android:textColor="#a8acae"
+                android:textSize="@dimen/personal_text_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/personal_age_layout"
+            android:layout_width="@dimen/personal_item_width"
+            android:layout_height="@dimen/personal_item_height"
+            android:layout_marginBottom="@dimen/personal_item_space"
+            android:addStatesFromChildren="true"
+            android:background="@drawable/personal_item_bg_selector"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/personal_item_padding_left"
+            android:paddingRight="@dimen/personal_item_padding_left" >
+
+            <TextView
+                style="@style/TextLabelMiddleLight"
+                android:layout_width="@dimen/personal_item_title_width"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:ellipsize="none"
+                android:gravity="right"
+                android:text="@string/personal_age" />
+
+            <Spinner
+                android:id="@+id/personal_age"
+                style="@style/AccountSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:nextFocusDown="@+id/personal_modify_pwd"
+                android:nextFocusLeft="@+id/personal_logout_btn"
+                android:nextFocusRight="@+id/personal_sex"
+                android:nextFocusUp="@+id/personal_photo" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/personal_modify_pwd"
+            style="@style/AccountButtonNormal"
+            android:layout_width="@dimen/personal_item_width"
+            android:layout_height="@dimen/personal_item_height"
+            android:layout_marginBottom="@dimen/personal_item_space"
+            android:nextFocusDown="@+id/personal_modify_pwd"
+            android:nextFocusLeft="@+id/personal_logout_btn"
+            android:nextFocusRight="@+id/personal_save"
+            android:nextFocusUp="@+id/personal_age"
+            android:text="@string/personal_modify_password"
+             />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/personal_nickname_layout"
+            android:layout_width="@dimen/personal_item_width"
+            android:layout_height="@dimen/personal_item_height"
+            android:layout_marginBottom="@dimen/personal_item_space"
+            android:addStatesFromChildren="true"
+            android:background="@drawable/personal_item_bg_selector"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/personal_item_padding_left"
+            android:paddingRight="@dimen/personal_item_padding_left" >
+
+            <TextView
+                style="@style/TextLabelMiddleLight"
+                android:layout_width="@dimen/personal_item_title_width"
+                android:layout_height="wrap_content"
+                android:ellipsize="none"
+                android:gravity="right"
+                android:text="@string/personal_nickname" />
+
+            <com.ireadygo.app.gamelauncher.ui.widget.CustomerEditText
+                android:id="@+id/personal_nickname"
+                style="@style/TextLabelMiddleLight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:maxLength="32"
+                android:nextFocusDown="@+id/personal_sex"
+                android:nextFocusLeft="@+id/personal_photo"
+                android:nextFocusRight="@+id/personal_nickname"
+                android:nextFocusUp="@+id/accountPersonalBtn"
+                android:paddingLeft="@dimen/personal_item_text_padding_left"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/personal_sex_layout"
+            android:layout_width="@dimen/personal_item_width"
+            android:layout_height="@dimen/personal_item_height"
+            android:layout_marginBottom="@dimen/personal_item_space"
+            android:addStatesFromChildren="true"
+            android:background="@drawable/personal_item_bg_selector"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/personal_item_padding_left"
+            android:paddingRight="@dimen/personal_item_padding_left" >
+
+            <TextView
+                style="@style/TextLabelMiddleLight"
+                android:layout_width="@dimen/personal_item_title_width"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:ellipsize="none"
+                android:gravity="right"
+                android:text="@string/personal_sex" />
+
+            <Spinner
+                android:id="@+id/personal_sex"
+                style="@style/AccountSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:nextFocusDown="@+id/personal_save"
+                android:nextFocusLeft="@+id/personal_age"
+                android:nextFocusRight="@+id/personal_sex"
+                android:nextFocusUp="@+id/personal_nickname" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/personal_save"
+            style="@style/AccountButtonNormal"
+            android:layout_width="@dimen/personal_item_width"
+            android:layout_height="@dimen/personal_item_height"
+            android:layout_marginBottom="@dimen/personal_item_space"
+            android:nextFocusDown="@+id/personal_save"
+            android:nextFocusLeft="@+id/personal_modify_pwd"
+            android:nextFocusRight="@+id/personal_save"
+            android:nextFocusUp="@+id/personal_sex"
+            android:text="@string/personal_save" />
+    </LinearLayout>
+
+</LinearLayout>

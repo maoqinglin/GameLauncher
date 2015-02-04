@@ -221,28 +221,20 @@
     <dimen name="mywealth_wealth_margin_top">210dp</dimen>
 
     <!-- 免账号-个人信息 -->
-    <dimen name="personal_age_item_height">120dp</dimen>
+    <dimen name="personal_item_width">590dp</dimen>
+    <dimen name="personal_item_height">106dp</dimen>
+    <dimen name="personal_item_space">120dp</dimen>
+    <dimen name="personal_item_padding_left">10dp</dimen>
+    <dimen name="personal_item_title_width">136dp</dimen>
+    <dimen name="personal_left_layout_width">300dp</dimen>
+    <dimen name="personal_center_layout_margin_right">60dp</dimen>
+    <dimen name="personal_logout_btn_margin_top">76dp</dimen>
+    <dimen name="personal_text_size">54sp</dimen>
+    <dimen name="personal_item_text_padding_left">50dp</dimen>
+    <dimen name="personal_btn_text_size">36sp</dimen>
     <dimen name="personal_age_item_margin_right">30dp</dimen>
-    <dimen name="personal_age_item_padding_left">15dp</dimen>
-    <dimen name="personal_age_sex_margin_right">69dp</dimen>
-    <dimen name="personal_age_pwd_margin_top">24dp</dimen>
-    <dimen name="personal_name_size">36sp</dimen>
-    <dimen name="personal_age_item_padding_bottom">6dp</dimen>
-    <dimen name="personal_age_item_padding_top">6dp</dimen>
-    <dimen name="personal_nickname_disable_height">105dp</dimen>
-    <dimen name="personal_nickname_disable_width">411dp</dimen>
-    <dimen name="personal_label_margin_bottom">36dp</dimen>
-    <dimen name="personal_left_layout_width">310dp</dimen>
-    <dimen name="personal_first_edittext_margin_left">150dp</dimen>
-    <dimen name="personal_padding_left">150dp</dimen>
-    <dimen name="personal_label_x_distance">60dp</dimen>
-    <dimen name="personal_label_y_distance">110dp</dimen>
-    <dimen name="personal_logout_margin_top">30dp</dimen>
-    <dimen name="personal_open_free_flow_margin_top">24dp</dimen>
-    <dimen name="personal_open_free_flow_padding_left">12dp</dimen>
-    <dimen name="personal_pwd_margin_top">28dp</dimen>
-    <dimen name="personal_sex_margin_right">69dp</dimen>
-    <dimen name="personal_info_margin_left">120dp</dimen>
+    <dimen name="personal_age_item_height">130dp</dimen>
+    <dimen name="personal_photo_width">150dp</dimen>
 
     <!-- 免账号-充值 -->
     <dimen name="recharge_distance_y_small">27dp</dimen>
@@ -250,10 +242,11 @@
     <dimen name="recharge_distance_y_big">75dp</dimen>
     <dimen name="recharge_rabbit_btn_size">36sp</dimen>
     <dimen name="recharge_ticket_recharge_size">36sp</dimen>
-    <dimen name="recharge_divide_line_height">546dp</dimen>
+    <dimen name="recharge_divide_line_height">600dp</dimen>
     <dimen name="recharge_right_layout_padding_left">114dp</dimen>
     <dimen name="recharge_confirm_btn_size">36sp</dimen>
     <dimen name="recharge_line_width">3dp</dimen>
+    <dimen name="recharge_line_margin_bottom">200dp</dimen>
     <dimen name="recharge_spinner_width">557dp</dimen>
     <dimen name="rechage_spinner_padding_left">15dp</dimen>
     <dimen name="rechage_spinner_padding_right">15dp</dimen>

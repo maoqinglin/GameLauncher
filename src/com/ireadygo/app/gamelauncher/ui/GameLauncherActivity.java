@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import com.igexin.sdk.PushManager;
 import com.ireadygo.app.gamelauncher.GameLauncherApplication;
 import com.ireadygo.app.gamelauncher.R;
+import com.ireadygo.app.gamelauncher.account.AccountInfoAsyncTask;
 import com.ireadygo.app.gamelauncher.account.AccountManager;
 import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
 import com.ireadygo.app.gamelauncher.ui.base.BaseActivity;
@@ -66,6 +67,7 @@ public class GameLauncherActivity extends BaseActivity {
 		StaticsUtils.onCreate();
 		mCreateTime = System.currentTimeMillis();
 		GameLauncherApplication.getApplication().setGameLauncherActivity(this);
+		new AccountInfoAsyncTask(this, null).execute();
 	}
 
 	@Override

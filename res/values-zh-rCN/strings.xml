@@ -102,7 +102,6 @@
     </string-array>
 
     <string-array name="account_age_array">
-        <item>请选择您的年龄段</item>
         <item>16岁~20岁</item>
         <item>21岁~25岁</item>
         <item>26岁~30岁</item>
@@ -113,7 +112,10 @@
         <item>51岁~55岁</item>
         <item>56岁~60岁</item>
     </string-array>
-
+	<string-array name="personal_sex_array">
+        <item>男</item>
+        <item>女</item>
+    </string-array>
     <!-- 免商店：下载管理 -->
     <string name="store_dld_manager_downloading">下载中</string>
     <string name="store_dld_manager_updatable">可更新</string>
@@ -173,14 +175,14 @@
     <string name="account_personal">个人信息</string>
     <string name="account_recharge">充值</string>
     <string name="account_freecard">免卡</string>
-    <string name="account_logout">退出账户</string>
+    <string name="account_logout">退出账号</string>
 
     <!-- 免账号-个人信息 -->
     <string name="personal_edit_account">编辑资料</string>
-    <string name="personal_nickname">昵称</string>
+    <string name="personal_nickname">昵称:</string>
     <string name="personal_phone_number">已绑定手机号</string>
-    <string name="personal_age">年龄</string>
-    <string name="personal_sex">性别</string>
+    <string name="personal_age">年龄:</string>
+    <string name="personal_sex">性别:</string>
     <string name="personal_open_freeflow">开通免流量</string>
     <string name="personal_modify_password">修改密码</string>
     <string name="personal_unbind_phone_number">解绑</string>

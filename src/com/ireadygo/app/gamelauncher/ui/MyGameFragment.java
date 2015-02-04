@@ -16,6 +16,7 @@ import com.ireadygo.app.gamelauncher.mygame.ui.view.GameRecommendAppLayout;
 import com.ireadygo.app.gamelauncher.mygame.ui.view.GameRecommendAppLayout.RecommendAppDisplayListener;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.MenuFragment;
+import com.ireadygo.app.gamelauncher.ui.store.StoreEmptyView;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
 

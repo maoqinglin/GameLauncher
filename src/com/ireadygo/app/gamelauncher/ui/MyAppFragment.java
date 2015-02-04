@@ -19,6 +19,7 @@ import com.ireadygo.app.gamelauncher.mygame.ui.view.GameAllAppLayout;
 import com.ireadygo.app.gamelauncher.mygame.ui.view.GameAllAppLayout.AppWindowShowStateListener;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.MenuFragment;
+import com.ireadygo.app.gamelauncher.ui.store.StoreEmptyView;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
 
@@ -61,6 +62,7 @@ public class MyAppFragment extends BaseContentFragment {
 		super.initView(view);
 		getOperationTipsLayout().setTipsVisible(TipFlag.FLAG_TIPS_SUN,TipFlag.FLAG_TIPS_WATER,TipFlag.FLAG_TIPS_MOON);
 		mHListView = (HListView) view.findViewById(R.id.h_listview_myapp_fragment);
+		mHListView.setEmptyView(new StoreEmptyView(getRootActivity()));
 		mGameModel.setHListView(mHListView, DataType.TYPE_APP);
 		mGameModel.setAppWindowShowStateListener(mAllAppShowStateListener);
 	}

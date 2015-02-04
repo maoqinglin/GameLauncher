@@ -93,7 +93,6 @@
         android:id="@+id/line"
         android:layout_width="@dimen/recharge_line_width"
         android:layout_height="@dimen/recharge_divide_line_height"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="@color/white_second_transparency" />
 
