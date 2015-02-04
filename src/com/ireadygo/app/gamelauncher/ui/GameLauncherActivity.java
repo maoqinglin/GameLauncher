@@ -251,12 +251,12 @@ public class GameLauncherActivity extends BaseActivity {
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
-		if (mHandler.hasMessages(MSG_FOCUS_REQUEST)) {
-			mHandler.removeMessages(MSG_FOCUS_REQUEST);
-		}
-		if (!hasFocus) {
-			postRequestFocus();
-		}
+//		if (mHandler.hasMessages(MSG_FOCUS_REQUEST)) {
+//			mHandler.removeMessages(MSG_FOCUS_REQUEST);
+//		}
+//		if (!hasFocus) {
+//			postRequestFocus();
+//		}
 	}
 
 	public static class Page {

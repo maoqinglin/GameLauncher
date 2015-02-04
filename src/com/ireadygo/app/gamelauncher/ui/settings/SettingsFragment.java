@@ -83,8 +83,8 @@ public class SettingsFragment extends BaseContentFragment {
 				getResources().getString(R.string.settings_language), SettingsIntentAction.LANGUAGE));
 //		settingsList.add(new SettingsItemEntity(getResources().getDrawable(R.drawable.settings_store_selector),
 //				getResources().getString(R.string.settings_store), SettingsIntentAction.STORE));
-		settingsList.add(new SettingsItemEntity(getResources().getDrawable(R.drawable.settings_wallpaper_selector),
-				getResources().getString(R.string.settings_wallpaper), SettingsIntentAction.WALL_PAPER));
+		settingsList.add(new SettingsItemEntity(getResources().getDrawable(R.drawable.settings_joystick_selector),
+				getResources().getString(R.string.settings_joystic_battery), SettingsIntentAction.JOYSTICK));
 		settingsList.add(new SettingsItemEntity(getResources().getDrawable(R.drawable.settings_help_selector),
 				getResources().getString(R.string.settings_help), null));
 		settingsList.add(new SettingsItemEntity(getResources().getDrawable(R.drawable.settings_secure_selector),
@@ -126,21 +126,6 @@ public class SettingsFragment extends BaseContentFragment {
 		}
 	};
 
-	// @Override
-	// public void onResume() {
-	// super.onResume();
-	// if(mIsViewDestory){
-	// mHListView.setSelectionFromLeft(0, mHListView.getPaddingLeft());
-	// mIsViewDestory = false;
-	// }
-	// }
-
-	// @Override
-	// public void onDestroyView() {
-	// super.onDestroyView();
-	// mIsViewDestory = true;
-	// }
-
 	public static class SettingsIntentAction {
 		public static final String SYSTEM_UPGRADE = "com.ireadygo.app.systemupgrade.activity.UpgradeHomeActivity";
 		public static final String PERSONALIZED = "com.ireadygo.app.screencapture.prefactivity";
@@ -151,6 +136,7 @@ public class SettingsFragment extends BaseContentFragment {
 		public static final String WIFI = Settings.ACTION_WIFI_SETTINGS;
 		public static final String SETTINGS = Settings.ACTION_SETTINGS;
 		public static final String WALL_PAPER = Intent.ACTION_SET_WALLPAPER;
+		public static final String JOYSTICK = "com.ireadygo.app.devicemanager.ui.HandlesBattery";
 	}
 
 	@Override
@@ -200,7 +186,7 @@ public class SettingsFragment extends BaseContentFragment {
 
 	private void setWallPaper() {
 		final Intent pickWallpaper = new Intent(Intent.ACTION_SET_WALLPAPER);
-		Intent chooser = Intent.createChooser(pickWallpaper, "chooser_wallpaper");
+		Intent chooser = Intent.createChooser(pickWallpaper, mActivity.getString(R.string.choose_wallpaper));
 		mActivity.startActivity(chooser);
 	}
 }

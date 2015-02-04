@@ -10,6 +10,7 @@
     <string name="pick_wallpaper">Snail Wallpapers</string>
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
+    <string name="choose_wallpaper">Choose Wallpaper</string>
 
     <!-- 下载 -->
     <string name="Toast_disable_3G_prompt">App Store has disabled downloading in 3G network!</string>
@@ -358,6 +359,7 @@
     <string name="settings_more">More</string>
     <string name="settings_wifi">WIFI</string>
     <string name="settings_wallpaper">Wallpaper</string>
+    <string name="settings_joystic_battery">Joystick</string>
 
     <!-- 按键提示层 -->
     <string name="key_sun">Confirm</string>

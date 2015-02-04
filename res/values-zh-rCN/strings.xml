@@ -10,6 +10,7 @@
     <string name="pick_wallpaper">蜗牛壁纸</string>
     <string name="confirm">确定</string>
     <string name="cancel">取消</string>
+    <string name="choose_wallpaper">选择壁纸</string>
 
     <!-- 下载 -->
     <string name="Toast_disable_3G_prompt">免商店已经禁止使用移动网络进行下载！</string>
@@ -334,6 +335,7 @@
     <string name="settings_more">更多</string>
     <string name="settings_wifi">WIFI</string>
     <string name="settings_wallpaper">壁纸</string>
+    <string name="settings_joystic_battery">手柄电量</string>
 
     <!-- 按键提示层 -->
     <string name="key_sun">启动</string>
