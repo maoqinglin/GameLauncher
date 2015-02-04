@@ -161,7 +161,7 @@ public class GameModel implements Callbacks {
 			ArrayList<ShortcutInfo> infos = folderInfo.contents;
 			mFolder = Folder.fromXml(mActivity);
 			parent.setVisibility(View.INVISIBLE);
-			applyBlur(mFolder);
+//			applyBlur(mFolder);
 			mFolder.bind(folderInfo);
 			mFolder.openFolder(mActivity, infos, view, position,mAppWindowShowStateListener);
 		}else if(gameInfo instanceof ExtendInfo){

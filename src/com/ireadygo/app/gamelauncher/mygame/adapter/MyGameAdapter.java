@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
+import com.ireadygo.app.gamelauncher.GameLauncherConfig;
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.data.GameData;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
@@ -40,7 +41,9 @@ public class MyGameAdapter extends AppListAdapter {
 		mContext = context;
 		gameList.clear();
 		this.gameList = list;
-		addExtendItem();
+		if (GameLauncherConfig.SLOT_ENABLE) {
+			addExtendItem();
+		}
 	}
 
 	private void addExtendItem(){
@@ -102,7 +105,7 @@ public class MyGameAdapter extends AppListAdapter {
 			if (gameList.size() > 0 && position < gameList.size()) {
 				if (gameList.get(position).getAppIcon() != null) {
 					holder.itemInfo = gameList.get(position);
-					if(position == ExtendInfo.POS_GAME_RECOMMEND){
+					if(position == ExtendInfo.POS_GAME_RECOMMEND && GameLauncherConfig.SLOT_ENABLE){
 						setFunctionItemState(holder,Function.GAME_RECOMMEND_DOWNLOAD,0.5f,R.color.orange);
 					}else{
 						setFunctionItemState(holder,null,1f,R.color.white);

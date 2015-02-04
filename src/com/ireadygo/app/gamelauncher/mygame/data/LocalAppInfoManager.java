@@ -39,6 +39,36 @@ public class LocalAppInfoManager {
 		mFilterPkgSet.add("com.google.android.inputmethod.latin");
 		mFilterPkgSet.add("com.google.android.inputmethod.latin.dictionarypack");
 		mFilterPkgSet.add("com.mediatek.videoplayer");
+		
+		mFilterPkgSet.add("com.android.contacts");
+		mFilterPkgSet.add("com.android.dialer");
+		mFilterPkgSet.add("com.android.mms");
+		mFilterPkgSet.add("com.android.email");
+		mFilterPkgSet.add("com.android.calendar");
+		mFilterPkgSet.add("com.android.calculator2");
+		mFilterPkgSet.add("com.android.deskclock");
+		mFilterPkgSet.add("com.android.settings");
+		mFilterPkgSet.add("com.android.soundrecorder");
+		mFilterPkgSet.add("com.mediatek.FMRadio");
+		mFilterPkgSet.add("om.android.flashlight");
+		mFilterPkgSet.add("com.android.quicksearchbox");
+		mFilterPkgSet.add("com.ireadygo.app.key.ui");
+		mFilterPkgSet.add("com.ireadygo.app.keyadapter");
+		mFilterPkgSet.add("com.android.gallery3d");
+		mFilterPkgSet.add("com.android.camera2");
+		mFilterPkgSet.add("com.android.music");
+		mFilterPkgSet.add("com.mediatek.filemanager");
+		mFilterPkgSet.add("com.android.wfd");
+		mFilterPkgSet.add("com.android.vending");
+		mFilterPkgSet.add("com.google.android.gms");
+		mFilterPkgSet.add("com.ireadygo.app.systemupgrade");
+		mFilterPkgSet.add("com.mediatek.bluetooth");
+		mFilterPkgSet.add("com.google.android.play.games");
+		mFilterPkgSet.add("com.mediatek.bluetooth");
+		mFilterPkgSet.add("com.nvidia.ota");
+		mFilterPkgSet.add("com.broadcom.bt.app.bt3d");
+		mFilterPkgSet.add("com.sohu.inputmethod.sogouoem");
+		mFilterPkgSet.add("com.widevine.demo");
 		mFilterPkgSet.add(mContext.getPackageName());
 	}
 

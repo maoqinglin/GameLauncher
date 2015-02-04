@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
+import com.ireadygo.app.gamelauncher.GameLauncherConfig;
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.data.GameData;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
@@ -40,7 +41,9 @@ public class MyAppAdapter extends AppListAdapter {
 		mContext = context;
 		appList.clear();
 		this.appList = list;
-		addExtendItem();
+		if (GameLauncherConfig.SLOT_ENABLE) {
+			addExtendItem();
+		}
 	}
 
 	public List<ItemInfo> getList() {
@@ -101,7 +104,7 @@ public class MyAppAdapter extends AppListAdapter {
 			holder.itemInfo = appList.get(position);
 			if (appList.size() > 0 && position < appList.size()) {
 				if(appList.get(position).getAppIcon() != null){
-					if(position == ExtendInfo.POS_GAME_ALL){
+					if(position == ExtendInfo.POS_GAME_ALL && GameLauncherConfig.SLOT_ENABLE){
 						setFunctionItemState(holder,Function.GAME_ALL,0.5f,R.color.app_item_bg_green);
 					}else{
 						setFunctionItemState(holder,null,1f,R.color.white);
