@@ -81,6 +81,7 @@
         android:nextFocusLeft="@id/storeOptionsGameManage"
         android:nextFocusRight="@+id/storeOptionsSettings"
         android:nextFocusUp="@+id/focusView"
+        android:visibility="gone"
         app:store_icon="@drawable/store_options_icon_settings"
         app:store_title="@string/store_options_settings_short" />
 

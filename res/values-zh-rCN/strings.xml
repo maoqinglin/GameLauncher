@@ -394,6 +394,7 @@
     <string name="all_app_no_slot_msg">没有多余卡槽，请充值购买！</string>
     <!-- 我的游戏推荐下载 -->
     <string name="mygame_recommend_app_download">推荐下载</string>
+    <string name="empty_tip">空空如也，快去免商店转转吧～！</string>
 
     <!-- 游戏社区 -->
     <string name="game_community_account">账号</string>

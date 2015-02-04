@@ -160,5 +160,9 @@
         className="com.android.settings.Settings$WifiSettingsActivity"
         iconName="WLAN.png"
         packageName="com.android.settings" />
+    <application
+        className="com.estrongs.android.pop.view.FileExplorerActivity"
+        iconName="fileexplorer.png"
+        packageName="com.estrongs.android.pop" />
 
 </applications>

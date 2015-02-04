@@ -21,4 +21,15 @@
         android:nextFocusRight="@id/h_listview_mygame_fragment"
         android:nextFocusUp="@+id/menu_game"
         android:paddingLeft="@dimen/content_padding_left_default" />
+
+    <TextView
+        android:id="@+id/empty"
+        style="@style/TextLabelSmallLight"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:text="@string/empty_tip"
+        android:visibility="gone" />
+
 </RelativeLayout>

@@ -418,6 +418,7 @@
     <string name="all_app_no_slot_msg">There is no empty slot,Pleasr buy more!</string>
     <!-- 我的游戏推荐下载 -->
     <string name="mygame_recommend_app_download">Recommend</string>
+    <string name="empty_tip">There is no games! Go to find one in Free-Store</string>
 
     <!-- 游戏社区 -->
     <string name="game_community_account">Account</string>

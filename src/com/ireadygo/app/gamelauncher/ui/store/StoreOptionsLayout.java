@@ -15,7 +15,6 @@ public class StoreOptionsLayout extends BaseOptionsLayout {
 	private OptionsItem mCollectionBtn;
 	private OptionsItem mSearchBtn;
 	private OptionsItem mGameManageBtn;
-	private OptionsItem mSettingsBtn;
 
 	// private StoreDetailActivity mFragment;
 	// private View mFocusView;
@@ -49,8 +48,6 @@ public class StoreOptionsLayout extends BaseOptionsLayout {
 			return mGameManageBtn;
 		case STORE_SEARCH:
 			return mSearchBtn;
-		case STORE_SETTINGS:
-			return mSettingsBtn;
 		default:
 			return mRecommendBtn;
 		}
@@ -64,13 +61,11 @@ public class StoreOptionsLayout extends BaseOptionsLayout {
 		mCollectionBtn = (OptionsItem) findViewById(R.id.storeOptionsCollection);
 		mSearchBtn = (OptionsItem) findViewById(R.id.storeOptionsSearch);
 		mGameManageBtn = (OptionsItem) findViewById(R.id.storeOptionsGameManage);
-		mSettingsBtn = (OptionsItem) findViewById(R.id.storeOptionsSettings);
 
 		initOptionButton(mRecommendBtn);
 		initOptionButton(mCategoryBtn);
 		initOptionButton(mCollectionBtn);
 		initOptionButton(mSearchBtn);
 		initOptionButton(mGameManageBtn);
-		initOptionButton(mSettingsBtn);
 	}
 }

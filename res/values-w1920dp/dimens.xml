@@ -172,6 +172,7 @@
     <dimen name="mygame_game_text_size">42sp</dimen>
     <dimen name="mygame_game_name_height">75dp</dimen>
     <dimen name="mygame_game_name_padding">9dp</dimen>
+    <dimen name="emptyview_margin_top">35dp</dimen>
     <!-- 设定 -->
     <dimen name="settings_icon_bg_width">300dp</dimen>
     <dimen name="settings_icon_bg_height">375dp</dimen>

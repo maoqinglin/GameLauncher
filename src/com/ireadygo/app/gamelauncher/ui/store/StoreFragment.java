@@ -79,10 +79,11 @@ public class StoreFragment extends BaseContentFragment {
 		posterItem.titleId = R.string.store_options_game_manager;
 		sPosterItems.add(posterItem);
 
-		posterItem = new StoreOptionsPoster();
-		posterItem.drawableId = R.drawable.store_settings_poster_icon_default;
-		posterItem.titleId = R.string.store_options_settings;
-		sPosterItems.add(posterItem);
+		//屏蔽商店设置 modify by linmaoqing 2015-2-4
+//		posterItem = new StoreOptionsPoster();
+//		posterItem.drawableId = R.drawable.store_settings_poster_icon_default;
+//		posterItem.titleId = R.string.store_options_settings;
+//		sPosterItems.add(posterItem);
 	}
 
 	@Override

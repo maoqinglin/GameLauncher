@@ -49,7 +49,8 @@ public class MyGameFragment extends BaseContentFragment {
 		super.initView(view);
 		getOperationTipsLayout().setTipsVisible(TipFlag.FLAG_ALL);
 		mHListView = (HListView) view.findViewById(R.id.h_listview_mygame_fragment);
-
+		View emptyView = view.findViewById(R.id.empty);  
+		mHListView.setEmptyView(emptyView); 
 		mGameModel.setHListView(mHListView, DataType.TYPE_GAME);
 	}
 
