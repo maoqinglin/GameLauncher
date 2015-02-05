@@ -6,8 +6,7 @@
     <com.ireadygo.app.gamelauncher.ui.activity.SwitchView
         android:id="@+id/image_layout"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="@drawable/helper_bg" />
+        android:layout_height="fill_parent"/>
 
     <LinearLayout
         android:id="@+id/dot_layout"

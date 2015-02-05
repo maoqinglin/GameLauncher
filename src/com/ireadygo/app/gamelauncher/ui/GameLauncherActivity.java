@@ -58,10 +58,10 @@ public class GameLauncherActivity extends BaseActivity {
 		// mFocusView.requestFocus();
 		mMenuFragment = new MenuFragment(this);
 		addFragment(mMenuFragment);
-		// 初始化个推
-		PushManager.getInstance().initialize(this);
-		// 上报终端个推信息
-		AccountManager.getInstance().uploadGetuiInfo(this);
+//		// 初始化个推
+//		PushManager.getInstance().initialize(this);
+//		// 上报终端个推信息
+//		AccountManager.getInstance().uploadGetuiInfo(this);
 		// 上报应用启动时间
 		StaticsUtils.onCreate();
 		mCreateTime = System.currentTimeMillis();

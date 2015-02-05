@@ -65,7 +65,6 @@ public class HelperActivity extends Activity implements OnClickListener,
 		for (int i = 0; i < mViewCount; i++) {
 
 			ImageView imageView = new ImageView(this);
-			imageView.setPadding(10, 10, 10, 10);
 			imageView.setClickable(true);
 			imageView.setEnabled(true);
 			imageView.setOnClickListener(this);
@@ -122,18 +121,24 @@ public class HelperActivity extends Activity implements OnClickListener,
 		int curScreen = mScrollLayout.getCurScreen();
 
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			android.os.Process.killProcess(android.os.Process.myPid());
+			finish();
+			return false;
 		}
+
+		int desScreen = curScreen;
 
 		if (keyCode == KeyEvent.KEYCODE_BUTTON_L1 || keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
-			setCurPoint(curScreen - 1);
-			mScrollLayout.snapToScreen(curScreen - 1);
+			desScreen = curScreen - 1;
 		}
-
 		if (keyCode == KeyEvent.KEYCODE_BUTTON_R1 || keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
-			setCurPoint(curScreen + 1);
-			mScrollLayout.snapToScreen(curScreen + 1);
+			if (curScreen == mViewCount - 1) {
+				finish();
+				return false;
+			}
+			desScreen = curScreen + 1;
 		}
+		setCurPoint(desScreen);
+		mScrollLayout.snapToScreen(desScreen);
 
 		return false;
 	}

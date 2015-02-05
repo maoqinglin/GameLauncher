@@ -186,7 +186,7 @@ public class SettingsFragment extends BaseContentFragment {
 
 	private void setWallPaper() {
 		final Intent pickWallpaper = new Intent(Intent.ACTION_SET_WALLPAPER);
-		Intent chooser = Intent.createChooser(pickWallpaper, mActivity.getString(R.string.choose_wallpaper));
+		Intent chooser = Intent.createChooser(pickWallpaper, "chooser_wallpaper");
 		mActivity.startActivity(chooser);
 	}
 }
