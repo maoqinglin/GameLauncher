@@ -81,17 +81,18 @@ public abstract class StoreBaseContentLayout extends KeyEventLayout {
 
 	@Override
 	public boolean onMoonKey() {
-		getActivity().getOptionsLayout().getCurrentSelectedView().requestFocus();
+//		getActivity().getOptionsLayout().getCurrentSelectedView().requestFocus();
 		return super.onMoonKey();
 	}
 
 	@Override
 	public boolean onBackKey() {
-		return false;
+		getActivity().getOptionsLayout().getCurrentSelectedView().requestFocus();
+		return true;
 	}
 	
 	@Override
-	public boolean onWaterKey() {//屏蔽系统山水键处理
+	public boolean onWaterKey() {
 		return true;
 	}
 

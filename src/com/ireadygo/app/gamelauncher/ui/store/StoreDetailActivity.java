@@ -73,7 +73,6 @@ public class StoreDetailActivity extends BaseActivity {
 		}
 		Anchor anchor = (Anchor)intent.getSerializableExtra(Anchor.EXTRA_ANCHOR);
 		if(anchor != null){
-//			Log.d("liu.js", "Anchor=" + anchor.getDestination() + "|" + this);
 			Destination destination = anchor.getDestination();
 			mOptionsLayout.requestOptionsFocusByTag(destination);			
 		}
