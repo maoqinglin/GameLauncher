@@ -11,7 +11,7 @@
         android:id="@+id/settings_view_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/corner_settings_item_bg_shape" />
+        android:src="@drawable/corner_black_shape" />
 
     <ImageView
         android:id="@+id/settings_icon"

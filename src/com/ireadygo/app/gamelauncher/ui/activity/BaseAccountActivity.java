@@ -1,5 +1,6 @@
 package com.ireadygo.app.gamelauncher.ui.activity;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import com.ireadygo.app.gamelauncher.ui.account.AccountLoginActivity;
 import com.ireadygo.app.gamelauncher.ui.account.AccountRegisterActivity;
 import com.ireadygo.app.gamelauncher.ui.account.CustomerLoginResultListener;
 import com.ireadygo.app.gamelauncher.utils.StaticsUtils;
+import com.ireadygo.app.gamelauncher.utils.Utils;
 import com.snailgame.mobilesdk.LoginResultListener;
 
 public class BaseAccountActivity extends BaseGuideActivity {
@@ -23,7 +25,7 @@ public class BaseAccountActivity extends BaseGuideActivity {
 	public static final int FLAG_START_BY_ACCOUNT_DETAIL = 2;
 	public static final String ACTION_ACCOUNT_LOGIN = "com.ireadygo.app.gamelauncher.ACTION_ACCOUNT_LOGIN";
 	private boolean mIsResumed = false;
-	private ProgressDialog mProgressDialog;
+	private Dialog mProgressDialog;
 	protected int mStartFlag = FLAG_START_BY_MAIN_ACTIVITY;
 	private long mLoginStartTime = 0;
 
@@ -35,9 +37,8 @@ public class BaseAccountActivity extends BaseGuideActivity {
 
 	protected void showProgressDialog(int msgId) {
 		if (mProgressDialog == null) {
-			mProgressDialog = new ProgressDialog(this);
+			mProgressDialog = Utils.createLoadingDialog(this);
 			String msg = getString(msgId);
-			mProgressDialog.setMessage(msg);
 		}
 		mProgressDialog.show();
 	}

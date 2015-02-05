@@ -21,40 +21,44 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/confirm_dialog_line_width"
         android:layout_marginTop="@dimen/confirm_dialog_line_margin_top"
-        android:background="#CF009500" />
+        android:background="#CF009500"
+        android:paddingLeft="@dimen/confirm_dialog_line_padding_left"
+        android:paddingRight="@dimen/confirm_dialog_line_padding_left" />
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginLeft="@dimen/confirm_dialog_framelayout_margin_left"
-        android:paddingTop="@dimen/confirm_dialog_framelayout_padding_top"
-        android:paddingBottom="@dimen/confirm_dialog_framelayout_padding_bottom"
         android:layout_marginRight="@dimen/confirm_dialog_framelayout_margin_right"
-        android:layout_weight="1" >
+        android:layout_weight="1"
+        android:paddingBottom="@dimen/confirm_dialog_framelayout_padding_bottom"
+        android:paddingTop="@dimen/confirm_dialog_framelayout_padding_top" >
 
         <TextView
             android:id="@+id/dialogMsg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_gravity="center"
+            android:gravity="center"
             android:textColor="#7FFFFFFF"
             android:textSize="@dimen/confirm_dialog_text_size" />
     </FrameLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#1a1a1a" />
+        android:layout_height="@dimen/confirm_dialog_line_width"
+        android:background="#FF1a1a1a"
+        android:paddingLeft="@dimen/confirm_dialog_line_padding_left"
+        android:paddingRight="@dimen/confirm_dialog_line_padding_left" />
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
         <View
-            android:layout_width="@dimen/confirm_dialog_view_width"
+            android:layout_width="@dimen/confirm_dialog_line_width"
             android:layout_height="@dimen/confirm_dialog_view_height"
             android:layout_gravity="center"
             android:layout_marginBottom="@dimen/confirm_dialog_view_margin_bottom"

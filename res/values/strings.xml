@@ -484,5 +484,6 @@
     <string name="extend_install_success">install success</string>
     <string name="extend_nearly_open">It is comming soon!</string>
     
-    <string name="store_empty_title">空空如也，快去免商店转转吧～！</string>
+    <string name="store_empty_title">There is no games! Go to find one in Free-Store!</string>
+    <string name="store_load_empty_title">网络不给力~！</string>
 </resources>

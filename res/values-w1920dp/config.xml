@@ -8,12 +8,12 @@
 
     <!-- Menu -->
     <item name="menu_init_x" format="integer" type="dimen">195</item>
-    <item name="menu_init_y" format="integer" type="dimen">370</item>
+    <item name="menu_init_y" format="integer" type="dimen">420</item>
     <item name="menu_focused_x1" format="integer" type="dimen">150</item>
     <item name="menu_focused_x2" format="integer" type="dimen">103</item>
-    <item name="menu_focused_y" format="integer" type="dimen">80</item>
+    <item name="menu_focused_y" format="integer" type="dimen">120</item>
     <item name="menu_selected_x" format="integer" type="dimen">103</item>
-    <item name="menu_selected_y" format="integer" type="dimen">-50</item>
+    <item name="menu_selected_y" format="integer" type="dimen">-10</item>
 
     <!-- MenuItem -->
     <item name="menu_item_init_alpha" format="float" type="string">1.0</item>
@@ -34,8 +34,8 @@
     
     <!-- Content -->
     <item name="content_init_x" format="integer" type="dimen">0</item>
-    <item name="content_init_y" format="integer" type="dimen">448</item>
+    <item name="content_init_y" format="integer" type="dimen">488</item>
     <item name="content_focused_x" format="integer" type="dimen">0</item>
-    <item name="content_focused_y" format="integer" type="dimen">238</item>
+    <item name="content_focused_y" format="integer" type="dimen">278</item>
 
 </resources>

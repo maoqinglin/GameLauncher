@@ -17,9 +17,11 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryItem;
 import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
 import com.ireadygo.app.gamelauncher.ui.store.StoreBaseContentLayout;
 import com.ireadygo.app.gamelauncher.ui.store.StoreDetailActivity;
+import com.ireadygo.app.gamelauncher.ui.store.StoreEmptyView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
+import com.ireadygo.app.gamelauncher.utils.Utils;
 
 public class StoreCollectionLayout extends StoreBaseContentLayout {
 	public static final String EXTRA_COLLECTION_ID = "CollectionId";
@@ -67,6 +69,7 @@ public class StoreCollectionLayout extends StoreBaseContentLayout {
 
 	private void loadData(int page) {
 		new LoadCollectionTask().execute(page);
+		showLoadingProgress();
 	}
 
 	private void startCollectionDetailActivity(long collectionId,String posterUrl) {
@@ -114,6 +117,10 @@ public class StoreCollectionLayout extends StoreBaseContentLayout {
 
 		@Override
 		protected void onPostExecute(List<CategoryItem> result) {
+			dimissLoadingProgress();
+			StoreEmptyView emptyView = new StoreEmptyView(getContext());
+			emptyView.getTitleView().setText(R.string.store_load_empty_title);
+			Utils.setEmptyView(emptyView, mAppListView);
 			if (isCancelled() || result == null || result.isEmpty()) {
 				return;
 			}

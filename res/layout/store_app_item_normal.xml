@@ -22,6 +22,7 @@
             android:id="@+id/icon"
             android:layout_width="@dimen/store_app_icon_normal_width"
             android:layout_height="@dimen/store_app_icon_normal_height"
+            android:background="@drawable/app_other_icon_bg"
             android:src="@drawable/store_category_poster_icon_default" />
 
         <FrameLayout

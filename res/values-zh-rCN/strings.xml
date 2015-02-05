@@ -457,4 +457,6 @@
     <string name="extend_install_error">服务器数据错误，请重新下载！</string>
     <string name="extend_install_success">安装成功</string>
     <string name="extend_nearly_open">即将开放，敬请期待！</string>
+    
+    <string name="store_empty_title">空空如也，快去免商店转转吧～！</string>
 </resources>

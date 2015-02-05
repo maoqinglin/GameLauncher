@@ -21,11 +21,13 @@ import com.ireadygo.app.gamelauncher.ui.detail.GameDetailActivity;
 import com.ireadygo.app.gamelauncher.ui.store.StoreAppNormalAdapter;
 import com.ireadygo.app.gamelauncher.ui.store.StoreBaseContentLayout;
 import com.ireadygo.app.gamelauncher.ui.store.StoreDetailActivity;
+import com.ireadygo.app.gamelauncher.ui.store.StoreEmptyView;
 import com.ireadygo.app.gamelauncher.ui.widget.AbsHListView;
 import com.ireadygo.app.gamelauncher.ui.widget.AbsHListView.OnScrollListener;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
+import com.ireadygo.app.gamelauncher.utils.Utils;
 
 public class StoreRecommendLayout extends StoreBaseContentLayout {
 	private static final int TYPE_GAME = 1;
@@ -105,6 +107,9 @@ public class StoreRecommendLayout extends StoreBaseContentLayout {
 
 	private void loadData() {
 		if (!mLoadingData) {
+			if(mAppList.isEmpty()){
+				showLoadingProgress();
+			}
 			new LoadRecommendTask().execute(mPageIndex);
 			mLoadingData = true;
 		}
@@ -149,6 +154,10 @@ public class StoreRecommendLayout extends StoreBaseContentLayout {
 
 		@Override
 		protected void onPostExecute(List<BannerItem> result) {
+			dimissLoadingProgress();
+			StoreEmptyView emptyView = new StoreEmptyView(mContext);
+			emptyView.getTitleView().setText(R.string.store_load_empty_title);
+			Utils.setEmptyView(emptyView, mListView);
 			if (isCancelled() || result == null || result.isEmpty()) {
 				return;
 			}

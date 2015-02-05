@@ -3,6 +3,7 @@ package com.ireadygo.app.gamelauncher.ui.store.collection;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
@@ -20,6 +21,7 @@ import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
 import com.ireadygo.app.gamelauncher.ui.base.BaseActivity;
 import com.ireadygo.app.gamelauncher.ui.detail.GameDetailActivity;
 import com.ireadygo.app.gamelauncher.ui.store.StoreAppNormalAdapter;
+import com.ireadygo.app.gamelauncher.ui.store.StoreEmptyView;
 import com.ireadygo.app.gamelauncher.ui.widget.AbsHListView;
 import com.ireadygo.app.gamelauncher.ui.widget.AbsHListView.OnScrollListener;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
@@ -27,6 +29,7 @@ import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
+import com.ireadygo.app.gamelauncher.utils.Utils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
@@ -43,6 +46,7 @@ public class CollectionDetailActivity extends BaseActivity implements OnClickLis
 	private View mGobackView;
 	private String mPosterBgUrl;
 	private View mView;
+	private Dialog mLoadingProgress;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,22 +68,23 @@ public class CollectionDetailActivity extends BaseActivity implements OnClickLis
 		}
 		if (!TextUtils.isEmpty(mPosterBgUrl)) {
 			ImageLoader.getInstance().loadImage(mPosterBgUrl, new ImageLoadingListener() {
-				
+
 				@Override
 				public void onLoadingStarted(String arg0, View arg1) {
 				}
-				
+
 				@Override
 				public void onLoadingFailed(String arg0, View arg1, FailReason arg2) {
 				}
-				
+
 				@Override
 				public void onLoadingComplete(String arg0, View arg1, Bitmap arg2) {
 					mView.setBackground(new BitmapDrawable(arg2));
 				}
+
 				@Override
 				public void onLoadingCancelled(String arg0, View arg1) {
-					
+
 				}
 			});
 		}
@@ -112,6 +117,9 @@ public class CollectionDetailActivity extends BaseActivity implements OnClickLis
 		if (!mLoadingData && mCollectionId > 0) {
 			new LoadCollectionDetailTask().execute(mCollectionId + "", mPageIndex + "");
 			mLoadingData = true;
+			if(mApps == null || mApps.isEmpty()){
+				showLoadingProgress();
+			}
 		}
 	}
 
@@ -120,9 +128,9 @@ public class CollectionDetailActivity extends BaseActivity implements OnClickLis
 		finish();
 		return true;
 	}
-	
-	private class LoadCollectionDetailTask extends AsyncTask<String, Void, List<AppEntity>> {
 
+	private class LoadCollectionDetailTask extends AsyncTask<String, Void, List<AppEntity>> {
+		
 		@Override
 		protected List<AppEntity> doInBackground(String... params) {
 			if (params == null || params.length < 2) {
@@ -140,6 +148,10 @@ public class CollectionDetailActivity extends BaseActivity implements OnClickLis
 
 		@Override
 		protected void onPostExecute(List<AppEntity> result) {
+			dimissLoadingProgress();
+			StoreEmptyView emptyView = new StoreEmptyView(CollectionDetailActivity.this);
+			emptyView.getTitleView().setText(R.string.store_load_empty_title);
+			Utils.setEmptyView(emptyView, mListView);
 			if (result == null || result.isEmpty()) {
 				mLoadingData = false;
 				return;
@@ -185,4 +197,19 @@ public class CollectionDetailActivity extends BaseActivity implements OnClickLis
 		}
 	}
 
+	protected void showLoadingProgress() {
+		if (mLoadingProgress == null) {
+			mLoadingProgress = Utils.createLoadingDialog(this);
+			mLoadingProgress.setCancelable(false);
+		}
+		if (!mLoadingProgress.isShowing()) {
+			mLoadingProgress.show();
+		}
+	}
+
+	protected void dimissLoadingProgress() {
+		if (mLoadingProgress != null && mLoadingProgress.isShowing()) {
+			mLoadingProgress.dismiss();
+		}
+	}
 }

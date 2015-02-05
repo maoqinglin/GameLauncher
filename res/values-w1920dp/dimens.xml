@@ -36,6 +36,7 @@
     <dimen name="tips_margin_right">0dp</dimen>
 
     <!-- 应用详情 -->
+    <dimen name="detail_list_padding_top_vertical">72dp</dimen>
     <dimen name="detail_title_width">336dp</dimen>
     <dimen name="detail_title_height">90dp</dimen>
     <dimen name="detail_title_margin_bottom">45dp</dimen>
@@ -75,6 +76,8 @@
     <dimen name="store_item_bg_width">444dp</dimen>
     <dimen name="store_item_bg_height">510dp</dimen>
     <dimen name="store_diver_width">24dp</dimen>
+    <dimen name="store_margin_top">50dp</dimen>
+    <dimen name="store_content_padding_top">40dp</dimen>
     
     <!-- 免商店-详情-->
     <dimen name="store_options_width">192dp</dimen>
@@ -135,6 +138,7 @@
     <dimen name="collection_item_icon_width">771dp</dimen>
     <dimen name="collection_item_icon_height">456dp</dimen>
     <dimen name="collection_detail_list_height">510dp</dimen>
+    <dimen name="store_collection_padding_top">60dp</dimen>
 
     <!-- 免商店-设置 -->
     <dimen name="store_settings_listview_margin_right">0dp</dimen>
@@ -172,7 +176,7 @@
     <dimen name="mygame_game_text_size">42sp</dimen>
     <dimen name="mygame_game_name_height">75dp</dimen>
     <dimen name="mygame_game_name_padding">9dp</dimen>
-    <dimen name="emptyview_margin_top">35dp</dimen>
+    <dimen name="mygame_emptyview_margin_bottom">320dp</dimen>
     <!-- 设定 -->
     <dimen name="settings_icon_bg_width">300dp</dimen>
     <dimen name="settings_icon_bg_height">375dp</dimen>
@@ -381,10 +385,10 @@
 	<!-- 自定义Dialog -->
 	<dimen name="confirm_dialog_width">1022dp</dimen>
 	<dimen name="confirm_dialog_height">599dp</dimen>
-	<dimen name="confirm_dialog_layout_padding_left">15dp</dimen>
-	<dimen name="confirm_dialog_layout_padding_right">15dp</dimen>
-	<dimen name="confirm_dialog_layout_padding_top">27dp</dimen>
-	<dimen name="confirm_dialog_layout_padding_bottom">27dp</dimen>
+	<dimen name="confirm_dialog_layout_padding_left">33dp</dimen>
+	<dimen name="confirm_dialog_layout_padding_right">33dp</dimen>
+	<dimen name="confirm_dialog_layout_padding_top">33dp</dimen>
+	<dimen name="confirm_dialog_layout_padding_bottom">33dp</dimen>
 	<dimen name="confirm_dialog_prompt_margin_left">60dp</dimen>
 	<dimen name="confirm_dialog_prompt_margin_top">48dp</dimen>
 	<dimen name="confirm_dialog_framelayout_margin_left">60dp</dimen>
@@ -392,7 +396,8 @@
 	<dimen name="confirm_dialog_framelayout_padding_top">15dp</dimen>
 	<dimen name="confirm_dialog_framelayout_padding_bottom">15dp</dimen>
 	<dimen name="confirm_dialog_line_margin_top">48dp</dimen>
-	<dimen name="confirm_dialog_view_width">3dp</dimen>
+	<dimen name="confirm_dialog_line_width">3dp</dimen>
+	<dimen name="confirm_dialog_line_padding_left">0dp</dimen>
 	<dimen name="confirm_dialog_view_height">105dp</dimen>
 	<dimen name="confirm_dialog_view_margin_bottom">15dp</dimen>
 	<dimen name="confirm_dialog_view_margin_top">15dp</dimen>

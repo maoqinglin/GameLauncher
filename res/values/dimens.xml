@@ -381,7 +381,7 @@
 	<dimen name="confirm_dialog_framelayout_padding_top">5dp</dimen>
 	<dimen name="confirm_dialog_framelayout_padding_bottom">5dp</dimen>
 	<dimen name="confirm_dialog_line_margin_top">16dp</dimen>
-	<dimen name="confirm_dialog_view_width">1dp</dimen>
+	<dimen name="confirm_dialog_line_width">1dp</dimen>
 	<dimen name="confirm_dialog_view_height">35dp</dimen>
 	<dimen name="confirm_dialog_view_margin_bottom">5dp</dimen>
 	<dimen name="confirm_dialog_view_margin_top">5dp</dimen>

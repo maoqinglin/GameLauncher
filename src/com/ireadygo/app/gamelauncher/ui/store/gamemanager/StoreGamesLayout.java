@@ -8,10 +8,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.ireadygo.app.gamelauncher.GameLauncher;
 import com.ireadygo.app.gamelauncher.GameLauncherApplication;
@@ -36,6 +34,7 @@ import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemSelectedListene
 import com.ireadygo.app.gamelauncher.ui.widget.ExpandableHListView;
 import com.ireadygo.app.gamelauncher.ui.widget.ExpandableHListView.OnChildClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.ExpandableHListView.OnGroupClickListener;
+import com.ireadygo.app.gamelauncher.utils.Utils;
 
 public class StoreGamesLayout extends StoreBaseContentLayout {
 
@@ -87,14 +86,7 @@ public class StoreGamesLayout extends StoreBaseContentLayout {
 
 		mStoreGameManagerExpandList = (ExpandableHListView) findViewById(R.id.store_gamemanager_expandlist);
 		View emptyView = new StoreEmptyView(mContext);
-		LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		params.gravity = Gravity.CENTER;
-		emptyView.setLayoutParams(params);
-		emptyView.setVisibility(View.GONE);
-		if(emptyView.getParent() == null){
-			((ViewGroup)mStoreGameManagerExpandList.getParent()).addView(emptyView);
-		}
-		mStoreGameManagerExpandList.setEmptyView(emptyView);
+		Utils.setEmptyView(emptyView, mStoreGameManagerExpandList);
 		mAdapter = new DownloadManageAdapter(mContext, mStoreGameManagerExpandList, downloadingList, updatableList,
 				launchableList);
 		mAdapter.setDataRefreshListener(mDataRefreshListener);

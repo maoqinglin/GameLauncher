@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:clipChildren="false"
     android:clipToPadding="false"
+    android:paddingTop="@dimen/store_margin_top"
     android:orientation="vertical" >
 
     <com.ireadygo.app.gamelauncher.ui.store.StoreOptionsLayout
@@ -14,6 +15,7 @@
     </com.ireadygo.app.gamelauncher.ui.store.StoreOptionsLayout>
 
     <com.ireadygo.app.gamelauncher.ui.widget.CustomFrameLayout
+        android:paddingTop="@dimen/store_content_padding_top"
         android:id="@+id/storeContentLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"

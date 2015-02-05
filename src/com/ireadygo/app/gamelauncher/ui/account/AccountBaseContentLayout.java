@@ -49,16 +49,17 @@ public abstract class AccountBaseContentLayout extends KeyEventLayout {
 	public int getLayoutTag(){
 		return mLayoutTag;
 	}
-	
-	@Override
-	public boolean onMoonKey() {
-		getActivity().getOptionsLayout().getCurrentItem().requestFocus();
-		return super.onMoonKey();
-	}
+//	
+//	@Override
+//	public boolean onMoonKey() {
+//		getActivity().getOptionsLayout().getCurrentItem().requestFocus();
+//		return super.onMoonKey();
+//	}
 
 	@Override
 	public boolean onBackKey() {
-		return onMoonKey();
+		getActivity().getOptionsLayout().getCurrentItem().requestFocus();
+		return true;
 	}
 
 }

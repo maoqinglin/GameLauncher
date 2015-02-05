@@ -3,19 +3,27 @@ package com.ireadygo.app.gamelauncher.ui.store;
 import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
 import android.animation.ObjectAnimator;
+import android.app.Dialog;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.FrameLayout.LayoutParams;
+import android.widget.ProgressBar;
 
 import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
 import com.ireadygo.app.gamelauncher.ui.base.KeyEventLayout;
+import com.ireadygo.app.gamelauncher.ui.widget.HListView;
+import com.ireadygo.app.gamelauncher.utils.Utils;
 
 public abstract class StoreBaseContentLayout extends KeyEventLayout {
 	private int mLayoutTag;
 	private GameInfoHub mGameInfoHub;
 	// private StoreOptionsLayout mOptionsLayout;
 	private StoreDetailActivity mStoreFragment;
+	private Dialog mLoadingProgress;
 
 	public StoreBaseContentLayout(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -90,7 +98,7 @@ public abstract class StoreBaseContentLayout extends KeyEventLayout {
 		getActivity().getOptionsLayout().getCurrentSelectedView().requestFocus();
 		return true;
 	}
-	
+
 	@Override
 	public boolean onWaterKey() {
 		return true;
@@ -99,5 +107,21 @@ public abstract class StoreBaseContentLayout extends KeyEventLayout {
 	@Override
 	public boolean onMountKey() {
 		return true;
+	}
+
+	protected void showLoadingProgress() {
+		if(mLoadingProgress == null){
+			mLoadingProgress = Utils.createLoadingDialog(getContext());
+			mLoadingProgress.setCancelable(false);
+		}
+		if(!mLoadingProgress.isShowing()){
+			mLoadingProgress.show();
+		}
+	}
+	
+	protected void dimissLoadingProgress() {
+		if(mLoadingProgress != null && mLoadingProgress.isShowing()){
+			mLoadingProgress.dismiss();
+		}
 	}
 }

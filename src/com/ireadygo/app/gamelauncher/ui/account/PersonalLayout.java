@@ -5,7 +5,6 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Handler;
@@ -17,6 +16,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
@@ -43,11 +43,11 @@ import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserHeaderImgItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserInfoItem;
 import com.ireadygo.app.gamelauncher.ui.SnailKeyCode;
-import com.ireadygo.app.gamelauncher.ui.account.AccountPersonalLayout.PhotoHolder;
 import com.ireadygo.app.gamelauncher.utils.NetworkUtils;
 import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
+import com.ireadygo.app.gamelauncher.utils.Utils;
 
-public class PersonalLayout extends AccountBaseContentLayout implements OnClickListener {
+public class PersonalLayout extends AccountBaseContentLayout implements OnClickListener ,OnFocusChangeListener{
 	private static final int SAVE_SUCCESS = 1;
 	private static final int SAVE_FAILED = 2;
 	private static final int IMAGE_LOAD_SUCCESS = 3;// 加载完成一张图片
@@ -65,7 +65,7 @@ public class PersonalLayout extends AccountBaseContentLayout implements OnClickL
 	private View mLogoutBtn;// 退出账号按钮
 
 	private UserInfoItem mUserInfoItem;
-	private ProgressDialog mProgressDialog;
+	private Dialog mProgressDialog;
 
 	private Dialog systemPhotoDialog;
 	private GridView photoGrid;
@@ -123,24 +123,24 @@ public class PersonalLayout extends AccountBaseContentLayout implements OnClickL
 
 		mModifyPwdBtn = findViewById(R.id.personal_modify_pwd);
 		mModifyPwdBtn.setOnClickListener(this);
+		mModifyPwdBtn.setOnFocusChangeListener(this);
 
 		mSaveBtn = findViewById(R.id.personal_save);
 		mSaveBtn.setOnClickListener(this);
+		mSaveBtn.setOnFocusChangeListener(this);
 
 		mAgeSpinner = (Spinner) findViewById(R.id.personal_age);
 		mAgeLayout = findViewById(R.id.personal_age_layout);
-		mAgeLayout.setOnClickListener(this);
 
 		mNicknameView = (EditText) findViewById(R.id.personal_nickname);
 		mNicknameLayout = findViewById(R.id.personal_nickname_layout);
-		mNicknameLayout.setOnClickListener(this);
 
 		mSexSpinner = (Spinner) findViewById(R.id.personal_sex);
 		mSexLayout = findViewById(R.id.personal_sex_layout);
-		mSexLayout.setOnClickListener(this);
 
 		mLogoutBtn = findViewById(R.id.personal_logout_btn);
 		mLogoutBtn.setOnClickListener(this);
+		mLogoutBtn.setOnFocusChangeListener(this);
 
 		mUserInfoItem = GameLauncherApplication.getApplication().getUserInfoItem();
 		updateData(mUserInfoItem);
@@ -270,18 +270,21 @@ public class PersonalLayout extends AccountBaseContentLayout implements OnClickL
 
 	protected void showProgressDialog(String msg) {
 		if (mProgressDialog == null) {
-			mProgressDialog = new ProgressDialog(getContext());
-			mProgressDialog.setMessage(msg);
-			mProgressDialog.setCancelable(false);
+			mProgressDialog = Utils.createLoadingDialog(getContext());
+//			mProgressDialog.setMessage(msg);
+			mProgressDialog.setCancelable(true);
+//			mProgressDialog.setIndeterminateDrawable(getResources().getDrawable(R.drawable.loading_progress));
 		}
-		mProgressDialog.show();
+		if(!mProgressDialog.isShowing()){
+			mProgressDialog.show();
+		}
 	}
 
 	protected void hideProgressDialog() {
 		if (isActivityDestoryed()) {
 			return;
 		}
-		if (mProgressDialog != null) {
+		if (mProgressDialog != null && mProgressDialog.isShowing()) {
 			mProgressDialog.dismiss();
 		}
 	}
@@ -547,4 +550,16 @@ public class PersonalLayout extends AccountBaseContentLayout implements OnClickL
 
 		}
 	};
+	
+	public static class PhotoHolder {
+		ImageView photoView;
+		UserHeaderImgItem imgItem;
+	}
+
+	@Override
+	public void onFocusChange(View v, boolean hasFocus) {
+		if(hasFocus && v.isInTouchMode()){
+			v.performClick();
+		}
+	}
 }

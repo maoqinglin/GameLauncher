@@ -12,6 +12,6 @@
     android:nextFocusRight="@id/storeCollectionList"
     android:nextFocusUp="@+id/storeOptionsCollection"
     android:paddingBottom="@dimen/store_detail_padding_bottom"
-    android:paddingTop="@dimen/store_detail_padding_top" >
+    android:paddingTop="@dimen/store_collection_padding_top" >
 
 </com.ireadygo.app.gamelauncher.ui.widget.HListView>

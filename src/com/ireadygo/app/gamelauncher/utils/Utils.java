@@ -22,6 +22,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import android.app.ActivityManager;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -30,17 +31,23 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.widget.FrameLayout.LayoutParams;
 
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.download.DownloadException;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.appstore.install.InstallMessage;
 import com.ireadygo.app.gamelauncher.appstore.manager.GameManager.GameManagerException;
+import com.ireadygo.app.gamelauncher.ui.widget.HListView;
 
 /**
  * Class containing some static utility methods.
@@ -342,5 +349,27 @@ public class Utils {
 				c[i] = (char) (c[i] - 65248);
 		}
 		return new String(c);
+	}
+	
+	public static Dialog createLoadingDialog(Context context) {
+		LayoutInflater inflater = LayoutInflater.from(context);
+		View layout = inflater.inflate(R.layout.loading_progress_dialog, null);// 得到加载view
+		// main.xml中的ImageView
+		ImageView spaceshipImage = (ImageView) layout.findViewById(R.id.progress_image);
+		Dialog loadingDialog = new Dialog(context, R.style.loading_progress_dialog);// 创建自定义样式dialog
+		loadingDialog.setContentView(layout, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+				LinearLayout.LayoutParams.MATCH_PARENT));// 设置布局
+		return loadingDialog;
+	}
+	
+	public static void setEmptyView(View emptyView, HListView listView) {
+		LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		params.gravity = Gravity.CENTER;
+		emptyView.setLayoutParams(params);
+		emptyView.setVisibility(View.GONE);
+		if (emptyView.getParent() == null) {
+			((ViewGroup) listView.getParent()).addView(emptyView);
+		}
+		listView.setEmptyView(emptyView);
 	}
 }

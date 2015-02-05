@@ -5,6 +5,7 @@
     <color name="white_first_transparency">#7FFFFFFF</color>
     <color name="white_second_transparency">#4CFFFFFF</color>
 	<color name="black">#FF1c1c1c</color>
+    <color name="black_zero_transparency">#B21c1c1c</color>
     <color name="black_first_transparency">#7F1c1c1c</color>
     <color name="black_second_transparency">#4C1c1c1c</color>
     <color name="red_normal">#fc5353</color>
