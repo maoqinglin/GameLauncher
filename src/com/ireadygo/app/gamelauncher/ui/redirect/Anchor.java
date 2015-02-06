@@ -9,6 +9,7 @@ import com.ireadygo.app.gamelauncher.GameLauncherApplication;
 import com.ireadygo.app.gamelauncher.ui.account.AccountDetailActivity;
 import com.ireadygo.app.gamelauncher.ui.detail.GameDetailActivity;
 import com.ireadygo.app.gamelauncher.ui.store.StoreDetailActivity;
+import com.ireadygo.app.gamelauncher.ui.store.category.CategoryDetailActivity;
 import com.ireadygo.app.gamelauncher.ui.store.collection.CollectionDetailActivity;
 
 public class Anchor implements Serializable {
@@ -35,6 +36,8 @@ public class Anchor implements Serializable {
 		Class<? extends Activity> clazz = null;
 		switch (destination) {
 		case CATEGORY_DETAIL:
+			clazz = CategoryDetailActivity.class;
+			break;
 		case COLLECTION_DETAIL:
 			clazz = CollectionDetailActivity.class;
 			break;

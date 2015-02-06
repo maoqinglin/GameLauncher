@@ -16,6 +16,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.appstore.info.item.BannerItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.BindPhoneItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryItem;
+import com.ireadygo.app.gamelauncher.appstore.info.item.CollectionItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.FeeConfigItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.FreeFlowStatusItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.KeywordItem;
@@ -58,7 +59,7 @@ public class LocalInfo implements IGameInfo {
 	}
 
 	@Override
-	public ArrayList<AppEntity> obtainChildren(String id, int page) throws InfoSourceException {
+	public ArrayList<AppEntity> obtainChildren(int dataType, String id, int page) throws InfoSourceException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -79,8 +80,8 @@ public class LocalInfo implements IGameInfo {
 	}
 
 	@Override
-	public List<CategoryItem> obtainCollection(int page) throws InfoSourceException {
-		List<CategoryItem> collectionItems = getCachedCollectionsFrmFile();
+	public List<CollectionItem> obtainCollection(int page) throws InfoSourceException {
+		List<CollectionItem> collectionItems = getCachedCollectionsFrmFile();
 		if (collectionItems.size() == 0) {
 			throw new InfoSourceException(InfoSourceException.MSG_NO_CACHED_DATA);
 		}
@@ -97,7 +98,7 @@ public class LocalInfo implements IGameInfo {
 	}
 
 	@Override
-	public List<String> obtainKeywordsByWord(String word) throws InfoSourceException {
+	public List<String> obtainKeywordsByWord(String word, int iPlatformId, String cAppType) throws InfoSourceException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -109,7 +110,7 @@ public class LocalInfo implements IGameInfo {
 	}
 
 	@Override
-	public List<AppEntity> searchByKeyword(String word, int page, int number) throws InfoSourceException {
+	public List<AppEntity> searchByKeyword(String word, int page, int number, int iPlatformId, String cAppType, String cDynamic) throws InfoSourceException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -148,8 +149,7 @@ public class LocalInfo implements IGameInfo {
 	}
 
 	@Override
-	public void saveUserInfo(String url, String nickName, String sex, String age, String email,
-			String birthday) throws InfoSourceException {
+	public void saveUserInfo(String nickName, String cSex, String cPhoto, String cPhone, String birthday) throws InfoSourceException {
 		// TODO Auto-generated method stub
 		
 	}
@@ -246,11 +246,11 @@ public class LocalInfo implements IGameInfo {
 		int length = Math.min(categorys.size(), MAX_CACHED_ITEMS);
 		for (int i = 0; i < length; i++) {
 			CategoryItem item = categorys.get(i);
-			sb.append(item.getId())
+			sb.append(item.getCategoryId())
 			.append(ITEM_INNER_DIVIDER)
-			.append(item.getItemName())
+			.append(item.getCatetoryName())
 			.append(ITEM_INNER_DIVIDER)
-			.append(item.getDecription())
+			.append(item.getCategoryDes())
 			.append(ITEM_INNER_DIVIDER)
 			.append(item.getIconUrl())
 			.append(ITEM_INNER_DIVIDER)
@@ -273,7 +273,7 @@ public class LocalInfo implements IGameInfo {
 		for (String category : categotyList) {
 			String[] categoryItems = category.split(ITEM_INNER_DIVIDER);
 			if (categoryItems.length == 4) {
-				CategoryItem item = new CategoryItem(Long.parseLong(categoryItems[0]),
+				CategoryItem item = new CategoryItem(Integer.valueOf((categoryItems[0])),
 						categoryItems[1],
 						categoryItems[2],
 						categoryItems[3],
@@ -285,7 +285,7 @@ public class LocalInfo implements IGameInfo {
 		return result;
 	}
 
-	public void cachedCollectionToFile(List<CategoryItem> collections) {
+	public void cachedCollectionToFile(List<CollectionItem> collections) {
 		if (collections == null || collections.size() == 0) {
 			return;
 		}
@@ -293,12 +293,12 @@ public class LocalInfo implements IGameInfo {
 		StringBuffer sb = new StringBuffer();
 		int length = Math.min(collections.size(), MAX_CACHED_ITEMS);
 		for (int i = 0; i < length; i++) {
-			CategoryItem item = collections.get(i);
-			sb.append(item.getId())
+			CollectionItem item = collections.get(i);
+			sb.append(item.getCollectionId())
 			.append(ITEM_INNER_DIVIDER)
-			.append(item.getItemName())
+			.append(item.getCollectionName())
 			.append(ITEM_INNER_DIVIDER)
-			.append(item.getDecription())
+			.append(item.getCollectionDes())
 			.append(ITEM_INNER_DIVIDER)
 			.append(item.getIconUrl())
 			.append(ITEM_INNER_DIVIDER)
@@ -311,17 +311,17 @@ public class LocalInfo implements IGameInfo {
 		editor.commit();
 	}
 
-	private List<CategoryItem> getCachedCollectionsFrmFile() {
+	private List<CollectionItem> getCachedCollectionsFrmFile() {
 		String collections = mContext.getSharedPreferences(CACHED_COLLECTIONS_NAME,Context.MODE_PRIVATE).getString(CACHED_COLLECTIONS, "");
 		if (TextUtils.isEmpty(collections)) {
-			return new ArrayList<CategoryItem>();
+			return new ArrayList<CollectionItem>();
 		}
 		String[] collectionList = collections.split(ITEM_DIVIDER);
-		ArrayList<CategoryItem> result = new ArrayList<CategoryItem>();
+		ArrayList<CollectionItem> result = new ArrayList<CollectionItem>();
 		for (String collection : collectionList) {
 			String[] collectionItems = collection.split(ITEM_INNER_DIVIDER);
 			if (collectionItems.length == 6) {
-				CategoryItem item = new CategoryItem(Long.parseLong(collectionItems[0]),
+				CollectionItem item = new CollectionItem(Integer.valueOf(collectionItems[0]),
 						collectionItems[1],
 						collectionItems[2],
 						collectionItems[3],
@@ -464,7 +464,7 @@ public class LocalInfo implements IGameInfo {
 			jsonObject.put(BANNER_JSON_KEY.CPicUrl, bannerItem.getCPicUrl());
 			jsonObject.put(BANNER_JSON_KEY.CHtmlUrl, bannerItem.getCHtmlUrl());
 			jsonObject.put(BANNER_JSON_KEY.IRefId, bannerItem.getIRefId());
-			jsonObject.put(BANNER_JSON_KEY.SGameName, bannerItem.getSGameName());
+			jsonObject.put(BANNER_JSON_KEY.SAppName, bannerItem.getSAppName());
 			jsonObject.put(BANNER_JSON_KEY.CIcon, bannerItem.getCIcon());
 			jsonObject.put(BANNER_JSON_KEY.CVersionName, bannerItem.getCVersionName());
 			jsonObject.put(BANNER_JSON_KEY.IVersionCode, bannerItem.getIVersionCode());
@@ -473,6 +473,12 @@ public class LocalInfo implements IGameInfo {
 			jsonObject.put(BANNER_JSON_KEY.CMd5, bannerItem.getCMd5());
 			jsonObject.put(BANNER_JSON_KEY.CMark, bannerItem.getCMark());
 			jsonObject.put(BANNER_JSON_KEY.ISize, bannerItem.getISize());
+			
+			jsonObject.put(BANNER_JSON_KEY.NAppId, bannerItem.getNAppId());
+			jsonObject.put(BANNER_JSON_KEY.ICategoryId, bannerItem.getICategoryId());
+			jsonObject.put(BANNER_JSON_KEY.IBannerId, bannerItem.getIBannerId());
+			jsonObject.put(BANNER_JSON_KEY.CDownloadUrl, bannerItem.getCDownloadUrl());
+			jsonObject.put(BANNER_JSON_KEY.SPayDesc, bannerItem.getSPayDesc());
 			return jsonObject;
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -492,7 +498,7 @@ public class LocalInfo implements IGameInfo {
 		bannerItem.setCPicUrl(object.optString(BANNER_JSON_KEY.CPicUrl));
 		bannerItem.setCHtmlUrl(object.optString(BANNER_JSON_KEY.CHtmlUrl));
 		bannerItem.setIRefId(object.optInt(BANNER_JSON_KEY.IRefId));
-		bannerItem.setSGameName(object.optString(BANNER_JSON_KEY.SGameName));
+		bannerItem.setSAppName(object.optString(BANNER_JSON_KEY.SAppName));
 		bannerItem.setCIcon(object.optString(BANNER_JSON_KEY.CIcon));
 		bannerItem.setIVersionCode(object.optLong(BANNER_JSON_KEY.IVersionCode));
 		bannerItem.setCPackage(object.optString(BANNER_JSON_KEY.CPackage));
@@ -500,6 +506,12 @@ public class LocalInfo implements IGameInfo {
 		bannerItem.setCMd5(object.optString(BANNER_JSON_KEY.CMd5));
 		bannerItem.setCMark(object.optString(BANNER_JSON_KEY.CMark));
 		bannerItem.setISize(object.optInt(BANNER_JSON_KEY.ISize));
+		
+		bannerItem.setNAppId(object.optLong(BANNER_JSON_KEY.NAppId));
+		bannerItem.setICategoryId(object.optInt(BANNER_JSON_KEY.ICategoryId));
+		bannerItem.setIBannerId(object.optInt(BANNER_JSON_KEY.IBannerId));
+		bannerItem.setCDownloadUrl(object.optString(BANNER_JSON_KEY.CDownloadUrl));
+		bannerItem.setSPayDesc(object.optString(BANNER_JSON_KEY.SPayDesc));
 		return bannerItem;
 	}
 
@@ -537,7 +549,6 @@ public class LocalInfo implements IGameInfo {
 	public JSONObject KeywordItemToJsonObject(KeywordItem keywordItem) {
 		JSONObject jsonObject = new JSONObject();
 		try {
-			jsonObject.put(KEYWORD_JSON_KEY.CPosterIcon,keywordItem.getCPosterIcon());
 			jsonObject.put(KEYWORD_JSON_KEY.INum,keywordItem.getINum());
 			jsonObject.put(KEYWORD_JSON_KEY.NAppId,keywordItem.getNAppId());
 			jsonObject.put(KEYWORD_JSON_KEY.SKeyWord,keywordItem.getSKeyWord());
@@ -554,7 +565,6 @@ public class LocalInfo implements IGameInfo {
 			return keywordItem;
 		}
 
-		keywordItem.setCPosterIcon(object.optString(KEYWORD_JSON_KEY.CPosterIcon));
 		keywordItem.setINum(object.optInt(KEYWORD_JSON_KEY.INum));
 		keywordItem.setNAppId(object.optInt(KEYWORD_JSON_KEY.NAppId));
 		keywordItem.setSKeyWord(object.optString(KEYWORD_JSON_KEY.SKeyWord));
@@ -579,7 +589,7 @@ public class LocalInfo implements IGameInfo {
 		String CHtmlUrl = "CHtmlUrl"; // 静态页面url
 		String IRefId = "IRefId"; // 关联广告栏ID
 
-		String SGameName = "SGameName"; // 游戏名称
+		String SAppName = "SAppName"; // 游戏名称
 		String CIcon = "CIcon"; // 游戏图标
 		String CVersionName = "CVersionName"; // 当前版本名称
 		String IVersionCode = "IVersionCode"; // 当前版本号
@@ -588,6 +598,11 @@ public class LocalInfo implements IGameInfo {
 		String CMd5 = "CMd5"; // 文件MD5
 		String CMark = "CMark";//专题标识: 0:不显示	1:首发 2:合集 3:热门  4:推荐 5:独家  6:精品
 		String ISize = "ISize";//文件大小
+		String NAppId = "NAppId";
+		String IBannerId = "IBannerId";
+		String CDownloadUrl = "CDownloadUrl";
+		String ICategoryId = "ICategoryId";
+		String SPayDesc = "SPayDesc";
 	}
 
 	private interface KEYWORD_JSON_KEY {

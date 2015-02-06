@@ -14,6 +14,7 @@ import android.view.View;
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
 import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryItem;
+import com.ireadygo.app.gamelauncher.appstore.info.item.CollectionItem;
 import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
 import com.ireadygo.app.gamelauncher.ui.store.StoreBaseContentLayout;
 import com.ireadygo.app.gamelauncher.ui.store.StoreDetailActivity;
@@ -28,7 +29,7 @@ public class StoreCollectionLayout extends StoreBaseContentLayout {
 	public static final String EXTRA_POSTER_BG = "Poster_bg";
 	private HListView mAppListView;
 	private StoreCollectionAdapter mAdapter;
-	private List<CategoryItem> mAppList = new ArrayList<CategoryItem>();
+	private List<CollectionItem> mAppList = new ArrayList<CollectionItem>();
 
 	public StoreCollectionLayout(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -52,8 +53,8 @@ public class StoreCollectionLayout extends StoreBaseContentLayout {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				CategoryItem collection = mAppList.get(position);
-				startCollectionDetailActivity(collection.getId(),collection.getPosterBgUrl());
+				CollectionItem collection = mAppList.get(position);
+				startCollectionDetailActivity(collection.getCollectionId(),collection.getPosterBgUrl());
 			}
 
 		});
@@ -90,16 +91,16 @@ public class StoreCollectionLayout extends StoreBaseContentLayout {
 	public boolean onSunKey() {
 		int selectedIndex = mAppListView.getSelectedItemPosition();
 		if (selectedIndex > -1 && selectedIndex < mAdapter.getCount()) {
-			CategoryItem collection = mAppList.get(selectedIndex);
-			startCollectionDetailActivity(collection.getId(),collection.getPosterBgUrl());
+			CollectionItem collection = mAppList.get(selectedIndex);
+			startCollectionDetailActivity(collection.getCollectionId(),collection.getPosterBgUrl());
 		}
 		return super.onSunKey();
 	}
 
-	private class LoadCollectionTask extends AsyncTask<Integer, Void, List<CategoryItem>> {
+	private class LoadCollectionTask extends AsyncTask<Integer, Void, List<CollectionItem>> {
 
 		@Override
-		protected List<CategoryItem> doInBackground(Integer... params) {
+		protected List<CollectionItem> doInBackground(Integer... params) {
 			if (params == null || params.length == 0) {
 				return null;
 			}
@@ -116,11 +117,7 @@ public class StoreCollectionLayout extends StoreBaseContentLayout {
 		}
 
 		@Override
-		protected void onPostExecute(List<CategoryItem> result) {
-			dimissLoadingProgress();
-			StoreEmptyView emptyView = new StoreEmptyView(getContext());
-			emptyView.getTitleView().setText(R.string.store_load_empty_title);
-			Utils.setEmptyView(emptyView, mAppListView);
+		protected void onPostExecute(List<CollectionItem> result) {
 			if (isCancelled() || result == null || result.isEmpty()) {
 				return;
 			}

@@ -10,7 +10,6 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.content.Context;
-import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,48 +17,19 @@ import android.view.animation.AccelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ireadygo.app.gamelauncher.GameLauncherApplication;
 import com.ireadygo.app.gamelauncher.R;
-import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
+import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryItem;
 import com.ireadygo.app.gamelauncher.ui.BaseAnimatorAdapter;
 import com.ireadygo.app.gamelauncher.ui.Config;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class StoreCategoryAdapter extends BaseAnimatorAdapter {
-	private List<AppEntity> mAppList = new ArrayList<AppEntity>();
+	private List<CategoryItem> mAppList = new ArrayList<CategoryItem>();
 	private Context mContext;
 	private View mCurrentItemView;
 
-	private static int[][] sIconAndBgIds = {
-			{ R.drawable.category_icon2, R.drawable.category_icon_background_365b0b, 1 },
-			{ R.drawable.category_icon3, R.drawable.category_icon_background_1b4971, 6 },
-			{ R.drawable.category_icon4, R.drawable.category_icon_background_365b0b, 2 },
-			{ R.drawable.category_icon5, R.drawable.category_icon_background_2b2b55, 4 },
-			{ R.drawable.category_icon6, R.drawable.category_icon_background_483028, 7 },
-			{ R.drawable.category_icon7, R.drawable.category_icon_background_483028, 8 },
-			{ R.drawable.category_icon8, R.drawable.category_icon_background_365b0b, 5 },
-			{ R.drawable.category_icon9, R.drawable.category_icon_background_483028, 3 },
-			{ R.drawable.category_icon1, R.drawable.category_icon_background_2b2b55, 10010 } };
-
-	private static List<Category> sCategories = new ArrayList<StoreCategoryAdapter.Category>();
-
-	static {
-		Resources resources = GameLauncherApplication.getApplication().getResources();
-		String[] titles = resources.getStringArray(R.array.category_titles);
-		String[] intros = resources.getStringArray(R.array.category_intros);
-		for (int i = 0; i < sIconAndBgIds.length; i++) {
-			Category category = new Category();
-			int[] iconAndBgId = sIconAndBgIds[i];
-			category.iconId = iconAndBgId[0];
-			category.bgId = iconAndBgId[1];
-			category.id = iconAndBgId[2];
-			category.title = titles[i];
-			category.intro = intros[i];
-			sCategories.add(category);
-		}
-	}
-
-	public StoreCategoryAdapter(List<AppEntity> appList, HListView mHListView, Context context) {
+	public StoreCategoryAdapter(List<CategoryItem> appList, HListView mHListView, Context context) {
 		super(mHListView);
 		if (appList != null) {
 			this.mAppList = appList;
@@ -71,7 +41,7 @@ public class StoreCategoryAdapter extends BaseAnimatorAdapter {
 
 	@Override
 	public int getCount() {
-		return sIconAndBgIds.length;
+		return mAppList.size();
 	}
 
 	@Override
@@ -99,16 +69,12 @@ public class StoreCategoryAdapter extends BaseAnimatorAdapter {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		Category category = sCategories.get(position);
-		holder.icon.setImageResource(category.iconId);
-		holder.title.setText(category.title);
-		holder.intro.setText(category.intro);
-		holder.background.setImageResource(category.bgId);
+		CategoryItem categoryItem = mAppList.get(position);
+		String iconUrl = categoryItem.getIconUrl();
+		ImageLoader.getInstance().displayImage(iconUrl, holder.icon);
+		holder.title.setText(categoryItem.getCatetoryName());
+		holder.intro.setText(categoryItem.getCategoryDes());
 		return convertView;
-	}
-
-	public int getCategoryId(int position) {
-		return sCategories.get(position).id;
 	}
 
 	class ViewHolder {
@@ -117,14 +83,6 @@ public class StoreCategoryAdapter extends BaseAnimatorAdapter {
 		TextView title;
 		TextView intro;
 		View titleLayout;
-	}
-
-	private static class Category {
-		int iconId;
-		int bgId;
-		String title;
-		String intro;
-		int id;
 	}
 
 	@Override
@@ -156,7 +114,7 @@ public class StoreCategoryAdapter extends BaseAnimatorAdapter {
 		AnimatorListener listener = new AnimatorListenerAdapter() {
 			@Override
 			public void onAnimationStart(Animator animation) {
-				holder.background.setImageResource(sCategories.get(position).bgId);
+//				holder.background.setImageResource(sCategories.get(position).bgId);
 			}
 		};
 		return createAnimator(holder, listener, 0.333f, 1, 1, 1, 0.9f,

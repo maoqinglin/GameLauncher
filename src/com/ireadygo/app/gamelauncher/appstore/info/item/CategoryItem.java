@@ -2,34 +2,43 @@ package com.ireadygo.app.gamelauncher.appstore.info.item;
 
 public class CategoryItem extends AppEntity{
 	private static final long serialVersionUID = -5850512530441575140L;
-	private long id;
-	private String itemName;
-	private String decription;
+	private int categoryId;
+	private String catetoryName;
+	private String categoryDes;
 	private String iconUrl;
 
-	public CategoryItem(long categoryId,String categoryName,String categoryDec,String categoryUrl,String posterIcon,String posterBg) {
-		setId(categoryId);
-		setItemName(categoryName);
-		setDecription(categoryDec);
+	public CategoryItem(int categoryId, String categoryName, String categoryDec, String categoryUrl, String posterIcon,
+			String posterBg) {
+		setCategoryId(categoryId);
+		setCatetoryName(categoryName);
+		setCategoryDes(categoryDec);
 		setIconUrl(categoryUrl);
 		setPosterIconUrl(posterIcon);
 		setPosterBgUrl(posterBg);
 	}
 
-	public long getId() {
-		return id;
+	public int getCategoryId() {
+		return categoryId;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
 	}
 
-	public String getDecription() {
-		return decription;
+	public String getCatetoryName() {
+		return catetoryName;
 	}
 
-	public void setDecription(String decription) {
-		this.decription = decription;
+	public void setCatetoryName(String catetoryName) {
+		this.catetoryName = catetoryName;
+	}
+
+	public String getCategoryDes() {
+		return categoryDes;
+	}
+
+	public void setCategoryDes(String categoryDes) {
+		this.categoryDes = categoryDes;
 	}
 
 	public String getIconUrl() {
@@ -39,15 +48,5 @@ public class CategoryItem extends AppEntity{
 	public void setIconUrl(String iconUrl) {
 		this.iconUrl = iconUrl;
 	}
-
-	public String getItemName() {
-		return itemName;
-	}
-
-	public void setItemName(String itemName) {
-		this.itemName = itemName;
-	}
-
-	
 
 }

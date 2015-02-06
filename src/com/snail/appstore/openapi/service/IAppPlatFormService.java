@@ -28,7 +28,7 @@ public interface IAppPlatFormService {
 	 * @throws HttpStatusCodeException
 	 *             , JSONException, Exception
 	 */
-	public ResultVO getGameList(String sKeyWord, Integer currentPage, int number) throws HttpStatusCodeException,
+	public ResultVO getGameList(String sKeyWord, Integer currentPage, int number,int iPlatformId, String cAppType, String cDynamic) throws HttpStatusCodeException,
 		JSONException, Exception;
 
 	/**
@@ -40,7 +40,7 @@ public interface IAppPlatFormService {
 	 * @throws HttpStatusCodeException
 	 *             , JSONException, Exception
 	 */
-	public ResultVO getKeywordList(String sKeyWord) throws HttpStatusCodeException, JSONException, Exception;
+	public ResultVO getKeywordList(String sKeyWord, int iPlatformId, String cAppType) throws HttpStatusCodeException, JSONException, Exception;
 
 	/**
 	 * 获取关键字数量 GET
@@ -85,6 +85,18 @@ public interface IAppPlatFormService {
 		Exception;
 
 	/**
+	 * 
+	 * @param nCollectionId 合集ID
+	 * @param currentPage 当前页码
+	 * @return
+	 * @throws HttpStatusCodeException
+	 * @throws JSONException
+	 * @throws Exception
+	 */
+	public ResultVO getAppListByCollection(Long nCollectionId, Integer currentPage) throws HttpStatusCodeException,
+			JSONException, Exception;
+
+	/**
 	 * 获取游戏详情 GET
 	 * 
 	 * @param nAppId
@@ -123,17 +135,17 @@ public interface IAppPlatFormService {
 	public ResultVO getBannerList(Integer currentPage) throws HttpStatusCodeException, JSONException, Exception;
 
 	/**
-	 * 获取应用更新列表
 	 * 
-	 * @param cPackages
-	 *            应用包名，以逗号分隔
-	 * @param iVersioncodes
-	 *            相匹配的应用当前版本号，以逗号分隔
+	 * @param cPackages 应用包名，以逗号分隔
+	 * @param iVersioncodes 相匹配的应用当前版本号，以逗号分隔
+	 * @param iPlatFormId 
+	 * @param cAppType 应用类型 1,游戏; 2, 应用 为空则返回所有
 	 * @return
 	 * @throws HttpStatusCodeException
-	 *             , JSONException, Exception
+	 * @throws JSONException
+	 * @throws Exception
 	 */
-	public ResultVO getAppUpdateList(String cPackages, String iVersioncodes, String cMainType) throws HttpStatusCodeException, JSONException, Exception;
+	public ResultVO getAppUpdateList(String cPackages, String iVersioncodes, String iPlatFormId, String cAppType) throws HttpStatusCodeException, JSONException, Exception;
 
 	/**
 	 * 获取应用匹配列表
@@ -146,8 +158,7 @@ public interface IAppPlatFormService {
 	 * @throws HttpStatusCodeException
 	 *             , JSONException, Exception
 	 */
-	public ResultVO getAppMappingList(String cPackages, String iVersioncodes, String cMainType) throws HttpStatusCodeException, JSONException, Exception;
-
+	public ResultVO getAppMappingList(String cPackages, String iVersioncodes, String iPlatFormId, String cAppType) throws HttpStatusCodeException, JSONException, Exception;
 	/**
 	 * 获取用户头像列表
 	 * 
@@ -191,7 +202,7 @@ public interface IAppPlatFormService {
 	 * @throws HttpStatusCodeException
 	 */
 	public ResultVO
-		saveUserInfo(String url, String nickName, String sex, String age, String email, String birthday)
+		saveUserInfo(String nickName, String cSex, String cPhoto, String cPhone, String birthday)
 			throws HttpStatusCodeException, Exception;
 
 	/**

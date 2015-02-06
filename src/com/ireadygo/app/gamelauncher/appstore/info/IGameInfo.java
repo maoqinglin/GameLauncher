@@ -8,6 +8,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.appstore.info.item.BannerItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.BindPhoneItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryItem;
+import com.ireadygo.app.gamelauncher.appstore.info.item.CollectionItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.FeeConfigItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.FreeFlowStatusItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.KeywordItem;
@@ -26,7 +27,7 @@ public interface IGameInfo {
 	int obtainChildrenCount(String parentItemId) throws InfoSourceException;
 
 	//获取指定分类的应用列表
-	ArrayList<AppEntity> obtainChildren(String id,int page) throws InfoSourceException;
+	ArrayList<AppEntity> obtainChildren(int dataType, String id,int page) throws InfoSourceException;
 
 
 	//获取应用详细信息
@@ -37,21 +38,21 @@ public interface IGameInfo {
 
 	//获取所有分类信息
 	List<CategoryItem> obtainCategorys() throws InfoSourceException;
-
 	//获取合集信息
-	List<CategoryItem> obtainCollection(int page) throws InfoSourceException;
+	
+	List<CollectionItem> obtainCollection(int page) throws InfoSourceException;
 	
 	//获取关键字列表
 	List<KeywordItem> obtainKeywords() throws InfoSourceException;
 
 	//按关键字获取关键字列表
-	List<String> obtainKeywordsByWord(String word) throws InfoSourceException;
+	List<String> obtainKeywordsByWord(String word, int iPlatformId, String cAppType) throws InfoSourceException;
 
 	//获取应用下载地址
 	String obtainDownloadUrl(long id) throws InfoSourceException;
 
 	//指定关键字执行搜索
-	List<AppEntity> searchByKeyword(String word, int page, int number) throws InfoSourceException;
+	List<AppEntity> searchByKeyword(String word, int page, int number, int iPlatformId, String cAppType, String cDynamic) throws InfoSourceException;
 
 	//获取指定页的banner图片
 	List<BannerItem> obtainBannerList(int page) throws InfoSourceException;
@@ -69,7 +70,7 @@ public interface IGameInfo {
 	List<UserHeaderImgItem> getUserHeaderImgItems() throws InfoSourceException;
 
 	//保存用户编辑后的个人信息
-	void saveUserInfo(String url, String nickName, String sex, String age, String email, String birthday) throws InfoSourceException;
+	void saveUserInfo(String nickName, String cSex, String cPhoto, String cPhone, String birthday) throws InfoSourceException;
 
 	//购买卡槽
 	void purchaseMuchSlot(int slotConfigId) throws InfoSourceException;

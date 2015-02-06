@@ -2,22 +2,23 @@ package com.snail.appstore.openapi.vo;
 
 public class KeyWordVO {
 	
-	private String SKeyWord;//关键字
+	private String SAppName;// 关键字
 
 	public KeyWordVO() {
+
 	}
-	
-	public KeyWordVO(String sKeyWord) {
+
+	public KeyWordVO(String sAppName) {
 		super();
-		SKeyWord = sKeyWord;
+		this.SAppName = sAppName;
 	}
 
-	public String getSKeyWord() {
-		return SKeyWord;
+	public String getSAppName() {
+		return SAppName;
 	}
 
-	public void setSKeyWord(String sKeyWord) {
-		SKeyWord = sKeyWord;
+	public void setSAppName(String sAppName) {
+		SAppName = sAppName;
 	}
 	
 }

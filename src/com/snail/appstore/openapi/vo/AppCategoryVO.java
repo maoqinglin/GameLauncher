@@ -3,28 +3,30 @@ package com.snail.appstore.openapi.vo;
 import java.util.Date;
 
 /**
- * 应用集合缓存VO
+ * 应用分类缓存VO
+ * 
  * @author gewq
  * @version 1.0 2014-6-11
  */
-public class AppCollectionVO {
+public class AppCategoryVO {
 	// 信息包括分类ID，分类名称，分类描述，分类ICON下载链接
 
 	private Date DCreate;
 	private Integer IPlatformId;
 	private Date DUpdate;
 	private String CDelFlag;
-	private Integer ICollectionId;
-	private String SCollectionName;// 集合名称
-	private String SCollectionDec;// 集合描述
-	private Integer ISortValue;
+	private Integer ICategoryId;
+	private String CPicUrl;
 	private String CAppType;
-	private String CPicUrl; // 图片URL
-	private String CPosterIcon;// 海报图标地址
-	private String CPosterPic;// 海报背景地址
+	private String SCategoryName;
+	private Integer ISortValue;
+	private String SCategoryDesc;
+	private String CCategoryType;
+	private String CPosterIcon;
+	private String CPosterPic;
 
 	public Date getDCreate() {
-		if(DCreate == null){
+		if (DCreate == null) {
 			return new Date();
 		}
 		return DCreate;
@@ -35,9 +37,6 @@ public class AppCollectionVO {
 	}
 
 	public Integer getIPlatformId() {
-		if(IPlatformId == null){
-			return 0;
-		}
 		return IPlatformId;
 	}
 
@@ -46,7 +45,7 @@ public class AppCollectionVO {
 	}
 
 	public Date getDUpdate() {
-		if(DUpdate == null){
+		if (DUpdate == null) {
 			return new Date();
 		}
 		return DUpdate;
@@ -64,42 +63,23 @@ public class AppCollectionVO {
 		CDelFlag = cDelFlag;
 	}
 
-	public Integer getICollectionId() {
-		if(ICollectionId == null){
-			return ICollectionId;
-		}
-		return ICollectionId;
-	}
-
-	public void setICollectionId(Integer iCollectionId) {
-		ICollectionId = iCollectionId;
-	}
-
-	public String getSCollectionName() {
-		return SCollectionName;
-	}
-
-	public void setSCollectionName(String sCollectionName) {
-		SCollectionName = sCollectionName;
-	}
-
-	public String getSCollectionDec() {
-		return SCollectionDec;
-	}
-
-	public void setSCollectionDec(String sCollectionDec) {
-		SCollectionDec = sCollectionDec;
-	}
-
-	public Integer getISortValue() {
-		if(ISortValue == null){
+	public Integer getICategoryId() {
+		if (ICategoryId == null) {
 			return 0;
 		}
-		return ISortValue;
+		return ICategoryId;
 	}
 
-	public void setISortValue(Integer iSortValue) {
-		ISortValue = iSortValue;
+	public void setICategoryId(Integer iCategoryId) {
+		ICategoryId = iCategoryId;
+	}
+
+	public String getCPicUrl() {
+		return CPicUrl;
+	}
+
+	public void setCPicUrl(String cPicUrl) {
+		CPicUrl = cPicUrl;
 	}
 
 	public String getCAppType() {
@@ -110,12 +90,39 @@ public class AppCollectionVO {
 		CAppType = cAppType;
 	}
 
-	public String getCPicUrl() {
-		return CPicUrl;
+	public String getSCategoryName() {
+		return SCategoryName;
 	}
 
-	public void setCPicUrl(String cPicUrl) {
-		CPicUrl = cPicUrl;
+	public void setSCategoryName(String sCategoryName) {
+		SCategoryName = sCategoryName;
+	}
+
+	public Integer getISortValue() {
+		if (ISortValue == null) {
+			return 0;
+		}
+		return ISortValue;
+	}
+
+	public void setISortValue(Integer iSortValue) {
+		ISortValue = iSortValue;
+	}
+
+	public String getSCategoryDesc() {
+		return SCategoryDesc;
+	}
+
+	public void setSCategoryDesc(String sCategoryDesc) {
+		SCategoryDesc = sCategoryDesc;
+	}
+
+	public String getCCategoryType() {
+		return CCategoryType;
+	}
+
+	public void setCCategoryType(String cCategoryType) {
+		CCategoryType = cCategoryType;
 	}
 
 	public String getCPosterIcon() {

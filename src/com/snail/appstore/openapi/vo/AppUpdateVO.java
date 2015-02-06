@@ -3,7 +3,7 @@ package com.snail.appstore.openapi.vo;
 public class AppUpdateVO {
 
 	private Long NAppId; // 游戏ID
-	private String SGameName; // 游戏名称
+	private String SGameName; // 游戏名称,兼容老版本
 	private String CIcon; // 游戏图标
 	private Long IVersionCode; // 当前版本号
 	private String sVersionName;// 版本名称
@@ -12,6 +12,9 @@ public class AppUpdateVO {
 	private String CUpdate;// 是否升级 0 不需要升级 1需要升级
 	private Integer iSize;// Apk大小
 	private String CMd5;// 文件MD5
+	private String SAppName;//与"sGameName   数据一样
+	private String CAppType;
+	private String CDownloadUrl;
 
 	public Long getNAppId() {
 		if (NAppId == null) {
@@ -105,4 +108,27 @@ public class AppUpdateVO {
 		CMd5 = cMd5;
 	}
 
+	public String getSAppName() {
+		return SAppName;
+	}
+
+	public void setSAppName(String sAppName) {
+		SAppName = sAppName;
+	}
+
+	public String getCAppType() {
+		return CAppType;
+	}
+
+	public void setCAppType(String cAppType) {
+		CAppType = cAppType;
+	}
+
+	public String getCDownloadUrl() {
+		return CDownloadUrl;
+	}
+
+	public void setCDownloadUrl(String cDownloadUrl) {
+		CDownloadUrl = cDownloadUrl;
+	}
 }

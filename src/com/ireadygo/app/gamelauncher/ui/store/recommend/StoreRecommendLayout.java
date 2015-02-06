@@ -177,7 +177,7 @@ public class StoreRecommendLayout extends StoreBaseContentLayout {
 			AppEntity appEntity = new AppEntity();
 			appEntity.setAppId(String.valueOf(bannerItem.getNParamId()));
 			appEntity.setDescription(bannerItem.getSInfo());
-			appEntity.setName(bannerItem.getSGameName());
+			appEntity.setName(bannerItem.getSAppName());
 			appEntity.setRemoteIconUrl(bannerItem.getCIcon());
 			appEntity.setVersionName(bannerItem.getCVersionName());
 			appEntity.setVersionCode(bannerItem.getIVersionCode());
@@ -185,8 +185,6 @@ public class StoreRecommendLayout extends StoreBaseContentLayout {
 			appEntity.setFreeFlag(bannerItem.getIFlowFree());
 			appEntity.setSign(bannerItem.getCMd5());
 			appEntity.setTotalSize(bannerItem.getISize());
-			appEntity.setPosterIconUrl(bannerItem.getCPosterIcon());
-			appEntity.setPosterBgUrl(bannerItem.getCPosterPic());
 			return appEntity;
 		}
 	}

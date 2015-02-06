@@ -1,5 +1,6 @@
 package com.ireadygo.app.gamelauncher.ui.account;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -298,7 +299,7 @@ public class PersonalLayout extends AccountBaseContentLayout implements OnClickL
 				getContext().getResources().getStringArray(R.array.account_age_array));
 		mAgeSpinner.setOnItemSelectedListener(mInternalItemSelectedListener);
 		mAgeSpinner.setAdapter(ageAdapter);
-		setAge(userInfo);
+//		setAge(userInfo);
 
 		// 性别
 		ArrayAdapter<String> sexAdapter = new AgeAdapter(getContext(), R.layout.account_age_item, R.id.accountAgeItem,
@@ -328,22 +329,6 @@ public class PersonalLayout extends AccountBaseContentLayout implements OnClickL
 		mNicknameView.setText(nickName);
 	}
 
-	private void setAge(UserInfoItem userInfoItem) {
-		if (userInfoItem == null) {
-			mAgeSpinner.setSelection(1);
-		} else {
-			String age = userInfoItem.getCAge();
-			if (TextUtils.isEmpty(age)) {
-				mAgeSpinner.setSelection(1);
-			} else {
-				int ageInt = Integer.parseInt(age);
-				if (ageInt > 0 && ageInt < 10) {
-					mAgeSpinner.setSelection(ageInt);
-				}
-			}
-		}
-	}
-
 	private void getAccountInfoAsync() {
 		if (!NetworkUtils.isNetworkConnected(getContext())) {
 			Toast.makeText(getContext(), getContext().getString(R.string.no_network), Toast.LENGTH_SHORT).show();
@@ -366,30 +351,23 @@ public class PersonalLayout extends AccountBaseContentLayout implements OnClickL
 	private void saveUserInfo() {
 		if (mUserInfoItem != null) {
 			final String nickName = mNicknameView.getEditableText().toString();
-			// final String sex =
-			// accountSexMale.isSelected()?UserInfoItem.MALE:UserInfoItem.FEMALE;
 			final String sex = getSex();
 			final String url = (String) mPhotoView.getTag();
-			String ageTmp = mAgeSpinner.getSelectedItemPosition() + "";
-			if ("0".equals(ageTmp)) {
-				ageTmp = "1";
-			}
-			final String age = ageTmp;
-			final String email = mUserInfoItem.getCEmail();
+			final String phone = "";
 			String birthdayTmp = "";
 			if (mUserInfoItem.getDBirthday() != null) {
-				birthdayTmp = mUserInfoItem.getDBirthday().toString();
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+				birthdayTmp = format.format(mUserInfoItem.getDBirthday());
 			}
 			final String birthday = birthdayTmp;
 			new Thread() {
 				public void run() {
 					try {
-						GameInfoHub.instance(getContext()).saveUserInfo(url, nickName, sex, age, email, birthday);
+						GameInfoHub.instance(getContext()).saveUserInfo(nickName, sex, url,phone, birthday);
 						if (mUserInfoItem != null) {
 							mUserInfoItem.setSNickname(nickName);
 							mUserInfoItem.setCSex(sex);
 							mUserInfoItem.setCPhoto(url);
-							mUserInfoItem.setCAge(age);
 						}
 						mHandler.sendEmptyMessage(SAVE_SUCCESS);
 					} catch (InfoSourceException e) {
@@ -541,7 +519,7 @@ public class PersonalLayout extends AccountBaseContentLayout implements OnClickL
 		@Override
 		public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 			if (position == 0) {
-				setAge(mUserInfoItem);
+//				setAge(mUserInfoItem);
 			}
 		}
 

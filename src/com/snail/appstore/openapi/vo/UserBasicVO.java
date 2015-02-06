@@ -4,24 +4,18 @@ import java.util.Date;
 
 public class UserBasicVO {
 
+	private Date DBirthday; // 生日
+	private String CSex; // 性别，1：男，2：女
+	private String CImsi; // 移动用户识别码
+	private Date DUpdate; // 更新时间
+	private Date DCreate; // 生成时间
+	private Long NUserId;// 用户ID
+	private String CAccount; // 用户账号
+	private Integer IIntegral; // 积分
+	private Integer IMoney; // 蜗牛币
 	private String CPhoto; // 用户头像
 	private String SNickname; // 昵称
-	private String CSex; // 性别，1：男，2：女
-	private String CAge; // 年龄，1：16-20，2：21-25，3：26-30，4：31-35，5：36-40，6：41-45，7：46-50，8：51-55，9：56-60
-	private String CEmail; // 邮箱
-	private String CEmailStatus; // 箱邮绑定状态，0：未绑定，1：绑定
 	private String CPhone; // 绑定的手机号码
-	private Date DBirthday; // 生日
-	private Integer IPoints; // 积分
-
-
-	public Date getDBirthday() {
-		return DBirthday;
-	}
-
-	public void setDBirthday(Date dBirthday) {
-		DBirthday = dBirthday;
-	}
 
 	public String getCPhoto() {
 		return CPhoto;
@@ -39,38 +33,6 @@ public class UserBasicVO {
 		SNickname = sNickname;
 	}
 
-	public String getCSex() {
-		return CSex;
-	}
-
-	public void setCSex(String cSex) {
-		CSex = cSex;
-	}
-
-	public String getCAge() {
-		return CAge;
-	}
-
-	public void setCAge(String cAge) {
-		CAge = cAge;
-	}
-
-	public String getCEmail() {
-		return CEmail;
-	}
-
-	public void setCEmail(String cEmail) {
-		CEmail = cEmail;
-	}
-
-	public String getCEmailStatus() {
-		return CEmailStatus;
-	}
-
-	public void setCEmailStatus(String cEmailStatus) {
-		CEmailStatus = cEmailStatus;
-	}
-
 	public String getCPhone() {
 		return CPhone;
 	}
@@ -79,15 +41,94 @@ public class UserBasicVO {
 		CPhone = cPhone;
 	}
 
-	public Integer getIPoints() {
-		if (IPoints == null) {
+	public Long getNUserId() {
+		if (NUserId == null) {
+			return 0L;
+		}
+		return NUserId;
+	}
+
+	public void setNUserId(Long nUserId) {
+		NUserId = nUserId;
+	}
+
+	public String getCAccount() {
+		return CAccount;
+	}
+
+	public void setCAccount(String cAccount) {
+		CAccount = cAccount;
+	}
+
+	public Integer getIIntegral() {
+		if (IIntegral == null) {
 			return 0;
 		}
-		return IPoints;
+		return IIntegral;
 	}
-	
-	public void setIPoints(Integer iPoints) {
-		IPoints = iPoints;
+
+	public void setIIntegral(Integer iIntegral) {
+		IIntegral = iIntegral;
 	}
-	
+
+	public Integer getIMoney() {
+		if (IMoney == null) {
+			return 0;
+		}
+		return IMoney;
+	}
+
+	public void setIMoney(Integer iMoney) {
+		IMoney = iMoney;
+	}
+
+	public Date getDBirthday() {
+		if (DBirthday == null) {
+			return new Date();
+		}
+		return DBirthday;
+	}
+
+	public void setDBirthday(Date dBirthday) {
+		DBirthday = dBirthday;
+	}
+
+	public String getCSex() {
+		return CSex;
+	}
+
+	public void setCSex(String cSex) {
+		CSex = cSex;
+	}
+
+	public String getCImsi() {
+		return CImsi;
+	}
+
+	public void setCImsi(String cImsi) {
+		CImsi = cImsi;
+	}
+
+	public Date getDUpdate() {
+		if (DUpdate == null) {
+			return new Date();
+		}
+		return DUpdate;
+	}
+
+	public void setDUpdate(Date dUpdate) {
+		DUpdate = dUpdate;
+	}
+
+	public Date getDCreate() {
+		if (DCreate == null) {
+			return new Date();
+		}
+		return DCreate;
+	}
+
+	public void setDCreate(Date dCreate) {
+		DCreate = dCreate;
+	}
+
 }

@@ -164,7 +164,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.HOME" />
-                <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+                 <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.MONKEY" />
             </intent-filter>
@@ -212,6 +212,11 @@
         </activity>
         <activity
             android:name="com.ireadygo.app.gamelauncher.ui.store.collection.CollectionDetailActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/CustomerTheme" >
+        </activity>
+        <activity
+            android:name="com.ireadygo.app.gamelauncher.ui.store.category.CategoryDetailActivity"
             android:screenOrientation="landscape"
             android:theme="@style/CustomerTheme" >
         </activity>
@@ -311,13 +316,13 @@
                 <action android:name="com.ireadygo.app.gamelauncher.aidl.wx" />
             </intent-filter>
         </service>
-	<service
-	    android:name="com.ireadygo.app.gamelauncher.rentfree.aidl.RentFreeRemoteService"
-	    android:exported="true" >
-	    <intent-filter>
-	        <action android:name="com.ireadygo.app.gamelauncher.rentfree.RentFreeRemoteService" />
-	    </intent-filter>
-	</service>
+        <service
+            android:name="com.ireadygo.app.gamelauncher.rentfree.aidl.RentFreeRemoteService"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="com.ireadygo.app.gamelauncher.rentfree.RentFreeRemoteService" />
+            </intent-filter>
+        </service>
 
         <!-- 蜗牛SDK -->
         <activity
@@ -350,6 +355,15 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+         <activity
+            android:name="com.snailgame.mobilesdk.OboxPayActivity"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Translucent" >
+            <intent-filter >
+                <action android:name="com.snailgame.obox.OBOX_APP_PAY"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
         <activity
@@ -413,6 +427,19 @@
             android:configChanges="orientation|keyboardHidden"
             android:excludeFromRecents="true" >
         </activity>
+
+         <receiver android:name="com.snailgame.mobilesdk.PostSSOLoginReceiver" >
+            <intent-filter>
+                <action android:name="com.snailgame.postssologin" >
+                </action>
+            </intent-filter>
+        </receiver>
+
+          <provider
+              android:name="com.snailgame.mobilesdk.DataProvider"
+              android:authorities="com.snailgame.mobilesdk.provider"
+              android:exported="true" >
+          </provider>
 
         <service android:name="com.umpay.huafubao.service.AppUpgradeService" />
         <service android:name="com.snail.statistics.SdkTimingService" />

@@ -11,6 +11,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.appstore.info.item.BannerItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.BindPhoneItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryItem;
+import com.ireadygo.app.gamelauncher.appstore.info.item.CollectionItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.FeeConfigItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.FreeFlowStatusItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.KeywordItem;
@@ -28,7 +29,7 @@ import com.snail.appstore.openapi.vo.AppTimeUploadResultVO;
 public class MemoryInfo implements IGameInfo {
 
 	private ArrayList<CategoryItem> mCachedCategoryItems = new ArrayList<CategoryItem>();
-	private HashMap<Integer, List<CategoryItem>> mCachedCollectionItems = new HashMap<Integer, List<CategoryItem>>();
+	private HashMap<Integer, List<CollectionItem>> mCachedCollectionItems = new HashMap<Integer, List<CollectionItem>>();
 	private HashMap<Integer, List<BannerItem>> mCachedBannerItems = new HashMap<Integer, List<BannerItem>>();
 	private ArrayList<KeywordItem> mCachedKeywordItems = new ArrayList<KeywordItem>();
 	private List<FeeConfigItem> mCachedFeeConfigItems = new ArrayList<FeeConfigItem>();
@@ -51,7 +52,7 @@ public class MemoryInfo implements IGameInfo {
 	}
 
 	@Override
-	public ArrayList<AppEntity> obtainChildren(String id, int page) throws InfoSourceException {
+	public ArrayList<AppEntity> obtainChildren(int dataType, String id, int page) throws InfoSourceException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -73,15 +74,15 @@ public class MemoryInfo implements IGameInfo {
 	}
 
 	@Override
-	public List<CategoryItem> obtainCollection(int page) throws InfoSourceException {
+	public List<CollectionItem> obtainCollection(int page) throws InfoSourceException {
 		if (mCachedCollectionItems.size() > 0) {
-			List<CategoryItem> result = mCachedCollectionItems.get(page);
+			List<CollectionItem> result = mCachedCollectionItems.get(page);
 			if (result != null) {
 				return result;
 			}
 			throw new InfoSourceException(InfoSourceException.MSG_NO_CACHED_DATA);
 		}
-		List<CategoryItem> collections = mLocalInfo.obtainCollection(1);
+		List<CollectionItem> collections = mLocalInfo.obtainCollection(1);
 		cachedMemoryCollectionItems(1, collections);
 		return collections;
 	}
@@ -97,7 +98,7 @@ public class MemoryInfo implements IGameInfo {
 	}
 
 	@Override
-	public List<String> obtainKeywordsByWord(String word) throws InfoSourceException {
+	public List<String> obtainKeywordsByWord(String word, int iPlatformId, String cAppType) throws InfoSourceException {
 		return null;
 	}
 
@@ -108,7 +109,7 @@ public class MemoryInfo implements IGameInfo {
 	}
 
 	@Override
-	public List<AppEntity> searchByKeyword(String word, int page, int number) throws InfoSourceException {
+	public List<AppEntity> searchByKeyword(String word, int page, int number, int iPlatformId, String cAppType, String cDynamic) throws InfoSourceException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -153,8 +154,7 @@ public class MemoryInfo implements IGameInfo {
 	}
 
 	@Override
-	public void saveUserInfo(String url, String nickName, String sex, String age, String email,
-			String birthday) throws InfoSourceException {
+	public void saveUserInfo(String nickName, String cSex, String cPhoto, String cPhone, String birthday) throws InfoSourceException {
 		// TODO Auto-generated method stub
 		
 	}
@@ -233,14 +233,14 @@ public class MemoryInfo implements IGameInfo {
 		}
 	}
 
-	public void cachedCollectionItems(int page,List<CategoryItem> collectionItems) {
-		List<CategoryItem> cachedCollection = mCachedCollectionItems.get(page);
+	public void cachedCollectionItems(int page,List<CollectionItem> collectionItems) {
+		List<CollectionItem> cachedCollection = mCachedCollectionItems.get(page);
 		if (cachedCollection != null) {
 			cachedCollection.clear();
 		} else {
-			cachedCollection = new ArrayList<CategoryItem>();
+			cachedCollection = new ArrayList<CollectionItem>();
 		}
-		for (CategoryItem item : collectionItems) {
+		for (CollectionItem item : collectionItems) {
 			cachedCollection.add(item);
 		}
 		mCachedCollectionItems.put(page, cachedCollection);
@@ -288,14 +288,14 @@ public class MemoryInfo implements IGameInfo {
 		mCachedBannerItems.put(page, cachedBannerItems);
 	}
 
-	public void cachedMemoryCollectionItems(int page,List<CategoryItem> collectionItems) {
-		List<CategoryItem> cachedCollection = mCachedCollectionItems.get(page);
+	public void cachedMemoryCollectionItems(int page,List<CollectionItem> collectionItems) {
+		List<CollectionItem> cachedCollection = mCachedCollectionItems.get(page);
 		if (cachedCollection != null) {
 			cachedCollection.clear();
 		} else {
-			cachedCollection = new ArrayList<CategoryItem>();
+			cachedCollection = new ArrayList<CollectionItem>();
 		}
-		for (CategoryItem item : collectionItems) {
+		for (CollectionItem item : collectionItems) {
 			cachedCollection.add(item);
 		}
 		mCachedCollectionItems.put(page, cachedCollection);

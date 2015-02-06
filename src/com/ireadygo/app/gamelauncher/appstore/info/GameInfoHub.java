@@ -15,6 +15,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.appstore.info.item.BannerItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.BindPhoneItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryItem;
+import com.ireadygo.app.gamelauncher.appstore.info.item.CollectionItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.FeeConfigItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.FreeFlowStatusItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.KeywordItem;
@@ -92,8 +93,8 @@ public class GameInfoHub implements IGameInfo {
 	}
 
 	@Override
-	public ArrayList<AppEntity> obtainChildren(String id, int page) throws InfoSourceException {
-		return mRemoteInfo.obtainChildren(id, page);
+	public ArrayList<AppEntity> obtainChildren(int dataType, String id, int page) throws InfoSourceException {
+		return mRemoteInfo.obtainChildren(dataType,id, page);
 	}
 
 	@Override
@@ -131,7 +132,7 @@ public class GameInfoHub implements IGameInfo {
 	}
 
 	@Override
-	public List<CategoryItem> obtainCollection(int page) throws InfoSourceException {
+	public List<CollectionItem> obtainCollection(int page) throws InfoSourceException {
 		if (!NetworkUtils.isNetworkConnected(mContext)) {
 			try {
 				return mMemoryInfo.obtainCollection(page);
@@ -143,12 +144,12 @@ public class GameInfoHub implements IGameInfo {
 				try {
 					return mMemoryInfo.obtainCollection(page);
 				} catch (InfoSourceException e) {
-					List<CategoryItem> result = mRemoteInfo.obtainCollection(page);
+					List<CollectionItem> result = mRemoteInfo.obtainCollection(page);
 					mMemoryInfo.cachedCollectionItems(page, result);
 					return result;
 				}
 			} else {
-				List<CategoryItem> result = mRemoteInfo.obtainCollection(page);
+				List<CollectionItem> result = mRemoteInfo.obtainCollection(page);
 				mMemoryInfo.cachedCollectionItems(page, result);
 				return result;
 			}
@@ -181,8 +182,8 @@ public class GameInfoHub implements IGameInfo {
 	}
 
 	@Override
-	public List<String> obtainKeywordsByWord(String word) throws InfoSourceException {
-		return mRemoteInfo.obtainKeywordsByWord(word);
+	public List<String> obtainKeywordsByWord(String word, int iPlatformId, String cAppType) throws InfoSourceException {
+		return mRemoteInfo.obtainKeywordsByWord(word, iPlatformId, cAppType);
 	}
 
 	@Override
@@ -191,8 +192,8 @@ public class GameInfoHub implements IGameInfo {
 	}
 
 	@Override
-	public List<AppEntity> searchByKeyword(String word, int page, int number) throws InfoSourceException {
-		return mRemoteInfo.searchByKeyword(word, page, number);
+	public List<AppEntity> searchByKeyword(String word, int page, int number, int iPlatformId, String cAppType, String cDynamic) throws InfoSourceException {
+		return mRemoteInfo.searchByKeyword(word, page, number, iPlatformId, cAppType, cDynamic);
 	}
 
 	@Override
@@ -241,9 +242,9 @@ public class GameInfoHub implements IGameInfo {
 	}
 
 	@Override
-	public void saveUserInfo(String url, String nickName, String sex, String age, String email, String birthday)
+	public void saveUserInfo(String nickName, String cSex, String cPhoto, String cPhone, String birthday)
 			throws InfoSourceException {
-		mRemoteInfo.saveUserInfo(url, nickName, sex, age, email, birthday);
+		mRemoteInfo.saveUserInfo(nickName, cSex, cPhoto, cPhone, birthday);
 	}
 
 	@Override

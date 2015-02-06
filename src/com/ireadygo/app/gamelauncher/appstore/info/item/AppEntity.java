@@ -76,6 +76,10 @@ public class AppEntity implements Parcelable, Serializable {
 	private String posterBgUrl;//海报背景地址
 //	private GameManagerException mException;
 
+	private int iCommentTimes;
+	private int iShareTimes;
+    private long nScore;
+
 	public static final Parcelable.Creator<AppEntity> CREATOR = new Parcelable.Creator<AppEntity>() {
 		public AppEntity createFromParcel(Parcel src) {
 			return new AppEntity(src);
@@ -267,6 +271,9 @@ public class AppEntity implements Parcelable, Serializable {
 		this.isInFreeStore = app.getIsInFreeStore();
 		this.screenshotDirection = app.getScreenshotDirection();
 		this.freeflowDldPath = app.getFreeflowDldPath();
+		this.iCommentTimes = app.getiCommentTimes();
+		this.iShareTimes = app.getiShareTimes();
+		this.nScore = app.getnScore();
 	}
 
 	@Override
@@ -306,6 +313,9 @@ public class AppEntity implements Parcelable, Serializable {
 		dest.writeInt(isOccupySlot);
 		dest.writeString(screenshotDirection);
 		dest.writeString(freeflowDldPath);
+		dest.writeInt(iCommentTimes);
+		dest.writeInt(iShareTimes);
+		dest.writeLong(nScore);
 	}
 
 	public void readFromParcel(Parcel src) {
@@ -339,6 +349,9 @@ public class AppEntity implements Parcelable, Serializable {
 		isOccupySlot = src.readInt();
 		screenshotDirection = src.readString();
 		freeflowDldPath = src.readString();
+		iCommentTimes = src.readInt();
+		iShareTimes = src.readInt();
+		nScore = src.readLong();
 	}
 
 	public long getNewVersionCode() {
@@ -520,5 +533,28 @@ public class AppEntity implements Parcelable, Serializable {
 	public void setPosterBgUrl(String posterBgUrl) {
 		this.posterBgUrl = posterBgUrl;
 	}
-	
+
+	public int getiCommentTimes() {
+		return iCommentTimes;
+	}
+
+	public void setiCommentTimes(int iCommentTimes) {
+		this.iCommentTimes = iCommentTimes;
+	}
+
+	public int getiShareTimes() {
+		return iShareTimes;
+	}
+
+	public void setiShareTimes(int iShareTimes) {
+		this.iShareTimes = iShareTimes;
+	}
+
+	public long getnScore() {
+		return nScore;
+	}
+
+	public void setnScore(long nScore) {
+		this.nScore = nScore;
+	}
 }

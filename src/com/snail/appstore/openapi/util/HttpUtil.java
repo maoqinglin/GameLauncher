@@ -10,7 +10,10 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+
+import android.util.Log;
 
 import com.snail.appstore.openapi.exception.HttpStatusCodeException;
 
@@ -282,6 +285,17 @@ public final class HttpUtil {
 				if (iter.hasNext()) {
 					params.append("&");
 				}
+			}
+		}
+		return params.toString();
+	}
+
+	public static String generatorParamString(List<String> parameters,String SEPARATOR) throws UnsupportedEncodingException {
+		StringBuffer params = new StringBuffer();
+		if (parameters != null && !parameters.isEmpty()) {
+			int size = parameters.size();
+			for (int i = 0;i<size;i++) {
+				params.append(SEPARATOR).append(parameters.get(i));
 			}
 		}
 		return params.toString();

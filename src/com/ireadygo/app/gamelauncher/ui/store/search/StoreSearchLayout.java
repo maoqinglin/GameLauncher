@@ -34,6 +34,7 @@ import com.ireadygo.app.gamelauncher.ui.store.StoreAppNormalAdapter;
 import com.ireadygo.app.gamelauncher.ui.store.StoreBaseContentLayout;
 import com.ireadygo.app.gamelauncher.ui.store.StoreDetailActivity;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
+import com.snail.appstore.openapi.AppPlatFormConfig;
 
 public class StoreSearchLayout extends StoreBaseContentLayout implements OnClickListener {
 	private static final int SEARCH_APP_MAX_SIZE = 10;
@@ -111,8 +112,8 @@ public class StoreSearchLayout extends StoreBaseContentLayout implements OnClick
 	}
 
 	private void initData() {
-//		InitKeywordsTask initKeywordsTask = new InitKeywordsTask();
-//		initKeywordsTask.execute();
+		InitKeywordsTask initKeywordsTask = new InitKeywordsTask();
+		initKeywordsTask.execute();
 		startSearchApp("太极熊猫");
 	}
 
@@ -227,7 +228,7 @@ public class StoreSearchLayout extends StoreBaseContentLayout implements OnClick
 				return null;
 			}
 			try {
-				return getGameInfoHub().obtainKeywordsByWord(mKeyword);
+				return getGameInfoHub().obtainKeywordsByWord(mKeyword,AppPlatFormConfig.IPLATFORMID, "");
 			} catch (InfoSourceException e) {
 				e.printStackTrace();
 			}
@@ -260,7 +261,7 @@ public class StoreSearchLayout extends StoreBaseContentLayout implements OnClick
 				return null;
 			}
 			try {
-				return getGameInfoHub().searchByKeyword(keyword, 1, SEARCH_APP_MAX_SIZE);
+				return getGameInfoHub().searchByKeyword(keyword, 1, SEARCH_APP_MAX_SIZE, AppPlatFormConfig.IPLATFORMID, "", "");
 			} catch (InfoSourceException e) {
 				e.printStackTrace();
 			}
@@ -299,7 +300,6 @@ public class StoreSearchLayout extends StoreBaseContentLayout implements OnClick
 			for (KeywordItem keywordItem : result) {
 				AppEntity app = new AppEntity();
 				app.setName(keywordItem.getSKeyWord());
-				app.setPosterIconUrl(keywordItem.getCPosterIcon());
 				mAppList.add(app);
 			}
 			mAdapter.notifyDataSetChanged();

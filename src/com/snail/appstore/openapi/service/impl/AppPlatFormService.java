@@ -4,6 +4,7 @@ import static com.snail.appstore.openapi.AppPlatFormConfig.ACCOUNT_SAVE_URL;
 import static com.snail.appstore.openapi.AppPlatFormConfig.ACCOUT_NICKNAME_URL;
 import static com.snail.appstore.openapi.AppPlatFormConfig.GAME_BANNER_LIST_URL;
 import static com.snail.appstore.openapi.AppPlatFormConfig.GAME_BY_CATEGORY_URL;
+import static com.snail.appstore.openapi.AppPlatFormConfig.GAME_BY_COLLECTION_URL;
 import static com.snail.appstore.openapi.AppPlatFormConfig.GAME_CATEGORY_URL;
 import static com.snail.appstore.openapi.AppPlatFormConfig.GAME_COLLECTION_URL;
 import static com.snail.appstore.openapi.AppPlatFormConfig.GAME_DETAIL_URL;
@@ -26,11 +27,14 @@ import static com.snail.appstore.openapi.AppPlatFormConfig.MUCH_TICKET_QUOTA;
 import static com.snail.appstore.openapi.AppPlatFormConfig.MUCH_TICKET_RECHARGE;
 import static com.snail.appstore.openapi.AppPlatFormConfig.MUCH_USER_PURCHASE_SLOT_URL;
 import static com.snail.appstore.openapi.AppPlatFormConfig.MUCH_USE_SLOT_URL;
+import static com.snail.appstore.openapi.AppPlatFormConfig.PARAMETER_CAPPTYPE;
+import static com.snail.appstore.openapi.AppPlatFormConfig.PARAMETER_CDYNAMIC;
 import static com.snail.appstore.openapi.AppPlatFormConfig.PARAMETER_CIDENTITY;
 import static com.snail.appstore.openapi.AppPlatFormConfig.PARAMETER_CMAINTYPE;
 import static com.snail.appstore.openapi.AppPlatFormConfig.PARAMETER_CPACKAGES;
 import static com.snail.appstore.openapi.AppPlatFormConfig.PARAMETER_CURRENTPAGE;
 import static com.snail.appstore.openapi.AppPlatFormConfig.PARAMETER_ID;
+import static com.snail.appstore.openapi.AppPlatFormConfig.PARAMETER_IPLATFORMID;
 import static com.snail.appstore.openapi.AppPlatFormConfig.PARAMETER_IVERSIONCODE;
 import static com.snail.appstore.openapi.AppPlatFormConfig.PARAMETER_NAPPID;
 import static com.snail.appstore.openapi.AppPlatFormConfig.PARAMETER_NUMBER;
@@ -39,7 +43,9 @@ import static com.snail.appstore.openapi.AppPlatFormConfig.PARAMETER_SKEYWORD;
 import static com.snail.appstore.openapi.AppPlatFormConfig.USERHEADER_LIST_URL;
 import static com.snail.appstore.openapi.AppPlatFormConfig.USER_ACCOUNT_URL;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import android.content.Context;
 import android.text.TextUtils;
@@ -57,6 +63,7 @@ import com.snail.appstore.openapi.util.HttpUtil;
 import com.snail.appstore.openapi.util.UrlParameterUtil;
 import com.snail.appstore.openapi.vo.AgentAppListItemVO;
 import com.snail.appstore.openapi.vo.AppBannerVO;
+import com.snail.appstore.openapi.vo.AppCategoryVO;
 import com.snail.appstore.openapi.vo.AppCollectionVO;
 import com.snail.appstore.openapi.vo.AppDetailVO;
 import com.snail.appstore.openapi.vo.AppDownUrlVO;
@@ -152,7 +159,7 @@ public class AppPlatFormService implements IAppPlatFormService {
 		return TextUtils.isEmpty(mAccountManager.getSessionId(mContext));
 	}
 
-	public ResultVO getGameList(String sKeyWord, Integer currentPage, int number) throws HttpStatusCodeException,
+	public ResultVO getGameList(String sKeyWord, Integer currentPage, int number, int iPlatformId, String cAppType, String cDynamic) throws HttpStatusCodeException,
 			JSONException, Exception {
 		if (null == sKeyWord) {
 			throw new NullPointerException("the parameter should not be null");
@@ -161,20 +168,27 @@ public class AppPlatFormService implements IAppPlatFormService {
 		parameterMap.put(PARAMETER_SKEYWORD, sKeyWord);
 		parameterMap.put(PARAMETER_CURRENTPAGE, currentPage == null ? "1" : currentPage.toString());
 		parameterMap.put(PARAMETER_NUMBER, String.valueOf(number));
-
+		parameterMap.put(PARAMETER_IPLATFORMID, String.valueOf(iPlatformId));
+		parameterMap.put(PARAMETER_CDYNAMIC, cDynamic);
+		if(!TextUtils.isEmpty(cAppType)){
+			parameterMap.put(PARAMETER_CAPPTYPE, cAppType);
+		}
 		addAuthentication(parameterMap);
 
 		String sResultJson = HttpUtil.doGet(UrlParameterUtil.generateGetUrl(GAME_LIST_URL, parameterMap));
 		return new JSONResultVO(sResultJson, AppListItemVO.class);
 	}
 
-	public ResultVO getKeywordList(String sKeyWord) throws HttpStatusCodeException, JSONException, Exception {
+	public ResultVO getKeywordList(String sKeyWord, int iPlatformId, String cAppType) throws HttpStatusCodeException, JSONException, Exception {
 		if (null == sKeyWord) {
 			throw new NullPointerException("the parameter should not be null");
 		}
 		HashMap<String, String> parameterMap = new HashMap<String, String>();
 		parameterMap.put(PARAMETER_SKEYWORD, sKeyWord);
-
+		parameterMap.put(PARAMETER_IPLATFORMID, String.valueOf(iPlatformId));
+		if(!TextUtils.isEmpty(cAppType)){
+			parameterMap.put(PARAMETER_CAPPTYPE, cAppType);
+		}
 		addAuthentication(parameterMap);
 
 		String sResultJson = HttpUtil.doGet(UrlParameterUtil.generateGetUrl(KEYWORD_LIST_URL, parameterMap));
@@ -196,16 +210,17 @@ public class AppPlatFormService implements IAppPlatFormService {
 		addAuthentication(parameterMap);
 
 		String sResultJson = HttpUtil.doGet(UrlParameterUtil.generateGetUrl(GAME_CATEGORY_URL, parameterMap));
-		return new JSONResultVO(sResultJson, AppCollectionVO.class);
+		return new JSONResultVO(sResultJson, AppCategoryVO.class);
 	}
 
 	public ResultVO getGameCollection(Integer currentPage) throws HttpStatusCodeException, JSONException, Exception {
-		HashMap<String, String> parameterMap = new HashMap<String, String>();
-		parameterMap.put(PARAMETER_CURRENTPAGE, currentPage == null ? "1" : currentPage.toString());
+		List<String> paramsList = new ArrayList<String>();
+		paramsList.add(currentPage == null ? "1" : String.valueOf(currentPage));
 
+		HashMap<String, String> parameterMap = new HashMap<String, String>();
 		addAuthentication(parameterMap);
 
-		String sResultJson = HttpUtil.doGet(UrlParameterUtil.generateGetUrl(GAME_COLLECTION_URL, parameterMap));
+		String sResultJson = HttpUtil.doGet(UrlParameterUtil.generateGetUrl(GAME_COLLECTION_URL, paramsList,parameterMap));
 		return new JSONResultVO(sResultJson, AppCollectionVO.class);
 	}
 
@@ -215,25 +230,43 @@ public class AppPlatFormService implements IAppPlatFormService {
 			throw new NullPointerException("the parameter should not be null");
 		}
 		HashMap<String, String> parameterMap = new HashMap<String, String>();
-		parameterMap.put(PARAMETER_ID, String.valueOf(nCategoryId));
-		parameterMap.put(PARAMETER_CURRENTPAGE, currentPage == null ? "1" : currentPage.toString());
-
 		addAuthentication(parameterMap);
 
-		String sResultJson = HttpUtil.doGet(UrlParameterUtil.generateGetUrl(GAME_BY_CATEGORY_URL, parameterMap));
+		List<String> paramsList = new ArrayList<String>();
+		paramsList.add(String.valueOf(nCategoryId));
+		paramsList.add(currentPage == null ? "1" : String.valueOf(currentPage));
+		String sResultJson = HttpUtil.doGet(UrlParameterUtil.generateGetUrl(GAME_BY_CATEGORY_URL, paramsList,
+				parameterMap));
 		return new JSONResultVO(sResultJson, AppListItemVO.class);
 	}
 
+	public ResultVO getAppListByCollection(Long nCollectionId, Integer currentPage) throws HttpStatusCodeException,
+			JSONException, Exception {
+		if (null == nCollectionId) {
+			throw new NullPointerException("the parameter should not be null");
+		}
+		HashMap<String, String> parameterMap = new HashMap<String, String>();
+
+		addAuthentication(parameterMap);
+
+		List<String> paramsList = new ArrayList<String>();
+		paramsList.add(String.valueOf(nCollectionId));
+		paramsList.add(currentPage == null ? "1" : String.valueOf(currentPage));
+		String sResultJson = HttpUtil.doGet(UrlParameterUtil.generateGetUrl(GAME_BY_COLLECTION_URL, paramsList,
+				parameterMap));
+		return new JSONResultVO(sResultJson, AppListItemVO.class);
+	}
+	
 	public ResultVO getAppDetail(Long nAppId) throws HttpStatusCodeException, JSONException, Exception {
 		if (null == nAppId) {
 			throw new NullPointerException("the parameter should not be null");
 		}
-		HashMap<String, String> parameterMap = new HashMap<String, String>();
-		parameterMap.put(PARAMETER_ID, String.valueOf(nAppId));
-
-		addAuthentication(parameterMap);
-
-		String sResultJson = HttpUtil.doGet(UrlParameterUtil.generateGetUrl(GAME_DETAIL_URL, parameterMap));
+		List<String> paramsList = new ArrayList<String>();
+		paramsList.add(String.valueOf(nAppId/AppPlatFormConfig.MILLION));
+		paramsList.add(String.valueOf(nAppId/AppPlatFormConfig.THOUSAND));
+		paramsList.add(String.valueOf(nAppId));
+		paramsList.add("detail");
+		String sResultJson = HttpUtil.doGet(UrlParameterUtil.generateGetDetailUrl(GAME_DETAIL_URL, paramsList));
 		return new JSONResultVO(sResultJson, AppDetailVO.class);
 	}
 
@@ -263,16 +296,17 @@ public class AppPlatFormService implements IAppPlatFormService {
 	}
 
 	public ResultVO getBannerList(Integer currentPage) throws HttpStatusCodeException, JSONException, Exception {
-		HashMap<String, String> parameterMap = new HashMap<String, String>();
-		parameterMap.put(PARAMETER_CURRENTPAGE, currentPage == null ? "1" : String.valueOf(currentPage));
+		List<String> paramsList = new ArrayList<String>();
+		paramsList.add(currentPage == null ? "1" : String.valueOf(currentPage));
 
+		HashMap<String, String> parameterMap = new HashMap<String, String>();
 		addAuthentication(parameterMap);
 
-		String sResultJson = HttpUtil.doGet(UrlParameterUtil.generateGetUrl(GAME_BANNER_LIST_URL, parameterMap));
+		String sResultJson = HttpUtil.doGet(UrlParameterUtil.generateGetUrl(GAME_BANNER_LIST_URL, paramsList,parameterMap));
 		return new JSONResultVO(sResultJson, AppBannerVO.class);
 	}
 
-	public ResultVO getAppUpdateList(String cPackages, String iVersioncodes, String cMainType)
+	public ResultVO getAppUpdateList(String cPackages, String iVersioncodes, String iPlatFormid,String cAppType)
 			throws HttpStatusCodeException, JSONException, Exception {
 		if (null == cPackages || null == iVersioncodes) {
 			throw new NullPointerException("the parameter should not be null");
@@ -280,16 +314,15 @@ public class AppPlatFormService implements IAppPlatFormService {
 		HashMap<String, String> parameterMap = new HashMap<String, String>();
 		parameterMap.put(PARAMETER_CPACKAGES, cPackages);
 		parameterMap.put(PARAMETER_IVERSIONCODE, iVersioncodes);
-		parameterMap.put(PARAMETER_CMAINTYPE, cMainType);
-
-		addAuthentication(parameterMap);
-
+		parameterMap.put(PARAMETER_IPLATFORMID, iPlatFormid);
+		parameterMap.put(PARAMETER_CAPPTYPE, cAppType);
+		
 		String sResultJson = HttpUtil.doPost(UrlParameterUtil.generateUrl(GAME_UPDATE_LIST_URL, parameterMap),
 				parameterMap);
 		return new JSONResultVO(sResultJson, AppUpdateVO.class);
 	}
 
-	public ResultVO getAppMappingList(String cPackages, String iVersioncodes, String cMainType)
+	public ResultVO getAppMappingList(String cPackages, String iVersioncodes, String iPlatFormid,String cAppType)
 			throws HttpStatusCodeException, JSONException, Exception {
 		if (null == cPackages || null == iVersioncodes) {
 			throw new NullPointerException("the parameter should not be null");
@@ -297,11 +330,10 @@ public class AppPlatFormService implements IAppPlatFormService {
 		HashMap<String, String> parameterMap = new HashMap<String, String>();
 		parameterMap.put(PARAMETER_CPACKAGES, cPackages);
 		parameterMap.put(PARAMETER_IVERSIONCODE, iVersioncodes);
-		parameterMap.put(PARAMETER_CMAINTYPE, cMainType);
+		parameterMap.put(PARAMETER_IPLATFORMID, iPlatFormid);
+		parameterMap.put(PARAMETER_CAPPTYPE, cAppType);
 
-		addAuthentication(parameterMap);
-
-		String sResultJson = HttpUtil.doPost(UrlParameterUtil.generateUrl(GAME_MAPPING_LIST_URL, parameterMap),
+		String sResultJson = HttpUtil.doPost(UrlParameterUtil.generateUrl(GAME_UPDATE_LIST_URL, parameterMap),
 				parameterMap);
 		return new JSONResultVO(sResultJson, AppMappingVO.class);
 	}
@@ -329,21 +361,19 @@ public class AppPlatFormService implements IAppPlatFormService {
 		return new JSONResultVO(sResultJson, null);
 	}
 
-	public ResultVO saveUserInfo(String url, String nickName, String sex, String age, String email, String birthday)
+	public ResultVO saveUserInfo(String nickName, String cSex, String cPhoto, String cPhone, String birthday)
 			throws HttpStatusCodeException, Exception {
 		if (isAccountIdAndSessionIdNull()) {
 			throw new NullPointerException("the parameter should not be null");
 		}
 		HashMap<String, String> parameterMap = new HashMap<String, String>();
-		parameterMap.put("cUrl", url);
-		parameterMap.put("cNickName", nickName);
-		parameterMap.put("cSex", sex);
-		parameterMap.put("iAge", age);
-		parameterMap.put("cEmail", email);
-		parameterMap.put("dBirthday", birthday);
+		parameterMap.put("sNickName", nickName);
+		parameterMap.put("cSex", cSex);
+		parameterMap.put("cPhoto", cPhoto);
+		parameterMap.put("cPhone", cPhone);
+		parameterMap.put("sBirthday", birthday);
 
 		addAuthentication(parameterMap);
-
 		String sResultJson = HttpUtil
 				.doPost(UrlParameterUtil.generateUrl(ACCOUNT_SAVE_URL, parameterMap), parameterMap);
 		return new JSONResultVO(sResultJson, null);
@@ -701,7 +731,6 @@ public class AppPlatFormService implements IAppPlatFormService {
 		HashMap<String, String> parameterMap = new HashMap<String, String>();
 		addAuthentication(parameterMap);
 		String sResultJson = HttpUtil.doGet(UrlParameterUtil.generateGetUrl(AppPlatFormConfig.RENT_RELIEF_APP_LIST_URL, parameterMap));
-		Log.d("lmq", "sResultJson = "+sResultJson);
 		return new JSONResultVO(sResultJson, RentReliefAppVO.class);
 	}
 

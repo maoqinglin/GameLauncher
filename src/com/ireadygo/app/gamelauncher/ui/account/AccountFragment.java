@@ -312,17 +312,13 @@ public class AccountFragment extends BaseContentFragment implements OnClickListe
 				@Override
 				public void onSuccess(UserInfoItem userInfo) {
 					String sex = userInfo.getCSex();
-					int points = userInfo.getiPoints();
-					String age = userInfo.getCAge();
+					int points = userInfo.getIIntegral();
 					String photo = userInfo.getCPhoto();
 					String nick = userInfo.getSNickname();
-					Log.e("lmq", "sex = " + sex + "--points = " + points + "---aage = " + age + "---photo = " + photo
-							+ "---nick = " + nick);
 				}
 
 				@Override
 				public void onFailed(int code) {
-					Log.e("lmq", code + "");
 				}
 			}).execute();
 

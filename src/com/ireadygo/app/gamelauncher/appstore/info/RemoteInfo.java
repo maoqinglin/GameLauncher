@@ -17,6 +17,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.appstore.info.item.BannerItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.BindPhoneItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryItem;
+import com.ireadygo.app.gamelauncher.appstore.info.item.CollectionItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.FeeConfigItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.FreeFlowStatusItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.GameState;
@@ -40,6 +41,7 @@ import com.snail.appstore.openapi.json.JSONException;
 import com.snail.appstore.openapi.service.IAppPlatFormService;
 import com.snail.appstore.openapi.vo.AgentAppListItemVO;
 import com.snail.appstore.openapi.vo.AppBannerVO;
+import com.snail.appstore.openapi.vo.AppCategoryVO;
 import com.snail.appstore.openapi.vo.AppCollectionVO;
 import com.snail.appstore.openapi.vo.AppDetailVO;
 import com.snail.appstore.openapi.vo.AppDownUrlVO;
@@ -146,9 +148,14 @@ public class RemoteInfo implements IGameInfo {
 	 */
 
 	@Override
-	public ArrayList<AppEntity> obtainChildren(String id,int page) throws InfoSourceException {
+	public ArrayList<AppEntity> obtainChildren(int dataType, String id,int page) throws InfoSourceException {
+		ResultVO resultVO = null;
 		try {
-			ResultVO resultVO = mAppPlatFormService.getAppListByCategory(Long.parseLong(id),page);
+			if (AppPlatFormConfig.DATA_TYPE_CATEGORY == dataType) {
+				resultVO = mAppPlatFormService.getAppListByCategory(Long.parseLong(id), page);
+			} else if (AppPlatFormConfig.DATA_TYPE_COLLECTION == dataType) {
+				resultVO = mAppPlatFormService.getAppListByCollection(Long.parseLong(id), page);
+			}
 			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
 				StringBuffer appIds = new StringBuffer();
 				HashMap<String, AppEntity> cachedChildrenList = new HashMap<String, AppEntity>();
@@ -201,9 +208,8 @@ public class RemoteInfo implements IGameInfo {
 				AppDetailVO appDetailVO = (AppDetailVO)resultVO.getObj();
 				AppEntity appDetail = detailToAppEntity(appDetailVO);
 				//先获取默认的下载地址
-				String downloadUrl = obtainNormalDownloadUrl(Long.parseLong(appDetail.getAppId()));
-				appDetail.setDownloadPath(downloadUrl);
-				GameData.getInstance(mContext).updateDownloadPath(appDetail.getPkgName(), downloadUrl);
+//				String downloadUrl = obtainNormalDownloadUrl(Long.parseLong(appDetail.getAppId()));
+				GameData.getInstance(mContext).updateDownloadPath(appDetail.getPkgName(), appDetail.getDownloadPath());
 				//免流量模式下，获取免流量
 				if (GameLauncherConfig.ENABLE_FREE_FLOW && !FreeFlowManager.getInstance(mContext).isFreeFlowDisable()) {
 					String freeflowDldUrl = obtainFreeFlowDownloadUrl(Long.parseLong(appDetail.getAppId()));
@@ -244,9 +250,9 @@ public class RemoteInfo implements IGameInfo {
 			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
 				List<CategoryItem> results = new ArrayList<CategoryItem>();
 				if (resultVO.getObj() != null) {
-					List<AppCollectionVO> appCollectionVOs = (List<AppCollectionVO>)resultVO.getObj();
-					for (AppCollectionVO collection : appCollectionVOs) {
-						results.add(collectionItemToCategory(collection));
+					List<AppCategoryVO> appCategoryVOs = (List<AppCategoryVO>)resultVO.getObj();
+					for (AppCategoryVO category : appCategoryVOs) {
+						results.add(categoryItemToCategory(category));
 					}
 				}
 				return results;
@@ -268,16 +274,16 @@ public class RemoteInfo implements IGameInfo {
 	 * 获取指定页的合集信息
 	 */
 	@Override
-	public List<CategoryItem> obtainCollection(int page) throws InfoSourceException {
+	public List<CollectionItem> obtainCollection(int page) throws InfoSourceException {
 		try {
 			ResultVO resultVO = mAppPlatFormService.getGameCollection(page);
 			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
-				List<CategoryItem> result = new ArrayList<CategoryItem>();
+				List<CollectionItem> result = new ArrayList<CollectionItem>();
 				if (resultVO.getObj() != null) {
 					PageListVO pageListVO = (PageListVO)resultVO.getObj();
 					List<AppCollectionVO> appCollectionVOs = (ArrayList<AppCollectionVO>)pageListVO.getList();
 					for (AppCollectionVO appCollectionVO : appCollectionVOs) {
-						result.add(collectionItemToCategory(appCollectionVO));
+						result.add(collectionItemToCollection(appCollectionVO));
 					}
 				}
 				return result;
@@ -331,16 +337,16 @@ public class RemoteInfo implements IGameInfo {
 	 * 根据关键字获取关键字列表
 	 */
 	@Override
-	public List<String> obtainKeywordsByWord(String word) throws InfoSourceException {
+	public List<String> obtainKeywordsByWord(String word,int iPlatformId, String cAppType) throws InfoSourceException {
 			ResultVO resultVO;
 			try {
-				resultVO = mAppPlatFormService.getKeywordList(word);
+				resultVO = mAppPlatFormService.getKeywordList(word,iPlatformId,cAppType);
 				if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
 					List<String> result = new ArrayList<String>();
 					if (resultVO.getObj() != null) {
 						List<KeyWordVO> keywords = (List<KeyWordVO>)resultVO.getObj();
 						for (KeyWordVO keyWord : keywords) {
-							result.add(keyWord.getSKeyWord());
+							result.add(keyWord.getSAppName());
 						}
 					}
 					return result;
@@ -446,9 +452,9 @@ public class RemoteInfo implements IGameInfo {
 	 * 根据关键字获取搜索结果
 	 */
 	@Override
-	public List<AppEntity> searchByKeyword(String word, int page, int number) throws InfoSourceException {
+	public List<AppEntity> searchByKeyword(String word, int page, int number, int iPlatformId, String cAppType, String cDynamic) throws InfoSourceException {
 		try {
-			ResultVO resultVO = mAppPlatFormService.getGameList(word, page, number);
+			ResultVO resultVO = mAppPlatFormService.getGameList(word, page, number, iPlatformId, cAppType, cDynamic);
 			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
 				List<AppEntity> results = new ArrayList<AppEntity>();
 				if (resultVO.getObj() != null) {
@@ -535,7 +541,8 @@ public class RemoteInfo implements IGameInfo {
 			sbVersionCodeList.append(app.getVersionCode()).append(PARAM_DIVIDER);
 		}
 		try {
-			ResultVO resultVO = mAppPlatFormService.getAppUpdateList(sbPkgNameList.toString(), sbVersionCodeList.toString(), "1");
+			ResultVO resultVO = mAppPlatFormService.getAppUpdateList(sbPkgNameList.toString(),
+					sbVersionCodeList.toString(), String.valueOf(AppPlatFormConfig.IPLATFORMID), "");
 			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
 				List<AppEntity> results = new ArrayList<AppEntity>();
 				if (resultVO.getObj() != null) {
@@ -573,7 +580,8 @@ public class RemoteInfo implements IGameInfo {
 			sbVersionCodeList.append(app.getVersionCode()).append(PARAM_DIVIDER);
 		}
 		try {
-			ResultVO resultVO = mAppPlatFormService.getAppMappingList(sbPkgNameList.toString(), sbVersionCodeList.toString(), "1");
+			ResultVO resultVO = mAppPlatFormService.getAppMappingList(sbPkgNameList.toString(),
+					sbVersionCodeList.toString(), String.valueOf(AppPlatFormConfig.IPLATFORMID), "");
 			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
 				List<Long> results = new ArrayList<Long>();
 				if (resultVO.getObj() != null) {
@@ -653,15 +661,13 @@ public class RemoteInfo implements IGameInfo {
 	}
 
 	@Override
-	public void saveUserInfo(String url, String nickName, String sex, String age, String email,
-			String birthday) throws InfoSourceException {
+	public void saveUserInfo(String nickName, String cSex, String cPhoto, String cPhone, String birthday) throws InfoSourceException {
 		try {
 			ResultVO resultVO = mAppPlatFormService.saveUserInfo(
-					url,
 					nickName,
-					sex,
-					age,
-					email,
+					cSex,
+					cPhoto,
+					cPhone,
 					birthday);
 			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
 				return;
@@ -1120,10 +1126,19 @@ public class RemoteInfo implements IGameInfo {
 		}
 	}
 
-
-	private CategoryItem collectionItemToCategory(AppCollectionVO item) {
+	private CategoryItem categoryItemToCategory(AppCategoryVO item) {
 		return new CategoryItem(
-				item.getNCollectionId(), 
+				item.getICategoryId(), 
+				item.getSCategoryName(),
+				item.getSCategoryDesc(),
+				item.getCPicUrl(),
+				item.getCPosterIcon(),
+				item.getCPosterPic());
+	}
+
+	private CollectionItem collectionItemToCollection(AppCollectionVO item) {
+		return new CollectionItem(
+				item.getICollectionId(), 
 				item.getSCollectionName(),
 				item.getSCollectionDec(),
 				item.getCPicUrl(),
@@ -1169,18 +1184,20 @@ public class RemoteInfo implements IGameInfo {
 	private AppEntity detailToAppEntity(AppDetailVO item) {
 		AppEntity app = new AppEntity();
 		app.setAppId(item.getNAppId().toString());
-		app.setName(item.getSGameName());
+		app.setName(item.getSAppName());
 		app.setRemoteIconUrl(item.getCIcon());
 		app.setVersionName(item.getCVersionName());
 		app.setVersionCode(item.getIVersionCode());
 		app.setPkgName(item.getCPackage());
 		app.setTotalSize(item.getISize());
 		app.setSign(item.getCMd5());
-		app.setDescription(item.getSGameDesc());
+		app.setDescription(item.getSAppDesc());
 		app.setScreenshotUrl(item.getCPicUrl());
-		app.setScreenshotDirection(item.getCAppScreen());
+		app.setScreenshotDirection(item.getcPicScreen());
 		app.setPosterIconUrl(item.getCPosterIcon());
 		app.setPosterBgUrl(item.getCPosterPic());
+		app.setDownloadPath(item.getCDownloadUrl());
+		app.setDownloadCounts(item.getIDownloadTimes());
 		if (GameLauncherConfig.ENABLE_FREE_FLOW && FreeFlowManager.getInstance(mContext).isUnProxyMode()) {
 			app.setFreeFlag(item.getIFlowFree());
 		}
@@ -1193,11 +1210,12 @@ public class RemoteInfo implements IGameInfo {
 		app.setPkgName(item.getCPackage());
 		app.setRemoteIconUrl(item.getCIcon());
 		app.setVersionName(item.getCVersionName());
-		app.setName(item.getSGameName());
-		app.setDescription(item.getSGameDesc());
+		app.setName(item.getSAppName());
+		app.setDescription(item.getSAppDesc());
 		app.setTotalSize(item.getISize());
-		app.setPosterIconUrl(item.getCPosterIcon());
-		app.setPosterBgUrl(item.getCPosterPic());
+		app.setDownloadCounts(item.getIDownloadTimes());
+		app.setDownloadPath(item.getCDownloadUrl());
+		app.setSign(item.getCMd5());
 		if (GameLauncherConfig.ENABLE_FREE_FLOW && FreeFlowManager.getInstance(mContext).isUnProxyMode()) {
 			app.setFreeFlag(item.getIFlowFree());
 		}
@@ -1214,7 +1232,7 @@ public class RemoteInfo implements IGameInfo {
 		bannerItem.setCHtmlUrl(appBannerVO.getCHtmlUrl());
 		bannerItem.setIRefId(appBannerVO.getIRefId());
 		
-		bannerItem.setSGameName(appBannerVO.getSGameName());
+		bannerItem.setSAppName(appBannerVO.getSAppName());
 		bannerItem.setCIcon(appBannerVO.getCIcon());
 		bannerItem.setCVersionName(appBannerVO.getCVersionName());
 		bannerItem.setIVersionCode(appBannerVO.getIVersionCode());
@@ -1225,8 +1243,11 @@ public class RemoteInfo implements IGameInfo {
 		bannerItem.setCMd5(appBannerVO.getCMd5());
 		bannerItem.setCMark(appBannerVO.getCMark());
 		bannerItem.setISize(appBannerVO.getISize());
-		bannerItem.setCPosterIcon(appBannerVO.getCPosterIcon());
-		bannerItem.setCPosterPic(appBannerVO.getCPosterPic());
+		bannerItem.setNAppId(appBannerVO.getNAppId());
+		bannerItem.setCDownloadUrl(appBannerVO.getCDownloadUrl());
+		bannerItem.setIBannerId(appBannerVO.getIBannerId());
+		bannerItem.setICategoryId(appBannerVO.getICategoryId());
+		bannerItem.setSPayDesc(appBannerVO.getSPayDesc());
 		return bannerItem;
 	}
 
@@ -1244,20 +1265,24 @@ public class RemoteInfo implements IGameInfo {
 		app.setSign(item.getCMd5());
 		app.setIsUpdateable(1);
 		app.setGameState(GameState.UPGRADEABLE);
+		app.setDownloadPath(item.getCDownloadUrl());
 		return app;
 	}
 
 	private UserInfoItem userBasicVOToUserInfoItem(UserBasicVO item) {
 		UserInfoItem userInfoItem = new UserInfoItem();
-		userInfoItem.setCAge(item.getCAge());
-		userInfoItem.setCEmail(item.getCEmail());
-		userInfoItem.setCEmailStatus(item.getCEmailStatus());
+		userInfoItem.setNUserId(item.getNUserId());
+		userInfoItem.setCAccount(item.getCAccount());
 		userInfoItem.setCPhone(item.getCPhone());
 		userInfoItem.setCPhoto(item.getCPhoto());
+		userInfoItem.setSNickname(item.getSNickname());
+		userInfoItem.setIIntegral(item.getIIntegral());
+		userInfoItem.setIMoney(item.getIMoney());
+		userInfoItem.setCImsi(item.getCImsi());
 		userInfoItem.setCSex(item.getCSex());
 		userInfoItem.setDBirthday(item.getDBirthday());
-		userInfoItem.setSNickname(item.getSNickname());
-		userInfoItem.setiPoints(item.getIPoints());
+		userInfoItem.setDCreate(item.getDCreate());
+		userInfoItem.setDUpdate(item.getDUpdate());
 		return userInfoItem;
 	}
 
@@ -1501,7 +1526,6 @@ public class RemoteInfo implements IGameInfo {
 
 	private KeywordItem AppHotwordVOToKeywordItem(AppHotwordVO appHotwordVO) {
 		KeywordItem keywordItem = new KeywordItem();
-		keywordItem.setCPosterIcon(appHotwordVO.getCPosterIcon());
 		keywordItem.setINum(appHotwordVO.getINum());
 		keywordItem.setNAppId(appHotwordVO.getNAppId());
 		keywordItem.setSKeyWord(appHotwordVO.getSKeyWord());
@@ -1511,9 +1535,9 @@ public class RemoteInfo implements IGameInfo {
 	private AppEntity preLoadItemVOToAppEntity(PreLoadItemVO preLoadItemVO) {
 		AppEntity app = new AppEntity();
 		app.setAppId(String.valueOf(preLoadItemVO.getNAppId()));
+		app.setName(preLoadItemVO.getSAppName());
 		app.setPosterIconUrl(preLoadItemVO.getCPosterIcon());
 		app.setPosterBgUrl(preLoadItemVO.getCPosterPic());
-		app.setName(preLoadItemVO.getSAppName());
 		return app;
 	}
 
@@ -1625,7 +1649,6 @@ public class RemoteInfo implements IGameInfo {
 					item.setAppTime(Long.valueOf(rentAppTime.getNAppTime()));
 					item.setAppRemainTime(Long.valueOf(rentAppTime.getNAppRemainTime()));
 					item.setRenewalMoney(rentAppTime.getCRenewalMoney());
-					Log.d("lmq", "rentAppTime= "+rentAppTime.getNAppTime()+"---remainTime = "+rentAppTime.getNAppRemainTime()+"--rentmoney = "+rentAppTime.getCRenewalMoney());
 				}
 				return item;
 			}

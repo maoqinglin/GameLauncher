@@ -20,16 +20,17 @@ import android.widget.ImageView;
 
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryItem;
+import com.ireadygo.app.gamelauncher.appstore.info.item.CollectionItem;
 import com.ireadygo.app.gamelauncher.ui.BaseAnimatorAdapter;
 import com.ireadygo.app.gamelauncher.ui.Config;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class StoreCollectionAdapter extends BaseAnimatorAdapter {
-	private List<CategoryItem> mAppList = new ArrayList<CategoryItem>();
+	private List<CollectionItem> mAppList = new ArrayList<CollectionItem>();
 	private Context mContext;
 
-	public StoreCollectionAdapter(List<CategoryItem> appList, HListView hListView, Context context) {
+	public StoreCollectionAdapter(List<CollectionItem> appList, HListView hListView, Context context) {
 		super(hListView);
 		if (appList != null) {
 			this.mAppList = appList;
@@ -67,7 +68,7 @@ public class StoreCollectionAdapter extends BaseAnimatorAdapter {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		CategoryItem app = mAppList.get(position);
+		CollectionItem app = mAppList.get(position);
 		String iconUrl = app.getPosterIconUrl();
 		if (TextUtils.isEmpty(iconUrl)) {
 			iconUrl = app.getIconUrl();

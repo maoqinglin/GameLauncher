@@ -2,8 +2,11 @@ package com.snail.appstore.openapi.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+
+import com.snail.appstore.openapi.AppPlatFormConfig;
 
 import static com.snail.appstore.openapi.AppPlatFormConfig.API_KEY;
 import static com.snail.appstore.openapi.AppPlatFormConfig.APP_SECRET;
@@ -100,6 +103,31 @@ public class UrlParameterUtil {
 		return generateReqUrl(reqUri, parameterMap, false);
 	}
 
+	/**
+	 * 生成GET请求方式地址，使用_拼接
+	 * 
+	 */
+	public static String generateGetUrl(String reqUri, List<String> paramsList, Map<String, String> parameterMap) throws Exception {
+		String reqUrl = generateHttpUrl(reqUri);
+		if(paramsList == null || paramsList.isEmpty()){
+			return reqUrl;
+		}
+		String params = HttpUtil.generatorParamString(paramsList, AppPlatFormConfig.SEPARATOR_UNDERLINE);
+		StringBuffer buffer = new StringBuffer().append(reqUrl).append(params).append(AppPlatFormConfig.SUFFIX_JSON)
+				.append(AppPlatFormConfig.SUFFIX_PARAM_SEPARATOR).append(HttpUtil.generatorParamString(parameterMap));
+		return buffer.toString();
+	}
+
+	/**
+	 * 生成GET请求方式地址，使用/拼接
+	 * 
+	 */
+	public static String generateGetDetailUrl(String reqUri, List<String> paramsList) throws Exception {
+		String reqUrl = generateHttpUrl(reqUri);
+		String params = HttpUtil.generatorParamString(paramsList,AppPlatFormConfig.SEPARATOR_SLASH);
+		StringBuffer buffer = new StringBuffer().append(reqUrl).append(params).append(AppPlatFormConfig.SUFFIX_JSON);
+		return buffer.toString();
+	}
 	/**
 	 * 生成完整请求地址
 	 * 
