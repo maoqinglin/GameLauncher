@@ -5,15 +5,14 @@ import java.util.List;
 import android.content.Context;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
 import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
+import com.ireadygo.app.gamelauncher.rentfree.info.AppTimeUploadResultItem;
+import com.ireadygo.app.gamelauncher.rentfree.info.AppTimeUploadItem;
 import com.ireadygo.app.gamelauncher.utils.Md5Util;
 import com.ireadygo.app.gamelauncher.widget.GameLauncherThreadPool;
-import com.snail.appstore.openapi.vo.AppTimeUploadResultVO;
-import com.snail.appstore.openapi.vo.AppTimeUploadVO;
 
 public class RentFreeRemoteServiceImpl extends IRentFreeAidlService.Stub {
 
@@ -55,7 +54,7 @@ public class RentFreeRemoteServiceImpl extends IRentFreeAidlService.Stub {
 	}
 
 	@Override
-	public void uploadStatisticTimeList(final List<AppTimeUploadVO> uploadList) throws RemoteException {
+	public void uploadStatisticTimeList(final List<AppTimeUploadItem> uploadList) throws RemoteException {
 		if (uploadList != null && !uploadList.isEmpty()) {
 			GameLauncherThreadPool.getCachedThreadPool().execute(new Runnable() {
 
@@ -63,8 +62,8 @@ public class RentFreeRemoteServiceImpl extends IRentFreeAidlService.Stub {
 				public void run() {
 					int size = uploadList.size();
 					for (int i = 0; i < size; i++) {
-						AppTimeUploadResultVO result = null;
-						AppTimeUploadVO upload = uploadList.get(i);
+						AppTimeUploadResultItem result = null;
+						AppTimeUploadItem upload = uploadList.get(i);
 						if (upload != null) {
 							String pkgName = uploadList.get(i).getPackageName();
 							long playingTime = uploadList.get(i).getPlayingTime();
@@ -78,9 +77,9 @@ public class RentFreeRemoteServiceImpl extends IRentFreeAidlService.Stub {
 								result = null;
 							}
 							if (result == null) {
-								result = new AppTimeUploadResultVO();
+								result = new AppTimeUploadResultItem();
 								result.setPackageName(pkgName);
-								result.setResult(AppTimeUploadResultVO.FAIL);
+								result.setResult(AppTimeUploadResultItem.FAIL);
 							}
 							callBack(result);
 						}
@@ -143,7 +142,7 @@ public class RentFreeRemoteServiceImpl extends IRentFreeAidlService.Stub {
 		}
 	}
 
-	private void callBack(AppTimeUploadResultVO uploadResult) {
+	private void callBack(AppTimeUploadResultItem uploadResult) {
 		try {
 			int N = mTimeCallbackList.beginBroadcast();
 			Log.d("lmq", "callBack---AppTimeUploadResultVO--N = " + N);

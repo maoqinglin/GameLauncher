@@ -28,6 +28,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
 import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
 import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
 import com.ireadygo.app.gamelauncher.widget.GameLauncherThreadPool;
+import com.snail.appstore.openapi.accountstatus.AccountStatusManager;
 import com.snailgame.mobilesdk.LoginResultListener;
 import com.snailgame.mobilesdk.OnInitCompleteListener;
 import com.snailgame.mobilesdk.OnQueryBalanceListener;
@@ -140,6 +141,7 @@ public class AccountManager {
 		PreferenceUtils.saveBindPhoneNum("");
 		PreferenceUtils.savePhoneNum("");
 		PreferenceUtils.setSlotNum(GameLauncherConfig.DEFAULT_SLOT_NUM);
+		AccountStatusManager.getInstance().clearLoginData();
 	}
 
 	/** 销毁 **/

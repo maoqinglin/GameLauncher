@@ -8,7 +8,6 @@ import org.json.JSONObject;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.ireadygo.app.gamelauncher.GameLauncherConfig;
 import com.ireadygo.app.gamelauncher.appstore.data.GameData;
@@ -31,6 +30,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.UserHeaderImgItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserInfoItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserSlotInfoItem;
 import com.ireadygo.app.gamelauncher.appstore.manager.FreeFlowManager;
+import com.ireadygo.app.gamelauncher.rentfree.info.AppTimeUploadResultItem;
 import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
 import com.snail.appstore.openapi.AppPlatFormClient;
 import com.snail.appstore.openapi.AppPlatFormConfig;
@@ -48,7 +48,6 @@ import com.snail.appstore.openapi.vo.AppDownUrlVO;
 import com.snail.appstore.openapi.vo.AppHotwordVO;
 import com.snail.appstore.openapi.vo.AppListItemVO;
 import com.snail.appstore.openapi.vo.AppMappingVO;
-import com.snail.appstore.openapi.vo.AppTimeUploadResultVO;
 import com.snail.appstore.openapi.vo.AppUpdateVO;
 import com.snail.appstore.openapi.vo.BindPhoneVO;
 import com.snail.appstore.openapi.vo.FeeConfigVO;
@@ -1666,13 +1665,13 @@ public class RemoteInfo implements IGameInfo {
 	}
 
 	@Override
-	public AppTimeUploadResultVO saveAppTime(String cPackage, long nAppTime,String cReqId,String sign) throws InfoSourceException {
+	public AppTimeUploadResultItem saveAppTime(String cPackage, long nAppTime,String cReqId,String sign) throws InfoSourceException {
 		try {
 			ResultVO resultVO = mAppPlatFormService.saveAppTime(cPackage, nAppTime,cReqId,sign);
 			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
-				AppTimeUploadResultVO uploadResult = new AppTimeUploadResultVO();
+				AppTimeUploadResultItem uploadResult = new AppTimeUploadResultItem();
 				uploadResult.setPackageName(cPackage);
-				uploadResult.setResult(AppTimeUploadResultVO.SUCCESS);
+				uploadResult.setResult(AppTimeUploadResultItem.SUCCESS);
 				return uploadResult;
 			}
 			String errMsg = processRemoteResultCode(resultVO.getCode());

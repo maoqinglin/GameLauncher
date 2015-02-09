@@ -1,9 +1,9 @@
-package com.snail.appstore.openapi.vo;
+package com.ireadygo.app.gamelauncher.rentfree.info;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class AppTimeUploadResultVO implements Parcelable {
+public class AppTimeUploadResultItem implements Parcelable {
 
 	/**
 	 * 免租游戏时长上传结果
@@ -13,10 +13,10 @@ public class AppTimeUploadResultVO implements Parcelable {
 	public static final int SUCCESS = 0;
 	public static final int FAIL = -1;
 
-	public AppTimeUploadResultVO() {
+	public AppTimeUploadResultItem() {
 	}
 
-	public AppTimeUploadResultVO(Parcel pl) {
+	public AppTimeUploadResultItem(Parcel pl) {
 		packageName = pl.readString();
 		result = pl.readInt();
 	}
@@ -54,16 +54,16 @@ public class AppTimeUploadResultVO implements Parcelable {
 		dest.writeInt(result);
 	}
 
-	public static final Parcelable.Creator<AppTimeUploadResultVO> CREATOR = new Parcelable.Creator<AppTimeUploadResultVO>() {
+	public static final Parcelable.Creator<AppTimeUploadResultItem> CREATOR = new Parcelable.Creator<AppTimeUploadResultItem>() {
 
 		@Override
-		public AppTimeUploadResultVO createFromParcel(Parcel source) {
-			return new AppTimeUploadResultVO(source);
+		public AppTimeUploadResultItem createFromParcel(Parcel source) {
+			return new AppTimeUploadResultItem(source);
 		}
 
 		@Override
-		public AppTimeUploadResultVO[] newArray(int size) {
-			return new AppTimeUploadResultVO[size];
+		public AppTimeUploadResultItem[] newArray(int size) {
+			return new AppTimeUploadResultItem[size];
 		}
 
 	};

@@ -118,6 +118,7 @@ public class StoreCollectionLayout extends StoreBaseContentLayout {
 
 		@Override
 		protected void onPostExecute(List<CollectionItem> result) {
+			dimissLoadingProgress();
 			if (isCancelled() || result == null || result.isEmpty()) {
 				return;
 			}

@@ -1,8 +1,8 @@
 package com.ireadygo.app.gamelauncher.rentfree.aidl;
-import com.snail.appstore.openapi.vo.AppTimeUploadResultVO;
+import com.ireadygo.app.gamelauncher.rentfree.info.AppTimeUploadResultItem;
 
 interface IRentFreeTimeAidlCallback {
 
-	void handlerResult(inout AppTimeUploadResultVO uploadResult);
+	void handlerResult(inout AppTimeUploadResultItem uploadResult);
 	
 }

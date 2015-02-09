@@ -1,9 +1,9 @@
-package com.snail.appstore.openapi.vo;
+package com.ireadygo.app.gamelauncher.rentfree.info;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class AppTimeUploadVO implements Parcelable {
+public class AppTimeUploadItem implements Parcelable {
 
 	/**
 	 * 免租游戏时长上传VO
@@ -11,10 +11,10 @@ public class AppTimeUploadVO implements Parcelable {
 	private String packageName;
 	private long playingTime;
 
-	public AppTimeUploadVO() {
+	public AppTimeUploadItem() {
 	}
 
-	public AppTimeUploadVO(Parcel pl) {
+	public AppTimeUploadItem(Parcel pl) {
 		packageName = pl.readString();
 		playingTime = pl.readLong();
 	}
@@ -52,16 +52,16 @@ public class AppTimeUploadVO implements Parcelable {
 		dest.writeLong(playingTime);
 	}
 
-	public static final Parcelable.Creator<AppTimeUploadVO> CREATOR = new Parcelable.Creator<AppTimeUploadVO>() {
+	public static final Parcelable.Creator<AppTimeUploadItem> CREATOR = new Parcelable.Creator<AppTimeUploadItem>() {
 
 		@Override
-		public AppTimeUploadVO createFromParcel(Parcel source) {
-			return new AppTimeUploadVO(source);
+		public AppTimeUploadItem createFromParcel(Parcel source) {
+			return new AppTimeUploadItem(source);
 		}
 
 		@Override
-		public AppTimeUploadVO[] newArray(int size) {
-			return new AppTimeUploadVO[size];
+		public AppTimeUploadItem[] newArray(int size) {
+			return new AppTimeUploadItem[size];
 		}
 
 	};

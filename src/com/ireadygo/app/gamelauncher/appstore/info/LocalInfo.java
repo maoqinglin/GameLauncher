@@ -28,7 +28,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.SubscribeResultItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserHeaderImgItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserInfoItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserSlotInfoItem;
-import com.snail.appstore.openapi.vo.AppTimeUploadResultVO;
+import com.ireadygo.app.gamelauncher.rentfree.info.AppTimeUploadResultItem;
 
 public class LocalInfo implements IGameInfo {
 
@@ -701,7 +701,7 @@ public class LocalInfo implements IGameInfo {
 	}
 
 	@Override
-	public AppTimeUploadResultVO saveAppTime(String cPackage, long nAppTime,String cReqId,String sign) throws InfoSourceException {
+	public AppTimeUploadResultItem saveAppTime(String cPackage, long nAppTime,String cReqId,String sign) throws InfoSourceException {
 		return null;
 	}
 

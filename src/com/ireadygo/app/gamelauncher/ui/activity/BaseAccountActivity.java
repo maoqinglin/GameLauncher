@@ -1,7 +1,6 @@
 package com.ireadygo.app.gamelauncher.ui.activity;
 
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -17,6 +16,7 @@ import com.ireadygo.app.gamelauncher.ui.account.AccountRegisterActivity;
 import com.ireadygo.app.gamelauncher.ui.account.CustomerLoginResultListener;
 import com.ireadygo.app.gamelauncher.utils.StaticsUtils;
 import com.ireadygo.app.gamelauncher.utils.Utils;
+import com.snail.appstore.openapi.accountstatus.AccountStatusManager;
 import com.snailgame.mobilesdk.LoginResultListener;
 
 public class BaseAccountActivity extends BaseGuideActivity {
@@ -100,6 +100,8 @@ public class BaseAccountActivity extends BaseGuideActivity {
 			if(mIsResumed){
 				onLoginSuccess();
 			}
+			AccountStatusManager.getInstance().setLoginData(AccountManager.getInstance().getLoginUni(getApplicationContext()),
+					AccountManager.getInstance().getSessionId(getApplicationContext()));
 			//上报登录成功事件，及登录花费的时间
 			long loginSuccessUsedTime = System.currentTimeMillis() - mLoginStartTime;
 			if (loginSuccessUsedTime < 0) {
@@ -113,6 +115,7 @@ public class BaseAccountActivity extends BaseGuideActivity {
 			if (mIsResumed) {
 				onLoginFailed(code);
 			}
+			AccountStatusManager.getInstance().clearLoginData();
 			//上报登录失败事件，及登录花费的时间
 			long loginFailedUsedTime = System.currentTimeMillis() - mLoginStartTime;
 			if (loginFailedUsedTime < 0) {
