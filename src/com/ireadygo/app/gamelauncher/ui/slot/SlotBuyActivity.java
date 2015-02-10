@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckedTextView;
@@ -132,7 +131,7 @@ public class SlotBuyActivity extends BaseActivity implements OnClickListener {
 					updatePayableText();
 					updateCurrentBalanceText(balance, balanceQuan);
 				} else if(code == StatusCode.USER_IDENTITY_EXPIRED){
-					Toast.makeText(SlotBuyActivity.this, R.string.user_identity_overdue, Toast.LENGTH_SHORT).show();
+					Toast.makeText(SlotBuyActivity.this, R.string.slot_user_identity_overdue, Toast.LENGTH_SHORT).show();
 				}else{
 					Toast.makeText(SlotBuyActivity.this, R.string.slot_query_balance_prompt, Toast.LENGTH_SHORT).show();
 				}

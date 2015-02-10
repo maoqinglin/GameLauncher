@@ -37,7 +37,7 @@
         <Button android:id="@+id/set"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/wallpaper_instructions"
+            android:text="@string/wallpaper_set"
             android:layout_gravity="center_horizontal" />
     </LinearLayout>
 </RelativeLayout>

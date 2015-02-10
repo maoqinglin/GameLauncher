@@ -12,7 +12,7 @@
         android:layout_marginTop="@dimen/photo_list_title_margin_top"
         android:gravity="center"
         style="@style/TextLabelSmallLight"
-        android:text="@string/system_photo_dialog_title" />
+        android:text="@string/personal_system_photo_dialog_title" />
 
     <GridView
         android:id="@+id/sytem_photo_grid"

@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="@string/from_system" />
+        android:text="@string/personal_from_system" />
 
     <TextView
         android:id="@+id/photo_from_camera"
@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="@string/from_camera" />
+        android:text="@string/personal_from_camera" />
 
     <TextView
         android:id="@+id/photo_from_gallery"
@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="@string/from_gallery" />
+        android:text="@string/personal_from_gallery" />
 
     <View
         android:layout_width="wrap_content"

@@ -2,13 +2,11 @@ package com.ireadygo.app.gamelauncher.ui.account;
 
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.ireadygo.app.gamelauncher.R;
-import com.ireadygo.app.gamelauncher.ui.SnailKeyCode;
 import com.ireadygo.app.gamelauncher.ui.activity.BaseAccountActivity;
 
 public class AccountRegisterActivity extends BaseAccountActivity{
@@ -26,7 +24,7 @@ public class AccountRegisterActivity extends BaseAccountActivity{
 	}
 	
 	private void initView(){
-		initHeaderView(R.string.account_register);
+		initHeaderView(R.string.account_register_btn);
 		mErrorPromptView = (TextView)findViewById(R.id.errorPrompt);
 		mUsernameView = (EditText)findViewById(R.id.username);
 		mPasswordView = (EditText)findViewById(R.id.password);

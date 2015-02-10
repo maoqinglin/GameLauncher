@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="15dp"
-        android:text="@string/rabbit_ticket_recharged_done"
+        android:text="@string/recharge_rabbit_ticket_recharged_done"
         android:textSize="20sp" />
 
     <TextView
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:text="@string/rabbit_ticket_recharged_tip"
+        android:text="@string/recharge_rabbit_ticket_recharged_tip"
         android:textColor="#7FFFFFFF" />
 
     <LinearLayout
@@ -37,7 +37,7 @@
             style="@style/TextNormal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/rabbit_ticket_purpose_title" />
+            android:text="@string/recharge_rabbit_ticket_purpose_title" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -53,7 +53,7 @@
                 android:drawableTop="@drawable/purpose_phone_recharge"
                 android:gravity="center_horizontal"
                 android:drawablePadding="5dp"
-                android:text="@string/purpose_phone_recharge" />
+                android:text="@string/recharge_purpose_phone" />
 
             <TextView
                 android:id="@+id/purpose_buy_slot"
@@ -64,7 +64,7 @@
                 android:drawableTop="@drawable/purpose_buy_slot"
                 android:gravity="center_horizontal"
                 android:drawablePadding="5dp"
-                android:text="@string/purpose_buy_slot" />
+                android:text="@string/recharge_purpose_buy_slot" />
 
             <TextView
                 android:id="@+id/purpose_game_recharge"
@@ -75,7 +75,7 @@
                 android:drawableTop="@drawable/purpose_game_recharge"
                 android:gravity="center_horizontal"
                 android:drawablePadding="5dp"
-                android:text="@string/purpose_game_recharge" />
+                android:text="@string/recharge_purpose_game" />
         </LinearLayout>
     </LinearLayout>
 
@@ -87,6 +87,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
         android:background="@drawable/account_login_btn_bg_selector"
-        android:text="@string/all_app_moon_explain" />
+        android:text="@string/goback" />
 
 </LinearLayout>

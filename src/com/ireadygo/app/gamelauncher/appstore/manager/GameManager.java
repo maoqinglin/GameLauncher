@@ -236,12 +236,12 @@ public class GameManager {
 					mAppRestrictionManager.setAppEnableWithoutRecord(pkgName, true);
 					return true;
 				} else {
-					Toast.makeText(mContext,mContext.getString(R.string.launch_disable_error),Toast.LENGTH_SHORT).show();
+					Toast.makeText(mContext,mContext.getString(R.string.error_launch_disable),Toast.LENGTH_SHORT).show();
 					return false;
 				}
 			}
 			//无法找到对应apk，提示用户重新下载
-			Toast.makeText(mContext,mContext.getString(R.string.launch_error),Toast.LENGTH_SHORT).show();
+			Toast.makeText(mContext,mContext.getString(R.string.error_launch_unknown),Toast.LENGTH_SHORT).show();
 			AppEntity app = mGameData.getGameByPkgName(pkgName);
 			if (app != null) {
 				mGameStateManager.setGameState(pkgName, GameState.DEFAULT);

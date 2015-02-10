@@ -26,7 +26,7 @@ public class OneKeyLoginActivity extends BaseAccountActivity implements OnFocusC
 	}
 
 	private void initView() {
-		initHeaderView(R.string.onekey_goback_btn);
+		initHeaderView(R.string.account_onekey_goback_btn);
 		mOneKeyLoginBtn = (TextView) findViewById(R.id.onekeyLogin);
 		mOneKeyLoginBtn.setOnClickListener(this);
 		mOneKeyLoginBtn.setOnFocusChangeListener(this);

@@ -347,12 +347,12 @@ public class DownloadManager {
 					&& NetworkUtils.is3GNetConnected(mContext)) {
 				// 根据3G网络的设置，在禁用3G下载时，不恢复下载
 				pauseForException();
-				ToastUtils.ToastMsg(mContext.getString(R.string.Toast_disable_3G_prompt), true);
+				ToastUtils.ToastMsg(mContext.getString(R.string.toast_disable_3G_prompt), true);
 				return;
 			}
 			resumeForReturnNomal();
 			if (NetworkUtils.is3GNetConnected(mContext)) {
-				ToastUtils.ToastMsg(mContext.getString(R.string.using_3G_download), true);
+				ToastUtils.ToastMsg(mContext.getString(R.string.toast_using_3G_download), true);
 			}
 		}
 

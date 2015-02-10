@@ -238,7 +238,7 @@ public class DownloadTask {
 				&& !PreferenceUtils.getEnable3GDownload() 
 				&& NetworkUtils.is3GNetConnected(mContext)) {
 			reportState(DownloadState.PAUSED, new DownloadException(DownloadException.MSG_UNDOWNLOADABLE_NETWORK_TYPE));
-			ToastUtils.ToastMsg(mContext.getString(R.string.Toast_disable_3G_prompt), true);
+			ToastUtils.ToastMsg(mContext.getString(R.string.toast_disable_3G_prompt), true);
 			return;
 		}
 		if (DownloadState.DEFAULT == mCurState || DownloadState.QUEUING == mCurState
@@ -246,7 +246,7 @@ public class DownloadTask {
 			reportState(DownloadState.TRANSFERING, null);
 			mTransferPool.execute(new TransferDataRunnable());
 			if (NetworkUtils.is3GNetConnected(mContext)) {
-				ToastUtils.ToastMsg(mContext.getString(R.string.using_3G_download), true);
+				ToastUtils.ToastMsg(mContext.getString(R.string.toast_using_3G_download), true);
 			}
 			//上报下载开始事件
 			StaticsUtils.beginDownload(mAppEntity.getAppId());

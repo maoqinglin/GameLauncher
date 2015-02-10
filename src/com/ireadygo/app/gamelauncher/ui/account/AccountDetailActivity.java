@@ -4,13 +4,12 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.View.OnClickListener;
 
 import com.ireadygo.app.gamelauncher.GameLauncherApplication;
 import com.ireadygo.app.gamelauncher.R;
@@ -19,8 +18,8 @@ import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
 import com.ireadygo.app.gamelauncher.ui.OnChildFocusChangeListener;
 import com.ireadygo.app.gamelauncher.ui.SnailKeyCode;
 import com.ireadygo.app.gamelauncher.ui.activity.BaseAccountActivity;
-import com.ireadygo.app.gamelauncher.ui.base.KeyEventFragment;
 import com.ireadygo.app.gamelauncher.ui.base.BaseActivity;
+import com.ireadygo.app.gamelauncher.ui.base.KeyEventFragment;
 import com.ireadygo.app.gamelauncher.ui.redirect.Anchor;
 import com.ireadygo.app.gamelauncher.ui.redirect.Anchor.Destination;
 import com.ireadygo.app.gamelauncher.ui.widget.ConfirmDialog;
@@ -115,7 +114,7 @@ public class AccountDetailActivity extends BaseActivity {
 
 	public void showLogoutDialog() {
 		final ConfirmDialog dialog = new ConfirmDialog(this);
-		dialog.setPrompt(R.string.logout_confirm_prompt).setMsg(R.string.logout_confirm_msg)
+		dialog.setPrompt(R.string.personal_logout_confirm_prompt).setMsg(R.string.personal_logout_confirm_msg)
 				.setConfirmClickListener(new OnClickListener() {
 
 					@Override

@@ -24,7 +24,7 @@ public class AccountLoginActivity extends BaseAccountActivity {
 	}
 
 	private void initView() {
-		initHeaderView(R.string.account_login);
+		initHeaderView(R.string.account_login_btn);
 		mErrorPromptView = (TextView) findViewById(R.id.loginErrorPrompt);
 
 		mUsernameView = (EditText) findViewById(R.id.username);
@@ -46,11 +46,11 @@ public class AccountLoginActivity extends BaseAccountActivity {
 			String account = mUsernameView.getEditableText().toString();
 			String password = mPasswordView.getEditableText().toString();
 			if (TextUtils.isEmpty(account)) {
-				mErrorPromptView.setText(R.string.login_username_empty_prompt);
+				mErrorPromptView.setText(R.string.account_login_username_empty_prompt);
 				return;
 			}
 			if (TextUtils.isEmpty(password)) {
-				mErrorPromptView.setText(R.string.login_password_empty_prompt);
+				mErrorPromptView.setText(R.string.account_login_password_empty_prompt);
 				return;
 			}
 			generalLogin(account, password);

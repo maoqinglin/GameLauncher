@@ -80,11 +80,11 @@ public class PersonalLayout extends AccountBaseContentLayout implements OnClickL
 			switch (msg.what) {
 			case SAVE_SUCCESS:
 				hideProgressDialog();
-				Toast.makeText(getContext(), R.string.account_save_success, Toast.LENGTH_SHORT).show();
+				Toast.makeText(getContext(), R.string.personal_save_success, Toast.LENGTH_SHORT).show();
 				break;
 			case SAVE_FAILED:
 				hideProgressDialog();
-				Toast.makeText(getContext(), R.string.account_save_failed, Toast.LENGTH_SHORT).show();
+				Toast.makeText(getContext(), R.string.personal_save_failed, Toast.LENGTH_SHORT).show();
 				break;
 			case IMAGE_LOAD_SUCCESS:
 				setPhotoAdapter();
@@ -296,7 +296,7 @@ public class PersonalLayout extends AccountBaseContentLayout implements OnClickL
 
 		// 年龄
 		ArrayAdapter<String> ageAdapter = new AgeAdapter(getContext(), R.layout.account_age_item, R.id.accountAgeItem,
-				getContext().getResources().getStringArray(R.array.account_age_array));
+				getContext().getResources().getStringArray(R.array.personal_age_array));
 		mAgeSpinner.setOnItemSelectedListener(mInternalItemSelectedListener);
 		mAgeSpinner.setAdapter(ageAdapter);
 //		setAge(userInfo);
@@ -376,7 +376,7 @@ public class PersonalLayout extends AccountBaseContentLayout implements OnClickL
 					}
 				};
 			}.start();
-			showProgressDialog(getContext().getString(R.string.account_saving));
+			showProgressDialog(getContext().getString(R.string.personal_saving));
 		} else {
 			new AccountInfoAsyncTask(getContext(), new AccountInfoListener() {
 

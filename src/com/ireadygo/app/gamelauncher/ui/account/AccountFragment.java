@@ -350,7 +350,7 @@ public class AccountFragment extends BaseContentFragment implements OnClickListe
 
 	private void showLogoutDialog() {
 		final ConfirmDialog dialog = new ConfirmDialog(getRootActivity());
-		dialog.setPrompt(R.string.logout_confirm_prompt).setMsg(R.string.logout_confirm_msg)
+		dialog.setPrompt(R.string.personal_logout_confirm_prompt).setMsg(R.string.personal_logout_confirm_msg)
 				.setConfirmClickListener(new OnClickListener() {
 
 					@Override

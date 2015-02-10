@@ -421,7 +421,7 @@ public class DownloadManageAdapter extends HExpandableListAdapter {
 
 	public void deleteItem(final AppEntity appEntity) {
 		final ConfirmDialog dialog = new ConfirmDialog(mContext);
-		dialog.setPrompt(R.string.delete_task_prompt).setMsg(R.string.delete_task_msg)
+		dialog.setPrompt(R.string.store_dld_manager_delete_task_prompt).setMsg(R.string.store_dld_manager_delete_task_msg)
 				.setConfirmClickListener(new OnClickListener() {
 
 					@Override

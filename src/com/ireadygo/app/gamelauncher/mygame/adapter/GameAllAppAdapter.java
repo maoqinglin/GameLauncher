@@ -60,7 +60,7 @@ public class GameAllAppAdapter extends BaseAnimatorAdapter {
 	 */
 	private void addBuySlot() {
 		EscrowApp escrowApp = new EscrowApp();
-		escrowApp.name = mContext.getResources().getString(R.string.purpose_buy_slot);
+		escrowApp.name = mContext.getResources().getString(R.string.recharge_purpose_buy_slot);
 		escrowApp.isDisable = true;
 		mNeckApps.add(ExtendInfo.POS_SLOT_BUY, escrowApp);
 	}

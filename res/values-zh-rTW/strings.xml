@@ -1,128 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <!-- Common -->
     <string name="app_name">蝸牛桌面</string>
     <string name="action_settings">設置壁紙</string>
     <string name="goback">返回</string>
-
-    <!-- 壁紙 -->
-    <string name="wallpaper_instructions">設置壁紙</string>
-    <string name="pick_wallpaper">蝸牛壁紙</string>
     <string name="confirm">確定</string>
     <string name="cancel">取消</string>
-    <string name="choose_wallpaper">选择壁紙</string>
 
-    <!-- 下載 -->
-    <string name="Toast_disable_3G_prompt">免商店已經禁止使用移動網路進行下載！</string>
-    <string name="using_3G_download">正在使用移動網路下載！</string>
+    <!-- 壁紙 -->
+    <string name="wallpaper_set">設置壁紙</string>
+    <string name="wallpaper_snail">蝸牛壁紙</string>
+    <string name="wallpaper_choose">選擇壁紙</string>
 
-    <!-- 卡槽 -->
-    <string name="Toast_slot_overdue">\t個卡槽已過期</string>
-    <string name="Notification_slot_expired_big_title">卡槽過期提示</string>
-    <string name="Notification_slot_expired_little_title">您的卡槽還有%1$d天到期，到期後，部分應用將被解綁回“全部應用”中，請及時購買新卡槽。</string>
-    <string name="Notification_slot_expired_today_title">您的卡槽今天到期，到期後，部分應用將被解綁回“全部應用”中，請及時購買新卡槽。</string>
-
-    <!-- Download -->
-    <string name="launch_error">啟動失敗：無法啟動應用，請重新下載！</string>
-    <string name="launch_disable_error">啟動失敗：應用已禁止！</string>
-
-    <!-- Menu -->
-    <string name="menu_store">遊戲商店</string>
-    <string name="menu_game">我的遊戲</string>
-    <string name="menu_community">遊戲社區</string>
-    <string name="menu_app">應用</string>
-    <string name="menu_call">通話</string>
-    <string name="menu_settings">設定</string>
-
-    <!-- 應用詳情 -->
-    <string name="detail_game_introduce">應用介紹</string>
-    <string name="detail_version">版本:%1$s</string>
-    <string name="detail_size">大小:%1$s</string>
-    <string name="detail_play_numbers">在玩用戶</string>
-    <string name="detail_download">下&#160;&#160;載</string>
-    <string name="detail_continue">繼&#160;&#160;續</string>
-    <string name="detail_pause">暫&#160;&#160;停</string>
-    <string name="detail_queue">等 &#160;&#160;待</string>
-    <string name="detail_install">安&#160;&#160;裝</string>
-    <string name="detail_installing">安裝中</string>
-    <string name="detail_error">出 &#160;&#160;錯</string>
-    <string name="detail_launch">啟&#160;&#160;動</string>
-    <string name="detail_update">更&#160;&#160;新</string>
-    <string name="detail_game_detail">遊戲詳情</string>
-    <string name="detail_player_comment">玩家評論</string>
-
-    <!-- 商店-選項 -->
-    <string name="store_options_search">搜索</string>
-    <string name="store_options_recommend">推薦</string>
-    <string name="store_options_collection">合集</string>
-    <string name="store_options_category">分類</string>
-    <string name="store_options_game_manager">遊戲管理</string>
-    <string name="store_options_settings">商店設置</string>
-
-    <!-- 商店-選項縮寫 -->
-    <string name="store_options_search_short">搜索</string>
-    <string name="store_options_recommend_short">推薦</string>
-    <string name="store_options_collection_short">合集</string>
-    <string name="store_options_category_short">分類</string>
-    <string name="store_options_game_manager_short">遊戲管理</string>
-    <string name="store_options_settings_short">商店設置</string>
-
-    <!-- 商店-搜索 -->
-    <string name="store_search">搜&#160;&#160;索</string>
-
-    <!-- 免商店-分類 -->
-    <string-array name="category_titles">
-        <item>創意休閒</item>
-        <item>單機遊戲</item>
-        <item>動作射擊</item>
-        <item>角色扮演</item>
-        <item>經營策略</item>
-        <item>競技飛行</item>
-        <item>體育競技</item>
-        <item>益智棋牌</item>
-        <item>寶島精選</item>
-    </string-array>
-    <string-array name="category_intros">
-        <item>切東西/找茬/減壓/寵物/答題/音樂節奏</item>
-        <item>回合制/即時戰略/養成/武俠/魔幻/動漫</item>
-        <item>橫版/射擊/3D/飛行/坦克/狙擊</item>
-        <item>回合制/即時戰鬥/養成/武俠/魔幻/動漫</item>
-        <item>紙牌/戰棋/經營/歷史/戰爭/DOTA</item>
-        <item>跑酷/賽車/摩托/賽艇/飛機</item>
-        <item>街機/籃球/足球/網球/檯球/其他球類</item>
-        <item>鬥地主/棋類/麻將/桌遊/德州撲克/紙牌</item>
-        <item>來自寶島臺灣的遊戲精選</item>
-    </string-array>
-    <string-array name="store_settings_titles">
-        <item>只在WIFI環境下下載</item>
-        <item>安裝完成後自動刪除安裝包</item>
-        <item>遊戲更新提醒</item>
-        <item>允許空投遊戲自動下載安裝</item>
-    </string-array>
-    <string-array name="account_age_array">
-        <item>16歲~20歲</item>
-        <item>21歲~25歲</item>
-        <item>26歲~30歲</item>
-        <item>31歲~35歲</item>
-        <item>36歲~40歲</item>
-        <item>41歲~45歲</item>
-        <item>46歲~50歲</item>
-        <item>51歲~55歲</item>
-        <item>56歲~60歲</item>
-    </string-array>
-	<string-array name="personal_sex_array">
-        <item>男</item>
-        <item>女</item>
-    </string-array>
-    <!-- 免商店：下載管理 -->
-    <string name="store_dld_manager_downloading">下載中</string>
-    <string name="store_dld_manager_updatable">可更新</string>
-    <string name="store_dld_manager_launchable">已安裝</string>
-    <string name="store_dld_manager_empty">還沒發現好玩的？去找找好玩的遊戲吧。</string>
-    <string name="store_dld_manager_cur_version">版本：%1$s</string>
-    <string name="store_dld_manager_detail_not_found">暫時沒有該應用資訊</string>
-    <string name="delete_task_prompt">刪除任務記錄</string>
-    <string name="delete_task_msg">是否刪除您的下載任務？</string>
+    <!-- Notification通知-->
+    <string name="toast_slot_overdue">\t個卡槽已過期</string>
+    <string name="toast_disable_3G_prompt">免商店已經禁止使用移動網路進行下載！</string>
+    <string name="toast_using_3G_download">正在使用移動網路下載！</string>
+    <string name="notification_slot_expired_big_title">卡槽過期提示</string>
+    <string name="notification_slot_expired_little_title">您的卡槽還有%1$d天到期，到期後，部分應用將被解綁回“全部應用”中，請及時購買新卡槽。</string>
+    <string name="notification_slot_expired_today_title">您的卡槽今天到期，到期後，部分應用將被解綁回“全部應用”中，請及時購買新卡槽。</string>
+    <string name="notification_downloading_big_title">\t個應用正在下載</string>
+    <string name="notification_downloading_apps">\t個下載中</string>
+    <string name="notification_pause_apps">\t個暫停</string>
+    <string name="notification_queue_apps">\t個等待</string>
+    <string name="notification_failed_apps">\t個失敗</string>
+    <string name="notification_downloaded_big_title">免商店下載完成</string>
+    <string name="notification_downloaded_little_title">\t個應用下載完成</string>
+    <string name="notification_upgrade_big_title">應用升級提示</string>
+    <string name="notification_upgrade_little_title">\t個應用可進行更新</string>
 
     <!-- 卡槽購買頁面 -->
     <string name="slot_title">購買卡槽</string>
@@ -147,10 +52,100 @@
     <string name="slot_meal_text_1">30個卡槽包月20兔兔幣（兔兔禮券）</string>
     <string name="slot_meal_text_2">30個卡槽包年180兔兔幣（兔兔禮券）</string>
     <string name="slot_query_balance_prompt">查詢餘額失敗!</string>
-    <string name="user_identity_overdue">用戶身份過期或不存在，請重新登錄</string>
+    <string name="slot_user_identity_overdue">用戶身份過期或不存在，請重新登錄</string>
     <string name="slot_should_login">請先登錄免帳號！</string>
     <string name="slot_buy_success">卡槽購買成功！</string>
     <string name="slot_buy_failed">卡槽購買失敗！</string>
+    
+    <!-- 第一級目錄 -->
+    <string name="menu_store">遊戲商店</string>
+    <string name="menu_game">我的遊戲</string>
+    <string name="menu_community">遊戲社區</string>
+    <string name="menu_app">應用</string>
+    <string name="menu_call">通話</string>
+    <string name="menu_settings">設定</string>
+
+    <!-- 免商店-應用詳情 -->
+    <string name="detail_title">遊戲詳情</string>
+    <string name="detail_game_size">大小：</string>
+    <string name="detail_game_version">版本：</string>
+    <string name="detail_game_introduce">應用介紹</string>
+    <string name="detail_version">版本:%1$s</string>
+    <string name="detail_size">大小:%1$s</string>
+    <string name="detail_play_numbers">在玩用戶</string>
+    <string name="detail_download">下&#160;&#160;載</string>
+    <string name="detail_continue">繼&#160;&#160;續</string>
+    <string name="detail_pause">暫&#160;&#160;停</string>
+    <string name="detail_queue">等 &#160;&#160;待</string>
+    <string name="detail_install">安&#160;&#160;裝</string>
+    <string name="detail_installing">安裝中</string>
+    <string name="detail_error">出 &#160;&#160;錯</string>
+    <string name="detail_launch">啟&#160;&#160;動</string>
+    <string name="detail_update">更&#160;&#160;新</string>
+    <string name="detail_game_detail">遊戲詳情</string>
+    <string name="detail_player_comment">玩家評論</string>
+
+    <!-- 免商店-選項 -->
+    <string name="store_options_search">搜索</string>
+    <string name="store_options_recommend">推薦</string>
+    <string name="store_options_collection">合集</string>
+    <string name="store_options_category">分類</string>
+    <string name="store_options_game_manager">遊戲管理</string>
+    <string name="store_options_settings">商店設置</string>
+
+    <!-- 免商店-選項縮寫-->
+    <string name="store_options_search_short">搜索</string>
+    <string name="store_options_recommend_short">推薦</string>
+    <string name="store_options_collection_short">合集</string>
+    <string name="store_options_category_short">分類</string>
+    <string name="store_options_game_manager_short">遊戲管理</string>
+    <string name="store_options_settings_short">商店設置</string>
+    
+
+    <!-- 免商店-搜索 -->
+    <string name="store_search">搜&#160;&#160;索</string>
+
+    <!-- 免商店：下載管理 -->
+    <string name="store_dld_manager_downloading">下載中</string>
+    <string name="store_dld_manager_updatable">可更新</string>
+    <string name="store_dld_manager_launchable">已安裝</string>
+    <string name="store_dld_manager_empty">還沒發現好玩的？去找找好玩的遊戲吧。</string>
+    <string name="store_dld_manager_cur_version">版本：%1$s</string>
+    <string name="store_dld_manager_detail_not_found">暫時沒有該應用資訊</string>
+    <string name="store_dld_manager_delete_task_prompt">刪除任務記錄</string>
+    <string name="store_dld_manager_delete_task_msg">是否刪除您的下載任務？</string>
+    
+    <!-- 免商店-分類 -->
+    <string-array name="store_category_titles">
+        <item>創意休閒</item>
+        <item>單機遊戲</item>
+        <item>動作射擊</item>
+        <item>角色扮演</item>
+        <item>經營策略</item>
+        <item>競技飛行</item>
+        <item>體育競技</item>
+        <item>益智棋牌</item>
+        <item>寶島精選</item>
+    </string-array>
+    <string-array name="store_category_intros">
+        <item>切東西/找茬/減壓/寵物/答題/音樂節奏</item>
+        <item>回合制/即時戰略/養成/武俠/魔幻/動漫</item>
+        <item>橫版/射擊/3D/飛行/坦克/狙擊</item>
+        <item>回合制/即時戰鬥/養成/武俠/魔幻/動漫</item>
+        <item>紙牌/戰棋/經營/歷史/戰爭/DOTA</item>
+        <item>跑酷/賽車/摩托/賽艇/飛機</item>
+        <item>街機/籃球/足球/網球/檯球/其他球類</item>
+        <item>鬥地主/棋類/麻將/桌遊/德州撲克/紙牌</item>
+        <item>來自寶島臺灣的遊戲精選</item>
+    </string-array>
+
+    <!-- 免商店-設置 -->
+    <string-array name="store_settings_titles">
+        <item>只在WIFI環境下下載</item>
+        <item>安裝完成後自動刪除安裝包</item>
+	<item>遊戲更新提醒</item>
+	<item>允許空投遊戲自動下載安裝</item>
+    </string-array>
 
     <!-- 狀態 -->
     <string name="status_download">下 載</string>
@@ -163,17 +158,16 @@
     <string name="status_launch">啟 動</string>
     <string name="status_update">更 新</string>
 
-    <!-- 遊戲詳情 -->
-    <string name="detail_title">遊戲詳情</string>
-    <string name="detail_game_size">大小：</string>
-    <string name="detail_game_version">版本：</string>
-
-    <!-- 免帳號 -->
+     <!-- 免帳號 -->
     <string name="account_mywealth">我的資產</string>
     <string name="account_personal">個人資訊</string>
     <string name="account_recharge">充值</string>
     <string name="account_freecard">免卡</string>
-    <string name="account_logout">退出帳戶</string>
+    <string name="account_logout">退出帳號</string>
+    
+    <!-- 免帳號- 我的資產 -->
+    <string name="mywealth_game_counts">遊戲</string>
+    <string name="mywealth_game_points">積分</string>
 
     <!-- 免帳號-個人資訊 -->
     <string name="personal_edit_account">編輯資料</string>
@@ -189,16 +183,35 @@
     <string name="personal_male">男</string>
     <string name="personal_empty_phone_number">無</string>
     <string name="personal_no_bind_phone_number">未綁定</string>
-    <string name="account_saving">保存中...</string>
-    <string name="account_save_success">保存成功！</string>
-    <string name="account_save_failed">保存失敗！</string>
-    <string name="account_outdate">用戶身份過期，請重新登錄</string>
-    <string name="logout_confirm_prompt">退出確認</string>
-    <string name="logout_confirm_msg">確定註銷當前帳號嗎？</string>
-    <string name="from_system">系統頭像</string>
-    <string name="from_camera">拍照</string>
-    <string name="from_gallery">從相冊選擇</string>
-    <string name="system_photo_dialog_title">系統頭像</string>
+    <string name="personal_saving">保存中...</string>
+    <string name="personal_save_success">保存成功！</string>
+    <string name="personal_save_failed">保存失敗！</string>
+    <string name="personal_outdate">用戶身份過期，請重新登錄</string>
+    <string name="personal_logout_confirm_prompt">退出確認</string>
+    <string name="personal_logout_confirm_msg">確定註銷當前帳號嗎？</string>
+    <string name="personal_from_system">系統頭像</string>
+    <string name="personal_from_camera">拍照</string>
+    <string name="personal_from_gallery">從相冊選擇</string>
+    <string name="personal_system_photo_dialog_title">系統頭像</string>
+
+    <!-- 免帳號-個人年齡 -->
+    <string-array name="personal_age_array">
+        <item>16歲~20歲</item>
+        <item>21歲~25歲</item>
+        <item>26歲~30歲</item>
+        <item>31歲~35歲</item>
+        <item>36歲~40歲</item>
+        <item>41歲~45歲</item>
+        <item>46歲~50歲</item>
+        <item>51歲~55歲</item>
+        <item>56歲~60歲</item>
+    </string-array>
+    
+    <!-- 免帳號-個人性別 -->
+    <string-array name="personal_sex_array">
+        <item>男</item>
+        <item>女</item>
+    </string-array>
 
     <!-- 免帳號-充值 -->
     <string name="recharge_current_account">當前帳戶</string>
@@ -222,29 +235,29 @@
     <string name="recharge_slot_ticket_not_exist">充值失敗，卡槽禮券碼不存在</string>
     <string name="recharge_slot_ticket_type_match">充值失敗，設備類型與卡槽禮券類型不匹配</string>
     <string name="recharge_slot_ticket_one_bind">充值失敗，綁定卡槽禮券失敗</string>
-    <string name="recharge_money_not_enough">充值失敗，帳戶餘額不足</string>
+    <string name="recharge_failed_money_not_enough">充值失敗，帳戶餘額不足</string>
     <string name="recharge_imei_unknown">充值失敗，未知設備號</string>
-    <string name="account_recharge_rabbit_ticket">兔兔禮券充值</string>
-    <string name="account_change_account">更換帳號</string>
-    <string name="account_recharge_account">充值帳號：%1$s \n 否對進行充值</string>
-    <string name="slot_insufficient_balance_prompt">您的帳戶餘額不足，請先充值兔兔幣</string>
-    <string name="recharge_account_empty">充值免卡帳號為空</string>
-    <string name="rabbit_coin">兔兔幣</string>
-    <string name="rabbit_ticket">兔兔禮券</string>
-    <string name="money_not_enough">帳戶餘額不足</string>
+    <string name="recharge_rabbit_ticket">兔兔禮券充值</string>
+    <string name="recharge_change_account">更換帳號</string>
+    <string name="recharge_account_number">充值帳號：%1$s \n 否對進行充值</string>
+    <string name="recharge_slot_insufficient_balance_prompt">您的帳戶餘額不足，請先充值兔兔幣</string>
+    <string name="recharge_account_number_empty">充值免卡帳號為空</string>
+    <string name="recharge_rabbit_coin_title">兔兔幣</string>
+    <string name="recharge_rabbit_ticket_title">兔兔禮券</string>
+    <string name="recharge_money_not_enough">帳戶餘額不足</string>
     <string name="recharge_phone_not_bind">充值失敗，免機手機號未綁定</string>
     <string name="recharge_phone_fee_limint">充值失敗，購買資費數量超過上限</string>
-    <string name="purpose_phone_recharge">免卡充值</string>
-    <string name="purpose_game_recharge">遊戲充值</string>
-    <string name="purpose_buy_slot">購買卡槽</string>
-    <string name="rabbit_ticket_recharged_tip">已充值%1$d兔兔禮券</string>
-    <string name="rabbit_ticket_recharged_done">完成！</string>
-    <string name="rabbit_ticket_purpose_title">兔兔禮券可用於：</string>
-    <string name="arm_ticket_recharged_tip">已充值%1$d個卡槽，有效時長：%2$d天</string>
-    <string name="arm_ticket_recharged_tip_permanent">已充值%1$d個卡槽，有效時長：永久</string>
-    <string name="arm_ticket_purpose_title">卡槽禮券可用於：在“我的應用”桌面上，增加更多協力廠商應用</string>
-    <string name="arm_ticket_recharge_title">卡槽禮券充值</string>
-    <string name="account_traiff_recharge">資費充值</string>
+    <string name="recharge_purpose_phone">免卡充值</string>
+    <string name="recharge_purpose_game">遊戲充值</string>
+    <string name="recharge_purpose_buy_slot">購買卡槽</string>
+    <string name="recharge_rabbit_ticket_recharged_tip">已充值%1$d兔兔禮券</string>
+    <string name="recharge_rabbit_ticket_recharged_done">完成！</string>
+    <string name="recharge_rabbit_ticket_purpose_title">兔兔禮券可用於：</string>
+    <string name="recharge_arm_ticket_recharged_tip">已充值%1$d個卡槽，有效時長：%2$d天</string>
+    <string name="recharge_arm_ticket_recharged_tip_permanent">已充值%1$d個卡槽，有效時長：永久</string>
+    <string name="recharge_arm_ticket_purpose_title">卡槽禮券可用於：在“我的應用”桌面上，增加更多第三方應用</string>
+    <string name="recharge_arm_ticket_recharge_title">卡槽禮券充值</string>
+    <string name="recharge_account_traiff_recharge">資費充值</string>
 
     <string-array name="recharge_ticket_types">
         <item>兔兔禮券</item>
@@ -261,66 +274,53 @@
     <string name="freecard_package_pay_unit">兔兔幣(兔兔券)</string>
     <string name="freecard_flow_package">45MB流量包</string>
     <string name="freecard_sms_package">50條短信包</string>
-    <string name="phone_bind">綁定</string>
-    <string name="phone_unbind">解綁</string>
-    <string name="bind_phone_not_empty">手機號碼不能為空</string>
-    <string name="bind_phone_length_wrong">手機號長度有誤</string>
-    <string name="rabbit_coin_or_ticket">兔兔幣(兔兔禮券)</string>
-    <string name="account_free_card_rule">充值免卡規則</string>
-    <string name="account_rule_msg">首次綁定免卡時，您的“兔兔禮券”將默認只能對此免卡進行資費充值，自後綁定的其他免卡需要兔兔幣充值</string>
-    <string name="account_confirm_bind">確認綁定</string>
-    <string name="bind_failed_illegality_bss_account">綁定失敗，非法的BSS帳號</string>
-    <string name="bind_failed_already_bind">綁定失敗，免機已綁定該手機號</string>
-    <string name="bind_failed_phone_wrong">綁定失敗，免機手機號綁定失敗</string>
-    <string name="bind_failed_without_recharge">綁定失敗，請進行兔兔禮券充值</string>
-    <string name="account_recharge_free_card">充值免卡：</string>
-    <string name="account_should_pay_money">應付金額：</string>
-    <string name="account_celerity_payment">立即支付</string>
+    <string name="freecard_phone_bind">綁定</string>
+    <string name="freecard_phone_unbind">解綁</string>
+    <string name="freecard_bind_phone_not_empty">手機號碼不能為空</string>
+    <string name="freecard_bind_phone_length_wrong">手機號長度有誤</string>
+    <string name="freecard_rabbit_coin_or_ticket">兔兔幣(兔兔禮券)</string>
+    <string name="freecard_rule">充值免卡規則</string>
+    <string name="freecard_rule_msg">首次綁定免卡時，您的“兔兔禮券”將默認只能對此免卡進行資費充值，自後綁定的其他免卡需要兔兔幣充值</string>
+    <string name="freecard_confirm_bind">確認綁定</string>
+    <string name="freecard_bind_failed_illegality_bss_account">綁定失敗，非法的BSS帳號</string>
+    <string name="freecard_bind_failed_already_bind">綁定失敗，免機已綁定該手機號</string>
+    <string name="freecard_bind_failed_phone_wrong">綁定失敗，免機手機號綁定失敗</string>
+    <string name="freecard_bind_failed_without_recharge">綁定失敗，請進行兔兔禮券充值</string>
+    <string name="freecard_recharge">充值免卡：</string>
+    <string name="freecard_should_pay_money">應付金額：</string>
+    <string name="freecard_celerity_payment">立即支付</string>
+
 
     <!-- 錯誤顯示 -->
-    <string name="unknown_error">未知錯誤</string>
-    <string name="manage_download_error">下載出錯</string>
-    <string name="manage_install_error">安裝出錯</string>
+    <string name="error_unknown">未知錯誤</string>
+    <string name="error_download">下載出錯</string>
+    <string name="error_install">安裝出錯</string>
+    <string name="error_launch_unknown">啟動失敗：無法啟動應用，請重新下載！</string>
+    <string name="error_launch_disable">啟動失敗：應用已禁止！</string>
+    <string name="error_install_package_not_found">安裝失敗：檔不存在，請重新下載</string>
+    <string name="error_install_package_unreadable">安裝失敗：檔受損，請重新下載</string>
+    <string name="error_install_silently_not_compatible">安裝失敗：未知錯誤</string>
+    <string name="error_install_invalid_apk">安裝失敗：檔受損，請重新下載</string>
+    <string name="error_install_insufficient_storage">安裝失敗：存儲空間不足</string>
+    <string name="error_install_inconsistent_certificates">安裝失敗：簽名衝突</string>
+    <string name="error_install_no_certificates">安裝失敗：應用無簽名</string>
+    <string name="error_install_unknow_apk">安裝失敗：未知錯誤</string>
+    <string name="error_install_zip_package">安裝失敗：解壓錯誤</string>
+    <string name="error_install_storage_system">安裝失敗：未知錯誤</string>
+    <string name="error_install_external_storage_unmounted">安裝失敗：未檢測到SD卡</string>
+    <string name="error_install_illegal_apk_with_data">安裝失敗：檔受損</string>
+    <string name="error_uninstall_failed_invalid_package">卸載失敗：應用不存在</string>
+    <string name="error_uninstall_failed_internal">卸載失敗：未知錯誤</string>
+    <string name="error_uninstall_failed_permission_denied">卸載失敗：未知錯誤</string>
+    <string name="error_download_network_unavaible">下載失敗：網路不可用</string>
+    <string name="error_download_insufficient_storage_space">下載失敗：存儲空間不足</string>
+    <string name="error_download_can_not_create_download_path">下載失敗：檔讀寫錯誤</string>
+    <string name="error_download_path_can_not_write">下載失敗：檔讀寫錯誤</string>
+    <string name="error_download_server_error">下載失敗：伺服器錯誤</string>
+    <string name="error_download_url_error">下載失敗：下載鏈接錯誤</string>
+    <string name="error_download_io_error">下載失敗：未知錯誤</string>
 
-    <!-- Install And Unstall -->
-    <string name="package_not_found">安裝失敗：檔不存在，請重新下載</string>
-    <string name="package_unreadable">安裝失敗：檔受損，請重新下載</string>
-    <string name="install_silently_not_compatible">安裝失敗：未知錯誤</string>
-    <string name="invalid_apk">安裝失敗：檔受損，請重新下載</string>
-    <string name="insufficient_storage">安裝失敗：存儲空間不足</string>
-    <string name="inconsistent_certificates">安裝失敗：簽名衝突</string>
-    <string name="no_certificates">安裝失敗：應用無簽名</string>
-    <string name="unknow_apk_install_error">安裝失敗：未知錯誤</string>
-    <string name="error_zip_package">安裝失敗：解壓錯誤</string>
-    <string name="storage_system_error">安裝失敗：未知錯誤</string>
-    <string name="external_storage_unmounted">安裝失敗：未檢測到SD卡</string>
-    <string name="illegal_apk_with_data">安裝失敗：文件受損</string>
-    <string name="uninstall_failed_invalid_package">卸載失敗：應用不存在</string>
-    <string name="uninstall_failed_internal_error">卸載失敗：未知錯誤</string>
-    <string name="uninstall_failed_permission_denied">卸載失敗：未知錯誤</string>
-
-    <!-- Download -->
-    <string name="network_unavaible">下載失敗：網路不可用</string>
-    <string name="insufficient_storage_space">下載失敗：存儲空間不足</string>
-    <string name="can_not_create_download_path">下載失敗：檔讀寫錯誤</string>
-    <string name="download_path_can_not_write">下載失敗：檔讀寫錯誤</string>
-    <string name="server_error">下載失敗：伺服器錯誤</string>
-    <string name="url_error">下載失敗：下載連結錯誤</string>
-    <string name="io_error">下載失敗：未知錯誤</string>
-
-    <!-- 更新 -->
-    <string name="notification_downloading_big_title">\t個應用正在下載</string>
-    <string name="notification_downloading_apps">\t個下載中</string>
-    <string name="notification_pause_apps">\t個暫停</string>
-    <string name="notification_queue_apps">\t個等待</string>
-    <string name="notification_failed_apps">\t個失敗</string>
-    <string name="notification_downloaded_big_title">免商店下載完成</string>
-    <string name="notification_downloaded_little_title">\t個應用下載完成</string>
-    <string name="notification_upgrade_big_title">應用升級提示</string>
-    <string name="notification_upgrade_little_title">\t個應用可進行更新</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="title_activity_test_main">TestMainActivity</string>
+    <!-- 設置 -->
     <string name="settings_systemupgrade">系統升級</string>
     <string name="settings_personalized">個性化</string>
     <string name="settings_language">語言</string>
@@ -329,7 +329,7 @@
     <string name="settings_help">幫助</string>
     <string name="settings_more">更多</string>
     <string name="settings_wifi">WIFI</string>
-    <string name="settings_wallpaper">壁纸</string>
+    <string name="settings_wallpaper">壁紙</string>
     <string name="settings_joystic_battery">手柄電量</string>
 
     <!-- 按鍵提示層 -->
@@ -340,61 +340,55 @@
 
     <!-- 網路 -->
     <string name="no_network">請連接網路</string>
-    <string name="all_app_moon_explain">返回</string>
-
-    <!-- 免帳號- 我的資產 -->
-    <string name="mywealth_game_counts">遊戲</string>
-    <string name="mywealth_game_points">積分</string>
 
     <!-- 開機引導 -->
     <string name="starting_guide_key_title">按鍵說明</string>
 
-    <!-- 帳號登錄、註冊 -->
+    <!-- 免帳號-登錄、註冊 -->
     <string name="account_one_key_logining_prompt">一鍵登錄中...</string>
     <string name="account_logining_prompt">帳號登錄中...</string>
     <string name="account_registing_prompt">帳號註冊中...</string>
-    <!-- 充值 -->
-    <string name="rabbit_ticket_recharge_title">兔兔禮券充值</string>
-    <string name="login_username_hint">請輸入蝸牛通行證/郵箱</string>
-    <string name="login_password_hint">請輸入密碼</string>
-    <string name="login">登 &#160;&#160;錄</string>
-    <!-- 一鍵登錄 -->
-    <string name="onekey_login">一鍵登錄</string>
-    <string name="account_login">帳號登錄</string>
-    <string name="onekey_goback_btn">帳號設定</string>
-    <string name="login_username_empty_prompt">用戶名不能為空</string>
-    <string name="login_password_empty_prompt">密碼不能為空</string>
-    <!-- 註冊 -->
-    <string name="account_register">帳號註冊</string>
-    <string name="register">注&#160;&#160;冊</string>
-    <string name="login_register_prompt">還沒有帳號？請點擊註冊</string>
-    <string name="register_username_hint">請輸入6-25位元字元</string>
-    <string name="register_password_hint">請輸入密碼</string>
-    <string name="register_password_repeat_hint">請確認密碼</string>
-    <string name="register_password_prompt">您的密碼長度必須為8-16個字元，且必須含一個數位元，一個字母，字母區分大小。</string>
+    <string name="account_login_username_hint">請輸入蝸牛通行證/郵箱</string>
+    <string name="account_login_password_hint">請輸入密碼</string>
+    <string name="account_login_btn">登 &#160;&#160;錄</string>
+    <string name="account_onekey_login_title">一鍵登錄</string>
+    <string name="account_login_title">帳號登錄</string>
+    <string name="account_onekey_goback_btn">帳號設定</string>
+    <string name="account_login_username_empty_prompt">用戶名不能為空</string>
+    <string name="account_login_password_empty_prompt">密碼不能為空</string>
+    <string name="account_register_title">帳號註冊</string>
+    <string name="account_register_btn">注&#160;&#160;冊</string>
+    <string name="account_login_register_prompt">還沒有帳號？請點擊註冊</string>
+    <string name="account_register_username_hint">請輸入6-25位字元</string>
+    <string name="account_register_password_hint">請輸入密碼</string>
+    <string name="account_register_password_repeat_hint">請確認密碼</string>
+    <string name="account_register_password_prompt">您的密碼長度必須為8-16個字元，且必須含一個數字，一個字母，字母區分大小。</string>
     <string name="account_username_length_error">帳號長度必須為6-25個字元！</string>
     <string name="account_login_success">登錄成功</string>
     <string name="account_one_key_login_failed">一鍵登錄失敗，請手動登錄帳號！</string>
     <string name="account_username_empty_prmopt">用戶名或密碼為空！</string>
     <string name="account_password_length_error">密碼長度必須為8-16個字元！</string>
-    <string name="account_password_digit_error">密碼必須包含字母和數位元</string>
+    <string name="account_password_digit_error">密碼必須包含字母和數字</string>
     <string name="account_password_repeat_error">兩次輸入的密碼不一致！</string>
     <string name="account_email_error">郵箱格式不正確！</string>
     <string name="account_login_failed">登錄失敗，請重試！</string>
     <string name="account_login_server_phonenumber">客服電話：(0512)67621007</string>
-    <string name="myapp_folder_title_system">系統資料夾</string>
+    
     <!-- 全部應用 -->
     <string name="all_app">全部應用</string>
     <string name="all_app_description">請選擇需要顯示在桌面上的應用</string>
     <string name="all_app_count">全部應用：</string>
     <string name="all_app_used_slot">已使用卡槽：</string>
-    <string name="all_app_device_not_support">操作失敗！設備不支援！</string>
+    <string name="all_app_device_not_support">操作失敗！設備不支持！</string>
     <string name="all_app_slot_has_bind">此應用已經綁定卡槽，可以正常使用！</string>
     <string name="all_app_network_error">網路異常！</string>
     <string name="all_app_no_slot_title">提示</string>
     <string name="all_app_no_slot_msg">沒有多餘卡槽，請充值購買！</string>
+
     <!-- 我的遊戲推薦下載 -->
     <string name="mygame_recommend_app_download">推薦下載</string>
+    <string name="mygame_empty_tip">空空如也，快去免商店轉轉吧～！</string>
+    <string name="myapp_folder_title_system">系統檔夾</string>
 
     <!-- 遊戲社區 -->
     <string name="game_community_account">帳號</string>
@@ -443,15 +437,16 @@
     <string name="free_flow_auto_get_success">自動領取免流量特權成功</string>
     <string name="free_flow_auto_get_failed">領取免流量特權失敗</string>
     <string name="free_flow_confirm_prompt">免流量提示</string>
+
     <string name="shortcut_confirm">確定</string>
     <string name="shortcut_detail">詳情</string>
     <string name="shortcut_back">返回</string>
     <string name="shortcut_uninstall">卸載</string>
 
     <!-- Extend -->
-    <string name="extend_install_error">伺服器資料錯誤，請重新下載！</string>
+    <string name="extend_install_error">伺服器數據錯誤，請重新下載！</string>
     <string name="extend_install_success">安裝成功</string>
-    <string name="extend_nearly_open">即將開放，敬請期待！</string>
-
-    <string name="store_empty_title">空空如也，快去免商店轉轉吧~！</string>
+    <string name="extend_nearly_open">即將開放，敬請期待！</string>    
+    <string name="extend_store_empty_title">空空如也，快去免商店轉轉吧～！</string>
+    <string name="store_load_empty_title">網路不給力~！</string>
 </resources>

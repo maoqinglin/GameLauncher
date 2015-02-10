@@ -286,7 +286,7 @@ public class AppRestrictionManager implements LocalDataLoadCallback {
 									
 									@Override
 									public void run() {
-										Toast.makeText(mContext, bindFailedPkgs.size() + mContext.getString(R.string.Toast_slot_overdue),
+										Toast.makeText(mContext, bindFailedPkgs.size() + mContext.getString(R.string.toast_slot_overdue),
 												Toast.LENGTH_SHORT).show();
 									}
 								});

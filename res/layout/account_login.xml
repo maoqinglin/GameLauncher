@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/login_margin_top_first"
             android:drawableLeft="@drawable/account_username_icon"
-            android:hint="@string/login_username_hint" />
+            android:hint="@string/account_login_username_hint" />
 
         <com.ireadygo.app.gamelauncher.ui.widget.CustomerEditText
             android:id="@+id/password"
@@ -36,7 +36,7 @@
             android:inputType="textPassword"
             android:layout_marginTop="@dimen/login_margin_top_normal"
             android:drawableLeft="@drawable/account_password_icon"
-            android:hint="@string/login_password_hint" />
+            android:hint="@string/account_login_password_hint" />
 
         <TextView
             android:id="@+id/loginBtn"
@@ -45,14 +45,14 @@
             android:layout_height="@dimen/login_edittext_height"
             android:layout_marginTop="@dimen/login_margin_top_normal"
             android:background="@drawable/login_btn_bg_selector"
-            android:text="@string/login" />
+            android:text="@string/account_login_btn" />
 
         <TextView
             style="@style/TextLabelSmallDark"
             android:layout_width="@dimen/login_edittext_width"
             android:layout_height="@dimen/login_edittext_height"
             android:gravity="center_vertical"
-            android:text="@string/login_register_prompt" />
+            android:text="@string/account_login_register_prompt" />
 
         <TextView
             android:id="@+id/registerBtn"
@@ -60,7 +60,7 @@
             android:layout_width="@dimen/login_edittext_width"
             android:layout_height="@dimen/login_edittext_height"
             android:background="@drawable/register_btn_bg_selector"
-            android:text="@string/register" />
+            android:text="@string/account_register_btn" />
     </LinearLayout>
 
     <com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout

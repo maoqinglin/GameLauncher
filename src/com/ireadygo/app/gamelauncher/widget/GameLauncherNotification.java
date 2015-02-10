@@ -233,17 +233,17 @@ public class GameLauncherNotification {
 	public void addSlotExpiredNotification(int days) {
 		Notification notification = mNotificationMap.get(TYPE_SLOT_EXPIRED_NOTIFICATION);
 		if (null == notification) {
-			notification = new Notification(R.drawable.notification_upgrade_logo, mContext.getString(R.string.Notification_slot_expired_big_title), System.currentTimeMillis());
+			notification = new Notification(R.drawable.notification_upgrade_logo, mContext.getString(R.string.notification_slot_expired_big_title), System.currentTimeMillis());
 		}
 		notification.defaults = Notification.DEFAULT_VIBRATE;
 		notification.flags = Notification.FLAG_AUTO_CANCEL;
 		String littleTitle;
 		if (days <= 0) {
-			littleTitle = mContext.getString(R.string.Notification_slot_expired_today_title);
+			littleTitle = mContext.getString(R.string.notification_slot_expired_today_title);
 		} else {
-			littleTitle = String.format(mContext.getString(R.string.Notification_slot_expired_little_title), days);
+			littleTitle = String.format(mContext.getString(R.string.notification_slot_expired_little_title), days);
 		}
-		notification.setLatestEventInfo(mContext, mContext.getString(R.string.Notification_slot_expired_big_title)
+		notification.setLatestEventInfo(mContext, mContext.getString(R.string.notification_slot_expired_big_title)
 				,littleTitle, setPendingIntentToAllApp(TYPE_SLOT_EXPIRED_NOTIFICATION));
 		mNotificationMap.put(TYPE_SLOT_EXPIRED_NOTIFICATION, notification);
 		mManager.notify(TYPE_SLOT_EXPIRED_NOTIFICATION, mNotificationMap.get(TYPE_SLOT_EXPIRED_NOTIFICATION));

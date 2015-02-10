@@ -24,21 +24,21 @@ public class AccountTicketRechargeDoneActivity extends BaseAccountActivity {
 		TextView gameRechargre = (TextView) findViewById(R.id.purpose_game_recharge);
 
 		if(type == 0) {
-			initHeaderView(R.string.rabbit_ticket_recharge_title);
-			purposeTitle.setText(getString(R.string.rabbit_ticket_purpose_title));
-			ticketIntro.setText(getString(R.string.rabbit_ticket_recharged_tip, getIntent().getIntExtra("count", 0)));
+			initHeaderView(R.string.recharge_rabbit_ticket_title);
+			purposeTitle.setText(getString(R.string.recharge_rabbit_ticket_purpose_title));
+			ticketIntro.setText(getString(R.string.recharge_rabbit_ticket_recharged_tip, getIntent().getIntExtra("count", 0)));
 			phoneRecharge.setVisibility(View.VISIBLE);
 			buySlot.setVisibility(View.VISIBLE);
 			gameRechargre.setVisibility(View.VISIBLE);
 		} else {
-			initHeaderView(R.string.arm_ticket_recharge_title);
-			purposeTitle.setText(getString(R.string.arm_ticket_purpose_title));
+			initHeaderView(R.string.recharge_arm_ticket_recharge_title);
+			purposeTitle.setText(getString(R.string.recharge_arm_ticket_purpose_title));
 			int expiredDays = getIntent().getIntExtra("expired", 0);
 			if (expiredDays == 0) {
-				ticketIntro.setText(getString(R.string.arm_ticket_recharged_tip_permanent,
+				ticketIntro.setText(getString(R.string.recharge_arm_ticket_recharged_tip_permanent,
 						getIntent().getIntExtra("count", 0)));
 			} else {
-				ticketIntro.setText(getString(R.string.arm_ticket_recharged_tip,
+				ticketIntro.setText(getString(R.string.recharge_arm_ticket_recharged_tip,
 						getIntent().getIntExtra("count", 0),expiredDays));
 			}
 			phoneRecharge.setVisibility(View.INVISIBLE);

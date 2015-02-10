@@ -35,12 +35,11 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.FrameLayout.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.widget.FrameLayout.LayoutParams;
 
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.download.DownloadException;
@@ -190,7 +189,7 @@ public class Utils {
 
 		}
 		if (TextUtils.isEmpty(result)) {
-			result = context.getString(R.string.unknown_error);
+			result = context.getString(R.string.error_unknown);
 		}
 		return result;
 	}
@@ -201,28 +200,28 @@ public class Utils {
 			if (!TextUtils.isEmpty(msg)) {
 				int resId = -1;
 				if (DownloadException.NETWORK_UNAVAIBLE.equals(msg)) {
-					resId = R.string.network_unavaible;
+					resId = R.string.error_download_network_unavaible;
 				} else if (DownloadException.INSUFFICIENT_STORAGE_SPACE.equals(msg)) {
-					resId = R.string.insufficient_storage_space;
+					resId = R.string.error_download_insufficient_storage_space;
 				} else if (DownloadException.CAN_NOT_CREATE_DOWNLOAD_PATH.equals(msg)) {
-					resId = R.string.can_not_create_download_path;
+					resId = R.string.error_download_can_not_create_download_path;
 				} else if (DownloadException.UNKNOW_ERROR.equals(msg)) {
-					resId = R.string.unknown_error;
+					resId = R.string.error_download;
 				} else if (DownloadException.DOWNLOAD_PATH_CAN_NOT_WRITE.equals(msg)) {
-					resId = R.string.download_path_can_not_write;
+					resId = R.string.error_download_path_can_not_write;
 				} else if (DownloadException.SERVER_ERROR.equals(msg)) {
-					resId = R.string.server_error;
+					resId = R.string.error_download_server_error;
 				} else if (DownloadException.URL_ERROR.equals(msg)) {
-					resId = R.string.url_error;
+					resId = R.string.error_download_url_error;
 				} else if (DownloadException.IO_ERROR.equals(msg)) {
-					resId = R.string.io_error;
+					resId = R.string.error_download_io_error;
 				}
 				if (resId != -1) {
 					return context.getString(resId);
 				}
 			}
 		}
-		return context.getString(R.string.manage_download_error);
+		return context.getString(R.string.error_download);
 	}
 
 	private static String handleUnOrInstallError(Context context, Throwable t) {
@@ -231,42 +230,42 @@ public class Utils {
 			if (!TextUtils.isEmpty(msg)) {
 				int resId = -1;
 				if (msg.equals(InstallMessage.PACKAGE_NOT_FOUND)) {
-					resId = R.string.package_not_found;
+					resId = R.string.error_install_package_not_found;
 				} else if (msg.equals(InstallMessage.PACKAGE_UNREADABLE)) {
-					resId = R.string.package_unreadable;
+					resId = R.string.error_install_package_unreadable;
 				} else if (msg.equals(InstallMessage.INSTALL_SILENTLY_NOT_COMPATIBLE)) {
-					resId = R.string.install_silently_not_compatible;
+					resId = R.string.error_install_silently_not_compatible;
 				} else if (msg.equals(InstallMessage.INVALID_APK)) {
-					resId = R.string.invalid_apk;
+					resId = R.string.error_install_invalid_apk;
 				} else if (msg.equals(InstallMessage.INSUFFICIENT_STORAGE)) {
-					resId = R.string.insufficient_storage;
+					resId = R.string.error_install_insufficient_storage;
 				} else if (msg.equals(InstallMessage.INCONSISTENT_CERTIFICATES)) {
-					resId = R.string.inconsistent_certificates;
+					resId = R.string.error_install_inconsistent_certificates;
 				} else if (msg.equals(InstallMessage.INSTALL_PARSE_FAILED_NO_CERTIFICATES)) {
-					resId = R.string.no_certificates;
+					resId = R.string.error_install_no_certificates;
 				} else if (msg.equals(InstallMessage.UNKNOW_APK_INSTALL_ERROR)) {
-					resId = R.string.unknow_apk_install_error;
+					resId = R.string.error_install_unknow_apk;
 				} else if (msg.equals(InstallMessage.ERROR_ZIP_PACKAGE)) {
-					resId = R.string.error_zip_package;
+					resId = R.string.error_install_zip_package;
 				} else if (msg.equals(InstallMessage.STORAGE_SYSTEM_ERROR)) {
-					resId = R.string.storage_system_error;
+					resId = R.string.error_install_storage_system;
 				} else if (msg.equals(InstallMessage.EXTERNAL_STORAGE_UNMOUNTED)) {
-					resId = R.string.external_storage_unmounted;
+					resId = R.string.error_install_external_storage_unmounted;
 				} else if (msg.equals(InstallMessage.ILLEGAL_APK_WITH_DATA)) {
-					resId = R.string.illegal_apk_with_data;
+					resId = R.string.error_install_illegal_apk_with_data;
 				} else if (msg.equals(InstallMessage.UNINSTALL_FAILED_INVALID_PACKAGE)) {
-					resId = R.string.uninstall_failed_invalid_package;
+					resId = R.string.error_uninstall_failed_invalid_package;
 				} else if (msg.equals(InstallMessage.UNINSTALL_FAILED_INTERNAL_ERROR)) {
-					resId = R.string.uninstall_failed_internal_error;
+					resId = R.string.error_uninstall_failed_internal;
 				} else if (msg.equals(InstallMessage.UNINSTALL_FAILED_PERMISSION_DENIED)) {
-					resId = R.string.uninstall_failed_permission_denied;
+					resId = R.string.error_uninstall_failed_permission_denied;
 				}
 				if (resId != -1) {
 					return context.getString(resId);
 				}
 			}
 		}
-		return context.getString(R.string.manage_install_error);
+		return context.getString(R.string.error_install);
 	}
 
 	public static boolean isEmail(String email) {
@@ -355,7 +354,6 @@ public class Utils {
 		LayoutInflater inflater = LayoutInflater.from(context);
 		View layout = inflater.inflate(R.layout.loading_progress_dialog, null);// 得到加载view
 		// main.xml中的ImageView
-		ImageView spaceshipImage = (ImageView) layout.findViewById(R.id.progress_image);
 		Dialog loadingDialog = new Dialog(context, R.style.loading_progress_dialog);// 创建自定义样式dialog
 		loadingDialog.setContentView(layout, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
 				LinearLayout.LayoutParams.MATCH_PARENT));// 设置布局

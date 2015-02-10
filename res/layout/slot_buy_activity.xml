@@ -172,7 +172,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:text="@string/slot_insufficient_balance_prompt"
+                android:text="@string/recharge_slot_insufficient_balance_prompt"
                 android:visibility="gone" />
         </FrameLayout>
 

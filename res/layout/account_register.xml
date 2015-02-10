@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/register_margin_top_first"
             android:drawableLeft="@drawable/account_username_icon"
-            android:hint="@string/register_username_hint" />
+            android:hint="@string/account_register_username_hint" />
 
         <TextView
             style="@style/TextLabelSmallDark"
@@ -36,7 +36,7 @@
             android:gravity="center_vertical"
             android:minLines="2"
             android:singleLine="false"
-            android:text="@string/register_password_prompt" />
+            android:text="@string/account_register_password_prompt" />
 
         <com.ireadygo.app.gamelauncher.ui.widget.CustomerEditText
             android:id="@+id/password"
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:drawableLeft="@drawable/account_password_icon"
-            android:hint="@string/register_password_hint" />
+            android:hint="@string/account_register_password_hint" />
 
         <com.ireadygo.app.gamelauncher.ui.widget.CustomerEditText
             android:id="@+id/passwordRepeat"
@@ -55,7 +55,7 @@
             android:inputType="textPassword"
             android:layout_marginTop="@dimen/register_margin_top_normal"
             android:drawableLeft="@drawable/account_password_icon"
-            android:hint="@string/register_password_repeat_hint" />
+            android:hint="@string/account_register_password_repeat_hint" />
 
         <TextView
             android:id="@+id/registerBtn"
@@ -66,7 +66,7 @@
             android:background="@drawable/register_btn_bg_selector"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:text="@string/register" />
+            android:text="@string/account_register_btn" />
     </LinearLayout>
 
     <com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout

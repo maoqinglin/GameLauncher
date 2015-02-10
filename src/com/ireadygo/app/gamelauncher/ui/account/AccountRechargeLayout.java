@@ -227,14 +227,14 @@ public class AccountRechargeLayout extends AccountBaseContentLayout implements O
 
 		final ConfirmDialog confirmDialog = new ConfirmDialog(getContext());
 		if(mTicketTypeValue == 0) {
-			confirmDialog.setPrompt(getContext().getString(R.string.account_recharge_rabbit_ticket));
-			confirmDialog.setCancelText(getContext().getString(R.string.account_change_account));
+			confirmDialog.setPrompt(getContext().getString(R.string.recharge_rabbit_ticket));
+			confirmDialog.setCancelText(getContext().getString(R.string.recharge_change_account));
 		} else {
-			confirmDialog.setPrompt(getContext().getString(R.string.arm_ticket_recharge_title));
+			confirmDialog.setPrompt(getContext().getString(R.string.recharge_arm_ticket_recharge_title));
 			confirmDialog.setCancelText(getContext().getString(R.string.cancel));
 		}
 		confirmDialog.setMsgTextSize(16);
-		confirmDialog.setMsg(getContext().getString(R.string.account_recharge_account, AccountManager.getInstance().getAccount(getContext())));
+		confirmDialog.setMsg(getContext().getString(R.string.recharge_account_number, AccountManager.getInstance().getAccount(getContext())));
 		confirmDialog.setCancelClickListener(new OnClickListener() {
 
 			@Override
@@ -327,7 +327,7 @@ public class AccountRechargeLayout extends AccountBaseContentLayout implements O
 				} else if (e.getMessage().equals(InfoSourceException.MSG_IMEI_NOT_KNOWN)) {
 					return getContext().getString(R.string.recharge_imei_unknown);
 				} else if (e.getMessage().equals(InfoSourceException.MSG_ACCOUNT_OUTDATE)) {
-					return getContext().getString(R.string.account_outdate);
+					return getContext().getString(R.string.personal_outdate);
 				}
 				return e.getMessage();
 			}
