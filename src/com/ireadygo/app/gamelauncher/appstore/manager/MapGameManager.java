@@ -116,10 +116,8 @@ public class MapGameManager {
 
 	//对外部安装游戏的匹配
 	private void mapOutsideGame(final String pkgName,final boolean isInstall) {
-		final boolean notOccupySlot = GameLauncherConfig.SLOT_ENABLE ? GameLauncherConfig.isInSlotWhiteList(pkgName)
-				|| (isInstall && AppRestrictionManager.getInstance(mContext).isSnailCtrlEnableApp(pkgName)) : true;//在白名单或免商店安装的应用，不占卡槽;
 		if (isInstall) {
-			mGameData.addGame(mContext, pkgName,!notOccupySlot);
+			mGameData.addGame(mContext, pkgName,false);
 			GameLauncherAppState.getInstance(mContext).getModel()
 			.handleGameAddOrUpdate(pkgName, checkPkgDisplayState(pkgName), Favorites.APP_TYPE_APPLICATION);
 		} else {
@@ -130,20 +128,13 @@ public class MapGameManager {
 		new Handler(mMapHandlerThread.getLooper()).postDelayed(new Runnable() {
 			@Override
 			public void run() {
-				doMapOutsideGame(pkgName, isInstall,!notOccupySlot);
-				if(GameLauncherConfig.SLOT_ENABLE && isInstall && notOccupySlot){
-					AppRestrictionManager.getInstance(mContext).setAppEnableWithoutRecord(pkgName, true);
-				}
+				doMapOutsideGame(pkgName, isInstall);
 			}
 		}, MAP_GAME_DELAY);
 	}
 
 	//对免商店安装游戏的匹配
 	private void mapFreeStoreGame(final AppEntity app) {
-		//免商店下载的应用，统一使能
-		if (GameLauncherConfig.SLOT_ENABLE) {
-			AppRestrictionManager.getInstance(mContext).setAppEnableWithoutMapAndRecord(app.getPkgName(), true);
-		}
 		new Handler(mMapHandlerThread.getLooper()).postDelayed(new Runnable() {
 			@Override
 			public void run() {
@@ -177,7 +168,7 @@ public class MapGameManager {
 		}
 	}
 
-	private void doMapOutsideGame(String pkgName,boolean isInstall,boolean isOccupySlot) {
+	private void doMapOutsideGame(String pkgName,boolean isInstall) {
 		List<AppEntity> gameList = new ArrayList<AppEntity>();
 		PackageInfo pkgInfo = PackageUtils.getPkgInfo(mContext, pkgName);
 		if (pkgInfo == null) {
@@ -206,13 +197,8 @@ public class MapGameManager {
 					game.setIsOccupySlot(AppEntity.OCCUPY_SLOT);
 				}
 				mGameData.updateMappedAppData(game);
-				if (GameLauncherConfig.SLOT_ENABLE && isInstall && isOccupySlot) {
-					GameLauncherAppState.getInstance(mContext).getModel()
-					.handleGameAddOrUpdate(pkgName, Favorites.DONOT_DISPLAY,Favorites.APP_TYPE_GAME);
-				} else {
-					GameLauncherAppState.getInstance(mContext).getModel()
-					.updateInstalledAppInfo(pkgName, checkPkgDisplayState(game.getPkgName()), Favorites.APP_TYPE_GAME);
-				}
+				GameLauncherAppState.getInstance(mContext).getModel()
+				.updateInstalledAppInfo(pkgName, checkPkgDisplayState(game.getPkgName()), Favorites.APP_TYPE_GAME);
 			}
 		} catch (InfoSourceException e) {
 			e.printStackTrace();
@@ -268,12 +254,6 @@ public class MapGameManager {
 	}
 
 	private int checkPkgDisplayState(String pkgName) {
-		if (TextUtils.isEmpty(pkgName)) {
-			return Favorites.DONOT_DISPLAY;
-		}
-		if (AppRestrictionManager.isAppDisable(mContext, pkgName)) {
-			return Favorites.DONOT_DISPLAY;
-		}
 		return Favorites.DISPLAY;
 	}
 

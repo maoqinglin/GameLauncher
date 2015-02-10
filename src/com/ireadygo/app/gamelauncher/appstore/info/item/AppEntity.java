@@ -10,9 +10,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 
-import com.ireadygo.app.gamelauncher.GameLauncherConfig;
-import com.ireadygo.app.gamelauncher.appstore.manager.FreeFlowManager;
-
 public class AppEntity implements Parcelable, Serializable {
 	private static final long serialVersionUID = 563834692100527381L;
 	public static final int CAN_UPGRADE = 1;
@@ -503,18 +500,10 @@ public class AppEntity implements Parcelable, Serializable {
 	}
 
 	public boolean isDldPathEmpty(Context context) {
-		if (GameLauncherConfig.ENABLE_FREE_FLOW && !FreeFlowManager.getInstance(context).isFreeFlowDisable()) {
-			return TextUtils.isEmpty(freeflowDldPath);
-		}
 		return TextUtils.isEmpty(downloadPath);
 	}
 
 	public String getActualDldPath(Context context) {
-		if (GameLauncherConfig.ENABLE_FREE_FLOW 
-				&& !FreeFlowManager.getInstance(context).isFreeFlowDisable()
-				&& !TextUtils.isEmpty(freeflowDldPath) ) {
-			return freeflowDldPath;
-		}
 		return downloadPath;
 	}
 

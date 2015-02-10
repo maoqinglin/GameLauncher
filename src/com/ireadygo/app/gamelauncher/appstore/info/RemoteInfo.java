@@ -9,7 +9,6 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.ireadygo.app.gamelauncher.GameLauncherConfig;
 import com.ireadygo.app.gamelauncher.appstore.data.GameData;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AgentAppItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
@@ -29,7 +28,6 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.SubscribeResultItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserHeaderImgItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserInfoItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserSlotInfoItem;
-import com.ireadygo.app.gamelauncher.appstore.manager.FreeFlowManager;
 import com.ireadygo.app.gamelauncher.rentfree.info.AppTimeUploadResultItem;
 import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
 import com.snail.appstore.openapi.AppPlatFormClient;
@@ -168,17 +166,6 @@ public class RemoteInfo implements IGameInfo {
 						appIds.append(app.getAppId()).append(",");
 						cachedChildrenList.put(app.getAppId(), app);
 					}
-					if (GameLauncherConfig.ENABLE_FREE_FLOW
-							&& FreeFlowManager.getInstance(mContext).isProxyMode() 
-							&& appIds.length() > 0) {
-						List<AgentAppItem> agentAppItems = getAgentAppItems(appIds.toString());
-						for (AgentAppItem agentAppItem : agentAppItems) {
-							AppEntity agentApp = cachedChildrenList.get(String.valueOf(agentAppItem.getNAppId()));
-							if (agentApp != null) {
-								agentApp.setFreeFlag(agentAppItem.getiFlowFree());
-							}
-						}
-					}
 				}
 				return result;
 			}
@@ -207,21 +194,8 @@ public class RemoteInfo implements IGameInfo {
 				AppDetailVO appDetailVO = (AppDetailVO)resultVO.getObj();
 				AppEntity appDetail = detailToAppEntity(appDetailVO);
 				//先获取默认的下载地址
-//				String downloadUrl = obtainNormalDownloadUrl(Long.parseLong(appDetail.getAppId()));
-				GameData.getInstance(mContext).updateDownloadPath(appDetail.getPkgName(), appDetail.getDownloadPath());
-				//免流量模式下，获取免流量
-				if (GameLauncherConfig.ENABLE_FREE_FLOW && !FreeFlowManager.getInstance(mContext).isFreeFlowDisable()) {
-					String freeflowDldUrl = obtainFreeFlowDownloadUrl(Long.parseLong(appDetail.getAppId()));
-					appDetail.setFreeflowDldPath(freeflowDldUrl);
-					GameData.getInstance(mContext).updateFreeflowDownloadPath(appDetail.getPkgName(), freeflowDldUrl);
-					if (FreeFlowManager.getInstance(mContext).isProxyMode()) {//代理模式下，需要重新更新免流量标志
-						//刷新免流量标志
-						List<AgentAppItem> agentAppItems = getAgentAppItems(appDetail.getAppId());
-						if (agentAppItems != null && agentAppItems.size() > 0) {
-							appDetail.setFreeFlag(agentAppItems.get(0).getiFlowFree());
-						}
-					}
-				}
+				String downloadUrl = obtainNormalDownloadUrl(Long.parseLong(appDetail.getAppId()));
+				GameData.getInstance(mContext).updateDownloadPath(appDetail.getPkgName(), downloadUrl);
 				return appDetail;
 			}
 			String errMsg = processRemoteResultCode(resultVO.getCode());
@@ -368,60 +342,36 @@ public class RemoteInfo implements IGameInfo {
 	 */
 	@Override
 	public String obtainDownloadUrl(long id) throws InfoSourceException {
-			try {
-				if (GameLauncherConfig.ENABLE_FREE_FLOW && FreeFlowManager.getInstance(mContext).isProxyMode()) {
-					String agentDownloadUrl = getAgentDownloadUrl(String.valueOf(id));//代理模式，直接重新获取下载地址
-					if (TextUtils.isEmpty(agentDownloadUrl)) {//获取失败，返回默认下载地址
-						return obtainNormalDownloadUrl(id);
-					}
-					return agentDownloadUrl;
-				} else {
-					String normalDldPaht = obtainNormalDownloadUrl(id);
-					if (TextUtils.isEmpty(normalDldPaht)) {
-						return new String();
-					}
-					if (GameLauncherConfig.ENABLE_FREE_FLOW && FreeFlowManager.getInstance(mContext).isUnProxyMode()) {
-						return FreeFlowManager.getInstance(mContext).replaceDomain(normalDldPaht);//非代理模式，替换获取到的下载地址的域名
-					} else {
-						return normalDldPaht;
-					}
-				}
-			} catch (InfoSourceException e) {
-				throw e;
-			} catch (HttpStatusCodeException e) {
-				throw new InfoSourceException(InfoSourceException.MSG_NETWORK_ERROR,e.getCause());
-			} catch (Exception e) {
-				throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_ERROR,e.getCause());
-			}
+		return obtainNormalDownloadUrl(id);
 	}
 
-	private String obtainFreeFlowDownloadUrl(long id) throws InfoSourceException {
-		try {
-			if (GameLauncherConfig.ENABLE_FREE_FLOW && FreeFlowManager.getInstance(mContext).isProxyMode()) {
-				String agentDownloadUrl = getAgentDownloadUrl(String.valueOf(id));//代理模式，直接重新获取下载地址
-				if (TextUtils.isEmpty(agentDownloadUrl)) {//获取失败，返回默认下载地址
-					return new String();
-				}
-				return agentDownloadUrl;
-			} else {
-				String normalDldPaht = obtainNormalDownloadUrl(id);
-				if (TextUtils.isEmpty(normalDldPaht)) {
-					return new String();
-				}
-				if (GameLauncherConfig.ENABLE_FREE_FLOW && FreeFlowManager.getInstance(mContext).isUnProxyMode()) {
-					return FreeFlowManager.getInstance(mContext).replaceDomain(normalDldPaht);//非代理模式，替换获取到的下载地址的域名
-				} else {
-					return normalDldPaht;
-				}
-			}
-		} catch (InfoSourceException e) {
-			throw e;
-		} catch (HttpStatusCodeException e) {
-			throw new InfoSourceException(InfoSourceException.MSG_NETWORK_ERROR,e.getCause());
-		} catch (Exception e) {
-			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_ERROR,e.getCause());
-		}
-	}
+//	private String obtainFreeFlowDownloadUrl(long id) throws InfoSourceException {
+//		try {
+//			if (GameLauncherConfig.ENABLE_FREE_FLOW && FreeFlowManager.getInstance(mContext).isProxyMode()) {
+//				String agentDownloadUrl = getAgentDownloadUrl(String.valueOf(id));//代理模式，直接重新获取下载地址
+//				if (TextUtils.isEmpty(agentDownloadUrl)) {//获取失败，返回默认下载地址
+//					return new String();
+//				}
+//				return agentDownloadUrl;
+//			} else {
+//				String normalDldPaht = obtainNormalDownloadUrl(id);
+//				if (TextUtils.isEmpty(normalDldPaht)) {
+//					return new String();
+//				}
+//				if (GameLauncherConfig.ENABLE_FREE_FLOW && FreeFlowManager.getInstance(mContext).isUnProxyMode()) {
+//					return FreeFlowManager.getInstance(mContext).replaceDomain(normalDldPaht);//非代理模式，替换获取到的下载地址的域名
+//				} else {
+//					return normalDldPaht;
+//				}
+//			}
+//		} catch (InfoSourceException e) {
+//			throw e;
+//		} catch (HttpStatusCodeException e) {
+//			throw new InfoSourceException(InfoSourceException.MSG_NETWORK_ERROR,e.getCause());
+//		} catch (Exception e) {
+//			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_ERROR,e.getCause());
+//		}
+//	}
 
 	private String obtainNormalDownloadUrl(long id) throws InfoSourceException {
 		ResultVO resultVO;
@@ -487,7 +437,6 @@ public class RemoteInfo implements IGameInfo {
 		try {
 			resultVO = mAppPlatFormService.getBannerList(page);
 			StringBuffer appIds = new StringBuffer();
-			HashMap<Long, BannerItem> cachedBannerItemMap = new HashMap<Long, BannerItem>();
 			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
 				List<BannerItem> results = new ArrayList<BannerItem>();
 				if (resultVO.getObj() != null) {
@@ -496,22 +445,6 @@ public class RemoteInfo implements IGameInfo {
 					for (AppBannerVO item : appBannerVOs) {
 						BannerItem bannerItem = AppBannerToBannerItem(item);
 						results.add(bannerItem);
-						if (AppEntity.BANNER_TYPE_GAME.equals(bannerItem.getCType())) {
-							appIds.append(bannerItem.getNParamId()).append(",");
-							cachedBannerItemMap.put(bannerItem.getNParamId(), bannerItem);
-						}
-					}
-					//代理模式下，需要替换列表的免流量标志
-					if (GameLauncherConfig.ENABLE_FREE_FLOW
-							&& FreeFlowManager.getInstance(mContext).isProxyMode()
-							&& appIds.length() > 0) {
-						List<AgentAppItem> agentItems = getAgentAppItems(appIds.toString());
-						for (AgentAppItem agentAppItem : agentItems) {
-							BannerItem bannerItem = cachedBannerItemMap.get(agentAppItem.getNAppId());
-							if (bannerItem != null) {
-								bannerItem.setIFlowFree(agentAppItem.getiFlowFree());
-							}
-						}
 					}
 				}
 				return results;
@@ -1197,9 +1130,6 @@ public class RemoteInfo implements IGameInfo {
 		app.setPosterBgUrl(item.getCPosterPic());
 		app.setDownloadPath(item.getCDownloadUrl());
 		app.setDownloadCounts(item.getIDownloadTimes());
-		if (GameLauncherConfig.ENABLE_FREE_FLOW && FreeFlowManager.getInstance(mContext).isUnProxyMode()) {
-			app.setFreeFlag(item.getIFlowFree());
-		}
 		return app;
 	}
 
@@ -1215,9 +1145,6 @@ public class RemoteInfo implements IGameInfo {
 		app.setDownloadCounts(item.getIDownloadTimes());
 		app.setDownloadPath(item.getCDownloadUrl());
 		app.setSign(item.getCMd5());
-		if (GameLauncherConfig.ENABLE_FREE_FLOW && FreeFlowManager.getInstance(mContext).isUnProxyMode()) {
-			app.setFreeFlag(item.getIFlowFree());
-		}
 		return app;
 	}
 
@@ -1236,9 +1163,6 @@ public class RemoteInfo implements IGameInfo {
 		bannerItem.setCVersionName(appBannerVO.getCVersionName());
 		bannerItem.setIVersionCode(appBannerVO.getIVersionCode());
 		bannerItem.setCPackage(appBannerVO.getCPackage());
-		if (GameLauncherConfig.ENABLE_FREE_FLOW && FreeFlowManager.getInstance(mContext).isUnProxyMode()) {
-			bannerItem.setIFlowFree(appBannerVO.getIFlowFree());
-		}
 		bannerItem.setCMd5(appBannerVO.getCMd5());
 		bannerItem.setCMark(appBannerVO.getCMark());
 		bannerItem.setISize(appBannerVO.getISize());
@@ -1551,7 +1475,6 @@ public class RemoteInfo implements IGameInfo {
 			ResultVO resultVO = mAppPlatFormService.getPreLoadList();
 			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
 				StringBuffer appIds = new StringBuffer();
-				HashMap<String, AppEntity> cachedChildrenList = new HashMap<String, AppEntity>();
 				ArrayList<AppEntity> result = new ArrayList<AppEntity>();
 				if (resultVO.getObj() != null) {
 					List<PreLoadItemVO> preLoadItemVOs = (List<PreLoadItemVO>)resultVO.getObj();
@@ -1559,18 +1482,6 @@ public class RemoteInfo implements IGameInfo {
 						AppEntity app = preLoadItemVOToAppEntity(preLoadItem);
 						result.add(app);
 						appIds.append(app.getAppId()).append(",");
-						cachedChildrenList.put(app.getAppId(), app);
-					}
-					if (GameLauncherConfig.ENABLE_FREE_FLOW
-							&& FreeFlowManager.getInstance(mContext).isProxyMode() 
-							&& appIds.length() > 0) {
-						List<AgentAppItem> agentAppItems = getAgentAppItems(appIds.toString());
-						for (AgentAppItem agentAppItem : agentAppItems) {
-							AppEntity agentApp = cachedChildrenList.get(String.valueOf(agentAppItem.getNAppId()));
-							if (agentApp != null) {
-								agentApp.setFreeFlag(agentAppItem.getiFlowFree());
-							}
-						}
 					}
 				}
 				return result;

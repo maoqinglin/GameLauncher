@@ -11,19 +11,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.ireadygo.app.gamelauncher.GameLauncherConfig;
 import com.ireadygo.app.gamelauncher.R;
-import com.ireadygo.app.gamelauncher.account.AccountManager;
 import com.ireadygo.app.gamelauncher.mygame.adapter.GameModel;
 import com.ireadygo.app.gamelauncher.mygame.adapter.GameModel.DataType;
 import com.ireadygo.app.gamelauncher.mygame.data.GameLauncherAppState;
 import com.ireadygo.app.gamelauncher.mygame.data.GameLauncherModel.Callbacks;
 import com.ireadygo.app.gamelauncher.mygame.info.FolderInfo;
 import com.ireadygo.app.gamelauncher.mygame.info.ItemInfo;
-import com.ireadygo.app.gamelauncher.mygame.ui.view.GameAllAppLayout;
-import com.ireadygo.app.gamelauncher.mygame.ui.view.GameAllAppLayout.AppWindowShowStateListener;
+import com.ireadygo.app.gamelauncher.mygame.ui.view.Folder.AppWindowShowStateListener;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.MenuFragment;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
@@ -38,7 +34,6 @@ public class MyAppFragment extends BaseContentFragment implements Callbacks{
 	protected boolean mDataHasInit = false;
 	protected boolean mIsAttach;
 	private boolean mIsViewDestory = false;
-	private GameAllAppLayout mGameAllAppLayout;
 	private GameModel mGameModel;
 
 	private HMultiListView mHMultiListView;
@@ -86,17 +81,6 @@ public class MyAppFragment extends BaseContentFragment implements Callbacks{
 		}
 	}
 
-	public void displayAllAppLayout(){
-		if (!AccountManager.getInstance().isLogined(getRootActivity())) {
-			Toast.makeText(getRootActivity(),getRootActivity().getString(R.string.account_no_account_login_prompt), Toast.LENGTH_SHORT).show();
-			return;
-		}
-		if (GameLauncherConfig.SLOT_ENABLE) {
-			mGameAllAppLayout = null;
-			mGameAllAppLayout = new GameAllAppLayout(getRootActivity());
-			mGameAllAppLayout.openAllApp(getRootActivity(), mAllAppShowStateListener);
-		}
-	}
 
 	AppWindowShowStateListener mAllAppShowStateListener = new AppWindowShowStateListener(){
 

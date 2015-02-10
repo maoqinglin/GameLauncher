@@ -12,7 +12,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +25,6 @@ import com.ireadygo.app.gamelauncher.ui.MyAppFragment;
 import com.ireadygo.app.gamelauncher.ui.MyGameFragment;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.base.BaseFragment;
-import com.ireadygo.app.gamelauncher.ui.gamecommunity.GameCommunityFragment;
 import com.ireadygo.app.gamelauncher.ui.settings.SettingsFragment;
 import com.ireadygo.app.gamelauncher.ui.store.StoreFragment;
 
@@ -35,9 +33,7 @@ public class MenuFragment extends BaseFragment {
 
 	private MenuItem mStoreMenu;
 	private MenuItem mGameMenu;
-	private MenuItem mCommunityMenu;
 	private MenuItem mAppMenu;
-	private MenuItem mCallMenu;
 	private MenuItem mSettingsMenu;
 
 	private MenuItem mPrevFocusItem;
@@ -46,8 +42,6 @@ public class MenuFragment extends BaseFragment {
 
 	private List<MenuItem> mMenuItemList = new ArrayList<MenuItem>();
 
-	private int mHighlightWidth;
-	private int mHighlightHeight;
 	private Status mStatus = Status.INIT;
 
 	private Handler mHandler = new Handler() {
@@ -94,16 +88,12 @@ public class MenuFragment extends BaseFragment {
 		View view = inflater.inflate(R.layout.menu, container, false);
 		mStoreMenu = (MenuItem) view.findViewById(R.id.menu_store);
 		mGameMenu = (MenuItem) view.findViewById(R.id.menu_game);
-		mCommunityMenu = (MenuItem) view.findViewById(R.id.menu_community);
 		mAppMenu = (MenuItem) view.findViewById(R.id.menu_app);
-//		mCallMenu = (MenuItem) view.findViewById(R.id.menu_call);
 		mSettingsMenu = (MenuItem) view.findViewById(R.id.menu_settings);
 
 		initItemView(mStoreMenu, new StoreFragment(getRootActivity(), this), index++);
 		initItemView(mGameMenu, new MyGameFragment(getRootActivity(), this), index++);
-		initItemView(mCommunityMenu, new GameCommunityFragment(getRootActivity(), this), index++);
 		initItemView(mAppMenu, new MyAppFragment(getRootActivity(), this), index++);
-//		initItemView(mCallMenu, new AccountFragment(getRootActivity(), this), index++);
 		initItemView(mSettingsMenu, new SettingsFragment(getRootActivity(), this), index++);
 
 		return view;

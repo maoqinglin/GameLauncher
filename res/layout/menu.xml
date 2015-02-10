@@ -42,20 +42,6 @@
             menuItem:menu_title="@string/menu_game" >
         </com.ireadygo.app.gamelauncher.ui.menu.MenuItem>
 
-        <com.ireadygo.app.gamelauncher.ui.menu.MenuItem
-            android:id="@+id/menu_community"
-            android:layout_width="@dimen/menu_item_width"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/menu_item_margin_left"
-            android:gravity="center"
-            android:nextFocusLeft="@+id/menu_game"
-            android:nextFocusRight="@+id/menu_app"
-            android:nextFocusDown="@+id/hlv_game_community"
-            menuItem:menu_background="@drawable/menu_notification_bg"
-            menuItem:menu_highlight="@drawable/menu_notification_highlight"
-            menuItem:menu_icon="@drawable/menu_community_icon"
-            menuItem:menu_title="@string/menu_community" >
-        </com.ireadygo.app.gamelauncher.ui.menu.MenuItem>
 
         <com.ireadygo.app.gamelauncher.ui.menu.MenuItem
             android:id="@+id/menu_app"

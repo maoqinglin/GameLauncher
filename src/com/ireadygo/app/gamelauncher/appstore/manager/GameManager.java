@@ -18,7 +18,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.ireadygo.app.gamelauncher.GameLauncherConfig;
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.data.GameData;
 import com.ireadygo.app.gamelauncher.appstore.download.DldOperator;
@@ -63,8 +62,6 @@ public class GameManager {
 	private Handler mHandler;
 	private ExecutorService mThreadPool = GameLauncherThreadPool.getFixedThreadPool();
 	private GameLauncherNotification mGameLauncherNotification;
-	private AppRestrictionManager mAppRestrictionManager;
-	private FreeFlowManager mFreeFlowManager;
 	private static final long MAP_GAME_DELAY = 60 * 1000;
 	private static final String ACTION_LOAD_DATA_COMPLETE = "com.ireadygo.app.gamelauncher.ACTION_LOAD_DATA_COMPLETE";
 
@@ -80,17 +77,9 @@ public class GameManager {
 		mGameLauncherNotification = new GameLauncherNotification(mContext,mGameStateManager);
 		mUpdateManager = new UpdateManager(mContext,mGameLauncherNotification);
 		mMapGameManager = MapGameManager.getInstance(mContext);
-		if (GameLauncherConfig.SLOT_ENABLE) {
-			mAppRestrictionManager = AppRestrictionManager.getInstance(mContext);
-			mAppRestrictionManager.setGameLauncherNotification(mGameLauncherNotification);
-			mGameData.addDataLoadCallback(mAppRestrictionManager);
-		}
 		mGameData.addDataLoadCallback(mGameStateManager);
 		mGameData.addDataLoadCallback(mUpdateManager);
 		mGameData.initGameData(mContext);
-		if (GameLauncherConfig.ENABLE_FREE_FLOW) {
-			mFreeFlowManager = FreeFlowManager.getInstance(mContext);
-		}
 
 		GameLauncherAppState.getInstance(mContext).getModel().startLoader();
 		mHandler = new Handler(context.getMainLooper());
@@ -108,9 +97,6 @@ public class GameManager {
 		return mGameLauncherNotification;
 	}
 
-	public FreeFlowManager getFreeFlowManager() {
-		return mFreeFlowManager;
-	}
 
 	public void download(final AppEntity app) {
 		GameState state = mGameStateManager.getGameState(app.getPkgName());
@@ -227,19 +213,6 @@ public class GameManager {
 		PackageManager pm = mContext.getPackageManager();
 		Intent intent = pm.getLaunchIntentForPackage(pkgName);
 		if (intent == null) {
-			//应用未使能，提示用户
-			if (AppRestrictionManager.isAppDisable(mContext,pkgName)) {
-				AppEntity app = mGameData.getGameByPkgName(pkgName);
-				if (GameLauncherConfig.SLOT_ENABLE
-						&&app != null 
-						&& AppEntity.NOT_OCCUPY_SLOT == app.getIsOccupySlot()) {
-					mAppRestrictionManager.setAppEnableWithoutRecord(pkgName, true);
-					return true;
-				} else {
-					Toast.makeText(mContext,mContext.getString(R.string.error_launch_disable),Toast.LENGTH_SHORT).show();
-					return false;
-				}
-			}
 			//无法找到对应apk，提示用户重新下载
 			Toast.makeText(mContext,mContext.getString(R.string.error_launch_unknown),Toast.LENGTH_SHORT).show();
 			AppEntity app = mGameData.getGameByPkgName(pkgName);
@@ -281,12 +254,6 @@ public class GameManager {
 		mDldOperator.shutdown();
 		mGameLauncherNotification.shutdown();
 		mMapGameManager.shutdown();
-		if (GameLauncherConfig.SLOT_ENABLE) {
-			mAppRestrictionManager.shutdown();
-		}
-		if (GameLauncherConfig.ENABLE_FREE_FLOW) {
-			mFreeFlowManager.shutdown();
-		}
 	}
 
 

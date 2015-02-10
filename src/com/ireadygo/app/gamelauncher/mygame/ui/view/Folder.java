@@ -14,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.PopupWindow.OnDismissListener;
 import android.widget.RelativeLayout;
@@ -30,7 +29,6 @@ import com.ireadygo.app.gamelauncher.mygame.info.FolderInfo;
 import com.ireadygo.app.gamelauncher.mygame.info.FolderInfo.FolderListener;
 import com.ireadygo.app.gamelauncher.mygame.info.ItemInfo;
 import com.ireadygo.app.gamelauncher.mygame.info.ShortcutInfo;
-import com.ireadygo.app.gamelauncher.mygame.ui.view.GameAllAppLayout.AppWindowShowStateListener;
 import com.ireadygo.app.gamelauncher.mygame.utils.Utilities;
 import com.ireadygo.app.gamelauncher.ui.SnailKeyCode;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
@@ -417,6 +415,12 @@ public class Folder extends RelativeLayout implements View.OnFocusChangeListener
 			return true;
 		}
 		return false;
+	}
+
+	public interface AppWindowShowStateListener {
+		public void openAppWindow();
+
+		public void closeAppWindow();
 	}
 
 }

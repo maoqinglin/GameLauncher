@@ -19,7 +19,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.BaseAdapter;
-import android.widget.TextView;
 
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.data.GameData;
@@ -32,9 +31,8 @@ import com.ireadygo.app.gamelauncher.mygame.info.FolderInfo;
 import com.ireadygo.app.gamelauncher.mygame.info.ItemInfo;
 import com.ireadygo.app.gamelauncher.mygame.info.ShortcutInfo;
 import com.ireadygo.app.gamelauncher.mygame.ui.view.Folder;
-import com.ireadygo.app.gamelauncher.mygame.ui.view.GameAllAppLayout.AppWindowShowStateListener;
+import com.ireadygo.app.gamelauncher.mygame.ui.view.Folder.AppWindowShowStateListener;
 import com.ireadygo.app.gamelauncher.mygame.utils.ImageHelper;
-import com.ireadygo.app.gamelauncher.mygame.utils.ScreenCapture;
 import com.ireadygo.app.gamelauncher.mygame.utils.Utilities;
 import com.ireadygo.app.gamelauncher.ui.MyAppFragment;
 import com.ireadygo.app.gamelauncher.ui.MyGameFragment;
@@ -167,11 +165,6 @@ public class GameModel implements Callbacks {
 		}else if(gameInfo instanceof ExtendInfo){
 			ExtendInfo extendInfo = (ExtendInfo) gameInfo;
 			switch (extendInfo.function) {
-			case GAME_ALL:
-				if(mCurrentContentFragment !=null && mCurrentContentFragment instanceof MyAppFragment){
-					((MyAppFragment)mCurrentContentFragment).displayAllAppLayout();
-				}
-				break;
 			case GAME_RECOMMEND_DOWNLOAD:
 				if(mCurrentContentFragment !=null && mCurrentContentFragment instanceof MyGameFragment){
 					((MyGameFragment)mCurrentContentFragment).displayRecommandAppLayout();
