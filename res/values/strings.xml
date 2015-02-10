@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <!-- Common -->
     <string name="app_name">Snail Launcher</string>
     <string name="action_settings">Set WallPaper</string>
@@ -7,6 +8,48 @@
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
 
+    <!-- 主页(main) -->
+    
+    <!-- 主菜单(menu) -->
+    <string name="menu_store">Store</string>
+    <string name="menu_game">Games</string>
+    <string name="menu_community">Social</string>
+    <string name="menu_app">Apps</string>
+    <string name="menu_call">Phone</string>
+    <string name="menu_settings">Settings</string>
+    
+    <!-- 我的游戏-推荐下载 -->
+    <string name="mygame_recommend_app_download">Recommend</string>
+    <string name="mygame_empty_tip">There is no games! Go to find one in Free-Store</string>
+    
+     <!-- 推荐下载(game_recommend) -->
+     
+     <!-- 我的应用(app) -->
+    <string name="myapp_folder_title_system">System</string>
+    
+    <!-- 我的应用-全部应用  -->
+    <string name="all_app">All App</string>
+    <string name="all_app_description">Please mark to display on the destop</string>
+    <string name="all_app_count">All App：</string>
+    <string name="all_app_used_slot">Used：</string>
+    <string name="all_app_device_not_support">Error:Device is not supported!</string>
+    <string name="all_app_slot_has_bind">This application has bound slot!</string>
+    <string name="all_app_network_error">Network error!</string>
+    <string name="all_app_no_slot_title">Prompt</string>
+    <string name="all_app_no_slot_msg">There is no empty slot,Pleasr buy more!</string>
+    
+    <!-- 设置(settings) -->
+    <string name="settings_systemupgrade">Upgrade</string>
+    <string name="settings_personalized">Customized</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_store">Storage</string>
+    <string name="settings_secure">Safety</string>
+    <string name="settings_help">Help</string>
+    <string name="settings_more">More</string>
+    <string name="settings_wifi">WIFI</string>
+    <string name="settings_wallpaper">Wallpaper</string>
+    <string name="settings_joystic_battery">Joystick</string>
+    
     <!-- 壁纸 -->
     <string name="wallpaper_set">Set wallpaper</string>
     <string name="wallpaper_snail">Snail Wallpapers</string>
@@ -29,7 +72,25 @@
     <string name="notification_upgrade_big_title">Apps upgrade promotion</string>
     <string name="notification_upgrade_little_title">\tapps have new version to be upgraded</string>
 
-    <!-- 卡槽购买页面 -->
+    <!-- 免商店(store) -->
+    
+    <!-- 免商店-选项(store_options) -->
+    <string name="store_options_search">Search</string>
+    <string name="store_options_recommend">Recommend</string>
+    <string name="store_options_collection">Album</string>
+    <string name="store_options_category">Category</string>
+    <string name="store_options_game_manager">Game Manager</string>
+    <string name="store_options_settings">Store Settings</string>
+    
+    <!-- 免商店-选项缩写 -->
+    <string name="store_options_search_short">Search</string>
+    <string name="store_options_recommend_short">RCMD</string>
+    <string name="store_options_collection_short">Album</string>
+    <string name="store_options_category_short">Category</string>
+    <string name="store_options_game_manager_short">Manager</string>
+    <string name="store_options_settings_short">Settings</string>
+    
+     <!-- 免商店-卡槽购买 -->
     <string name="slot_title">Buy Slot</string>
     <string name="slot_balance">Balance:%1$d</string>
     <string name="slot_currency">Rabbit Coin</string>
@@ -57,63 +118,9 @@
     <string name="slot_buy_success">Buy slot success!</string>
     <string name="slot_buy_failed">Failed to but slot!</string>
     
-    <!-- 第一级目录 -->
-    <string name="menu_store">Store</string>
-    <string name="menu_game">Games</string>
-    <string name="menu_community">Social</string>
-    <string name="menu_app">Apps</string>
-    <string name="menu_call">Phone</string>
-    <string name="menu_settings">Settings</string>
-
-    <!-- 免商店-应用详情 -->
-    <string name="detail_title">Detail</string>
-    <string name="detail_game_size">Size：</string>
-    <string name="detail_game_version">Version：</string>
-    <string name="detail_game_introduce">Instruction</string>
-    <string name="detail_version">Version:%1$s</string>
-    <string name="detail_size">Size:%1$s</string>
-    <string name="detail_play_numbers">Online Players</string>
-    <string name="detail_download">Download</string>
-    <string name="detail_continue">Continue</string>
-    <string name="detail_pause">Pause</string>
-    <string name="detail_queue">Waiting</string>
-    <string name="detail_install">Install</string>
-    <string name="detail_installing">Installing</string>
-    <string name="detail_error">Error</string>
-    <string name="detail_launch">Launch</string>
-    <string name="detail_update">Upgrade</string>
-    <string name="detail_game_detail">Game Detail</string>
-    <string name="detail_player_comment">Comments</string>
-
-    <!-- 免商店-选项 -->
-    <string name="store_options_search">Search</string>
-    <string name="store_options_recommend">Recommend</string>
-    <string name="store_options_collection">Album</string>
-    <string name="store_options_category">Category</string>
-    <string name="store_options_game_manager">Game Manager</string>
-    <string name="store_options_settings">Store Settings</string>
-
-    <!-- 免商店-选项缩写 -->
-    <string name="store_options_search_short">Search</string>
-    <string name="store_options_recommend_short">RCMD</string>
-    <string name="store_options_collection_short">Album</string>
-    <string name="store_options_category_short">Category</string>
-    <string name="store_options_game_manager_short">Manager</string>
-    <string name="store_options_settings_short">Settings</string>
-
-    <!-- 免商店-搜索 -->
-    <string name="store_search">Search</string>
-
-    <!-- 免商店：下载管理 -->
-    <string name="store_dld_manager_downloading">Downloading</string>
-    <string name="store_dld_manager_updatable">Upgrade</string>
-    <string name="store_dld_manager_launchable">Installed</string>
-    <string name="store_dld_manager_empty">There is no game,Go and find one in store!</string>
-    <string name="store_dld_manager_cur_version">Version：%1$s</string>
-    <string name="store_dld_manager_detail_not_found">No information about this application!</string>
-    <string name="store_dld_manager_delete_task_prompt">Delete Task</string>
-    <string name="store_dld_manager_delete_task_msg">Are you sure to delete the download task？</string>
-    <!-- 免商店-分类 -->
+    <!-- 免商店-推荐(recommend) -->
+    
+    <!-- 免商店-分类(category) -->
     <string-array name="store_category_titles">
         <item>SLG</item>
         <item>Off-Line Game</item>
@@ -137,14 +144,52 @@
         <item>Dou Di Zhu/Chess/Mahjong/BRPG/Dezhou Poker/Card</item>
         <item>Game form Taiwan</item>
     </string-array>
+    
+    <!-- 免商店-合集(collection) -->
 
-    <!-- 免商店-设置 -->
+    <!-- 免商店-合集/分类-游戏列表(collection_detail) -->
+    
+    <!-- 免商店-下载管理(store_manager) -->
+    <string name="store_dld_manager_downloading">Downloading</string>
+    <string name="store_dld_manager_updatable">Upgrade</string>
+    <string name="store_dld_manager_launchable">Installed</string>
+    <string name="store_dld_manager_empty">There is no game,Go and find one in store!</string>
+    <string name="store_dld_manager_cur_version">Version：%1$s</string>
+    <string name="store_dld_manager_detail_not_found">No information about this application!</string>
+    <string name="store_dld_manager_delete_task_prompt">Delete Task</string>
+    <string name="store_dld_manager_delete_task_msg">Are you sure to delete the download task？</string>
+    
+    <!-- 免商店-搜索(search) -->
+    <string name="store_search">Search</string>
+
+    <!-- 免商店-设置(store_settings) -->
     <string-array name="store_settings_titles">
         <item>Download only when WIFI connected</item>
         <item>Enable installed package automatically delete</item>
         <item>Enable game upgrade notification</item>
         <item>Enable remote game auto-installation</item>
     </string-array>
+    
+    <!-- 免商店-应用详情 -->
+    <string name="detail_title">Detail</string>
+    <string name="detail_game_size">Size：</string>
+    <string name="detail_game_version">Version：</string>
+    <string name="detail_game_introduce">Instruction</string>
+    <string name="detail_version">Version:%1$s</string>
+    <string name="detail_size">Size:%1$s</string>
+    <string name="detail_play_numbers">Online Players</string>
+    <string name="detail_download">Download</string>
+    <string name="detail_continue">Continue</string>
+    <string name="detail_pause">Pause</string>
+    <string name="detail_queue">Waiting</string>
+    <string name="detail_install">Install</string>
+    <string name="detail_installing">Installing</string>
+    <string name="detail_error">Error</string>
+    <string name="detail_launch">Launch</string>
+    <string name="detail_update">Upgrade</string>
+    <string name="detail_game_detail">Game Detail</string>
+    <string name="detail_player_comment">Comments</string>
+
     <!-- 状态 -->
     <string name="status_download">Download</string>
     <string name="status_transfering">Continue</string>
@@ -156,6 +201,20 @@
     <string name="status_launch">Launch</string>
     <string name="status_update">Upgrade</string>
 
+    <!-- 游戏社区 -->
+    <string name="game_community_account">Account</string>
+    <string name="game_community_Announcement">Notice</string>
+    <string name="game_community">Forum</string>
+    <string name="account_no_account_login_prompt">You should login first!</string>
+    
+    <!-- 社交(social) -->
+
+    <!-- 论坛(forum) -->
+
+    <!-- 公告(notice) -->
+    
+    <!-- 顶部引导栏(guide) -->
+    
     <!-- 免账号 -->
     <string name="account_mywealth">Assets</string>
     <string name="account_personal">INFO</string>
@@ -210,6 +269,7 @@
         <item>Male</item>
         <item>Female</item>
     </string-array>
+
     <!-- 免账号-充值 -->
     <string name="recharge_current_account">Account</string>
     <string name="recharge_my_balance">Balance</string>
@@ -287,61 +347,7 @@
     <string name="freecard_should_pay_money">Amount payable：</string>
     <string name="freecard_celerity_payment">Pay</string>
 
-
-    <!-- 错误显示 -->
-    <string name="error_unknown">Unknown Error!</string>
-    <string name="error_download">Download Error!</string>
-    <string name="error_install">Install Error!</string>
-    <string name="error_launch_unknown">Error:Application failed to start,Please download again!</string>
-    <string name="error_launch_disable">Error:Application has been disabled!</string>
-    <string name="error_install_package_not_found">Install Error：Invalid file</string>
-    <string name="error_install_package_unreadable">Install Error:file is corrupted</string>
-    <string name="error_install_silently_not_compatible">Install Error：Unknown</string>
-    <string name="error_install_invalid_apk">Install Error：File is corrupted</string>
-    <string name="error_install_insufficient_storage">Install Error：Storage insufficient</string>
-    <string name="error_install_inconsistent_certificates">Install Error：Signature conflict</string>
-    <string name="error_install_no_certificates">Install Error：Application has no Signature</string>
-    <string name="error_install_unknow_apk">Install Error：Unknown error</string>
-    <string name="error_install_zip_package">Install Error：Decompression error</string>
-    <string name="error_install_storage_system">Install Error：Unknow error</string>
-    <string name="error_install_external_storage_unmounted">Install Error：No SD card</string>
-    <string name="error_install_illegal_apk_with_data">Install Error：File unavailable</string>
-    <string name="error_uninstall_failed_invalid_package">Uninstall Error：</string>
-    <string name="error_uninstall_failed_internal">Uninstall Error：Unknow error</string>
-    <string name="error_uninstall_failed_permission_denied">Uninstall Error：Unknow error</string>
-    <string name="error_download_network_unavaible"> Download Error：Network error</string>
-    <string name="error_download_insufficient_storage_space">Download Error：Storage insufficient</string>
-    <string name="error_download_can_not_create_download_path">Download Error：Storage can not read</string>
-    <string name="error_download_path_can_not_write">Download Error：File can not write</string>
-    <string name="error_download_server_error">Download Error：Server error</string>
-    <string name="error_download_url_error">Download Error：Download Url error</string>
-    <string name="error_download_io_error">Download Error:Unknown Error</string>
-
-    <!-- 设置 -->
-    <string name="settings_systemupgrade">Upgrade</string>
-    <string name="settings_personalized">Customized</string>
-    <string name="settings_language">Language</string>
-    <string name="settings_store">Storage</string>
-    <string name="settings_secure">Safety</string>
-    <string name="settings_help">Help</string>
-    <string name="settings_more">More</string>
-    <string name="settings_wifi">WIFI</string>
-    <string name="settings_wallpaper">Wallpaper</string>
-    <string name="settings_joystic_battery">Joystick</string>
-
-    <!-- 按键提示层 -->
-    <string name="key_sun">Confirm</string>
-    <string name="key_mountain">Detail</string>
-    <string name="key_water">Delete</string>
-    <string name="key_moon">Back</string>
-
-    <!-- 网络 -->
-    <string name="no_network">Please connect network!</string>
-
-    <!-- 开机引导 -->
-    <string name="starting_guide_key_title">Key Instruction</string>
-
-    <!-- 账号登录、注册 -->
+    <!-- 免账号-登录/注册/一键登录 -->
     <string name="account_one_key_logining_prompt">Qick login...</string>
     <string name="account_logining_prompt">Login...</string>
     <string name="account_registing_prompt">Register...</string>
@@ -370,27 +376,7 @@
     <string name="account_email_error">Email format error!</string>
     <string name="account_login_failed">Login failed,Please try again!</string>
     <string name="account_login_server_phonenumber">Customer service：(0512)67621007</string>
-    <!-- 全部应用 -->
-    <string name="all_app">All App</string>
-    <string name="all_app_description">Please mark to display on the destop</string>
-    <string name="all_app_count">All App：</string>
-    <string name="all_app_used_slot">Used：</string>
-    <string name="all_app_device_not_support">Error:Device is not supported!</string>
-    <string name="all_app_slot_has_bind">This application has bound slot!</string>
-    <string name="all_app_network_error">Network error!</string>
-    <string name="all_app_no_slot_title">Prompt</string>
-    <string name="all_app_no_slot_msg">There is no empty slot,Pleasr buy more!</string>
-    <!-- 我的游戏推荐下载 -->
-    <string name="mygame_recommend_app_download">Recommend</string>
-    <string name="mygame_empty_tip">There is no games! Go to find one in Free-Store</string>
-    <string name="myapp_folder_title_system">System</string>
-
-    <!-- 游戏社区 -->
-    <string name="game_community_account">Account</string>
-    <string name="game_community_Announcement">Notice</string>
-    <string name="game_community">Forum</string>
-    <string name="account_no_account_login_prompt">You should login first!</string>
-
+    
     <!-- 免流量开通 -->
     <string name="free_flow_privilege_title">Free-Flux privileges</string>
     <string name="free_flow_privilege_tip">Free-Flux privileges：Download and play the specific game without any mobile flux cost!</string>
@@ -438,6 +424,47 @@
     <string name="shortcut_back">Back</string>
     <string name="shortcut_uninstall">Uninstall</string>
 
+    <!-- 按键提示层 -->
+    <string name="key_sun">Confirm</string>
+    <string name="key_mountain">Detail</string>
+    <string name="key_water">Delete</string>
+    <string name="key_moon">Back</string>
+
+    <!-- 网络 -->
+    <string name="no_network">Please connect network!</string>
+
+    <!-- 开机引导 -->
+    <string name="starting_guide_key_title">Key Instruction</string>
+    
+    <!-- 错误显示 -->
+    <string name="error_unknown">Unknown Error!</string>
+    <string name="error_download">Download Error!</string>
+    <string name="error_install">Install Error!</string>
+    <string name="error_launch_unknown">Error:Application failed to start,Please download again!</string>
+    <string name="error_launch_disable">Error:Application has been disabled!</string>
+    <string name="error_install_package_not_found">Install Error：Invalid file</string>
+    <string name="error_install_package_unreadable">Install Error:file is corrupted</string>
+    <string name="error_install_silently_not_compatible">Install Error：Unknown</string>
+    <string name="error_install_invalid_apk">Install Error：File is corrupted</string>
+    <string name="error_install_insufficient_storage">Install Error：Storage insufficient</string>
+    <string name="error_install_inconsistent_certificates">Install Error：Signature conflict</string>
+    <string name="error_install_no_certificates">Install Error：Application has no Signature</string>
+    <string name="error_install_unknow_apk">Install Error：Unknown error</string>
+    <string name="error_install_zip_package">Install Error：Decompression error</string>
+    <string name="error_install_storage_system">Install Error：Unknow error</string>
+    <string name="error_install_external_storage_unmounted">Install Error：No SD card</string>
+    <string name="error_install_illegal_apk_with_data">Install Error：File unavailable</string>
+    <string name="error_uninstall_failed_invalid_package">Uninstall Error：</string>
+    <string name="error_uninstall_failed_internal">Uninstall Error：Unknow error</string>
+    <string name="error_uninstall_failed_permission_denied">Uninstall Error：Unknow error</string>
+    <string name="error_download_network_unavaible"> Download Error：Network error</string>
+    <string name="error_download_insufficient_storage_space">Download Error：Storage insufficient</string>
+    <string name="error_download_can_not_create_download_path">Download Error：Storage can not read</string>
+    <string name="error_download_path_can_not_write">Download Error：File can not write</string>
+    <string name="error_download_server_error">Download Error：Server error</string>
+    <string name="error_download_url_error">Download Error：Download Url error</string>
+    <string name="error_download_io_error">Download Error:Unknown Error</string>
+    
     <!-- Extend -->
     <string name="extend_install_error">Server data error,Please try again!</string>
     <string name="extend_install_success">install success</string>

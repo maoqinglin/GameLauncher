@@ -25,7 +25,7 @@
         android:id="@+id/storeCollectionDetailList"
         style="@style/StoreListView"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/collection_detail_list_height"
+        android:layout_height="@dimen/store_collection_detail_list_height"
         android:layout_centerInParent="true"
         android:nextFocusDown="@id/storeCollectionDetailList"
         android:nextFocusLeft="@+id/storeCollectionDetailList"

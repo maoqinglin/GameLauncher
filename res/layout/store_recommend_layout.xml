@@ -10,7 +10,7 @@
     android:nextFocusRight="@id/storeRecommendList"
     android:nextFocusUp="@+id/storeOptionsRecommend"
     android:paddingBottom="@dimen/store_detail_padding_bottom"
-    android:layout_marginTop="@dimen/recommend_list_margin_top"
+    android:layout_marginTop="@dimen/store_recommend_list_margin_top"
     android:paddingTop="@dimen/store_detail_padding_top" >
 
 </com.ireadygo.app.gamelauncher.ui.widget.HListView>

@@ -4,12 +4,37 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="corner_shape_radius_normal">3dp</dimen>
     <dimen name="mygame_app_icon_size">100dp</dimen>
-    <!-- 一级菜单 -->
+    
+    <!-- 公共 -->
+    
+    <!-- 主页(main) -->
+    
+    <!-- 主菜单(menu) -->
     <dimen name="menu_item_margin_left">10dp</dimen>
     <dimen name="menu_item_width">75dp</dimen>
     <dimen name="menu_item_height">106dp</dimen>
     <dimen name="menu_item_title_margin_top">12dp</dimen>
 
+    <!-- 我的游戏-->
+    <dimen name="mygame_app_width">72dp</dimen>
+    <dimen name="mygame_app_height">110dp</dimen>
+    <dimen name="mygame_app_text_size">12sp</dimen>
+    <dimen name="mygame_app_drawable_padding">5dp</dimen>
+    <dimen name="mygame_hlistview_margin_top">30dp</dimen>
+    <dimen name="myapp_hlistview_padding_top">80dp</dimen>
+    <dimen name="hlistview_margin_top">50dp</dimen>
+    <dimen name="mygame_content_height">210dp</dimen>
+    <dimen name="mygame_game_width">100dp</dimen>
+    <dimen name="mygame_game_height">100dp</dimen>
+    <dimen name="mygame_game_bg_height">125dp</dimen>
+    <dimen name="mygame_game_text_size">16sp</dimen>
+    <dimen name="mygame_game_name_height">25dp</dimen>
+    <dimen name="mygame_game_name_padding">3dp</dimen>
+    <dimen name="mygame_recommend_app_bg_height">160dp</dimen>
+	<dimen name="mygame_recommend_app_listview_padding_top">18dp</dimen>
+    
+    <!-- 推荐下载(game_recommend) -->
+    
     <!-- 内容页面 -->
     <dimen name="content_fragment_height">260dp</dimen>
     <dimen name="content_padding_left_default">50dp</dimen>
@@ -34,148 +59,9 @@
     <dimen name="tips_margin_top">20dp</dimen>
     <dimen name="tips_height">35dp</dimen>
     <dimen name="tips_text_size">12sp</dimen>
+    <dimen name="tips_shortcut_margin">50dp</dimen>
 
-    <!-- 应用详情 -->
-    <dimen name="detail_title_width">112dp</dimen>
-    <dimen name="detail_title_height">30dp</dimen>
-    <dimen name="detail_title_margin_bottom">15dp</dimen>
-    <dimen name="detail_padding_left">30dp</dimen>
-    <dimen name="detail_list_padding_bottom">20dp</dimen>
-    <dimen name="detail_list_padding_top_h">35dp</dimen>
-    <dimen name="detail_list_padding_top_vertical">20dp</dimen>
-    <dimen name="detail_padding_top">12dp</dimen>
-    <dimen name="detail_goback_padding_top">10dp</dimen>
-    <dimen name="detail_goback_padding_left">15dp</dimen>
-    <dimen name="detail_goback_padding_right">25dp</dimen>
-    <dimen name="detail_goback_margin_left">15dp</dimen>
-    <dimen name="detail_name_layout_width">200dp</dimen>
-    <dimen name="detail_icon_width">100dp</dimen>
-    <dimen name="detail_icon_height">100dp</dimen>
-    <dimen name="detail_icon_margin_top">15dp</dimen>
-    <dimen name="detail_icon_margin_right">18dp</dimen>
-    <dimen name="detail_name_margin_bottom">7dp</dimen>
-    <dimen name="detail_name_margin_right">20dp</dimen>
-    <dimen name="detail_player_number_margin_top">4dp</dimen>
-    <dimen name="detail_download_margin_left">25dp</dimen>
-    <dimen name="detail_intro_margin_right">12dp</dimen>
-    <dimen name="detail_intro_margin_top">6dp</dimen>
-    <dimen name="detail_intro_padding">4dp</dimen>
-    <dimen name="detail_intro_padding_right">6dp</dimen>
-    <dimen name="detail_down_arrow_margin_right">10dp</dimen>
-    <dimen name="detail_down_arrow_margin_top">2dp</dimen>
-    <dimen name="detail_intro_height_normal">84dp</dimen>
-    <dimen name="detail_intro_height_focused">220dp</dimen>
-    <dimen name="detail_intro_line_spacing">4dp</dimen>
-    <dimen name="detail_intro_text_size">13sp</dimen>
-    <dimen name="detail_screenshot_width">162dp</dimen>
-    <dimen name="detail_screenshot_height">92dp</dimen>
-    <dimen name="detail_screenshot_padding">1dp</dimen>
-    <dimen name="detail_screenshot_divide_width_vertical">32dp</dimen>
-    <dimen name="detail_screenshot_padding_top_vertical">20dp</dimen>
-    <dimen name="detail_screenshot_scale_padding">3dp</dimen>
-
-    <!-- 免商店 -->
-    <dimen name="store_item_title_height">32dp</dimen>
-    <dimen name="store_item_bg_width">148dp</dimen>
-    <dimen name="store_item_bg_height">170dp</dimen>
-    <dimen name="store_diver_width">8dp</dimen>
-    
-    <!-- 免商店-详情-->
-    <dimen name="store_options_width">64dp</dimen>
-    <dimen name="store_options_height">40dp</dimen>
-    <dimen name="store_options_margin_top">10dp</dimen>
-    <dimen name="store_options_margin_left">10dp</dimen>
-    <dimen name="store_options_layout_padding_left">36dp</dimen>
-    <dimen name="store_options_title_margin_top">5dp</dimen>
-    <dimen name="store_detail_padding_top">25dp</dimen>
-    <dimen name="store_detail_padding_bottom">30dp</dimen>
-
-    <!-- 免商店-搜索 -->
-    <dimen name="store_search_diver_width">10dp</dimen>
-    <dimen name="store_search_input_text_width">204dp</dimen>
-    <dimen name="search_listview_padding_top">10dp</dimen>
-    <dimen name="search_keyword_textview_height">49dp</dimen>
-    <dimen name="search_keyword_textview_size">12sp</dimen>
-    <dimen name="search_keyword_padding_left">10dp</dimen>
-    <dimen name="search_listview_item_space">5dp</dimen>
-    <dimen name="store_app_normal_title_height">24dp</dimen>
-    <dimen name="store_app_icon_normal_width">100dp</dimen>
-    <dimen name="store_app_icon_normal_height">100dp</dimen>
-    <dimen name="store_app_normal_bg_height">124dp</dimen>
-    <dimen name="store_search_input_btn_margin_left">10dp</dimen>
-    <dimen name="store_search_listview_margin_top">10dp</dimen>
-    <dimen name="store_search_input_btn_size">14sp</dimen>
-    <dimen name="store_search_padding_top">3dp</dimen>
-    <dimen name="store_search_padding_bottom">3dp</dimen>
-    <dimen name="store_search_padding_left">5dp</dimen>
-    <dimen name="store_search_padding_right">5dp</dimen>
-	
-    <!-- 免商店-推荐 -->
-    <dimen name="recommend_item_width">157dp</dimen>
-    <dimen name="recommend_item_height">147dp</dimen>
-    <dimen name="recommend_item_padding">3dp</dimen>
-    <dimen name="recommend_item_name_padding_bottom">5dp</dimen>
-    <dimen name="recommend_list_margin_top">25dp</dimen>
-
-    <!-- 免商店-分类 -->
-    <dimen name="category_item_width">257dp</dimen>
-    <dimen name="category_item_height">182dp</dimen>
-    <dimen name="category_item_icon_width">257dp</dimen>
-    <dimen name="category_item_icon_height">152dp</dimen>
-    <dimen name="store_category_diver_width">10dp</dimen>
-    <dimen name="store_category_list_margin_top">10dp</dimen>
-    <dimen name="category_item_title_layout_height">30dp</dimen>
-    <dimen name="category_item_title_layout_padding_bottom">4dp</dimen>
-    <dimen name="category_item_title_margin_left">0dp</dimen>
-    <dimen name="category_item_intro_margin_left">6dp</dimen>
-    <dimen name="category_item_intro_size">10sp</dimen>
-
-    <!-- 免商店-合集 -->
-    <dimen name="store_collection_item_width">257dp</dimen>
-    <dimen name="store_collection_item_height">170dp</dimen>
-    <dimen name="store_collection_diver_width">10dp</dimen>
-    <dimen name="store_collection_list_margin_top">10dp</dimen>
-    <dimen name="collection_item_icon_width">257dp</dimen>
-    <dimen name="collection_item_icon_height">152dp</dimen>
-        <dimen name="collection_detail_list_height">170dp</dimen>
-    <!-- 免商店-设置 -->
-    <dimen name="store_settings_listview_margin_right">0dp</dimen>
-    <dimen name="store_settings_item_padding_top">8dp</dimen>
-    <dimen name="store_settings_item_padding_left">5dp</dimen>
-    <dimen name="store_settings_item_padding_right">25dp</dimen>
-    <dimen name="store_settings_item_title_size">16sp</dimen>
-    <dimen name="store_settings_item_check_size">10sp</dimen>
-
-    <!-- 免商店-游戏管理 -->
-	<dimen name="store_download_item_height">148dp</dimen>
-	<dimen name="store_download_item_icon_width">100dp</dimen>
-	<dimen name="store_download_item_icon_height">100dp</dimen>
-	<dimen name="store_download_item_name_height">23dp</dimen>
-	<dimen name="store_download_item_name_padding">3dp</dimen>
-	<dimen name="store_download_item_undo_bg_height">123dp</dimen>
-	<dimen name="store_download_item_status_height">25dp</dimen>
-    <dimen name="store_download_expandlist_padding_top">45dp</dimen>
-    <dimen name="store_download_expandlist_indicatorPaddingTop">-35dp</dimen>
-    <dimen name="store_download_expandlist_indicatorPaddingLeft">5dp</dimen>
-    <dimen name="store_download_speed_text_size">10sp</dimen>
-
-    <!-- 我的游戏 -->
-    <dimen name="mygame_app_width">72dp</dimen>
-    <dimen name="mygame_app_height">110dp</dimen>
-    <dimen name="mygame_app_text_size">12sp</dimen>
-    <dimen name="mygame_app_drawable_padding">5dp</dimen>
-    <dimen name="mygame_hlistview_margin_top">30dp</dimen>
-    <dimen name="myapp_hlistview_padding_top">80dp</dimen>
-    <dimen name="hlistview_margin_top">50dp</dimen>
-    <dimen name="mygame_content_height">210dp</dimen>
-    <dimen name="mygame_game_width">100dp</dimen>
-    <dimen name="mygame_game_height">100dp</dimen>
-    <dimen name="mygame_game_bg_height">125dp</dimen>
-    <dimen name="mygame_game_text_size">16sp</dimen>
-    <dimen name="mygame_game_name_height">25dp</dimen>
-    <dimen name="mygame_game_name_padding">3dp</dimen>
-    
-    <!-- 设定 -->
+    <!-- 设置 -->
     <dimen name="settings_icon_bg_width">100dp</dimen>
     <dimen name="settings_icon_bg_height">125dp</dimen>
     <dimen name="settings_icon_width">25dp</dimen>
@@ -185,7 +71,7 @@
     <dimen name="settings_list_padding_bottom">40dp</dimen>
     <dimen name="settings_name_margin_bottom">20dp</dimen>
     <dimen name="settings_name_txt_size">18sp</dimen>
-
+    
     <!-- 免账号 -->
     <dimen name="account_item_init_width">100dp</dimen>
     <dimen name="account_item_init_height">125dp</dimen>
@@ -201,6 +87,8 @@
     <dimen name="account_edit_btn_width">100dp</dimen>
     <dimen name="account_edit_btn_height">35dp</dimen>
 
+    <!-- 免账号-菜单(account_menu) -->
+    
     <!-- 免账号-详情 -->
     <dimen name="account_detail_padding_left">50dp</dimen>
     <dimen name="account_detail_padding_top">20dp</dimen>
@@ -272,7 +160,7 @@
     <dimen name="freecard_package_pay_margin_top">8dp</dimen>
     <dimen name="freecard_phone_number_text_size">15sp</dimen>
 
-    <!-- 账号-登陆 -->
+    <!-- 免账号-登陆 -->
     <dimen name="account_login_item_width">338dp</dimen>
     <dimen name="account_login_item_height">36dp</dimen>
     <dimen name="login_edittext_width">271dp</dimen>
@@ -283,13 +171,13 @@
     <dimen name="login_edittext_drawable_padding">25dp</dimen>
     <dimen name="login_edittext_padding_left">10dp</dimen>
     
-    <!-- 账号-注册 -->
+    <!-- 免账号-注册 -->
     <dimen name="register_password_prompt_height">50dp</dimen>
     <dimen name="register_margin_top_first">5dp</dimen>
     <dimen name="register_error_prompt_margin_top">0dp</dimen>
     <dimen name="register_margin_top_normal">15dp</dimen>
     
-    <!-- 系统头像 -->
+    <!-- 免账号-系统头像 -->
     <dimen name="system_photo_dialog_width">320dp</dimen>
     <dimen name="system_photo_dialog_height">250dp</dimen>
     <dimen name="dialog_titile_margin_top">15dp</dimen>
@@ -297,11 +185,11 @@
     <dimen name="grid_vertical_spacing">20dp</dimen>
     <dimen name="gird_padding">15dp</dimen>
 
-    <!-- 账号-一键登录 -->
+    <!-- 免账号-一键登录 -->
     <dimen name="onekey_account_login_margin_left">30dp</dimen>
     <dimen name="onekey_btn_text_size">18sp</dimen>
 
-    <!-- 卡槽购买页面 -->
+    <!-- 免账号-卡槽购买 -->
     <dimen name="slot_padding_top">0dp</dimen>
     <dimen name="slot_padding_left">10dp</dimen>
     <dimen name="slot_content_width">345dp</dimen>
@@ -317,8 +205,15 @@
     <dimen name="slot_pay_button_margin_top">12dp</dimen>
     <dimen name="slot_payable_layout_height">40dp</dimen>
     <dimen name="slot_payable_layout_margin_top">8dp</dimen>
-
-	<dimen name="all_app_count_margin_left">20dp</dimen>
+    
+    <!-- 免账号-资费 -->
+	<dimen name="traiff_layout_margin_left">1dp</dimen>
+	<dimen name="traiff_layout_margin_top">30dp</dimen>
+	<dimen name="traiff_layout_text_margin_right">20dp</dimen>
+	<dimen name="traiff_layout_text_size">18sp</dimen>
+    
+    <!-- 全部应用 -->
+    <dimen name="all_app_count_margin_left">20dp</dimen>
 	<dimen name="all_app_used_slot_margin_left">10dp</dimen>
 	<dimen name="all_app_title_margin_left">15dp</dimen>
 	<dimen name="all_app_title_margin_top">10dp</dimen>
@@ -326,23 +221,144 @@
 	<dimen name="all_app_hlistview_pading_top">15dp</dimen>
 	<dimen name="all_app_hlistview_pading_bottom">20dp</dimen>
 	<dimen name="all_app_hlistview_pading_right">20dp</dimen>
-	
+    
 	<!-- 文件夹位置 -->
 	<dimen name="popwindow_width">577dp</dimen>
 	<dimen name="popwindow_height">176dp</dimen>
 	<dimen name="popwindow_all_app_height">208dp</dimen>
 	<dimen name="popwindow_x">44dp</dimen>
 	<dimen name="popwindow_y">107dp</dimen>
+	
+    <!-- 免商店 -->
+    <dimen name="store_item_title_height">32dp</dimen>
+    <dimen name="store_item_bg_width">148dp</dimen>
+    <dimen name="store_item_bg_height">170dp</dimen>
+    <dimen name="store_diver_width">8dp</dimen>
+    
+    <!-- 免商店-选项-->
+    <dimen name="store_options_width">64dp</dimen>
+    <dimen name="store_options_height">40dp</dimen>
+    <dimen name="store_options_margin_top">10dp</dimen>
+    <dimen name="store_options_margin_left">10dp</dimen>
+    <dimen name="store_options_layout_padding_left">36dp</dimen>
+    <dimen name="store_options_title_margin_top">5dp</dimen>
+    <dimen name="store_detail_padding_top">25dp</dimen>
+    <dimen name="store_detail_padding_bottom">30dp</dimen>
 
-	<dimen name="mygame_recommend_app_bg_height">160dp</dimen>
-	<dimen name="mygame_recommend_app_listview_padding_top">18dp</dimen>
+    <!-- 免商店-搜索 -->
+    <dimen name="store_search_diver_width">10dp</dimen>
+    <dimen name="store_search_input_text_width">204dp</dimen>
+    <dimen name="store_search_listview_padding_top">10dp</dimen>
+    <dimen name="store_search_keyword_textview_height">49dp</dimen>
+    <dimen name="store_search_keyword_textview_size">12sp</dimen>
+    <dimen name="store_search_keyword_padding_left">10dp</dimen>
+    <dimen name="store_search_listview_item_space">5dp</dimen>
+    <dimen name="store_search_input_btn_margin_left">10dp</dimen>
+    <dimen name="store_search_listview_margin_top">10dp</dimen>
+    <dimen name="store_search_input_btn_size">14sp</dimen>
+    <dimen name="store_search_padding_top">3dp</dimen>
+    <dimen name="store_search_padding_bottom">3dp</dimen>
+    <dimen name="store_search_padding_left">5dp</dimen>
+    <dimen name="store_search_padding_right">5dp</dimen>
+    <dimen name="store_app_normal_title_height">24dp</dimen>
+    <dimen name="store_app_icon_normal_width">100dp</dimen>
+    <dimen name="store_app_icon_normal_height">100dp</dimen>
+    <dimen name="store_app_normal_bg_height">124dp</dimen>
+	
+    <!-- 免商店-推荐 -->
+    <dimen name="store_recommend_item_width">157dp</dimen>
+    <dimen name="store_recommend_item_height">147dp</dimen>
+    <dimen name="store_recommend_item_padding">3dp</dimen>
+    <dimen name="store_recommend_item_name_padding_bottom">5dp</dimen>
+    <dimen name="store_recommend_list_margin_top">25dp</dimen>
 
+    <!-- 免商店-分类 -->
+    <dimen name="store_category_item_width">257dp</dimen>
+    <dimen name="store_category_item_height">182dp</dimen>
+    <dimen name="store_category_item_icon_width">257dp</dimen>
+    <dimen name="store_category_item_icon_height">152dp</dimen>
+    <dimen name="store_category_diver_width">10dp</dimen>
+    <dimen name="store_category_list_margin_top">10dp</dimen>
+    <dimen name="store_category_item_title_layout_height">30dp</dimen>
+    <dimen name="store_category_item_title_layout_padding_bottom">4dp</dimen>
+    <dimen name="store_category_item_title_margin_left">0dp</dimen>
+    <dimen name="store_category_item_intro_margin_left">6dp</dimen>
+    <dimen name="store_category_item_intro_size">10sp</dimen>
+
+    <!-- 免商店-合集 -->
+    <dimen name="store_collection_item_width">257dp</dimen>
+    <dimen name="store_collection_item_height">170dp</dimen>
+    <dimen name="store_collection_diver_width">10dp</dimen>
+    <dimen name="store_collection_list_margin_top">10dp</dimen>
+    <dimen name="store_collection_item_icon_width">257dp</dimen>
+    <dimen name="store_collection_item_icon_height">152dp</dimen>
+    <dimen name="store_collection_detail_list_height">170dp</dimen>
+    
+    <!-- 免商店-设置 -->
+    <dimen name="store_settings_listview_margin_right">0dp</dimen>
+    <dimen name="store_settings_item_padding_top">8dp</dimen>
+    <dimen name="store_settings_item_padding_left">5dp</dimen>
+    <dimen name="store_settings_item_padding_right">25dp</dimen>
+    <dimen name="store_settings_item_title_size">16sp</dimen>
+    <dimen name="store_settings_item_check_size">10sp</dimen>
+
+    <!-- 免商店-游戏管理 -->
+	<dimen name="store_download_item_height">148dp</dimen>
+	<dimen name="store_download_item_icon_width">100dp</dimen>
+	<dimen name="store_download_item_icon_height">100dp</dimen>
+	<dimen name="store_download_item_name_height">23dp</dimen>
+	<dimen name="store_download_item_name_padding">3dp</dimen>
+	<dimen name="store_download_item_undo_bg_height">123dp</dimen>
+	<dimen name="store_download_item_status_height">25dp</dimen>
+    <dimen name="store_download_expandlist_padding_top">45dp</dimen>
+    <dimen name="store_download_expandlist_indicatorPaddingTop">-35dp</dimen>
+    <dimen name="store_download_expandlist_indicatorPaddingLeft">5dp</dimen>
+    <dimen name="store_download_speed_text_size">10sp</dimen>
+
+    <!-- 免商店-应用详情 -->
+    <dimen name="detail_title_width">112dp</dimen>
+    <dimen name="detail_title_height">30dp</dimen>
+    <dimen name="detail_title_margin_bottom">15dp</dimen>
+    <dimen name="detail_padding_left">30dp</dimen>
+    <dimen name="detail_list_padding_bottom">20dp</dimen>
+    <dimen name="detail_list_padding_top_h">35dp</dimen>
+    <dimen name="detail_list_padding_top_vertical">20dp</dimen>
+    <dimen name="detail_padding_top">12dp</dimen>
+    <dimen name="detail_goback_padding_top">10dp</dimen>
+    <dimen name="detail_goback_padding_left">15dp</dimen>
+    <dimen name="detail_goback_padding_right">25dp</dimen>
+    <dimen name="detail_goback_margin_left">15dp</dimen>
+    <dimen name="detail_name_layout_width">200dp</dimen>
+    <dimen name="detail_icon_width">100dp</dimen>
+    <dimen name="detail_icon_height">100dp</dimen>
+    <dimen name="detail_icon_margin_top">15dp</dimen>
+    <dimen name="detail_icon_margin_right">18dp</dimen>
+    <dimen name="detail_name_margin_bottom">7dp</dimen>
+    <dimen name="detail_name_margin_right">20dp</dimen>
+    <dimen name="detail_player_number_margin_top">4dp</dimen>
+    <dimen name="detail_download_margin_left">25dp</dimen>
+    <dimen name="detail_intro_margin_right">12dp</dimen>
+    <dimen name="detail_intro_margin_top">6dp</dimen>
+    <dimen name="detail_intro_padding">4dp</dimen>
+    <dimen name="detail_intro_padding_right">6dp</dimen>
+    <dimen name="detail_down_arrow_margin_right">10dp</dimen>
+    <dimen name="detail_down_arrow_margin_top">2dp</dimen>
+    <dimen name="detail_intro_height_normal">84dp</dimen>
+    <dimen name="detail_intro_height_focused">220dp</dimen>
+    <dimen name="detail_intro_line_spacing">4dp</dimen>
+    <dimen name="detail_intro_text_size">13sp</dimen>
+    <dimen name="detail_screenshot_width">162dp</dimen>
+    <dimen name="detail_screenshot_height">92dp</dimen>
+    <dimen name="detail_screenshot_padding">1dp</dimen>
+    <dimen name="detail_screenshot_divide_width_vertical">32dp</dimen>
+    <dimen name="detail_screenshot_padding_top_vertical">20dp</dimen>
+    <dimen name="detail_screenshot_scale_padding">3dp</dimen>
+    
 	<!-- 公告 -->
 	<dimen name="announcement_hlistview_margin_left">50dp</dimen>
 	<dimen name="announcement_hlistview_height">100dp</dimen>
 	<dimen name="announcement_hlistview_padding">15dp</dimen>
 	<dimen name="announcement_goback_margin_left">30dp</dimen>
-	
 	<dimen name="announcement_item_width">267dp</dimen>
 	<dimen name="announcement_item_height">75dp</dimen>
 	<dimen name="announcement_content_width">150dp</dimen>
@@ -353,19 +369,17 @@
 	<dimen name="announcement_content_margin_top">10dp</dimen>
 	<dimen name="announcement_arrow_margin_right">10dp</dimen>
 
-	<dimen name="tips_shortcut_margin">50dp</dimen>
+	<!-- 社交(social) -->
 
+    <!-- 论坛(forum) -->
+
+    <!-- 通知(notification) -->
+    
 	<!-- 顶部引导栏 -->
 	<dimen name="guide_title_layout_height">44dp</dimen>
 	<dimen name="guide_title_layout_padding_left">15dp</dimen>
 	<dimen name="guide_title_layout_padding_top">4dp</dimen>
 	<dimen name="guide_title_layout_image_margin_right">25dp</dimen>
-	
-	<!-- 账号-资费 -->
-	<dimen name="traiff_layout_margin_left">1dp</dimen>
-	<dimen name="traiff_layout_margin_top">30dp</dimen>
-	<dimen name="traiff_layout_text_margin_right">20dp</dimen>
-	<dimen name="traiff_layout_text_size">18sp</dimen>
 	
 	<!-- 自定义Dialog -->
 	<dimen name="confirm_dialog_width">654dp</dimen>
@@ -388,7 +402,7 @@
 	<dimen name="confirm_dialog_cancel_btn_width">159dp</dimen>
 	<dimen name="confirm_dialog_text_size">18sp</dimen>
 
-		<!-- 状态栏 -->
+	<!-- 状态栏 -->
 	<dimen name="statusbar_height">22dp</dimen>
 	<dimen name="statusbar_icon_width">26dp</dimen>
 	<dimen name="statusbar_padding_right">7dp</dimen>

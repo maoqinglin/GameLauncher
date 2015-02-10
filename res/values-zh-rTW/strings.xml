@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <!-- Common -->
     <string name="app_name">蝸牛桌面</string>
     <string name="action_settings">設置壁紙</string>
@@ -7,6 +8,48 @@
     <string name="confirm">確定</string>
     <string name="cancel">取消</string>
 
+    <!-- 主頁(main) -->
+    
+    <!-- 主菜單(menu) -->
+    <string name="menu_store">遊戲商店</string>
+    <string name="menu_game">我的遊戲</string>
+    <string name="menu_community">遊戲社區</string>
+    <string name="menu_app">應用</string>
+    <string name="menu_call">通話</string>
+    <string name="menu_settings">設定</string>
+    
+    <!-- 我的遊戲-推薦下載 -->
+    <string name="mygame_recommend_app_download">推薦下載</string>
+    <string name="mygame_empty_tip">空空如也，快去免商店轉轉吧～！</string>
+    
+    <!-- 推薦下載(game_recommend) -->
+    
+    <!-- 我的應用(app) -->
+    <string name="myapp_folder_title_system">系統檔夾</string>
+    
+    <!-- 我的應用-全部應用 -->
+    <string name="all_app">全部應用</string>
+    <string name="all_app_description">請選擇需要顯示在桌面上的應用</string>
+    <string name="all_app_count">全部應用：</string>
+    <string name="all_app_used_slot">已使用卡槽：</string>
+    <string name="all_app_device_not_support">操作失敗！設備不支持！</string>
+    <string name="all_app_slot_has_bind">此應用已經綁定卡槽，可以正常使用！</string>
+    <string name="all_app_network_error">網路異常！</string>
+    <string name="all_app_no_slot_title">提示</string>
+    <string name="all_app_no_slot_msg">沒有多餘卡槽，請充值購買！</string>
+    
+    <!-- 設置(settings) -->
+    <string name="settings_systemupgrade">系統升級</string>
+    <string name="settings_personalized">個性化</string>
+    <string name="settings_language">語言</string>
+    <string name="settings_store">存儲</string>
+    <string name="settings_secure">安全</string>
+    <string name="settings_help">幫助</string>
+    <string name="settings_more">更多</string>
+    <string name="settings_wifi">WIFI</string>
+    <string name="settings_wallpaper">壁紙</string>
+    <string name="settings_joystic_battery">手柄電量</string>
+    
     <!-- 壁紙 -->
     <string name="wallpaper_set">設置壁紙</string>
     <string name="wallpaper_snail">蝸牛壁紙</string>
@@ -29,7 +72,25 @@
     <string name="notification_upgrade_big_title">應用升級提示</string>
     <string name="notification_upgrade_little_title">\t個應用可進行更新</string>
 
-    <!-- 卡槽購買頁面 -->
+    <!-- 免商店(store) -->
+
+	<!-- 免商店-選項(store_options) -->
+    <string name="store_options_search">搜索</string>
+    <string name="store_options_recommend">推薦</string>
+    <string name="store_options_collection">合集</string>
+    <string name="store_options_category">分類</string>
+    <string name="store_options_game_manager">遊戲管理</string>
+    <string name="store_options_settings">商店設置</string>
+
+    <!-- 免商店-選項縮寫-->
+    <string name="store_options_search_short">搜索</string>
+    <string name="store_options_recommend_short">推薦</string>
+    <string name="store_options_collection_short">合集</string>
+    <string name="store_options_category_short">分類</string>
+    <string name="store_options_game_manager_short">遊戲管理</string>
+    <string name="store_options_settings_short">商店設置</string>
+    
+    <!-- 免商店-卡槽購買 -->
     <string name="slot_title">購買卡槽</string>
     <string name="slot_balance">餘額：%1$d</string>
     <string name="slot_currency">兔兔幣</string>
@@ -57,66 +118,10 @@
     <string name="slot_buy_success">卡槽購買成功！</string>
     <string name="slot_buy_failed">卡槽購買失敗！</string>
     
-    <!-- 第一級目錄 -->
-    <string name="menu_store">遊戲商店</string>
-    <string name="menu_game">我的遊戲</string>
-    <string name="menu_community">遊戲社區</string>
-    <string name="menu_app">應用</string>
-    <string name="menu_call">通話</string>
-    <string name="menu_settings">設定</string>
-
-    <!-- 免商店-應用詳情 -->
-    <string name="detail_title">遊戲詳情</string>
-    <string name="detail_game_size">大小：</string>
-    <string name="detail_game_version">版本：</string>
-    <string name="detail_game_introduce">應用介紹</string>
-    <string name="detail_version">版本:%1$s</string>
-    <string name="detail_size">大小:%1$s</string>
-    <string name="detail_play_numbers">在玩用戶</string>
-    <string name="detail_download">下&#160;&#160;載</string>
-    <string name="detail_continue">繼&#160;&#160;續</string>
-    <string name="detail_pause">暫&#160;&#160;停</string>
-    <string name="detail_queue">等 &#160;&#160;待</string>
-    <string name="detail_install">安&#160;&#160;裝</string>
-    <string name="detail_installing">安裝中</string>
-    <string name="detail_error">出 &#160;&#160;錯</string>
-    <string name="detail_launch">啟&#160;&#160;動</string>
-    <string name="detail_update">更&#160;&#160;新</string>
-    <string name="detail_game_detail">遊戲詳情</string>
-    <string name="detail_player_comment">玩家評論</string>
-
-    <!-- 免商店-選項 -->
-    <string name="store_options_search">搜索</string>
-    <string name="store_options_recommend">推薦</string>
-    <string name="store_options_collection">合集</string>
-    <string name="store_options_category">分類</string>
-    <string name="store_options_game_manager">遊戲管理</string>
-    <string name="store_options_settings">商店設置</string>
-
-    <!-- 免商店-選項縮寫-->
-    <string name="store_options_search_short">搜索</string>
-    <string name="store_options_recommend_short">推薦</string>
-    <string name="store_options_collection_short">合集</string>
-    <string name="store_options_category_short">分類</string>
-    <string name="store_options_game_manager_short">遊戲管理</string>
-    <string name="store_options_settings_short">商店設置</string>
+    <!-- 免商店-推薦(recommend) -->
     
-
-    <!-- 免商店-搜索 -->
-    <string name="store_search">搜&#160;&#160;索</string>
-
-    <!-- 免商店：下載管理 -->
-    <string name="store_dld_manager_downloading">下載中</string>
-    <string name="store_dld_manager_updatable">可更新</string>
-    <string name="store_dld_manager_launchable">已安裝</string>
-    <string name="store_dld_manager_empty">還沒發現好玩的？去找找好玩的遊戲吧。</string>
-    <string name="store_dld_manager_cur_version">版本：%1$s</string>
-    <string name="store_dld_manager_detail_not_found">暫時沒有該應用資訊</string>
-    <string name="store_dld_manager_delete_task_prompt">刪除任務記錄</string>
-    <string name="store_dld_manager_delete_task_msg">是否刪除您的下載任務？</string>
-    
-    <!-- 免商店-分類 -->
-    <string-array name="store_category_titles">
+    <!-- 免商店-分類(category) -->
+     <string-array name="store_category_titles">
         <item>創意休閒</item>
         <item>單機遊戲</item>
         <item>動作射擊</item>
@@ -138,14 +143,51 @@
         <item>鬥地主/棋類/麻將/桌遊/德州撲克/紙牌</item>
         <item>來自寶島臺灣的遊戲精選</item>
     </string-array>
+    
+    <!-- 免商店-合集(collection) -->
 
-    <!-- 免商店-設置 -->
+    <!-- 免商店-合集/分類-遊戲列表(collection_detail) -->
+    
+    <!-- 免商店-下載管理(store_manager) -->
+    <string name="store_dld_manager_downloading">下載中</string>
+    <string name="store_dld_manager_updatable">可更新</string>
+    <string name="store_dld_manager_launchable">已安裝</string>
+    <string name="store_dld_manager_empty">還沒發現好玩的？去找找好玩的遊戲吧。</string>
+    <string name="store_dld_manager_cur_version">版本：%1$s</string>
+    <string name="store_dld_manager_detail_not_found">暫時沒有該應用資訊</string>
+    <string name="store_dld_manager_delete_task_prompt">刪除任務記錄</string>
+    <string name="store_dld_manager_delete_task_msg">是否刪除您的下載任務？</string>
+    
+    <!-- 免商店-搜索(search) -->
+    <string name="store_search">搜&#160;&#160;索</string>
+    
+    <!-- 免商店-設置(store_settings) -->
     <string-array name="store_settings_titles">
         <item>只在WIFI環境下下載</item>
         <item>安裝完成後自動刪除安裝包</item>
-	<item>遊戲更新提醒</item>
-	<item>允許空投遊戲自動下載安裝</item>
+		<item>遊戲更新提醒</item>
+		<item>允許空投遊戲自動下載安裝</item>
     </string-array>
+    
+    <!-- 免商店-應用詳情 -->
+    <string name="detail_title">遊戲詳情</string>
+    <string name="detail_game_size">大小：</string>
+    <string name="detail_game_version">版本：</string>
+    <string name="detail_game_introduce">應用介紹</string>
+    <string name="detail_version">版本:%1$s</string>
+    <string name="detail_size">大小:%1$s</string>
+    <string name="detail_play_numbers">在玩用戶</string>
+    <string name="detail_download">下&#160;&#160;載</string>
+    <string name="detail_continue">繼&#160;&#160;續</string>
+    <string name="detail_pause">暫&#160;&#160;停</string>
+    <string name="detail_queue">等 &#160;&#160;待</string>
+    <string name="detail_install">安&#160;&#160;裝</string>
+    <string name="detail_installing">安裝中</string>
+    <string name="detail_error">出 &#160;&#160;錯</string>
+    <string name="detail_launch">啟&#160;&#160;動</string>
+    <string name="detail_update">更&#160;&#160;新</string>
+    <string name="detail_game_detail">遊戲詳情</string>
+    <string name="detail_player_comment">玩家評論</string>
 
     <!-- 狀態 -->
     <string name="status_download">下 載</string>
@@ -158,7 +200,21 @@
     <string name="status_launch">啟 動</string>
     <string name="status_update">更 新</string>
 
-     <!-- 免帳號 -->
+    <!-- 遊戲社區 -->
+    <string name="game_community_account">帳號</string>
+    <string name="game_community_Announcement">公告</string>
+    <string name="game_community">社區</string>
+    <string name="account_no_account_login_prompt">您尚未登錄帳戶</string>
+
+    <!-- 社交(social) -->
+
+    <!-- 論壇(forum) -->
+
+    <!-- 公告(notice) -->
+    
+    <!-- 頂部引導欄(guide) -->
+
+    <!-- 免帳號 -->
     <string name="account_mywealth">我的資產</string>
     <string name="account_personal">個人資訊</string>
     <string name="account_recharge">充值</string>
@@ -290,61 +346,7 @@
     <string name="freecard_should_pay_money">應付金額：</string>
     <string name="freecard_celerity_payment">立即支付</string>
 
-
-    <!-- 錯誤顯示 -->
-    <string name="error_unknown">未知錯誤</string>
-    <string name="error_download">下載出錯</string>
-    <string name="error_install">安裝出錯</string>
-    <string name="error_launch_unknown">啟動失敗：無法啟動應用，請重新下載！</string>
-    <string name="error_launch_disable">啟動失敗：應用已禁止！</string>
-    <string name="error_install_package_not_found">安裝失敗：檔不存在，請重新下載</string>
-    <string name="error_install_package_unreadable">安裝失敗：檔受損，請重新下載</string>
-    <string name="error_install_silently_not_compatible">安裝失敗：未知錯誤</string>
-    <string name="error_install_invalid_apk">安裝失敗：檔受損，請重新下載</string>
-    <string name="error_install_insufficient_storage">安裝失敗：存儲空間不足</string>
-    <string name="error_install_inconsistent_certificates">安裝失敗：簽名衝突</string>
-    <string name="error_install_no_certificates">安裝失敗：應用無簽名</string>
-    <string name="error_install_unknow_apk">安裝失敗：未知錯誤</string>
-    <string name="error_install_zip_package">安裝失敗：解壓錯誤</string>
-    <string name="error_install_storage_system">安裝失敗：未知錯誤</string>
-    <string name="error_install_external_storage_unmounted">安裝失敗：未檢測到SD卡</string>
-    <string name="error_install_illegal_apk_with_data">安裝失敗：檔受損</string>
-    <string name="error_uninstall_failed_invalid_package">卸載失敗：應用不存在</string>
-    <string name="error_uninstall_failed_internal">卸載失敗：未知錯誤</string>
-    <string name="error_uninstall_failed_permission_denied">卸載失敗：未知錯誤</string>
-    <string name="error_download_network_unavaible">下載失敗：網路不可用</string>
-    <string name="error_download_insufficient_storage_space">下載失敗：存儲空間不足</string>
-    <string name="error_download_can_not_create_download_path">下載失敗：檔讀寫錯誤</string>
-    <string name="error_download_path_can_not_write">下載失敗：檔讀寫錯誤</string>
-    <string name="error_download_server_error">下載失敗：伺服器錯誤</string>
-    <string name="error_download_url_error">下載失敗：下載鏈接錯誤</string>
-    <string name="error_download_io_error">下載失敗：未知錯誤</string>
-
-    <!-- 設置 -->
-    <string name="settings_systemupgrade">系統升級</string>
-    <string name="settings_personalized">個性化</string>
-    <string name="settings_language">語言</string>
-    <string name="settings_store">存儲</string>
-    <string name="settings_secure">安全</string>
-    <string name="settings_help">幫助</string>
-    <string name="settings_more">更多</string>
-    <string name="settings_wifi">WIFI</string>
-    <string name="settings_wallpaper">壁紙</string>
-    <string name="settings_joystic_battery">手柄電量</string>
-
-    <!-- 按鍵提示層 -->
-    <string name="key_sun">啟動</string>
-    <string name="key_mountain">詳情</string>
-    <string name="key_water">刪除</string>
-    <string name="key_moon">返回</string>
-
-    <!-- 網路 -->
-    <string name="no_network">請連接網路</string>
-
-    <!-- 開機引導 -->
-    <string name="starting_guide_key_title">按鍵說明</string>
-
-    <!-- 免帳號-登錄、註冊 -->
+    <!-- 免帳號-登錄/註冊/一鍵登錄 -->
     <string name="account_one_key_logining_prompt">一鍵登錄中...</string>
     <string name="account_logining_prompt">帳號登錄中...</string>
     <string name="account_registing_prompt">帳號註冊中...</string>
@@ -374,29 +376,7 @@
     <string name="account_login_failed">登錄失敗，請重試！</string>
     <string name="account_login_server_phonenumber">客服電話：(0512)67621007</string>
     
-    <!-- 全部應用 -->
-    <string name="all_app">全部應用</string>
-    <string name="all_app_description">請選擇需要顯示在桌面上的應用</string>
-    <string name="all_app_count">全部應用：</string>
-    <string name="all_app_used_slot">已使用卡槽：</string>
-    <string name="all_app_device_not_support">操作失敗！設備不支持！</string>
-    <string name="all_app_slot_has_bind">此應用已經綁定卡槽，可以正常使用！</string>
-    <string name="all_app_network_error">網路異常！</string>
-    <string name="all_app_no_slot_title">提示</string>
-    <string name="all_app_no_slot_msg">沒有多餘卡槽，請充值購買！</string>
-
-    <!-- 我的遊戲推薦下載 -->
-    <string name="mygame_recommend_app_download">推薦下載</string>
-    <string name="mygame_empty_tip">空空如也，快去免商店轉轉吧～！</string>
-    <string name="myapp_folder_title_system">系統檔夾</string>
-
-    <!-- 遊戲社區 -->
-    <string name="game_community_account">帳號</string>
-    <string name="game_community_Announcement">公告</string>
-    <string name="game_community">社區</string>
-    <string name="account_no_account_login_prompt">您尚未登錄帳戶</string>
-
-    <!-- 免流量開通 -->
+    <!-- 免帳號-免流量 -->
     <string name="free_flow_privilege_title">免流量特權</string>
     <string name="free_flow_privilege_tip">免流量特權：免費開通後，可在免商店下載遊戲、暢玩部分指定遊戲不產生流量費用。</string>
     <string name="free_flow_privilege_remark">開通免流量特權的免帳號，需綁定本機手機號才可生效</string>
@@ -443,6 +423,47 @@
     <string name="shortcut_back">返回</string>
     <string name="shortcut_uninstall">卸載</string>
 
+    <!-- 按鍵提示層 -->
+    <string name="key_sun">啟動</string>
+    <string name="key_mountain">詳情</string>
+    <string name="key_water">刪除</string>
+    <string name="key_moon">返回</string>
+
+    <!-- 網路 -->
+    <string name="no_network">請連接網路</string>
+
+    <!-- 開機引導 -->
+    <string name="starting_guide_key_title">按鍵說明</string>
+
+    <!-- 錯誤顯示 -->
+    <string name="error_unknown">未知錯誤</string>
+    <string name="error_download">下載出錯</string>
+    <string name="error_install">安裝出錯</string>
+    <string name="error_launch_unknown">啟動失敗：無法啟動應用，請重新下載！</string>
+    <string name="error_launch_disable">啟動失敗：應用已禁止！</string>
+    <string name="error_install_package_not_found">安裝失敗：檔不存在，請重新下載</string>
+    <string name="error_install_package_unreadable">安裝失敗：檔受損，請重新下載</string>
+    <string name="error_install_silently_not_compatible">安裝失敗：未知錯誤</string>
+    <string name="error_install_invalid_apk">安裝失敗：檔受損，請重新下載</string>
+    <string name="error_install_insufficient_storage">安裝失敗：存儲空間不足</string>
+    <string name="error_install_inconsistent_certificates">安裝失敗：簽名衝突</string>
+    <string name="error_install_no_certificates">安裝失敗：應用無簽名</string>
+    <string name="error_install_unknow_apk">安裝失敗：未知錯誤</string>
+    <string name="error_install_zip_package">安裝失敗：解壓錯誤</string>
+    <string name="error_install_storage_system">安裝失敗：未知錯誤</string>
+    <string name="error_install_external_storage_unmounted">安裝失敗：未檢測到SD卡</string>
+    <string name="error_install_illegal_apk_with_data">安裝失敗：檔受損</string>
+    <string name="error_uninstall_failed_invalid_package">卸載失敗：應用不存在</string>
+    <string name="error_uninstall_failed_internal">卸載失敗：未知錯誤</string>
+    <string name="error_uninstall_failed_permission_denied">卸載失敗：未知錯誤</string>
+    <string name="error_download_network_unavaible">下載失敗：網路不可用</string>
+    <string name="error_download_insufficient_storage_space">下載失敗：存儲空間不足</string>
+    <string name="error_download_can_not_create_download_path">下載失敗：檔讀寫錯誤</string>
+    <string name="error_download_path_can_not_write">下載失敗：檔讀寫錯誤</string>
+    <string name="error_download_server_error">下載失敗：伺服器錯誤</string>
+    <string name="error_download_url_error">下載失敗：下載鏈接錯誤</string>
+    <string name="error_download_io_error">下載失敗：未知錯誤</string>
+    
     <!-- Extend -->
     <string name="extend_install_error">伺服器數據錯誤，請重新下載！</string>
     <string name="extend_install_success">安裝成功</string>

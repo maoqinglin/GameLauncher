@@ -21,13 +21,13 @@
 
         <ImageView
             android:id="@+id/icon"
-            android:layout_width="@dimen/collection_item_icon_width"
-            android:layout_height="@dimen/collection_item_icon_height"
+            android:layout_width="@dimen/store_collection_item_icon_width"
+            android:layout_height="@dimen/store_collection_item_icon_height"
             android:scaleType="fitXY"
             android:src="@drawable/store_app_icon_large" />
 
         <ImageView
-            android:layout_width="@dimen/collection_item_icon_width"
+            android:layout_width="@dimen/store_collection_item_icon_width"
             android:layout_height="wrap_content"
             android:scaleType="fitXY"
             android:src="@drawable/collection_item_footer" />

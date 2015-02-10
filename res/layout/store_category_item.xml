@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/category_item_width"
-    android:layout_height="@dimen/category_item_height"
+    android:layout_width="@dimen/store_category_item_width"
+    android:layout_height="@dimen/store_category_item_height"
     android:background="@drawable/category_icon_background_2b2b55"
     android:clipChildren="false"
     android:clipToPadding="false"
@@ -22,13 +22,13 @@
 
         <ImageView
             android:id="@+id/icon"
-            android:layout_width="@dimen/category_item_icon_width"
-            android:layout_height="@dimen/category_item_icon_height"
+            android:layout_width="@dimen/store_category_item_icon_width"
+            android:layout_height="@dimen/store_category_item_icon_height"
             android:src="@drawable/category_icon1" />
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/category_item_title_layout_height"
+            android:layout_height="@dimen/store_category_item_title_layout_height"
             android:clipChildren="false"
             android:clipToPadding="false" >
 
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:gravity="bottom"
-                android:paddingLeft="@dimen/category_item_title_margin_left"
+                android:paddingLeft="@dimen/store_category_item_title_margin_left"
                 android:orientation="horizontal"
                 android:scaleX="0.9"
                 android:scaleY="0.9" >
@@ -54,12 +54,12 @@
                     android:id="@+id/intro"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/category_item_intro_margin_left"
+                    android:layout_marginLeft="@dimen/store_category_item_intro_margin_left"
                     android:ellipsize="none"
                     android:gravity="left"
                     android:singleLine="true"
                     android:textColor="#7FFFFFFF"
-                    android:textSize="@dimen/category_item_intro_size" />
+                    android:textSize="@dimen/store_category_item_intro_size" />
             </LinearLayout>
         </FrameLayout>
     </LinearLayout>

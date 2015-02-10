@@ -53,7 +53,7 @@
         android:nextFocusLeft="@+id/storeOptionsSearch"
         android:nextFocusRight="@id/storeSearchList"
         android:nextFocusUp="@id/storeSearchInput"
-        app:hlv_dividerWidth="@dimen/search_listview_item_space" >
+        app:hlv_dividerWidth="@dimen/store_search_listview_item_space" >
     </com.ireadygo.app.gamelauncher.ui.widget.HListView>
 
 </LinearLayout>
