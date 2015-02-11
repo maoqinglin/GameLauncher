@@ -94,4 +94,10 @@
 
 	</declare-styleable>
 
+	<declare-styleable name="HMultiListView">
+
+		<attr name="hlv_horizontal_spacing" format="dimension" />
+		<attr name="hlv_vertical_spacing" format="dimension" />
+
+	</declare-styleable>
 </resources>

@@ -1,5 +1,8 @@
 package com.ireadygo.app.gamelauncher.ui;
 
+import java.util.HashMap;
+import java.util.List;
+
 import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
 import android.annotation.SuppressLint;
@@ -15,16 +18,21 @@ import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.account.AccountManager;
 import com.ireadygo.app.gamelauncher.mygame.adapter.GameModel;
 import com.ireadygo.app.gamelauncher.mygame.adapter.GameModel.DataType;
+import com.ireadygo.app.gamelauncher.mygame.data.GameLauncherAppState;
+import com.ireadygo.app.gamelauncher.mygame.data.GameLauncherModel.Callbacks;
+import com.ireadygo.app.gamelauncher.mygame.info.FolderInfo;
+import com.ireadygo.app.gamelauncher.mygame.info.ItemInfo;
 import com.ireadygo.app.gamelauncher.mygame.ui.view.GameAllAppLayout;
 import com.ireadygo.app.gamelauncher.mygame.ui.view.GameAllAppLayout.AppWindowShowStateListener;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.MenuFragment;
-import com.ireadygo.app.gamelauncher.ui.store.StoreEmptyView;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
+import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HAdapter;
+import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 
 @SuppressLint("ValidFragment")
-public class MyAppFragment extends BaseContentFragment {
+public class MyAppFragment extends BaseContentFragment implements Callbacks{
 
 	protected HListView mHListView;
 	protected boolean mDataHasInit = false;
@@ -33,9 +41,13 @@ public class MyAppFragment extends BaseContentFragment {
 	private GameAllAppLayout mGameAllAppLayout;
 	private GameModel mGameModel;
 
+	private HMultiListView mHMultiListView;
+	private HAdapter mHAdapter ;
 	public MyAppFragment(Activity activity, MenuFragment menuFragment) {
 		super(activity, menuFragment);
-		mGameModel = new GameModel(getRootActivity(),this);
+//		mGameModel = new GameModel(getRootActivity(),this);
+		GameLauncherAppState.getInstance(getRootActivity()).setCallback(this);
+		GameLauncherAppState.getInstance(getRootActivity()).getModel().startLoader();
 	}
 
 	@Override
@@ -61,10 +73,17 @@ public class MyAppFragment extends BaseContentFragment {
 	protected void initView(View view) {
 		super.initView(view);
 		getOperationTipsLayout().setTipsVisible(TipFlag.FLAG_TIPS_SUN,TipFlag.FLAG_TIPS_WATER,TipFlag.FLAG_TIPS_MOON);
-		mHListView = (HListView) view.findViewById(R.id.h_listview_myapp_fragment);
-		mHListView.setEmptyView(new StoreEmptyView(getRootActivity()));
-		mGameModel.setHListView(mHListView, DataType.TYPE_APP);
-		mGameModel.setAppWindowShowStateListener(mAllAppShowStateListener);
+//		mHListView = (HListView) view.findViewById(R.id.h_listview_myapp_fragment);
+//		mHListView.setEmptyView(new StoreEmptyView(getRootActivity()));
+//		mGameModel.setHListView(mHListView, DataType.TYPE_APP);
+//		mGameModel.setAppWindowShowStateListener(mAllAppShowStateListener);
+		
+		//test
+		mHMultiListView = (HMultiListView)view.findViewById(R.id.mutillist);
+		if(mHMultiListView != null){
+			mHMultiListView.setAdapter(mHAdapter);
+			mHMultiListView.notifyDataSetChanged();
+		}
 	}
 
 	public void displayAllAppLayout(){
@@ -162,5 +181,38 @@ public class MyAppFragment extends BaseContentFragment {
 	@Override
 	public int getOutAnimatorDuration() {
 		return mGameModel.getOutAnimatorDuration(DataType.TYPE_APP);
+	}
+
+	@Override
+	public void bindGames(List<ItemInfo> infos) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void bindApps(List<ItemInfo> infos) {
+		mHAdapter = new HAdapter(infos);
+		if(mHMultiListView != null){
+			mHMultiListView.setAdapter(mHAdapter);
+			mHMultiListView.notifyDataSetChanged();
+		}
+	}
+
+	@Override
+	public void bindFolders(HashMap<Long, FolderInfo> folders) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void gameAddOrUpdate(ItemInfo info, boolean isAdd) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void gameRemove(ItemInfo info) {
+		// TODO Auto-generated method stub
+		
 	}
 }

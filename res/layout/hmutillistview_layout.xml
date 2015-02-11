@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false" >
+
+    <com.ireadygo.app.gamelauncher.ui.widget.HListView
+        android:id="@+id/upHList"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#11000000"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:paddingBottom="10dip"
+        android:paddingTop="10dip"
+        app:hlv_transcriptMode="normal" />
+
+    <com.ireadygo.app.gamelauncher.ui.widget.HListView
+        android:id="@+id/downHList"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignLeft="@+id/upHList"
+        android:layout_below="@+id/upHList"
+        android:background="#11000000"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:paddingBottom="10dip"
+        android:paddingTop="10dip"
+        app:hlv_transcriptMode="normal" />
+
+</RelativeLayout>
