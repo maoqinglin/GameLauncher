@@ -14,7 +14,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.appstore.info.item.GameState;
 import com.ireadygo.app.gamelauncher.appstore.manager.GameManager;
 import com.ireadygo.app.gamelauncher.appstore.manager.GameStateManager;
-import com.ireadygo.app.gamelauncher.ui.detail.GameDetailActivity;
+import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
 import com.ireadygo.app.gamelauncher.utils.NetworkUtils;
 import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
 import com.ireadygo.app.gamelauncher.widget.GameLauncherThreadPool;
@@ -86,7 +86,7 @@ public class PushMsgProcessor {
 
 	private void skipToGameDetail(String appId) {
 		Intent intent = new Intent();
-		intent.setClass(mContext, GameDetailActivity.class);
+		intent.setClass(mContext, DetailActivity.class);
 		intent.putExtra(GameLauncherConfig.APP_ID, appId);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 		mContext.startActivity(intent);

@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.ireadygo.app.gamelauncher.aidl.rentfree.AppTimeUploadResultItem;
 import com.ireadygo.app.gamelauncher.appstore.data.GameData;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AgentAppItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
@@ -28,7 +29,6 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.SubscribeResultItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserHeaderImgItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserInfoItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserSlotInfoItem;
-import com.ireadygo.app.gamelauncher.rentfree.info.AppTimeUploadResultItem;
 import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
 import com.snail.appstore.openapi.AppPlatFormClient;
 import com.snail.appstore.openapi.AppPlatFormConfig;

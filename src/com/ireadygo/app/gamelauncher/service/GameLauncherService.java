@@ -8,7 +8,7 @@ import android.os.IBinder;
 
 import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
 import com.ireadygo.app.gamelauncher.appstore.manager.GameManager;
-import com.ireadygo.app.gamelauncher.mygame.data.GameLauncherAppState;
+import com.ireadygo.app.gamelauncher.game.data.GameLauncherAppState;
 
 
 public class GameLauncherService extends Service {

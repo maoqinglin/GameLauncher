@@ -19,7 +19,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
 import com.ireadygo.app.gamelauncher.ui.base.BaseActivity;
-import com.ireadygo.app.gamelauncher.ui.detail.GameDetailActivity;
+import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
 import com.ireadygo.app.gamelauncher.ui.store.StoreAppNormalAdapter;
 import com.ireadygo.app.gamelauncher.ui.store.StoreEmptyView;
 import com.ireadygo.app.gamelauncher.ui.widget.AbsHListView;
@@ -61,8 +61,8 @@ public class CollectionDetailActivity extends BaseActivity implements OnClickLis
 		mListView = (HListView) findViewById(R.id.storeCollectionDetailList);
 		mAdapter = new StoreAppNormalAdapter(this, mListView, mApps);
 		mListView.setAdapter(mAdapter.toAnimationAdapter());
-		mCollectionId = getIntent().getLongExtra(StoreCollectionLayout.EXTRA_COLLECTION_ID, -1);
-		mPosterBgUrl = getIntent().getStringExtra(StoreCollectionLayout.EXTRA_POSTER_BG);
+		mCollectionId = getIntent().getLongExtra(CollectionLayout.EXTRA_COLLECTION_ID, -1);
+		mPosterBgUrl = getIntent().getStringExtra(CollectionLayout.EXTRA_POSTER_BG);
 		mView = getWindow().getDecorView();
 		if (mCollectionId > 0) {
 			loadCollectionDetail();
@@ -108,7 +108,7 @@ public class CollectionDetailActivity extends BaseActivity implements OnClickLis
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				if (position >= 0 && position < mApps.size()) {
-					GameDetailActivity.startSelf(CollectionDetailActivity.this, mApps.get(position));
+					DetailActivity.startSelf(CollectionDetailActivity.this, mApps.get(position));
 				}
 			}
 		});

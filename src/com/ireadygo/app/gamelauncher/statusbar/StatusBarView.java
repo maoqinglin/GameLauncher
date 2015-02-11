@@ -189,12 +189,12 @@ public class StatusBarView extends LinearLayout {
 	}
 
 	private void setClockStart() {
-		MyDigitalClock clock = (MyDigitalClock) getItemView(KEY_CLOCK);
+		DigitalClock clock = (DigitalClock) getItemView(KEY_CLOCK);
 		clock.resume();
 	}
 
 	public void setClockStop() {
-		MyDigitalClock clock = (MyDigitalClock) getItemView(KEY_CLOCK);
+		DigitalClock clock = (DigitalClock) getItemView(KEY_CLOCK);
 		clock.stop();
 	}
 

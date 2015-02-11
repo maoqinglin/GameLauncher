@@ -42,8 +42,8 @@ import android.widget.ListAdapter;
 
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
-import com.ireadygo.app.gamelauncher.mygame.adapter.HExpandableListAdapter;
-import com.ireadygo.app.gamelauncher.ui.store.gamemanager.DownloadManageAdapter;
+import com.ireadygo.app.gamelauncher.game.adapter.HExpandableListAdapter;
+import com.ireadygo.app.gamelauncher.ui.store.storemanager.StoreManageAdapter;
 import com.ireadygo.app.gamelauncher.utils.PictureUtil;
 
 /**

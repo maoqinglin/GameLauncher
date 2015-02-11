@@ -33,7 +33,7 @@ import com.ireadygo.app.gamelauncher.appstore.install.IInstaller.InstallExceptio
 import com.ireadygo.app.gamelauncher.appstore.install.IInstaller.InstallResponse;
 import com.ireadygo.app.gamelauncher.appstore.install.InstallManager;
 import com.ireadygo.app.gamelauncher.appstore.install.InstallMessage;
-import com.ireadygo.app.gamelauncher.mygame.data.GameLauncherAppState;
+import com.ireadygo.app.gamelauncher.game.data.GameLauncherAppState;
 import com.ireadygo.app.gamelauncher.utils.StaticsUtils;
 import com.ireadygo.app.gamelauncher.utils.ToastUtils;
 import com.ireadygo.app.gamelauncher.utils.Utils;

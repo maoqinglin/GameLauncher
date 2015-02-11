@@ -21,7 +21,7 @@ import com.ireadygo.app.gamelauncher.account.pushmsg.SnailPushMessage;
 import com.ireadygo.app.gamelauncher.account.pushmsg.SnailPushMessage.Type;
 import com.ireadygo.app.gamelauncher.appstore.info.item.GameState;
 import com.ireadygo.app.gamelauncher.appstore.manager.GameStateManager;
-import com.ireadygo.app.gamelauncher.ui.detail.GameDetailActivity;
+import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
 import com.ireadygo.app.gamelauncher.ui.redirect.Anchor;
 import com.ireadygo.app.gamelauncher.ui.redirect.Anchor.Destination;
 
@@ -81,7 +81,7 @@ public class GameLauncherNotification {
 
 	private Intent getSkipDetailIntent(String appId) {
 		Intent intent = new Intent();
-		intent.setClass(GameLauncherApplication.getApplication().getCurrentActivity(), GameDetailActivity.class);
+		intent.setClass(GameLauncherApplication.getApplication().getCurrentActivity(), DetailActivity.class);
 		intent.putExtra(GameLauncherConfig.APP_ID, appId);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 		return intent;

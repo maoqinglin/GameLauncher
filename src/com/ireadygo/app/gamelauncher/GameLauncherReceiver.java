@@ -11,7 +11,7 @@ import com.ireadygo.app.gamelauncher.GameLauncher.InitComplete;
 import com.ireadygo.app.gamelauncher.appstore.info.item.GameState;
 import com.ireadygo.app.gamelauncher.appstore.manager.GameManager;
 import com.ireadygo.app.gamelauncher.appstore.manager.GameStateManager;
-import com.ireadygo.app.gamelauncher.mygame.data.GameLauncherAppState;
+import com.ireadygo.app.gamelauncher.game.data.GameLauncherAppState;
 import com.umeng.analytics.MobclickAgent;
 
 public class GameLauncherReceiver extends BroadcastReceiver {

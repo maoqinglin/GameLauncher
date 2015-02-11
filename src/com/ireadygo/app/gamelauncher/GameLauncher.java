@@ -5,7 +5,7 @@ import android.content.Context;
 
 import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
 import com.ireadygo.app.gamelauncher.appstore.manager.GameManager;
-import com.ireadygo.app.gamelauncher.mygame.data.GameLauncherAppState;
+import com.ireadygo.app.gamelauncher.game.data.GameLauncherAppState;
 import com.ireadygo.app.gamelauncher.service.GameLauncherBindable;
 import com.ireadygo.app.gamelauncher.service.IBindable.BindResponse;
 

@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.ui.Config;
-import com.ireadygo.app.gamelauncher.ui.settings.adapter.SettingsItemEntity;
+import com.ireadygo.app.gamelauncher.ui.settings.SettingsItemEntity;
 
 public class SettingsIconView extends RelativeLayout {
 	private ImageView mSettingsViewBg;

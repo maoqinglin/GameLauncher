@@ -8,7 +8,7 @@ import com.ireadygo.app.gamelauncher.GameLauncher.InitComplete;
 import com.ireadygo.app.gamelauncher.account.AccountManager;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserInfoItem;
 import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
-import com.ireadygo.app.gamelauncher.mygame.data.GameLauncherAppState;
+import com.ireadygo.app.gamelauncher.game.data.GameLauncherAppState;
 import com.ireadygo.app.gamelauncher.statusbar.StatusBarService;
 import com.ireadygo.app.gamelauncher.ui.GameLauncherActivity;
 import com.ireadygo.app.gamelauncher.utils.Utils;

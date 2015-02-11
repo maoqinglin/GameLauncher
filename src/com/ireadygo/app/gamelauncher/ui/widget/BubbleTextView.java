@@ -28,11 +28,11 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.TextView;
 
-import com.ireadygo.app.gamelauncher.mygame.info.ShortcutInfo;
-import com.ireadygo.app.gamelauncher.mygame.utils.CheckLongPressHelper;
-import com.ireadygo.app.gamelauncher.mygame.utils.HolographicOutlineHelper;
-import com.ireadygo.app.gamelauncher.mygame.utils.IconCache;
-import com.ireadygo.app.gamelauncher.mygame.utils.Utilities;
+import com.ireadygo.app.gamelauncher.game.info.ShortcutInfo;
+import com.ireadygo.app.gamelauncher.game.utils.CheckLongPressHelper;
+import com.ireadygo.app.gamelauncher.game.utils.HolographicOutlineHelper;
+import com.ireadygo.app.gamelauncher.game.utils.IconCache;
+import com.ireadygo.app.gamelauncher.game.utils.Utilities;
 
 /**
  * TextView that draws a bubble behind the text. We cannot use a LineBackgroundSpan

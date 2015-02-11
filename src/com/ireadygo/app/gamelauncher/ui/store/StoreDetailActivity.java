@@ -6,7 +6,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.KeyEvent;
 import android.view.View;
@@ -19,12 +18,11 @@ import com.ireadygo.app.gamelauncher.ui.base.BaseActivity;
 import com.ireadygo.app.gamelauncher.ui.base.KeyEventFragment;
 import com.ireadygo.app.gamelauncher.ui.redirect.Anchor;
 import com.ireadygo.app.gamelauncher.ui.redirect.Anchor.Destination;
-import com.ireadygo.app.gamelauncher.ui.store.category.StoreCategoryLayout;
-import com.ireadygo.app.gamelauncher.ui.store.collection.StoreCollectionLayout;
-import com.ireadygo.app.gamelauncher.ui.store.gamemanager.StoreGamesLayout;
-import com.ireadygo.app.gamelauncher.ui.store.recommend.StoreRecommendLayout;
-import com.ireadygo.app.gamelauncher.ui.store.search.StoreSearchLayout;
-import com.ireadygo.app.gamelauncher.ui.store.settings.StoreSettingsLayout;
+import com.ireadygo.app.gamelauncher.ui.store.category.CategoryLayout;
+import com.ireadygo.app.gamelauncher.ui.store.collection.CollectionLayout;
+import com.ireadygo.app.gamelauncher.ui.store.recommend.RecommendLayout;
+import com.ireadygo.app.gamelauncher.ui.store.search.SearchLayout;
+import com.ireadygo.app.gamelauncher.ui.store.storemanager.StoreGamesLayout;
 import com.ireadygo.app.gamelauncher.ui.widget.CustomFrameLayout;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
@@ -163,22 +161,19 @@ public class StoreDetailActivity extends BaseActivity {
 		StoreBaseContentLayout contentLayout = null;
 		switch (layoutTag) {
 		case LayoutTag.SEARCH:
-			contentLayout = new StoreSearchLayout(this, layoutTag, this);
+			contentLayout = new SearchLayout(this, layoutTag, this);
 			break;
 		case LayoutTag.RECOMMEND:
-			contentLayout = new StoreRecommendLayout(this, layoutTag, this);
+			contentLayout = new RecommendLayout(this, layoutTag, this);
 			break;
 		case LayoutTag.COLLECTION:
-			contentLayout = new StoreCollectionLayout(this, layoutTag, this);
+			contentLayout = new CollectionLayout(this, layoutTag, this);
 			break;
 		case LayoutTag.CATEGORY:
-			contentLayout = new StoreCategoryLayout(this, layoutTag, this);
+			contentLayout = new CategoryLayout(this, layoutTag, this);
 			break;
 		case LayoutTag.GAME_MANAGE:
 			contentLayout = new StoreGamesLayout(this, layoutTag, this);
-			break;
-		case LayoutTag.SETTINGS:
-			contentLayout = new StoreSettingsLayout(this, layoutTag, this);
 			break;
 		}
 		return contentLayout;

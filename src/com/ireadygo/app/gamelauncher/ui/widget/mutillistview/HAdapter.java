@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ireadygo.app.gamelauncher.R;
-import com.ireadygo.app.gamelauncher.mygame.adapter.GameModel.DataType;
-import com.ireadygo.app.gamelauncher.mygame.info.ItemInfo;
+import com.ireadygo.app.gamelauncher.game.adapter.GameModel.DataType;
+import com.ireadygo.app.gamelauncher.game.info.ItemInfo;
 import com.ireadygo.app.gamelauncher.ui.widget.GameIconView;
 
 public class HAdapter extends HMultiBaseAdapter {

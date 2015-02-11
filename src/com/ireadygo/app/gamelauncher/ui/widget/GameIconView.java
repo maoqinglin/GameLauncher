@@ -16,8 +16,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ireadygo.app.gamelauncher.R;
-import com.ireadygo.app.gamelauncher.mygame.adapter.GameModel.DataType;
-import com.ireadygo.app.gamelauncher.mygame.info.ExtendInfo.Function;
+import com.ireadygo.app.gamelauncher.game.adapter.GameModel.DataType;
+import com.ireadygo.app.gamelauncher.game.info.ExtendInfo.Function;
 import com.ireadygo.app.gamelauncher.ui.Config;
 
 public class GameIconView extends RelativeLayout {

@@ -21,13 +21,11 @@ import android.widget.BaseAdapter;
 
 import com.ireadygo.app.gamelauncher.GameLauncherConfig;
 import com.ireadygo.app.gamelauncher.R;
-import com.ireadygo.app.gamelauncher.mygame.utils.Utilities;
+import com.ireadygo.app.gamelauncher.game.utils.Utilities;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.listview.anim.AnimationAdapter;
 import com.ireadygo.app.gamelauncher.ui.menu.MenuFragment;
-import com.ireadygo.app.gamelauncher.ui.settings.adapter.SettingsAdapter;
-import com.ireadygo.app.gamelauncher.ui.settings.adapter.SettingsAdapter.ViewHolder;
-import com.ireadygo.app.gamelauncher.ui.settings.adapter.SettingsItemEntity;
+import com.ireadygo.app.gamelauncher.ui.settings.SettingsAdapter.ViewHolder;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemSelectedListener;

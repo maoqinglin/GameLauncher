@@ -6,6 +6,7 @@ import java.util.List;
 
 import android.content.Context;
 
+import com.ireadygo.app.gamelauncher.aidl.rentfree.AppTimeUploadResultItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AgentAppItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.appstore.info.item.BannerItem;
@@ -23,7 +24,6 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.SubscribeResultItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserHeaderImgItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserInfoItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserSlotInfoItem;
-import com.ireadygo.app.gamelauncher.rentfree.info.AppTimeUploadResultItem;
 import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
 
 public class MemoryInfo implements IGameInfo {

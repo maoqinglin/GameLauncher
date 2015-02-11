@@ -62,7 +62,7 @@
         android:contentDescription="@null"
         android:paddingRight="@dimen/statusbar_padding_right" />
 
-    <com.ireadygo.app.gamelauncher.statusbar.MyDigitalClock
+    <com.ireadygo.app.gamelauncher.statusbar.DigitalClock
         android:id="@+id/status_bar_clock_textview"
         style="@style/Statusbar.Time"
         android:layout_width="@dimen/statusbar_time_width"

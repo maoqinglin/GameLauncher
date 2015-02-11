@@ -21,8 +21,8 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.ui.Config;
-import com.ireadygo.app.gamelauncher.ui.MyAppFragment;
-import com.ireadygo.app.gamelauncher.ui.MyGameFragment;
+import com.ireadygo.app.gamelauncher.ui.AppFragment;
+import com.ireadygo.app.gamelauncher.ui.GameFragment;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.base.BaseFragment;
 import com.ireadygo.app.gamelauncher.ui.settings.SettingsFragment;
@@ -92,8 +92,8 @@ public class MenuFragment extends BaseFragment {
 		mSettingsMenu = (MenuItem) view.findViewById(R.id.menu_settings);
 
 		initItemView(mStoreMenu, new StoreFragment(getRootActivity(), this), index++);
-		initItemView(mGameMenu, new MyGameFragment(getRootActivity(), this), index++);
-		initItemView(mAppMenu, new MyAppFragment(getRootActivity(), this), index++);
+		initItemView(mGameMenu, new GameFragment(getRootActivity(), this), index++);
+		initItemView(mAppMenu, new AppFragment(getRootActivity(), this), index++);
 		initItemView(mSettingsMenu, new SettingsFragment(getRootActivity(), this), index++);
 
 		return view;
