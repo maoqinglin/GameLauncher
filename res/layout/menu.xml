@@ -58,21 +58,6 @@
             menuItem:menu_title="@string/menu_app" >
         </com.ireadygo.app.gamelauncher.ui.menu.MenuItem>
 
-        <com.ireadygo.app.gamelauncher.ui.menu.MenuItem
-            android:id="@+id/menu_call"
-            android:layout_width="@dimen/menu_item_width"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/menu_item_margin_left"
-            android:gravity="center"
-            android:nextFocusDown="@+id/accountPersonal"
-            android:nextFocusLeft="@+id/menu_app"
-            android:nextFocusRight="@+id/menu_settings"
-            menuItem:menu_background="@drawable/menu_account_bg"
-            menuItem:menu_highlight="@drawable/menu_account_highlight"
-            menuItem:menu_icon="@drawable/menu_call_icon"
-            menuItem:menu_title="@string/menu_call"
-            android:visibility="gone" >
-        </com.ireadygo.app.gamelauncher.ui.menu.MenuItem>
 
         <com.ireadygo.app.gamelauncher.ui.menu.MenuItem
             android:id="@+id/menu_settings"

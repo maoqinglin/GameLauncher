@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:drawable="@drawable/slot_checkbox_checked_focused" android:state_checked="true" android:state_focused="true"></item>
-    <item android:drawable="@drawable/slot_checkbox_checked" android:state_checked="true" android:state_focused="false"></item>
-    <item android:drawable="@drawable/slot_checkbox_focused" android:state_checked="false" android:state_focused="true"></item>
-    <item android:drawable="@drawable/slot_checkbox_normal"></item>
-
-</selector>

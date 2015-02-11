@@ -54,14 +54,6 @@ public class AppAdapter extends AppListAdapter {
 		if(!appList.isEmpty() && appList.get(ExtendInfo.POS_GAME_ALL) instanceof ExtendInfo){
 			return;
 		}
-		appList.add(ExtendInfo.POS_GAME_ALL, getAllAppInfo());
-	}
-	public ExtendInfo getAllAppInfo(){
-		ExtendInfo allAppInfo = new ExtendInfo();
-		allAppInfo.function = Function.GAME_ALL;
-		allAppInfo.appIcon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.myapp_all_normal);
-		allAppInfo.title = mContext.getString(R.string.all_app);
-		return allAppInfo;
 	}
 
 	@Override

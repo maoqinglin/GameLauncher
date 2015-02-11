@@ -26,7 +26,6 @@ public class GameIconView extends RelativeLayout {
 	private ImageView mGameViewBg;
 	private ImageView mGameImg;
 	private TextView mGameNameTxt;
-	private ImageView mGameSlotImg;
 	private ImageView mGameUninstallImg;
 	private DataType mDataType = DataType.TYPE_APP;
 	private Function mFunction = null;
@@ -49,7 +48,6 @@ public class GameIconView extends RelativeLayout {
 		mGameViewBg = (ImageView) findViewById(R.id.game_view_bg);
 		mGameImg = (ImageView) findViewById(R.id.game_icon);
 		mGameNameTxt = (TextView) findViewById(R.id.game_name);
-		mGameSlotImg = (ImageView) findViewById(R.id.game_slot_selected_icon);
 		mGameUninstallImg = (ImageView) findViewById(R.id.iv_game_uninstall);
 		mGameImgLayout = (ViewGroup) findViewById(R.id.game_icon_rl);
 		mGameNameTxt.setScaleX(0.8f);
@@ -137,9 +135,6 @@ public class GameIconView extends RelativeLayout {
 		return mGameImg;
 	}
 
-	public ImageView getGameSlotImg() {
-		return mGameSlotImg;
-	}
 
 	public ImageView getGameUninstallImg() {
 		return mGameUninstallImg;
@@ -167,13 +162,6 @@ public class GameIconView extends RelativeLayout {
 				setStateByResourceId(1f,R.drawable.mygame_recommand_app_selected,R.color.white);
 			} else {
 				setStateByResourceId(0.5f,R.drawable.mygame_recommand_app_normal,R.color.orange);
-			}
-			break;
-		case SLOT_BUY:
-			if (isSelected) {
-				setStateByResourceId(1f,R.drawable.all_app_purpose_buy_slot_selected,R.color.white);
-			} else {
-				setStateByResourceId(0.5f,R.drawable.all_app_purpose_buy_slot_normal,R.color.app_item_bg_green);
 			}
 			break;
 		default:

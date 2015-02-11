@@ -9,35 +9,24 @@
     <string name="cancel">取消</string>
 
     <!-- 主頁(main) -->
-    
+
+
     <!-- 主菜單(menu) -->
     <string name="menu_store">遊戲商店</string>
     <string name="menu_game">我的遊戲</string>
-    <string name="menu_community">遊戲社區</string>
     <string name="menu_app">應用</string>
-    <string name="menu_call">通話</string>
     <string name="menu_settings">設定</string>
-    
+
     <!-- 我的遊戲-推薦下載 -->
     <string name="mygame_recommend_app_download">推薦下載</string>
     <string name="mygame_empty_tip">空空如也，快去免商店轉轉吧～！</string>
-    
+
     <!-- 推薦下載(game_recommend) -->
-    
+
+
     <!-- 我的應用(app) -->
     <string name="myapp_folder_title_system">系統檔夾</string>
-    
-    <!-- 我的應用-全部應用 -->
-    <string name="all_app">全部應用</string>
-    <string name="all_app_description">請選擇需要顯示在桌面上的應用</string>
-    <string name="all_app_count">全部應用：</string>
-    <string name="all_app_used_slot">已使用卡槽：</string>
-    <string name="all_app_device_not_support">操作失敗！設備不支持！</string>
-    <string name="all_app_slot_has_bind">此應用已經綁定卡槽，可以正常使用！</string>
-    <string name="all_app_network_error">網路異常！</string>
-    <string name="all_app_no_slot_title">提示</string>
-    <string name="all_app_no_slot_msg">沒有多餘卡槽，請充值購買！</string>
-    
+
     <!-- 設置(settings) -->
     <string name="settings_systemupgrade">系統升級</string>
     <string name="settings_personalized">個性化</string>
@@ -49,19 +38,15 @@
     <string name="settings_wifi">WIFI</string>
     <string name="settings_wallpaper">壁紙</string>
     <string name="settings_joystic_battery">手柄電量</string>
-    
+
     <!-- 壁紙 -->
     <string name="wallpaper_set">設置壁紙</string>
     <string name="wallpaper_snail">蝸牛壁紙</string>
     <string name="wallpaper_choose">選擇壁紙</string>
 
-    <!-- Notification通知-->
-    <string name="toast_slot_overdue">\t個卡槽已過期</string>
+    <!-- Notification通知 -->
     <string name="toast_disable_3G_prompt">免商店已經禁止使用移動網路進行下載！</string>
     <string name="toast_using_3G_download">正在使用移動網路下載！</string>
-    <string name="notification_slot_expired_big_title">卡槽過期提示</string>
-    <string name="notification_slot_expired_little_title">您的卡槽還有%1$d天到期，到期後，部分應用將被解綁回“全部應用”中，請及時購買新卡槽。</string>
-    <string name="notification_slot_expired_today_title">您的卡槽今天到期，到期後，部分應用將被解綁回“全部應用”中，請及時購買新卡槽。</string>
     <string name="notification_downloading_big_title">\t個應用正在下載</string>
     <string name="notification_downloading_apps">\t個下載中</string>
     <string name="notification_pause_apps">\t個暫停</string>
@@ -74,7 +59,8 @@
 
     <!-- 免商店(store) -->
 
-	<!-- 免商店-選項(store_options) -->
+
+    <!-- 免商店-選項(store_options) -->
     <string name="store_options_search">搜索</string>
     <string name="store_options_recommend">推薦</string>
     <string name="store_options_collection">合集</string>
@@ -82,46 +68,19 @@
     <string name="store_options_game_manager">遊戲管理</string>
     <string name="store_options_settings">商店設置</string>
 
-    <!-- 免商店-選項縮寫-->
+    <!-- 免商店-選項縮寫 -->
     <string name="store_options_search_short">搜索</string>
     <string name="store_options_recommend_short">推薦</string>
     <string name="store_options_collection_short">合集</string>
     <string name="store_options_category_short">分類</string>
     <string name="store_options_game_manager_short">遊戲管理</string>
     <string name="store_options_settings_short">商店設置</string>
-    
-    <!-- 免商店-卡槽購買 -->
-    <string name="slot_title">購買卡槽</string>
-    <string name="slot_balance">餘額：%1$d</string>
-    <string name="slot_currency">兔兔幣</string>
-    <string name="slot_ticket">兔兔禮券</string>
-    <string name="slot_open_number">開通數量：</string>
-    <string name="slot_number">個</string>
-    <string name="slot_pay_method">付費模式：</string>
-    <string name="slot_pay_method_month">按月付費</string>
-    <string name="slot_pay_method_year">按年付費</string>
-    <string name="slot_open_duration">開通時長：</string>
-    <string name="slot_month">月</string>
-    <string name="slot_year">年</string>
-    <string name="slot_buy_dialog_prompt">是否購買卡槽？</string>
-    <string name="slot_pay_amount">應付金額：</string>
-    <string name="slot_recharge">充  值</string>
-    <string name="slot_buy_now">立即購買</string>
-    <string name="slot_meal_1">套餐一：</string>
-    <string name="slot_meal_2">套餐二：</string>
-    <string name="slot_meal_3">套餐三：</string>
-    <string name="slot_meal_text_1">30個卡槽包月20兔兔幣（兔兔禮券）</string>
-    <string name="slot_meal_text_2">30個卡槽包年180兔兔幣（兔兔禮券）</string>
-    <string name="slot_query_balance_prompt">查詢餘額失敗!</string>
-    <string name="slot_user_identity_overdue">用戶身份過期或不存在，請重新登錄</string>
-    <string name="slot_should_login">請先登錄免帳號！</string>
-    <string name="slot_buy_success">卡槽購買成功！</string>
-    <string name="slot_buy_failed">卡槽購買失敗！</string>
-    
+
     <!-- 免商店-推薦(recommend) -->
-    
+
+
     <!-- 免商店-分類(category) -->
-     <string-array name="store_category_titles">
+    <string-array name="store_category_titles">
         <item>創意休閒</item>
         <item>單機遊戲</item>
         <item>動作射擊</item>
@@ -143,11 +102,13 @@
         <item>鬥地主/棋類/麻將/桌遊/德州撲克/紙牌</item>
         <item>來自寶島臺灣的遊戲精選</item>
     </string-array>
-    
+
     <!-- 免商店-合集(collection) -->
 
+
     <!-- 免商店-合集/分類-遊戲列表(collection_detail) -->
-    
+
+
     <!-- 免商店-下載管理(store_manager) -->
     <string name="store_dld_manager_downloading">下載中</string>
     <string name="store_dld_manager_updatable">可更新</string>
@@ -157,18 +118,18 @@
     <string name="store_dld_manager_detail_not_found">暫時沒有該應用資訊</string>
     <string name="store_dld_manager_delete_task_prompt">刪除任務記錄</string>
     <string name="store_dld_manager_delete_task_msg">是否刪除您的下載任務？</string>
-    
+
     <!-- 免商店-搜索(search) -->
     <string name="store_search">搜&#160;&#160;索</string>
-    
+
     <!-- 免商店-設置(store_settings) -->
     <string-array name="store_settings_titles">
         <item>只在WIFI環境下下載</item>
         <item>安裝完成後自動刪除安裝包</item>
-		<item>遊戲更新提醒</item>
-		<item>允許空投遊戲自動下載安裝</item>
+        <item>遊戲更新提醒</item>
+        <item>允許空投遊戲自動下載安裝</item>
     </string-array>
-    
+
     <!-- 免商店-應用詳情 -->
     <string name="detail_title">遊戲詳情</string>
     <string name="detail_game_size">大小：</string>
@@ -201,18 +162,18 @@
     <string name="status_update">更 新</string>
 
     <!-- 遊戲社區 -->
-    <string name="game_community_account">帳號</string>
-    <string name="game_community_Announcement">公告</string>
-    <string name="game_community">社區</string>
-    <string name="account_no_account_login_prompt">您尚未登錄帳戶</string>
 
     <!-- 社交(social) -->
 
+
     <!-- 論壇(forum) -->
 
+
     <!-- 公告(notice) -->
-    
+
+
     <!-- 頂部引導欄(guide) -->
+
 
     <!-- 免帳號 -->
     <string name="account_mywealth">我的資產</string>
@@ -220,7 +181,7 @@
     <string name="account_recharge">充值</string>
     <string name="account_freecard">免卡</string>
     <string name="account_logout">退出帳號</string>
-    
+
     <!-- 免帳號- 我的資產 -->
     <string name="mywealth_game_counts">遊戲</string>
     <string name="mywealth_game_points">積分</string>
@@ -262,7 +223,7 @@
         <item>51歲~55歲</item>
         <item>56歲~60歲</item>
     </string-array>
-    
+
     <!-- 免帳號-個人性別 -->
     <string-array name="personal_sex_array">
         <item>男</item>
@@ -320,31 +281,6 @@
         <item>卡槽禮券</item>
     </string-array>
 
-    <!-- 免帳號-免卡 -->
-    <string name="freecard_input_phone_number">填寫免卡號碼</string>
-    <string name="freecard_confirm_number">確認號碼</string>
-    <string name="freecard_phone_number_bind_prompt">提示：兔兔禮券只能充值給第一次綁定的免卡手機號</string>
-    <string name="freecard_buy_tariff_package">購買資費包</string>
-    <string name="freecard_input_office">進入免卡營業廳</string>
-    <string name="freecard_voice_package">60分鐘語音包</string>
-    <string name="freecard_package_pay_unit">兔兔幣(兔兔券)</string>
-    <string name="freecard_flow_package">45MB流量包</string>
-    <string name="freecard_sms_package">50條短信包</string>
-    <string name="freecard_phone_bind">綁定</string>
-    <string name="freecard_phone_unbind">解綁</string>
-    <string name="freecard_bind_phone_not_empty">手機號碼不能為空</string>
-    <string name="freecard_bind_phone_length_wrong">手機號長度有誤</string>
-    <string name="freecard_rabbit_coin_or_ticket">兔兔幣(兔兔禮券)</string>
-    <string name="freecard_rule">充值免卡規則</string>
-    <string name="freecard_rule_msg">首次綁定免卡時，您的“兔兔禮券”將默認只能對此免卡進行資費充值，自後綁定的其他免卡需要兔兔幣充值</string>
-    <string name="freecard_confirm_bind">確認綁定</string>
-    <string name="freecard_bind_failed_illegality_bss_account">綁定失敗，非法的BSS帳號</string>
-    <string name="freecard_bind_failed_already_bind">綁定失敗，免機已綁定該手機號</string>
-    <string name="freecard_bind_failed_phone_wrong">綁定失敗，免機手機號綁定失敗</string>
-    <string name="freecard_bind_failed_without_recharge">綁定失敗，請進行兔兔禮券充值</string>
-    <string name="freecard_recharge">充值免卡：</string>
-    <string name="freecard_should_pay_money">應付金額：</string>
-    <string name="freecard_celerity_payment">立即支付</string>
 
     <!-- 免帳號-登錄/註冊/一鍵登錄 -->
     <string name="account_one_key_logining_prompt">一鍵登錄中...</string>
@@ -375,48 +311,6 @@
     <string name="account_email_error">郵箱格式不正確！</string>
     <string name="account_login_failed">登錄失敗，請重試！</string>
     <string name="account_login_server_phonenumber">客服電話：(0512)67621007</string>
-    
-    <!-- 免帳號-免流量 -->
-    <string name="free_flow_privilege_title">免流量特權</string>
-    <string name="free_flow_privilege_tip">免流量特權：免費開通後，可在免商店下載遊戲、暢玩部分指定遊戲不產生流量費用。</string>
-    <string name="free_flow_privilege_remark">開通免流量特權的免帳號，需綁定本機手機號才可生效</string>
-    <string name="free_flow_bind_phone_title">免流量手機號：</string>
-    <string name="free_flow_bind_phone_tip">如果此號碼非本機手機號，請點擊“ 解綁 ”，重新綁定本機手機號</string>
-    <string name="free_flow_bind_phone_hint">請輸入SIM卡1的手機號</string>
-    <string name="free_flow_bind_phone_status">獲取驗證碼</string>
-    <string name="free_flow_unbind_phone_status">解&#160;&#160;&#160;綁</string>
-    <string name="free_flow_auto_code_title">短信驗證碼：</string>
-    <string name="free_flow_auto_code_hine">輸入驗證碼</string>
-    <string name="free_flow_warm_tip">溫馨提示：免流量特權需要每月領取</string>
-    <string name="free_flow_get_title">領取免流量特權</string>
-    <string name="free_flow_get_tip">您的手機號尚未支持此特權。</string>
-    <string name="free_flow_get">領&#160;&#160;&#160;取</string>
-    <string name="free_flow_has_get">已&#160;領&#160;取</string>
-    <string name="free_flow_not_open_btn_title">免流量未開通</string>
-    <string name="free_flow_has_open_btn_title">免流量已開通</string>
-    <string name="free_flow_phone_conflict_prompt">已綁定免流量手機號與本機不符，\t\n如需正常使用“免流量”特權，請更換綁定號碼！</string>
-    <string name="free_flow_phone_empty_prompt">您的免帳號未綁定手機號，如需正常使用“免流量”特權，請綁定本機手機號碼！</string>
-    <string name="free_flow_reget_sms_code">重新獲取(%1$d)</string>
-    <string name="free_flow_sms_use_out">此手機號今日獲取短信驗證碼次數已用完！</string>
-    <string name="free_flow_sms_getting">短信驗證碼請求中……</string>
-    <string name="free_flow_phone_binding">手機號碼綁定中……</string>
-    <string name="free_flow_phone_unbinding">手機號碼解綁中……</string>
-    <string name="free_flow_enabling">免流量特權領取中……</string>
-    <string name="free_flow_phone_empty">請輸入手機號碼</string>
-    <string name="free_flow_phone_format_error">輸入手機號碼有誤，請重新輸入！</string>
-    <string name="free_flow_sms_code_empty">請輸入短信驗證碼</string>
-    <string name="free_flow_bind_phone_success">手機號碼綁定成功</string>
-    <string name="free_flow_get_success">免流量特權領取成功</string>
-    <string name="free_flow_unbind_phone_success">手機號碼解綁成功</string>
-    <string name="free_flow_get_sms_failed">獲取驗證碼失敗</string>
-    <string name="free_flow_bind_phone_failed">綁定手機號碼失敗</string>
-    <string name="free_flow_unbind_phone_failed">解綁手機號碼失敗</string>
-    <string name="free_flow_sms_code_not_match">驗證碼錯誤</string>
-    <string name="free_flow_enable_failed">領取免流量特權失敗</string>
-    <string name="free_flow_expired">免流量特權已過期</string>
-    <string name="free_flow_auto_get_success">自動領取免流量特權成功</string>
-    <string name="free_flow_auto_get_failed">領取免流量特權失敗</string>
-    <string name="free_flow_confirm_prompt">免流量提示</string>
 
     <string name="shortcut_confirm">確定</string>
     <string name="shortcut_detail">詳情</string>
@@ -463,11 +357,12 @@
     <string name="error_download_server_error">下載失敗：伺服器錯誤</string>
     <string name="error_download_url_error">下載失敗：下載鏈接錯誤</string>
     <string name="error_download_io_error">下載失敗：未知錯誤</string>
-    
+
     <!-- Extend -->
     <string name="extend_install_error">伺服器數據錯誤，請重新下載！</string>
     <string name="extend_install_success">安裝成功</string>
-    <string name="extend_nearly_open">即將開放，敬請期待！</string>    
+    <string name="extend_nearly_open">即將開放，敬請期待！</string>
     <string name="extend_store_empty_title">空空如也，快去免商店轉轉吧～！</string>
     <string name="store_load_empty_title">網路不給力~！</string>
+
 </resources>

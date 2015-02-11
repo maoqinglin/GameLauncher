@@ -13,9 +13,7 @@
     <!-- 主菜单(menu) -->
     <string name="menu_store">Store</string>
     <string name="menu_game">Games</string>
-    <string name="menu_community">Social</string>
     <string name="menu_app">Apps</string>
-    <string name="menu_call">Phone</string>
     <string name="menu_settings">Settings</string>
     
     <!-- 我的游戏-推荐下载 -->
@@ -26,18 +24,7 @@
      
      <!-- 我的应用(app) -->
     <string name="myapp_folder_title_system">System</string>
-    
-    <!-- 我的应用-全部应用  -->
-    <string name="all_app">All App</string>
-    <string name="all_app_description">Please mark to display on the destop</string>
-    <string name="all_app_count">All App：</string>
-    <string name="all_app_used_slot">Used：</string>
-    <string name="all_app_device_not_support">Error:Device is not supported!</string>
-    <string name="all_app_slot_has_bind">This application has bound slot!</string>
-    <string name="all_app_network_error">Network error!</string>
-    <string name="all_app_no_slot_title">Prompt</string>
-    <string name="all_app_no_slot_msg">There is no empty slot,Pleasr buy more!</string>
-    
+
     <!-- 设置(settings) -->
     <string name="settings_systemupgrade">Upgrade</string>
     <string name="settings_personalized">Customized</string>
@@ -89,37 +76,9 @@
     <string name="store_options_category_short">Category</string>
     <string name="store_options_game_manager_short">Manager</string>
     <string name="store_options_settings_short">Settings</string>
-    
-     <!-- 免商店-卡槽购买 -->
-    <string name="slot_title">Buy Slot</string>
-    <string name="slot_balance">Balance:%1$d</string>
-    <string name="slot_currency">Rabbit Coin</string>
-    <string name="slot_ticket">Rabbit Certificate</string>
-    <string name="slot_open_number">Purchase Quantity：</string>
-    <string name="slot_number"></string>
-    <string name="slot_pay_method">Charge Mode:</string>
-    <string name="slot_pay_method_month">Pay by Months</string>
-    <string name="slot_pay_method_year">Pay by Years</string>
-    <string name="slot_open_duration">Purchase Time：</string>
-    <string name="slot_month">Month</string>
-    <string name="slot_year">Year</string>
-    <string name="slot_buy_dialog_prompt">Are you sure to buy slot？</string>
-    <string name="slot_pay_amount">Amount Payable：</string>
-    <string name="slot_recharge">Deposit</string>
-    <string name="slot_buy_now">Buy Now</string>
-    <string name="slot_meal_1">Package 1：</string>
-    <string name="slot_meal_2">Package 2：</string>
-    <string name="slot_meal_3">Package 3：</string>
-    <string name="slot_meal_text_1">30 slots for 1 month,20 Rabbit-Coin</string>
-    <string name="slot_meal_text_2">30 slots for 1 year,\t180 Rabbit-Coin</string>
-    <string name="slot_query_balance_prompt">Failed to query balance!</string>
-    <string name="slot_user_identity_overdue">Account state expired,please login again!</string>
-    <string name="slot_should_login">Please login first!</string>
-    <string name="slot_buy_success">Buy slot success!</string>
-    <string name="slot_buy_failed">Failed to but slot!</string>
-    
+
     <!-- 免商店-推荐(recommend) -->
-    
+
     <!-- 免商店-分类(category) -->
     <string-array name="store_category_titles">
         <item>SLG</item>
@@ -202,11 +161,7 @@
     <string name="status_update">Upgrade</string>
 
     <!-- 游戏社区 -->
-    <string name="game_community_account">Account</string>
-    <string name="game_community_Announcement">Notice</string>
-    <string name="game_community">Forum</string>
-    <string name="account_no_account_login_prompt">You should login first!</string>
-    
+
     <!-- 社交(social) -->
 
     <!-- 论坛(forum) -->
@@ -321,31 +276,6 @@
         <item>Slot Certificate</item>
     </string-array>
 
-    <!-- 免账号-免卡 -->
-    <string name="freecard_input_phone_number">Enter phone number</string>
-    <string name="freecard_confirm_number">Confirm</string>
-    <string name="freecard_phone_number_bind_prompt">Rabbit Certificate can be used to deposit the first bound phone number only</string>
-    <string name="freecard_buy_tariff_package">Buy Package</string>
-    <string name="freecard_input_office">Enter Mian-card Hall</string>
-    <string name="freecard_voice_package">60MNT Call</string>
-    <string name="freecard_package_pay_unit">Rabbit-Coin</string>
-    <string name="freecard_flow_package">45MB Data</string>
-    <string name="freecard_sms_package">50 SMS</string>
-    <string name="freecard_phone_bind">Bind</string>
-    <string name="freecard_phone_unbind">Unbind</string>
-    <string name="freecard_bind_phone_not_empty">Phone number is empty!</string>
-    <string name="freecard_bind_phone_length_wrong">Invalid phone number</string>
-    <string name="freecard_rabbit_coin_or_ticket">Rabbit-Coin</string>
-    <string name="freecard_rule">Mian-card deposit rule</string>
-    <string name="freecard_rule_msg">Rabbit Certificate can be used to deposit the first bound phone number only</string>
-    <string name="freecard_confirm_bind">Confirm</string>
-    <string name="freecard_bind_failed_illegality_bss_account">Invalid bss account!</string>
-    <string name="freecard_bind_failed_already_bind">This phone number has been bound!</string>
-    <string name="freecard_bind_failed_phone_wrong">Failed to bind phone number!</string>
-    <string name="freecard_bind_failed_without_recharge">Please deposit Rabbit Certificate first!</string>
-    <string name="freecard_recharge">Mian-card deposit：</string>
-    <string name="freecard_should_pay_money">Amount payable：</string>
-    <string name="freecard_celerity_payment">Pay</string>
 
     <!-- 免账号-登录/注册/一键登录 -->
     <string name="account_one_key_logining_prompt">Qick login...</string>
@@ -376,48 +306,7 @@
     <string name="account_email_error">Email format error!</string>
     <string name="account_login_failed">Login failed,Please try again!</string>
     <string name="account_login_server_phonenumber">Customer service：(0512)67621007</string>
-    
-    <!-- 免流量开通 -->
-    <string name="free_flow_privilege_title">Free-Flux privileges</string>
-    <string name="free_flow_privilege_tip">Free-Flux privileges：Download and play the specific game without any mobile flux cost!</string>
-    <string name="free_flow_privilege_remark">You should bind you phone number before access Free-Flux privileges</string>
-    <string name="free_flow_bind_phone_title">Free-Flux Phone：</string>
-    <string name="free_flow_bind_phone_tip">If it is not your phone number,please bind yours again!</string>
-    <string name="free_flow_bind_phone_hint">Enter Phone number in SIM Card 1</string>
-    <string name="free_flow_bind_phone_status">Get Code</string>
-    <string name="free_flow_unbind_phone_status">Unbind</string>
-    <string name="free_flow_auto_code_title">Verification Code：</string>
-    <string name="free_flow_auto_code_hine">Enter verification code</string>
-    <string name="free_flow_warm_tip">Note：Free-Flux privileges need to access every month</string>
-    <string name="free_flow_get_title">Access Free-Flux privileges</string>
-    <string name="free_flow_get_tip">Your phone number can not access these privileges yet!</string>
-    <string name="free_flow_get">Access</string>
-    <string name="free_flow_has_get">Accessed</string>
-    <string name="free_flow_not_open_btn_title">Free-Flux Unabled</string>
-    <string name="free_flow_has_open_btn_title">Free-Flux Enabled</string>
-    <string name="free_flow_phone_conflict_prompt">The bound Free-Flux phone number is not match with this phone，\t\nPlease bind the phone number again to access Free-Flux privileges.</string>
-    <string name="free_flow_phone_empty_prompt">Your Snail Account has not bound phone number,Please bind your phone number to access Free-Flux privileges!</string>
-    <string name="free_flow_reget_sms_code">Again(%1$d)</string>
-    <string name="free_flow_sms_use_out">Verification code has exhausted!</string>
-    <string name="free_flow_sms_getting">Get verification code&#8230;</string>
-    <string name="free_flow_phone_binding">Bind phone number&#8230;</string>
-    <string name="free_flow_phone_unbinding">Unbind phone number&#8230;</string>
-    <string name="free_flow_enabling">Access Free-Flux privileges&#8230;</string>
-    <string name="free_flow_phone_empty">Enter phone number</string>
-    <string name="free_flow_phone_format_error">Phone number error!</string>
-    <string name="free_flow_sms_code_empty">Enter verification code</string>
-    <string name="free_flow_bind_phone_success">Bind phone success!</string>
-    <string name="free_flow_get_success">Access Free-Flux privileges success!</string>
-    <string name="free_flow_unbind_phone_success">Unbind phone success!</string>
-    <string name="free_flow_get_sms_failed">Failed to get verification code</string>
-    <string name="free_flow_bind_phone_failed">Failed to bind phone!</string>
-    <string name="free_flow_unbind_phone_failed">Failed to unbind phone!</string>
-    <string name="free_flow_sms_code_not_match">Verification code error!</string>
-    <string name="free_flow_enable_failed">Access Free-Flux privileges failed!</string>
-    <string name="free_flow_expired">Free-Flux privileges expire!</string>
-    <string name="free_flow_auto_get_success">Access Free-Flux privileges success!</string>
-    <string name="free_flow_auto_get_failed">Access Free-Flux privileges failed!</string>
-    <string name="free_flow_confirm_prompt">Free-Flux Promot</string>
+
 
     <string name="shortcut_confirm">Confirm</string>
     <string name="shortcut_detail">Detail</string>

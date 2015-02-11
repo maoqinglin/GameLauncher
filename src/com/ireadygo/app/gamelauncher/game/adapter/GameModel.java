@@ -163,21 +163,6 @@ public class GameModel implements Callbacks {
 			mFolder.bind(folderInfo);
 			mFolder.openFolder(mActivity, infos, view, position,mAppWindowShowStateListener);
 		}else if(gameInfo instanceof ExtendInfo){
-			ExtendInfo extendInfo = (ExtendInfo) gameInfo;
-			switch (extendInfo.function) {
-			case GAME_RECOMMEND_DOWNLOAD:
-				if(mCurrentContentFragment !=null && mCurrentContentFragment instanceof GameFragment){
-					((GameFragment)mCurrentContentFragment).displayRecommandAppLayout();
-				}
-				break;
-			case SLOT_BUY:
-
-				break;
-			case SLOT_USE:
-				break;
-			default:
-				throw new IllegalStateException("extendInfo is illegalState");
-			}
 		}
 	}
 

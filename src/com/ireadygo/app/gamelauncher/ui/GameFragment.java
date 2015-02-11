@@ -12,11 +12,8 @@ import android.view.ViewGroup;
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.game.adapter.GameModel;
 import com.ireadygo.app.gamelauncher.game.adapter.GameModel.DataType;
-import com.ireadygo.app.gamelauncher.game.ui.view.GameRecommendAppLayout;
-import com.ireadygo.app.gamelauncher.game.ui.view.GameRecommendAppLayout.RecommendAppDisplayListener;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.MenuFragment;
-import com.ireadygo.app.gamelauncher.ui.store.StoreEmptyView;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
 
@@ -26,7 +23,6 @@ public class GameFragment extends BaseContentFragment {
 	protected boolean mDataHasInit = false;
 
 	protected HListView mHListView;
-	private GameRecommendAppLayout mGameRecommendAppLayout;
 
 	protected boolean mIsAttach;
 	private boolean mIsViewDestory = false;
@@ -55,48 +51,7 @@ public class GameFragment extends BaseContentFragment {
 		mGameModel.setHListView(mHListView, DataType.TYPE_GAME);
 	}
 
-	public void displayRecommandAppLayout() {
-		mGameRecommendAppLayout = null;
-		mGameRecommendAppLayout = new GameRecommendAppLayout(getRootActivity());
-		mGameRecommendAppLayout.openRecommendApp(getRootActivity(), mRecommendAppDisplayListener);
-	}
-	
-	RecommendAppDisplayListener mRecommendAppDisplayListener = new RecommendAppDisplayListener() {
 
-		@Override
-		public void recommendAppOpened() {
-			mHListView.setVisibility(View.INVISIBLE);
-		}
-
-		@Override
-		public void recommendAppClosed() {
-			mHListView.setVisibility(View.VISIBLE);
-			mHListView.requestFocus();
-		}
-	};
-
-	// @Override
-	// public void onResume() {
-	// super.onResume();
-	// if(mIsViewDestory){
-	// mHListView.setSelectionFromLeft(0, mHListView.getPaddingLeft());
-	// mIsViewDestory = false;
-	// }
-	// }
-	//
-	// @Override
-	// public void onDestroyView() {
-	// super.onDestroyView();
-	// mGameModel.onDestoreView();
-	// mIsViewDestory = true;
-	// }
-	//
-	// @Override
-	// public void onDestroy() {
-	// super.onDestroy();
-	// mGameModel.onDestory();
-	// mGameModel = null;
-	// }
 
 	@Override
 	protected boolean isCurrentFocus() {
