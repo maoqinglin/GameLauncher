@@ -8,26 +8,28 @@
 
     <com.ireadygo.app.gamelauncher.ui.widget.HListView
         android:id="@+id/upHList"
+        style="@style/StoreListView"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="0dp"
         android:background="#11000000"
         android:clipChildren="false"
         android:clipToPadding="false"
-        android:paddingBottom="10dip"
-        android:paddingTop="10dip"
+        android:nextFocusDown="@+id/downHList"
+        android:nextFocusUp="@+id/menu_settings"
         app:hlv_transcriptMode="normal" />
 
     <com.ireadygo.app.gamelauncher.ui.widget.HListView
         android:id="@+id/downHList"
+        style="@style/StoreListView"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="0dp"
         android:layout_alignLeft="@+id/upHList"
         android:layout_below="@+id/upHList"
         android:background="#11000000"
         android:clipChildren="false"
         android:clipToPadding="false"
-        android:paddingBottom="10dip"
-        android:paddingTop="10dip"
+        android:nextFocusDown="@+id/downHList"
+        android:nextFocusUp="@+id/upHList"
         app:hlv_transcriptMode="normal" />
 
 </RelativeLayout>

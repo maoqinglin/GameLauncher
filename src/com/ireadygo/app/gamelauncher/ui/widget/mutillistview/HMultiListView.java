@@ -5,7 +5,6 @@ import java.util.List;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +21,8 @@ import com.ireadygo.app.gamelauncher.ui.widget.HListView;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView.SynSmoothScrollListener;
 
 public class HMultiListView extends RelativeLayout {
+
+	private static final int NUM_LIST_VIEW = 2;
 
 	private HListView mUpHListView, mDownHListView;
 	private int mHorizontalSpacing, mVerticalSpacing;
@@ -82,6 +83,38 @@ public class HMultiListView extends RelativeLayout {
 		}
 		LayoutParams params = (LayoutParams) mDownHListView.getLayoutParams();
 		params.topMargin = verticalSpacing;
+	}
+
+	public HListView getUpHListView() {
+		return mUpHListView;
+	}
+
+	public HListView getDownHListView() {
+		return mDownHListView;
+	}
+
+	public View getSelectedView() {
+		if (mUpHListView.hasFocus()) {
+			return mUpHListView.getSelectedView();
+		}
+		if (mDownHListView.hasFocus()) {
+			return mDownHListView.getSelectedView();
+		}
+		return null;
+	}
+
+	/**
+	 * 返回双行控件选中Item的位置（数据的绝对位置序号）
+	 * @return
+	 */
+	public int getSelectedItemPosition() {
+		if (mUpHListView.hasFocus()) {
+			return (mUpHListView.getSelectedItemPosition() * 2);
+		}
+		if (mDownHListView.hasFocus()) {
+			return (mDownHListView.getSelectedItemPosition() * 2 + 1);
+		}
+		return -1;
 	}
 
 	private void setKeyListener() {
@@ -148,7 +181,6 @@ public class HMultiListView extends RelativeLayout {
 
 		@Override
 		public void onScrollStateChanged(AbsHListView view, int scrollState) {
-			Log.d("lmq", "onScrollStateChanged---scrollState = " + scrollState);
 			if (!view.isInTouchMode()) {
 				return;
 			}
@@ -254,7 +286,6 @@ public class HMultiListView extends RelativeLayout {
 	}
 
 	public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-		// mOnItemClickListener = onItemClickListener;
 		if (onItemClickListener != null) {
 			mUpHListView.setOnItemClickListener(onItemClickListener);
 			mDownHListView.setOnItemClickListener(onItemClickListener);
@@ -293,29 +324,27 @@ public class HMultiListView extends RelativeLayout {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-			// if (mSyncItemClickListener != null) {
-			// if (parent.getId() == R.id.upHList) {
-			// mSyncItemClickListener.onSyncItemClick(mUpHListView, view,
-			// position * 2);
-			// } else if (parent.getId() == R.id.downHList) {
-			// mSyncItemClickListener.onSyncItemClick(mUpHListView, view,
-			// (position + 1) * 2);
-			// }
-			// }
+			if (mSyncItemClickListener != null) {
+			if (parent.getId() == R.id.upHList) {
+//					mSyncItemClickListener.onSyncItemClick(mUpHListView, view, position * 2);
+				} else if (parent.getId() == R.id.downHList) {
+					mSyncItemClickListener.onSyncItemClick(mUpHListView, view, (position + 1) * 2);
+				}
+			}
 		}
 
 	};
 
 }
 
-interface OnSyncItemClickListener {
-	void onSyncItemClick(AdapterView<?> parent, View view, int position);
-}
-
-interface OnSyncItemLongClickListener {
-	void onSyncItemLongClick(AdapterView<?> parent, View view, int position);
-}
-
-interface OnSyncItemSelectedListener {
-	void onSyncItemSelected(AdapterView<?> parent, View view, int position);
-}
+//interface OnSyncItemClickListener {
+//	void onSyncItemClick(AdapterView<?> parent, View view, int position);
+//}
+//
+//interface OnSyncItemLongClickListener {
+//	void onSyncItemLongClick(AdapterView<?> parent, View view, int position);
+//}
+//
+//interface OnSyncItemSelectedListener {
+//	void onSyncItemSelected(AdapterView<?> parent, View view, int position);
+//}

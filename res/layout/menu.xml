@@ -55,7 +55,8 @@
             menuItem:menu_background="@drawable/menu_app_bg"
             menuItem:menu_highlight="@drawable/menu_app_highlight"
             menuItem:menu_icon="@drawable/menu_app_focused"
-            menuItem:menu_title="@string/menu_app" >
+            menuItem:menu_title="@string/menu_app" 
+            android:visibility="gone">
         </com.ireadygo.app.gamelauncher.ui.menu.MenuItem>
 
 
