@@ -28,7 +28,6 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/guide_title_layout_image_margin_right"
             android:focusable="true"
-            android:src="@drawable/starting_guide_wifi_settings_selector"
             android:visibility="gone" />
     </RelativeLayout>
 

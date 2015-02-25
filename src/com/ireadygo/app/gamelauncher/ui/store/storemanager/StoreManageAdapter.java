@@ -555,7 +555,7 @@ public class StoreManageAdapter extends HExpandableListAdapter {
 			updateProgressView(holder, null, null, 100, View.INVISIBLE);
 			break;
 		case ERROR:
-			updateStateView(holder, R.string.status_error, R.drawable.store_item_status_error);
+			updateStateView(holder, R.string.status_error, R.drawable.store_item_status_download_shape);
 			updateProgressView(holder, null, null, 100, View.INVISIBLE);
 			break;
 		default:
@@ -804,7 +804,7 @@ public class StoreManageAdapter extends HExpandableListAdapter {
 
 			@Override
 			public void onAnimationEnd(Animator animation) {
-				viewHolder.status.setBackgroundResource(R.drawable.store_item_status_select_bg);
+				viewHolder.status.setBackgroundResource(R.drawable.corner_red_shape);
 			}
 		});
 		return animSet;
