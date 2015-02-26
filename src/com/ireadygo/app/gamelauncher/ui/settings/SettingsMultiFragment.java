@@ -3,8 +3,6 @@ package com.ireadygo.app.gamelauncher.ui.settings;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.animation.Animator;
-import android.animation.Animator.AnimatorListener;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
@@ -15,35 +13,30 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 
 import com.ireadygo.app.gamelauncher.GameLauncherConfig;
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.game.utils.Utilities;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
-import com.ireadygo.app.gamelauncher.ui.listview.anim.AnimationAdapter;
 import com.ireadygo.app.gamelauncher.ui.menu.MenuFragment;
-import com.ireadygo.app.gamelauncher.ui.settings.SettingsAdapter.ViewHolder;
+import com.ireadygo.app.gamelauncher.ui.settings.SettingsMultiAdapterTest.ViewHolder;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
-import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemSelectedListener;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
-import com.ireadygo.app.gamelauncher.ui.widget.HListView;
-import com.ireadygo.app.gamelauncher.ui.widget.SettingsIconView;
-import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListViewTest;
+import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 
 @SuppressLint("ValidFragment")
 public class SettingsMultiFragment extends BaseContentFragment {
 
 	private static final String TAG = "SettingsFragment";
 //	protected HListView mHListView;
-	protected HMultiListViewTest mHMultiListViewTest;
+	protected HMultiListView mHMultiListViewTest;
 
 	protected boolean mIsAttach;
 	private boolean mIsViewDestory = false;
-	private SettingsMultiAdapter mSettingsMultiAdapter;
+//	private SettingsMultiAdapter mSettingsMultiAdapter;
+	private SettingsMultiAdapterTest mSettingsMultiAdapter;
 	private Activity mActivity;
 
 	public SettingsMultiFragment(Activity activity, MenuFragment menuFragment) {
@@ -62,11 +55,11 @@ public class SettingsMultiFragment extends BaseContentFragment {
 	protected void initView(View view) {
 		super.initView(view);
 		getOperationTipsLayout().setTipsVisible(TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
-		mHMultiListViewTest = (HMultiListViewTest) view.findViewById(R.id.mutillist);
-		mHMultiListViewTest.setOnItemClickListener(mOnItemClickListener);
-		mSettingsMultiAdapter = new SettingsMultiAdapter(getRootActivity(), initData(),2,mHMultiListViewTest.getHListViews());
+		mHMultiListViewTest = (HMultiListView) view.findViewById(R.id.mutillist);
+		mSettingsMultiAdapter = new SettingsMultiAdapterTest(getRootActivity(), initData(),2,mHMultiListViewTest);
 //		mHListView.setAdapter(mSettingsAdapter.toAnimationAdapter());
 		mHMultiListViewTest.setAdapter(mSettingsMultiAdapter);
+		mHMultiListViewTest.setOnItemClickListener(mOnItemClickListener);
 	}
 
 	private List<SettingsItemEntity> initData() {
@@ -151,6 +144,7 @@ public class SettingsMultiFragment extends BaseContentFragment {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			Log.d("lmq", "onItemClick---position = "+position);
 			if (mSettingsMultiAdapter != null) {
 				SettingsItemEntity entity = (SettingsItemEntity) mSettingsMultiAdapter.getItem(position);
 				if (entity != null) {

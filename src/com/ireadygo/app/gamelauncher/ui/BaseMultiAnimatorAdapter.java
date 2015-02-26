@@ -163,7 +163,8 @@ public abstract class BaseMultiAnimatorAdapter extends BaseAdapter {
 				return new Animator[] { inAnimator(view) };
 			}
 		};
-		mUpAnimationAdapter.setAbsListView(mHMultiHListView.getUpHListView());
+		//modify by linmaoqing 2015-2-26
+//		mUpAnimationAdapter.setAbsListView(mHMultiHListView.getUpHListView());
 		mUpAnimationAdapter.getViewAnimator().setAnimationDurationMillis(mAnimationDurationMillis);
 		mUpAnimationAdapter.getViewAnimator().setAnimationDelayMillis(mAnimationDelayMillis);
 		mDownAnimationAdapter = new AnimationAdapter(this) {
@@ -172,7 +173,8 @@ public abstract class BaseMultiAnimatorAdapter extends BaseAdapter {
 				return new Animator[] { inAnimator(view) };
 			}
 		};
-		mDownAnimationAdapter.setAbsListView(mHMultiHListView.getDownHListView());
+		//modify by linmaoqing 2015-2-26
+//		mDownAnimationAdapter.setAbsListView(mHMultiHListView.getDownHListView());
 		mDownAnimationAdapter.getViewAnimator().setAnimationDurationMillis(mAnimationDurationMillis);
 		mDownAnimationAdapter.getViewAnimator().setAnimationDelayMillis(mAnimationDelayMillis);
 		return new AnimationAdapter[]{mUpAnimationAdapter,mDownAnimationAdapter};

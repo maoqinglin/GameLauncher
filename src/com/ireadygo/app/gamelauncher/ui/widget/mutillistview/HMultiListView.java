@@ -1,16 +1,22 @@
 package com.ireadygo.app.gamelauncher.ui.widget.mutillistview;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import android.animation.Animator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.RelativeLayout;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 
 import com.ireadygo.app.gamelauncher.R;
+import com.ireadygo.app.gamelauncher.ui.BaseAnimatorAdapter;
+import com.ireadygo.app.gamelauncher.ui.SnailKeyCode;
 import com.ireadygo.app.gamelauncher.ui.widget.AbsHListView;
 import com.ireadygo.app.gamelauncher.ui.widget.AbsHListView.OnScrollListener;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
@@ -20,32 +26,35 @@ import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemSelectedListene
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView.SynSmoothScrollListener;
 
-public class HMultiListView extends RelativeLayout {
+public class HMultiListView extends LinearLayout {
 
 	private static final int NUM_LIST_VIEW = 2;
 
-	private HListView mUpHListView, mDownHListView;
+	private HMultiBaseAdapter mHMultiBaseAdapter;
+	private List<HListView> mHListViews = new ArrayList<HListView>();
+	private List<BaseAdapter> mBaseAdapters = new ArrayList<BaseAdapter>();
 	private int mHorizontalSpacing, mVerticalSpacing;
-	private HMultiBaseAdapter mUpAdapter, mDownAdapter;
-	private List<?> mData;
+	private List<List<?>> mDataLists = new ArrayList<List<?>>();
 	private TouchScrollState mTouchScrollState = TouchScrollState.NONE;
-	private OnSyncItemClickListener mSyncItemClickListener;
-	private OnSyncItemLongClickListener mSyncItemLongClickListener;
-	private OnSyncItemSelectedListener mSyncItemSelectedListener;
+	private int mMainScrollListViewIndex = -1;
+	private int mPaddingLeft;
 
 	enum TouchScrollState {
 		NONE, UPTOUCH, DOWNTOUCH
 	}
 
-	public HMultiListView(Context context) {
+	public HMultiListView(Context context, int num) {
 		super(context);
 		initView(context);
 	}
 
 	private void initView(Context context) {
 		LayoutInflater.from(context).inflate(R.layout.hmutillistview_layout, this, true);
-		mUpHListView = (HListView) findViewById(R.id.upHList);
-		mDownHListView = (HListView) findViewById(R.id.downHList);
+		HListView upHListView = (HListView) findViewById(R.id.upHList);
+		HListView downHListView = (HListView) findViewById(R.id.downHList);
+		mPaddingLeft = upHListView.getPaddingLeft();
+		mHListViews.add(upHListView);
+		mHListViews.add(downHListView);
 		setHorizontalSpacing(mHorizontalSpacing);
 		setVerticalSpacing(mVerticalSpacing);
 		setKeyListener();
@@ -66,86 +75,99 @@ public class HMultiListView extends RelativeLayout {
 
 	public HMultiListView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-		// TODO Auto-generated constructor stub
 	}
 
 	public void setHorizontalSpacing(int horizontalSpacing) {
 		if (horizontalSpacing < 0) {
 			throw new IllegalArgumentException("horizontalSpacing must >= 0 ");
 		}
-		mUpHListView.setDividerWidth(horizontalSpacing);
-		mDownHListView.setDividerWidth(horizontalSpacing);
+		for (HListView hListView : mHListViews) {
+			hListView.setDividerWidth(horizontalSpacing);
+		}
 	}
 
 	public void setVerticalSpacing(int verticalSpacing) {
 		if (verticalSpacing < 0) {
 			throw new IllegalArgumentException("verticalSpacing must >= 0 ");
 		}
-		LayoutParams params = (LayoutParams) mDownHListView.getLayoutParams();
-		params.topMargin = verticalSpacing;
-	}
-
-	public HListView getUpHListView() {
-		return mUpHListView;
-	}
-
-	public HListView getDownHListView() {
-		return mDownHListView;
+		for (int i = 1; i < mHListViews.size(); i++) {
+			LayoutParams params = (LayoutParams) (mHListViews.get(i).getLayoutParams());
+			params.topMargin = verticalSpacing;
+		}
 	}
 
 	public View getSelectedView() {
-		if (mUpHListView.hasFocus()) {
-			return mUpHListView.getSelectedView();
-		}
-		if (mDownHListView.hasFocus()) {
-			return mDownHListView.getSelectedView();
+		for (HListView hListView : mHListViews) {
+			if (hListView.hasFocus()) {
+				return hListView.getSelectedView();
+			}
 		}
 		return null;
 	}
 
 	/**
 	 * 返回双行控件选中Item的位置（数据的绝对位置序号）
+	 * 
 	 * @return
 	 */
 	public int getSelectedItemPosition() {
-		if (mUpHListView.hasFocus()) {
-			return (mUpHListView.getSelectedItemPosition() * 2);
-		}
-		if (mDownHListView.hasFocus()) {
-			return (mDownHListView.getSelectedItemPosition() * 2 + 1);
+		for (int i = 0; i < mHListViews.size(); i++) {
+			HListView hListView = mHListViews.get(i);
+			if (hListView.hasFocus()) {
+				return hListView.getSelectedItemPosition() * mHListViews.size() + i;
+			}
 		}
 		return -1;
 	}
 
-	private void setKeyListener() {
-		mUpHListView.setOnKeyListener(new OnKeyListener() {
+	public List<HListView> getHListViews() {
+		return mHListViews;
+	}
 
-			@Override
-			public boolean onKey(View v, int keyCode, KeyEvent event) {
-				if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
-					final int position = mUpHListView.getSelectedItemPosition();
-					if (position == HListView.INVALID_POSITION) {
-						return false;
-					}
-					final int left = mUpHListView.getSelectedView().getLeft();
-					// 如果两个首个显示的子view高度不等
-					mDownHListView.setSelectionFromLeft(position, left);
-				}
-				return false;
+	public boolean isCurrentFocus() {
+		for (HListView hListView : mHListViews) {
+			if (hListView.hasFocus()) {
+				return true;
 			}
-		});
+		}
+		return false;
+	}
 
-		mDownHListView.setOnKeyListener(new OnKeyListener() {
+	private void setKeyListener() {
+		for (int i = 0; i < mHListViews.size(); i++) {
+			HListView curHListView = mHListViews.get(i);
+			HListView nextHListView = null;
+			HListView preHListView = null;
+			if (i + 1 < mHListViews.size()) {
+				nextHListView = mHListViews.get(i + 1);
+			}
+			if (i - 1 > -1) {
+				preHListView = mHListViews.get(i - 1);
+			}
+			setKeyListener(curHListView, preHListView, nextHListView);
+		}
+	}
 
+	private void setKeyListener(final HListView curView, final HListView preView, final HListView nextView) {
+		curView.setOnKeyListener(new OnKeyListener() {
 			@Override
 			public boolean onKey(View v, int keyCode, KeyEvent event) {
-				if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DPAD_UP) {
-					final int position = mDownHListView.getSelectedItemPosition();
-					if (position == HListView.INVALID_POSITION) {
-						return false;
+				final int position = curView.getSelectedItemPosition();
+				if (event.getAction() != KeyEvent.ACTION_DOWN) {
+					return false;
+				}
+				if (position == HListView.INVALID_POSITION) {
+					return false;
+				}
+				final int left = curView.getSelectedView().getLeft();
+				if (keyCode == SnailKeyCode.DOWN_KEY) {
+					if (nextView != null) {
+						nextView.setSelectionFromLeft(position, left - mPaddingLeft);
 					}
-					final int left = mDownHListView.getSelectedView().getLeft();
-					mUpHListView.setSelectionFromLeft(position, left);
+				} else if (keyCode == SnailKeyCode.UP_KEY) {
+					if (preView != null) {
+						preView.setSelectionFromLeft(position, left - mPaddingLeft);
+					}
 				}
 				return false;
 			}
@@ -153,28 +175,27 @@ public class HMultiListView extends RelativeLayout {
 	}
 
 	private void setSyncScrollListener() {
-		mUpHListView.setSynSmoothScrollListener(new SynSmoothScrollListener() {
+		for (final HListView hListView : mHListViews) {
+			hListView.setSynSmoothScrollListener(new SynSmoothScrollListener() {
 
-			@Override
-			public void synSmoothScrollBy(int distance, int duration, boolean linear) {
-				mDownHListView.smoothScrollBy(distance, duration, linear);
-			}
-		});
-		mDownHListView.setSynSmoothScrollListener(new SynSmoothScrollListener() {
+				@Override
+				public void synSmoothScrollBy(int distance, int duration, boolean linear) {
+					for(final HListView otherListView : mHListViews){
+						if(hListView.getId() != otherListView.getId()){
+							otherListView.smoothScrollBy(distance, duration, linear);
+						}
+					}
+				}
+			});
+		}
 
-			@Override
-			public void synSmoothScrollBy(int distance, int duration, boolean linear) {
-				mUpHListView.smoothScrollBy(distance, duration, linear);
-
-			}
-		});
 	}
 
 	private void setOnScrollListener() {
 		// 设置listview列表的scroll监听，用于滑动过程中左右不同步时校正
-		mUpHListView.setOnScrollListener(mOnScrollerListener);
-
-		mDownHListView.setOnScrollListener(mOnScrollerListener);
+		for (HListView hListView : mHListViews) {
+			hListView.setOnScrollListener(mOnScrollerListener);
+		}
 	}
 
 	OnScrollListener mOnScrollerListener = new OnScrollListener() {
@@ -185,21 +206,20 @@ public class HMultiListView extends RelativeLayout {
 				return;
 			}
 			if (view.getId() == R.id.upHList) {
-				mTouchScrollState = TouchScrollState.UPTOUCH;
+				mMainScrollListViewIndex = 0;
 			} else if (view.getId() == R.id.downHList) {
-				mTouchScrollState = TouchScrollState.DOWNTOUCH;
+				mMainScrollListViewIndex = 1;
 			}
-			if (mTouchScrollState == TouchScrollState.DOWNTOUCH) {
-				// 如果停止滑动
-				if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
-						|| scrollState == OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+			if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
+					|| scrollState == OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+			}
+			if (mMainScrollListViewIndex == -1 && mMainScrollListViewIndex >= mHListViews.size()) {
+				return;
+			}
+			for (int i = 0; i < mHListViews.size(); i++) {
+				if (i != mMainScrollListViewIndex) {
+					synScrollListview((HListView) view, mHListViews.get(i), view.getFirstVisiblePosition());
 				}
-				synScrollListview((HListView) view, mUpHListView, view.getFirstVisiblePosition());
-			} else if (mTouchScrollState == TouchScrollState.UPTOUCH) {
-				if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
-						|| scrollState == OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
-				}
-				synScrollListview((HListView) view, mDownHListView, view.getFirstVisiblePosition());
 			}
 		}
 
@@ -208,10 +228,12 @@ public class HMultiListView extends RelativeLayout {
 			if (!view.isInTouchMode()) {
 				return;
 			}
-			if (mTouchScrollState == TouchScrollState.DOWNTOUCH) {
-				synScrollListview((HListView) view, mUpHListView, firstVisibleItem);
-			} else if (mTouchScrollState == TouchScrollState.UPTOUCH) {
-				synScrollListview((HListView) view, mDownHListView, firstVisibleItem);
+			if (mMainScrollListViewIndex != -1 && mMainScrollListViewIndex < mHListViews.size()) {
+				for (int i = 0; i < mHListViews.size(); i++) {
+					if (i != mMainScrollListViewIndex) {
+						synScrollListview((HListView) view, mHListViews.get(i), firstVisibleItem);
+					}
+				}
 			}
 		}
 
@@ -227,124 +249,174 @@ public class HMultiListView extends RelativeLayout {
 		if (synView != null) {
 			int synLeft = synView.getLeft();
 			if (left != synLeft) {
-				synListView.setSelectionFromLeft(position, left);
+				synListView.setSelectionFromLeft(position, left - mPaddingLeft);
 			}
 		}
 	}
 
-	public void setAdapter(HMultiBaseAdapter hSyncAdapter) {
-		if (hSyncAdapter != null) {
-			Class subClass = hSyncAdapter.getClass();
-			try {
-				mData = hSyncAdapter.getData();
-				if (mData == null || mData.isEmpty()) {
-					return;
+	public void setAdapter(HMultiBaseAdapter hMultiListBaseAdapter) {
+		mHMultiBaseAdapter = hMultiListBaseAdapter;
+		if (hMultiListBaseAdapter != null) {
+			int listNum = hMultiListBaseAdapter.getHListNum();
+			if (listNum > 0 && listNum == mHListViews.size()) {
+				mBaseAdapters.clear();
+				//设置数据
+				initDataLists(listNum, hMultiListBaseAdapter.getData());
+				for (int i = 0; i < listNum; i++) {
+					ProxyAdapter proxyAdapter = new ProxyAdapter(mHListViews.get(i));
+					proxyAdapter.setData(mDataLists.get(i),listNum, i);
+					mBaseAdapters.add(proxyAdapter);
+					mHListViews.get(i).setAdapter(proxyAdapter);
 				}
-				String className = subClass.getName();
-
-				mUpAdapter = createHListViewAdapter(className, mData);
-				if (mUpAdapter != null) {
-					mUpHListView.setAdapter(mUpAdapter);
-				}
-
-				mDownAdapter = createHListViewAdapter(className, mData);
-				if (mDownAdapter != null) {
-					mDownHListView.setAdapter(mDownAdapter);
-				}
-				mDownHListView.setAdapter(mDownAdapter);
-			} catch (InstantiationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		}
-
 	}
 
-	private HMultiBaseAdapter createHListViewAdapter(String className, List<?> data) throws InstantiationException,
-			IllegalAccessException, ClassNotFoundException {
-		HMultiBaseAdapter hAdapter = (HMultiBaseAdapter) Class.forName(className).newInstance();
-		if (hAdapter != null) {
-			hAdapter.setContext(getContext());
-			hAdapter.setData(data);
+	private <T> void initDataLists(int listNum,List<?> list) {
+		mDataLists.clear();
+		for (int i = 0; i < listNum; i++) {
+			List<T> dataList = new ArrayList<T>();
+			mDataLists.add(dataList);
 		}
-		return hAdapter;
+		for (int j = 0; j < list.size(); j++) {
+			int dataListIndex = j % listNum;
+			List<T> dataList = (List<T>) mDataLists.get(dataListIndex);
+			dataList.add((T) list.get(j));
+		}
+	}
+
+	public BaseAdapter getAdapter() {
+		for (HListView hListView : mHListViews) {
+			if (hListView.hasFocus()) {
+				return (BaseAdapter) hListView.getAdapter();
+			}
+		}
+		return null;
+	}
+
+	private Object getItem(int position) {
+		if (mHMultiBaseAdapter != null) {
+			return mHMultiBaseAdapter.getItem(position);
+		}
+		return null;
+	}
+
+	private View getView(int arg0, View arg1, ViewGroup arg2) {
+		if (mHMultiBaseAdapter != null) {
+			return mHMultiBaseAdapter.getView(arg0, arg1, arg2);
+		}
+		return null;
 	}
 
 	public void notifyDataSetChanged() {
-		if (mUpAdapter != null) {
-			mUpAdapter.notifyDataSetChanged();
+		if(mHMultiBaseAdapter != null){
+			initDataLists(mHMultiBaseAdapter.getHListNum(), mHMultiBaseAdapter.getData());
 		}
-		if (mDownAdapter != null) {
-			mDownAdapter.notifyDataSetChanged();
+		for (BaseAdapter baseAdapter : mBaseAdapters) {
+			baseAdapter.notifyDataSetChanged();
 		}
 	}
 
+	public class ProxyAdapter extends BaseAnimatorAdapter{
+
+		private List<?> data;
+		private int listNum;
+		private int dataIndex;
+		public ProxyAdapter(HListView listView) {
+			super(listView);
+		}
+
+		public void setData(List<?> data,int num, int index) {
+			this.data = data;
+			listNum = num;
+			dataIndex = index;
+		}
+
+		@Override
+		public int getCount() {
+			if(data != null && !data.isEmpty()){
+				return data.size();
+			}
+			return 0;
+		}
+
+		@Override
+		public Object getItem(int position) {
+			int dataPos = listNum * position+dataIndex;
+			return HMultiListView.this.getItem(dataPos);
+		}
+
+		@Override
+		public long getItemId(int position) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			int dataPos = listNum * position + dataIndex;
+			return HMultiListView.this.getView(dataPos, convertView, parent);
+		}
+
+		@Override
+		public Animator selectedAnimator(View view) {
+			if (view != null && view instanceof ISelectedAnim) {
+				return ((ISelectedAnim) view).selectedAnimation();
+			}
+			return null;
+		}
+
+		@Override
+		protected Animator unselectedAnimator(View view) {
+			if (view != null && view instanceof ISelectedAnim) {
+				return ((ISelectedAnim) view).unselectedAnimation();
+			}
+			return null;
+		}
+	}
+	
 	public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
 		if (onItemClickListener != null) {
-			mUpHListView.setOnItemClickListener(onItemClickListener);
-			mDownHListView.setOnItemClickListener(onItemClickListener);
-		}
-	}
-
-	public void setSyncItemClickListener(OnSyncItemClickListener onSyncItemClickListener) {
-		if (onSyncItemClickListener != null) {
-			mUpHListView.setOnItemClickListener(mOnItemClickListener);
-			mDownHListView.setOnItemClickListener(mOnItemClickListener);
+			for (HListView hListView : mHListViews) {
+				hListView.setOnItemClickListener(onItemClickListener);
+			}
 		}
 	}
 
 	public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
 		if (onItemLongClickListener != null) {
-			mUpHListView.setOnItemLongClickListener(onItemLongClickListener);
-			mDownHListView.setOnItemLongClickListener(onItemLongClickListener);
+			for (HListView hListView : mHListViews) {
+				hListView.setOnItemLongClickListener(onItemLongClickListener);
+			}
 		}
 	}
 
 	public void setFocusListener(OnFocusChangeListener onFocusChangeListener) {
 		if (onFocusChangeListener != null) {
-			mUpHListView.setOnFocusChangeListener(onFocusChangeListener);
-			mDownHListView.setOnFocusChangeListener(onFocusChangeListener);
+			for (HListView hListView : mHListViews) {
+				hListView.setOnFocusChangeListener(onFocusChangeListener);
+			}
 		}
 	}
 
 	public void setOnItemSelectedListener(OnItemSelectedListener onItemSelectListener) {
 		if (onItemSelectListener != null) {
-			mUpHListView.setOnItemSelectedListener(onItemSelectListener);
-			mDownHListView.setOnItemSelectedListener(onItemSelectListener);
+			for (HListView hListView : mHListViews) {
+				hListView.setOnItemSelectedListener(onItemSelectListener);
+			}
 		}
 	}
 
-	private OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
-
-		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-			if (mSyncItemClickListener != null) {
-			if (parent.getId() == R.id.upHList) {
-//					mSyncItemClickListener.onSyncItemClick(mUpHListView, view, position * 2);
-				} else if (parent.getId() == R.id.downHList) {
-					mSyncItemClickListener.onSyncItemClick(mUpHListView, view, (position + 1) * 2);
-				}
-			}
-		}
-
-	};
-
 }
 
-//interface OnSyncItemClickListener {
-//	void onSyncItemClick(AdapterView<?> parent, View view, int position);
-//}
-//
-//interface OnSyncItemLongClickListener {
-//	void onSyncItemLongClick(AdapterView<?> parent, View view, int position);
-//}
-//
-//interface OnSyncItemSelectedListener {
-//	void onSyncItemSelected(AdapterView<?> parent, View view, int position);
-//}
+interface OnSyncItemClickListener {
+	void onSyncItemClick(AdapterView<?> parent, View view, int position);
+}
+
+interface OnSyncItemLongClickListener {
+	void onSyncItemLongClick(AdapterView<?> parent, View view, int position);
+}
+
+interface OnSyncItemSelectedListener {
+	void onSyncItemSelected(AdapterView<?> parent, View view, int position);
+}

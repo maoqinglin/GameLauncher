@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipChildren="false"
-    android:clipToPadding="false" >
+    android:clipToPadding="false"
+    android:orientation="vertical"
+     >
 
     <com.ireadygo.app.gamelauncher.ui.widget.HListView
         android:id="@+id/upHList"
         style="@style/StoreListView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:background="#11000000"
         android:clipChildren="false"
         android:clipToPadding="false"
@@ -22,9 +25,8 @@
         android:id="@+id/downHList"
         style="@style/StoreListView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_alignLeft="@+id/upHList"
-        android:layout_below="@+id/upHList"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:background="#11000000"
         android:clipChildren="false"
         android:clipToPadding="false"
@@ -32,4 +34,4 @@
         android:nextFocusUp="@+id/upHList"
         app:hlv_transcriptMode="normal" />
 
-</RelativeLayout>
+</LinearLayout>

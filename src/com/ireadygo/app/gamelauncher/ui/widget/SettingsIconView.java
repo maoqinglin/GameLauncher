@@ -17,8 +17,9 @@ import android.widget.TextView;
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.ui.Config;
 import com.ireadygo.app.gamelauncher.ui.settings.SettingsItemEntity;
+import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.ISelectedAnim;
 
-public class SettingsIconView extends RelativeLayout {
+public class SettingsIconView extends RelativeLayout implements ISelectedAnim{
 	private ImageView mSettingsViewBg;
 	private ImageView mSettingsImg;
 	private TextView mSettingsNameTxt;
@@ -59,6 +60,7 @@ public class SettingsIconView extends RelativeLayout {
 		mSettingsImg.setImageDrawable(itemEntity.getItemIcon());
 	}
 
+	@Override
 	public Animator selectedAnimation() {
 		AnimatorListener listener = new AnimatorListenerAdapter() {
 			@Override
@@ -69,6 +71,7 @@ public class SettingsIconView extends RelativeLayout {
 		return createAnimator(listener, 0.25f, 1.2f, 1.32f, 2f, 1.0f, Config.SettingsIcon.TITLE_SLEECTED_TRANSLATE_Y);
 	}
 
+	@Override
 	public Animator unselectedAnimation() {
 		AnimatorListener listener = new AnimatorListenerAdapter() {
 			@Override

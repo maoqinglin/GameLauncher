@@ -2,60 +2,19 @@ package com.ireadygo.app.gamelauncher.ui.widget.mutillistview;
 
 import java.util.List;
 
-import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-public abstract class HMultiBaseAdapter extends BaseAdapter {
+public interface HMultiBaseAdapter {
 
-	List<?> mData;
-	protected Context mContext;
+	Object getItem(int position);
 
-	/**
-	 * 子类必须重写空的构造方法
-	 */
-	public HMultiBaseAdapter(){
-		
-	}
+	View getView(int arg0, View arg1, ViewGroup arg2);
 
-	public HMultiBaseAdapter(List<?> data) {
-		mData = data;
-	}
+	BaseAdapter getAdapter();
 
-	public void setContext(Context context){
-		mContext = context;
-	}
+	int getHListNum();
 
-	@Override
-	public int getCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public Object getItem(int arg0) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public long getItemId(int arg0) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public View getView(int arg0, View arg1, ViewGroup arg2) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void setData(List<?> data) {
-		mData = data;
-	}
-
-	public List<?> getData() {
-		return mData;
-	}
+	List<?> getData();
 }

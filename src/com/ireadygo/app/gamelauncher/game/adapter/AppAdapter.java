@@ -3,6 +3,8 @@ package com.ireadygo.app.gamelauncher.game.adapter;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.net.ssl.HandshakeCompletedListener;
+
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.text.TextUtils;
@@ -10,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 
 import com.ireadygo.app.gamelauncher.GameLauncherConfig;
 import com.ireadygo.app.gamelauncher.R;
@@ -24,20 +27,25 @@ import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemLongClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.GameIconView;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
+import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiBaseAdapter;
+import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 import com.ireadygo.app.gamelauncher.utils.PackageUtils;
 import com.ireadygo.app.gamelauncher.utils.PictureUtil;
 
-public class AppAdapter extends AppListAdapter {
+public class AppAdapter implements HMultiBaseAdapter {
 
 	private Context mContext;
 	private List<ItemInfo> appList = new LinkedList<ItemInfo>();
 	private boolean mIsLongClickable;
-	private HListView mHListView;
+	private HMultiListView mHMultiListView;
+	private int mListViewNum;
 
-	public AppAdapter(Context context, HListView hListView, List<ItemInfo> list) {
-		super(hListView);
-		mHListView = hListView;
-		mHListView.setOnItemLongClickListener(mOnItemLongClickListener);
+	public AppAdapter(Context context, List<ItemInfo> list, int listViewNum, HMultiListView hListView) {
+		mHMultiListView = hListView;
+		mListViewNum = listViewNum;
+		if(mHMultiListView != null){
+			mHMultiListView.setOnItemLongClickListener(mOnItemLongClickListener);
+		}
 		mContext = context;
 		appList.clear();
 		this.appList = list;
@@ -57,28 +65,17 @@ public class AppAdapter extends AppListAdapter {
 	}
 
 	@Override
-	public int getCount() {
-		return appList.size();
-	}
-
-	@Override
 	public Object getItem(int position) {
-		if (position < 0) {
-			position = 0;
-		} else if (position >= getCount()) {
-			position = getCount() - 1;
-		}
 		return appList.get(position);
 	}
 
 	@Override
-	public long getItemId(int position) {
-		return position;
-	}
-
-	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		return super.getView(position, convertView, parent);
+		if (convertView == null) {
+			convertView = newView(position, convertView, parent);
+		}
+		bindView(position, convertView);
+		return convertView;
 	}
 
 	public View newView(int position, View convertView, ViewGroup parent) {
@@ -138,11 +135,19 @@ public class AppAdapter extends AppListAdapter {
 	}
 
 	public void updateCurrentDeleteView() {
-		for (int pos = 0; pos < mHListView.getChildCount(); pos++) {
-			View view = mHListView.getChildAt(pos);
-			if (view != null) {
-				ViewHolder holder = (ViewHolder) view.getTag();
-				updateDeleteView(holder);
+		if(mHMultiListView == null){
+			return;
+		}
+		List<HListView> hListViews = mHMultiListView.getHListViews();
+		if (hListViews != null && !hListViews.isEmpty()) {
+			for (HListView hListView : hListViews) {
+				for (int pos = 0; pos < hListView.getChildCount(); pos++) {
+					View view = hListView.getChildAt(pos);
+					if (view != null) {
+						ViewHolder holder = (ViewHolder) view.getTag();
+						updateDeleteView(holder);
+					}
+				}
 			}
 		}
 	}
@@ -181,5 +186,21 @@ public class AppAdapter extends AppListAdapter {
 
 	public void setIsLongClickable(boolean isLongClickable) {
 		this.mIsLongClickable = isLongClickable;
+	}
+
+	@Override
+	public BaseAdapter getAdapter() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getHListNum() {
+		return mListViewNum;
+	}
+
+	@Override
+	public List<?> getData() {
+		return appList;
 	}
 }

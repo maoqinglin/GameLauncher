@@ -82,15 +82,14 @@ public class GameModel implements Callbacks {
 	}
 
 	public void setAdapter(DataType dataType) {
-		if (mHListView != null) {
-			if (DataType.TYPE_APP == dataType) {
-				mMyAppAdapter = new AppAdapter(mActivity, mHListView, mAppItems);
-				mHListView.setAdapter(mMyAppAdapter.toAnimationAdapter());
-			} else if (DataType.TYPE_GAME == dataType) {
-				mMyGameAdapter = new GameAdapter(mActivity, mHListView, mGameItems);
-				mHListView.setAdapter(mMyGameAdapter.toAnimationAdapter());
-			}
-		}
+//		if (mHListView != null) {
+//			if (DataType.TYPE_APP == dataType) {
+//				mMyAppAdapter = new AppAdapter(mActivity, mHListView,2, mAppItems);
+//			} else if (DataType.TYPE_GAME == dataType) {
+//				mMyGameAdapter = new GameAdapter(mActivity, mHListView, mGameItems);
+//				mHListView.setAdapter(mMyGameAdapter.toAnimationAdapter());
+//			}
+//		}
 	}
 
 	public void notifyDataSet() {
@@ -99,16 +98,7 @@ public class GameModel implements Callbacks {
 			if (null != animAdapter) {
 				BaseAdapter appAdapter = animAdapter.getDecoratedBaseAdapter();
 				appAdapter.notifyDataSetChanged();
-				setAppNextFocusDownId(appAdapter);
 			}
-		}
-	}
-
-	private void setAppNextFocusDownId(BaseAdapter adapter) {
-		if (adapter instanceof AppAdapter) {
-
-		} else if (adapter instanceof GameAdapter) {
-
 		}
 	}
 
@@ -204,9 +194,9 @@ public class GameModel implements Callbacks {
 		mAppItems = infos;
 		if (mHListView != null) {
 			AnimationAdapter adapter = (AnimationAdapter) mHListView.getAdapter();
-			if (adapter != null && adapter.getDecoratedBaseAdapter() instanceof AppAdapter) {
-				setAdapter(DataType.TYPE_APP);
-			}
+//			if (adapter != null && adapter.getDecoratedBaseAdapter() instanceof AppAdapter) {
+//				setAdapter(DataType.TYPE_APP);
+//			}
 		}
 	}
 
@@ -310,10 +300,11 @@ public class GameModel implements Callbacks {
 		if (adapter instanceof GameAdapter) {
 			mActivity.findViewById(R.id.menu_game).requestFocus();
 			((GameAdapter)adapter).unDisplayGameDeleteView();
-		} else if (adapter instanceof AppAdapter) {
-			mActivity.findViewById(R.id.menu_app).requestFocus();
-			((AppAdapter)adapter).unDisplayGameDeleteView();
-		}
+		} 
+//		else if (adapter instanceof AppAdapter) {
+//			mActivity.findViewById(R.id.menu_app).requestFocus();
+//			((AppAdapter)adapter).unDisplayGameDeleteView();
+//		}
 
 		return true;
 	}
@@ -397,7 +388,7 @@ public class GameModel implements Callbacks {
 			if (mMyAppAdapter == null) {
 				return null;
 			}
-			return mMyAppAdapter.outAnimator(listener);
+//			return mMyAppAdapter.outAnimator(listener);
 		} else if (dataType == DataType.TYPE_GAME) {
 			if (mMyGameAdapter == null) {
 				return null;
@@ -412,7 +403,7 @@ public class GameModel implements Callbacks {
 			if (mMyAppAdapter == null) {
 				return 0;
 			}
-			return mMyAppAdapter.getOutAnimatorDuration();
+//			return mMyAppAdapter.getOutAnimatorDuration();
 		} else if (dataType == DataType.TYPE_GAME) {
 			if (mMyGameAdapter == null) {
 				return 0;

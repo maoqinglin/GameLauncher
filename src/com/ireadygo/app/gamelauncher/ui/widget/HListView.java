@@ -3985,9 +3985,9 @@ public class HListView extends AbsHListView {
 				int selectionPos = getSelectedItemPosition();
 				if (selectionPos != INVALID_POSITION && mCanRecyclable) {
 					if (selectionPos == getCount() - 1 && keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
-						setSelection(0);
+//						setSelection(0);
 					} else if (selectionPos == 0 && keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
-						setSelection(getCount() - 1);
+//						setSelection(getCount() - 1);
 					}
 				}
 			}

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ireadygo.app.gamelauncher.R;
+import com.ireadygo.app.gamelauncher.game.adapter.AppAdapter;
 import com.ireadygo.app.gamelauncher.game.adapter.GameModel;
 import com.ireadygo.app.gamelauncher.game.adapter.GameModel.DataType;
 import com.ireadygo.app.gamelauncher.game.data.GameLauncherAppState;
@@ -24,7 +25,6 @@ import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.MenuFragment;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
-import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HAdapter;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 
 @SuppressLint("ValidFragment")
@@ -37,7 +37,7 @@ public class AppFragment extends BaseContentFragment implements Callbacks {
 	private GameModel mGameModel;
 
 	private HMultiListView mHMultiListView;
-	private HAdapter mHAdapter ;
+	private AppAdapter mHAdapter ;
 	public AppFragment(Activity activity, MenuFragment menuFragment) {
 		super(activity, menuFragment);
 //		mGameModel = new GameModel(getRootActivity(),this);
@@ -175,7 +175,7 @@ public class AppFragment extends BaseContentFragment implements Callbacks {
 
 	@Override
 	public void bindApps(List<ItemInfo> infos) {
-		mHAdapter = new HAdapter(infos);
+		mHAdapter = new AppAdapter(getRootActivity(), infos, 2, mHMultiListView);
 		if(mHMultiListView != null){
 			mHMultiListView.setAdapter(mHAdapter);
 			mHMultiListView.notifyDataSetChanged();
