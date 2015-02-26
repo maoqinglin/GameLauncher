@@ -18,6 +18,6 @@
         android:layout_height="wrap_content"
         android:ellipsize="none"
         android:layout_marginTop="@dimen/store_options_title_margin_top"
-        android:text="@string/store_options_category" />
+        android:text="@string/store_menu_category" />
 
 </LinearLayout>

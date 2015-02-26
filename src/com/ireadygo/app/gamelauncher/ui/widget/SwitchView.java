@@ -1,4 +1,4 @@
-package com.ireadygo.app.gamelauncher.ui.activity;
+package com.ireadygo.app.gamelauncher.ui.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;

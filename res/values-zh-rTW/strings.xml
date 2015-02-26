@@ -61,11 +61,12 @@
 
 
     <!-- 免商店-選項(store_options) -->
-    <string name="store_options_search">搜索</string>
+    <string name="store_menu_search">搜索</string>
     <string name="store_options_recommend">推薦</string>
-    <string name="store_options_collection">合集</string>
-    <string name="store_options_category">分類</string>
-    <string name="store_options_game_manager">遊戲管理</string>
+    <string name="store_menu_collection">合集</string>
+    <string name="store_menu_category">分類</string>
+    <string name="store_menu_app">常用應用</string>
+    <string name="store_menu_manager">遊戲管理</string>
     <string name="store_options_settings">商店設置</string>
 
     <!-- 免商店-選項縮寫 -->

@@ -13,7 +13,7 @@ import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.game.adapter.GameModel;
 import com.ireadygo.app.gamelauncher.game.adapter.GameModel.DataType;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
-import com.ireadygo.app.gamelauncher.ui.menu.MenuFragment;
+import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
 
@@ -29,7 +29,7 @@ public class GameFragment extends BaseContentFragment {
 
 	private GameModel mGameModel;
 
-	public GameFragment(Activity activity, MenuFragment menuFragment) {
+	public GameFragment(Activity activity, BaseMenuFragment menuFragment) {
 		super(activity, menuFragment);
 		mGameModel = new GameModel(getRootActivity(),this);
 	}

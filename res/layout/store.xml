@@ -16,9 +16,8 @@
             style="@style/StoreListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:nextFocusLeft="@id/storeList"
+            android:nextFocusLeft="@id/menu_store"
             android:nextFocusRight="@id/storeList"
-            android:nextFocusUp="@+id/menu_store"
             app:hlv_dividerWidth="@dimen/store_diver_width" >
         </com.ireadygo.app.gamelauncher.ui.widget.HListView>
     </RelativeLayout>

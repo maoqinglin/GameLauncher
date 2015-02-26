@@ -10,10 +10,11 @@
     <!-- 主页(main) -->
     
     <!-- 主菜单(menu) -->
-    <dimen name="menu_item_margin_left">10dp</dimen>
-    <dimen name="menu_item_width">260dp</dimen>
-    <dimen name="menu_item_height">318dp</dimen>
-    <dimen name="menu_item_title_margin_top">36dp</dimen>
+    <dimen name="menu_image_width">60dp</dimen>
+    <dimen name="menu_item_margin_top">50dp</dimen>
+    <dimen name="menu_width">290dp</dimen>
+    <dimen name="menu_padding_right">70dp</dimen>
+    <dimen name="menu_title_size">48sp</dimen>
 
     <!-- 我的游戏 -->
     <dimen name="mygame_app_width">216dp</dimen>

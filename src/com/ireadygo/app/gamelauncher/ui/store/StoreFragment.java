@@ -15,7 +15,8 @@ import android.view.ViewGroup;
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
-import com.ireadygo.app.gamelauncher.ui.menu.MenuFragment;
+import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
+import com.ireadygo.app.gamelauncher.ui.menu.HomeMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.redirect.Anchor;
 import com.ireadygo.app.gamelauncher.ui.redirect.Anchor.Destination;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
@@ -28,7 +29,7 @@ public class StoreFragment extends BaseContentFragment {
 	private StoreAdapter mAdapter;
 	private static List<StoreOptionsPoster> sPosterItems = new ArrayList<StoreFragment.StoreOptionsPoster>();
 
-	public StoreFragment(Activity activity, MenuFragment menuFragment) {
+	public StoreFragment(Activity activity, BaseMenuFragment menuFragment) {
 		super(activity, menuFragment);
 	}
 
@@ -61,22 +62,22 @@ public class StoreFragment extends BaseContentFragment {
 
 		posterItem = new StoreOptionsPoster();
 		posterItem.drawableId = R.drawable.store_category_poster_icon_default;
-		posterItem.titleId = R.string.store_options_category;
+		posterItem.titleId = R.string.store_menu_category;
 		sPosterItems.add(posterItem);
 
 		posterItem = new StoreOptionsPoster();
 		posterItem.drawableId = R.drawable.store_collection_poster_icon_default;
-		posterItem.titleId = R.string.store_options_collection;
+		posterItem.titleId = R.string.store_menu_collection;
 		sPosterItems.add(posterItem);
 
 		posterItem = new StoreOptionsPoster();
 		posterItem.drawableId = R.drawable.store_search_poster_icon_default;
-		posterItem.titleId = R.string.store_options_search;
+		posterItem.titleId = R.string.store_menu_search;
 		sPosterItems.add(posterItem);
 
 		posterItem = new StoreOptionsPoster();
 		posterItem.drawableId = R.drawable.store_downloadmanage_poster_icon_default;
-		posterItem.titleId = R.string.store_options_game_manager;
+		posterItem.titleId = R.string.store_menu_manager;
 		sPosterItems.add(posterItem);
 
 		//屏蔽商店设置 modify by linmaoqing 2015-2-4
@@ -143,12 +144,13 @@ public class StoreFragment extends BaseContentFragment {
 				anchor = new Anchor(Destination.STORE_SETTINGS);
 				break;
 			}
-			if(anchor != null){
-				Intent intent = anchor.getIntent();
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-				getRootActivity().startActivity(intent);
-				SoundPoolManager.instance(getRootActivity()).play(SoundPoolManager.SOUND_ENTER);
-			}
+//			if(anchor != null){
+//				Intent intent = anchor.getIntent();
+//				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//				getRootActivity().startActivity(intent);
+//				SoundPoolManager.instance(getRootActivity()).play(SoundPoolManager.SOUND_ENTER);
+//			}
+			StoreActivity.startSelf(getRootActivity());
 		}
 	};
 

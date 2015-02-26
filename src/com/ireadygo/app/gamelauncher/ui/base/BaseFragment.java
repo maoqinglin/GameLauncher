@@ -15,7 +15,7 @@ import com.ireadygo.app.gamelauncher.ui.GameLauncherActivity;
 import com.ireadygo.app.gamelauncher.ui.widget.WidgetController;
 
 public abstract class BaseFragment extends KeyEventFragment {
-	private GameLauncherActivity mActivity;
+	private BaseMenuActivity mActivity;
 	private LayoutInflater mInflater;
 	private View mRootView;
 	private String mTag;
@@ -34,7 +34,7 @@ public abstract class BaseFragment extends KeyEventFragment {
 	}
 
 	public void setActivity(Activity activity) {
-		this.mActivity = (GameLauncherActivity) activity;
+		this.mActivity = (BaseMenuActivity) activity;
 		mInflater = LayoutInflater.from(activity);
 	}
 
@@ -72,7 +72,7 @@ public abstract class BaseFragment extends KeyEventFragment {
 		return mRootView;
 	}
 
-	public GameLauncherActivity getRootActivity() {
+	public BaseMenuActivity getRootActivity() {
 		return mActivity;
 	}
 

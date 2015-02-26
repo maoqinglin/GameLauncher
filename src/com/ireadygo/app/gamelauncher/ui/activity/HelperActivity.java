@@ -17,7 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ireadygo.app.gamelauncher.R;
-import com.ireadygo.app.gamelauncher.ui.activity.SwitchView.OnViewChangeListener;
+import com.ireadygo.app.gamelauncher.ui.widget.SwitchView;
+import com.ireadygo.app.gamelauncher.ui.widget.SwitchView.OnViewChangeListener;
 import com.umeng.analytics.MobclickAgent;
 
 public class HelperActivity extends Activity implements OnClickListener,

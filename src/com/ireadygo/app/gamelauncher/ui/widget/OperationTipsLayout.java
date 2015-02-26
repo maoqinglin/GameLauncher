@@ -78,7 +78,7 @@ public class OperationTipsLayout extends RelativeLayout {
 		}
 	}
 
-	private void setAllVisible(int isVisible) {
+	public void setAllVisible(int isVisible) {
 		tipsSunTxt.setVisibility(isVisible);
 		tipsMoonTxt.setVisibility(isVisible);
 		tipsMoontainTxt.setVisibility(isVisible);

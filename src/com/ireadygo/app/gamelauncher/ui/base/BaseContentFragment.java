@@ -10,22 +10,23 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.ui.Config;
-import com.ireadygo.app.gamelauncher.ui.menu.MenuFragment;
+import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
+import com.ireadygo.app.gamelauncher.ui.menu.HomeMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout;
 
 public abstract class BaseContentFragment extends BaseFragment {
 	private OperationTipsLayout mOperationTipsLayout;
-	private MenuFragment mMenuFragment;
+	private BaseMenuFragment mMenuFragment;
 	private int mFocusedX = Config.Content.FOCUSED_X;
 	private int mFocusedY = Config.Content.FOCUSED_Y;
 
-	public BaseContentFragment(MenuFragment menuFragment,HListView hListView) {
+	public BaseContentFragment(BaseMenuFragment menuFragment,HListView hListView) {
 		this.mMenuFragment = menuFragment;
 		initCoordinateParams(Config.Content.INIT_X, Config.Content.INIT_Y);
 	}
 
-	public BaseContentFragment(Activity activity, MenuFragment menuFragment) {
+	public BaseContentFragment(Activity activity, BaseMenuFragment menuFragment) {
 		super(activity);
 		this.mMenuFragment = menuFragment;
 		initCoordinateParams(Config.Content.INIT_X, Config.Content.INIT_Y);
@@ -90,11 +91,11 @@ public abstract class BaseContentFragment extends BaseFragment {
 	}
 
 	public void onObtainFocus(AnimatorListener listener) {
-		obtainFocusAnimator(listener);
+		getRootActivity().translateToLeft();
 	}
 
 	public void onLoseFocus(AnimatorListener listener) {
-		loseFocusAnimator(listener);
+		getRootActivity().translateToRight();		
 	}
 
 	private void obtainFocusAnimator(AnimatorListener listener) {
@@ -119,7 +120,7 @@ public abstract class BaseContentFragment extends BaseFragment {
 		return animatorSet;
 	}
 
-	protected MenuFragment getMenu() {
+	protected BaseMenuFragment getMenu() {
 		return mMenuFragment;
 	}
 

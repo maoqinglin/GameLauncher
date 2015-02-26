@@ -62,11 +62,12 @@
     <!-- 免商店(store) -->
     
     <!-- 免商店-选项(store_options) -->
-    <string name="store_options_search">Search</string>
+    <string name="store_menu_search">Search</string>
     <string name="store_options_recommend">Recommend</string>
-    <string name="store_options_collection">Album</string>
-    <string name="store_options_category">Category</string>
-    <string name="store_options_game_manager">Game Manager</string>
+    <string name="store_menu_collection">Album</string>
+    <string name="store_menu_category">Category</string>
+    <string name="store_menu_app">常用应用</string>
+    <string name="store_menu_manager">Game Manager</string>
     <string name="store_options_settings">Store Settings</string>
     
     <!-- 免商店-选项缩写 -->

@@ -19,7 +19,7 @@ import com.ireadygo.app.gamelauncher.GameLauncherConfig;
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.game.utils.Utilities;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
-import com.ireadygo.app.gamelauncher.ui.menu.MenuFragment;
+import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.settings.SettingsMultiAdapter.ViewHolder;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
@@ -39,7 +39,7 @@ public class SettingsMultiFragment extends BaseContentFragment {
 	private SettingsMultiAdapter mSettingsMultiAdapter;
 	private Activity mActivity;
 
-	public SettingsMultiFragment(Activity activity, MenuFragment menuFragment) {
+	public SettingsMultiFragment(Activity activity, BaseMenuFragment menuFragment) {
 		super(activity, menuFragment);
 		mActivity = activity;
 	}

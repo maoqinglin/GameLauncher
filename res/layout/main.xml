@@ -1,26 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.ireadygo.app.gamelauncher.ui.widget.CustomFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main_layout"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipChildren="false" >
+    android:clipChildren="false"
+    android:orientation="vertical" >
 
-    <View
-        android:id="@+id/focusView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left|top"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:nextFocusDown="@+id/menu_store"
-        android:nextFocusLeft="@+id/menu_store"
-        android:nextFocusRight="@+id/menu_store"
-        android:nextFocusUp="@+id/menu_store" />
+    <com.ireadygo.app.gamelauncher.ui.widget.CustomFrameLayout
+        android:id="@+id/main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipChildren="false" >
 
-    <ImageView
-        android:id="@+id/menu_highlight_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/menu_my_highlight"
-        android:visibility="gone" />
-</com.ireadygo.app.gamelauncher.ui.widget.CustomFrameLayout>
+        <View
+            android:id="@+id/focusView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|top"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:nextFocusDown="@+id/menu_store"
+            android:nextFocusLeft="@+id/menu_store"
+            android:nextFocusRight="@+id/menu_store"
+            android:nextFocusUp="@+id/menu_store" />
+    </com.ireadygo.app.gamelauncher.ui.widget.CustomFrameLayout>
+
+    <com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout
+        android:id="@+id/tips_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tips_height" >
+    </com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout>
+
+</LinearLayout>

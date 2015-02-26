@@ -22,7 +22,7 @@ import com.ireadygo.app.gamelauncher.game.info.FolderInfo;
 import com.ireadygo.app.gamelauncher.game.info.ItemInfo;
 import com.ireadygo.app.gamelauncher.game.ui.view.Folder.AppWindowShowStateListener;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
-import com.ireadygo.app.gamelauncher.ui.menu.MenuFragment;
+import com.ireadygo.app.gamelauncher.ui.menu.HomeMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
@@ -38,7 +38,8 @@ public class AppFragment extends BaseContentFragment implements Callbacks {
 
 	private HMultiListView mHMultiListView;
 	private AppAdapter mHAdapter ;
-	public AppFragment(Activity activity, MenuFragment menuFragment) {
+	public AppFragment(Activity activity, HomeMenuFragment menuFragment) {
+
 		super(activity, menuFragment);
 //		mGameModel = new GameModel(getRootActivity(),this);
 		GameLauncherAppState.getInstance(getRootActivity()).setCallback(this);

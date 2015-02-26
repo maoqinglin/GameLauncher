@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/menu_image"
+    android:layout_width="@dimen/menu_image_width"
+    android:layout_height="@dimen/menu_image_width" >
+    
+
+</ImageView>

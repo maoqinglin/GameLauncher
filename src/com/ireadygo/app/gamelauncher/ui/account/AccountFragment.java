@@ -36,7 +36,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.UserInfoItem;
 import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
 import com.ireadygo.app.gamelauncher.ui.activity.BaseAccountActivity;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
-import com.ireadygo.app.gamelauncher.ui.menu.MenuFragment;
+import com.ireadygo.app.gamelauncher.ui.menu.HomeMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.widget.ConfirmDialog;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
 import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
@@ -84,7 +84,7 @@ public class AccountFragment extends BaseContentFragment implements OnClickListe
 
 	};
 
-	public AccountFragment(Activity activity, MenuFragment menuFragment) {
+	public AccountFragment(Activity activity, HomeMenuFragment menuFragment) {
 		super(activity, menuFragment);
 	}
 
