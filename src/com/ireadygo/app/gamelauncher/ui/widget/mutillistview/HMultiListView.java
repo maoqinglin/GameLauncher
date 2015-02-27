@@ -261,6 +261,7 @@ public class HMultiListView extends LinearLayout {
 			if (listNum > 0 && listNum == mHListViews.size()) {
 				mBaseAdapters.clear();
 				//设置数据
+				initLists(listNum);
 				initDataLists(listNum, hMultiListBaseAdapter.getData());
 				for (int i = 0; i < listNum; i++) {
 					ProxyAdapter proxyAdapter = new ProxyAdapter(mHListViews.get(i));
@@ -272,16 +273,34 @@ public class HMultiListView extends LinearLayout {
 		}
 	}
 
-	private <T> void initDataLists(int listNum,List<?> list) {
+	/**
+	 * 初始化多级水平列表
+	 * @param listNum
+	 */
+	private <T> void initLists(int listNum){
 		mDataLists.clear();
 		for (int i = 0; i < listNum; i++) {
 			List<T> dataList = new ArrayList<T>();
 			mDataLists.add(dataList);
 		}
-		for (int j = 0; j < list.size(); j++) {
-			int dataListIndex = j % listNum;
-			List<T> dataList = (List<T>) mDataLists.get(dataListIndex);
-			dataList.add((T) list.get(j));
+	}
+
+	/**
+	 * 装载每个列表数据
+	 * @param listNum
+	 * @param list
+	 */
+	private <T> void initDataLists(int listNum,List<?> list) {
+		if (!mDataLists.isEmpty()) {
+			for (List<?> listData : mDataLists) {
+				listData.clear();// 清除单个列表数据
+			}
+
+			for (int j = 0; j < list.size(); j++) {
+				int dataListIndex = j % listNum;
+				List<T> dataList = (List<T>) mDataLists.get(dataListIndex);
+				dataList.add((T) list.get(j));
+			}
 		}
 	}
 

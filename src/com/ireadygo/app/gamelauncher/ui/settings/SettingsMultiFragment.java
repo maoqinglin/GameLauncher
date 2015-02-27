@@ -20,7 +20,7 @@ import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.game.utils.Utilities;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.MenuFragment;
-import com.ireadygo.app.gamelauncher.ui.settings.SettingsMultiAdapterTest.ViewHolder;
+import com.ireadygo.app.gamelauncher.ui.settings.SettingsMultiAdapter.ViewHolder;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
@@ -31,12 +31,12 @@ public class SettingsMultiFragment extends BaseContentFragment {
 
 	private static final String TAG = "SettingsFragment";
 //	protected HListView mHListView;
-	protected HMultiListView mHMultiListViewTest;
+	protected HMultiListView mHMultiListView;
 
 	protected boolean mIsAttach;
 	private boolean mIsViewDestory = false;
 //	private SettingsMultiAdapter mSettingsMultiAdapter;
-	private SettingsMultiAdapterTest mSettingsMultiAdapter;
+	private SettingsMultiAdapter mSettingsMultiAdapter;
 	private Activity mActivity;
 
 	public SettingsMultiFragment(Activity activity, MenuFragment menuFragment) {
@@ -55,11 +55,11 @@ public class SettingsMultiFragment extends BaseContentFragment {
 	protected void initView(View view) {
 		super.initView(view);
 		getOperationTipsLayout().setTipsVisible(TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
-		mHMultiListViewTest = (HMultiListView) view.findViewById(R.id.mutillist);
-		mSettingsMultiAdapter = new SettingsMultiAdapterTest(getRootActivity(), initData(),2,mHMultiListViewTest);
+		mHMultiListView = (HMultiListView) view.findViewById(R.id.mutillist);
+		mSettingsMultiAdapter = new SettingsMultiAdapter(getRootActivity(), initData(),2,mHMultiListView);
 //		mHListView.setAdapter(mSettingsAdapter.toAnimationAdapter());
-		mHMultiListViewTest.setAdapter(mSettingsMultiAdapter);
-		mHMultiListViewTest.setOnItemClickListener(mOnItemClickListener);
+		mHMultiListView.setAdapter(mSettingsMultiAdapter);
+		mHMultiListView.setOnItemClickListener(mOnItemClickListener);
 	}
 
 	private List<SettingsItemEntity> initData() {
@@ -135,8 +135,8 @@ public class SettingsMultiFragment extends BaseContentFragment {
 //				appAdapter.notifyDataSetChanged();
 //			}
 //		}
-		if (mHMultiListViewTest != null) {
-			mHMultiListViewTest.notifyDataSetChanged();
+		if (mHMultiListView != null) {
+			mHMultiListView.notifyDataSetChanged();
 		}
 	}
 
@@ -180,12 +180,12 @@ public class SettingsMultiFragment extends BaseContentFragment {
 
 	@Override
 	protected boolean isCurrentFocus() {
-		return mHMultiListViewTest.isCurrentFocus();
+		return mHMultiListView.isCurrentFocus();
 	}
 
 	@Override
 	public boolean onSunKey() {
-		View selectedView = mHMultiListViewTest.getSelectedView();
+		View selectedView = mHMultiListView.getSelectedView();
 		if (selectedView != null) {
 			ViewHolder holder = (ViewHolder) selectedView.getTag();
 			SettingsItemEntity settingsItemEntity = holder.settingsItem;
