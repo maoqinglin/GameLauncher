@@ -4886,8 +4886,8 @@ public abstract class AbsHListView extends AdapterView<ListAdapter> implements V
 							childrenLeft += getHorizontalFadingEdgeLength();
 						}
 					}
-					
-					if ( left >= childrenLeft && (i == childCount/2) ) {
+					//modify by linmaoqing 2015-2-27 去掉滑动后选中中间项    (中间选中添加判断：&& (i == childCount/2))
+					if ( left >= childrenLeft) {
 						// Found a view whose top is fully visisble
 						selectedPos = firstPosition + i;
 						selectedLeft = left;
@@ -4910,8 +4910,8 @@ public abstract class AbsHListView extends AdapterView<ListAdapter> implements V
 							childrenRight -= getHorizontalFadingEdgeLength();
 						}
 					}
-					//TODO by linmaoqing 滑动后选中中间项
-					if ( right <= childrenRight && (i == childCount/2)) {
+					//modify by linmaoqing 2015-2-27 去掉滑动后选中中间项
+					if ( right <= childrenRight) {
 						selectedPos = firstPosition + i;
 						selectedLeft = left;
 						break;

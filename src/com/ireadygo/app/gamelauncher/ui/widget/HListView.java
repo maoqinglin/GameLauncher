@@ -2893,8 +2893,12 @@ public class HListView extends AbsHListView {
 				goalRight -= getArrowScrollPreviewLength();
 			}
 
-			if (nextSelectedPosition != INVALID_POSITION && nextSelectedPosition >= (mFirstPosition + numChildren) / 2) {
-				int distance = getScrollDistance(viewToMakeVisible);
+			if (nextSelectedPosition != INVALID_POSITION && nextSelectedPosition == mFirstPosition + numChildren-1) {
+//				int distance = getScrollDistance(viewToMakeVisible); //计算中间位置距离
+
+				//计算向右翻页时，左边距离相等
+				int distance = viewToMakeVisible.getLeft() - (viewToMakeVisible.getWidth()/2 + mDividerWidth);
+
 				if ((mFirstPosition + numChildren) == mItemCount) {
 					// last is last in list -> make sure we don't scroll past it
 					final int max = getChildAt(numChildren - 1).getRight() - listRight;
@@ -2939,8 +2943,12 @@ public class HListView extends AbsHListView {
 				goalLeft += getArrowScrollPreviewLength();
 			}
 
-			if (nextSelectedPosition != INVALID_POSITION && nextSelectedPosition < (mFirstPosition + numChildren / 2)) {
-				int distance = getScrollDistance(viewToMakeVisible);
+			if (nextSelectedPosition != INVALID_POSITION && nextSelectedPosition == mFirstPosition) {
+//				int distance = getScrollDistance(viewToMakeVisible);
+
+				//计算向左翻页时，右边距离相等
+				int distance = getWidth() - viewToMakeVisible.getRight()-(viewToMakeVisible.getWidth()/2 + mDividerWidth);
+
 				// first is first in list -> make sure we don't scroll past it
 				if (mFirstPosition == 0) {
 					final int max = listLeft - getChildAt(0).getLeft();
