@@ -21,7 +21,7 @@ public abstract class BaseContentFragment extends BaseFragment {
 	private int mFocusedX = Config.Content.FOCUSED_X;
 	private int mFocusedY = Config.Content.FOCUSED_Y;
 
-	public BaseContentFragment(BaseMenuFragment menuFragment,HListView hListView) {
+	public BaseContentFragment(BaseMenuFragment menuFragment) {
 		this.mMenuFragment = menuFragment;
 		initCoordinateParams(Config.Content.INIT_X, Config.Content.INIT_Y);
 	}

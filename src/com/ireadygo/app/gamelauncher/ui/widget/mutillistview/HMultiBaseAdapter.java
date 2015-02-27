@@ -10,7 +10,7 @@ public interface HMultiBaseAdapter {
 
 	Object getItem(int position);
 
-	View getView(int arg0, View arg1, ViewGroup arg2);
+	View getView(int position, View convertView, ViewGroup parent);
 
 	BaseAdapter getAdapter();
 

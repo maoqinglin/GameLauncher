@@ -82,7 +82,7 @@ public abstract class MenuItem extends FrameLayout implements IMenuItem {
 	}
 
 	@Override
-	public void toNoselected(AnimatorListener listener) {
+	public void toUnselected(AnimatorListener listener) {
 		mState = State.NOSELECTED;
 	}
 

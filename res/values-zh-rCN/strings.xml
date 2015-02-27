@@ -108,6 +108,7 @@
     </string-array>
 
     <!-- 免商店-合集(collection) -->
+    <string name="collection_prompt">商店内合集数量</string>
 
 
     <!-- 免商店-合集/分类-游戏列表(collection_detail) -->

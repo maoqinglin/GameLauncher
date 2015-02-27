@@ -3,8 +3,9 @@ package com.ireadygo.app.gamelauncher.ui.menu;
 import android.animation.Animator.AnimatorListener;
 
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
+import com.ireadygo.app.gamelauncher.ui.item.ISelectableItem;
 
-public interface IMenuItem {
+public interface IMenuItem extends ISelectableItem{
 	
 	void setContentFragment(BaseContentFragment contentFragment);
 	
@@ -17,10 +18,6 @@ public interface IMenuItem {
 	void toFocused(AnimatorListener listener);
 	
 	void toUnfocused(AnimatorListener listener);
-	
-	void toSelected(AnimatorListener listener);
-	
-	void toNoselected(AnimatorListener listener);
 	
 	void toInit(AnimatorListener listener);
 	

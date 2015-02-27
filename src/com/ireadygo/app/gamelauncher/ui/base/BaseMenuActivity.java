@@ -83,11 +83,6 @@ public abstract class BaseMenuActivity extends BaseActivity {
 		return mMainLayout;
 	}
 
-	@Override
-	public boolean onBackKey() {
-		return true;
-	}
-
 	public abstract BaseMenuFragment createMenuFragment();
 
 	public void translateToLeft() {

@@ -11,7 +11,7 @@ public interface HMultiListBaseAdapter {
 	int getCount();
 	Object getItem(int position);
 	long getItemId(int position);
-	View getView(int arg0, View arg1, ViewGroup arg2);
+	View getView(int position, View convertView, ViewGroup parent);
 
 	List<BaseAdapter> getAdapters();
 	void setAdaters(List<BaseAdapter> adapters);

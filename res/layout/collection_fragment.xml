@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="1920dp"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:orientation="vertical"
+    android:paddingLeft="30dp" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/collection_prompt"
+            android:textColor="@color/white_first_transparency"
+            android:textSize="36sp" />
+
+        <TextView
+            android:id="@+id/collection_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:textColor="@color/white"
+            android:text="56"
+            android:textSize="48sp" />
+    </LinearLayout>
+
+    <com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView
+        android:id="@+id/collection_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:hlv_horizontal_spacing="25dp"
+        app:hlv_vertical_spacing="0dp"
+        app:padding_top="40dp"
+        app:padding_left="30dp" >
+    </com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView>
+
+</LinearLayout>

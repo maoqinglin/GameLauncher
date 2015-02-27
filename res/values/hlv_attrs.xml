@@ -98,6 +98,10 @@
 
 		<attr name="hlv_horizontal_spacing" format="dimension" />
 		<attr name="hlv_vertical_spacing" format="dimension" />
+		<attr name="padding_left" format="dimension"></attr>
+		<attr name="padding_right" format="dimension"></attr>
+		<attr name="padding_top" format="dimension"></attr>
+		<attr name="padding_bottom" format="dimension"></attr>
 
 	</declare-styleable>
 </resources>

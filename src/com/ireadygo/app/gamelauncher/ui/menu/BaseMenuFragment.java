@@ -193,7 +193,7 @@ public abstract class BaseMenuFragment extends BaseFragment {
 			if (item == mCurrentFocusItem) {
 				item.toSelected(null);
 			} else {
-				item.toNoselected(null);
+				item.toUnselected(null);
 			}
 		}
 	}

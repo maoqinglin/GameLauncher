@@ -34,8 +34,8 @@
     
     <!-- Content -->
     <item name="content_init_x" format="integer" type="dimen">290</item>
-    <item name="content_init_y" format="integer" type="dimen">120</item>
+    <item name="content_init_y" format="integer" type="dimen">0</item>
     <item name="content_focused_x" format="integer" type="dimen">290</item>
-    <item name="content_focused_y" format="integer" type="dimen">120</item>
+    <item name="content_focused_y" format="integer" type="dimen">0</item>
 
 </resources>

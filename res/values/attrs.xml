@@ -43,6 +43,13 @@
         <attr name="menu_icon" format="reference"></attr>
         <attr name="menu_title" format="reference|string"></attr>
     </declare-styleable>
+    <declare-styleable name="Item">
+        <attr name="item_background" format="reference"></attr>
+        <attr name="item_icon" format="reference"></attr>
+        <attr name="item_mask" format="reference"></attr>
+        <attr name="item_title" format="reference|string"></attr>
+        <attr name="item_intro" format="reference|string"></attr>
+    </declare-styleable>
     <declare-styleable name="AccountItem">
         <attr name="account_selected_icon" format="reference"></attr>
         <attr name="account_unselected_icon" format="reference"></attr>
