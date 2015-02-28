@@ -76,6 +76,10 @@ public class GameLauncherModel{
     private DeferredHandler mHandler = new DeferredHandler();
     private ArrayList<Callbacks> mCallbacks = new ArrayList<Callbacks>();
     private LocalAppInfoManager mLocalAppInfoManager;
+    private final List<ItemInfo> gameInfos = new LinkedList<ItemInfo>();
+    private final List<ItemInfo> appInfos = new LinkedList<ItemInfo>();
+    final HashMap<Long, FolderInfo> sBgFolders = new HashMap<Long, FolderInfo>();
+    private boolean mDataHasLoaded;
     public GameLauncherModel(Context context, IconCache iconCache) {
         mContext = context;
         mPkgManager = mContext.getPackageManager();
@@ -135,24 +139,31 @@ public class GameLauncherModel{
     class LoaderTask implements Runnable {
         private boolean mStopped;
         private boolean mIsLaunching;
-        List<ItemInfo> gameInfos = new LinkedList<ItemInfo>();
-        List<ItemInfo> appInfos = new LinkedList<ItemInfo>();
+        
+        private int mDataType;
      // sBgFolders is all FolderInfos created by LauncherModel. Passed to bindFolders()
-        final HashMap<Long, FolderInfo> sBgFolders = new HashMap<Long, FolderInfo>();
 
         public LoaderTask() {
             // TODO Auto-generated constructor stub
         }
 
+        public LoaderTask(int dataType) {
+            mDataType = dataType;
+        }
         boolean isLaunching() {
             return mIsLaunching;
         }
         @Override
         public void run() {
             synchronized (LoaderTask.class) {
+                if(!mDataHasLoaded){
                 loadAllData();
+                }
+                if(mDataType == Favorites.APP_TYPE_GAME){
                 bindMyGame();
+                }else if(mDataType == Favorites.APP_TYPE_APPLICATION){
                 bindMyApp();
+                }
                 bindFolders();
             }
         }
@@ -167,6 +178,7 @@ public class GameLauncherModel{
             loadWorkspace();
             checkEmptyFolders(appInfos);
             checkEmptyFolders(gameInfos);
+            mDataHasLoaded = true;
         }
 
         private void checkEmptyFolders(final List<ItemInfo> appList) {
@@ -613,6 +625,7 @@ public class GameLauncherModel{
     }
 
     public void startLoader() {
+        mDataHasLoaded = false;
         synchronized (mLock) {
 
 //            // Don't bother to start the thread if we know it's not going to do anything
@@ -622,6 +635,22 @@ public class GameLauncherModel{
 ////                isLaunching = isLaunching || stopLoaderLocked();
 //            }
             mLoaderTask = new LoaderTask();
+            sWorkerThread.setPriority(Thread.NORM_PRIORITY);
+            sWorker.post(mLoaderTask);
+        }
+    }
+	public void startLoader(int dataType) {
+		synchronized (mLock) {
+			mLoaderTask = new LoaderTask(dataType);
+			if (!appInfos.isEmpty() && Favorites.APP_TYPE_APPLICATION == dataType) {
+				mLoaderTask.bindMyApp();
+				mLoaderTask.bindFolders();
+				return;
+			}
+			if (!gameInfos.isEmpty() && Favorites.APP_TYPE_GAME == dataType) {
+				mLoaderTask.bindMyGame();
+				return;
+			}
             sWorkerThread.setPriority(Thread.NORM_PRIORITY);
             sWorker.post(mLoaderTask);
         }
@@ -816,7 +845,13 @@ public class GameLauncherModel{
         if (posterIcon == null) {
             posterIcon = GameLauncherAppState.getInstance(mContext).getIconCache().getIcon(item.getIntent());
         }
+        int iconWidth = mContext.getResources().getDimensionPixelSize(R.dimen.common_app_item_small_width);
+        int iconHeigth = mContext.getResources().getDimensionPixelSize(R.dimen.common_app_item_middle_icon_height);
+        if (posterIcon.getHeight() > iconHeigth || posterIcon.getWidth() > iconWidth) {
+        	ItemInfo.writeBitmap(values, PictureUtil.zoomImage(posterIcon, iconWidth, iconHeigth));
+        } else {
         ItemInfo.writeBitmap(values, posterIcon);
+        }
         item.cellSortId = (int)GameLauncherAppState.getLauncherProvider().generateNewCellSortId();
         item.updateValuesWithSortId(values, item.cellSortId);
         
@@ -1205,7 +1240,8 @@ public class GameLauncherModel{
 		return info;
 	}
 
-	private void bindGameAdd(final ItemInfo info, final boolean isAdd) {
+    private synchronized void bindGameAdd(final ItemInfo info,final boolean isAdd){
+        dataSync(info, true);
 		final Runnable r = new Runnable() {
 
 			@Override
@@ -1220,7 +1256,8 @@ public class GameLauncherModel{
 		runOnMainThread(r);
 	}
 
-	private void bindGameRemove(final ItemInfo info) {
+    private synchronized void bindGameRemove(final ItemInfo info){
+        dataSync(info, false);
 		final Runnable r = new Runnable() {
 
 			@Override
@@ -1233,6 +1270,26 @@ public class GameLauncherModel{
 			}
 		};
 		runOnMainThread(r);
+    }
+    private synchronized void dataSync(ItemInfo info, boolean isAdd) {
+        if (info != null) {
+            if (isAdd) {
+                if (!appInfos.contains(info) && info.appType == Favorites.APP_TYPE_APPLICATION) {
+                    appInfos.add(info);
+                    Log.e("lmq", "dataSync--appInfos-isAdd = "+info);
+                }else if (!gameInfos.contains(info) && info.appType == Favorites.APP_TYPE_GAME) {
+                    Log.e("lmq", "dataSync---isAdd = "+info);
+                    gameInfos.add(info);
+                }
+            } else {
+                if (appInfos.contains(info)) {
+                    appInfos.remove(info);
+                }
+                if (gameInfos.contains(info)) {
+                    gameInfos.remove(info);
+                }
+            }
+        }
 	}
 
 	private synchronized void updateAppTypeAndDisplayMode(Cursor cursor, int appType, int displayMode) {

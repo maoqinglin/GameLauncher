@@ -144,7 +144,6 @@ public class SettingsMultiFragment extends BaseContentFragment {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-			Log.d("lmq", "onItemClick---position = "+position);
 			if (mSettingsMultiAdapter != null) {
 				SettingsItemEntity entity = (SettingsItemEntity) mSettingsMultiAdapter.getItem(position);
 				if (entity != null) {

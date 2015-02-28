@@ -20,7 +20,6 @@ import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.game.data.GameLauncherAppState;
 import com.ireadygo.app.gamelauncher.game.info.FolderInfo;
 import com.ireadygo.app.gamelauncher.game.info.ShortcutInfo;
-import com.ireadygo.app.gamelauncher.game.ui.view.Folder;
 
 public class ImageHelper {
 
@@ -58,31 +57,6 @@ public class ImageHelper {
 		drawable.setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
 		return drawable;
 	}
-	
-	public static void blur(Context context, Folder folder, Bitmap bkg) {
-        Bitmap overlay = Bitmap.createBitmap((int) (folder.getWidth() / scaleFactor),
-                (int) (folder.getHeight() / scaleFactor), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(overlay);
-        canvas.translate(-folder.getLeft() / scaleFactor, -folder.getTop() / scaleFactor);
-        canvas.scale(1 / scaleFactor, 1 / scaleFactor);
-        Paint paint = new Paint();
-        paint.setFlags(Paint.FILTER_BITMAP_FLAG);
-
-        canvas.drawBitmap(bkg, 0, 0, paint);
-        overlay = FastBlur.doBlur(overlay, (int) radius, true); // 模糊处理
-        
-        Bitmap scaleBmp = Bitmap.createScaledBitmap(overlay,folder.getWidth(), folder.getHeight(),true);
-        overlay.recycle();
-        overlay = null;
-        
-//        Bitmap roundBmp = getRoundedCornerBitmap(scaleBmp);
-//        scaleBmp.recycle();
-//        scaleBmp = null;
-        
-        BitmapDrawable drawable = new BitmapDrawable(context.getResources(), scaleBmp);
-        drawable.setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
-        folder.setBackground(drawable);
-    }
 
 	/**
 	 * 圆角处理

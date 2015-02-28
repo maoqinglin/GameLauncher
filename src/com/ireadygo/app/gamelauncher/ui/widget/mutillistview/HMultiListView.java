@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.animation.Animator;
-import android.animation.Animator.AnimatorListener;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Handler;
@@ -53,6 +52,7 @@ public class HMultiListView extends LinearLayout {
 	private BaseAdapterItem mSelectedItem;
 	private OnItemSelectedListener mOnItemSelectedListener;
 	private OnFocusChangeListener mOnFocusChangeListener;
+	private OnItemClickListener mOnItemClickListener;
 
 	enum TouchScrollState {
 		NONE, UPTOUCH, DOWNTOUCH
@@ -97,6 +97,7 @@ public class HMultiListView extends LinearLayout {
 		setSyncScrollListener();
 		setInternalFocusListener(mInternalFocusChangeL);
 		setInternalItemSelectedListener(mInternalItemSelectedListener);
+		setInternalItemClickListener(mInternalItemClickListener);
 	}
 
 	public HMultiListView(Context context, AttributeSet attrs) {
@@ -160,6 +161,19 @@ public class HMultiListView extends LinearLayout {
 			}
 		}
 		return -1;
+	}
+
+	/**
+	 *  返回选中的Item
+	 * @return
+	 */
+	public Object getSelectedItem() {
+		for (HListView hListView : mHListViews) {
+			if (hListView.hasFocus()) {
+				return hListView.getSelectedItem();
+			}
+		}
+		return null;
 	}
 
 	public List<HListView> getHListViews() {
@@ -360,13 +374,6 @@ public class HMultiListView extends LinearLayout {
 		return null;
 	}
 
-	private Object getItem(int position) {
-		if (mHMultiBaseAdapter != null) {
-			return mHMultiBaseAdapter.getItem(position);
-		}
-		return null;
-	}
-
 	private View getView(int arg0, View arg1, ViewGroup arg2) {
 		if (mHMultiBaseAdapter != null) {
 			return mHMultiBaseAdapter.getView(arg0, arg1, arg2);
@@ -381,6 +388,10 @@ public class HMultiListView extends LinearLayout {
 		for (BaseAdapter baseAdapter : mBaseAdapters) {
 			baseAdapter.notifyDataSetChanged();
 		}
+	}
+
+	private int getRealPos(int oriPos, int listNum, int rowIndex) {
+		return listNum * oriPos + rowIndex;
 	}
 
 	public class ProxyAdapter extends BaseAnimatorAdapter {
@@ -399,6 +410,10 @@ public class HMultiListView extends LinearLayout {
 			dataIndex = index;
 		}
 
+		public int getDataIndex() {
+			return dataIndex;
+		}
+
 		@Override
 		public int getCount() {
 			if (data != null && !data.isEmpty()) {
@@ -409,8 +424,10 @@ public class HMultiListView extends LinearLayout {
 
 		@Override
 		public Object getItem(int position) {
-			int dataPos = listNum * position + dataIndex;
-			return HMultiListView.this.getItem(dataPos);
+			if(position > data.size()-1){
+				return null;
+			}
+			return data.get(position);
 		}
 
 		@Override
@@ -421,8 +438,8 @@ public class HMultiListView extends LinearLayout {
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			int dataPos = listNum * position + dataIndex;
-			return HMultiListView.this.getView(dataPos, convertView, parent);
+			int realPos = getRealPos(position, listNum, dataIndex);
+			return HMultiListView.this.getView(realPos, convertView, parent);
 		}
 
 		@Override
@@ -443,13 +460,17 @@ public class HMultiListView extends LinearLayout {
 	}
 
 	public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+		this.mOnItemClickListener = onItemClickListener;
+	}
+
+	private void setInternalItemClickListener(OnItemClickListener onItemClickListener){
 		if (onItemClickListener != null) {
 			for (HListView hListView : mHListViews) {
 				hListView.setOnItemClickListener(onItemClickListener);
 			}
 		}
 	}
-
+	
 	public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
 		if (onItemLongClickListener != null) {
 			for (HListView hListView : mHListViews) {
@@ -548,6 +569,21 @@ public class HMultiListView extends LinearLayout {
 				mOnFocusChangeListener.onFocusChange(view, hasFocus);
 			}
 		}
+	};
+
+	private OnItemClickListener mInternalItemClickListener = new OnItemClickListener() {
+
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			ProxyAdapter adapter = (ProxyAdapter) parent.getAdapter();
+			if (adapter != null) {
+				int realPosition = getRealPos(position, mHMultiBaseAdapter.getHListNum(), adapter.getDataIndex());
+				if (mOnItemClickListener != null) {
+					mOnItemClickListener.onItemClick(parent, view, realPosition, id);
+				}
+			}
+		}
+
 	};
 
 	private void animatorToSelected(BaseAdapterItem item) {

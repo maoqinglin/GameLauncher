@@ -100,7 +100,7 @@
         android:layout_height="wrap_content"
         android:layout_alignRight="@id/game_icon"
         android:layout_alignTop="@id/game_icon"
-        android:src="@drawable/ic_gametask_delete"
+        android:src="@drawable/icon_gametask_delete"
         android:visibility="invisible" />
 
 </RelativeLayout>

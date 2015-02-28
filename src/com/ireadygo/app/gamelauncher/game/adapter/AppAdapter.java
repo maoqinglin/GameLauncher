@@ -3,30 +3,21 @@ package com.ireadygo.app.gamelauncher.game.adapter;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.net.ssl.HandshakeCompletedListener;
-
 import android.content.Context;
-import android.graphics.BitmapFactory;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.ireadygo.app.gamelauncher.GameLauncherConfig;
-import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.data.GameData;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
-import com.ireadygo.app.gamelauncher.game.adapter.GameModel.DataType;
-import com.ireadygo.app.gamelauncher.game.info.ExtendInfo;
 import com.ireadygo.app.gamelauncher.game.info.ItemInfo;
 import com.ireadygo.app.gamelauncher.game.info.ShortcutInfo;
-import com.ireadygo.app.gamelauncher.game.info.ExtendInfo.Function;
+import com.ireadygo.app.gamelauncher.ui.item.AppItem;
+import com.ireadygo.app.gamelauncher.ui.item.AppItem.AppItemHolder;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemLongClickListener;
-import com.ireadygo.app.gamelauncher.ui.widget.GameIconView;
-import com.ireadygo.app.gamelauncher.ui.widget.HListView;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiBaseAdapter;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 import com.ireadygo.app.gamelauncher.utils.PackageUtils;
@@ -49,19 +40,6 @@ public class AppAdapter implements HMultiBaseAdapter {
 		mContext = context;
 		appList.clear();
 		this.appList = list;
-		if (GameLauncherConfig.SLOT_ENABLE) {
-			addExtendItem();
-		}
-	}
-
-	public List<ItemInfo> getList() {
-		return appList;
-	}
-	
-	private void addExtendItem(){
-		if(!appList.isEmpty() && appList.get(ExtendInfo.POS_GAME_ALL) instanceof ExtendInfo){
-			return;
-		}
 	}
 
 	@Override
@@ -79,43 +57,33 @@ public class AppAdapter implements HMultiBaseAdapter {
 	}
 
 	public View newView(int position, View convertView, ViewGroup parent) {
-		GameIconView gameIcon = (GameIconView) LayoutInflater.from(mContext).inflate(R.layout.game_item, parent, false);
-		ViewHolder holder = new ViewHolder();
-		holder.gameIcon = gameIcon;
-		holder.gameIcon.setDataType(DataType.TYPE_APP);
-		gameIcon.setTag(holder);
-		return gameIcon;
+		convertView = new AppItem(mContext);
+		return convertView;
 	}
 
 	public void bindView(final int position, View convertView) {
-		final ViewHolder holder = (ViewHolder) convertView.getTag();
+		final AppItemHolder holder = ((AppItem)convertView).getHolder();
 		if (null != holder) {
-			holder.itemInfo = appList.get(position);
 			if (appList.size() > 0 && position < appList.size()) {
 				if(appList.get(position).getAppIcon() != null){
-					if(position == ExtendInfo.POS_GAME_ALL && GameLauncherConfig.SLOT_ENABLE){
-						setFunctionItemState(holder,Function.GAME_ALL,0.5f,R.color.app_item_bg_green);
-					}else{
-						setFunctionItemState(holder,null,1f,R.color.white);
-					}
-					holder.gameIcon.getGameImg().setImageBitmap(appList.get(position).getAppIcon());
-					holder.gameIcon.getGameNameTxt().setText(appList.get(position).getTitle());
+					holder.icon.setImageBitmap(appList.get(position).getAppIcon());
+					holder.title.setText(appList.get(position).getTitle());
 					if (appList.get(position).getTitle().toString().contains("太极熊猫")) {
 						AppEntity app = GameData.getInstance(mContext).getGameById("38");
 						if (app == null) {
 							app = GameData.getInstance(mContext).getGameByPkgName("com.snailgames.taiji");
 						}
 						if (app != null && !TextUtils.isEmpty(app.getLocalIconUrl())) {
-							holder.gameIcon.getGameImg().setImageBitmap(PictureUtil.readBitmap(mContext, app.getLocalIconUrl()));
+							holder.icon.setImageBitmap(PictureUtil.readBitmap(mContext, app.getLocalIconUrl()));
 						}
 					}
 
-					updateDeleteView(holder);
-					holder.gameIcon.getGameUninstallImg().setOnClickListener(new OnClickListener() {
+					updateDeleteView(holder,appList.get(position));
+					holder.uninstallIcon.setOnClickListener(new OnClickListener() {
 
 						@Override
 						public void onClick(View v) {
-							PackageUtils.unInstallApp(mContext, holder.itemInfo.packageName);
+							PackageUtils.unInstallApp(mContext, appList.get(position).packageName);
 						}
 					});
 				}
@@ -123,51 +91,12 @@ public class AppAdapter implements HMultiBaseAdapter {
 		}
 	}
 
-	public void updateDeleteView(ViewHolder holder) {
-		if (isLongClickable() && (holder.itemInfo instanceof ShortcutInfo && !holder.itemInfo.isSystemApp)) {
-			holder.gameIcon.getGameUninstallImg().setVisibility(View.VISIBLE);
-//			holder.gameIcon.getGameViewBg().setAlpha(0.5f);
+	public void updateDeleteView(AppItemHolder holder, ItemInfo info) {
+		if (isLongClickable() && (info instanceof ShortcutInfo && !info.isSystemApp)) {
+			holder.uninstallIcon.setVisibility(View.VISIBLE);
 		} else {
-			holder.gameIcon.getGameUninstallImg().setVisibility(View.INVISIBLE);
-//			holder.gameIcon.getGameViewBg().setAlpha(1f);
-//			holder.gameDeleteBg.setVisibility(View.INVISIBLE);
+			holder.uninstallIcon.setVisibility(View.INVISIBLE);
 		}
-	}
-
-	public void updateCurrentDeleteView() {
-		if(mHMultiListView == null){
-			return;
-		}
-		List<HListView> hListViews = mHMultiListView.getHListViews();
-		if (hListViews != null && !hListViews.isEmpty()) {
-			for (HListView hListView : hListViews) {
-				for (int pos = 0; pos < hListView.getChildCount(); pos++) {
-					View view = hListView.getChildAt(pos);
-					if (view != null) {
-						ViewHolder holder = (ViewHolder) view.getTag();
-						updateDeleteView(holder);
-					}
-				}
-			}
-		}
-	}
-	
-	public void unDisplayGameDeleteView() {
-		if (isLongClickable()) {
-			setIsLongClickable(false);
-			updateCurrentDeleteView();
-		}
-	}
-
-	private void setFunctionItemState(ViewHolder holder,Function function,float alpha,int textColorResourceId) {
-		holder.gameIcon.setFunction(function);
-		holder.gameIcon.getGameViewBg().setAlpha(alpha);
-		holder.gameIcon.getGameNameTxt().setTextColor(mContext.getResources().getColor(textColorResourceId));
-	}
-
-	public static class ViewHolder {
-		public GameIconView gameIcon;
-		public ItemInfo itemInfo;
 	}
 
 	OnItemLongClickListener mOnItemLongClickListener = new OnItemLongClickListener() {
@@ -175,10 +104,17 @@ public class AppAdapter implements HMultiBaseAdapter {
 		@Override
 		public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 			mIsLongClickable = true;
-			updateCurrentDeleteView();
+			mHMultiListView.notifyDataSetChanged();
 			return true;
 		}
 	};
+
+	public void unDisplayGameDeleteView() {
+		if (isLongClickable()) {
+			setIsLongClickable(false);
+			mHMultiListView.notifyDataSetChanged();
+		}
+	}
 
 	public boolean isLongClickable() {
 		return mIsLongClickable;
@@ -190,8 +126,7 @@ public class AppAdapter implements HMultiBaseAdapter {
 
 	@Override
 	public BaseAdapter getAdapter() {
-		// TODO Auto-generated method stub
-		return null;
+		return mHMultiListView.getAdapter();
 	}
 
 	@Override

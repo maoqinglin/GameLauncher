@@ -77,6 +77,11 @@
 	    <attr name="store_icon" format="reference"></attr>
         <attr name="store_title" format="reference|string"></attr>
 	</declare-styleable>
+
+	<declare-styleable name="Statistics_Item">
+        <attr name="stat_title" format="reference|string"></attr>
+        <attr name="Stat_count" format="reference|string"></attr>
+    </declare-styleable>
   <string-array name="image_name">
         <item>helper_image_01</item>
         <item>helper_image_02</item>

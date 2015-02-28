@@ -6,31 +6,20 @@
     android:layout_height="@dimen/content_fragment_height"
     android:clipChildren="false" >
 
-    <com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout
-        android:id="@+id/tipsLayout"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/tips_height"
-        android:layout_alignParentBottom="true">
-    </com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout>
-
-    <com.ireadygo.app.gamelauncher.ui.widget.HListView
-        android:id="@+id/h_listview_myapp_fragment"
-        style="@style/AppListView"
-        android:layout_width="match_parent"
+    <com.ireadygo.app.gamelauncher.ui.widget.StatisticsTitleView
+        android:id="@+id/statistics_view"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/tipsLayout"
-        android:nextFocusLeft="@id/h_listview_myapp_fragment"
-        android:nextFocusRight="@id/h_listview_myapp_fragment"
-        android:nextFocusUp="@+id/menu_app"
-        android:paddingLeft="@dimen/content_padding_left_default" 
-        android:visibility="gone"
-        />
+        app:stat_title="游戏个数" />
+
     <com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView
         android:id="@+id/mutillist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:hlv_horizontal_spacing="40dp"
-        app:hlv_vertical_spacing="40dp" >
+        android:layout_below="@+id/statistics_view"
+        android:layout_marginTop="@dimen/mygame_mhlv_margin_top"
+        app:hlv_horizontal_spacing="@dimen/mygame_mhlv_horizontal_spacing"
+        app:hlv_vertical_spacing="@dimen/mygame_mhlv_vertical_spacing" >
     </com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView>
 
 </RelativeLayout>

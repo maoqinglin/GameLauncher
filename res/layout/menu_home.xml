@@ -28,7 +28,7 @@
         android:layout_marginTop="@dimen/menu_item_margin_top"
         android:nextFocusDown="@+id/menu_store"
         android:nextFocusLeft="@+id/menu_game"
-        android:nextFocusRight="@+id/h_listview_mygame_fragment"
+        android:nextFocusRight="@+id/upHList"
         android:nextFocusUp="@+id/menu_user"
         menuItem:menu_title="@string/menu_game" >
     </com.ireadygo.app.gamelauncher.ui.menu.TextMenu>
@@ -52,7 +52,7 @@
         android:layout_marginTop="@dimen/menu_item_margin_top"
         android:nextFocusDown="@+id/menu_settings"
         android:nextFocusLeft="@+id/menu_app"
-        android:nextFocusRight="@+id/menu_app"
+        android:nextFocusRight="@+id/upHList"
         android:nextFocusUp="@+id/menu_store"
         menuItem:menu_title="@string/menu_app" >
     </com.ireadygo.app.gamelauncher.ui.menu.TextMenu>

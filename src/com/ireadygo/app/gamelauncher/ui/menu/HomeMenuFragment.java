@@ -37,7 +37,7 @@ public class HomeMenuFragment extends BaseMenuFragment {
 		addMenuItem(mUserMenu, new StoreFragment(getRootActivity(), this));
 		addMenuItem(mStoreMenu, new StoreFragment(getRootActivity(), this));
 		addMenuItem(mGameMenu, new GameFragment(getRootActivity(), this));
-		addMenuItem(mAppMenu, new GameFragment(getRootActivity(), this));
+		addMenuItem(mAppMenu, new AppFragment(getRootActivity(), this));
 		addMenuItem(mSettingsMenu, new SettingsMultiFragment(getRootActivity(), this));
 		return view;
 	}
