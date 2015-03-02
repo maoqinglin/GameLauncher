@@ -7,6 +7,10 @@ public class CollectionInfo extends AppEntity {
 	private String collectionDes;
 	private String iconUrl;
 
+	public CollectionInfo(){
+		
+	}
+
 	public CollectionInfo(int collectionId, String collectionName, String collectionDes, String iconUrl,
 			String posterIcon, String posterBg) {
 		setCollectionId(collectionId);

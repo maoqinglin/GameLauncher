@@ -12,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.ireadygo.app.gamelauncher.R;
+import com.ireadygo.app.gamelauncher.game.info.ItemInfo;
 import com.ireadygo.app.gamelauncher.ui.item.ImageItem;
 import com.ireadygo.app.gamelauncher.ui.item.ImageItem.ImageItemHolder;
 import com.ireadygo.app.gamelauncher.ui.store.category.CategoryItem.CategoryItemHoder;
@@ -45,6 +46,7 @@ public class CategoryMultiAdapter implements HMultiBaseAdapter {
 		this.mContext = mContext;
 		this.mMultiListView = mMultiListView;
 		initCategoryDatas();
+		addEmptyData();
 	}
 
 	private void initCategoryDatas() {
@@ -160,6 +162,10 @@ public class CategoryMultiAdapter implements HMultiBaseAdapter {
 		String[] intros;
 		int count;
 
+		public InternalCategoryInfo(){
+			
+		}
+
 		public InternalCategoryInfo(String categoryId, int titleId, int iconId, int bgId, String intro) {
 			this.categoryId = categoryId;
 			this.titleId = titleId;
@@ -172,6 +178,18 @@ public class CategoryMultiAdapter implements HMultiBaseAdapter {
 
 		public void setCount(int count) {
 			this.count = count;
+		}
+	}
+
+	@Override
+	public void addEmptyData() {
+		int size = mCategoryDatas.size();
+		int mod = size % LIST_NUM;
+		if (mod != 0) {
+			int extra = LIST_NUM - mod;
+			for (int i = 0; i < extra; i++) {
+				mCategoryDatas.add(new InternalCategoryInfo());
+			}
 		}
 	}
 }

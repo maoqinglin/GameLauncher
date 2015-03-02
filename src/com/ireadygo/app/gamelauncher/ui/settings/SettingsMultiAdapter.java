@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.ireadygo.app.gamelauncher.R;
+import com.ireadygo.app.gamelauncher.game.info.ItemInfo;
 import com.ireadygo.app.gamelauncher.ui.widget.SettingsIconView;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiBaseAdapter;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
@@ -26,6 +27,7 @@ public class SettingsMultiAdapter implements HMultiBaseAdapter {
 		mDataList = list;
 		mListViewNum = listViewNum;
 		mHListViews = hListViews;
+		addEmptyData();
 	}
 
 	@Override
@@ -85,5 +87,19 @@ public class SettingsMultiAdapter implements HMultiBaseAdapter {
 	@Override
 	public int getHListNum() {
 		return mListViewNum;
+	}
+
+	@Override
+	public void addEmptyData() {
+		if (mListViewNum != 0) {
+			int size = mDataList.size();
+			int mod = size % mListViewNum;
+			if (mod != 0) {
+				int extra = mListViewNum - mod;
+				for (int i = 0; i < extra; i++) {
+					mDataList.add(new SettingsItemEntity());
+				}
+			}
+		}
 	}
 }

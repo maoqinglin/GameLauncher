@@ -28,6 +28,7 @@ import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.HomeMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
+import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemSelectedListener;
 import com.ireadygo.app.gamelauncher.ui.widget.StatisticsTitleView;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 import com.ireadygo.app.gamelauncher.utils.PackageUtils;
@@ -63,6 +64,7 @@ public class AppFragment extends BaseContentFragment implements Callbacks {
 		mAppAdapter = new AppAdapter(getRootActivity(), mAppList, LIST_NUM, mHMultiListView);
 		mHMultiListView.setAdapter(mAppAdapter);
 		mHMultiListView.setOnItemClickListener(mOnItemClickListener);
+		mHMultiListView.setOnItemSelectedListener(mOnItemSelectedListener);
 		if(!mAppList.isEmpty()){
 			mStatisticsView.setCount(mAppList.size());
 		}
@@ -98,7 +100,6 @@ public class AppFragment extends BaseContentFragment implements Callbacks {
 	}
 
 	private void notifyDataSetChanged(){
-		Log.d("lmq", "notifyDataSetChanged---mAppList.size = "+mAppList.size());
 		if(mHMultiListView != null){
 			mHMultiListView.notifyDataSetChanged();
 			mStatisticsView.setCount(mAppList.size());
@@ -186,6 +187,24 @@ public class AppFragment extends BaseContentFragment implements Callbacks {
 			}
 		}
 	}
+
+	OnItemSelectedListener mOnItemSelectedListener = new OnItemSelectedListener() {
+
+		@Override
+		public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+			ItemInfo info = (ItemInfo) mAppAdapter.getItem(position);
+			if (TextUtils.isEmpty(info.packageName)) {
+				int prePos = parent.getSelectedItemPosition();
+				parent.setSelection(prePos - 1);
+			}
+		}
+
+		@Override
+		public void onNothingSelected(AdapterView<?> parent) {
+			// TODO Auto-generated method stub
+			
+		}
+	};
 
 	public boolean onSunKey() {
 		View v = mHMultiListView.getSelectedView();

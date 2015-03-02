@@ -460,7 +460,6 @@ public class GameLauncherModel{
 				public void run() {
 					for (Callbacks callbacks : mCallbacks) {
 						if (callbacks != null) {
-							Collections.sort(gameInfos, new CellSortIdComparator());
 							callbacks.bindGames(gameInfos);
 						}
 					}
@@ -477,7 +476,6 @@ public class GameLauncherModel{
 				public void run() {
 					for (Callbacks callbacks : mCallbacks) {
 						if (callbacks != null) {
-							Collections.sort(appInfos, new CellSortIdComparator());
 							callbacks.bindApps(appInfos);
 						}
 					}

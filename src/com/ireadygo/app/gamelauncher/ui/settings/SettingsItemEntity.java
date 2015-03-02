@@ -16,7 +16,11 @@ public class SettingsItemEntity implements Serializable{
 	private String itemName;
 	
 	private String intentAction;
-	
+
+	public SettingsItemEntity(){
+
+	}
+
 	public SettingsItemEntity(Drawable itemIcon, String itemName, String intentAction) {
 		super();
 		this.itemIcon = itemIcon;

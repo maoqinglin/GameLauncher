@@ -14,6 +14,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 
@@ -351,7 +352,7 @@ public class HMultiListView extends LinearLayout {
 	 * @param listNum
 	 * @param list
 	 */
-	private <T> void initDataLists(int listNum, List<?> list) {
+	private <T> void initDataLists(int listNum, List<T> list) {
 		if (!mDataLists.isEmpty()) {
 			for (List<?> listData : mDataLists) {
 				listData.clear();// 清除单个列表数据
@@ -523,7 +524,11 @@ public class HMultiListView extends LinearLayout {
 				animatorToSelected(mSelectedItem);
 			}
 			if (mOnItemSelectedListener != null) {
-				mOnItemSelectedListener.onItemSelected(parent, view, position, id);
+				ProxyAdapter adapter = (ProxyAdapter) parent.getAdapter();
+				if (adapter != null) {
+					int realPos = getRealPos(position, mHMultiBaseAdapter.getHListNum(), adapter.getDataIndex());
+					mOnItemSelectedListener.onItemSelected(parent, view, realPos, id);
+				}
 			}
 		}
 
@@ -599,9 +604,10 @@ public class HMultiListView extends LinearLayout {
 	private void animatorToUnselected(BaseAdapterItem item) {
 		item.toUnselected(null);
 	}
+	
 }
 
-interface OnSyncItemClickListener {
+interface OnSyncItemClickListener { 
 	void onSyncItemClick(AdapterView<?> parent, View view, int position);
 }
 

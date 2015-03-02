@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ireadygo.app.gamelauncher.R;
-import com.ireadygo.app.gamelauncher.game.info.ItemInfo;
 
 public class AppItem extends BaseAdapterItem{
 	private AppItemHolder mHolder;

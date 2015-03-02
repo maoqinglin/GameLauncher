@@ -17,4 +17,6 @@ public interface HMultiBaseAdapter {
 	int getHListNum();
 
 	List<?> getData();
+
+	void addEmptyData();
 }

@@ -40,6 +40,21 @@ public class AppAdapter implements HMultiBaseAdapter {
 		mContext = context;
 		appList.clear();
 		this.appList = list;
+		addEmptyData();
+	}
+
+	@Override
+	public void addEmptyData() {
+		if (mListViewNum != 0) {
+			int size = appList.size();
+			int mod = size % mListViewNum;
+			if (mod != 0) {
+				int extra = mListViewNum - mod;
+				for (int i = 0; i < extra; i++) {
+					appList.add(new ItemInfo());
+				}
+			}
+		}
 	}
 
 	@Override

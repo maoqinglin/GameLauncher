@@ -16,6 +16,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryInfo;
 import com.ireadygo.app.gamelauncher.appstore.info.item.CollectionInfo;
 import com.ireadygo.app.gamelauncher.ui.item.ImageItem;
 import com.ireadygo.app.gamelauncher.ui.item.ImageItem.ImageItemHolder;
+import com.ireadygo.app.gamelauncher.ui.settings.SettingsItemEntity;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiBaseAdapter;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -30,6 +31,7 @@ public class CollectionMultiAdapter implements HMultiBaseAdapter {
 		this.mContext = mContext;
 		this.mMultiListView = mMultiListView;
 		this.mCollectionDatas = mCollectionDatas;
+		addEmptyData();
 	}
 
 	@Override
@@ -72,6 +74,18 @@ public class CollectionMultiAdapter implements HMultiBaseAdapter {
 	@Override
 	public List<?> getData() {
 		return mCollectionDatas;
+	}
+
+	@Override
+	public void addEmptyData() {
+		int size = mCollectionDatas.size();
+		int mod = size % LIST_NUM;
+		if (mod != 0) {
+			int extra = LIST_NUM - mod;
+			for (int i = 0; i < extra; i++) {
+				mCollectionDatas.add(new CollectionInfo());
+			}
+		}
 	}
 
 }
