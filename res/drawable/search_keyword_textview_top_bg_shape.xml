@@ -6,7 +6,7 @@
     <corners
         android:bottomLeftRadius="0dp"
         android:bottomRightRadius="0dp"
-        android:topLeftRadius="@dimen/corner_shape_radius_normal"
-        android:topRightRadius="@dimen/corner_shape_radius_normal" />
+        android:topLeftRadius="@dimen/common_item_shape_internal_radius"
+        android:topRightRadius="@dimen/common_item_shape_internal_radius" />
 
 </shape>

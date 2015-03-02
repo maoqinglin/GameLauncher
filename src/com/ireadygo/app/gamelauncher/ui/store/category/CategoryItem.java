@@ -1,13 +1,11 @@
-package com.ireadygo.app.gamelauncher.ui.item;
+package com.ireadygo.app.gamelauncher.ui.store.category;
 
 import android.animation.Animator;
-import android.animation.Animator.AnimatorListener;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
+import android.animation.Animator.AnimatorListener;
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,49 +16,42 @@ import android.widget.TextView;
 
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.helper.AnimatorHelper;
+import com.ireadygo.app.gamelauncher.ui.item.BaseAdapterItem;
+import com.ireadygo.app.gamelauncher.utils.Utils;
 
-public class ImageItem extends BaseAdapterItem {
-	private ImageItemHolder mHolder;
-	private Drawable mIconDrawable;
+public class CategoryItem extends BaseAdapterItem {
+	private CategoryItemHoder mHolder;
 	private Animator mSelectedAnimator;
 	private Animator mUnselectedAnimator;
 
-	public ImageItem(Context context, AttributeSet attrs, int defStyle) {
+	public CategoryItem(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-		initAttrs(context, attrs);
-		initView(context);
 	}
 
-	public ImageItem(Context context, AttributeSet attrs) {
-		this(context, attrs, 0);
+	public CategoryItem(Context context, AttributeSet attrs) {
+		super(context, attrs);
 	}
 
-	public ImageItem(Context context) {
+	public CategoryItem(Context context) {
 		super(context);
 		initView(context);
 	}
 
-	private void initAttrs(Context context, AttributeSet attrs) {
-		TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Item);
-		mIconDrawable = a.getDrawable(R.styleable.Item_item_icon);
-		a.recycle();
-	}
-
 	private void initView(Context context) {
-		LayoutInflater.from(context).inflate(R.layout.image_item, this, true);
-		mHolder = new ImageItemHolder();
-		mHolder.background = (ImageView) findViewById(R.id.background);
-		mHolder.icon = (ImageView) findViewById(R.id.icon);
-		if (mIconDrawable != null) {
-			LayoutParams params = new LayoutParams(mIconDrawable.getMinimumWidth(), mIconDrawable.getMinimumHeight());
-			mHolder.background.setLayoutParams(params);
-			mHolder.icon.setImageDrawable(mIconDrawable);
-		}
-		mHolder.iconLayout = (ViewGroup)findViewById(R.id.icon_layout);
-		mHolder.title = (TextView) findViewById(R.id.title);
+		View rootView = LayoutInflater.from(context).inflate(R.layout.category_item, this, true);
+		mHolder = new CategoryItemHoder();
+		mHolder.background = (ImageView) rootView.findViewById(R.id.category_item_background);
+		mHolder.icon = (ImageView) rootView.findViewById(R.id.category_item_icon);
+		mHolder.iconLayout = (ViewGroup) rootView.findViewById(R.id.category_item_icon_layout);
+		mHolder.introLayout = (ViewGroup) rootView.findViewById(R.id.category_item_intro_layout);
+		mHolder.titleLayout = (ViewGroup) rootView.findViewById(R.id.category_item_title_layout);
+		mHolder.title = (TextView) rootView.findViewById(R.id.category_item_title);
+		mHolder.countLayout = (ViewGroup) rootView.findViewById(R.id.category_item_count_layout);
+		mHolder.count = (TextView) rootView.findViewById(R.id.category_item_count);
+		Utils.setCustomTypeface(getContext(), "fonts/din_pro_regular.otf", mHolder.count);
 	}
 
-	public ImageItemHolder getHolder() {
+	public CategoryItemHoder getHolder() {
 		return mHolder;
 	}
 
@@ -78,6 +69,7 @@ public class ImageItem extends BaseAdapterItem {
 
 	@Override
 	public void toUnselected(AnimatorListener listener) {
+		Log.d("liu.js", "toUnselected--" + this);
 		if (mSelectedAnimator != null && mSelectedAnimator.isRunning()) {
 			mSelectedAnimator.cancel();
 		}
@@ -106,10 +98,14 @@ public class ImageItem extends BaseAdapterItem {
 		return animatorSet;
 	}
 
-	public class ImageItemHolder {
-		public ImageView background;
-		public ImageView icon;
-		public TextView title;
-		public ViewGroup iconLayout;
+	static class CategoryItemHoder {
+		ImageView background;
+		ImageView icon;
+		ViewGroup iconLayout;
+		TextView title;
+		ViewGroup titleLayout;
+		ViewGroup introLayout;
+		ViewGroup countLayout;
+		TextView count;
 	}
 }

@@ -1,13 +1,13 @@
 package com.ireadygo.app.gamelauncher.appstore.info.item;
 
-public class CategoryItem extends AppEntity{
+public class CategoryInfo extends AppEntity{
 	private static final long serialVersionUID = -5850512530441575140L;
 	private int categoryId;
 	private String catetoryName;
 	private String categoryDes;
 	private String iconUrl;
 
-	public CategoryItem(int categoryId, String categoryName, String categoryDec, String categoryUrl, String posterIcon,
+	public CategoryInfo(int categoryId, String categoryName, String categoryDec, String categoryUrl, String posterIcon,
 			String posterBg) {
 		setCategoryId(categoryId);
 		setCatetoryName(categoryName);

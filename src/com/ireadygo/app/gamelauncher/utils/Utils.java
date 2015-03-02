@@ -28,6 +28,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
@@ -39,6 +40,7 @@ import android.widget.FrameLayout.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ireadygo.app.gamelauncher.R;
@@ -349,7 +351,7 @@ public class Utils {
 		}
 		return new String(c);
 	}
-	
+
 	public static Dialog createLoadingDialog(Context context) {
 		LayoutInflater inflater = LayoutInflater.from(context);
 		View layout = inflater.inflate(R.layout.loading_progress_dialog, null);// 得到加载view
@@ -359,7 +361,7 @@ public class Utils {
 				LinearLayout.LayoutParams.MATCH_PARENT));// 设置布局
 		return loadingDialog;
 	}
-	
+
 	public static void setEmptyView(View emptyView, HListView listView) {
 		LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		params.gravity = Gravity.CENTER;
@@ -369,5 +371,11 @@ public class Utils {
 			((ViewGroup) listView.getParent()).addView(emptyView);
 		}
 		listView.setEmptyView(emptyView);
+	}
+
+	/** 设置自定义字体 **/
+	public static void setCustomTypeface(Context context, String path, TextView textView) {
+		Typeface typeface = Typeface.createFromAsset(context.getAssets(), path);
+		textView.setTypeface(typeface);
 	}
 }

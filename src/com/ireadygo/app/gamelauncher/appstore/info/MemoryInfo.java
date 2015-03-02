@@ -11,7 +11,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.AgentAppItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.appstore.info.item.BannerItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.BindPhoneItem;
-import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryItem;
+import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryInfo;
 import com.ireadygo.app.gamelauncher.appstore.info.item.CollectionInfo;
 import com.ireadygo.app.gamelauncher.appstore.info.item.FeeConfigItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.FreeFlowStatusItem;
@@ -28,7 +28,7 @@ import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
 
 public class MemoryInfo implements IGameInfo {
 
-	private ArrayList<CategoryItem> mCachedCategoryItems = new ArrayList<CategoryItem>();
+	private ArrayList<CategoryInfo> mCachedCategoryItems = new ArrayList<CategoryInfo>();
 	private HashMap<Integer, List<CollectionInfo>> mCachedCollectionItems = new HashMap<Integer, List<CollectionInfo>>();
 	private HashMap<Integer, List<BannerItem>> mCachedBannerItems = new HashMap<Integer, List<BannerItem>>();
 	private ArrayList<KeywordItem> mCachedKeywordItems = new ArrayList<KeywordItem>();
@@ -64,11 +64,11 @@ public class MemoryInfo implements IGameInfo {
 	}
 
 	@Override
-	public List<CategoryItem> obtainCategorys() throws InfoSourceException {
+	public List<CategoryInfo> obtainCategorys() throws InfoSourceException {
 		if (mCachedCategoryItems.size() > 0) {
 			return mCachedCategoryItems;
 		}
-		List<CategoryItem> categorys = mLocalInfo.obtainCategorys();
+		List<CategoryInfo> categorys = mLocalInfo.obtainCategorys();
 		cachedMemoryCategoryItems(categorys);
 		return categorys;
 	}
@@ -207,9 +207,9 @@ public class MemoryInfo implements IGameInfo {
 		return null;
 	}
 
-	public void cachedCategoryItems(List<CategoryItem> categoryItems) {
+	public void cachedCategoryItems(List<CategoryInfo> categoryItems) {
 		mCachedCategoryItems.clear();
-		for (CategoryItem item : categoryItems) {
+		for (CategoryInfo item : categoryItems) {
 			mCachedCategoryItems.add(item);
 		}
 		PreferenceUtils.setCategoryExpiredTime(System.currentTimeMillis());
@@ -268,9 +268,9 @@ public class MemoryInfo implements IGameInfo {
 		mLocalInfo.cachedFeeConfigListToFile(feeConfigItems);
 	}
 
-	public void cachedMemoryCategoryItems(List<CategoryItem> categoryItems) {
+	public void cachedMemoryCategoryItems(List<CategoryInfo> categoryItems) {
 		mCachedCategoryItems.clear();
-		for (CategoryItem item : categoryItems) {
+		for (CategoryInfo item : categoryItems) {
 			mCachedCategoryItems.add(item);
 		}
 	}

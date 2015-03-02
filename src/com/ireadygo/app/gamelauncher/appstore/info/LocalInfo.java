@@ -16,7 +16,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.AgentAppItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.appstore.info.item.BannerItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.BindPhoneItem;
-import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryItem;
+import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryInfo;
 import com.ireadygo.app.gamelauncher.appstore.info.item.CollectionInfo;
 import com.ireadygo.app.gamelauncher.appstore.info.item.FeeConfigItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.FreeFlowStatusItem;
@@ -71,8 +71,8 @@ public class LocalInfo implements IGameInfo {
 	}
 
 	@Override
-	public List<CategoryItem> obtainCategorys() throws InfoSourceException {
-		List<CategoryItem> categoryItems = getCachedCategorysFrmFile();
+	public List<CategoryInfo> obtainCategorys() throws InfoSourceException {
+		List<CategoryInfo> categoryItems = getCachedCategorysFrmFile();
 		if (categoryItems.size() == 0) {
 			throw new InfoSourceException(InfoSourceException.MSG_NO_CACHED_DATA);
 		}
@@ -237,7 +237,7 @@ public class LocalInfo implements IGameInfo {
 		}
 	}
 
-	public void cachedCategorysToFile(List<CategoryItem> categorys) {
+	public void cachedCategorysToFile(List<CategoryInfo> categorys) {
 		if (categorys == null || categorys.size() == 0) {
 			return;
 		}
@@ -245,7 +245,7 @@ public class LocalInfo implements IGameInfo {
 		StringBuffer sb = new StringBuffer();
 		int length = Math.min(categorys.size(), MAX_CACHED_ITEMS);
 		for (int i = 0; i < length; i++) {
-			CategoryItem item = categorys.get(i);
+			CategoryInfo item = categorys.get(i);
 			sb.append(item.getCategoryId())
 			.append(ITEM_INNER_DIVIDER)
 			.append(item.getCatetoryName())
@@ -263,17 +263,17 @@ public class LocalInfo implements IGameInfo {
 		editor.commit();
 	}
 
-	private List<CategoryItem> getCachedCategorysFrmFile() {
+	private List<CategoryInfo> getCachedCategorysFrmFile() {
 		String categorys = mContext.getSharedPreferences(CACHED_CATEGORYS_NAME,Context.MODE_PRIVATE).getString(CACHED_CATEGORYS, "");
 		if (TextUtils.isEmpty(categorys)) {
-			return new ArrayList<CategoryItem>();
+			return new ArrayList<CategoryInfo>();
 		}
 		String[] categotyList = categorys.split(ITEM_DIVIDER);
-		ArrayList<CategoryItem> result = new ArrayList<CategoryItem>();
+		ArrayList<CategoryInfo> result = new ArrayList<CategoryInfo>();
 		for (String category : categotyList) {
 			String[] categoryItems = category.split(ITEM_INNER_DIVIDER);
 			if (categoryItems.length == 4) {
-				CategoryItem item = new CategoryItem(Integer.valueOf((categoryItems[0])),
+				CategoryInfo item = new CategoryInfo(Integer.valueOf((categoryItems[0])),
 						categoryItems[1],
 						categoryItems[2],
 						categoryItems[3],

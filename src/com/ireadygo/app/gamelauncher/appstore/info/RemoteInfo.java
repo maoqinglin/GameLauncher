@@ -15,7 +15,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.AgentAppItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.appstore.info.item.BannerItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.BindPhoneItem;
-import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryItem;
+import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryInfo;
 import com.ireadygo.app.gamelauncher.appstore.info.item.CollectionInfo;
 import com.ireadygo.app.gamelauncher.appstore.info.item.FeeConfigItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.FreeFlowStatusItem;
@@ -216,12 +216,12 @@ public class RemoteInfo implements IGameInfo {
 	 * 获取所有的分类
 	 */
 	@Override
-	public List<CategoryItem> obtainCategorys() throws InfoSourceException {
+	public List<CategoryInfo> obtainCategorys() throws InfoSourceException {
 		ResultVO resultVO;
 		try {
 			resultVO = mAppPlatFormService.getGameCategory();
 			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
-				List<CategoryItem> results = new ArrayList<CategoryItem>();
+				List<CategoryInfo> results = new ArrayList<CategoryInfo>();
 				if (resultVO.getObj() != null) {
 					List<AppCategoryVO> appCategoryVOs = (List<AppCategoryVO>)resultVO.getObj();
 					for (AppCategoryVO category : appCategoryVOs) {
@@ -1058,8 +1058,8 @@ public class RemoteInfo implements IGameInfo {
 		}
 	}
 
-	private CategoryItem categoryItemToCategory(AppCategoryVO item) {
-		return new CategoryItem(
+	private CategoryInfo categoryItemToCategory(AppCategoryVO item) {
+		return new CategoryInfo(
 				item.getICategoryId(), 
 				item.getSCategoryName(),
 				item.getSCategoryDesc(),

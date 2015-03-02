@@ -8,7 +8,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.AgentAppItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.appstore.info.item.BannerItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.BindPhoneItem;
-import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryItem;
+import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryInfo;
 import com.ireadygo.app.gamelauncher.appstore.info.item.CollectionInfo;
 import com.ireadygo.app.gamelauncher.appstore.info.item.FeeConfigItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.FreeFlowStatusItem;
@@ -37,7 +37,7 @@ public interface IGameInfo {
 	AppEntity obtainItemByIdFrmRemote(String appId) throws InfoSourceException;
 
 	//获取所有分类信息
-	List<CategoryItem> obtainCategorys() throws InfoSourceException;
+	List<CategoryInfo> obtainCategorys() throws InfoSourceException;
 	//获取合集信息
 	
 	List<CollectionInfo> obtainCollection(int page) throws InfoSourceException;

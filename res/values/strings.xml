@@ -81,29 +81,24 @@
     <!-- 免商店-推荐(recommend) -->
 
     <!-- 免商店-分类(category) -->
-    <string-array name="store_category_titles">
-        <item>SLG</item>
-        <item>Off-Line Game</item>
-        <item>STG</item>
-        <item>RPG</item>
-        <item>SIM</item>
-        <item>RSG</item>
-        <item>SPT</item>
-        <item>PZL</item>
-        <item>ETC</item>
-    </string-array>
-
-    <string-array name="store_category_intros">
-        <item>Quickspot/Decompression/Pet/Answer/Music</item>
-        <item>SLG/RTS/Kongfu/Magic/Animation</item>
-        <item>Shoting/3D/SSG/Tank/Sniper</item>
-        <item>SLG/RTS/Kongfu/Magic/Animation</item>
-        <item>Card/Chess/SIM/History/War/DOTA</item>
-        <item>Parkour/Race/Motorcycle/Rowing/Plane</item>
-        <item>Arcade/BasketBall/Soccer/Tennis/Billiards/ETC</item>
-        <item>Dou Di Zhu/Chess/Mahjong/BRPG/Dezhou Poker/Card</item>
-        <item>Game form Taiwan</item>
-    </string-array>
+    <string name="category_item_count_suffix">款</string>
+     <string name="category_title_slg">SLG</string>
+    <string name="category_title_olg">Off-Line Game</string>
+    <string name="category_title_stg">STG</string>
+    <string name="category_title_rpg">RPG</string>
+    <string name="category_title_sim">SIM</string>
+    <string name="category_title_rsg">RSG</string>
+    <string name="category_title_spt">SPT</string>
+    <string name="category_title_pzl">PZL</string>
+    
+    <string name="category_intro_slg">Quickspot/Decompression/Pet/Answer/Music</string>
+    <string name="category_intro_olg">SLG/RTS/Kongfu/Magic/Animation</string>
+    <string name="category_intro_stg">Shoting/3D/SSG/Tank/Sniper</string>
+    <string name="category_intro_rpg">SLG/RTS/Kongfu/Magic/Animation</string>
+    <string name="category_intro_sim">Card/Chess/SIM/History/War/DOTA</string>
+    <string name="category_intro_rsg">Parkour/Race/Motorcycle/Rowing/Plane</string>
+    <string name="category_intro_spt">Arcade/BasketBall/Soccer/Tennis/Billiards/ETC</string>
+    <string name="category_intro_pzl">Dou Di Zhu/Chess/Mahjong/BRPG/Dezhou Poker/Card</string>
     
     <!-- 免商店-合集(collection) -->
     <string name="collection_prompt">商店内合集数量</string>

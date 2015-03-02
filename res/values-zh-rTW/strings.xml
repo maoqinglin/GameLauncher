@@ -81,32 +81,26 @@
 
 
     <!-- 免商店-分類(category) -->
-    <string-array name="store_category_titles">
-        <item>創意休閒</item>
-        <item>單機遊戲</item>
-        <item>動作射擊</item>
-        <item>角色扮演</item>
-        <item>經營策略</item>
-        <item>競技飛行</item>
-        <item>體育競技</item>
-        <item>益智棋牌</item>
-        <item>寶島精選</item>
-    </string-array>
-    <string-array name="store_category_intros">
-        <item>切東西/找茬/減壓/寵物/答題/音樂節奏</item>
-        <item>回合制/即時戰略/養成/武俠/魔幻/動漫</item>
-        <item>橫版/射擊/3D/飛行/坦克/狙擊</item>
-        <item>回合制/即時戰鬥/養成/武俠/魔幻/動漫</item>
-        <item>紙牌/戰棋/經營/歷史/戰爭/DOTA</item>
-        <item>跑酷/賽車/摩托/賽艇/飛機</item>
-        <item>街機/籃球/足球/網球/檯球/其他球類</item>
-        <item>鬥地主/棋類/麻將/桌遊/德州撲克/紙牌</item>
-        <item>來自寶島臺灣的遊戲精選</item>
-    </string-array>
+    <string name="category_item_count_suffix">款</string>
+    <string name="category_title_slg">創意休閒</string>
+    <string name="category_title_olg">單機精選</string>
+    <string name="category_title_stg">動作射擊</string>
+    <string name="category_title_rpg">角色扮演</string>
+    <string name="category_title_sim">經營策略</string>
+    <string name="category_title_rsg">競技飛行</string>
+    <string name="category_title_spt">體育競技</string>
+    <string name="category_title_pzl">益智棋牌</string>
+    <string name="category_intro_slg">切東西/找茬/減壓/寵物/答題/音樂節奏</string>
+    <string name="category_intro_olg">回合制/即時戰略/養成/武俠/魔幻/動漫</string>
+    <string name="category_intro_stg">橫版/射擊/3D/飛行/坦克/狙擊</string>
+    <string name="category_intro_rpg">回合制/即時戰鬥/養成/武俠/魔幻/動漫</string>
+    <string name="category_intro_sim">紙牌/戰棋/經營/歷史/戰爭/DOTA</string>
+    <string name="category_intro_rsg">跑酷/賽車/摩托/賽艇/飛機</string>
+    <string name="category_intro_spt">街機/籃球/足球/網球/檯球/其他球類</string>
+    <string name="category_intro_pzl">鬥地主/棋類/麻將/桌遊/德州撲克/紙牌</string>
 
     <!-- 免商店-合集(collection) -->
     <string name="collection_prompt">商店內合集數量</string>
-
 
     <!-- 免商店-合集/分類-遊戲列表(collection_detail) -->
 
@@ -164,6 +158,7 @@
     <string name="status_update">更 新</string>
 
     <!-- 遊戲社區 -->
+
 
     <!-- 社交(social) -->
 
@@ -283,7 +278,6 @@
         <item>卡槽禮券</item>
     </string-array>
 
-
     <!-- 免帳號-登錄/註冊/一鍵登錄 -->
     <string name="account_one_key_logining_prompt">一鍵登錄中...</string>
     <string name="account_logining_prompt">帳號登錄中...</string>
@@ -313,7 +307,6 @@
     <string name="account_email_error">郵箱格式不正確！</string>
     <string name="account_login_failed">登錄失敗，請重試！</string>
     <string name="account_login_server_phonenumber">客服電話：(0512)67621007</string>
-
     <string name="shortcut_confirm">確定</string>
     <string name="shortcut_detail">詳情</string>
     <string name="shortcut_back">返回</string>

@@ -12,7 +12,7 @@ import android.view.View;
 
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
-import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryItem;
+import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryInfo;
 import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
 import com.ireadygo.app.gamelauncher.ui.store.StoreBaseContentLayout;
 import com.ireadygo.app.gamelauncher.ui.store.StoreDetailActivity;
@@ -25,7 +25,7 @@ public class CategoryLayout extends StoreBaseContentLayout {
 	public static final String EXTRA_POSTER_BG = "Poster_bg";
 	private HListView mAppListView;
 	private CategoryAdapter mAdapter;
-	private List<CategoryItem> mAppList = new ArrayList<CategoryItem>();
+	private List<CategoryInfo> mAppList = new ArrayList<CategoryInfo>();
 
 	public CategoryLayout(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -43,13 +43,13 @@ public class CategoryLayout extends StoreBaseContentLayout {
 	@Override
 	protected void init() {
 		super.init();
-		LayoutInflater.from(getContext()).inflate(R.layout.store_category_layout, this, true);
+//		LayoutInflater.from(getContext()).inflate(R.layout.store_category_layout, this, true);
 		mAppListView = (HListView) findViewById(R.id.storeCategoryList);
 		mAppListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				CategoryItem categoryItem = mAppList.get(position);
+				CategoryInfo categoryItem = mAppList.get(position);
 				startCategoryDetailActivity(categoryItem.getCategoryId());
 			}
 		});
@@ -70,10 +70,10 @@ public class CategoryLayout extends StoreBaseContentLayout {
 		new LoadCategoryTask().execute(page);
 	}
 
-	private class LoadCategoryTask extends AsyncTask<Integer, Void, List<CategoryItem>> {
+	private class LoadCategoryTask extends AsyncTask<Integer, Void, List<CategoryInfo>> {
 
 		@Override
-		protected List<CategoryItem> doInBackground(Integer... params) {
+		protected List<CategoryInfo> doInBackground(Integer... params) {
 			if (params == null || params.length == 0) {
 				return null;
 			}
@@ -90,7 +90,7 @@ public class CategoryLayout extends StoreBaseContentLayout {
 		}
 
 		@Override
-		protected void onPostExecute(List<CategoryItem> result) {
+		protected void onPostExecute(List<CategoryInfo> result) {
 			if (isCancelled() || result == null || result.isEmpty()) {
 				return;
 			}
@@ -115,7 +115,7 @@ public class CategoryLayout extends StoreBaseContentLayout {
 	public boolean onSunKey() {
 		int selectIndex = mAppListView.getSelectedItemPosition();
 		if (selectIndex > -1 && selectIndex < mAdapter.getCount()) {
-			CategoryItem categoryItem = mAppList.get(selectIndex);
+			CategoryInfo categoryItem = mAppList.get(selectIndex);
 			startCategoryDetailActivity(categoryItem.getCategoryId());
 			return true;
 		}

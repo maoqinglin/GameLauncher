@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/category_item_width"
+    android:layout_height="@dimen/category_item_height" >
+
+    <ImageView
+        android:id="@+id/category_item_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/item_background_selected_shape" />
+
+    <FrameLayout
+        android:id="@+id/category_item_icon_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <ImageView
+            android:id="@+id/category_item_icon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/category_item_bg_olg" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" >
+
+            <RelativeLayout
+                android:id="@+id/category_item_title_layout"
+                android:layout_width="@dimen/category_item_title_layout_width"
+                android:layout_height="match_parent"
+                android:background="@drawable/category_item_title_bg_brown"
+                android:paddingBottom="@dimen/category_item_padding_bottom" >
+
+                <TextView
+                    android:id="@+id/category_item_title"
+                    android:layout_width="@dimen/category_item_title_layout_width"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="@dimen/category_item_title_margin"
+                    android:gravity="center"
+                    android:lines="2"
+                    android:singleLine="false"
+                    android:text="角色扮演"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/category_item_title_size" />
+
+                <GridLayout
+                    android:id="@+id/category_item_intro_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:rowCount="3" >
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:padding="@dimen/category_item_intro_padding"
+                        android:text="回合"
+                        android:textColor="@color/white_first_transparency"
+                        android:textSize="@dimen/category_item_intro_size" />
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:padding="@dimen/category_item_intro_padding"
+                        android:text="回合制"
+                        android:textColor="@color/white_first_transparency"
+                        android:textSize="@dimen/category_item_intro_size" />
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:padding="@dimen/category_item_intro_padding"
+                        android:text="回合"
+                        android:textColor="@color/white_first_transparency"
+                        android:textSize="@dimen/category_item_intro_size" />
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:padding="@dimen/category_item_intro_padding"
+                        android:text="回合"
+                        android:textColor="@color/white_first_transparency"
+                        android:textSize="@dimen/category_item_intro_size" />
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:padding="@dimen/category_item_intro_padding"
+                        android:text="回合"
+                        android:textColor="@color/white_first_transparency"
+                        android:textSize="@dimen/category_item_intro_size" />
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:padding="@dimen/category_item_intro_padding"
+                        android:text="回合"
+                        android:textColor="@color/white_first_transparency"
+                        android:textSize="@dimen/category_item_intro_size" />
+                </GridLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/category_item_count_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:gravity="bottom"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/category_item_padding_bottom" >
+
+                <TextView
+                    android:id="@+id/category_item_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/category_item_count_margin_left"
+                    android:gravity="bottom"
+                    android:text="249"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/category_item_count_size" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/category_item_count_suffix_margin_left"
+                    android:text="@string/category_item_count_suffix"
+                    android:textColor="@color/white_first_transparency"
+                    android:textSize="@dimen/category_item_count_suffix_size" />
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+</FrameLayout>

@@ -9,17 +9,23 @@
         android:id="@+id/background"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/item_background_shape" />
+        android:background="@drawable/item_background_selected_shape" />
 
-    <ImageView
-        android:id="@+id/icon"
+    <FrameLayout
+        android:id="@+id/icon_layout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" >
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|bottom" />
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom" />
+    </FrameLayout>
 
 </FrameLayout>

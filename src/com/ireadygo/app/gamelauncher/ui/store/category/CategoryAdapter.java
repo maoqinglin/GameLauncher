@@ -18,18 +18,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ireadygo.app.gamelauncher.R;
-import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryItem;
+import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryInfo;
 import com.ireadygo.app.gamelauncher.ui.BaseAnimatorAdapter;
 import com.ireadygo.app.gamelauncher.ui.Config;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class CategoryAdapter extends BaseAnimatorAdapter {
-	private List<CategoryItem> mAppList = new ArrayList<CategoryItem>();
+	private List<CategoryInfo> mAppList = new ArrayList<CategoryInfo>();
 	private Context mContext;
 	private View mCurrentItemView;
 
-	public CategoryAdapter(List<CategoryItem> appList, HListView mHListView, Context context) {
+	public CategoryAdapter(List<CategoryInfo> appList, HListView mHListView, Context context) {
 		super(mHListView);
 		if (appList != null) {
 			this.mAppList = appList;
@@ -59,17 +59,17 @@ public class CategoryAdapter extends BaseAnimatorAdapter {
 		ViewHolder holder;
 		if (convertView == null) {
 			holder = new ViewHolder();
-			convertView = LayoutInflater.from(mContext).inflate(R.layout.store_category_item, parent, false);
+//			convertView = LayoutInflater.from(mContext).inflate(R.layout.store_category_item, parent, false);
 			holder.background = (ImageView) convertView.findViewById(R.id.background);
 			holder.icon = (ImageView) convertView.findViewById(R.id.icon);
 			holder.title = (TextView) convertView.findViewById(R.id.title);
 			holder.intro = (TextView) convertView.findViewById(R.id.intro);
-			holder.titleLayout = convertView.findViewById(R.id.titleLayout);
+//			holder.titleLayout = convertView.findViewById(R.id.titleLayout);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		CategoryItem categoryItem = mAppList.get(position);
+		CategoryInfo categoryItem = mAppList.get(position);
 		String iconUrl = categoryItem.getIconUrl();
 		ImageLoader.getInstance().displayImage(iconUrl, holder.icon);
 		holder.title.setText(categoryItem.getCatetoryName());

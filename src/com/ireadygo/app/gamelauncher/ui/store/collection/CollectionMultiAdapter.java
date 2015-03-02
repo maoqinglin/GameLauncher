@@ -12,7 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.FrameLayout.LayoutParams;
 
 import com.ireadygo.app.gamelauncher.R;
-import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryItem;
+import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryInfo;
 import com.ireadygo.app.gamelauncher.appstore.info.item.CollectionInfo;
 import com.ireadygo.app.gamelauncher.ui.item.ImageItem;
 import com.ireadygo.app.gamelauncher.ui.item.ImageItem.ImageItemHolder;

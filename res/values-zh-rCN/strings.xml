@@ -84,28 +84,24 @@
 
 
     <!-- 免商店-分类(category) -->
-    <string-array name="store_category_titles">
-        <item>创意休闲</item>
-        <item>单机游戏</item>
-        <item>动作射击</item>
-        <item>角色扮演</item>
-        <item>经营策略</item>
-        <item>竞技飞行</item>
-        <item>体育竞技</item>
-        <item>益智棋牌</item>
-        <item>宝岛精选</item>
-    </string-array>
-    <string-array name="store_category_intros">
-        <item>切东西/找茬/减压/宠物/答题/音乐节奏</item>
-        <item>回合制/即时战略/养成/武侠/魔幻/动漫</item>
-        <item>横版/射击/3D/飞行/坦克/狙击</item>
-        <item>回合制/即时战斗/养成/武侠/魔幻/动漫</item>
-        <item>纸牌/战棋/经营/历史/战争/DOTA</item>
-        <item>跑酷/赛车/摩托/赛艇/飞机</item>
-        <item>街机/篮球/足球/网球/台球/其他球类</item>
-        <item>斗地主/棋类/麻将/桌游/德州扑克/纸牌</item>
-        <item>来自宝岛台湾的游戏精选</item>
-    </string-array>
+    <string name="category_item_count_suffix">款</string>
+    <string name="category_title_slg">创意休闲</string>
+    <string name="category_title_olg">单机精选</string>
+    <string name="category_title_stg">动作射击</string>
+    <string name="category_title_rpg">角色扮演</string>
+    <string name="category_title_sim">经营策略</string>
+    <string name="category_title_rsg">竞技飞行</string>
+    <string name="category_title_spt">体育竞技</string>
+    <string name="category_title_pzl">益智棋牌</string>
+    
+    <string name="category_intro_slg">切东西/找茬/减压/宠物/答题/音乐节奏</string>
+    <string name="category_intro_olg">回合制/即时战略/养成/武侠/魔幻/动漫</string>
+    <string name="category_intro_stg">横版/射击/3D/飞行/坦克/狙击</string>
+    <string name="category_intro_rpg">回合制/即时战斗/养成/武侠/魔幻/动漫</string>
+    <string name="category_intro_sim">纸牌/战棋/经营/历史/战争/DOTA</string>
+    <string name="category_intro_rsg">跑酷/赛车/摩托/赛艇/飞机</string>
+    <string name="category_intro_spt">街机/篮球/足球/网球/台球/其他球类</string>
+    <string name="category_intro_pzl">斗地主/棋类/麻将/桌游/德州扑克/纸牌</string>
 
     <!-- 免商店-合集(collection) -->
     <string name="collection_prompt">商店内合集数量</string>

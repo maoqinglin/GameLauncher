@@ -4,6 +4,6 @@
 
     <solid android:color="@color/app_item_bg_green" />
 
-    <corners android:radius="@dimen/corner_shape_radius_normal" />
+    <corners android:radius="@dimen/common_item_shape_internal_radius" />
 
 </shape>
