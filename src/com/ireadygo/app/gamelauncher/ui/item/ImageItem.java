@@ -17,8 +17,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ireadygo.app.gamelauncher.R;
+import com.ireadygo.app.gamelauncher.helper.AnimatorHelper;
 
-public class ImageItem extends BaseAdapterItem{
+public class ImageItem extends BaseAdapterItem {
 	private ImageItemHolder mHolder;
 	private Drawable mIconDrawable;
 	private Animator mSelectedAnimator;
@@ -51,11 +52,11 @@ public class ImageItem extends BaseAdapterItem{
 		mHolder.background = (ImageView) findViewById(R.id.background);
 		mHolder.icon = (ImageView) findViewById(R.id.icon);
 		if (mIconDrawable != null) {
-			LayoutParams params = new LayoutParams(mIconDrawable.getMinimumWidth(),mIconDrawable.getMinimumHeight());
+			LayoutParams params = new LayoutParams(mIconDrawable.getMinimumWidth(), mIconDrawable.getMinimumHeight());
 			mHolder.background.setLayoutParams(params);
 			mHolder.icon.setImageDrawable(mIconDrawable);
 		}
-		mHolder.title = (TextView)findViewById(R.id.title);
+		mHolder.title = (TextView) findViewById(R.id.title);
 	}
 
 	public ImageItemHolder getHolder() {
@@ -64,14 +65,14 @@ public class ImageItem extends BaseAdapterItem{
 
 	@Override
 	public void toSelected(AnimatorListener listener) {
-		int index = ((ViewGroup)getParent()).indexOfChild(this);
-		Log.d("liu.js", "toSelected--index=" + index);
 		if (mUnselectedAnimator != null && mUnselectedAnimator.isRunning()) {
 			mUnselectedAnimator.cancel();
 		}
-//		if (mSelectedAnimator == null) {
-			mSelectedAnimator = createAnimator(listener, 1.1f, 1.2f);
-//		}
+		// if (mSelectedAnimator == null) {
+		float iconScale = 1.088f;
+		float bgScale = AnimatorHelper.calcBgScaleX(10, getWidth(), iconScale);
+		mSelectedAnimator = createAnimator(listener, iconScale, bgScale);
+		// }
 		mSelectedAnimator.start();
 	}
 
@@ -81,9 +82,9 @@ public class ImageItem extends BaseAdapterItem{
 		if (mSelectedAnimator != null && mSelectedAnimator.isRunning()) {
 			mSelectedAnimator.cancel();
 		}
-//		if (mUnselectedAnimator == null) {
-			mUnselectedAnimator = createAnimator(listener, 1, 1);
-//		}
+		// if (mUnselectedAnimator == null) {
+		mUnselectedAnimator = createAnimator(listener, 1, 1);
+		// }
 		mUnselectedAnimator.start();
 	}
 

@@ -31,7 +31,7 @@ public class StoreMenuFragment extends BaseMenuFragment {
 		MenuItem managerMenu = (MenuItem) view.findViewById(R.id.store_menu_manager);
 
 		addMenuItem(searchMenu, new StoreFragment(getRootActivity(), this));
-		addMenuItem(categoryMenu, new StoreFragment(getRootActivity(), this));
+		addMenuItem(categoryMenu, new GameFragment(getRootActivity(), this));
 		addMenuItem(collectionMenu, new CollectionFragment(getRootActivity(), this));
 		addMenuItem(appMenu, new GameFragment(getRootActivity(), this));
 		addMenuItem(managerMenu, new SettingsMultiFragment(getRootActivity(), this));

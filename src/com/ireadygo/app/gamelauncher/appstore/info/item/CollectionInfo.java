@@ -1,13 +1,13 @@
 package com.ireadygo.app.gamelauncher.appstore.info.item;
 
-public class CollectionItem extends AppEntity {
+public class CollectionInfo extends AppEntity {
 	private static final long serialVersionUID = -5850512530441575140L;
 	private int collectionId;
 	private String collectionName;
 	private String collectionDes;
 	private String iconUrl;
 
-	public CollectionItem(int collectionId, String collectionName, String collectionDes, String iconUrl,
+	public CollectionInfo(int collectionId, String collectionName, String collectionDes, String iconUrl,
 			String posterIcon, String posterBg) {
 		setCollectionId(collectionId);
 		setCollectionName(collectionName);

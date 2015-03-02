@@ -17,7 +17,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.appstore.info.item.BannerItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.BindPhoneItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryItem;
-import com.ireadygo.app.gamelauncher.appstore.info.item.CollectionItem;
+import com.ireadygo.app.gamelauncher.appstore.info.item.CollectionInfo;
 import com.ireadygo.app.gamelauncher.appstore.info.item.FeeConfigItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.FreeFlowStatusItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.KeywordItem;
@@ -80,8 +80,8 @@ public class LocalInfo implements IGameInfo {
 	}
 
 	@Override
-	public List<CollectionItem> obtainCollection(int page) throws InfoSourceException {
-		List<CollectionItem> collectionItems = getCachedCollectionsFrmFile();
+	public List<CollectionInfo> obtainCollection(int page) throws InfoSourceException {
+		List<CollectionInfo> collectionItems = getCachedCollectionsFrmFile();
 		if (collectionItems.size() == 0) {
 			throw new InfoSourceException(InfoSourceException.MSG_NO_CACHED_DATA);
 		}
@@ -285,7 +285,7 @@ public class LocalInfo implements IGameInfo {
 		return result;
 	}
 
-	public void cachedCollectionToFile(List<CollectionItem> collections) {
+	public void cachedCollectionToFile(List<CollectionInfo> collections) {
 		if (collections == null || collections.size() == 0) {
 			return;
 		}
@@ -293,7 +293,7 @@ public class LocalInfo implements IGameInfo {
 		StringBuffer sb = new StringBuffer();
 		int length = Math.min(collections.size(), MAX_CACHED_ITEMS);
 		for (int i = 0; i < length; i++) {
-			CollectionItem item = collections.get(i);
+			CollectionInfo item = collections.get(i);
 			sb.append(item.getCollectionId())
 			.append(ITEM_INNER_DIVIDER)
 			.append(item.getCollectionName())
@@ -311,17 +311,17 @@ public class LocalInfo implements IGameInfo {
 		editor.commit();
 	}
 
-	private List<CollectionItem> getCachedCollectionsFrmFile() {
+	private List<CollectionInfo> getCachedCollectionsFrmFile() {
 		String collections = mContext.getSharedPreferences(CACHED_COLLECTIONS_NAME,Context.MODE_PRIVATE).getString(CACHED_COLLECTIONS, "");
 		if (TextUtils.isEmpty(collections)) {
-			return new ArrayList<CollectionItem>();
+			return new ArrayList<CollectionInfo>();
 		}
 		String[] collectionList = collections.split(ITEM_DIVIDER);
-		ArrayList<CollectionItem> result = new ArrayList<CollectionItem>();
+		ArrayList<CollectionInfo> result = new ArrayList<CollectionInfo>();
 		for (String collection : collectionList) {
 			String[] collectionItems = collection.split(ITEM_INNER_DIVIDER);
 			if (collectionItems.length == 6) {
-				CollectionItem item = new CollectionItem(Integer.valueOf(collectionItems[0]),
+				CollectionInfo item = new CollectionInfo(Integer.valueOf(collectionItems[0]),
 						collectionItems[1],
 						collectionItems[2],
 						collectionItems[3],

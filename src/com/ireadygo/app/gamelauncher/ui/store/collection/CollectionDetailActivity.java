@@ -61,8 +61,8 @@ public class CollectionDetailActivity extends BaseActivity implements OnClickLis
 		mListView = (HListView) findViewById(R.id.storeCollectionDetailList);
 		mAdapter = new StoreAppNormalAdapter(this, mListView, mApps);
 		mListView.setAdapter(mAdapter.toAnimationAdapter());
-		mCollectionId = getIntent().getLongExtra(CollectionLayout.EXTRA_COLLECTION_ID, -1);
-		mPosterBgUrl = getIntent().getStringExtra(CollectionLayout.EXTRA_POSTER_BG);
+		mCollectionId = getIntent().getLongExtra(CollectionFragment.EXTRA_COLLECTION_ID, -1);
+		mPosterBgUrl = getIntent().getStringExtra(CollectionFragment.EXTRA_POSTER_BG);
 		mView = getWindow().getDecorView();
 		if (mCollectionId > 0) {
 			loadCollectionDetail();

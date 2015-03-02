@@ -9,7 +9,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.appstore.info.item.BannerItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.BindPhoneItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryItem;
-import com.ireadygo.app.gamelauncher.appstore.info.item.CollectionItem;
+import com.ireadygo.app.gamelauncher.appstore.info.item.CollectionInfo;
 import com.ireadygo.app.gamelauncher.appstore.info.item.FeeConfigItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.FreeFlowStatusItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.KeywordItem;
@@ -40,7 +40,7 @@ public interface IGameInfo {
 	List<CategoryItem> obtainCategorys() throws InfoSourceException;
 	//获取合集信息
 	
-	List<CollectionItem> obtainCollection(int page) throws InfoSourceException;
+	List<CollectionInfo> obtainCollection(int page) throws InfoSourceException;
 	
 	//获取关键字列表
 	List<KeywordItem> obtainKeywords() throws InfoSourceException;

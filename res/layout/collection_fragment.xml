@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res/com.ireadygo.app.gamelauncher"
     android:layout_width="1920dp"
     android:layout_height="match_parent"
     android:clipChildren="false"
@@ -37,7 +37,9 @@
         android:layout_height="match_parent"
         app:hlv_horizontal_spacing="25dp"
         app:hlv_vertical_spacing="0dp"
+       	app:padding_right="100dp"
         app:padding_top="40dp"
+        android:nextFocusLeft="@+id/store_menu_collection"
         app:padding_left="30dp" >
     </com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView>
 

@@ -16,7 +16,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.appstore.info.item.BannerItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.BindPhoneItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryItem;
-import com.ireadygo.app.gamelauncher.appstore.info.item.CollectionItem;
+import com.ireadygo.app.gamelauncher.appstore.info.item.CollectionInfo;
 import com.ireadygo.app.gamelauncher.appstore.info.item.FeeConfigItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.FreeFlowStatusItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.GameState;
@@ -247,11 +247,11 @@ public class RemoteInfo implements IGameInfo {
 	 * 获取指定页的合集信息
 	 */
 	@Override
-	public List<CollectionItem> obtainCollection(int page) throws InfoSourceException {
+	public List<CollectionInfo> obtainCollection(int page) throws InfoSourceException {
 		try {
 			ResultVO resultVO = mAppPlatFormService.getGameCollection(page);
 			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
-				List<CollectionItem> result = new ArrayList<CollectionItem>();
+				List<CollectionInfo> result = new ArrayList<CollectionInfo>();
 				if (resultVO.getObj() != null) {
 					PageListVO pageListVO = (PageListVO)resultVO.getObj();
 					List<AppCollectionVO> appCollectionVOs = (ArrayList<AppCollectionVO>)pageListVO.getList();
@@ -1068,8 +1068,8 @@ public class RemoteInfo implements IGameInfo {
 				item.getCPosterPic());
 	}
 
-	private CollectionItem collectionItemToCollection(AppCollectionVO item) {
-		return new CollectionItem(
+	private CollectionInfo collectionItemToCollection(AppCollectionVO item) {
+		return new CollectionInfo(
 				item.getICollectionId(), 
 				item.getSCollectionName(),
 				item.getSCollectionDec(),

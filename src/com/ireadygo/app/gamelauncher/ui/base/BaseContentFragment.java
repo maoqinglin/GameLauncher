@@ -5,30 +5,36 @@ import android.animation.Animator.AnimatorListener;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.app.Dialog;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.ireadygo.app.gamelauncher.R;
+import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
 import com.ireadygo.app.gamelauncher.ui.Config;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.HomeMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout;
+import com.ireadygo.app.gamelauncher.utils.Utils;
 
 public abstract class BaseContentFragment extends BaseFragment {
 	private OperationTipsLayout mOperationTipsLayout;
 	private BaseMenuFragment mMenuFragment;
 	private int mFocusedX = Config.Content.FOCUSED_X;
 	private int mFocusedY = Config.Content.FOCUSED_Y;
+	private Dialog mLoadingProgress;
+	private GameInfoHub mGameInfoHub;
 
-	public BaseContentFragment(BaseMenuFragment menuFragment) {
-		this.mMenuFragment = menuFragment;
-		initCoordinateParams(Config.Content.INIT_X, Config.Content.INIT_Y);
-	}
+//	public BaseContentFragment(BaseMenuFragment menuFragment) {
+//		this.mMenuFragment = menuFragment;
+//		initCoordinateParams(Config.Content.INIT_X, Config.Content.INIT_Y);
+//	}
 
 	public BaseContentFragment(Activity activity, BaseMenuFragment menuFragment) {
 		super(activity);
 		this.mMenuFragment = menuFragment;
+		mGameInfoHub = GameInfoHub.instance(activity);
 		initCoordinateParams(Config.Content.INIT_X, Config.Content.INIT_Y);
 	}
 
@@ -154,5 +160,25 @@ public abstract class BaseContentFragment extends BaseFragment {
 	@Override
 	public int getOutAnimatorDuration() {
 		return Config.Animator.DURATION_SHORT;
+	}
+	
+	protected void showLoadingProgress() {
+		if(mLoadingProgress == null){
+			mLoadingProgress = Utils.createLoadingDialog(getRootActivity());
+			mLoadingProgress.setCancelable(false);
+		}
+		if(!mLoadingProgress.isShowing()){
+			mLoadingProgress.show();
+		}
+	}
+	
+	protected void dimissLoadingProgress() {
+		if(mLoadingProgress != null && mLoadingProgress.isShowing()){
+			mLoadingProgress.dismiss();
+		}
+	}
+	
+	protected GameInfoHub getGameInfoHub() {
+		return mGameInfoHub;
 	}
 }

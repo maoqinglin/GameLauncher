@@ -16,7 +16,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.appstore.info.item.BannerItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.BindPhoneItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryItem;
-import com.ireadygo.app.gamelauncher.appstore.info.item.CollectionItem;
+import com.ireadygo.app.gamelauncher.appstore.info.item.CollectionInfo;
 import com.ireadygo.app.gamelauncher.appstore.info.item.FeeConfigItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.FreeFlowStatusItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.KeywordItem;
@@ -132,7 +132,7 @@ public class GameInfoHub implements IGameInfo {
 	}
 
 	@Override
-	public List<CollectionItem> obtainCollection(int page) throws InfoSourceException {
+	public List<CollectionInfo> obtainCollection(int page) throws InfoSourceException {
 		if (!NetworkUtils.isNetworkConnected(mContext)) {
 			try {
 				return mMemoryInfo.obtainCollection(page);
@@ -144,12 +144,12 @@ public class GameInfoHub implements IGameInfo {
 				try {
 					return mMemoryInfo.obtainCollection(page);
 				} catch (InfoSourceException e) {
-					List<CollectionItem> result = mRemoteInfo.obtainCollection(page);
+					List<CollectionInfo> result = mRemoteInfo.obtainCollection(page);
 					mMemoryInfo.cachedCollectionItems(page, result);
 					return result;
 				}
 			} else {
-				List<CollectionItem> result = mRemoteInfo.obtainCollection(page);
+				List<CollectionInfo> result = mRemoteInfo.obtainCollection(page);
 				mMemoryInfo.cachedCollectionItems(page, result);
 				return result;
 			}

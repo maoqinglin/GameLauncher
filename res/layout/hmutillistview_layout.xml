@@ -17,7 +17,7 @@
         android:nextFocusDown="@+id/downHList"
         android:nextFocusUp="@+id/menu_settings"
         android:overScrollMode="never"
-        app:hlv_transcriptMode="normal" />
+         />
 
     <com.ireadygo.app.gamelauncher.ui.widget.HListView
         android:id="@+id/downHList"
@@ -29,6 +29,6 @@
         android:nextFocusDown="@+id/downHList"
         android:nextFocusUp="@+id/upHList"
         android:overScrollMode="never"
-        app:hlv_transcriptMode="normal" />
+         />
 
 </LinearLayout>

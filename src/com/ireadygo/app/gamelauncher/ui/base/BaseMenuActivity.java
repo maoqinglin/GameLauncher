@@ -106,4 +106,8 @@ public abstract class BaseMenuActivity extends BaseActivity {
 		}
 		mRightTranslateAnimator.start();
 	}
+	
+	public View getFocusView(){
+		return mFocusView;
+	}
 }

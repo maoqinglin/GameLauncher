@@ -79,8 +79,15 @@ public class HMultiListView extends LinearLayout {
 		LayoutInflater.from(context).inflate(R.layout.hmutillistview_layout, this, true);
 		HListView upHListView = (HListView) findViewById(R.id.upHList);
 		upHListView.setPadding(mPaddingLeft, mPaddingTop, mPaddingRight, mVerticalSpacing / 2);
+		upHListView.setNextFocusLeftId(getNextFocusLeftId());
+		upHListView.setNextFocusRightId(getNextFocusRightId());
+		upHListView.setNextFocusUpId(getNextFocusUpId());
+		
 		HListView downHListView = (HListView) findViewById(R.id.downHList);
 		downHListView.setPadding(mPaddingLeft, mVerticalSpacing / 2, mPaddingRight, mPaddingBottom);
+		downHListView.setNextFocusLeftId(getNextFocusLeftId());
+		downHListView.setNextFocusRightId(getNextFocusRightId());
+		downHListView.setNextFocusDownId(getNextFocusDownId());
 		mHListViews.add(upHListView);
 		mHListViews.add(downHListView);
 		setHorizontalSpacing(mHorizontalSpacing);
