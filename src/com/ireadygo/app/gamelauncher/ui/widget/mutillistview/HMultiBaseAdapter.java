@@ -18,5 +18,5 @@ public interface HMultiBaseAdapter {
 
 	List<?> getData();
 
-	void addEmptyData();
+	View getEmptyView(int position, View convertView, ViewGroup parent);
 }

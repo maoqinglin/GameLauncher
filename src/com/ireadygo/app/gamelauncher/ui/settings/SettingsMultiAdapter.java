@@ -27,7 +27,6 @@ public class SettingsMultiAdapter implements HMultiBaseAdapter {
 		mDataList = list;
 		mListViewNum = listViewNum;
 		mHListViews = hListViews;
-		addEmptyData();
 	}
 
 	@Override
@@ -90,16 +89,11 @@ public class SettingsMultiAdapter implements HMultiBaseAdapter {
 	}
 
 	@Override
-	public void addEmptyData() {
-		if (mListViewNum != 0) {
-			int size = mDataList.size();
-			int mod = size % mListViewNum;
-			if (mod != 0) {
-				int extra = mListViewNum - mod;
-				for (int i = 0; i < extra; i++) {
-					mDataList.add(new SettingsItemEntity());
-				}
-			}
+	public View getEmptyView(int position, View convertView, ViewGroup parent) {
+		if (convertView == null) {
+			convertView = newView(position, convertView, parent);
 		}
+		convertView.setVisibility(View.GONE);
+		return convertView;
 	}
 }

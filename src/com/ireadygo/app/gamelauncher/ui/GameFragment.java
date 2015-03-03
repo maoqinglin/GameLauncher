@@ -24,12 +24,9 @@ import com.ireadygo.app.gamelauncher.game.info.ItemInfo;
 import com.ireadygo.app.gamelauncher.game.info.ShortcutInfo;
 import com.ireadygo.app.gamelauncher.game.utils.Utilities;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
-import com.ireadygo.app.gamelauncher.ui.item.AppItem;
-import com.ireadygo.app.gamelauncher.ui.item.AppItem.AppItemHolder;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
-import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 import com.ireadygo.app.gamelauncher.utils.PackageUtils;
 import com.ireadygo.app.gamelauncher.utils.StaticsUtils;
@@ -100,59 +97,14 @@ public class GameFragment extends BaseContentFragment implements Callbacks{
 	}
 	@Override
 	public void gameAddOrUpdate(ItemInfo info, boolean isAdd) {
-		updateGridData(mGameList, info);
+		notifyDataSetChanged();
 	}
 
 	@Override
 	public void gameRemove(ItemInfo info) {
-		updateDataByGameRemove(mGameList, info);
-	}
-
-	private void updateGridData(final List<ItemInfo> appList, final ItemInfo info) {
-		if (null != info && Favorites.APP_TYPE_GAME == info.appType) {
-			if (null == appList || dataFilter(appList, info)) {
-				return;
-			}
-			appList.add(info);
-			notifyDataSetChanged();
-		}
-	}
-
-	private boolean dataFilter(final List<ItemInfo> appList, final ItemInfo info) {
-		boolean isExist = false;
-		for (ItemInfo appItem : appList) {
-			if (appItem instanceof ShortcutInfo && appItem.equals(info)) {
-				isExist = true;
-				updateInfo((ShortcutInfo) appItem, (ShortcutInfo) info);
-			}
-		}
-		return isExist;
-	}
-
-	private void updateInfo(ShortcutInfo oriInfo, ShortcutInfo newInfo) {
-		oriInfo.intent = newInfo.intent;
-		oriInfo.appIcon = newInfo.appIcon;
 		notifyDataSetChanged();
 	}
 
-	private synchronized void updateDataByGameRemove(final List<ItemInfo> appInfos, final ItemInfo info) {
-		if (null != info && null != appInfos) {
-			int size = appInfos.size();
-			for (int i = 0; i < size; i++) {
-				ItemInfo item = appInfos.get(i);
-				if (null != item) {
-					if (item instanceof ShortcutInfo) {
-						ShortcutInfo appShortcutInfo = (ShortcutInfo) item;
-						if (appShortcutInfo.getCellSortId() == info.getCellSortId() && appShortcutInfo.equals(info)) {
-							appInfos.remove(item);
-							break;
-						}
-					}
-				}
-			}
-			notifyDataSetChanged();
-		}
-	}
 
 	OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
 

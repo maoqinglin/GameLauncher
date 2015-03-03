@@ -13,10 +13,10 @@
         android:layout_height="wrap_content"
         android:background="@drawable/game_item_bg" />
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/icon_layout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:layout_height="wrap_content" >
 
         <ImageView
             android:id="@+id/icon"
@@ -28,16 +28,18 @@
             style="@style/mygame_game_text_style"
             android:layout_width="@dimen/mygame_app_width"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|bottom"
+            android:layout_below="@+id/icon"
             android:gravity="center" />
-    </LinearLayout>
 
-    <ImageView
-        android:id="@+id/delete_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|right"
-        android:src="@drawable/icon_gametask_delete"
-        android:visibility="invisible" />
+        <ImageView
+            android:id="@+id/delete_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/icon"
+            android:layout_alignRight="@+id/icon"
+            android:src="@drawable/icon_gametask_delete"
+            android:visibility="invisible" />
+
+    </RelativeLayout>
 
 </FrameLayout>

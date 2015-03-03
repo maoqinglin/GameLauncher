@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -40,25 +41,13 @@ public class AppAdapter implements HMultiBaseAdapter {
 		mContext = context;
 		appList.clear();
 		this.appList = list;
-		addEmptyData();
-	}
-
-	@Override
-	public void addEmptyData() {
-		if (mListViewNum != 0) {
-			int size = appList.size();
-			int mod = size % mListViewNum;
-			if (mod != 0) {
-				int extra = mListViewNum - mod;
-				for (int i = 0; i < extra; i++) {
-					appList.add(new ItemInfo());
-				}
-			}
-		}
 	}
 
 	@Override
 	public Object getItem(int position) {
+		if (appList == null || position > appList.size() - 1) {
+			return null;
+		}
 		return appList.get(position);
 	}
 
@@ -77,6 +66,7 @@ public class AppAdapter implements HMultiBaseAdapter {
 	}
 
 	public void bindView(final int position, View convertView) {
+		convertView.setVisibility(View.VISIBLE);
 		final AppItemHolder holder = ((AppItem)convertView).getHolder();
 		if (null != holder) {
 			if (appList.size() > 0 && position < appList.size()) {
@@ -150,7 +140,17 @@ public class AppAdapter implements HMultiBaseAdapter {
 	}
 
 	@Override
-	public List<?> getData() {
+	public List<ItemInfo> getData() {
 		return appList;
 	}
+
+	@Override
+	public View getEmptyView(int position, View convertView, ViewGroup parent) {
+		if (convertView == null) {
+			convertView = newView(position, convertView, parent);
+		}
+		convertView.setVisibility(View.GONE);
+		return convertView;
+	}
+
 }

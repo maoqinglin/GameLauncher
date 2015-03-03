@@ -45,7 +45,6 @@ public class CategoryMultiAdapter implements HMultiBaseAdapter {
 		this.mContext = context;
 		this.mMultiListView = multiListView;
 		initCategoryDatas();
-		addEmptyData();
 		multiListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -190,14 +189,11 @@ public class CategoryMultiAdapter implements HMultiBaseAdapter {
 	}
 
 	@Override
-	public void addEmptyData() {
-		int size = mCategoryDatas.size();
-		int mod = size % LIST_NUM;
-		if (mod != 0) {
-			int extra = LIST_NUM - mod;
-			for (int i = 0; i < extra; i++) {
-				mCategoryDatas.add(new InternalCategoryInfo());
-			}
+	public View getEmptyView(int position, View convertView, ViewGroup parent) {
+		if (convertView == null) {
+			convertView = new CategoryItem(mContext);
 		}
+		convertView.setVisibility(View.GONE);
+		return convertView;
 	}
 }

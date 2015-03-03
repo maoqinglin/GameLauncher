@@ -18,7 +18,9 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 
+import com.google.zxing.maxicode.MaxiCodeReader;
 import com.ireadygo.app.gamelauncher.R;
+import com.ireadygo.app.gamelauncher.game.info.ItemInfo;
 import com.ireadygo.app.gamelauncher.ui.BaseAnimatorAdapter;
 import com.ireadygo.app.gamelauncher.ui.SnailKeyCode;
 import com.ireadygo.app.gamelauncher.ui.item.BaseAdapterItem;
@@ -44,6 +46,7 @@ public class HMultiListView extends LinearLayout {
 	private List<List<?>> mDataLists = new ArrayList<List<?>>();
 	private TouchScrollState mTouchScrollState = TouchScrollState.NONE;
 	private int mMainScrollListViewIndex = -1;
+	private int mMaxCount;
 
 	private int mPaddingLeft;
 	private int mPaddingTop;
@@ -237,16 +240,17 @@ public class HMultiListView extends LinearLayout {
 	 * @param list
 	 */
 	private <T> void initDataLists(int listNum, List<T> list) {
-		if (!mDataLists.isEmpty()) {
+		if (listNum != 0 && list != null && !list.isEmpty() && !mDataLists.isEmpty()) {
 			for (List<?> listData : mDataLists) {
 				listData.clear();// 清除单个列表数据
 			}
-
+			int size = list.size();
 			for (int j = 0; j < list.size(); j++) {
 				int dataListIndex = j % listNum;
 				List<T> dataList = (List<T>) mDataLists.get(dataListIndex);
 				dataList.add((T) list.get(j));
 			}
+			mMaxCount = size % listNum == 0 ? size / listNum : size / listNum + 1;
 		}
 	}
 
@@ -255,6 +259,13 @@ public class HMultiListView extends LinearLayout {
 			if (hListView.hasFocus()) {
 				return (BaseAdapter) hListView.getAdapter();
 			}
+		}
+		return null;
+	}
+
+	private View getEmptyView(int arg0, View arg1, ViewGroup arg2) {
+		if (mHMultiBaseAdapter != null) {
+			return mHMultiBaseAdapter.getEmptyView(arg0, arg1, arg2);
 		}
 		return null;
 	}
@@ -291,8 +302,8 @@ public class HMultiListView extends LinearLayout {
 
 		public void setData(List<?> data, int num, int index) {
 			this.data = data;
-			listNum = num;
-			dataIndex = index;
+			this.listNum = num;
+			this.dataIndex = index;
 		}
 
 		public int getDataIndex() {
@@ -302,7 +313,7 @@ public class HMultiListView extends LinearLayout {
 		@Override
 		public int getCount() {
 			if (data != null && !data.isEmpty()) {
-				return data.size();
+				return mMaxCount;
 			}
 			return 0;
 		}
@@ -324,6 +335,9 @@ public class HMultiListView extends LinearLayout {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			int realPos = getRealPos(position, listNum, dataIndex);
+			if(position > data.size()-1){
+				return HMultiListView.this.getEmptyView(realPos, convertView, parent);
+			}
 			return HMultiListView.this.getView(realPos, convertView, parent);
 		}
 

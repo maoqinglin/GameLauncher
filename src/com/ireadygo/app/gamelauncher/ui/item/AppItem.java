@@ -11,6 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -46,6 +47,7 @@ public class AppItem extends BaseAdapterItem {
 	private void initView(Context context) {
 		LayoutInflater.from(context).inflate(R.layout.app_item, this, true);
 		mHolder = new AppItemHolder();
+		mHolder.iconLayout = (ViewGroup)findViewById(R.id.icon_layout);
 		mHolder.background = (ImageView) findViewById(R.id.background);
 		mHolder.icon = (ImageView) findViewById(R.id.icon);
 		mHolder.uninstallIcon = (ImageView) findViewById(R.id.delete_icon);
@@ -84,7 +86,7 @@ public class AppItem extends BaseAdapterItem {
 
 		PropertyValuesHolder iconScaleXHolder = PropertyValuesHolder.ofFloat(View.SCALE_X, scaleIcon);
 		PropertyValuesHolder iconScaleYHolder = PropertyValuesHolder.ofFloat(View.SCALE_Y, scaleIcon);
-		ObjectAnimator animatorIcon = ObjectAnimator.ofPropertyValuesHolder(mHolder.icon, iconScaleXHolder,
+		ObjectAnimator animatorIcon = ObjectAnimator.ofPropertyValuesHolder(mHolder.iconLayout, iconScaleXHolder,
 				iconScaleYHolder);
 
 		PropertyValuesHolder bgScaleXHolder = PropertyValuesHolder.ofFloat(View.SCALE_X, scaleBg);
@@ -101,6 +103,7 @@ public class AppItem extends BaseAdapterItem {
 	}
 
 	public class AppItemHolder {
+		public ViewGroup iconLayout;
 		public ImageView background;
 		public ImageView icon;
 		public ImageView uninstallIcon;

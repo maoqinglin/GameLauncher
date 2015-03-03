@@ -90,7 +90,6 @@ public class AppFragment extends BaseContentFragment implements Callbacks {
 
 	@Override
 	public void bindApps(List<ItemInfo> infos) {
-		Log.d("lmq", "bindApps---mAppList.size = "+mAppList.size());
 		mAppList = infos;
 		if(mHMultiListView != null){
 			mHMultiListView.notifyDataSetChanged();
@@ -110,58 +109,12 @@ public class AppFragment extends BaseContentFragment implements Callbacks {
 	}
 	@Override
 	public void gameAddOrUpdate(ItemInfo info, boolean isAdd) {
-		updateGridData(mAppList, info);
+		notifyDataSetChanged();
 	}
 
 	@Override
 	public void gameRemove(ItemInfo info) {
-		updateDataByGameRemove(mAppList, info);
-	}
-
-	private void updateGridData(final List<ItemInfo> appList, final ItemInfo info) {
-		if (null != info && Favorites.APP_TYPE_APPLICATION == info.appType) {
-			if (null == appList || dataFilter(appList, info)) {
-				return;
-			}
-			appList.add(info);
-			notifyDataSetChanged();
-		}
-	}
-
-	private boolean dataFilter(final List<ItemInfo> appList, final ItemInfo info) {
-		boolean isExist = false;
-		for (ItemInfo appItem : appList) {
-			if (appItem instanceof ShortcutInfo && appItem.equals(info)) {
-				isExist = true;
-				updateInfo((ShortcutInfo) appItem, (ShortcutInfo) info);
-			}
-		}
-		return isExist;
-	}
-
-	private void updateInfo(ShortcutInfo oriInfo, ShortcutInfo newInfo) {
-		oriInfo.intent = newInfo.intent;
-		oriInfo.appIcon = newInfo.appIcon;
 		notifyDataSetChanged();
-	}
-
-	private synchronized void updateDataByGameRemove(final List<ItemInfo> appInfos, final ItemInfo info) {
-		if (null != info && null != appInfos) {
-			int size = appInfos.size();
-			for (int i = 0; i < size; i++) {
-				ItemInfo item = appInfos.get(i);
-				if (null != item) {
-					if (item instanceof ShortcutInfo) {
-						ShortcutInfo appShortcutInfo = (ShortcutInfo) item;
-						if (appShortcutInfo.getCellSortId() == info.getCellSortId() && appShortcutInfo.equals(info)) {
-							appInfos.remove(item);
-							break;
-						}
-					}
-				}
-			}
-			notifyDataSetChanged();
-		}
 	}
 
 	OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
@@ -195,8 +148,8 @@ public class AppFragment extends BaseContentFragment implements Callbacks {
 
 		@Override
 		public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-			ItemInfo info = (ItemInfo) mAppAdapter.getItem(position);
-			if (TextUtils.isEmpty(info.packageName)) {
+			Object obj = mAppAdapter.getItem(position);
+			if (obj == null) {
 				int prePos = parent.getSelectedItemPosition();
 				parent.setSelection(prePos - 1);
 			}
@@ -213,14 +166,11 @@ public class AppFragment extends BaseContentFragment implements Callbacks {
 
 		@Override
 		public void onScrollStateChanged(AbsHListView view, int scrollState) {
-			Log.d("lmq", "view.getid = " + view.getId() + "----scrollState = " + scrollState);
 
 		}
 
 		@Override
 		public void onScroll(AbsHListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-			Log.d("lmq", "view.getid = " + view.getId() + "----firstVisibleItem = " + firstVisibleItem
-					+ "---visibleItemCount = " + visibleItemCount + "---totalItemCount =" + totalItemCount);
 
 		}
 	};

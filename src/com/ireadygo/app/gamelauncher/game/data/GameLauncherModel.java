@@ -1269,25 +1269,62 @@ public class GameLauncherModel{
 		};
 		runOnMainThread(r);
     }
-    private synchronized void dataSync(ItemInfo info, boolean isAdd) {
-        if (info != null) {
-            if (isAdd) {
-                if (!appInfos.contains(info) && info.appType == Favorites.APP_TYPE_APPLICATION) {
-                    appInfos.add(info);
-                    Log.e("lmq", "dataSync--appInfos-isAdd = "+info);
-                }else if (!gameInfos.contains(info) && info.appType == Favorites.APP_TYPE_GAME) {
-                    Log.e("lmq", "dataSync---isAdd = "+info);
-                    gameInfos.add(info);
-                }
-            } else {
-                if (appInfos.contains(info)) {
-                    appInfos.remove(info);
-                }
-                if (gameInfos.contains(info)) {
-                    gameInfos.remove(info);
-                }
-            }
-        }
+
+	private synchronized void dataSync(ItemInfo info, boolean isAdd) {
+		if (info != null) {
+			if (isAdd) {
+				if (info.appType == Favorites.APP_TYPE_APPLICATION) {
+					if (dataFilter(appInfos, info)) {
+						return;
+					}
+					appInfos.add(info);
+					Log.d("lmq", "dataSync--appInfos-isAdd = " + info);
+				} else if (info.appType == Favorites.APP_TYPE_GAME) {
+					if (dataFilter(gameInfos, info)) {
+						return;
+					}
+					Log.d("lmq", "dataSync---isAdd = " + info);
+					gameInfos.add(info);
+				}
+			} else {
+				updateDataByGameRemove(appInfos, info);
+				updateDataByGameRemove(gameInfos, info);
+			}
+		}
+	}
+
+	private boolean dataFilter(final List<ItemInfo> appList, final ItemInfo info) {
+		boolean isExist = false;
+		for (ItemInfo appItem : appList) {
+			if (appItem instanceof ShortcutInfo && appItem.equals(info)) {
+				isExist = true;
+				updateInfo((ShortcutInfo) appItem, (ShortcutInfo) info);
+			}
+		}
+		return isExist;
+	}
+
+	private void updateInfo(ShortcutInfo oriInfo, ShortcutInfo newInfo) {
+		oriInfo.intent = newInfo.intent;
+		oriInfo.appIcon = newInfo.appIcon;
+	}
+
+	private void updateDataByGameRemove(final List<ItemInfo> appInfos, final ItemInfo info) {
+		if (null != info && null != appInfos) {
+			int size = appInfos.size();
+			for (int i = 0; i < size; i++) {
+				ItemInfo item = appInfos.get(i);
+				if (null != item) {
+					if (item instanceof ShortcutInfo) {
+						ShortcutInfo appShortcutInfo = (ShortcutInfo) item;
+						if (appShortcutInfo.equals(info)) {
+							appInfos.remove(item);
+							break;
+						}
+					}
+				}
+			}
+		}
 	}
 
 	private synchronized void updateAppTypeAndDisplayMode(Cursor cursor, int appType, int displayMode) {

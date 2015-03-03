@@ -31,7 +31,6 @@ public class CollectionMultiAdapter implements HMultiBaseAdapter {
 		this.mContext = mContext;
 		this.mMultiListView = mMultiListView;
 		this.mCollectionDatas = mCollectionDatas;
-		addEmptyData();
 	}
 
 	@Override
@@ -76,15 +75,12 @@ public class CollectionMultiAdapter implements HMultiBaseAdapter {
 	}
 
 	@Override
-	public void addEmptyData() {
-		int size = mCollectionDatas.size();
-		int mod = size % LIST_NUM;
-		if (mod != 0) {
-			int extra = LIST_NUM - mod;
-			for (int i = 0; i < extra; i++) {
-				mCollectionDatas.add(new CollectionInfo());
-			}
+	public View getEmptyView(int position, View convertView, ViewGroup parent) {
+		if (convertView == null) {
+			convertView = new ImageItem(mContext);
 		}
+		convertView.setVisibility(View.GONE);
+		return convertView;
 	}
 
 }

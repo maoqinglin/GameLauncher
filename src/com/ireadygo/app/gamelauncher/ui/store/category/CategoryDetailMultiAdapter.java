@@ -71,8 +71,12 @@ public class CategoryDetailMultiAdapter implements HMultiBaseAdapter {
 	}
 
 	@Override
-	public void addEmptyData() {
-		
+	public View getEmptyView(int position, View convertView, ViewGroup parent) {
+		if (convertView == null) {
+			convertView = new AppItem(mContext);
+		}
+		convertView.setVisibility(View.GONE);
+		return convertView;
 	}
 
 }
