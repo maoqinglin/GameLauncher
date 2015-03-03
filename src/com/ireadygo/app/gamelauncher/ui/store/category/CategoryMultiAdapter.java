@@ -12,55 +12,62 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.ireadygo.app.gamelauncher.R;
-import com.ireadygo.app.gamelauncher.game.info.ItemInfo;
-import com.ireadygo.app.gamelauncher.ui.item.ImageItem;
-import com.ireadygo.app.gamelauncher.ui.item.ImageItem.ImageItemHolder;
 import com.ireadygo.app.gamelauncher.ui.store.category.CategoryItem.CategoryItemHoder;
+import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
+import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiBaseAdapter;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 
 public class CategoryMultiAdapter implements HMultiBaseAdapter {
-	/** 角色扮演 **/
-	private static final String CATEGORY_ID_RPG = "1";
 	/** 创意休闲 **/
-	private static final String CATEGORY_ID_SLG = "6";
-	/** 单机游戏 **/
-	private static final String CATEGORY_ID_OLG = "2";
+	public static final String CATEGORY_ID_SLG = "1";
 	/** 动作射击 **/
-	private static final String CATEGORY_ID_STG = "4";
-	/** 经营策略 **/
-	private static final String CATEGORY_ID_SIM = "1";
+	public static final String CATEGORY_ID_STG = "2";
 	/** 益智棋牌 **/
-	private static final String CATEGORY_ID_PZL = "1";
-	/** 竞技飞行 **/
-	private static final String CATEGORY_ID_RSG = "1";
+	public static final String CATEGORY_ID_PZL = "3";
+	/** 角色扮演 **/
+	public static final String CATEGORY_ID_RPG = "4";
 	/** 体育竞技 **/
-	private static final String CATEGORY_ID_SPT = "1";
+	public static final String CATEGORY_ID_SPT = "5";
+	/** 单机游戏 **/
+	public static final String CATEGORY_ID_OLG = "6";
+	/** 经营策略 **/
+	public static final String CATEGORY_ID_SIM = "7";
+	/** 竞技飞行 **/
+	public static final String CATEGORY_ID_RSG = "8";
 
 	private static final int LIST_NUM = 2;
 	private Context mContext;
 	private HMultiListView mMultiListView;
 	private List<InternalCategoryInfo> mCategoryDatas = new ArrayList<InternalCategoryInfo>();
 
-	public CategoryMultiAdapter(Context mContext, HMultiListView mMultiListView) {
-		this.mContext = mContext;
-		this.mMultiListView = mMultiListView;
+	public CategoryMultiAdapter(Context context, HMultiListView multiListView) {
+		this.mContext = context;
+		this.mMultiListView = multiListView;
 		initCategoryDatas();
 		addEmptyData();
+		multiListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				CategoryDetailActivity.startSelf(mContext, position);
+			}
+
+		});
 	}
 
 	private void initCategoryDatas() {
-		// 角色扮演RPG
 		Resources res = mContext.getResources();
-		String intro = res.getString(R.string.category_intro_rpg);
-		InternalCategoryInfo categoryInfo = new InternalCategoryInfo(CATEGORY_ID_RPG, R.string.category_title_rpg,
-				R.drawable.category_item_bg_rpg, R.drawable.category_item_title_bg_blue, intro);
+		// 创意休闲SLG
+		String intro = res.getString(R.string.category_intro_slg);
+		InternalCategoryInfo categoryInfo = new InternalCategoryInfo(CATEGORY_ID_SLG, R.string.category_title_slg,
+				R.drawable.category_item_bg_slg, R.drawable.category_item_title_bg_green, intro);
 		mCategoryDatas.add(categoryInfo);
 
-		// 创意休闲SLG
-		intro = res.getString(R.string.category_intro_slg);
-		categoryInfo = new InternalCategoryInfo(CATEGORY_ID_SLG, R.string.category_title_slg,
-				R.drawable.category_item_bg_slg, R.drawable.category_item_title_bg_green, intro);
+		// 动作射击STG
+		intro = res.getString(R.string.category_intro_stg);
+		categoryInfo = new InternalCategoryInfo(CATEGORY_ID_STG, R.string.category_title_stg,
+				R.drawable.category_item_bg_stg, R.drawable.category_item_title_bg_green, intro);
 		mCategoryDatas.add(categoryInfo);
 
 		// 益智棋牌PZL
@@ -69,16 +76,22 @@ public class CategoryMultiAdapter implements HMultiBaseAdapter {
 				R.drawable.category_item_bg_pzl, R.drawable.category_item_title_bg_brown, intro);
 		mCategoryDatas.add(categoryInfo);
 
+		// 角色扮演RPG
+		intro = res.getString(R.string.category_intro_rpg);
+		categoryInfo = new InternalCategoryInfo(CATEGORY_ID_RPG, R.string.category_title_rpg,
+				R.drawable.category_item_bg_rpg, R.drawable.category_item_title_bg_blue, intro);
+		mCategoryDatas.add(categoryInfo);
+
+		// 体育竞技SPT
+		intro = res.getString(R.string.category_intro_spt);
+		categoryInfo = new InternalCategoryInfo(CATEGORY_ID_SPT, R.string.category_title_spt,
+				R.drawable.category_item_bg_spt, R.drawable.category_item_title_bg_green, intro);
+		mCategoryDatas.add(categoryInfo);
+
 		// 单机精选OLG
 		intro = res.getString(R.string.category_intro_olg);
 		categoryInfo = new InternalCategoryInfo(CATEGORY_ID_OLG, R.string.category_title_olg,
 				R.drawable.category_item_bg_olg, R.drawable.category_item_title_bg_blue, intro);
-		mCategoryDatas.add(categoryInfo);
-
-		// 动作射击STG
-		intro = res.getString(R.string.category_intro_stg);
-		categoryInfo = new InternalCategoryInfo(CATEGORY_ID_STG, R.string.category_title_stg,
-				R.drawable.category_item_bg_stg, R.drawable.category_item_title_bg_green, intro);
 		mCategoryDatas.add(categoryInfo);
 
 		// 经营策略SIM
@@ -93,11 +106,6 @@ public class CategoryMultiAdapter implements HMultiBaseAdapter {
 				R.drawable.category_item_bg_rsg, R.drawable.category_item_title_bg_brown, intro);
 		mCategoryDatas.add(categoryInfo);
 
-		// 体育竞技SPT
-		intro = res.getString(R.string.category_intro_spt);
-		categoryInfo = new InternalCategoryInfo(CATEGORY_ID_SPT, R.string.category_title_spt,
-				R.drawable.category_item_bg_spt, R.drawable.category_item_title_bg_green, intro);
-		mCategoryDatas.add(categoryInfo);
 	}
 
 	@Override

@@ -24,7 +24,7 @@ public class StoreMenuFragment extends BaseMenuFragment {
 
 	@Override
 	public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.menu_store, container, false);
+		View view = inflater.inflate(R.layout.store_menu_fragment, container, false);
 		MenuItem searchMenu = (MenuItem) view.findViewById(R.id.store_menu_search);
 		MenuItem categoryMenu = (MenuItem) view.findViewById(R.id.store_menu_category);
 		MenuItem collectionMenu = (MenuItem) view.findViewById(R.id.store_menu_collection);

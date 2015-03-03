@@ -16,6 +16,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryInfo;
 import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
 import com.ireadygo.app.gamelauncher.ui.store.StoreBaseContentLayout;
 import com.ireadygo.app.gamelauncher.ui.store.StoreDetailActivity;
+import com.ireadygo.app.gamelauncher.ui.store.collection.CollectionDetailActivity;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
@@ -59,7 +60,7 @@ public class CategoryLayout extends StoreBaseContentLayout {
 	}
 
 	private void startCategoryDetailActivity(long categoryId) {
-		Intent intent = new Intent(getContext(), CategoryDetailActivity.class);
+		Intent intent = new Intent(getContext(), CollectionDetailActivity.class);
 		intent.putExtra(CategoryLayout.EXTRA_CATEGORY_ID, categoryId);
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		SoundPoolManager.instance(getContext()).play(SoundPoolManager.SOUND_ENTER);

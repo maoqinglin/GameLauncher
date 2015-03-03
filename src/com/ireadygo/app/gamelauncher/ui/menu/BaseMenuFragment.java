@@ -291,4 +291,11 @@ public abstract class BaseMenuFragment extends BaseFragment {
 			mMenuItemList.get(curPos).requestFocus();
 		}
 	}
+
+	public void requestFocusByPosition(int position) {
+		if (position < 0 || position >= mMenuItemList.size()) {
+			return;
+		}
+		mMenuItemList.get(position).requestFocus();
+	}
 }

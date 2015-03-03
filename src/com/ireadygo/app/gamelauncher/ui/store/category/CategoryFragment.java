@@ -1,14 +1,21 @@
 package com.ireadygo.app.gamelauncher.ui.store.category;
 
+import java.util.List;
+
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.ireadygo.app.gamelauncher.R;
+import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
+import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryInfo;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
+import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
+import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiBaseAdapter;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 
@@ -33,6 +40,7 @@ public class CategoryFragment extends BaseContentFragment {
 		mMultiListView = (HMultiListView) view.findViewById(R.id.category_list);
 		mAdapter = new CategoryMultiAdapter(getRootActivity(), mMultiListView);
 		mMultiListView.setAdapter(mAdapter);
+		loadData(1);
 	}
 
 	@Override
@@ -40,4 +48,34 @@ public class CategoryFragment extends BaseContentFragment {
 		return mMultiListView.hasFocus();
 	}
 
+	private void loadData(int page) {
+		new LoadCategoryTask().execute(page);
+	}
+
+	private class LoadCategoryTask extends AsyncTask<Integer, Void, List<CategoryInfo>> {
+
+		@Override
+		protected List<CategoryInfo> doInBackground(Integer... params) {
+			if (params == null || params.length == 0) {
+				return null;
+			}
+			int page = params[0];
+			if (page < 0) {
+				return null;
+			}
+			try {
+				return getGameInfoHub().obtainCategorys();
+			} catch (InfoSourceException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(List<CategoryInfo> result) {
+			if (isCancelled() || result == null || result.isEmpty()) {
+				return;
+			}
+		}
+	}
 }

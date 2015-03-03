@@ -14,6 +14,7 @@ import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout;
 import com.ireadygo.app.gamelauncher.utils.StaticsUtils;
 
 public abstract class BaseMenuActivity extends BaseActivity {
+	public static final String EXTRA_FOCUS_POSITION = "EXTRA_FOCUS_POSITION";
 	private int mLastKeyCode = -1;
 	private long mLastKeyTime;
 
@@ -109,5 +110,9 @@ public abstract class BaseMenuActivity extends BaseActivity {
 	
 	public View getFocusView(){
 		return mFocusView;
+	}
+	
+	public BaseMenuFragment getMenuFragment(){
+		return mMenuFragment;
 	}
 }
