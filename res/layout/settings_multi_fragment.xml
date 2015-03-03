@@ -10,14 +10,10 @@
         android:id="@+id/mutillist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:nextFocusLeft="@+id/menu_settings"
+        android:nextFocusUp="@+id/mutillist"
         app:hlv_horizontal_spacing="10dp"
         app:hlv_vertical_spacing="20dp" >
     </com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView>
-
-    <com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout
-        android:id="@+id/tipsLayout"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/tips_height" >
-    </com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout>
 
 </LinearLayout>

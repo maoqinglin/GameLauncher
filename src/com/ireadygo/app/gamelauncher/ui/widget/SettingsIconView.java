@@ -16,14 +16,14 @@ import android.widget.TextView;
 
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.ui.Config;
-import com.ireadygo.app.gamelauncher.ui.settings.SettingsItemEntity;
+import com.ireadygo.app.gamelauncher.ui.settings.SettingsInfo;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.ISelectedAnim;
 
 public class SettingsIconView extends RelativeLayout implements ISelectedAnim{
 	private ImageView mSettingsViewBg;
 	private ImageView mSettingsImg;
 	private TextView mSettingsNameTxt;
-	private SettingsItemEntity mSettingsEntiry;
+	private SettingsInfo mSettingsEntiry;
 
 	public SettingsIconView(Context context) {
 		super(context);
@@ -47,12 +47,12 @@ public class SettingsIconView extends RelativeLayout implements ISelectedAnim{
 		mSettingsNameTxt.setScaleY(0.8f);
 	}
 
-	public void setSettingsItemEntity(SettingsItemEntity itemEntity) {
+	public void setSettingsItemEntity(SettingsInfo itemEntity) {
 		this.mSettingsEntiry = itemEntity;
 		updateViewByEntity(itemEntity);
 	}
 
-	private void updateViewByEntity(SettingsItemEntity itemEntity) {
+	private void updateViewByEntity(SettingsInfo itemEntity) {
 		if (itemEntity == null) {
 			return;
 		}

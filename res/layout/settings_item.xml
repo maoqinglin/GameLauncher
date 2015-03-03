@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.ireadygo.app.gamelauncher.ui.widget.SettingsIconView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/settings_view"
+    android:id="@+id/settings_item"
     android:layout_width="@dimen/settings_icon_bg_width"
     android:layout_height="@dimen/settings_icon_bg_height"
     android:clipChildren="false"
@@ -11,7 +11,7 @@
         android:id="@+id/settings_view_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/corner_black_shape" />
+        android:src="@drawable/corner_settings_item_bg_shape" />
 
     <ImageView
         android:id="@+id/settings_icon"
@@ -20,9 +20,31 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/settings_icon_margin_top" />
 
+    <ImageView
+        android:id="@+id/notification_icon"
+        android:layout_width="@dimen/settings_icon_width"
+        android:layout_height="@dimen/settings_icon_height"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/settings_icon_margin_top"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/info"
+        style="@style/mygame_game_text_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/settings_name_margin_bottom"
+        android:gravity="center"
+        android:scaleX="0.8"
+        android:scaleY="0.8"
+        android:visibility="gone"
+        android:textSize="@dimen/settings_name_txt_size" />
+
     <TextView
         android:id="@+id/settings_name"
-        style="@style/mygame_game_text_style"
+        style="@style/settings_text_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -33,4 +55,4 @@
         android:scaleY="0.8"
         android:textSize="@dimen/settings_name_txt_size" />
 
-</com.ireadygo.app.gamelauncher.ui.widget.SettingsIconView>
+</RelativeLayout>

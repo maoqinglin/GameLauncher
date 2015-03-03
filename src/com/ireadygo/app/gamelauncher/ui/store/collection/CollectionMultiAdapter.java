@@ -16,7 +16,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryInfo;
 import com.ireadygo.app.gamelauncher.appstore.info.item.CollectionInfo;
 import com.ireadygo.app.gamelauncher.ui.item.ImageItem;
 import com.ireadygo.app.gamelauncher.ui.item.ImageItem.ImageItemHolder;
-import com.ireadygo.app.gamelauncher.ui.settings.SettingsItemEntity;
+import com.ireadygo.app.gamelauncher.ui.settings.SettingsInfo;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiBaseAdapter;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 import com.nostra13.universalimageloader.core.ImageLoader;

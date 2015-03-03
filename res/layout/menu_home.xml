@@ -65,7 +65,7 @@
         android:layout_marginTop="@dimen/menu_item_margin_top"
         android:nextFocusDown="@+id/menu_settings"
         android:nextFocusLeft="@+id/menu_settings"
-        android:nextFocusRight="@+id/h_listview_settings"
+        android:nextFocusRight="@+id/upHList"
         android:nextFocusUp="@+id/menu_app"
         menuItem:menu_title="@string/menu_settings" >
     </com.ireadygo.app.gamelauncher.ui.menu.TextMenu>

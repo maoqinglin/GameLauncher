@@ -85,15 +85,15 @@
     <dimen name="tips_shortcut_margin">150dp</dimen>
 
     <!-- 设置 -->
-    <dimen name="settings_icon_bg_width">300dp</dimen>
-    <dimen name="settings_icon_bg_height">375dp</dimen>
-    <dimen name="settings_icon_width">75dp</dimen>
-    <dimen name="settings_icon_height">75dp</dimen>
+    <dimen name="settings_icon_bg_width">270dp</dimen>
+    <dimen name="settings_icon_bg_height">340dp</dimen>
+    <dimen name="settings_icon_width">130dp</dimen>
+    <dimen name="settings_icon_height">130dp</dimen>
     <dimen name="settings_icon_margin_top">105dp</dimen>
     <dimen name="settings_list_padding_top">135dp</dimen>
     <dimen name="settings_list_padding_bottom">120dp</dimen>
     <dimen name="settings_name_margin_bottom">60dp</dimen>
-    <dimen name="settings_name_txt_size">54sp</dimen>
+    <dimen name="settings_name_txt_size">36sp</dimen>
 
     <!-- 免账号 -->
     <dimen name="account_item_init_width">300dp</dimen>

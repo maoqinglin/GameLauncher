@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import android.graphics.drawable.Drawable;
 
-public class SettingsItemEntity implements Serializable{
+public class SettingsInfo implements Serializable{
 
 	/**
 	 * 
@@ -17,11 +17,11 @@ public class SettingsItemEntity implements Serializable{
 	
 	private String intentAction;
 
-	public SettingsItemEntity(){
+	public SettingsInfo(){
 
 	}
 
-	public SettingsItemEntity(Drawable itemIcon, String itemName, String intentAction) {
+	public SettingsInfo(Drawable itemIcon, String itemName, String intentAction) {
 		super();
 		this.itemIcon = itemIcon;
 		this.itemName = itemName;

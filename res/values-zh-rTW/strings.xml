@@ -29,15 +29,22 @@
 
     <!-- 設置(settings) -->
     <string name="settings_systemupgrade">系統升級</string>
-    <string name="settings_personalized">個性化</string>
+    <string name="settings_wx">微信遙控器</string>
     <string name="settings_language">語言</string>
-    <string name="settings_store">存儲</string>
-    <string name="settings_secure">安全</string>
     <string name="settings_help">幫助</string>
-    <string name="settings_more">更多</string>
     <string name="settings_wifi">WIFI</string>
     <string name="settings_wallpaper">壁紙</string>
-    <string name="settings_joystic_battery">手柄電量</string>
+    <string name="settings_handle_battery">手柄電量</string>
+    <string name="settings_ap">OBox熱點</string>
+    <string name="settings_time">日期時間</string>
+    <string name="settings_bluetooth">藍牙</string>
+    <string name="settings_keyboard">鍵盤</string>
+    <string name="settings_network">以太網</string>
+    <string name="settings_display">無線顯示</string>
+    <string name="settings_brightness">亮度</string>
+    <string name="settings_reset">恢復出廠設置</string>
+    <string name="settings_about">關於</string>
+    <string name="settings_hdmi">HDMI</string>
 
     <!-- 壁紙 -->
     <string name="wallpaper_set">設置壁紙</string>

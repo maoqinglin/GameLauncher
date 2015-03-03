@@ -4,13 +4,11 @@ import java.util.List;
 
 import android.animation.Animator;
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.ireadygo.app.gamelauncher.R;
-import com.ireadygo.app.gamelauncher.game.info.ItemInfo;
+import com.ireadygo.app.gamelauncher.ui.settings.SettingsItem.SettingsItemHoder;
 import com.ireadygo.app.gamelauncher.ui.widget.SettingsIconView;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiBaseAdapter;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
@@ -18,11 +16,11 @@ import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 public class SettingsMultiAdapter implements HMultiBaseAdapter {
 
 	private Context mContext;
-	private List<SettingsItemEntity> mDataList;
+	private List<SettingsInfo> mDataList;
 	private HMultiListView mHListViews;
 	private int mListViewNum;
 
-	public SettingsMultiAdapter(Context context,List<SettingsItemEntity> list,int listViewNum,HMultiListView hListViews) {
+	public SettingsMultiAdapter(Context context,List<SettingsInfo> list,int listViewNum,HMultiListView hListViews) {
 		mContext = context;
 		mDataList = list;
 		mListViewNum = listViewNum;
@@ -37,33 +35,18 @@ public class SettingsMultiAdapter implements HMultiBaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
-			convertView = newView(position, convertView, parent);
+			convertView = new SettingsItem(mContext);
 		}
-		bindView(position, convertView);
+		SettingsItemHoder holder = ((SettingsItem)convertView).getHolder();
+		SettingsInfo info = mDataList.get(position);
+		holder.icon.setImageDrawable(info.getItemIcon());
+		holder.name.setText(info.getItemName());
+		convertView.setTag(holder);
+		
 		return convertView;
 	}
 
-	public View newView(int position, View convertView, ViewGroup parent) {
-		SettingsIconView gameIcon = (SettingsIconView) LayoutInflater.from(mContext).inflate(R.layout.settings_item,
-				parent, false);
-		ViewHolder holder = new ViewHolder();
-		holder.settingsIcon = gameIcon;
-		gameIcon.setTag(holder);
-		return gameIcon;
-	}
 
-	public void bindView(final int position, final View convertView) {
-		ViewHolder holder = (ViewHolder) convertView.getTag();
-		if (null != holder) {
-			holder.settingsItem = mDataList.get(position);
-			holder.settingsIcon.setSettingsItemEntity(holder.settingsItem);
-		}
-	}
-
-	public static class ViewHolder {
-		public SettingsIconView settingsIcon;
-		public SettingsItemEntity settingsItem;
-	}
 
 	public Animator selectedAnimator(View view) {
 		return ((SettingsIconView) view).selectedAnimation();
@@ -91,7 +74,7 @@ public class SettingsMultiAdapter implements HMultiBaseAdapter {
 	@Override
 	public View getEmptyView(int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
-			convertView = newView(position, convertView, parent);
+			convertView = new SettingsItem(mContext);
 		}
 		convertView.setVisibility(View.GONE);
 		return convertView;

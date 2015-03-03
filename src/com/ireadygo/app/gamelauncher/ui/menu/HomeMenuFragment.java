@@ -10,7 +10,7 @@ import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.ui.AppFragment;
 import com.ireadygo.app.gamelauncher.ui.Config;
 import com.ireadygo.app.gamelauncher.ui.GameFragment;
-import com.ireadygo.app.gamelauncher.ui.settings.SettingsMultiFragment;
+import com.ireadygo.app.gamelauncher.ui.settings.SettingsFragment;
 import com.ireadygo.app.gamelauncher.ui.store.StoreFragment;
 
 public class HomeMenuFragment extends BaseMenuFragment {
@@ -38,7 +38,7 @@ public class HomeMenuFragment extends BaseMenuFragment {
 		addMenuItem(mStoreMenu, new StoreFragment(getRootActivity(), this));
 		addMenuItem(mGameMenu, new GameFragment(getRootActivity(), this));
 		addMenuItem(mAppMenu, new AppFragment(getRootActivity(), this));
-		addMenuItem(mSettingsMenu, new SettingsMultiFragment(getRootActivity(), this));
+		addMenuItem(mSettingsMenu, new SettingsFragment(getRootActivity(), this));
 		return view;
 	}
 
