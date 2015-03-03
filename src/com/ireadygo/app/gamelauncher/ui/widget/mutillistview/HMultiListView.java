@@ -54,6 +54,7 @@ public class HMultiListView extends LinearLayout {
 	private OnItemSelectedListener mOnItemSelectedListener;
 	private OnFocusChangeListener mOnFocusChangeListener;
 	private OnItemClickListener mOnItemClickListener;
+	private OnScrollListener mOnScrollListener;
 
 	enum TouchScrollState {
 		NONE, UPTOUCH, DOWNTOUCH
@@ -98,7 +99,7 @@ public class HMultiListView extends LinearLayout {
 		setHorizontalSpacing(mHorizontalSpacing);
 		// setVerticalSpacing(mVerticalSpacing);
 		setKeyListener();
-		setOnScrollListener();
+		setOnInternalScrollListener(mOnInternalScrollerListener);
 		setSyncScrollListener();
 		setInternalFocusListener(mInternalFocusChangeL);
 		setInternalItemSelectedListener(mInternalItemSelectedListener);
@@ -192,127 +193,6 @@ public class HMultiListView extends LinearLayout {
 			}
 		}
 		return false;
-	}
-
-	private void setKeyListener() {
-		for (int i = 0; i < mHListViews.size(); i++) {
-			HListView curHListView = mHListViews.get(i);
-			HListView nextHListView = null;
-			HListView preHListView = null;
-			if (i + 1 < mHListViews.size()) {
-				nextHListView = mHListViews.get(i + 1);
-			}
-			if (i - 1 > -1) {
-				preHListView = mHListViews.get(i - 1);
-			}
-			setKeyListener(curHListView, preHListView, nextHListView);
-		}
-	}
-
-	private void setKeyListener(final HListView curView, final HListView preView, final HListView nextView) {
-		curView.setOnKeyListener(new OnKeyListener() {
-			@Override
-			public boolean onKey(View v, int keyCode, KeyEvent event) {
-				final int position = curView.getSelectedItemPosition();
-				if (event.getAction() != KeyEvent.ACTION_DOWN) {
-					return false;
-				}
-				if (position == HListView.INVALID_POSITION) {
-					return false;
-				}
-				final int left = curView.getSelectedView().getLeft();
-				if (keyCode == SnailKeyCode.DOWN_KEY) {
-					if (nextView != null) {
-						nextView.setSelectionFromLeft(position, left - mPaddingLeft);
-					}
-				} else if (keyCode == SnailKeyCode.UP_KEY) {
-					if (preView != null) {
-						preView.setSelectionFromLeft(position, left - mPaddingLeft);
-					}
-				}
-				return false;
-			}
-		});
-	}
-
-	private void setSyncScrollListener() {
-		for (final HListView hListView : mHListViews) {
-			hListView.setSynSmoothScrollListener(new SynSmoothScrollListener() {
-
-				@Override
-				public void synSmoothScrollBy(int distance, int duration, boolean linear) {
-					for (final HListView otherListView : mHListViews) {
-						if (hListView.getId() != otherListView.getId()) {
-							otherListView.smoothScrollBy(distance, duration, linear);
-						}
-					}
-				}
-			});
-		}
-
-	}
-
-	private void setOnScrollListener() {
-		// 设置listview列表的scroll监听，用于滑动过程中左右不同步时校正
-		for (HListView hListView : mHListViews) {
-			hListView.setOnScrollListener(mOnScrollerListener);
-		}
-	}
-
-	OnScrollListener mOnScrollerListener = new OnScrollListener() {
-
-		@Override
-		public void onScrollStateChanged(AbsHListView view, int scrollState) {
-			if (!view.isInTouchMode()) {
-				return;
-			}
-			if (view.getId() == R.id.upHList) {
-				mMainScrollListViewIndex = 0;
-			} else if (view.getId() == R.id.downHList) {
-				mMainScrollListViewIndex = 1;
-			}
-			if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
-					|| scrollState == OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
-			}
-			if (mMainScrollListViewIndex == -1 && mMainScrollListViewIndex >= mHListViews.size()) {
-				return;
-			}
-			for (int i = 0; i < mHListViews.size(); i++) {
-				if (i != mMainScrollListViewIndex) {
-					synScrollListview((HListView) view, mHListViews.get(i), view.getFirstVisiblePosition());
-				}
-			}
-		}
-
-		@Override
-		public void onScroll(AbsHListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-			if (!view.isInTouchMode()) {
-				return;
-			}
-			if (mMainScrollListViewIndex != -1 && mMainScrollListViewIndex < mHListViews.size()) {
-				for (int i = 0; i < mHListViews.size(); i++) {
-					if (i != mMainScrollListViewIndex) {
-						synScrollListview((HListView) view, mHListViews.get(i), firstVisibleItem);
-					}
-				}
-			}
-		}
-
-	};
-
-	private void synScrollListview(HListView touchListView, HListView synListView, final int position) {
-		View firstView = touchListView.getChildAt(0);
-		if (firstView == null) {
-			return;
-		}
-		int left = firstView.getLeft();
-		View synView = synListView.getChildAt(0);
-		if (synView != null) {
-			int synLeft = synView.getLeft();
-			if (left != synLeft) {
-				synListView.setSelectionFromLeft(position, left - mPaddingLeft);
-			}
-		}
 	}
 
 	public void setAdapter(HMultiBaseAdapter hMultiListBaseAdapter) {
@@ -461,6 +341,149 @@ public class HMultiListView extends LinearLayout {
 				return ((ISelectedAnim) view).unselectedAnimation();
 			}
 			return null;
+		}
+	}
+
+	private void setKeyListener() {
+		for (int i = 0; i < mHListViews.size(); i++) {
+			HListView curHListView = mHListViews.get(i);
+			HListView nextHListView = null;
+			HListView preHListView = null;
+			if (i + 1 < mHListViews.size()) {
+				nextHListView = mHListViews.get(i + 1);
+			}
+			if (i - 1 > -1) {
+				preHListView = mHListViews.get(i - 1);
+			}
+			setKeyListener(curHListView, preHListView, nextHListView);
+		}
+	}
+
+	private void setKeyListener(final HListView curView, final HListView preView, final HListView nextView) {
+		curView.setOnKeyListener(new OnKeyListener() {
+			@Override
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+				final int position = curView.getSelectedItemPosition();
+				if (event.getAction() != KeyEvent.ACTION_DOWN) {
+					return false;
+				}
+				if (position == HListView.INVALID_POSITION) {
+					return false;
+				}
+				final int left = curView.getSelectedView().getLeft();
+				if (keyCode == SnailKeyCode.DOWN_KEY) {
+					if (nextView != null) {
+						nextView.setSelectionFromLeft(position, left - mPaddingLeft);
+					}
+				} else if (keyCode == SnailKeyCode.UP_KEY) {
+					if (preView != null) {
+						preView.setSelectionFromLeft(position, left - mPaddingLeft);
+					}
+				}
+				return false;
+			}
+		});
+	}
+
+	private void setSyncScrollListener() {
+		for (final HListView hListView : mHListViews) {
+			hListView.setSynSmoothScrollListener(new SynSmoothScrollListener() {
+
+				@Override
+				public void synSmoothScrollBy(int distance, int duration, boolean linear) {
+					for (final HListView otherListView : mHListViews) {
+						if (hListView.getId() != otherListView.getId()) {
+							otherListView.smoothScrollBy(distance, duration, linear);
+						}
+					}
+				}
+			});
+		}
+
+	}
+
+	public void setOnScrollListener(OnScrollListener onScrollListener){
+		this.mOnScrollListener = onScrollListener;
+	}
+
+	private void setOnInternalScrollListener(OnScrollListener onScrollListener) {
+		// 设置listview列表的scroll监听，用于滑动过程中左右不同步时校正
+		for (HListView hListView : mHListViews) {
+			hListView.setOnScrollListener(onScrollListener);
+		}
+	}
+
+	OnScrollListener mOnInternalScrollerListener = new OnScrollListener() {
+
+		@Override
+		public void onScrollStateChanged(AbsHListView view, int scrollState) {
+
+			if (view.getId() == R.id.upHList) {
+				mMainScrollListViewIndex = 0;
+			} else if (view.getId() == R.id.downHList) {
+				mMainScrollListViewIndex = 1;
+			}
+
+			for (int i = 0; i < mHListViews.size(); i++) {
+				if (i == mMainScrollListViewIndex && mOnScrollListener != null) {
+					mOnScrollListener.onScrollStateChanged(view, scrollState);
+					break;
+				}
+			}
+
+			if (!view.isInTouchMode()) {
+				return;
+			}
+			
+			if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
+					|| scrollState == OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+			}
+			if (mMainScrollListViewIndex == -1 && mMainScrollListViewIndex >= mHListViews.size()) {
+				return;
+			}
+			for (int i = 0; i < mHListViews.size(); i++) {
+				if (i != mMainScrollListViewIndex) {
+					synScrollListview((HListView) view, mHListViews.get(i), view.getFirstVisiblePosition());
+				}
+			}
+		}
+
+		@Override
+		public void onScroll(AbsHListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+			
+			for (int i = 0; i < mHListViews.size(); i++) {
+				if (i == mMainScrollListViewIndex && mOnScrollListener != null) {
+					mOnScrollListener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
+					break;
+				}
+			}
+
+			if (!view.isInTouchMode()) {
+				return;
+			}
+			if (mMainScrollListViewIndex != -1 && mMainScrollListViewIndex < mHListViews.size()) {
+				for (int i = 0; i < mHListViews.size(); i++) {
+					if (i != mMainScrollListViewIndex) {
+						synScrollListview((HListView) view, mHListViews.get(i), firstVisibleItem);
+					}
+				}
+			}
+		}
+
+	};
+
+	private void synScrollListview(HListView touchListView, HListView synListView, final int position) {
+		View firstView = touchListView.getChildAt(0);
+		if (firstView == null) {
+			return;
+		}
+		int left = firstView.getLeft();
+		View synView = synListView.getChildAt(0);
+		if (synView != null) {
+			int synLeft = synView.getLeft();
+			if (left != synLeft) {
+				synListView.setSelectionFromLeft(position, left - mPaddingLeft);
+			}
 		}
 	}
 

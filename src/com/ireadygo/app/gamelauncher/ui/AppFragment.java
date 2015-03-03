@@ -26,6 +26,8 @@ import com.ireadygo.app.gamelauncher.game.info.ShortcutInfo;
 import com.ireadygo.app.gamelauncher.game.utils.Utilities;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.HomeMenuFragment;
+import com.ireadygo.app.gamelauncher.ui.widget.AbsHListView.OnScrollListener;
+import com.ireadygo.app.gamelauncher.ui.widget.AbsHListView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemSelectedListener;
@@ -65,6 +67,7 @@ public class AppFragment extends BaseContentFragment implements Callbacks {
 		mHMultiListView.setAdapter(mAppAdapter);
 		mHMultiListView.setOnItemClickListener(mOnItemClickListener);
 		mHMultiListView.setOnItemSelectedListener(mOnItemSelectedListener);
+		mHMultiListView.setOnScrollListener(mOnScrollListener);
 		if(!mAppList.isEmpty()){
 			mStatisticsView.setCount(mAppList.size());
 		}
@@ -203,6 +206,22 @@ public class AppFragment extends BaseContentFragment implements Callbacks {
 		public void onNothingSelected(AdapterView<?> parent) {
 			// TODO Auto-generated method stub
 			
+		}
+	};
+
+	OnScrollListener mOnScrollListener = new OnScrollListener() {
+
+		@Override
+		public void onScrollStateChanged(AbsHListView view, int scrollState) {
+			Log.d("lmq", "view.getid = " + view.getId() + "----scrollState = " + scrollState);
+
+		}
+
+		@Override
+		public void onScroll(AbsHListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+			Log.d("lmq", "view.getid = " + view.getId() + "----firstVisibleItem = " + firstVisibleItem
+					+ "---visibleItemCount = " + visibleItemCount + "---totalItemCount =" + totalItemCount);
+
 		}
 	};
 
