@@ -1,22 +1,20 @@
 package com.ireadygo.app.gamelauncher.ui.menu;
 
 import android.animation.Animator.AnimatorListener;
-import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ireadygo.app.gamelauncher.R;
 
 public class TextMenu extends MenuItem {
+	private static final float TEXT_SCALE_DEFAULT = 0.75f;
 	private String mText;
 	private TextView mTextView;
 
@@ -47,8 +45,8 @@ public class TextMenu extends MenuItem {
 		if (mText != null) {
 			mTextView.setText(mText);
 		}
-		mTextView.setScaleX(0.8f);
-		mTextView.setScaleY(0.8f);
+		mTextView.setScaleX(TEXT_SCALE_DEFAULT);
+		mTextView.setScaleY(TEXT_SCALE_DEFAULT);
 	}
 
 	public TextView getTextView() {
@@ -60,7 +58,7 @@ public class TextMenu extends MenuItem {
 		super.toUnfocused(listener);
 		mTextView.setTextColor(Color.WHITE);
 		if(mUnfocusedAnimator == null){
-			mUnfocusedAnimator = createAnimator(listener, 150, 0.3f, 0.8f);
+			mUnfocusedAnimator = createAnimator(listener, 150, 0.3f, TEXT_SCALE_DEFAULT);
 		}
 		mUnfocusedAnimator.start();
 	}

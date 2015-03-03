@@ -49,8 +49,7 @@ public class CollectionMultiAdapter implements HMultiBaseAdapter {
 		ImageItemHolder holder = ((ImageItem) convertView).getHolder();
 		Drawable drawable = mContext.getResources().getDrawable(R.drawable.store_poster_large);
 		holder.icon.setImageDrawable(drawable);
-		LayoutParams params = new LayoutParams(drawable.getMinimumWidth(), drawable.getMinimumHeight());
-		holder.background.setLayoutParams(params);
+		((ImageItem)convertView).setBackgroundDimens(drawable.getMinimumWidth(), drawable.getMinimumHeight());
 		
 //		CollectionInfo app = mCollectionDatas.get(position);
 //		String iconUrl = app.getPosterIconUrl();

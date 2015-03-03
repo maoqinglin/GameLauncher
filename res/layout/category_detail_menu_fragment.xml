@@ -6,9 +6,10 @@
     android:layout_height="wrap_content"
     android:clipChildren="false"
     android:clipToPadding="false"
-    android:gravity="right|center_vertical"
+    android:gravity="right"
     android:orientation="vertical"
-    android:paddingRight="@dimen/menu_padding_right" >
+    android:paddingRight="@dimen/menu_padding_right"
+    android:paddingTop="@dimen/menu_category_detail_margin_top" >
 
     <com.ireadygo.app.gamelauncher.ui.menu.TextMenu
         android:id="@+id/category_detail_menu_slg"

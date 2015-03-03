@@ -49,6 +49,7 @@ public class CategoryItem extends BaseAdapterItem {
 		mHolder.countLayout = (ViewGroup) rootView.findViewById(R.id.category_item_count_layout);
 		mHolder.count = (TextView) rootView.findViewById(R.id.category_item_count);
 		Utils.setCustomTypeface(getContext(), "fonts/din_pro_regular.otf", mHolder.count);
+		mHolder.count.getPaint().setFakeBoldText(true);
 	}
 
 	public CategoryItemHoder getHolder() {

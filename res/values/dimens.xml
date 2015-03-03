@@ -9,14 +9,21 @@
     <dimen name="common_app_item_middle_icon_height">110dp</dimen>
     <dimen name="common_item_shape_internal_radius">4dp</dimen>
     <dimen name="common_item_shape_external_radius">10dp</dimen>
+    <dimen name="common_title_margin_left">20dp</dimen>
+    <dimen name="common_title_size">72sp</dimen>
+    <dimen name="common_title_prompt_size">36sp</dimen>
+
     <!-- 主页(main) -->
 
 
     <!-- 主菜单(menu) -->
     <dimen name="menu_image_width">60dp</dimen>
-    <dimen name="menu_item_margin_top">50dp</dimen>
-    <dimen name="menu_width">290dp</dimen>
-    <dimen name="menu_padding_right">70dp</dimen>
+    <dimen name="menu_item_margin_top">46dp</dimen>
+    <dimen name="menu_width">220dp</dimen>
+    <dimen name="menu_home_margin_top">204dp</dimen>
+    <dimen name="menu_store_margin_top">204dp</dimen>
+    <dimen name="menu_category_detail_margin_top">204dp</dimen>
+    <dimen name="menu_padding_right">0dp</dimen>
     <dimen name="menu_title_size">48sp</dimen>
 
     <!-- 我的游戏 -->
@@ -36,8 +43,8 @@
     <dimen name="mygame_game_name_padding">9dp</dimen>
     <dimen name="mygame_emptyview_margin_bottom">320dp</dimen>
     <dimen name="mygame_recommend_app_bg_height">480dp</dimen>
-	<dimen name="mygame_recommend_app_listview_padding_top">60dp</dimen>
-	<dimen name="mygame_mhlv_horizontal_spacing">20dp</dimen>
+    <dimen name="mygame_recommend_app_listview_padding_top">60dp</dimen>
+    <dimen name="mygame_mhlv_horizontal_spacing">20dp</dimen>
     <dimen name="mygame_mhlv_vertical_spacing">40dp</dimen>
     <dimen name="mygame_mhlv_margin_top">40dp</dimen>
     <!-- 推荐下载(game_recommend) -->
@@ -46,6 +53,11 @@
     <!-- 内容页面 -->
     <dimen name="content_fragment_height">780dp</dimen>
     <dimen name="content_padding_left_default">150dp</dimen>
+    <dimen name="content_fragment_width">1700dp</dimen>
+    <dimen name="content_fragment_padding_left">70dp</dimen>
+    <dimen name="content_fragment_padding_top">75dp</dimen>
+    <dimen name="content_fragment_list_padding_right">60dp</dimen>
+    <dimen name="content_fragment_list_padding_top">45dp</dimen>
 
     <!-- 我的页面 -->
     <dimen name="user_cup_drawable_padding">12dp</dimen>
@@ -345,6 +357,7 @@
     <dimen name="category_item_count_margin_left">30dp</dimen>
     <dimen name="category_item_count_suffix_size">36sp</dimen>
     <dimen name="category_item_count_suffix_margin_left">10dp</dimen>
+    <dimen name="category_detail_padding_top">150dp</dimen>
 
     <!-- 免商店-合集 -->
     <dimen name="store_collection_item_width">771dp</dimen>

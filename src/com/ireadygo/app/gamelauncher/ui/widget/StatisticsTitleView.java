@@ -3,12 +3,12 @@ package com.ireadygo.app.gamelauncher.ui.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.ireadygo.app.gamelauncher.R;
+import com.ireadygo.app.gamelauncher.utils.Utils;
 
 public class StatisticsTitleView extends FrameLayout {
 
@@ -39,28 +39,23 @@ public class StatisticsTitleView extends FrameLayout {
 
 	private void initView() {
 		LayoutInflater.from(getContext()).inflate(R.layout.statistics_title_view, this, true);
-		mTitleView = (TextView) findViewById(R.id.title);
-		mCountView = (TextView) findViewById(R.id.count);
-
+		mTitleView = (TextView) findViewById(R.id.title_prompt);
 		mTitleView.setText(mTitle);
-	}
 
-	@Override
-	protected void onFinishInflate() {
-		super.onFinishInflate();
-
-	}
-
-	public TextView getTitleView() {
-		return mTitleView;
-	}
-
-	public TextView getCountView() {
-		return mCountView;
+		mCountView = (TextView) findViewById(R.id.count);
+		mCountView.getPaint().setFakeBoldText(true);
+		Utils.setCustomTypeface(getContext(), "fonts/din_pro_regular.otf", mCountView);
 	}
 
 	public void setCount(int count) {
-		Log.d("lmq", "setCount---count = "+count);
 		mCountView.setText(String.valueOf(count));
+	}
+
+	public void setTitle(String title) {
+		mTitleView.setText(title);
+	}
+
+	public void setTitle(int titleId) {
+		mTitleView.setText(titleId);
 	}
 }

@@ -8,6 +8,7 @@
     android:clipToPadding="false"
     android:gravity="right|center_vertical"
     android:orientation="vertical"
+    android:paddingTop="@dimen/menu_store_margin_top"
     android:paddingRight="@dimen/menu_padding_right" >
 
     <com.ireadygo.app.gamelauncher.ui.menu.TextMenu

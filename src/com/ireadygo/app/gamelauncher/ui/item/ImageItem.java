@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.FrameLayout.LayoutParams;
 
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.helper.AnimatorHelper;
@@ -56,7 +57,7 @@ public class ImageItem extends BaseAdapterItem {
 			mHolder.background.setLayoutParams(params);
 			mHolder.icon.setImageDrawable(mIconDrawable);
 		}
-		mHolder.iconLayout = (ViewGroup)findViewById(R.id.icon_layout);
+		mHolder.iconLayout = (ViewGroup) findViewById(R.id.icon_layout);
 		mHolder.title = (TextView) findViewById(R.id.title);
 	}
 
@@ -104,6 +105,11 @@ public class ImageItem extends BaseAdapterItem {
 			animatorSet.addListener(listener);
 		}
 		return animatorSet;
+	}
+
+	public void setBackgroundDimens(int width, int height) {
+		LayoutParams params = new LayoutParams(width, height);
+		mHolder.background.setLayoutParams(params);
 	}
 
 	public class ImageItemHolder {

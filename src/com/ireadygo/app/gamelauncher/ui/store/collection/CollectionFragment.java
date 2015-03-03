@@ -17,6 +17,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.CollectionInfo;
 import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
+import com.ireadygo.app.gamelauncher.ui.widget.StatisticsTitleView;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiBaseAdapter;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 
@@ -25,6 +26,7 @@ public class CollectionFragment extends BaseContentFragment {
 	public static final String EXTRA_POSTER_BG = "Poster_bg";
 	private HMultiListView mMultiListView;
 	private HMultiBaseAdapter mAdapter;
+	private StatisticsTitleView mTitleLayout;
 	private View mSelectedView;
 	private List<CollectionInfo> mAppList = new ArrayList<CollectionInfo>();
 
@@ -42,6 +44,10 @@ public class CollectionFragment extends BaseContentFragment {
 	@Override
 	protected void initView(View view) {
 		super.initView(view);
+		mTitleLayout = (StatisticsTitleView)view.findViewById(R.id.title_layout);
+		mTitleLayout.setCount(269);
+		mTitleLayout.setTitle(R.string.collection_prompt);
+		
 		mMultiListView = (HMultiListView) view.findViewById(R.id.collection_list);
 		for(int i = 0; i < 10 ; i ++){
 			mAppList.add(null);

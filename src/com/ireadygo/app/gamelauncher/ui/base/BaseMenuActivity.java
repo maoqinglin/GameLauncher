@@ -15,6 +15,7 @@ import com.ireadygo.app.gamelauncher.utils.StaticsUtils;
 
 public abstract class BaseMenuActivity extends BaseActivity {
 	public static final String EXTRA_FOCUS_POSITION = "EXTRA_FOCUS_POSITION";
+	private boolean mShouldTranslate = false;
 	private int mLastKeyCode = -1;
 	private long mLastKeyTime;
 
@@ -87,6 +88,9 @@ public abstract class BaseMenuActivity extends BaseActivity {
 	public abstract BaseMenuFragment createMenuFragment();
 
 	public void translateToLeft() {
+		if(!mShouldTranslate){
+			return;
+		}
 		if (mRightTranslateAnimator != null && mRightTranslateAnimator.isRunning()) {
 			mRightTranslateAnimator.cancel();
 		}
@@ -98,6 +102,9 @@ public abstract class BaseMenuActivity extends BaseActivity {
 	}
 
 	public void translateToRight() {
+		if(!mShouldTranslate){
+			return;
+		}
 		if (mLeftTranslateAnimator != null && mLeftTranslateAnimator.isRunning()) {
 			mLeftTranslateAnimator.cancel();
 		}
@@ -114,5 +121,9 @@ public abstract class BaseMenuActivity extends BaseActivity {
 	
 	public BaseMenuFragment getMenuFragment(){
 		return mMenuFragment;
+	}
+	
+	public void setShouldTranslate(boolean shouldTranslate){
+		this.mShouldTranslate = shouldTranslate;
 	}
 }

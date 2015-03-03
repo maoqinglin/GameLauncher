@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="MultiListNormal">
+        <item name="hlv_horizontal_spacing">25dp</item>
+        <item name="hlv_vertical_spacing">46dp</item>
+        <item name="padding_left">@dimen/content_fragment_padding_left</item>
+        <item name="padding_right">@dimen/content_fragment_list_padding_right</item>
+        <item name="padding_top">@dimen/content_fragment_list_padding_top</item>
+    </style>
+
+</resources>

@@ -25,6 +25,7 @@ public class GameLauncherActivity extends BaseMenuActivity {
 		// AccountManager.getInstance().uploadGetuiInfo(this);
 		// 上报应用启动时间
 		StaticsUtils.onCreate();
+		setShouldTranslate(true);
 		GameLauncherApplication.getApplication().setGameLauncherActivity(this);
 		new AccountInfoAsyncTask(this, null).execute();
 	}

@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:gravity="bottom" >
 
     <TextView
-        android:id="@+id/title"
-        style="@style/MenuTitle"
+        android:id="@+id/title_prompt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center" />
+        android:textColor="@color/white_first_transparency"
+        android:textSize="@dimen/common_title_prompt_size" />
 
     <TextView
         android:id="@+id/count"
-        style="@style/MenuTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:gravity="center" />
+        android:textColor="@color/white_first_transparency"
+        android:textSize="@dimen/common_title_size" />
 
 </LinearLayout>

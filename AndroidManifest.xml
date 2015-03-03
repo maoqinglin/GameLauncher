@@ -113,7 +113,7 @@
                 android:resource="@xml/wallpaper_picker_preview" />
         </activity>
         <activity
-            android:name="com.ireadygo.app.gamelauncher.ui.store.collection.CollectionDetailActivity"
+            android:name="com.ireadygo.app.gamelauncher.ui.store.category.CategoryDetailActivity"
             android:screenOrientation="landscape"
             android:theme="@style/CustomerTheme" >
         </activity>

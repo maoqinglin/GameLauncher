@@ -3,18 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res/com.ireadygo.app.gamelauncher"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:paddingTop="@dimen/category_detail_padding_top" >
 
     <com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView
         android:id="@+id/category_detail_list"
+        style="@style/MultiListNormal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:nextFocusLeft="@+id/store_menu_collection"
-        app:hlv_horizontal_spacing="25dp"
-        app:hlv_vertical_spacing="0dp"
-        app:padding_left="30dp"
-        app:padding_right="100dp"
-        app:padding_top="40dp" >
+        android:nextFocusLeft="@+id/store_menu_collection" >
     </com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView>
 
 </LinearLayout>

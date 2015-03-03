@@ -14,14 +14,14 @@ import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException
 import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryInfo;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
-import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
-import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
+import com.ireadygo.app.gamelauncher.ui.widget.StatisticsTitleView;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiBaseAdapter;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 
 public class CategoryFragment extends BaseContentFragment {
 	private HMultiListView mMultiListView;
 	private HMultiBaseAdapter mAdapter;
+	private StatisticsTitleView mTitleLayout;
 
 	public CategoryFragment(Activity activity, BaseMenuFragment menuFragment) {
 		super(activity, menuFragment);
@@ -37,6 +37,9 @@ public class CategoryFragment extends BaseContentFragment {
 	@Override
 	protected void initView(View view) {
 		super.initView(view);
+		mTitleLayout = (StatisticsTitleView)view.findViewById(R.id.title_layout);
+		mTitleLayout.setCount(269);
+		mTitleLayout.setTitle("分类");
 		mMultiListView = (HMultiListView) view.findViewById(R.id.category_list);
 		mAdapter = new CategoryMultiAdapter(getRootActivity(), mMultiListView);
 		mMultiListView.setAdapter(mAdapter);
