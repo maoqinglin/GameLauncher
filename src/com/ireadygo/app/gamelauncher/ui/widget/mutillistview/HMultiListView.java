@@ -64,11 +64,15 @@ public class HMultiListView extends LinearLayout {
 			switch (msg.what) {
 			case WHAT_SELECTED_ANIMATOR:
 				BaseAdapterItem item = (BaseAdapterItem) msg.obj;
-				item.toSelected(null);
+				if(item != null){
+					item.toSelected(null);
+				}
 				break;
 			case WHAT_UNSELECTED_ANIMATOR:
 				BaseAdapterItem itemUn = (BaseAdapterItem) msg.obj;
-				itemUn.toUnselected(null);
+				if(itemUn != null){
+					itemUn.toUnselected(null);
+				}
 				break;
 			default:
 				break;

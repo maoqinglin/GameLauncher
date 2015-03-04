@@ -5,11 +5,8 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -20,88 +17,65 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
 import com.ireadygo.app.gamelauncher.ui.base.BaseActivity;
 import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
-import com.ireadygo.app.gamelauncher.ui.store.StoreAppNormalAdapter;
+import com.ireadygo.app.gamelauncher.ui.store.category.CategoryDetailMultiAdapter;
 import com.ireadygo.app.gamelauncher.ui.store.category.CategoryLayout;
-import com.ireadygo.app.gamelauncher.ui.widget.AbsHListView;
-import com.ireadygo.app.gamelauncher.ui.widget.AbsHListView.OnScrollListener;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
-import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
-import com.ireadygo.app.gamelauncher.ui.widget.HListView;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout;
-import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
+import com.ireadygo.app.gamelauncher.ui.widget.StatisticsTitleView;
+import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
+import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiBaseAdapter;
+import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 import com.snail.appstore.openapi.AppPlatFormConfig;
 
 public class CollectionDetailActivity extends BaseActivity implements OnClickListener {
-	private HListView mListView;
+	private StatisticsTitleView mTitleLayout;
+	private HMultiListView mMultiListView;
+	private OperationTipsLayout mTipsLayout;
 	private List<AppEntity> mApps = new ArrayList<AppEntity>();
-	private StoreAppNormalAdapter mAdapter;
-	private OperationTipsLayout mOperationTipsLayout;
+	private HMultiBaseAdapter mAdapter;
 	private GameInfoHub mGameInfoHub;
 	private long mPageIndex = 1;
 	private boolean mLoadingData = false;
 	private long mCategoryId = -1;
-	private View mGobackView;
-	private String mPosterBgUrl;
-	private View mView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.store_collection_detail_activity);
 		mGameInfoHub = GameInfoHub.instance(this);
-		mGobackView = findViewById(R.id.goback);
-		mGobackView.setOnClickListener(this);
-		mOperationTipsLayout = (OperationTipsLayout) findViewById(R.id.tipsLayout);
-		mOperationTipsLayout.setTipsVisible(TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
-		mListView = (HListView) findViewById(R.id.storeCollectionDetailList);
-		mAdapter = new StoreAppNormalAdapter(this, mListView, mApps);
-		mListView.setAdapter(mAdapter.toAnimationAdapter());
+		mTitleLayout = (StatisticsTitleView)findViewById(R.id.title_layout);
+		mTitleLayout.setTitle(R.string.collection_detail_prompt);
+		mTitleLayout.setCount(255);
+		
+		mMultiListView = (HMultiListView)findViewById(R.id.collection_detail_list);
+		mAdapter = new CategoryDetailMultiAdapter(this, mMultiListView, mApps);
+		mMultiListView.setAdapter(mAdapter);
+		
+		mTipsLayout = (OperationTipsLayout)findViewById(R.id.tips_layout);
+		mTipsLayout.setAllVisible(View.VISIBLE);
+		
 		mCategoryId = getIntent().getLongExtra(CategoryLayout.EXTRA_CATEGORY_ID, -1);
-		mPosterBgUrl = getIntent().getStringExtra(CategoryLayout.EXTRA_POSTER_BG);
-		mView = getWindow().getDecorView();
 		if (mCategoryId > 0) {
 			loadCategoryDetail();
 		}
-		if (!TextUtils.isEmpty(mPosterBgUrl)) {
-			ImageLoader.getInstance().loadImage(mPosterBgUrl, new ImageLoadingListener() {
-
-				@Override
-				public void onLoadingStarted(String arg0, View arg1) {
-				}
-
-				@Override
-				public void onLoadingFailed(String arg0, View arg1, FailReason arg2) {
-				}
-
-				@Override
-				public void onLoadingComplete(String arg0, View arg1, Bitmap arg2) {
-					mView.setBackground(new BitmapDrawable(arg2));
-				}
-
-				@Override
-				public void onLoadingCancelled(String arg0, View arg1) {
-
-				}
-			});
-		}
-		mListView.setOnScrollListener(new OnScrollListener() {
-
-			@Override
-			public void onScrollStateChanged(AbsHListView view, int scrollState) {
-
-			}
-
-			@Override
-			public void onScroll(AbsHListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-				if (!mLoadingData && firstVisibleItem >= totalItemCount - visibleItemCount - 1) {
-					loadCategoryDetail();
-				}
-			}
-		});
-		mListView.setOnItemClickListener(new OnItemClickListener() {
+		// mMultiListView.setOnScrollListener(new OnScrollListener() {
+		//
+		// @Override
+		// public void onScrollStateChanged(AbsHListView view, int scrollState)
+		// {
+		//
+		// }
+		//
+		// @Override
+		// public void onScroll(AbsHListView view, int firstVisibleItem, int
+		// visibleItemCount, int totalItemCount) {
+		// if (!mLoadingData && firstVisibleItem >= totalItemCount -
+		// visibleItemCount - 1) {
+		// loadCategoryDetail();
+		// }
+		// }
+		// });
+		mMultiListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -149,7 +123,7 @@ public class CollectionDetailActivity extends BaseActivity implements OnClickLis
 				return;
 			}
 			mApps.addAll(result);
-			mAdapter.notifyDataSetChanged();
+			mMultiListView.notifyDataSetChanged();
 			mPageIndex++;
 			mLoadingData = false;
 		}
@@ -163,12 +137,12 @@ public class CollectionDetailActivity extends BaseActivity implements OnClickLis
 
 	@Override
 	public boolean onSunKey() {
-		if (mListView.hasFocus()) {
-			int selectIndex = mListView.getSelectedItemPosition();
-			if (selectIndex >= 0) {
-				mListView.performItemClick(mListView, selectIndex, 0);
-			}
-		}
+		// if (mMultiListView.hasFocus()) {
+		// int selectIndex = mMultiListView.getSelectedItemPosition();
+		// if (selectIndex >= 0) {
+		// mMultiListView.performItemClick(mMultiListView, selectIndex, 0);
+		// }
+		// }
 		return true;
 	}
 

@@ -17,6 +17,8 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.CollectionInfo;
 import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
+import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
+import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.StatisticsTitleView;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiBaseAdapter;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
@@ -28,7 +30,7 @@ public class CollectionFragment extends BaseContentFragment {
 	private HMultiBaseAdapter mAdapter;
 	private StatisticsTitleView mTitleLayout;
 	private View mSelectedView;
-	private List<CollectionInfo> mAppList = new ArrayList<CollectionInfo>();
+	private List<CollectionInfo> mCollectionList = new ArrayList<CollectionInfo>();
 
 	public CollectionFragment(Activity activity, BaseMenuFragment menuFragment) {
 		super(activity, menuFragment);
@@ -50,10 +52,18 @@ public class CollectionFragment extends BaseContentFragment {
 		
 		mMultiListView = (HMultiListView) view.findViewById(R.id.collection_list);
 		for(int i = 0; i < 10 ; i ++){
-			mAppList.add(null);
+			mCollectionList.add(null);
 		}
-		mAdapter = new CollectionMultiAdapter(getRootActivity(), mMultiListView, mAppList);
+		mAdapter = new CollectionMultiAdapter(getRootActivity(), mMultiListView, mCollectionList);
 		mMultiListView.setAdapter(mAdapter);
+		mMultiListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				CollectionDetailActivity.startSelf(getRootActivity(), 2L);
+			}
+			
+		});
 		loadData(1);
 	}
 
@@ -79,8 +89,8 @@ public class CollectionFragment extends BaseContentFragment {
 	@Override
 	public boolean onSunKey() {
 		int selectedIndex = mMultiListView.getSelectedItemPosition();
-		if (selectedIndex > -1 && selectedIndex < mAppList.size()) {
-			CollectionInfo collection = mAppList.get(selectedIndex);
+		if (selectedIndex > -1 && selectedIndex < mCollectionList.size()) {
+			CollectionInfo collection = mCollectionList.get(selectedIndex);
 			startCollectionDetailActivity(collection.getCollectionId(),collection.getPosterBgUrl());
 		}
 		return super.onSunKey();
@@ -111,10 +121,10 @@ public class CollectionFragment extends BaseContentFragment {
 			if (isCancelled() || result == null || result.isEmpty()) {
 				return;
 			}
-			mAppList.clear();
+			mCollectionList.clear();
 			//TODO
 			for(int i = 0; i < 20; i ++){
-				mAppList.add(result.get(0));
+				mCollectionList.add(result.get(0));
 			}
 //			mAppList.addAll(result);
 			mMultiListView.notifyDataSetChanged();
