@@ -23,6 +23,7 @@ import android.view.View.OnLayoutChangeListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -43,7 +44,6 @@ import com.ireadygo.app.gamelauncher.ui.base.BaseActivity;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
-import com.ireadygo.app.gamelauncher.utils.PictureUtil;
 import com.ireadygo.app.gamelauncher.utils.StaticsUtils;
 import com.ireadygo.app.gamelauncher.utils.Utils;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -69,6 +69,7 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 	private GameManager mGameManager;
 	private AppStateListener mStateListener = new AppStateListener();
 	private View mView;
+	private ProgressBar mProgressBar;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +107,7 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 				}
 			}
 		});
+		mProgressBar = (ProgressBar) findViewById(R.id.downloadProgress);
 
 		mIntroDownArrowView = (ImageView) findViewById(R.id.introDownArrow);
 
@@ -208,9 +210,11 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 	}
 
 	private void updateDownloadBtn(String pkgName) {
+		if(mAppEntity == null || !mAppEntity.getPkgName().equals(pkgName)) {
+			return;
+		}
 		GameState state = mGameManager.getGameStateManager().getGameState(pkgName);
 		int textId = R.string.detail_download;
-		int bgDrawableId = R.drawable.store_search_btn_bg_selector;
 		switch (state) {
 		case DEFAULT:
 			textId = R.string.detail_download;
@@ -231,8 +235,9 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 			textId = R.string.detail_launch;
 			break;
 		case QUEUING:
-		case TRANSFERING:
 			textId = R.string.detail_pause;
+			break;
+		case TRANSFERING:
 			break;
 		case UPGRADEABLE:
 			textId = R.string.detail_update;
@@ -240,8 +245,17 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 		case MOVING:
 			break;
 		}
-		mDownloadBtn.setText(textId);
-		mDownloadBtn.setBackgroundResource(bgDrawableId);
+		if(state != GameState.TRANSFERING) {
+			mDownloadBtn.setText(textId);
+			mProgressBar.setProgress(0);
+			mProgressBar.setVisibility(View.GONE);
+			mDownloadBtn.setBackgroundResource(R.drawable.store_normal_btn_bg_selector);
+			mDownloadBtn.setTextColor(getResources().getColor(R.color.store_btn_normal_color_selector));
+		} else {
+			mProgressBar.setVisibility(View.VISIBLE);
+			mDownloadBtn.setBackgroundResource(R.drawable.store_detail_btn_focused);
+			mDownloadBtn.setTextColor(getResources().getColor(R.color.white));
+		}
 	}
 
 	private void doIntroAnimator(AnimatorListener listener, int height) {
@@ -420,6 +434,22 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 
 		@Override
 		public void onDownloadProgressChange(AppEntity app) {
+			if(mAppEntity == null || !mAppEntity.getAppId().equals(app.getAppId())) {
+				return;
+			}
+			GameState state = mGameManager.getGameStateManager().getGameState(app.getPkgName());
+			if(state == GameState.TRANSFERING) {
+				int progress = (int) (app.getDownloadSize() * 100 / app.getTotalSize());
+				if(progress <= 100) {
+					mProgressBar.setProgress(progress);
+					mDownloadBtn.setText(progress + "%");
+				} else {
+					mProgressBar.setProgress(0);
+					mProgressBar.setVisibility(View.GONE);
+				}
+			} else {
+				mProgressBar.setVisibility(View.GONE);
+			}
 		}
 
 		@Override
