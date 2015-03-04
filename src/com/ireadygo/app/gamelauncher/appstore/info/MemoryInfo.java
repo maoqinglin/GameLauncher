@@ -25,6 +25,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.UserHeaderImgItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserInfoItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserSlotInfoItem;
 import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
+import com.snail.appstore.openapi.exception.HttpStatusCodeException;
 
 public class MemoryInfo implements IGameInfo {
 
@@ -427,7 +428,7 @@ public class MemoryInfo implements IGameInfo {
 	}
 
 	@Override
-	public void activateBox(String activateCode) throws InfoSourceException {
+	public void activateBox(String cSN) throws InfoSourceException {
 		// TODO Auto-generated method stub
 		
 	}
@@ -460,6 +461,60 @@ public class MemoryInfo implements IGameInfo {
 			Integer iGoodNum, Integer nMoney) throws InfoSourceException {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public String getSaleType(String cSN) throws InfoSourceException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void bindAccount() throws HttpStatusCodeException, Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getSNCorrespondBindAccount(String cSN) throws InfoSourceException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getPaymentSign() throws InfoSourceException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String bindPayment() throws InfoSourceException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void bindTicket(String cTicketCode, String cTicketPwd, String cMac) throws InfoSourceException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getRentReliefMonths() throws InfoSourceException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getRebateMoney() throws InfoSourceException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String queryTicketBalance() throws InfoSourceException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -115,7 +115,17 @@ public class RemoteInfo implements IGameInfo {
 	private static final int RESULT_SMS_USE_OUT = 10006;
 	private static final int RESULT_AGENT_APP_NOT_FOUND = 5001;
 	
-
+	//以租代售相关接口错误码
+	private static final int RESULT_BOX_NOT_EXIST = 9102;
+	private static final int RESULT_BOX_INACTIVATE_OR_DISCONTINUED = 9114;
+	private static final int RESULT_BOX_HAS_BIND_OTHER_ACCOUNT = 9115;
+	private static final int RESULT_BOX_UNBIND_ACCOUNT = 9116;
+	private static final int RESULT_ACCOUNT_UNBIND_PAYMENT_SIGN = 5302;
+	private static final int RESULT_BOX_PARAMETERS_SUBMITTED = 9107;
+	private static final int RESULT_BOX_TICKET_INVALID = 9109;
+	private static final int RESULT_BOX_TICKET_ALREADY_IN_USE = 9110;
+	private static final int RESULT_BOX_TICKET_HAS_BINDING = 9117;
+	
 	private static final String PARAM_DIVIDER = ",";
 	private static final String KEY_REQ_TIME = "dTime";
 	private static final String KEY_SLOT_NUM = "iSlotNum";
@@ -1053,6 +1063,24 @@ public class RemoteInfo implements IGameInfo {
 			return InfoSourceException.MSG_FREE_FLOW_SMS_USE_OUT;
 		case RESULT_AGENT_APP_NOT_FOUND:
 			return InfoSourceException.MSG_AGENT_APP_NOT_FOUND;
+		case RESULT_BOX_NOT_EXIST:
+			return InfoSourceException.MSG_BOX_NOT_EXIST;
+		case RESULT_BOX_INACTIVATE_OR_DISCONTINUED:
+			return InfoSourceException.MSG_BOX_INACTIVATE_OR_DISCONTINUED;
+		case RESULT_BOX_HAS_BIND_OTHER_ACCOUNT:
+			return InfoSourceException.MSG_BOX_HAS_BIND_OTHER_ACCOUNT;
+		case RESULT_BOX_UNBIND_ACCOUNT:
+			return InfoSourceException.MSG_BOX_UNBIND_ACCOUNT;
+		case RESULT_ACCOUNT_UNBIND_PAYMENT_SIGN:
+			return InfoSourceException.MSG_ACCOUNT_UNBIND_PAYMENT_SIGN;
+		case RESULT_BOX_PARAMETERS_SUBMITTED:
+			return InfoSourceException.MSG_BOX_PARAMETERS_SUBMITTED;
+		case RESULT_BOX_TICKET_INVALID:
+			return InfoSourceException.MSG_BOX_TICKET_INVALID;
+		case RESULT_BOX_TICKET_ALREADY_IN_USE:
+			return InfoSourceException.MSG_BOX_TICKET_ALREADY_IN_USE;
+		case RESULT_BOX_TICKET_HAS_BINDING:
+			return InfoSourceException.MSG_BOX_TICKET_HAS_BINDING;
 		default:
 			return InfoSourceException.MSG_UNKNOWN_ERROR;
 		}
@@ -1125,7 +1153,7 @@ public class RemoteInfo implements IGameInfo {
 		app.setSign(item.getCMd5());
 		app.setDescription(item.getSAppDesc());
 		app.setScreenshotUrl(item.getCPicUrl());
-		app.setScreenshotDirection(item.getcPicScreen());
+		app.setScreenshotDirection(item.getCPicScreen());
 		app.setPosterIconUrl(item.getCPosterIcon());
 		app.setPosterBgUrl(item.getCPosterPic());
 		app.setDownloadPath(item.getCDownloadUrl());
@@ -1170,7 +1198,6 @@ public class RemoteInfo implements IGameInfo {
 		bannerItem.setCDownloadUrl(appBannerVO.getCDownloadUrl());
 		bannerItem.setIBannerId(appBannerVO.getIBannerId());
 		bannerItem.setICategoryId(appBannerVO.getICategoryId());
-		bannerItem.setSPayDesc(appBannerVO.getSPayDesc());
 		return bannerItem;
 	}
 
@@ -1181,10 +1208,9 @@ public class RemoteInfo implements IGameInfo {
 		app.setName(item.getSGameName());
 		app.setRemoteIconUrl(item.getCIcon());
 		app.setNewVersionCode(item.getIVersionCode());
-		app.setNewVersionName(item.getsVersionName());
 		app.setPkgName(item.getCPackage());
 		app.setFreeFlag(item.getIFlowFree());
-		app.setTotalSize(item.getiSize());
+		app.setTotalSize(item.getISize());
 		app.setSign(item.getCMd5());
 		app.setIsUpdateable(1);
 		app.setGameState(GameState.UPGRADEABLE);
@@ -1500,9 +1526,9 @@ public class RemoteInfo implements IGameInfo {
 	}
 
 	@Override
-	public void activateBox(String activateCode) throws InfoSourceException {
+	public void activateBox(String cSN) throws InfoSourceException {
 		try {
-			ResultVO resultVO = mAppPlatFormService.activateBox(activateCode);
+			ResultVO resultVO = mAppPlatFormService.activateBox(cSN);
 			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
 				return;
 			}
@@ -1625,6 +1651,207 @@ public class RemoteInfo implements IGameInfo {
 			ResultVO resultVO = mAppPlatFormService.appPayment(nAppId, cAppOrder, cAppAccuntId, cGoodId, sGoodName, iGoodNum, nMoney);
 			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
 				return;
+			}
+			String errMsg = processRemoteResultCode(resultVO.getCode());
+			throw new InfoSourceException(errMsg);
+		} catch (InfoSourceException e) {
+			throw e;
+		} catch (HttpStatusCodeException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_NETWORK_ERROR,e.getCause());
+		} catch (JSONException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_CLIENT_ERROR,e.getCause());
+		} catch (Exception e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_ERROR,e.getCause());
+		}
+	}
+
+	@Override
+	public String getSaleType(String cSN) throws InfoSourceException {
+		try {
+			ResultVO resultVO = mAppPlatFormService.getSaleType(cSN);
+			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
+				if (resultVO.getObj() == null) {
+					return null;
+				}
+				return (String)resultVO.getObj();
+			}
+			String errMsg = processRemoteResultCode(resultVO.getCode());
+			throw new InfoSourceException(errMsg);
+		} catch (InfoSourceException e) {
+			throw e;
+		} catch (HttpStatusCodeException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_NETWORK_ERROR,e.getCause());
+		} catch (JSONException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_CLIENT_ERROR,e.getCause());
+		} catch (Exception e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_ERROR,e.getCause());
+		}
+	}
+
+	@Override
+	public void bindAccount() throws InfoSourceException {
+		try {
+			ResultVO resultVO = mAppPlatFormService.bindAccount();
+			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
+				return;
+			}
+			String errMsg = processRemoteResultCode(resultVO.getCode());
+			throw new InfoSourceException(errMsg);
+		} catch (InfoSourceException e) {
+			throw e;
+		} catch (HttpStatusCodeException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_NETWORK_ERROR,e.getCause());
+		} catch (JSONException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_CLIENT_ERROR,e.getCause());
+		} catch (Exception e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_ERROR,e.getCause());
+		}
+	}
+
+	@Override
+	public String getSNCorrespondBindAccount(String cSN) throws InfoSourceException {
+		try {
+			ResultVO resultVO = mAppPlatFormService.getSNCorrespondBindAccount(cSN);
+			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
+				if (resultVO.getObj() == null) {
+					return null;
+				}
+				return (String)resultVO.getObj();
+			}
+			String errMsg = processRemoteResultCode(resultVO.getCode());
+			throw new InfoSourceException(errMsg);
+		} catch (InfoSourceException e) {
+			throw e;
+		} catch (HttpStatusCodeException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_NETWORK_ERROR,e.getCause());
+		} catch (JSONException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_CLIENT_ERROR,e.getCause());
+		} catch (Exception e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_ERROR,e.getCause());
+		}
+	}
+
+	@Override
+	public String getPaymentSign() throws InfoSourceException {
+		try {
+			ResultVO resultVO = mAppPlatFormService.getPaymentSign();
+			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
+				if (resultVO.getObj() == null) {
+					return null;
+				}
+				return (String)resultVO.getObj();
+			}
+			String errMsg = processRemoteResultCode(resultVO.getCode());
+			throw new InfoSourceException(errMsg);
+		} catch (InfoSourceException e) {
+			throw e;
+		} catch (HttpStatusCodeException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_NETWORK_ERROR,e.getCause());
+		} catch (JSONException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_CLIENT_ERROR,e.getCause());
+		} catch (Exception e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_ERROR,e.getCause());
+		}
+	}
+
+	@Override
+	public String bindPayment() throws InfoSourceException {
+		try {
+			ResultVO resultVO = mAppPlatFormService.bindPayment();
+			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
+				if (resultVO.getObj() == null) {
+					return null;
+				}
+				return (String)resultVO.getObj();
+			}
+			String errMsg = processRemoteResultCode(resultVO.getCode());
+			throw new InfoSourceException(errMsg);
+		} catch (InfoSourceException e) {
+			throw e;
+		} catch (HttpStatusCodeException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_NETWORK_ERROR,e.getCause());
+		} catch (JSONException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_CLIENT_ERROR,e.getCause());
+		} catch (Exception e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_ERROR,e.getCause());
+		}
+	}
+
+	@Override
+	public void bindTicket(String cTicketCode, String cTicketPwd, String cMac) throws InfoSourceException {
+		try {
+			ResultVO resultVO = mAppPlatFormService.bindTicket(cTicketCode, cTicketPwd, cMac);
+			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
+				return;
+			}
+			String errMsg = processRemoteResultCode(resultVO.getCode());
+			throw new InfoSourceException(errMsg);
+		} catch (InfoSourceException e) {
+			throw e;
+		} catch (HttpStatusCodeException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_NETWORK_ERROR,e.getCause());
+		} catch (JSONException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_CLIENT_ERROR,e.getCause());
+		} catch (Exception e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_ERROR,e.getCause());
+		}
+	}
+
+	@Override
+	public String getRentReliefMonths() throws InfoSourceException {
+		try {
+			ResultVO resultVO = mAppPlatFormService.getRentReliefMonths();
+			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
+				if (resultVO.getObj() == null) {
+					return null;
+				}
+				return (String)resultVO.getObj();
+			}
+			String errMsg = processRemoteResultCode(resultVO.getCode());
+			throw new InfoSourceException(errMsg);
+		} catch (InfoSourceException e) {
+			throw e;
+		} catch (HttpStatusCodeException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_NETWORK_ERROR,e.getCause());
+		} catch (JSONException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_CLIENT_ERROR,e.getCause());
+		} catch (Exception e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_ERROR,e.getCause());
+		}
+	}
+
+	@Override
+	public String getRebateMoney() throws InfoSourceException {
+		try {
+			ResultVO resultVO = mAppPlatFormService.getRebateMoney();
+			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
+				if (resultVO.getObj() == null) {
+					return null;
+				}
+				return (String)resultVO.getObj();
+			}
+			String errMsg = processRemoteResultCode(resultVO.getCode());
+			throw new InfoSourceException(errMsg);
+		} catch (InfoSourceException e) {
+			throw e;
+		} catch (HttpStatusCodeException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_NETWORK_ERROR,e.getCause());
+		} catch (JSONException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_CLIENT_ERROR,e.getCause());
+		} catch (Exception e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_ERROR,e.getCause());
+		}
+	}
+
+	@Override
+	public String queryTicketBalance() throws InfoSourceException {
+		try {
+			ResultVO resultVO = mAppPlatFormService.queryTicketBalance();
+			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
+				if (resultVO.getObj() == null) {
+					return null;
+				}
+				return (String)resultVO.getObj();
 			}
 			String errMsg = processRemoteResultCode(resultVO.getCode());
 			throw new InfoSourceException(errMsg);

@@ -35,6 +35,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.snail.appstore.openapi.exception.HttpStatusCodeException;
 
 public class GameInfoHub implements IGameInfo {
 
@@ -424,8 +425,8 @@ public class GameInfoHub implements IGameInfo {
 	}
 
 	@Override
-	public void activateBox(String activateCode) throws InfoSourceException {
-		mRemoteInfo.activateBox(activateCode);
+	public void activateBox(String cSN) throws InfoSourceException {
+		mRemoteInfo.activateBox(cSN);
 	}
 
 	@Override
@@ -452,6 +453,51 @@ public class GameInfoHub implements IGameInfo {
 	public void appPayment(String nAppId, String cAppOrder, String cAppAccuntId, String cGoodId, String sGoodName,
 			Integer iGoodNum, Integer nMoney) throws InfoSourceException {
 		mRemoteInfo.appPayment(nAppId, cAppOrder, cAppAccuntId, cGoodId, sGoodName, iGoodNum, nMoney);
+	}
+
+	@Override
+	public String getSaleType(String cSN) throws InfoSourceException {
+		return mRemoteInfo.getSaleType(cSN);
+	}
+
+	@Override
+	public void bindAccount() throws InfoSourceException {
+		mRemoteInfo.bindAccount();
+	}
+
+	@Override
+	public String getSNCorrespondBindAccount(String cSN) throws InfoSourceException {
+		return mRemoteInfo.getSNCorrespondBindAccount(cSN);
+	}
+
+	@Override
+	public String getPaymentSign() throws InfoSourceException {
+		return mRemoteInfo.getPaymentSign();
+	}
+
+	@Override
+	public String bindPayment() throws InfoSourceException {
+		return mRemoteInfo.bindPayment();
+	}
+
+	@Override
+	public void bindTicket(String cTicketCode, String cTicketPwd, String cMac) throws InfoSourceException {
+		mRemoteInfo.bindTicket(cTicketCode, cTicketPwd, cMac);
+	}
+
+	@Override
+	public String getRentReliefMonths() throws InfoSourceException {
+		return mRemoteInfo.getRentReliefMonths();
+	}
+
+	@Override
+	public String getRebateMoney() throws InfoSourceException {
+		return mRemoteInfo.getRebateMoney();
+	}
+
+	@Override
+	public String queryTicketBalance() throws InfoSourceException {
+		return mRemoteInfo.queryTicketBalance();
 	}
 
 }

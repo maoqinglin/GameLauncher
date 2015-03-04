@@ -21,6 +21,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.SubscribeResultItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserHeaderImgItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserInfoItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserSlotInfoItem;
+import com.snail.appstore.openapi.exception.HttpStatusCodeException;
 
 public interface IGameInfo {
 
@@ -148,7 +149,7 @@ public interface IGameInfo {
 	List<AppEntity> getPreLoadList() throws InfoSourceException;
 
 	// 激活OBOX
-	void activateBox(String activateCode) throws InfoSourceException;
+	void activateBox(String cSN) throws InfoSourceException;
 
 	// 减免租金应用列表
 	List<String> getRentReliefAppList() throws InfoSourceException;
@@ -165,6 +166,33 @@ public interface IGameInfo {
 	// 主机应用支付
 	void appPayment(String nAppId, String cAppOrder, String cAppAccuntId, String cGoodId, String sGoodName,
 			Integer iGoodNum, Integer nMoney) throws InfoSourceException;
+
+	//查询指定SN号对应渠道信息接口
+	String getSaleType(String cSN) throws InfoSourceException;
+
+	//绑定免账号
+	void bindAccount() throws HttpStatusCodeException, Exception;
+
+	//查询指定SN号对应绑定的免账号接口
+	String getSNCorrespondBindAccount(String cSN) throws InfoSourceException;
+
+	//查询指定免账号绑定支付宝快充接口
+	String getPaymentSign() throws InfoSourceException;
+
+	// 绑定支付宝快充
+	String bindPayment() throws InfoSourceException;
+
+	//绑定代金券
+	void bindTicket(String cTicketCode, String cTicketPwd, String cMac) throws InfoSourceException;
+
+	//查询已抵扣次年月租月数的接口
+	String getRentReliefMonths() throws InfoSourceException;
+
+	//查询已返还月度租金总额的接口
+	String getRebateMoney() throws InfoSourceException;
+
+	//查询蜗牛游戏点券数量的接口
+	String queryTicketBalance() throws InfoSourceException;
 
 	//清除缓存
 	void cleanCached();
@@ -216,6 +244,16 @@ public interface IGameInfo {
 		public static final String MSG_FREE_FLOW_FAILED = "FREE_FLOW_FAILED";
 		public static final String MSG_FREE_FLOW_SMS_USE_OUT = "FREE_FLOW_SMS_USE_OUT";
 		public static final String MSG_AGENT_APP_NOT_FOUND = "AGENT_APP_NOT_FOUND";
+		
+		public static final String MSG_BOX_NOT_EXIST = "BOX_NOT_EXIST";
+		public static final String MSG_BOX_INACTIVATE_OR_DISCONTINUED = "BOX_INACTIVATE_OR_DISCONTINUED";
+		public static final String MSG_BOX_HAS_BIND_OTHER_ACCOUNT = "BOX_HAS_BIND_OTHER_ACCOUNT";
+		public static final String MSG_BOX_UNBIND_ACCOUNT = "BOX_UNBIND_ACCOUNT";
+		public static final String MSG_ACCOUNT_UNBIND_PAYMENT_SIGN = "ACCOUNT_UNBIND_PAYMENT_SIGN";
+		public static final String MSG_BOX_PARAMETERS_SUBMITTED = "BOX_PARAMETERS_SUBMITTED";
+		public static final String MSG_BOX_TICKET_INVALID = "BOX_TICKET_INVALID";
+		public static final String MSG_BOX_TICKET_ALREADY_IN_USE = "BOX_TICKET_ALREADY_IN_USE";
+		public static final String MSG_BOX_TICKET_HAS_BINDING = "BOX_TICKET_HAS_BINDING";
 
 
 		public InfoSourceException() {
