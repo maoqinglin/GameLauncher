@@ -16,6 +16,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
+import com.ireadygo.app.gamelauncher.ui.store.StoreAppMultiAdapter;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiBaseAdapter;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 import com.snail.appstore.openapi.AppPlatFormConfig;
@@ -46,7 +47,7 @@ public class CategoryDetailContentFragment extends BaseContentFragment {
 	protected void initView(View view) {
 		super.initView(view);
 		mMultiListView = (HMultiListView) view.findViewById(R.id.category_detail_list);
-		mMultiAdapter = new CategoryDetailMultiAdapter(getRootActivity(), mMultiListView, mAppEntities);
+		mMultiAdapter = new StoreAppMultiAdapter(getRootActivity(), mMultiListView, mAppEntities);
 		mMultiListView.setAdapter(mMultiAdapter);
 		loadCategoryDetail();
 	}

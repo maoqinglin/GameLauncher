@@ -29,7 +29,6 @@ public class CollectionFragment extends BaseContentFragment {
 	private HMultiListView mMultiListView;
 	private HMultiBaseAdapter mAdapter;
 	private StatisticsTitleView mTitleLayout;
-	private View mSelectedView;
 	private List<CollectionInfo> mCollectionList = new ArrayList<CollectionInfo>();
 
 	public CollectionFragment(Activity activity, BaseMenuFragment menuFragment) {

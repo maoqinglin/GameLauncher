@@ -18,7 +18,10 @@
         style="@style/MultiListNormal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:nextFocusLeft="@+id/store_menu_collection" >
+        android:nextFocusDown="@+id/collection_list"
+        android:nextFocusLeft="@+id/store_menu_collection"
+        android:nextFocusRight="@+id/collection_list"
+        android:nextFocusUp="@+id/collection_list" >
     </com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView>
 
 </LinearLayout>

@@ -17,7 +17,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
 import com.ireadygo.app.gamelauncher.ui.base.BaseActivity;
 import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
-import com.ireadygo.app.gamelauncher.ui.store.category.CategoryDetailMultiAdapter;
+import com.ireadygo.app.gamelauncher.ui.store.StoreAppMultiAdapter;
 import com.ireadygo.app.gamelauncher.ui.store.category.CategoryLayout;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout;
@@ -48,7 +48,7 @@ public class CollectionDetailActivity extends BaseActivity implements OnClickLis
 		mTitleLayout.setCount(255);
 		
 		mMultiListView = (HMultiListView)findViewById(R.id.collection_detail_list);
-		mAdapter = new CategoryDetailMultiAdapter(this, mMultiListView, mApps);
+		mAdapter = new StoreAppMultiAdapter(this, mMultiListView, mApps);
 		mMultiListView.setAdapter(mAdapter);
 		
 		mTipsLayout = (OperationTipsLayout)findViewById(R.id.tips_layout);

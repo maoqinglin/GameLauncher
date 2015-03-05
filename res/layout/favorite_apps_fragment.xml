@@ -14,13 +14,13 @@
     </com.ireadygo.app.gamelauncher.ui.widget.StatisticsTitleView>
 
     <com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView
-        android:id="@+id/category_list"
+        android:id="@+id/favorite_apps_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:nextFocusDown="@+id/category_list"
         android:nextFocusLeft="@+id/store_menu_category"
-        android:nextFocusRight="@+id/category_list"
-        android:nextFocusUp="@+id/category_list"
+        android:nextFocusDown="@+id/favorite_apps_list"
+        android:nextFocusRight="@+id/favorite_apps_list"
+        android:nextFocusUp="@+id/favorite_apps_list"
         app:hlv_horizontal_spacing="25dp"
         app:hlv_vertical_spacing="46dp"
         app:padding_left="@dimen/content_fragment_padding_left"

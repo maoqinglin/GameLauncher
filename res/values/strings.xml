@@ -391,4 +391,8 @@
     <string name="extend_nearly_open">It is comming soon!</string>
     <string name="extend_store_empty_title">There is no games! Go to find one in Free-Store!</string>
     <string name="store_load_empty_title">网络不给力~！</string>
+    
+    
+    <!-- 常用应用(FavoriteApps) -->
+    <string name="favorite_apps_title_prompt">商店内应用数量</string>
 </resources>

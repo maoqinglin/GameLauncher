@@ -1,4 +1,4 @@
-package com.ireadygo.app.gamelauncher.ui.store.category;
+package com.ireadygo.app.gamelauncher.ui.store;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiBaseAdapter;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-public class CategoryDetailMultiAdapter implements HMultiBaseAdapter {
+public class StoreAppMultiAdapter implements HMultiBaseAdapter {
 
 	private static final int LIST_NUM = 2;
 	private Context mContext;
@@ -26,7 +26,7 @@ public class CategoryDetailMultiAdapter implements HMultiBaseAdapter {
 	private List<AppEntity> mAppEntities = new ArrayList<AppEntity>();
 	private Drawable mDefaultIcon;
 
-	public CategoryDetailMultiAdapter(Context context, HMultiListView multiListView, List<AppEntity> appEntities) {
+	public StoreAppMultiAdapter(Context context, HMultiListView multiListView, List<AppEntity> appEntities) {
 		this.mContext = context;
 		this.mMultiListView = multiListView;
 		this.mAppEntities = appEntities;

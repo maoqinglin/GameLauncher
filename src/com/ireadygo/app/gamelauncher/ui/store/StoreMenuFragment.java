@@ -8,11 +8,11 @@ import android.view.ViewGroup;
 
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.ui.Config;
-import com.ireadygo.app.gamelauncher.ui.GameFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.MenuItem;
 import com.ireadygo.app.gamelauncher.ui.store.category.CategoryFragment;
 import com.ireadygo.app.gamelauncher.ui.store.collection.CollectionFragment;
+import com.ireadygo.app.gamelauncher.ui.store.favoriteapps.FavoriteAppsFragment;
 import com.ireadygo.app.gamelauncher.ui.store.search.SearchFragment;
 import com.ireadygo.app.gamelauncher.ui.store.storemanager.StoreManagerContentFragment;
 
@@ -35,7 +35,7 @@ public class StoreMenuFragment extends BaseMenuFragment {
 		addMenuItem(searchMenu, new SearchFragment(getRootActivity(), this));
 		addMenuItem(categoryMenu, new CategoryFragment(getRootActivity(), this));
 		addMenuItem(collectionMenu, new CollectionFragment(getRootActivity(), this));
-		addMenuItem(appMenu, new GameFragment(getRootActivity(), this));
+		addMenuItem(appMenu, new FavoriteAppsFragment(getRootActivity(), this));
 		addMenuItem(managerMenu, new StoreManagerContentFragment(getRootActivity(), this));
 		return view;
 	}
