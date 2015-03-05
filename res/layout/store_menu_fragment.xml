@@ -63,9 +63,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/menu_item_margin_top"
-        android:nextFocusDown="@+id/menu_settings"
+        android:nextFocusDown="@+id/store_menu_manager"
         android:nextFocusLeft="@+id/store_menu_manager"
-        android:nextFocusRight="@+id/upHList"
+        android:nextFocusRight="@+id/manager_download"
         android:nextFocusUp="@+id/store_menu_app"
         menuItem:menu_title="@string/store_menu_manager" >
     </com.ireadygo.app.gamelauncher.ui.menu.TextMenu>

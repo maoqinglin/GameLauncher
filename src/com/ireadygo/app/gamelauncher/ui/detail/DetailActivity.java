@@ -10,6 +10,7 @@ import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -103,6 +104,20 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 				if(hasFocus){
 					if(mRootView.getScrollY() > 0){
 						mRootView.smoothScrollTo(0, 0);
+					}
+					mDownloadBtn.setTextColor(Color.WHITE);
+					if(mProgressBar.isShown()) {
+						mDownloadBtn.setBackgroundResource(R.drawable.store_detail_btn_focused);
+					} else {
+						mDownloadBtn.setBackgroundResource(R.drawable.store_normal_btn_bg_selector);
+					}
+				} else {
+					if(mProgressBar.isShown()) {
+						mDownloadBtn.setTextColor(Color.WHITE);
+						mDownloadBtn.setBackgroundColor(Color.TRANSPARENT);
+					} else {
+						mDownloadBtn.setTextColor(getResources().getColor(R.color.red_normal));
+						mDownloadBtn.setBackgroundResource(R.drawable.store_normal_btn_bg_selector);
 					}
 				}
 			}
@@ -250,11 +265,19 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 			mProgressBar.setProgress(0);
 			mProgressBar.setVisibility(View.GONE);
 			mDownloadBtn.setBackgroundResource(R.drawable.store_normal_btn_bg_selector);
-			mDownloadBtn.setTextColor(getResources().getColor(R.color.store_btn_normal_color_selector));
+			if(mDownloadBtn.isFocused()) {
+				mDownloadBtn.setTextColor(getResources().getColor(R.color.white));
+			} else {
+				mDownloadBtn.setTextColor(getResources().getColor(R.color.red_normal));
+			}
 		} else {
 			mProgressBar.setVisibility(View.VISIBLE);
-			mDownloadBtn.setBackgroundResource(R.drawable.store_detail_btn_focused);
 			mDownloadBtn.setTextColor(getResources().getColor(R.color.white));
+			if(mDownloadBtn.isFocused()) {
+				mDownloadBtn.setBackgroundResource(R.drawable.store_detail_btn_focused);
+			} else {
+				mDownloadBtn.setBackgroundColor(Color.TRANSPARENT);
+			}
 		}
 	}
 

@@ -115,6 +115,12 @@
     <string name="store_dld_manager_detail_not_found">暫時沒有該應用資訊</string>
     <string name="store_dld_manager_delete_task_prompt">刪除任務記錄</string>
     <string name="store_dld_manager_delete_task_msg">是否刪除您的下載任務？</string>
+    
+    <string name="store_manager_downloading">下載中</string>
+    <string name="store_manager_updatable">可更新</string>
+    <string name="store_manager_launchable">已安裝</string>
+    <string name="store_manager_delete_task_prompt">刪除任務記錄</string>
+    <string name="store_manager_delete_task_msg">是否刪除您的下載任務？</string>
 
     <!-- 免商店-搜索(search) -->
     <string name="store_search">搜&#160;&#160;索</string>

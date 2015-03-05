@@ -121,6 +121,12 @@
     <string name="store_dld_manager_delete_task_prompt">删除任务记录</string>
     <string name="store_dld_manager_delete_task_msg">是否删除您的下载任务？</string>
 
+    <string name="store_manager_downloading">下载中</string>
+    <string name="store_manager_updatable">可更新</string>
+    <string name="store_manager_launchable">已安装</string>
+    <string name="store_manager_delete_task_prompt">删除任务记录</string>
+    <string name="store_manager_delete_task_msg">是否删除您的下载任务？</string>
+
     <!-- 免商店-搜索(search) -->
     <string name="store_search">搜&#160;&#160;索</string>
 

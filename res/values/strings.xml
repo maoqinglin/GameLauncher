@@ -116,6 +116,12 @@
     <string name="store_dld_manager_delete_task_prompt">Delete Task</string>
     <string name="store_dld_manager_delete_task_msg">Are you sure to delete the download task？</string>
     
+    <string name="store_manager_downloading">Downloading</string>
+    <string name="store_manager_updatable">Upgrade</string>
+    <string name="store_manager_launchable">Installed</string>
+    <string name="store_manager_delete_task_prompt">Delete Task</string>
+    <string name="store_manager_delete_task_msg">Are you sure to delete the download task？</string>
+    
     <!-- 免商店-搜索(search) -->
     <string name="store_search">Search</string>
 

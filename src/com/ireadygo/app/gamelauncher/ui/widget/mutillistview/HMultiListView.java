@@ -240,7 +240,7 @@ public class HMultiListView extends LinearLayout {
 	 * @param list
 	 */
 	private <T> void initDataLists(int listNum, List<T> list) {
-		if (listNum != 0 && list != null && !list.isEmpty() && !mDataLists.isEmpty()) {
+		if (listNum != 0 && list != null && !mDataLists.isEmpty()) {
 			for (List<?> listData : mDataLists) {
 				listData.clear();// 清除单个列表数据
 			}
@@ -280,6 +280,7 @@ public class HMultiListView extends LinearLayout {
 	public void notifyDataSetChanged() {
 		if (mHMultiBaseAdapter != null) {
 			initDataLists(mHMultiBaseAdapter.getHListNum(), mHMultiBaseAdapter.getData());
+			Log.i("chen.r", "mHMultiBaseAdapter Data : " + mHMultiBaseAdapter.getData().size());
 		}
 		for (BaseAdapter baseAdapter : mBaseAdapters) {
 			baseAdapter.notifyDataSetChanged();

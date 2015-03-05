@@ -19,6 +19,7 @@
     <!-- 主菜单(menu) -->
     <dimen name="menu_image_width">60dp</dimen>
     <dimen name="menu_item_margin_top">46dp</dimen>
+    <dimen name="menu_item_margin_left">40dp</dimen>
     <dimen name="menu_width">220dp</dimen>
     <dimen name="menu_home_margin_top">204dp</dimen>
     <dimen name="menu_store_margin_top">204dp</dimen>
@@ -389,7 +390,14 @@
     <dimen name="store_download_expandlist_indicatorPaddingTop">-120dp</dimen>
     <dimen name="store_download_expandlist_indicatorPaddingLeft">15dp</dimen>
     <dimen name="store_download_speed_text_size">30sp</dimen>
-
+    
+    <dimen name="store_manager_menu_margin_left">100dp</dimen>
+    <dimen name="store_manager_menu_margin_top">100dp</dimen>
+    <dimen name="store_manager_hlv_margin_left">120dp</dimen>
+    <dimen name="store_manager_hlv_horizontal_spacing">120dp</dimen>
+    <dimen name="store_manager_hlv_vertical_spacing">46dp</dimen>
+    <dimen name="store_manager_speed_text_size">36sp</dimen>
+    
     <!-- 免账号-卡槽购买 -->
     <dimen name="slot_padding_top">0dp</dimen>
     <dimen name="slot_padding_left">30dp</dimen>

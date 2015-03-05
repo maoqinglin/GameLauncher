@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/game_view"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clipChildren="false"
+    android:clipToPadding="false" >
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/game_item_bg" />
+
+    <RelativeLayout
+        android:id="@+id/icon_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="@dimen/mygame_app_width"
+            android:layout_height="@dimen/mygame_app_height" />
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/mygame_game_text_style"
+            android:layout_width="@dimen/mygame_app_width"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/icon"
+            android:gravity="center" />
+
+        <ImageView
+            android:id="@+id/delete_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/icon"
+            android:layout_alignTop="@+id/icon"
+            android:src="@drawable/icon_gametask_delete"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/manager_item_speed_layout"
+        android:layout_width="@dimen/mygame_app_width"
+        android:layout_height="@dimen/mygame_app_height"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/manager_item_download_speed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/store_manager_speed_text_size" />
+
+        <TextView
+            android:id="@+id/manager_item_download_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/store_manager_speed_text_size" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/manager_item_status_layout"
+        android:layout_width="@dimen/mygame_app_width"
+        android:layout_height="@dimen/mygame_app_height"
+        android:background="@android:color/transparent"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/manager_item_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/store_manager_status_queue"
+            android:clickable="true"
+            android:contentDescription="@null" />
+    </FrameLayout>
+
+</FrameLayout>
