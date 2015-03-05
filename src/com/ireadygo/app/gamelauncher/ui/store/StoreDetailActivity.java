@@ -20,7 +20,6 @@ import com.ireadygo.app.gamelauncher.ui.redirect.Anchor;
 import com.ireadygo.app.gamelauncher.ui.redirect.Anchor.Destination;
 import com.ireadygo.app.gamelauncher.ui.store.category.CategoryLayout;
 import com.ireadygo.app.gamelauncher.ui.store.recommend.RecommendLayout;
-import com.ireadygo.app.gamelauncher.ui.store.search.SearchLayout;
 import com.ireadygo.app.gamelauncher.ui.widget.CustomFrameLayout;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
@@ -159,7 +158,7 @@ public class StoreDetailActivity extends BaseActivity {
 		StoreBaseContentLayout contentLayout = null;
 		switch (layoutTag) {
 		case LayoutTag.SEARCH:
-			contentLayout = new SearchLayout(this, layoutTag, this);
+//			contentLayout = new SearchLayout(this, layoutTag, this);
 			break;
 		case LayoutTag.RECOMMEND:
 			contentLayout = new RecommendLayout(this, layoutTag, this);

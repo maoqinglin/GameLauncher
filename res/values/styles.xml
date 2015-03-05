@@ -127,7 +127,6 @@
         <item name="android:focusableInTouchMode">true</item>
         <item name="android:clickable">true</item>
         <item name="android:textColor">@color/store_btn_normal_color_selector</item>
-        <item name="android:textSize">@dimen/store_search_input_btn_size</item>
     </style>
 
     <style name="AccountButtonNormal">
@@ -224,7 +223,7 @@
         <item name="android:dropDownVerticalOffset">3dp</item>
         <item name="android:dropDownHorizontalOffset">0dip</item>
         <item name="android:background">@drawable/store_search_input_bg_selector</item>
-        <item name="android:textSize">36sp</item>
+        <item name="android:textSize">@dimen/search_edittext_textsize</item>
     </style>
 
     <style name="MainMenuImageStyle">

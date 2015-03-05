@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.ireadygo.app.gamelauncher"
+    android:layout_width="@dimen/content_fragment_width"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <AutoCompleteTextView
+        android:id="@+id/search_edittext"
+        style="@style/SearchInputView"
+        android:layout_width="@dimen/search_edittext_width"
+        android:layout_height="@dimen/search_edittext_height"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/search_edittext_margin_top"
+        android:imeOptions="actionSearch"
+        android:nextFocusDown="@+id/search_list"
+        android:nextFocusLeft="@+id/store_menu_search"
+        android:nextFocusRight="@+id/search_edittext"
+        android:nextFocusUp="@+id/search_edittext"
+        android:singleLine="true"
+        android:textColor="@color/white" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/search_intro_margin_bottom"
+        android:layout_marginTop="@dimen/search_intro_margin_top"
+        android:src="@drawable/search_intro" />
+
+    <TextView
+        android:id="@+id/search_recommend_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/content_fragment_padding_left"
+        android:text="@string/search_recommend_prompt"
+        android:textColor="@color/white_first_transparency"
+        android:textSize="@dimen/search_recommend_prompt_textsize" />
+
+    <com.ireadygo.app.gamelauncher.ui.widget.HListView
+        android:id="@+id/search_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:nextFocusDown="@+id/search_list"
+        android:nextFocusLeft="@+id/store_menu_search"
+        android:nextFocusRight="@+id/search_list"
+        android:nextFocusUp="@+id/search_edittext"
+        android:paddingLeft="@dimen/content_fragment_padding_left"
+        android:paddingRight="@dimen/content_fragment_list_padding_right"
+        android:paddingTop="@dimen/content_fragment_list_padding_top"
+        android:paddingBottom="@dimen/content_fragment_list_padding_top"
+        app:hlv_dividerWidth="@dimen/search_list_diver_width" >
+    </com.ireadygo.app.gamelauncher.ui.widget.HListView>
+
+</LinearLayout>

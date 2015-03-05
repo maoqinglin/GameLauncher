@@ -3,25 +3,30 @@ package com.ireadygo.app.gamelauncher.ui.store.search;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.ResultReceiver;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
@@ -29,51 +34,71 @@ import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.appstore.info.item.KeywordItem;
+import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
+import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.store.StoreAppNormalAdapter;
-import com.ireadygo.app.gamelauncher.ui.store.StoreBaseContentLayout;
-import com.ireadygo.app.gamelauncher.ui.store.StoreDetailActivity;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
+import com.ireadygo.app.gamelauncher.utils.Utils;
 import com.snail.appstore.openapi.AppPlatFormConfig;
 
-public class SearchLayout extends StoreBaseContentLayout implements OnClickListener {
+public class SearchFragment extends BaseContentFragment {
 	private static final int SEARCH_APP_MAX_SIZE = 10;
-	private HListView mListView;
-	private List<AppEntity> mAppList = new ArrayList<AppEntity>();
-	private StoreAppNormalAdapter mAdapter;
+	private static final int WHAT_RESTART_INPUT_METHOD = 1;
 	private AutoCompleteTextView mSearchInputView;
-	private TextView mSearchBtn;
+	private HListView mListView;
+
 	private ArrayAdapter<String> mKeywordAdapter;
 	private SearchKeywordTask mSearchKeywordTask;
+	private List<AppEntity> mAppList = new ArrayList<AppEntity>();
+	private BaseAdapter mSearchAdapter;
 	private InputMethodManager mInputMethodManager;
+	// private boolean mIsSoftInputOpen = false;
 
-	public SearchLayout(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
-	}
+	private Handler mHandler = new Handler() {
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case WHAT_RESTART_INPUT_METHOD:
+				mInputMethodManager.restartInput(mSearchInputView);
+				break;
+			default:
+				break;
+			}
+		};
+	};
 
-	public SearchLayout(Context context, AttributeSet attrs) {
-		super(context, attrs);
-	}
-
-	public SearchLayout(Context context, int layoutTag, StoreDetailActivity storeFragment) {
-		super(context, layoutTag, storeFragment);
-		init();
+	public SearchFragment(Activity activity, BaseMenuFragment menuFragment) {
+		super(activity, menuFragment);
 	}
 
 	@Override
-	protected void init() {
-		super.init();
-		LayoutInflater.from(getContext()).inflate(R.layout.store_search_layout, this, true);
-		mListView = (HListView) findViewById(R.id.storeSearchList);
+	public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.search_fragment, container, false);
+		initView(view);
+		return view;
+	}
 
-		mSearchInputView = (AutoCompleteTextView) findViewById(R.id.storeSearchInput);
+	@Override
+	protected void initView(View view) {
+		super.initView(view);
+		mListView = (HListView) view.findViewById(R.id.search_list);
+
+		mSearchInputView = (AutoCompleteTextView) view.findViewById(R.id.search_edittext);
 		mSearchInputView.addTextChangedListener(mKeywordTextWatcher);
-		mKeywordAdapter = new SearchArrayAdapter(getContext(), R.layout.search_keyword_textview);
+		mKeywordAdapter = new SearchArrayAdapter(getRootActivity(), R.layout.search_suggest_textview);
 		mSearchInputView.setAdapter(mKeywordAdapter);
 		mSearchInputView.setOnEditorActionListener(new OnEditorActionListener() {
 
 			@Override
 			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				Log.d("liu.js", "onEditorAction--actionId=" + actionId);
+				switch (actionId) {
+				case EditorInfo.IME_ACTION_SEARCH:
+					startSearchApp();
+					break;
+				default:
+					break;
+				}
 				return false;
 			}
 		});
@@ -100,15 +125,11 @@ public class SearchLayout extends StoreBaseContentLayout implements OnClickListe
 			}
 		});
 
-		mSearchBtn = (TextView) findViewById(R.id.storeSearchBtn);
-		mSearchBtn.setOnClickListener(this);
-
 		initData();
-		mAdapter = new StoreAppNormalAdapter(getContext(), mListView, mAppList);
-		mListView.setAdapter(mAdapter.toAnimationAdapter());
+		mSearchAdapter = new StoreAppNormalAdapter(getRootActivity(), mListView, mAppList);
+		mListView.setAdapter(mSearchAdapter);
 		mListView.setOnItemClickListener(mOnItemClickListener);
-		mInputMethodManager = (InputMethodManager) getContext().getSystemService(
-					Context.INPUT_METHOD_SERVICE);
+		mInputMethodManager = (InputMethodManager) getRootActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 	}
 
 	private void initData() {
@@ -126,7 +147,7 @@ public class SearchLayout extends StoreBaseContentLayout implements OnClickListe
 			if (app == null) {
 				return;
 			}
-			if (TextUtils.isEmpty(app.getAppId())) {//当前点击的是关键字
+			if (TextUtils.isEmpty(app.getAppId())) {// 当前点击的是关键字
 				startSearchApp(app.getName());
 				return;
 			}
@@ -137,38 +158,65 @@ public class SearchLayout extends StoreBaseContentLayout implements OnClickListe
 	private void skipToGameDetail(int pos) {
 		AppEntity app = mAppList.get(pos);
 		if (app != null) {
-			Intent intent = new Intent(getContext(), DetailActivity.class);
+			Intent intent = new Intent(getRootActivity(), DetailActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			Bundle bundle = new Bundle();
 			bundle.putParcelable(DetailActivity.EXTRAS_APP_ENTITY, app);
 			intent.putExtras(bundle);
-			getContext().startActivity(intent);
+			getRootActivity().startActivity(intent);
 		}
 	}
 
 	@Override
 	public boolean onSunKey() {
 		if (mSearchInputView.hasFocus()) {
-			if (mSearchInputView.isPopupShowing()) {
+			if (mSearchInputView.isPopupShowing() && mSearchInputView.getListSelection() >= 0) {
 				mSearchInputView.performCompletion();
 			} else {
-				mInputMethodManager.showSoftInput(mSearchInputView, 0);
+				mInputMethodManager.showSoftInput(mSearchInputView, 0, new ResultReceiver(null) {
+
+					@Override
+					protected void onReceiveResult(int resultCode, Bundle resultData) {
+						super.onReceiveResult(resultCode, resultData);
+						if (resultCode == InputMethodManager.RESULT_SHOWN) {
+							// 清除输入法弹出时默认输入“g”
+							mHandler.sendEmptyMessageDelayed(WHAT_RESTART_INPUT_METHOD, 180);
+						}
+					}
+
+				});
 			}
-		} else if (mSearchBtn.hasFocus()) {
-			mSearchBtn.performClick();
 		} else if (mListView.hasFocus()) {
 			int selectedPos = mListView.getSelectedItemPosition();
 			View selectedView = mListView.getSelectedView();
 			if (selectedView != null && selectedPos != -1) {
-				mListView.performItemClick(selectedView,selectedPos, 0);
+				mListView.performItemClick(selectedView, selectedPos, 0);
 			}
 		}
 		return super.onSunKey();
 	}
 
 	@Override
+	public boolean onBackKey() {
+		if (mSearchInputView.hasFocus()) {
+			// 判断输入法是否弹出
+			if (Utils.isSoftInputOpen(getRootActivity(), mSearchInputView)) {
+				mInputMethodManager.hideSoftInputFromWindow(mSearchInputView.getWindowToken(),
+						InputMethodManager.HIDE_NOT_ALWAYS);
+				return true;
+			}
+		}
+		return super.onBackKey();
+	}
+
+	@Override
+	public boolean onMoonKey() {
+		return onBackKey();
+	}
+
+	@Override
 	protected boolean isCurrentFocus() {
-		return hasFocus(mSearchBtn, mSearchInputView, mListView);
+		return hasFocus(mSearchInputView, mListView);
 	}
 
 	// 搜索提示关键字
@@ -228,7 +276,7 @@ public class SearchLayout extends StoreBaseContentLayout implements OnClickListe
 				return null;
 			}
 			try {
-				return getGameInfoHub().obtainKeywordsByWord(mKeyword,AppPlatFormConfig.IPLATFORMID, "");
+				return getGameInfoHub().obtainKeywordsByWord(mKeyword, AppPlatFormConfig.IPLATFORMID, "");
 			} catch (InfoSourceException e) {
 				e.printStackTrace();
 			}
@@ -236,7 +284,8 @@ public class SearchLayout extends StoreBaseContentLayout implements OnClickListe
 		}
 
 		protected void onPostExecute(List<String> result) {
-//			Log.d("liu.js", "searchKeyword--onPostExecute--result=" + result);
+			// Log.d("liu.js", "searchKeyword--onPostExecute--result=" +
+			// result);
 			if (isCancelled()) {
 				return;
 			}
@@ -261,7 +310,8 @@ public class SearchLayout extends StoreBaseContentLayout implements OnClickListe
 				return null;
 			}
 			try {
-				return getGameInfoHub().searchByKeyword(keyword, 1, SEARCH_APP_MAX_SIZE, AppPlatFormConfig.IPLATFORMID, "", "");
+				return getGameInfoHub().searchByKeyword(keyword, 1, SEARCH_APP_MAX_SIZE, AppPlatFormConfig.IPLATFORMID,
+						"", "");
 			} catch (InfoSourceException e) {
 				e.printStackTrace();
 			}
@@ -275,7 +325,7 @@ public class SearchLayout extends StoreBaseContentLayout implements OnClickListe
 			}
 			mAppList.clear();
 			mAppList.addAll(result);
-			mAdapter.notifyDataSetChanged();
+			mSearchAdapter.notifyDataSetChanged();
 		}
 	}
 
@@ -302,18 +352,7 @@ public class SearchLayout extends StoreBaseContentLayout implements OnClickListe
 				app.setName(keywordItem.getSKeyWord());
 				mAppList.add(app);
 			}
-			mAdapter.notifyDataSetChanged();
-		}
-	}
-
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.storeSearchBtn:
-			startSearchApp();
-			break;
-		default:
-			break;
+			mSearchAdapter.notifyDataSetChanged();
 		}
 	}
 
@@ -322,6 +361,7 @@ public class SearchLayout extends StoreBaseContentLayout implements OnClickListe
 		public SearchArrayAdapter(Context context, int textViewResourceId) {
 			super(context, textViewResourceId);
 		}
+
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View view = super.getView(position, convertView, parent);

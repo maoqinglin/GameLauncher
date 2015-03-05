@@ -68,47 +68,6 @@ public class GameLauncherActivity extends BaseMenuActivity {
 	// return super.onKeyUp(keyCode, event);
 	// }
 
-	// @Override
-	// public boolean onKeyDown(int keyCode, KeyEvent event) {
-	// if (KeyEventFragment.ALLOW_KEY_DELAY && mLastKeyCode != -1
-	// && (keyCode == SnailKeyCode.LEFT_KEY || keyCode ==
-	// SnailKeyCode.RIGHT_KEY)) {
-	// if (System.currentTimeMillis() - mLastKeyTime <=
-	// KeyEventFragment.KEY_DELAY) {
-	// return true;
-	// }
-	// }
-	// mLastKeyCode = keyCode;
-	// mLastKeyTime = System.currentTimeMillis();
-	// switch (keyCode) {
-	// case SnailKeyCode.MOUNT_KEY:
-	// case SnailKeyCode.WATER_KEY:
-	// case SnailKeyCode.SUN_KEY:
-	// case KeyEvent.KEYCODE_DPAD_CENTER:
-	// case SnailKeyCode.MOON_KEY:
-	// case SnailKeyCode.BACK_KEY:
-	// case SnailKeyCode.L2_KEY:
-	// case SnailKeyCode.R2_KEY:
-	// case SnailKeyCode.LEFT_KEY:
-	// case SnailKeyCode.RIGHT_KEY:
-	// case SnailKeyCode.UP_KEY:
-	// case SnailKeyCode.DOWN_KEY:
-	// if (mFragmentManager.onKeyDown(keyCode, event)) {
-	// return true;
-	// }
-	// break;
-	// case SnailKeyCode.L1_KEY:
-	// mMenuFragment.requestFocusToUp();
-	// return true;
-	// case SnailKeyCode.R1_KEY:
-	// mMenuFragment.requestFocusToDown();
-	// return true;
-	// default:
-	// break;
-	// }
-	// return super.onKeyDown(keyCode, event);
-	// }
-
 	@Override
 	protected void onDestroy() {
 		// 上报应用关闭的时间，打开时长

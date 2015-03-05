@@ -313,6 +313,10 @@
     <dimen name="store_diver_width">24dp</dimen>
     <dimen name="store_margin_top">50dp</dimen>
     <dimen name="store_content_padding_top">40dp</dimen>
+    <dimen name="store_app_normal_title_height">72dp</dimen>
+    <dimen name="store_app_icon_normal_width">300dp</dimen>
+    <dimen name="store_app_icon_normal_height">300dp</dimen>
+    <dimen name="store_app_normal_bg_height">372dp</dimen>
 
     <!-- 免商店-详情 -->
     <dimen name="store_options_width">192dp</dimen>
@@ -326,24 +330,17 @@
     <dimen name="store_detail_padding_bottom">30dp</dimen>
 
     <!-- 免商店-搜索 -->
-    <dimen name="store_search_diver_width">30dp</dimen>
-    <dimen name="store_search_input_text_width">612dp</dimen>
-    <dimen name="store_search_listview_padding_top">30dp</dimen>
-    <dimen name="store_search_keyword_textview_height">147dp</dimen>
-    <dimen name="store_search_keyword_textview_size">36sp</dimen>
-    <dimen name="store_search_keyword_padding_left">30dp</dimen>
-    <dimen name="store_search_listview_item_space">15dp</dimen>
-    <dimen name="store_search_input_btn_margin_left">30dp</dimen>
-    <dimen name="store_search_listview_margin_top">30dp</dimen>
-    <dimen name="store_search_input_btn_size">42sp</dimen>
-    <dimen name="store_search_padding_top">9dp</dimen>
-    <dimen name="store_search_padding_bottom">9dp</dimen>
-    <dimen name="store_search_padding_left">15dp</dimen>
-    <dimen name="store_search_padding_right">15dp</dimen>
-    <dimen name="store_app_normal_title_height">72dp</dimen>
-    <dimen name="store_app_icon_normal_width">300dp</dimen>
-    <dimen name="store_app_icon_normal_height">300dp</dimen>
-    <dimen name="store_app_normal_bg_height">372dp</dimen>
+	<dimen name="search_edittext_width">830dp</dimen>
+	<dimen name="search_edittext_height">112dp</dimen>
+	<dimen name="search_edittext_margin_top">120dp</dimen>
+	<dimen name="search_edittext_textsize">48sp</dimen>
+	<dimen name="search_intro_margin_top">30dp</dimen>
+	<dimen name="search_intro_margin_bottom">30dp</dimen>
+	<dimen name="search_suggest_textsize">42sp</dimen>
+	<dimen name="search_suggest_height">146dp</dimen>
+	<dimen name="search_suggest_padding_left">50dp</dimen>
+	<dimen name="search_recommend_prompt_textsize">36sp</dimen>
+	<dimen name="search_list_diver_width">20dp</dimen>
 
     <!-- 免商店-推荐 -->
     <dimen name="store_recommend_item_width">471dp</dimen>

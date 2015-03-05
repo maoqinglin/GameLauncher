@@ -16,6 +16,7 @@
 
 package com.ireadygo.app.gamelauncher.utils;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -29,13 +30,17 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Typeface;
+import android.hardware.input.InputManager;
 import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.InputEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
@@ -378,4 +383,15 @@ public class Utils {
 		Typeface typeface = Typeface.createFromAsset(context.getAssets(), path);
 		textView.setTypeface(typeface);
 	}
+
+	public static boolean isSoftInputOpen(Context context, EditText editText) {
+		InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+		if (imm.hideSoftInputFromWindow(editText.getWindowToken(), 0)) {
+			imm.showSoftInput(editText, 0);
+			return true;
+		}
+		return false;
+
+	}
+
 }

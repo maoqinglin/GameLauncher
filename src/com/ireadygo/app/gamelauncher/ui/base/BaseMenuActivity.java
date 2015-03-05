@@ -3,11 +3,13 @@ package com.ireadygo.app.gamelauncher.ui.base;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.ui.CustomFragmentManager;
+import com.ireadygo.app.gamelauncher.ui.SnailKeyCode;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.widget.CustomFrameLayout;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout;
@@ -26,7 +28,7 @@ public abstract class BaseMenuActivity extends BaseActivity {
 	private BaseMenuFragment mMenuFragment;
 
 	private OperationTipsLayout mTipsLayout;
-	
+
 	private ObjectAnimator mLeftTranslateAnimator;
 	private ObjectAnimator mRightTranslateAnimator;
 
@@ -37,7 +39,7 @@ public abstract class BaseMenuActivity extends BaseActivity {
 		setContentView(R.layout.main);
 		mMainLayout = (CustomFrameLayout) findViewById(R.id.main_layout);
 		mFocusView = findViewById(R.id.focusView);
-		mTipsLayout = (OperationTipsLayout)findViewById(R.id.tips_layout);
+		mTipsLayout = (OperationTipsLayout) findViewById(R.id.tips_layout);
 		mTipsLayout.setAllVisible(View.VISIBLE);
 		mMenuFragment = createMenuFragment();
 		addFragment(mMenuFragment);
@@ -88,7 +90,7 @@ public abstract class BaseMenuActivity extends BaseActivity {
 	public abstract BaseMenuFragment createMenuFragment();
 
 	public void translateToLeft() {
-		if(!mShouldTranslate){
+		if (!mShouldTranslate) {
 			return;
 		}
 		if (mRightTranslateAnimator != null && mRightTranslateAnimator.isRunning()) {
@@ -102,7 +104,7 @@ public abstract class BaseMenuActivity extends BaseActivity {
 	}
 
 	public void translateToRight() {
-		if(!mShouldTranslate){
+		if (!mShouldTranslate) {
 			return;
 		}
 		if (mLeftTranslateAnimator != null && mLeftTranslateAnimator.isRunning()) {
@@ -114,16 +116,55 @@ public abstract class BaseMenuActivity extends BaseActivity {
 		}
 		mRightTranslateAnimator.start();
 	}
-	
-	public View getFocusView(){
+
+	public View getFocusView() {
 		return mFocusView;
 	}
-	
-	public BaseMenuFragment getMenuFragment(){
+
+	public BaseMenuFragment getMenuFragment() {
 		return mMenuFragment;
 	}
-	
-	public void setShouldTranslate(boolean shouldTranslate){
+
+	public void setShouldTranslate(boolean shouldTranslate) {
 		this.mShouldTranslate = shouldTranslate;
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (KeyEventFragment.ALLOW_KEY_DELAY && mLastKeyCode != -1
+				&& (keyCode == SnailKeyCode.LEFT_KEY || keyCode == SnailKeyCode.RIGHT_KEY)) {
+			if (System.currentTimeMillis() - mLastKeyTime <= KeyEventFragment.KEY_DELAY) {
+				return true;
+			}
+		}
+		mLastKeyCode = keyCode;
+		mLastKeyTime = System.currentTimeMillis();
+		switch (keyCode) {
+		case SnailKeyCode.MOUNT_KEY:
+		case SnailKeyCode.WATER_KEY:
+		case SnailKeyCode.SUN_KEY:
+		case KeyEvent.KEYCODE_DPAD_CENTER:
+		case SnailKeyCode.MOON_KEY:
+		case SnailKeyCode.BACK_KEY:
+		case SnailKeyCode.L2_KEY:
+		case SnailKeyCode.R2_KEY:
+		case SnailKeyCode.LEFT_KEY:
+		case SnailKeyCode.RIGHT_KEY:
+		case SnailKeyCode.UP_KEY:
+		case SnailKeyCode.DOWN_KEY:
+			if (mFragmentManager.onKeyDown(keyCode, event)) {
+				return true;
+			}
+			break;
+		case SnailKeyCode.L1_KEY:
+			mMenuFragment.requestFocusToUp();
+			return true;
+		case SnailKeyCode.R1_KEY:
+			mMenuFragment.requestFocusToDown();
+			return true;
+		default:
+			break;
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 }
