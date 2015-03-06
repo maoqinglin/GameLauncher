@@ -157,6 +157,14 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.ireadygo.app.gamelauncher.ui.guide.GuideRegisterOrLoginActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/CustomerTheme" />
+        <activity
+            android:name="com.ireadygo.app.gamelauncher.ui.guide.GuideAlipayActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/CustomerTheme" />
 
         <!-- service -->
         <service android:name="com.ireadygo.app.gamelauncher.service.GameLauncherService" />

@@ -336,6 +336,13 @@
 
     <!-- 开机引导 -->
     <string name="starting_guide_key_title">按键说明</string>
+    <string name="starting_guide_account_login_title">账号登陆</string>
+    <string name="starting_guide_alipay_title">支付宝绑定</string>
+    <string name="starting_guide_login">登&#160;&#160;陆</string>
+    <string name="starting_guide_register">注&#160;&#160;册</string>
+    <string name="starting_guide_alipay_bind">支付宝绑定</string>
+    <string name="starting_guide_alipay_skip">跳&#160;&#160;过</string>
+    <string name="starting_guide_login_intro">你首次“登陆”或“注册”的账号\n将会与你所购买的套餐类型绑定在一起</string>
 
     <!-- 错误显示 -->
     <string name="error_unknown">未知错误</string>

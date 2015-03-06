@@ -330,6 +330,13 @@
 
     <!-- 開機引導 -->
     <string name="starting_guide_key_title">按鍵說明</string>
+    <string name="starting_guide_account_login_title">帳號登陸</string>
+    <string name="starting_guide_alipay_title">支付寶綁定</string>
+    <string name="starting_guide_login">登&#160;&#160;陸</string>
+    <string name="starting_guide_register">注&#160;&#160;冊</string>
+    <string name="starting_guide_alipay_bind">支付寶綁定</string>
+    <string name="starting_guide_alipay_skip">跳&#160;&#160;過</string>
+    <string name="starting_guide_login_intro">你首次“登陸”或“註冊”的帳號\n將會與你所購買的套餐類型綁定在一起</string>
 
     <!-- 錯誤顯示 -->
     <string name="error_unknown">未知錯誤</string>

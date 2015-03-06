@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <include
+        android:id="@+id/guideLayout"
+        layout="@layout/starting_guide_title_layout" />
+
+    <com.ireadygo.app.gamelauncher.ui.widget.GuideTwoBtnLayout 
+        android:id="@+id/guideTwoBtnLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        />
+
+    <com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout 
+        android:id="@+id/operationTipsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>

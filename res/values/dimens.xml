@@ -226,7 +226,7 @@
     <dimen name="photo_list_padding">60dp</dimen>
 
     <!-- 免账号-一键登录 -->
-    <dimen name="onekey_account_login_margin_left">90dp</dimen>
+    <dimen name="onekey_account_login_margin_left">100dp</dimen>
     <dimen name="onekey_btn_text_size">54sp</dimen>
 
     <!-- 免账号-资费 -->

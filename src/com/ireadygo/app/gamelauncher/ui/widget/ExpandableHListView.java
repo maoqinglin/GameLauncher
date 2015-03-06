@@ -21,10 +21,8 @@ import java.util.ArrayList;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Parcel;
@@ -41,10 +39,7 @@ import android.widget.ExpandableListAdapter;
 import android.widget.ListAdapter;
 
 import com.ireadygo.app.gamelauncher.R;
-import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.game.adapter.HExpandableListAdapter;
-import com.ireadygo.app.gamelauncher.ui.store.storemanager.StoreManageAdapter;
-import com.ireadygo.app.gamelauncher.utils.PictureUtil;
 
 /**
  * A view that shows items in a vertically scrolling two-level list. This
