@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:menuItem="http://schemas.android.com/apk/res/com.ireadygo.app.gamelauncher"
+    android:id="@+id/store_menu"
+    android:layout_width="@dimen/menu_width"
+    android:layout_height="wrap_content"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:gravity="right|center_vertical"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/menu_store_margin_top"
+    android:paddingRight="@dimen/menu_padding_right" >
+
+    <com.ireadygo.app.gamelauncher.ui.menu.TextMenu
+        android:id="@+id/account_menu_personal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:nextFocusDown="@+id/account_menu_notice"
+        android:nextFocusLeft="@+id/account_menu_personal"
+        android:nextFocusRight="@+id/upHList"
+        android:nextFocusUp="@+id/account_menu_personal"
+        menuItem:menu_title="@string/account_personal_center" >
+    </com.ireadygo.app.gamelauncher.ui.menu.TextMenu>
+
+    <com.ireadygo.app.gamelauncher.ui.menu.TextMenu
+        android:id="@+id/account_menu_notice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/menu_item_margin_top"
+        android:nextFocusDown="@+id/account_menu_recharge"
+        android:nextFocusLeft="@+id/account_menu_notice"
+        android:nextFocusRight="@+id/upHList"
+        android:nextFocusUp="@+id/account_menu_personal"
+        menuItem:menu_title="@string/account_notice" >
+    </com.ireadygo.app.gamelauncher.ui.menu.TextMenu>
+
+    <com.ireadygo.app.gamelauncher.ui.menu.TextMenu
+        android:id="@+id/account_menu_recharge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/menu_item_margin_top"
+        android:nextFocusDown="@+id/account_menu_recharge"
+        android:nextFocusLeft="@+id/account_menu_recharge"
+        android:nextFocusRight="@+id/upHList"
+        android:nextFocusUp="@+id/account_menu_notice"
+        menuItem:menu_title="@string/account_freecard" >
+    </com.ireadygo.app.gamelauncher.ui.menu.TextMenu>
+
+</LinearLayout>

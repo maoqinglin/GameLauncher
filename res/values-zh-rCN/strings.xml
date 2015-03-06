@@ -179,7 +179,8 @@
 
     <!-- 免账号 -->
     <string name="account_mywealth">我的资产</string>
-    <string name="account_personal">个人信息</string>
+    <string name="account_personal_center">个人中心</string>
+    <string name="account_notice">公告</string>
     <string name="account_recharge">充值</string>
     <string name="account_freecard">免卡</string>
     <string name="account_logout">退出账号</string>
@@ -234,7 +235,7 @@
 
     <!-- 免账号-充值 -->
     <string name="recharge_current_account">当前账户</string>
-    <string name="recharge_my_balance">我的余额</string>
+    <string name="recharge_my_balance">余额</string>
     <string name="recharge_rubbit_currency">兔兔币</string>
     <string name="recharge_rubbit_ticket">兔兔礼券</string>
     <string name="recharge_rubbit_recharge">兔兔币充值</string>
@@ -277,6 +278,9 @@
     <string name="recharge_arm_ticket_purpose_title">卡槽礼券可用于：在“我的应用”桌面上，增加更多第三方应用</string>
     <string name="recharge_arm_ticket_recharge_title">卡槽礼券充值</string>
     <string name="recharge_account_traiff_recharge">资费充值</string>
+    
+    <string name="my_pass">我的通行证：</string>
+    <string name="snail_point">蜗牛点券</string>
 
     <string-array name="recharge_ticket_types">
         <item>兔兔礼券</item>

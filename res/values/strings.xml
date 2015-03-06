@@ -170,8 +170,9 @@
     
     <!-- 免账号 -->
     <string name="account_mywealth">Assets</string>
-    <string name="account_personal">INFO</string>
+    <string name="account_personal_center">INFO</string>
     <string name="account_recharge">Deposit</string>
+    <string name="account_notice">Notice</string>
     <string name="account_freecard">M-Card</string>
     <string name="account_logout">Logout</string>
 
@@ -269,6 +270,9 @@
     <string name="recharge_arm_ticket_recharge_title">Slot Certificate Deposit</string>
     <string name="recharge_account_traiff_recharge">Deposit</string>
 
+    <string name="my_pass">My Pass:</string>
+	<string name="snail_point">Snail Point</string>
+    
     <string-array name="recharge_ticket_types">
         <item>Rabbit Certificate</item>
         <item>Slot Certificate</item>
