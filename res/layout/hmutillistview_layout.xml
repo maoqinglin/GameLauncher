@@ -16,8 +16,7 @@
         android:clipToPadding="false"
         android:nextFocusDown="@+id/downHList"
         android:nextFocusUp="@+id/upHList"
-        android:overScrollMode="never"
-         />
+        android:overScrollMode="never" />
 
     <com.ireadygo.app.gamelauncher.ui.widget.HListView
         android:id="@+id/downHList"
@@ -28,7 +27,6 @@
         android:clipToPadding="false"
         android:nextFocusDown="@+id/downHList"
         android:nextFocusUp="@+id/upHList"
-        android:overScrollMode="never"
-         />
+        android:overScrollMode="never" />
 
 </LinearLayout>

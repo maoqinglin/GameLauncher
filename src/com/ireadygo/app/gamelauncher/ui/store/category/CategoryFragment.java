@@ -13,7 +13,12 @@ import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
 import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryInfo;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
+import com.ireadygo.app.gamelauncher.ui.base.BaseMenuActivity.ScrollListenerByIndicator;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
+import com.ireadygo.app.gamelauncher.ui.widget.AbsHListView;
+import com.ireadygo.app.gamelauncher.ui.widget.AbsHListView.OnScrollListener;
+import com.ireadygo.app.gamelauncher.ui.widget.HListView;
+import com.ireadygo.app.gamelauncher.ui.widget.PagingIndicator;
 import com.ireadygo.app.gamelauncher.ui.widget.StatisticsTitleView;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiBaseAdapter;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
@@ -37,12 +42,16 @@ public class CategoryFragment extends BaseContentFragment {
 	@Override
 	protected void initView(View view) {
 		super.initView(view);
-		mTitleLayout = (StatisticsTitleView)view.findViewById(R.id.title_layout);
+		mTitleLayout = (StatisticsTitleView) view.findViewById(R.id.title_layout);
 		mTitleLayout.setCount(269);
 		mTitleLayout.setTitle("分类");
 		mMultiListView = (HMultiListView) view.findViewById(R.id.category_list);
 		mAdapter = new CategoryMultiAdapter(getRootActivity(), mMultiListView);
 		mMultiListView.setAdapter(mAdapter);
+		PagingIndicator indicator = getMenuActivity().getPagingIndicator();
+		mMultiListView.setOnScrollListener(new ScrollListenerByIndicator(indicator));
+		HListView upListView = mMultiListView.getHListViews().get(0);
+		indicator.bind(upListView);
 		loadData(1);
 	}
 

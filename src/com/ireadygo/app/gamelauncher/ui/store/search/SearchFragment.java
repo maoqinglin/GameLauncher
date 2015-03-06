@@ -35,10 +35,12 @@ import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.appstore.info.item.KeywordItem;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
+import com.ireadygo.app.gamelauncher.ui.base.BaseMenuActivity.ScrollListenerByIndicator;
 import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.store.StoreAppNormalAdapter;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
+import com.ireadygo.app.gamelauncher.ui.widget.PagingIndicator;
 import com.ireadygo.app.gamelauncher.utils.Utils;
 import com.snail.appstore.openapi.AppPlatFormConfig;
 
@@ -126,9 +128,14 @@ public class SearchFragment extends BaseContentFragment {
 		});
 
 		initData();
+		
 		mSearchAdapter = new StoreAppNormalAdapter(getRootActivity(), mListView, mAppList);
 		mListView.setAdapter(mSearchAdapter);
 		mListView.setOnItemClickListener(mOnItemClickListener);
+		PagingIndicator indicator = getMenuActivity().getPagingIndicator();
+		mListView.setOnScrollListener(new ScrollListenerByIndicator(indicator));
+		indicator.bind(mListView);
+		
 		mInputMethodManager = (InputMethodManager) getRootActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 	}
 

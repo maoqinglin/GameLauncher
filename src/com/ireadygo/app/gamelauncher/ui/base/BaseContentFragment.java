@@ -181,4 +181,8 @@ public abstract class BaseContentFragment extends BaseFragment {
 	protected GameInfoHub getGameInfoHub() {
 		return mGameInfoHub;
 	}
+	
+	protected BaseMenuActivity getMenuActivity() {
+		return (BaseMenuActivity)getRootActivity();
+	}
 }

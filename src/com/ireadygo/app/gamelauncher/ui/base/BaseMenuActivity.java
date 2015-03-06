@@ -11,8 +11,12 @@ import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.ui.CustomFragmentManager;
 import com.ireadygo.app.gamelauncher.ui.SnailKeyCode;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
+import com.ireadygo.app.gamelauncher.ui.widget.AbsHListView;
+import com.ireadygo.app.gamelauncher.ui.widget.AbsHListView.OnScrollListener;
 import com.ireadygo.app.gamelauncher.ui.widget.CustomFrameLayout;
+import com.ireadygo.app.gamelauncher.ui.widget.HListView;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout;
+import com.ireadygo.app.gamelauncher.ui.widget.PagingIndicator;
 import com.ireadygo.app.gamelauncher.utils.StaticsUtils;
 
 public abstract class BaseMenuActivity extends BaseActivity {
@@ -57,6 +61,14 @@ public abstract class BaseMenuActivity extends BaseActivity {
 	protected void onPause() {
 		getCustomFragmentManager().onPause();
 		super.onPause();
+	}
+
+	public OperationTipsLayout getTipsLayout() {
+		return mTipsLayout;
+	}
+
+	public PagingIndicator getPagingIndicator() {
+		return mTipsLayout.getPagingIndicator();
 	}
 
 	public void removeFragment(BaseFragment fragment) {
@@ -166,5 +178,26 @@ public abstract class BaseMenuActivity extends BaseActivity {
 			break;
 		}
 		return super.onKeyDown(keyCode, event);
+	}
+
+	public static class ScrollListenerByIndicator implements OnScrollListener {
+		private PagingIndicator mPagingIndicator;
+
+		public ScrollListenerByIndicator(PagingIndicator mPagingIndicator) {
+			this.mPagingIndicator = mPagingIndicator;
+		}
+
+		@Override
+		public void onScrollStateChanged(AbsHListView view, int scrollState) {
+
+		}
+
+		@Override
+		public void onScroll(AbsHListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+			if (mPagingIndicator != null) {
+				mPagingIndicator.onScroll((HListView) view);
+			}
+		}
+
 	}
 }

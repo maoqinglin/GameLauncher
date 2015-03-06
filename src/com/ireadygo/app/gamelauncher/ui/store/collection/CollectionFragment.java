@@ -16,8 +16,11 @@ import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException
 import com.ireadygo.app.gamelauncher.appstore.info.item.CollectionInfo;
 import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
+import com.ireadygo.app.gamelauncher.ui.base.BaseMenuActivity.ScrollListenerByIndicator;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
+import com.ireadygo.app.gamelauncher.ui.widget.HListView;
+import com.ireadygo.app.gamelauncher.ui.widget.PagingIndicator;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.StatisticsTitleView;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiBaseAdapter;
@@ -45,12 +48,12 @@ public class CollectionFragment extends BaseContentFragment {
 	@Override
 	protected void initView(View view) {
 		super.initView(view);
-		mTitleLayout = (StatisticsTitleView)view.findViewById(R.id.title_layout);
+		mTitleLayout = (StatisticsTitleView) view.findViewById(R.id.title_layout);
 		mTitleLayout.setCount(269);
 		mTitleLayout.setTitle(R.string.collection_prompt);
-		
+
 		mMultiListView = (HMultiListView) view.findViewById(R.id.collection_list);
-		for(int i = 0; i < 10 ; i ++){
+		for (int i = 0; i < 10; i++) {
 			mCollectionList.add(null);
 		}
 		mAdapter = new CollectionMultiAdapter(getRootActivity(), mMultiListView, mCollectionList);
@@ -61,8 +64,12 @@ public class CollectionFragment extends BaseContentFragment {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				CollectionDetailActivity.startSelf(getRootActivity(), 2L);
 			}
-			
+
 		});
+		PagingIndicator indicator = getMenuActivity().getPagingIndicator();
+		mMultiListView.setOnScrollListener(new ScrollListenerByIndicator(indicator));
+		HListView upListView = mMultiListView.getHListViews().get(0);
+		indicator.bind(upListView);
 		loadData(1);
 	}
 
@@ -71,7 +78,7 @@ public class CollectionFragment extends BaseContentFragment {
 		showLoadingProgress();
 	}
 
-	private void startCollectionDetailActivity(long collectionId,String posterUrl) {
+	private void startCollectionDetailActivity(long collectionId, String posterUrl) {
 		Intent intent = new Intent(getRootActivity(), CollectionDetailActivity.class);
 		intent.putExtra(EXTRA_COLLECTION_ID, collectionId);
 		intent.putExtra(EXTRA_POSTER_BG, posterUrl);
@@ -79,7 +86,7 @@ public class CollectionFragment extends BaseContentFragment {
 		SoundPoolManager.instance(getRootActivity()).play(SoundPoolManager.SOUND_ENTER);
 		getRootActivity().startActivity(intent);
 	}
-	
+
 	@Override
 	protected boolean isCurrentFocus() {
 		return mMultiListView.hasFocus();
@@ -90,11 +97,11 @@ public class CollectionFragment extends BaseContentFragment {
 		int selectedIndex = mMultiListView.getSelectedItemPosition();
 		if (selectedIndex > -1 && selectedIndex < mCollectionList.size()) {
 			CollectionInfo collection = mCollectionList.get(selectedIndex);
-			startCollectionDetailActivity(collection.getCollectionId(),collection.getPosterBgUrl());
+			startCollectionDetailActivity(collection.getCollectionId(), collection.getPosterBgUrl());
 		}
 		return super.onSunKey();
 	}
-	
+
 	private class LoadCollectionTask extends AsyncTask<Integer, Void, List<CollectionInfo>> {
 
 		@Override
@@ -121,11 +128,11 @@ public class CollectionFragment extends BaseContentFragment {
 				return;
 			}
 			mCollectionList.clear();
-			//TODO
-			for(int i = 0; i < 20; i ++){
+			// TODO
+			for (int i = 0; i < 20; i++) {
 				mCollectionList.add(result.get(0));
 			}
-//			mAppList.addAll(result);
+			// mAppList.addAll(result);
 			mMultiListView.notifyDataSetChanged();
 		}
 	}
