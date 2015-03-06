@@ -31,6 +31,11 @@ public class GameLauncherConfig {
 	public static final int DEFAULT_SLOT_NUM = 20;
 	public static final String DEFAULT_REMOTE_REQUEST_DOMAIN = "http://api.app.snail.com";
 
+	public static final String OBOX_TYPE_A = "A";
+	public static final String OBOX_TYPE_B = "B";
+	public static final String OBOX_TYPE_C = "C";
+	public static final String OBOX_DEFAULT_TYPE = OBOX_TYPE_C;
+
 	
 	public static final String[] SLOT_WHITE_LIST = {
 		"com.snailgame.cjg",

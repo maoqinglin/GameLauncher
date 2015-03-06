@@ -180,7 +180,22 @@
     <!-- 公告(notice) -->
     
     <!-- 顶部引导栏(guide) -->
-    
+
+    <!--个人-->
+    <string name="personal_account">Account:%1$s</string>
+    <string name="personal_account_unlogin">Has not login</string>
+    <string name="user_alipay_account_bind"><u>Bind Alipay Account</u></string>
+    <string name="user_play_time_title">Play Time of this Month:</string>
+    <string name="personal_play_time_state">%1$d/%2$d\tHours</string>
+    <string name="personal_months_reduction_pre">Months reduction of next year:\t</string>
+    <string name="personal_months_reduction_post">\tMonths</string>
+    <string name="personal_expired_date">Free rent expired date:</string>
+    <string name="personal_feedback_money">Returned money:%1$d/%2$d RMB</string>
+    <string name="personal_feedback_month">Will return months:%1$d</string>
+    <string name="user_center">Personal Center</string>
+    <string name="user_recharge">Recharge</string>
+    <string name="user_notice">Notice</string>
+
     <!-- 免账号 -->
     <string name="account_mywealth">Assets</string>
     <string name="account_personal_center">INFO</string>

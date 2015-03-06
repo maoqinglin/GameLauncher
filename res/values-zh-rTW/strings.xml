@@ -186,6 +186,21 @@
     <!-- 頂部引導欄(guide) -->
 
 
+    <!-- 個人 -->
+    <string name="personal_account">我的賬號：%1$s</string>
+    <string name="personal_account_unlogin">未登錄</string>
+    <string name="user_alipay_account_bind"><u>綁定支付寶</u></string>
+    <string name="user_play_time_title">本月任務遊戲時間：</string>
+    <string name="personal_play_time_state">%1$d/%2$d\t小時</string>
+    <string name="personal_months_reduction_pre">已減免次年：\t</string>
+    <string name="personal_months_reduction_post">\t個月OBox租金</string>
+    <string name="personal_expired_date">免租到期時間：</string>
+    <string name="personal_feedback_money">已返還：%1$d/%2$d元</string>
+    <string name="personal_feedback_month">可返還：%1$d月</string>
+    <string name="user_center">個人中心</string>
+    <string name="user_recharge">充值</string>
+    <string name="user_notice">公告</string>
+
     <!-- 免帳號 -->
     <string name="account_mywealth">我的資產</string>
     <string name="account_personal">個人資訊</string>

@@ -66,6 +66,15 @@ public abstract class BaseMenuFragment extends BaseFragment {
 		mMenuItemList.add(menuItem);
 	}
 
+	protected void updateMenuItem(int menuIndex,BaseContentFragment newFragment) {
+		if (menuIndex > -1 && menuIndex < mMenuItemList.size()) {
+			MenuItem menuItem = mMenuItemList.get(menuIndex);
+			if (newFragment != null) {
+				menuItem.setContentFragment(newFragment);
+			}
+		}
+	}
+
 	public Status getState() {
 		return mStatus;
 	}

@@ -87,6 +87,7 @@ public class PreferenceUtils {
 	public static final String KEY_FREE_FLOW_NOT_SUPPORT_NUM = "aj";
 	public static final String KEY_FREE_FLOW_BIND_PHONE_NUM = "ak";
 	public static final String KEY_FREE_FLOW_MODE = "al";
+	public static final String KEY_OBOX_TYPE = "am";
 
 	private static final int USER_PHOTO_EXPIRED_TIME = 7 * 24 * 60 * 60 * 1000;
 
@@ -449,6 +450,16 @@ public class PreferenceUtils {
 	public static void saveFreeFlowBindPhoneNum(String phoneNum) {
 		Editor editor = getSharePref().edit();
 		editor.putString(KEY_FREE_FLOW_BIND_PHONE_NUM, phoneNum);
+		editor.apply();
+	}
+
+	public static String getOBoxType() {
+		return getSharePref().getString(KEY_OBOX_TYPE,GameLauncherConfig.OBOX_DEFAULT_TYPE);
+	}
+
+	public static void saveOBoxType(String type) {
+		Editor editor = getSharePref().edit();
+		editor.putString(KEY_OBOX_TYPE, type);
 		editor.apply();
 	}
 

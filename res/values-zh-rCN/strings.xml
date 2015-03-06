@@ -100,7 +100,6 @@
     <string name="category_title_rsg">竞技飞行</string>
     <string name="category_title_spt">体育竞技</string>
     <string name="category_title_pzl">益智棋牌</string>
-    
     <string name="category_intro_slg">切东西/找茬/减压/宠物/答题/音乐节奏</string>
     <string name="category_intro_olg">回合制/即时战略/养成/武侠/魔幻/动漫</string>
     <string name="category_intro_stg">横版/射击/3D/飞行/坦克/狙击</string>
@@ -113,7 +112,6 @@
     <!-- 免商店-合集(collection) -->
     <string name="collection_prompt">商店内合集数量</string>
     <string name="collection_detail_prompt">合集内游戏数量</string>
-
 
     <!-- 免商店-合集/分类-游戏列表(collection_detail) -->
 
@@ -178,6 +176,7 @@
 
     <!-- 游戏社区 -->
 
+
     <!-- 社交(social) -->
 
 
@@ -189,6 +188,21 @@
 
     <!-- 顶部引导栏(guide) -->
 
+
+    <!-- 个人 -->
+    <string name="personal_account">我的账号：%1$s</string>
+    <string name="personal_account_unlogin">未登录</string>
+    <string name="user_alipay_account_bind"><u>绑定支付宝</u></string>
+    <string name="user_play_time_title">本月任务游戏时间：</string>
+    <string name="personal_play_time_state">%1$d/%2$d\t小时</string>
+    <string name="personal_months_reduction_pre">已减免次年：\t</string>
+    <string name="personal_months_reduction_post">\t个月OBox租金</string>
+    <string name="personal_expired_date">免租到期时间：</string>
+    <string name="personal_feedback_money">已返还：%1$d/%2$d元</string>
+    <string name="personal_feedback_month">可返还：%1$d月</string>
+    <string name="user_center">个人中心</string>
+    <string name="user_recharge">充值</string>
+    <string name="user_notice">公告</string>
 
     <!-- 免账号 -->
     <string name="account_mywealth">我的资产</string>
@@ -300,7 +314,6 @@
         <item>卡槽礼券</item>
     </string-array>
 
-
     <!-- 免账号-登录/注册/一键登录 -->
     <string name="account_one_key_logining_prompt">一键登录中...</string>
     <string name="account_logining_prompt">账号登录中...</string>
@@ -330,7 +343,6 @@
     <string name="account_email_error">邮箱格式不正确！</string>
     <string name="account_login_failed">登录失败，请重试！</string>
     <string name="account_login_server_phonenumber">客服电话：(0512)67621007</string>
-
 
     <!-- 按键提示层 -->
     <string name="key_sun">启动</string>

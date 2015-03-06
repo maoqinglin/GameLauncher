@@ -60,6 +60,16 @@
     <dimen name="content_fragment_list_padding_right">60dp</dimen>
     <dimen name="content_fragment_list_padding_top">45dp</dimen>
 
+    <!-- 个人 -->
+    <dimen name="user_text_size">36sp</dimen>
+    <dimen name="user_play_time_progress_width">800dp</dimen>
+    <dimen name="user_play_time_progress_height">10dp</dimen>
+    <dimen name="user_alipay_account_state_margin_left">60dp</dimen>
+    <dimen name="user_text_margin_top">70dp</dimen>
+    <dimen name="user_option_margin_top">100dp</dimen>
+    <dimen name="user_option_margin_top_normal">180dp</dimen>
+    <dimen name="user_option_margin_right">20dp</dimen>
+    <dimen name="user_option_title_margin_bottom">20dp</dimen>
     <!-- 我的页面 -->
     <dimen name="user_cup_drawable_padding">12dp</dimen>
     <dimen name="user_cup_text_size">36sp</dimen>

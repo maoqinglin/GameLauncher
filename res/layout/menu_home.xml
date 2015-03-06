@@ -19,7 +19,7 @@
         android:nextFocusLeft="@+id/menu_user"
         android:nextFocusRight="@+id/menu_user"
         android:nextFocusUp="@+id/menu_user"
-        menuItem:menu_icon="@drawable/menu_game_focused" >
+        menuItem:menu_icon="@drawable/menu_personal_selector" >
     </com.ireadygo.app.gamelauncher.ui.menu.ImageMenu>
 
     <com.ireadygo.app.gamelauncher.ui.menu.TextMenu
