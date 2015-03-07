@@ -28,6 +28,8 @@ public class PagingIndicator extends View {
 	private HListView mListView;
 	private boolean mIsBound;
 
+	private Interpolation mInterpolation = sDetaultInterpolation;
+
 	private Handler mHandler = new Handler() {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
@@ -58,7 +60,6 @@ public class PagingIndicator extends View {
 
 	private void init(Context context) {
 		mIndicatorDrawable = getResources().getDrawable(R.drawable.paging_indicator_shape);
-
 		mBackgroundDrawable = getResources().getDrawable(R.drawable.paging_indicator_background_shape);
 	}
 
@@ -118,7 +119,7 @@ public class PagingIndicator extends View {
 
 	private void doRefresh(HListView listView) {
 		if (listView.getChildCount() > 0) {
-			HListViewIndicatorInfo listViewInfo = calcHListIndicatorInfo(mListView);
+			HListViewIndicatorInfo listViewInfo = mInterpolation.calcHListIndicatorInfo(mListView);
 			int scrollX = listViewInfo.scrollX;
 			int listWidth = listViewInfo.listWidth;
 			int totalWidth = listViewInfo.listTotalWidth;
@@ -159,8 +160,16 @@ public class PagingIndicator extends View {
 		if (listView == null || mListView != listView || listView.getChildCount() == 0) {
 			return;
 		}
-		HListViewIndicatorInfo listViewInfo = calcHListIndicatorInfo(mListView);
+		HListViewIndicatorInfo listViewInfo = mInterpolation.calcHListIndicatorInfo(mListView);
 		scroll(listViewInfo.scrollX);
+	}
+
+	public void setInterpolation(Interpolation interpolation) {
+		if (interpolation == null) {
+			this.mInterpolation = sDetaultInterpolation;
+			return;
+		}
+		this.mInterpolation = interpolation;
 	}
 
 	private OnLayoutChangeListener mListViewLayoutChangeListener = new OnLayoutChangeListener() {
@@ -206,33 +215,41 @@ public class PagingIndicator extends View {
 		mScale = 0d;
 	}
 
-	private HListViewIndicatorInfo calcHListIndicatorInfo(HListView listView) {
-		int firstPos = listView.getFirstVisiblePosition();
-		int paddingLeft = listView.getPaddingLeft();
-		int paddingRight = listView.getPaddingRight();
-		int listWidth = listView.getWidth();
-		View firstItem = listView.getChildAt(0);
-		int scrollX = firstItem.getWidth() * firstPos + listView.getDividerWidth() * firstPos + paddingLeft
-				- firstItem.getLeft();
-		int totalWidth = paddingLeft + paddingRight + listView.getDividerWidth() * (listView.getCount())
-				+ firstItem.getWidth() * listView.getCount();
-		HListViewIndicatorInfo info = new HListViewIndicatorInfo();
-		info.scrollX = scrollX;
-		info.listWidth = listWidth;
-		info.listTotalWidth = totalWidth;
-		Log.d("liu.js", "scrollX=" + scrollX + "|totalWidth=" + totalWidth);
-		return info;
-	}
-
 	private class VListViewIndicatorInfo {
 		public int itemTop;
 		public int listHeight;
 		public int listTotalHeight;
 	}
 
-	private class HListViewIndicatorInfo {
+	public static class HListViewIndicatorInfo {
 		public int scrollX;
 		public int listWidth;
 		public int listTotalWidth;
 	}
+
+	public interface Interpolation {
+		HListViewIndicatorInfo calcHListIndicatorInfo(HListView listView);
+	}
+
+	private static Interpolation sDetaultInterpolation = new Interpolation() {
+
+		@Override
+		public HListViewIndicatorInfo calcHListIndicatorInfo(HListView listView) {
+			int firstPos = listView.getFirstVisiblePosition();
+			int paddingLeft = listView.getPaddingLeft();
+			int paddingRight = listView.getPaddingRight();
+			int listWidth = listView.getWidth();
+			View firstItem = listView.getChildAt(0);
+			int scrollX = firstItem.getWidth() * firstPos + listView.getDividerWidth() * firstPos + paddingLeft
+					- firstItem.getLeft();
+			int totalWidth = paddingLeft + paddingRight + listView.getDividerWidth() * (listView.getCount())
+					+ firstItem.getWidth() * listView.getCount();
+			HListViewIndicatorInfo info = new HListViewIndicatorInfo();
+			info.scrollX = scrollX;
+			info.listWidth = listWidth;
+			info.listTotalWidth = totalWidth;
+			Log.d("liu.js", "scrollX=" + scrollX + "|totalWidth=" + totalWidth);
+			return info;
+		}
+	};
 }

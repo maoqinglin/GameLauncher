@@ -18,6 +18,7 @@ import com.ireadygo.app.gamelauncher.ui.menu.HomeMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout;
 import com.ireadygo.app.gamelauncher.ui.widget.PagingIndicator;
+import com.ireadygo.app.gamelauncher.ui.widget.PagingIndicator.Interpolation;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 import com.ireadygo.app.gamelauncher.utils.Utils;
 
@@ -192,15 +193,25 @@ public abstract class BaseContentFragment extends BaseFragment {
 	}
 
 	protected void bindPagingIndicator(HMultiListView multiListView) {
-		PagingIndicator indicator = getMenuActivity().getPagingIndicator();
-		multiListView.setOnScrollListener(new ScrollListenerByIndicator(indicator));
-		HListView upListView = multiListView.getHListViews().get(0);
-		indicator.bind(upListView);
+		bindPagingIndicator(multiListView, null);
 	}
 
 	protected void bindPagingIndicator(HListView hListView) {
+		bindPagingIndicator(hListView, null);
+	}
+
+	protected void bindPagingIndicator(HMultiListView multiListView, Interpolation interpolation) {
+		PagingIndicator indicator = getMenuActivity().getPagingIndicator();
+		multiListView.setOnScrollListener(new ScrollListenerByIndicator(indicator));
+		HListView upListView = multiListView.getHListViews().get(0);
+		indicator.setInterpolation(interpolation);
+		indicator.bind(upListView);
+	}
+
+	protected void bindPagingIndicator(HListView hListView, Interpolation interpolation) {
 		PagingIndicator indicator = getMenuActivity().getPagingIndicator();
 		hListView.setOnScrollListener(new ScrollListenerByIndicator(indicator));
+		indicator.setInterpolation(interpolation);
 		indicator.bind(hListView);
 	}
 }

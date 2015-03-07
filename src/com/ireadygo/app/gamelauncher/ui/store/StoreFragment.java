@@ -6,6 +6,7 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,10 @@ import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.redirect.Anchor;
 import com.ireadygo.app.gamelauncher.ui.redirect.Anchor.Destination;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
+import com.ireadygo.app.gamelauncher.ui.widget.HListView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
+import com.ireadygo.app.gamelauncher.ui.widget.PagingIndicator.HListViewIndicatorInfo;
+import com.ireadygo.app.gamelauncher.ui.widget.PagingIndicator.Interpolation;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiBaseAdapter;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 
@@ -45,7 +49,7 @@ public class StoreFragment extends BaseContentFragment {
 		mMultiBaseAdapter = new StoreMultiAdapter(getRootActivity(), mStoreDatas, mMultiListView);
 		mMultiListView.setAdapter(mMultiBaseAdapter);
 		mMultiListView.setOnItemClickListener(mOnItemClickListener);
-		bindPagingIndicator(mMultiListView);
+		bindPagingIndicator(mMultiListView, mInterpolation);
 	}
 
 	@Override
@@ -135,6 +139,35 @@ public class StoreFragment extends BaseContentFragment {
 				getRootActivity().startActivity(intent);
 				SoundPoolManager.instance(getRootActivity()).play(SoundPoolManager.SOUND_ENTER);
 			}
+		}
+	};
+
+	private Interpolation mInterpolation = new Interpolation() {
+
+		@Override
+		public HListViewIndicatorInfo calcHListIndicatorInfo(HListView listView) {
+			int firstPos = listView.getFirstVisiblePosition();
+			int paddingLeft = listView.getPaddingLeft();
+			int paddingRight = listView.getPaddingRight();
+			int listWidth = listView.getWidth();
+			// View firstItem = listView.getChildAt(0);
+			View largeItem = listView.getChildAt(0);
+			View smallItem = listView.getChildAt(1);
+			int scrollX = 0;
+			if (firstPos == 0) {
+				scrollX = paddingLeft - largeItem.getLeft();
+			} else {
+				scrollX = largeItem.getWidth() + smallItem.getWidth() * (firstPos - 1) + listView.getDividerWidth()
+						* firstPos + paddingLeft - largeItem.getLeft();
+			}
+			int totalWidth = paddingLeft + paddingRight + listView.getDividerWidth() * (listView.getCount() - 1)
+					+ largeItem.getWidth() + smallItem.getWidth() * (listView.getCount() - 1);
+			HListViewIndicatorInfo info = new HListViewIndicatorInfo();
+			info.scrollX = scrollX;
+			info.listWidth = listWidth;
+			info.listTotalWidth = totalWidth;
+			Log.d("liu.js", "StoreFragment--scrollX=" + scrollX + "|totalWidth=" + totalWidth);
+			return info;
 		}
 	};
 }
