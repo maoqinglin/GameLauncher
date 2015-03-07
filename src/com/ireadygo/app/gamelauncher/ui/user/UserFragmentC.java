@@ -1,18 +1,22 @@
-package com.ireadygo.app.gamelauncher.ui.personal;
+package com.ireadygo.app.gamelauncher.ui.user;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.account.AccountManager;
 import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
 import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
+import com.ireadygo.app.gamelauncher.ui.activity.BindAlipayAccountActivity;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
 
@@ -37,6 +41,7 @@ public class UserFragmentC extends BaseContentFragment {
 		super.initView(view);
 		mAccount = (TextView)view.findViewById(R.id.account);
 		mAlipayAccountState = (TextView)view.findViewById(R.id.alipay_account_state);
+		mAlipayAccountState.setOnClickListener(mOnClickListener);
 		initData();
 	}
 
@@ -100,6 +105,28 @@ public class UserFragmentC extends BaseContentFragment {
 			}
 			setAlipayAccountState(false);
 		}
+	}
+
+	private OnClickListener mOnClickListener = new OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			switch (v.getId()) {
+			case R.id.alipay_account_state:
+//				skipToBindAlipayAccount(getRootActivity());
+				Intent intent = new Intent(getRootActivity(),UserActivity.class);
+				getRootActivity().startActivity(intent);
+				break;
+
+			default:
+				break;
+			}
+		}
+	};
+
+	private void skipToBindAlipayAccount(Context context) {
+		Intent intent = new Intent(context,BindAlipayAccountActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|intent.FLAG_ACTIVITY_NEW_TASK);
+		context.startActivity(intent);
 	}
 
 

@@ -6,20 +6,15 @@ import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.ireadygo.app.gamelauncher.R;
-import com.ireadygo.app.gamelauncher.account.AccountManager;
 import com.ireadygo.app.gamelauncher.appstore.data.GameData;
-import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
-import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.game.adapter.AppAdapter;
 import com.ireadygo.app.gamelauncher.game.data.GameLauncherAppState;
@@ -29,21 +24,17 @@ import com.ireadygo.app.gamelauncher.game.info.FolderInfo;
 import com.ireadygo.app.gamelauncher.game.info.ItemInfo;
 import com.ireadygo.app.gamelauncher.game.info.ShortcutInfo;
 import com.ireadygo.app.gamelauncher.game.utils.Utilities;
-import com.ireadygo.app.gamelauncher.ui.account.AccountFragment.CustomerLoginResultListener;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.HomeMenuFragment;
-import com.ireadygo.app.gamelauncher.ui.widget.AbsHListView.OnScrollListener;
 import com.ireadygo.app.gamelauncher.ui.widget.AbsHListView;
+import com.ireadygo.app.gamelauncher.ui.widget.AbsHListView.OnScrollListener;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemSelectedListener;
 import com.ireadygo.app.gamelauncher.ui.widget.StatisticsTitleView;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
-import com.ireadygo.app.gamelauncher.utils.Md5Util;
 import com.ireadygo.app.gamelauncher.utils.PackageUtils;
 import com.ireadygo.app.gamelauncher.utils.StaticsUtils;
-import com.ireadygo.app.gamelauncher.widget.GameLauncherThreadPool;
-import com.snail.appstore.openapi.accountstatus.AccountStatusManager;
 
 @SuppressLint("ValidFragment")
 public class AppFragment extends BaseContentFragment implements Callbacks {

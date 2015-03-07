@@ -9,20 +9,22 @@
     <string name="cancel">Cancel</string>
 
     <!-- 主页(main) -->
-    
+
+
     <!-- 主菜单(menu) -->
     <string name="menu_store">Store</string>
     <string name="menu_game">Games</string>
     <string name="menu_app">Apps</string>
     <string name="menu_settings">Settings</string>
-    
+
     <!-- 我的游戏-推荐下载 -->
     <string name="mygame_recommend_app_download">Recommend</string>
     <string name="mygame_empty_tip">There is no games! Go to find one in Free-Store</string>
-    
-     <!-- 推荐下载(game_recommend) -->
-     
-     <!-- 我的应用(app) -->
+
+    <!-- 推荐下载(game_recommend) -->
+
+
+    <!-- 我的应用(app) -->
     <string name="myapp_folder_title_system">System</string>
 
     <!-- 设置(settings) -->
@@ -43,13 +45,13 @@
     <string name="settings_reset">Reset</string>
     <string name="settings_about">about</string>
     <string name="settings_hdmi">HDMI</string>
-    
+
     <!-- 壁纸 -->
     <string name="wallpaper_set">Set wallpaper</string>
     <string name="wallpaper_snail">Snail Wallpapers</string>
     <string name="wallpaper_choose">Choose Wallpaper</string>
 
-    <!-- Notification通知-->
+    <!-- Notification通知 -->
     <string name="toast_slot_overdue">\tslot has expired!</string>
     <string name="toast_disable_3G_prompt">App Store has disabled downloading in 3G network!</string>
     <string name="toast_using_3G_download">Downloading with 3G network now!</string>
@@ -67,7 +69,8 @@
     <string name="notification_upgrade_little_title">\tapps have new version to be upgraded</string>
 
     <!-- 免商店(store) -->
-    
+
+
     <!-- 免商店-选项(store_options) -->
     <string name="store_menu_search">Search</string>
     <string name="store_options_recommend">Recommend</string>
@@ -76,7 +79,7 @@
     <string name="store_menu_app">常用应用</string>
     <string name="store_menu_manager">Game Manager</string>
     <string name="store_options_settings">Store Settings</string>
-    
+
     <!-- 免商店-选项缩写 -->
     <string name="store_options_search_short">Search</string>
     <string name="store_options_recommend_short">RCMD</string>
@@ -87,9 +90,10 @@
 
     <!-- 免商店-推荐(recommend) -->
 
+
     <!-- 免商店-分类(category) -->
     <string name="category_item_count_suffix">款</string>
-     <string name="category_title_slg">SLG</string>
+    <string name="category_title_slg">SLG</string>
     <string name="category_title_olg">Off-Line Game</string>
     <string name="category_title_stg">STG</string>
     <string name="category_title_rpg">RPG</string>
@@ -97,7 +101,6 @@
     <string name="category_title_rsg">RSG</string>
     <string name="category_title_spt">SPT</string>
     <string name="category_title_pzl">PZL</string>
-    
     <string name="category_intro_slg">Quickspot/Decompression/Pet/Answer/Music</string>
     <string name="category_intro_olg">SLG/RTS/Kongfu/Magic/Animation</string>
     <string name="category_intro_stg">Shoting/3D/SSG/Tank/Sniper</string>
@@ -106,13 +109,14 @@
     <string name="category_intro_rsg">Parkour/Race/Motorcycle/Rowing/Plane</string>
     <string name="category_intro_spt">Arcade/BasketBall/Soccer/Tennis/Billiards/ETC</string>
     <string name="category_intro_pzl">Dou Di Zhu/Chess/Mahjong/BRPG/Dezhou Poker/Card</string>
-    
+
     <!-- 免商店-合集(collection) -->
     <string name="collection_prompt">商店内合集数量</string>
     <string name="collection_detail_prompt">合集内游戏数量</string>
 
     <!-- 免商店-合集/分类-游戏列表(collection_detail) -->
-    
+
+
     <!-- 免商店-下载管理(store_manager) -->
     <string name="store_dld_manager_downloading">Downloading</string>
     <string name="store_dld_manager_updatable">Upgrade</string>
@@ -122,13 +126,12 @@
     <string name="store_dld_manager_detail_not_found">No information about this application!</string>
     <string name="store_dld_manager_delete_task_prompt">Delete Task</string>
     <string name="store_dld_manager_delete_task_msg">Are you sure to delete the download task？</string>
-    
     <string name="store_manager_downloading">Downloading</string>
     <string name="store_manager_updatable">Upgrade</string>
     <string name="store_manager_launchable">Installed</string>
     <string name="store_manager_delete_task_prompt">Delete Task</string>
     <string name="store_manager_delete_task_msg">Are you sure to delete the download task？</string>
-    
+
     <!-- 免商店-搜索(search) -->
     <string name="store_search">Search</string>
     <string name="search_recommend_prompt">最近大家都在搜的游戏</string>
@@ -140,7 +143,7 @@
         <item>Enable game upgrade notification</item>
         <item>Enable remote game auto-installation</item>
     </string-array>
-    
+
     <!-- 免商店-应用详情 -->
     <string name="detail_title">Detail</string>
     <string name="detail_game_size">Size：</string>
@@ -174,15 +177,20 @@
 
     <!-- 游戏社区 -->
 
+
     <!-- 社交(social) -->
+
 
     <!-- 论坛(forum) -->
 
+
     <!-- 公告(notice) -->
-    
+
+
     <!-- 顶部引导栏(guide) -->
 
-    <!--个人-->
+
+    <!-- 个人 -->
     <string name="personal_account">Account:%1$s</string>
     <string name="personal_account_unlogin">Has not login</string>
     <string name="user_alipay_account_bind"><u>Bind Alipay Account</u></string>
@@ -246,7 +254,7 @@
         <item>51~55</item>
         <item>56~60</item>
     </string-array>
-    
+
     <!-- 免账号-个人性别 -->
     <string-array name="personal_sex_array">
         <item>Male</item>
@@ -298,15 +306,13 @@
     <string name="recharge_arm_ticket_purpose_title">Slot Certificate is used to make more app display on the destop</string>
     <string name="recharge_arm_ticket_recharge_title">Slot Certificate Deposit</string>
     <string name="recharge_account_traiff_recharge">Deposit</string>
-
     <string name="my_pass">My Pass:</string>
-	<string name="snail_point">Snail Point</string>
-    
-    <string-array name="recharge_ticket_types">
-        <item>Rabbit Certificate</item>
-        <item>Slot Certificate</item>
-    </string-array>
+    <string name="snail_point">Snail Point</string>
 
+    <string-array name="recharge_ticket_types">
+        <item>Snail Ticket</item>
+        <item>Game Ticket</item>
+    </string-array>
 
     <!-- 免账号-登录/注册/一键登录 -->
     <string name="account_one_key_logining_prompt">Qick login...</string>
@@ -337,8 +343,6 @@
     <string name="account_email_error">Email format error!</string>
     <string name="account_login_failed">Login failed,Please try again!</string>
     <string name="account_login_server_phonenumber">Customer service：(0512)67621007</string>
-
-
     <string name="shortcut_confirm">Confirm</string>
     <string name="shortcut_detail">Detail</string>
     <string name="shortcut_back">Back</string>
@@ -355,7 +359,7 @@
 
     <!-- 开机引导 -->
     <string name="starting_guide_key_title">Key Instruction</string>
-    
+
     <!-- 错误显示 -->
     <string name="error_unknown">Unknown Error!</string>
     <string name="error_download">Download Error!</string>
@@ -384,15 +388,13 @@
     <string name="error_download_server_error">Download Error：Server error</string>
     <string name="error_download_url_error">Download Error：Download Url error</string>
     <string name="error_download_io_error">Download Error:Unknown Error</string>
-    
+
     <!-- Extend -->
     <string name="extend_install_error">Server data error,Please try again!</string>
     <string name="extend_install_success">install success</string>
     <string name="extend_nearly_open">It is comming soon!</string>
     <string name="extend_store_empty_title">There is no games! Go to find one in Free-Store!</string>
     <string name="store_load_empty_title">网络不给力~！</string>
-    
-    
     <!-- 常用应用(FavoriteApps) -->
     <string name="favorite_apps_title_prompt">商店内应用数量</string>
 </resources>

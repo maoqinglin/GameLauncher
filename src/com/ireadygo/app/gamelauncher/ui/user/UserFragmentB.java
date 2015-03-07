@@ -1,6 +1,4 @@
-package com.ireadygo.app.gamelauncher.ui.personal;
-
-import java.util.List;
+package com.ireadygo.app.gamelauncher.ui.user;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,14 +6,11 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.Html;
-import android.text.Spanned;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.View.OnFocusChangeListener;
+import android.view.View.OnClickListener;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -23,31 +18,27 @@ import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.account.AccountManager;
 import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
 import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
-import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryInfo;
 import com.ireadygo.app.gamelauncher.appstore.info.item.RentReliefItem;
 import com.ireadygo.app.gamelauncher.ui.activity.BindAlipayAccountActivity;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
 
-public class UserFragmentA extends BaseContentFragment {
+public class UserFragmentB extends BaseContentFragment {
 
 	private TextView mAccount;
 	private TextView mAlipayAccountState;
 	private ProgressBar mPlayTime;
 	private TextView mPlayTimeState;
-	private TextView mFeedbackRent;
-	private TextView mExpiredDate;
-	private int mFeedbackMonth = 0;
-	private int mPlayTimeHours = 0;
-	private String mAccountStr;
+	private TextView mFeedbackMoney;
+	private TextView mFeedbackMonth;
 
-	public UserFragmentA(Activity activity, BaseMenuFragment menuFragment) {
+	public UserFragmentB(Activity activity, BaseMenuFragment menuFragment) {
 		super(activity, menuFragment);
 	}
 
 	@Override
 	public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.user_fragment_a, container, false);
+		View view = inflater.inflate(R.layout.user_fragment_b, container, false);
 		initView(view);
 		return view;
 	}
@@ -60,8 +51,8 @@ public class UserFragmentA extends BaseContentFragment {
 		mAlipayAccountState.setOnClickListener(mOnClickListener);
 		mPlayTime = (ProgressBar)view.findViewById(R.id.play_time_progress);
 		mPlayTimeState = (TextView)view.findViewById(R.id.play_time_state);
-		mFeedbackRent = (TextView)view.findViewById(R.id.feedback_rent);
-		mExpiredDate = (TextView)view.findViewById(R.id.expired_date);
+		mFeedbackMoney = (TextView)view.findViewById(R.id.feedback_money);
+		mFeedbackMonth = (TextView)view.findViewById(R.id.feedback_months);
 		initData();
 	}
 
@@ -72,11 +63,12 @@ public class UserFragmentA extends BaseContentFragment {
 
 	private void initData() {
 		setAccount();
+		setAlipayAccountState(false);
 		initProgressBar(20);
 		initAlipayAccountState();
-		initFeedbackState();
 		initPlayTime();
-		setExpiredDate("2017-5-10");
+		initFeedbackMoney();
+		setFeedbackMonth(24);
 	}
 
 
@@ -110,10 +102,10 @@ public class UserFragmentA extends BaseContentFragment {
 		}
 	}
 
-	private void initFeedbackState() {
-		setFeedbackRent(0);
+	private void initFeedbackMoney() {
+		setFeedbackMoney(0, 1000);
 		if (AccountManager.getInstance().isLogined(getRootActivity())) {
-			LoadFeedbackMonthTask task = new LoadFeedbackMonthTask();
+			LoadFeedbackMoneyTask task = new LoadFeedbackMoneyTask();
 			task.execute();
 		}
 	}
@@ -138,19 +130,13 @@ public class UserFragmentA extends BaseContentFragment {
 		mPlayTimeState.setText(getRootActivity().getString(R.string.personal_play_time_state,playHour,maxHour));
 	}
 
-	private void setFeedbackRent(int months) {
-		Spanned colorMonths = Html.fromHtml(getRootActivity().getString(R.string.personal_months_reduction_pre)
-				+ "<font color='#fbae1a' size='40px'>" + months + "</FONT>"
-				+ getRootActivity().getString(R.string.personal_months_reduction_post));
-		mFeedbackRent.setText(colorMonths);
+	private void setFeedbackMoney(int feedbackMoney,int totalMoney) {
+		mFeedbackMoney.setText(getRootActivity().getString(R.string.personal_feedback_money,feedbackMoney,totalMoney));
 	}
 
-	private void setExpiredDate(String expiredDate) {
-		Spanned date = Html.fromHtml(getRootActivity().getString(R.string.personal_expired_date)
-				+ "<font color='#fbae1a' size='40px'>" + expiredDate + "</FONT>");
-		mExpiredDate.setText(date);
+	private void setFeedbackMonth(int month) {
+		mFeedbackMonth.setText(getRootActivity().getString(R.string.personal_feedback_month,month));
 	}
-
 
 	private class LoadAlipayAccountTask extends AsyncTask<Void, Void, String> {
 		@Override
@@ -199,12 +185,14 @@ public class UserFragmentA extends BaseContentFragment {
 		}
 	}
 
-	private class LoadFeedbackMonthTask extends AsyncTask<Void, Void, String> {
-
+	private class LoadFeedbackMoneyTask extends AsyncTask<Void, Void, String> {
 		@Override
 		protected String doInBackground(Void... params) {
 			try {
-				return GameInfoHub.instance(getRootActivity()).getRentReliefMonths();
+				String account = GameInfoHub.instance(getRootActivity()).getSNCorrespondBindAccount(Build.SERIAL);
+				if (!TextUtils.isEmpty(account) && account.equals(AccountManager.getInstance().getAccount(getRootActivity()))) {
+					return GameInfoHub.instance(getRootActivity()).getRebateMoney();
+				}
 			} catch (InfoSourceException e) {
 				e.printStackTrace();
 			}
@@ -213,8 +201,8 @@ public class UserFragmentA extends BaseContentFragment {
 
 		@Override
 		protected void onPostExecute(String result) {
-			if (!TextUtils.isEmpty(result)) {
-				setFeedbackRent(Integer.parseInt(result));
+			if (result != null) {
+				setFeedbackMoney(Integer.parseInt(result), 1000);
 			}
 		}
 	}

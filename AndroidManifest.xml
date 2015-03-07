@@ -165,6 +165,10 @@
             android:name="com.ireadygo.app.gamelauncher.ui.guide.GuideAlipayActivity"
             android:screenOrientation="landscape"
             android:theme="@style/CustomerTheme" />
+        <activity
+            android:name="com.ireadygo.app.gamelauncher.ui.user.UserActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/CustomerTheme" />
 
         <!-- service -->
         <service android:name="com.ireadygo.app.gamelauncher.service.GameLauncherService" />
@@ -220,7 +224,8 @@
 
 
         <!-- 个推相关配置 start -->
-        
+
+
         <!-- 个推相关配置 end -->
 
 

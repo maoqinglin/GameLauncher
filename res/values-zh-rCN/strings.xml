@@ -125,7 +125,6 @@
     <string name="store_dld_manager_detail_not_found">暂时没有该应用信息</string>
     <string name="store_dld_manager_delete_task_prompt">删除任务记录</string>
     <string name="store_dld_manager_delete_task_msg">是否删除您的下载任务？</string>
-
     <string name="store_manager_downloading">下载中</string>
     <string name="store_manager_updatable">可更新</string>
     <string name="store_manager_launchable">已安装</string>
@@ -306,13 +305,12 @@
     <string name="recharge_arm_ticket_purpose_title">卡槽礼券可用于：在“我的应用”桌面上，增加更多第三方应用</string>
     <string name="recharge_arm_ticket_recharge_title">卡槽礼券充值</string>
     <string name="recharge_account_traiff_recharge">资费充值</string>
-    
     <string name="my_pass">我的通行证：</string>
-    <string name="snail_point">蜗牛点券</string>
+    <string name="snail_point">游戏点券</string>
 
     <string-array name="recharge_ticket_types">
-        <item>兔兔礼券</item>
-        <item>卡槽礼券</item>
+        <item>游戏礼券</item>
+        <item>蜗牛礼券</item>
     </string-array>
 
     <!-- 免账号-登录/注册/一键登录 -->

@@ -1,4 +1,4 @@
-package com.ireadygo.app.gamelauncher.ui.account;
+package com.ireadygo.app.gamelauncher.ui.user;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -11,9 +11,9 @@ import com.ireadygo.app.gamelauncher.ui.Config;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.MenuItem;
 
-public class AccountMenuFragment extends BaseMenuFragment {
+public class UserMenuFragment extends BaseMenuFragment {
 
-	public AccountMenuFragment(Activity activity) {
+	public UserMenuFragment(Activity activity) {
 		super(activity);
 		initCoordinateParams(Config.Menu.INIT_X, Config.Menu.INIT_Y);
 	}
@@ -25,9 +25,9 @@ public class AccountMenuFragment extends BaseMenuFragment {
 		MenuItem noticeMenu = (MenuItem) view.findViewById(R.id.account_menu_notice);
 		MenuItem rechargeMenu = (MenuItem) view.findViewById(R.id.account_menu_recharge);
 
-		addMenuItem(personalCenterMenu, new AccountPersonalFragment(getRootActivity(), this));
-		addMenuItem(noticeMenu, new AccountNoticeFragment(getRootActivity(), this));
-		addMenuItem(rechargeMenu, new AccountRechargeFragment(getRootActivity(), this));
+		addMenuItem(personalCenterMenu, new UserPersonalFragment(getRootActivity(), this));
+		addMenuItem(noticeMenu, new UserNoticeFragment(getRootActivity(), this));
+		addMenuItem(rechargeMenu, new UserRechargeFragment(getRootActivity(), this));
 		return view;
 	}
 

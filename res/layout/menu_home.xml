@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:nextFocusDown="@+id/menu_game"
         android:nextFocusLeft="@+id/menu_user"
-        android:nextFocusRight="@+id/menu_user"
+        android:nextFocusRight="@+id/alipay_account_state"
         android:nextFocusUp="@+id/menu_user"
         menuItem:menu_icon="@drawable/menu_personal_selector" >
     </com.ireadygo.app.gamelauncher.ui.menu.ImageMenu>

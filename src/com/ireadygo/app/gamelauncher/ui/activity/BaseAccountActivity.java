@@ -9,8 +9,6 @@ import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.account.AccountManager;
 import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
 import com.ireadygo.app.gamelauncher.ui.GameLauncherActivity;
-import com.ireadygo.app.gamelauncher.ui.account.AccountDetailActivity;
-import com.ireadygo.app.gamelauncher.ui.account.AccountFragment;
 import com.ireadygo.app.gamelauncher.ui.account.AccountLoginActivity;
 import com.ireadygo.app.gamelauncher.ui.account.AccountRegisterActivity;
 import com.ireadygo.app.gamelauncher.ui.account.CustomerLoginResultListener;
@@ -82,15 +80,15 @@ public class BaseAccountActivity extends BaseGuideActivity {
 		if (mStartFlag == FLAG_START_BY_MAIN_ACTIVITY) {
 			intent.setClass(this, GameLauncherActivity.class);
 		} else if (mStartFlag == FLAG_START_BY_ACCOUNT_DETAIL) {
-			intent.setClass(this, AccountDetailActivity.class);
-			intent.putExtra(AccountFragment.ACCOUNT_LAYOUT_FLAG, AccountFragment.LAYOUT_FLAG_MYWEALTH);
+//			intent.setClass(this, AccountDetailActivity.class);
+//			intent.putExtra(AccountFragment.ACCOUNT_LAYOUT_FLAG, AccountFragment.LAYOUT_FLAG_MYWEALTH);
 		}
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		SoundPoolManager.instance(this).play(SoundPoolManager.SOUND_EXIT);
 		startActivity(intent);
 		finish();
 	}
-	
+
 	protected void onLoginFailed(int code) {
 		hideProgressDialog();
 	}

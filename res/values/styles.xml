@@ -49,7 +49,6 @@
         <item name="android:paddingLeft">48dp</item>
         <item name="android:paddingBottom">60dp</item>
         <item name="hlv_dividerWidth">18dp</item>
-        
     </style>
 
     <style name="StoreListView" parent="@style/HListView">
@@ -60,7 +59,7 @@
         <item name="android:paddingTop">65dp</item>
     </style>
 
-     <style name="WindowHListView" parent="@style/HListView">
+    <style name="WindowHListView" parent="@style/HListView">
         <item name="android:padding">45dp</item>
     </style>
 
@@ -77,6 +76,7 @@
         <item name="android:paddingLeft">@dimen/mygame_game_name_padding</item>
         <item name="android:paddingRight">@dimen/mygame_game_name_padding</item>
     </style>
+
     <style name="settings_text_style">
         <item name="android:textSize">@dimen/settings_name_txt_size</item>
         <item name="android:textColor">@drawable/game_item_color_selector</item>
@@ -95,8 +95,18 @@
         <item name="android:textColor">@color/white_first_transparency</item>
     </style>
 
+    <style name="TextLabelExtraSmallLight" parent="@style/Label">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
     <style name="TextLabelSmallLight" parent="@style/Label">
         <item name="android:textSize">36sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TextLabelExtraBigLight" parent="@style/Label">
+        <item name="android:textSize">62sp</item>
         <item name="android:textColor">@color/white</item>
     </style>
 
@@ -156,12 +166,12 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">36sp</item>
     </style>
-    
+
     <style name="AccountAgeTxtSpinner">
         <item name="android:clickable">true</item>
         <item name="android:textSize">48sp</item>
     </style>
-    
+
     <style name="AccountAgeScopeSpinner">
         <item name="android:clickable">true</item>
         <item name="android:textSize">42sp</item>
@@ -326,7 +336,7 @@
         <item name="android:minHeight">15dp</item>
         <item name="android:maxHeight">15dp</item>
     </style>
-    
+
     <style name="Statusbar.Time" parent="@android:style/Widget.TextView">
         <item name="android:textSize">36sp</item>
         <item name="android:textColor">@android:color/white</item>

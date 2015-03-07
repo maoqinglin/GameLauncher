@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.content.Intent;
 
 import com.ireadygo.app.gamelauncher.GameLauncherApplication;
-import com.ireadygo.app.gamelauncher.ui.account.AccountDetailActivity;
 import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
 import com.ireadygo.app.gamelauncher.ui.store.StoreActivity;
 import com.ireadygo.app.gamelauncher.ui.store.category.CategoryDetailActivity;
@@ -56,7 +55,7 @@ public class Anchor implements Serializable {
 		case ACCOUNT_FREECARD:
 		case ACCOUNT_PERSONAL:
 		case ACCOUNT_RECHARGE:
-			clazz = AccountDetailActivity.class;
+//			clazz = AccountDetailActivity.class;
 			break;
 		default:
 			break;

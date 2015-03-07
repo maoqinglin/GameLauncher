@@ -1,4 +1,4 @@
-package com.ireadygo.app.gamelauncher.ui.account;
+package com.ireadygo.app.gamelauncher.ui.user;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -10,15 +10,16 @@ import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
 
-public class AccountRechargeFragment extends BaseContentFragment {
+public class UserNoticeFragment extends BaseContentFragment {
 
-	public AccountRechargeFragment(Activity activity, BaseMenuFragment menuFragment) {
+	public UserNoticeFragment(Activity activity, BaseMenuFragment menuFragment) {
 		super(activity, menuFragment);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.account_recharge_1, container, false);
+		View view = inflater.inflate(R.layout.account_notice_fragment, container, false);
 		initView(view);
 		return view;
 	}

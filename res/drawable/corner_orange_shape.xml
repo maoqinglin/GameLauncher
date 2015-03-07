@@ -3,7 +3,6 @@
 
     <corners android:radius="@dimen/common_item_shape_internal_radius" />
 
-    <solid android:color="#ff943d" />
+    <solid android:color="@color/orange_dark" />
 
-    
 </shape>

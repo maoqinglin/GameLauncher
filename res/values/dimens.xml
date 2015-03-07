@@ -78,6 +78,15 @@
     <dimen name="user_option_margin_top_normal">180dp</dimen>
     <dimen name="user_option_margin_right">20dp</dimen>
     <dimen name="user_option_title_margin_bottom">20dp</dimen>
+
+        <!-- 个人-充值 -->
+    <dimen name="user_recharge_spinner_item_margin_right">36dp</dimen>
+    <dimen name="user_recharge_spinner_item_margin_left">36dp</dimen>
+    <dimen name="user_recharge_spinner_item_height">144dp</dimen>
+    <dimen name="user_recharge_spinner_item_width">580dp</dimen>
+    <dimen name="user_recharge_spinner_item_text_size">48sp</dimen>
+
+
     <!-- 我的页面 -->
     <dimen name="user_cup_drawable_padding">12dp</dimen>
     <dimen name="user_cup_text_size">36sp</dimen>
@@ -177,20 +186,7 @@
     <dimen name="personal_age_item_height">130dp</dimen>
     <dimen name="personal_photo_width">150dp</dimen>
 
-    <!-- 免账号-充值 -->
-    <dimen name="recharge_distance_y_small">27dp</dimen>
-    <dimen name="recharge_distance_y_middle">54dp</dimen>
-    <dimen name="recharge_distance_y_big">75dp</dimen>
-    <dimen name="recharge_rabbit_btn_size">36sp</dimen>
-    <dimen name="recharge_ticket_recharge_size">36sp</dimen>
-    <dimen name="recharge_divide_line_height">600dp</dimen>
-    <dimen name="recharge_right_layout_padding_left">114dp</dimen>
-    <dimen name="recharge_confirm_btn_size">36sp</dimen>
-    <dimen name="recharge_line_width">3dp</dimen>
-    <dimen name="recharge_line_margin_bottom">200dp</dimen>
-    <dimen name="recharge_spinner_width">557dp</dimen>
-    <dimen name="rechage_spinner_padding_left">15dp</dimen>
-    <dimen name="rechage_spinner_padding_right">15dp</dimen>
+
 
     <!-- 免账号-免卡 -->
     <dimen name="freecard_phone_number_width">555dp</dimen>

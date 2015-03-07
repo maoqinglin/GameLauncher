@@ -12,14 +12,14 @@
 
         <TextView
             android:id="@+id/balance_title"
-            style="@style/TextLabelMiddleLight"
+            style="@style/TextLabelSmallLight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/recharge_my_balance" />
 
         <TextView
             android:id="@+id/rabbit_currency"
-            style="@style/TextLabelBigLight"
+            style="@style/TextLabelExtraBigLight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/balance_title"
@@ -29,6 +29,7 @@
 
         <TextView
             android:id="@+id/rabbit_currency_title"
+            style="@style/TextLabelExtraSmallLight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/rabbit_currency"
@@ -36,7 +37,7 @@
 
         <TextView
             android:id="@+id/snail_point"
-            style="@style/TextLabelBigLight"
+            style="@style/TextLabelExtraBigLight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/rabbit_currency"
@@ -47,6 +48,7 @@
 
         <TextView
             android:id="@+id/snail_point_title"
+            style="@style/TextLabelExtraSmallLight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@id/snail_point"
@@ -61,6 +63,7 @@
             android:layout_alignBottom="@id/snail_point_title"
             android:layout_alignParentRight="true"
             android:layout_marginRight="464dp"
+            android:background="@drawable/corner_orange_shape"
             android:gravity="center"
             android:text="@string/recharge_rubbit_recharge" />
     </RelativeLayout>
@@ -78,28 +81,32 @@
 
         <TextView
             android:id="@+id/gift_certificate_recharge_title"
-            style="@style/TextLabelMiddleLight"
+            style="@style/TextLabelSmallLight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/recharge_ticket_recharge" />
 
-        <TextView
+        <Spinner
             android:id="@+id/snail_point_select"
-            style="@style/TextLabelBigLight"
+            style="@style/AccountSpinner"
             android:layout_width="580dp"
             android:layout_height="106dp"
             android:layout_below="@id/gift_certificate_recharge_title"
             android:layout_marginTop="22dp"
+            android:entries="@array/recharge_ticket_types"
+            android:focusable="true"
+            android:focusableInTouchMode="false"
             android:gravity="center_vertical"
             android:text="@string/snail_point" />
 
-        <EditText
+        <com.ireadygo.app.gamelauncher.ui.widget.CustomerEditText
             android:id="@+id/gift_certificate_recharge"
             style="@style/TextLabelMiddleLight"
             android:layout_width="580dp"
             android:layout_height="106dp"
             android:layout_below="@id/snail_point_select"
             android:layout_marginTop="36dp"
+            android:background="@drawable/custom_edittext_bg_selector"
             android:text="12345679" />
 
         <TextView
@@ -110,6 +117,7 @@
             android:layout_alignBottom="@id/gift_certificate_recharge"
             android:layout_alignParentRight="true"
             android:layout_marginRight="464dp"
+            android:background="@drawable/corner_orange_shape"
             android:gravity="center"
             android:text="@string/recharge_ticket_recharge" />
     </RelativeLayout>

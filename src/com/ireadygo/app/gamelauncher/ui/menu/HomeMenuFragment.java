@@ -17,11 +17,11 @@ import com.ireadygo.app.gamelauncher.ui.AppFragment;
 import com.ireadygo.app.gamelauncher.ui.Config;
 import com.ireadygo.app.gamelauncher.ui.GameFragment;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
-import com.ireadygo.app.gamelauncher.ui.personal.UserFragmentA;
-import com.ireadygo.app.gamelauncher.ui.personal.UserFragmentB;
-import com.ireadygo.app.gamelauncher.ui.personal.UserFragmentC;
 import com.ireadygo.app.gamelauncher.ui.settings.SettingsFragment;
 import com.ireadygo.app.gamelauncher.ui.store.StoreFragment;
+import com.ireadygo.app.gamelauncher.ui.user.UserFragmentA;
+import com.ireadygo.app.gamelauncher.ui.user.UserFragmentB;
+import com.ireadygo.app.gamelauncher.ui.user.UserFragmentC;
 import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
 
 public class HomeMenuFragment extends BaseMenuFragment {

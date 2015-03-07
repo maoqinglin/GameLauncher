@@ -11,7 +11,6 @@ import android.text.TextUtils;
 import com.ireadygo.app.gamelauncher.account.AccountManager;
 import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
 import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
-import com.ireadygo.app.gamelauncher.ui.account.AccountDetailActivity;
 import com.ireadygo.app.gamelauncher.ui.activity.BaseAccountActivity;
 import com.ireadygo.app.gamelauncher.widget.GameLauncherThreadPool;
 
@@ -29,7 +28,7 @@ public class KeyAdapterRemoteServiceImpl extends IKeyAdapterAidlService.Stub {
 		mContext = context;
 		IntentFilter intentFilter = new IntentFilter();
 		intentFilter.addAction(BaseAccountActivity.ACTION_ACCOUNT_LOGIN);
-		intentFilter.addAction(AccountDetailActivity.ACTION_ACCOUNT_LOGOUT);
+//		intentFilter.addAction(AccountDetailActivity.ACTION_ACCOUNT_LOGOUT);
 		mContext.registerReceiver(mReceiver, intentFilter);
 	}
 
@@ -116,11 +115,11 @@ public class KeyAdapterRemoteServiceImpl extends IKeyAdapterAidlService.Stub {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			String action = intent.getAction();
-			if (BaseAccountActivity.ACTION_ACCOUNT_LOGIN.equals(action)) {
-				callBack(MSG_LOGIN_ACCOUNT_CHANGE,AccountManager.getInstance().getLoginUni(mContext));
-			} else if (AccountDetailActivity.ACTION_ACCOUNT_LOGOUT.equals(action)) {
-				callBack(MSG_LOGIN_ACCOUNT_CHANGE, "");
-			}
+//			if (BaseAccountActivity.ACTION_ACCOUNT_LOGIN.equals(action)) {
+//				callBack(MSG_LOGIN_ACCOUNT_CHANGE,AccountManager.getInstance().getLoginUni(mContext));
+//			} else if (AccountDetailActivity.ACTION_ACCOUNT_LOGOUT.equals(action)) {
+//				callBack(MSG_LOGIN_ACCOUNT_CHANGE, "");
+//			}
 		}
 	};
 
