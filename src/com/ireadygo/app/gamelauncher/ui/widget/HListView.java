@@ -34,6 +34,7 @@ import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Message;
 import android.support.v4.util.SparseArrayCompat;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -55,6 +56,7 @@ import android.widget.WrapperListAdapter;
 
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.ui.BaseAnimatorAdapter;
+import com.ireadygo.app.gamelauncher.ui.item.BaseAdapterItem;
 import com.ireadygo.app.gamelauncher.ui.listview.anim.AnimationAdapter;
 
 /*
@@ -156,7 +158,9 @@ public class HListView extends AbsHListView {
 	private long mLastKeyStartTime = -1;
 	private int mLastKeyCode = -1;
 	private static final int KEY_INTERNAL = 200;
-	private boolean mCanRecyclable = true;//设置列表
+	private boolean mCanRecyclable = true;// 设置列表
+
+	private BaseAdapterItem mSelectedItem;
 
 	public HListView(Context context) {
 		this(context, null);
@@ -236,10 +240,11 @@ public class HListView extends AbsHListView {
 		mFooterDividersEnabled = footerDividersEnabled;
 		mMeasureWithChild = measureWithChild;
 
-		//add by liu.js 2014/11/27
+		// add by liu.js 2014/11/27
 		super.setOnItemSelectedListener(mExternalItemSelectedListener);
 		super.setOnFocusChangeListener(mExternalFocusChangeListener);
-		super.setOnKeyListener(mExternalKeyListener);//add by linmaoqing 2014/12/11
+		super.setOnKeyListener(mExternalKeyListener);// add by linmaoqing
+														// 2014/12/11
 	}
 
 	/**
@@ -2893,11 +2898,12 @@ public class HListView extends AbsHListView {
 				goalRight -= getArrowScrollPreviewLength();
 			}
 
-			if (nextSelectedPosition != INVALID_POSITION && nextSelectedPosition == mFirstPosition + numChildren-1) {
-//				int distance = getScrollDistance(viewToMakeVisible); //计算中间位置距离
+			if (nextSelectedPosition != INVALID_POSITION && nextSelectedPosition == mFirstPosition + numChildren - 1) {
+				// int distance = getScrollDistance(viewToMakeVisible);
+				// //计算中间位置距离
 
-				//计算向右翻页时，左边距离相等
-				int distance = viewToMakeVisible.getLeft() - (viewToMakeVisible.getWidth()/2 + mDividerWidth);
+				// 计算向右翻页时，左边距离相等
+				int distance = viewToMakeVisible.getLeft() - (viewToMakeVisible.getWidth() / 2 + mDividerWidth);
 
 				if ((mFirstPosition + numChildren) == mItemCount) {
 					// last is last in list -> make sure we don't scroll past it
@@ -2905,9 +2911,10 @@ public class HListView extends AbsHListView {
 					distance = Math.min(distance, max);
 				}
 				smoothScrollBy((direction == View.FOCUS_UP) ? -distance : distance, TRANSLATE_ANIMATION_DURATION, true);
-				if(mSynSmoothScrollListener != null){
-			        mSynSmoothScrollListener.synSmoothScrollBy((direction == View.FOCUS_UP) ? -distance : distance, TRANSLATE_ANIMATION_DURATION, true);
-			    }
+				if (mSynSmoothScrollListener != null) {
+					mSynSmoothScrollListener.synSmoothScrollBy((direction == View.FOCUS_UP) ? -distance : distance,
+							TRANSLATE_ANIMATION_DURATION, true);
+				}
 			}
 
 			if (viewToMakeVisible.getRight() <= goalRight) {
@@ -2944,10 +2951,11 @@ public class HListView extends AbsHListView {
 			}
 
 			if (nextSelectedPosition != INVALID_POSITION && nextSelectedPosition == mFirstPosition) {
-//				int distance = getScrollDistance(viewToMakeVisible);
+				// int distance = getScrollDistance(viewToMakeVisible);
 
-				//计算向左翻页时，右边距离相等
-				int distance = getWidth() - viewToMakeVisible.getRight()-(viewToMakeVisible.getWidth()/2 + mDividerWidth);
+				// 计算向左翻页时，右边距离相等
+				int distance = getWidth() - viewToMakeVisible.getRight()
+						- (viewToMakeVisible.getWidth() / 2 + mDividerWidth);
 
 				// first is first in list -> make sure we don't scroll past it
 				if (mFirstPosition == 0) {
@@ -2955,9 +2963,10 @@ public class HListView extends AbsHListView {
 					distance = Math.min(distance, max);
 				}
 				smoothScrollBy((direction == View.FOCUS_UP) ? -distance : distance, TRANSLATE_ANIMATION_DURATION, true);
-				if(mSynSmoothScrollListener != null){
-			        mSynSmoothScrollListener.synSmoothScrollBy((direction == View.FOCUS_UP) ? -distance : distance, TRANSLATE_ANIMATION_DURATION, true);
-			    }
+				if (mSynSmoothScrollListener != null) {
+					mSynSmoothScrollListener.synSmoothScrollBy((direction == View.FOCUS_UP) ? -distance : distance,
+							TRANSLATE_ANIMATION_DURATION, true);
+				}
 			}
 
 			if (viewToMakeVisible.getLeft() >= goalLeft) {
@@ -3894,93 +3903,100 @@ public class HListView extends AbsHListView {
 	@Override
 	public void onGlobalLayout() {
 	}
-	
-	//add by liu.js 2014/11/27
+
+	// add by liu.js 2014/11/27
 	private OnItemSelectedListener mOnItemSelectedListener;
 	private OnFocusChangeListener mOnFocusChangeListener;
-	private OnKeyListener mOnKeyListener;//add by linmaoqing 2014/12/11
-	
+	private OnKeyListener mOnKeyListener;// add by linmaoqing 2014/12/11
+
 	@Override
 	public void setOnItemSelectedListener(OnItemSelectedListener listener) {
 		this.mOnItemSelectedListener = listener;
 	}
-	
+
 	@Override
 	public void setOnFocusChangeListener(OnFocusChangeListener l) {
 		this.mOnFocusChangeListener = l;
 	}
 
 	@Override
-	public void setOnKeyListener(OnKeyListener keyListener){
+	public void setOnKeyListener(OnKeyListener keyListener) {
 		this.mOnKeyListener = keyListener;
 	}
-	
+
 	private OnItemSelectedListener mExternalItemSelectedListener = new OnItemSelectedListener() {
 
 		@Override
 		public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-			BaseAnimatorAdapter adapter = null;
-			if(getAdapter() instanceof AnimationAdapter){
-				adapter = (BaseAnimatorAdapter)((AnimationAdapter)getAdapter()).getDecoratedBaseAdapter();
-			}else if(getAdapter() instanceof BaseAnimatorAdapter){
-				adapter = (BaseAnimatorAdapter)getAdapter();
+			if (mSelectedItem != null) {
+				animatorToUnselected(mSelectedItem);
+				mSelectedItem = null;
 			}
-			if(adapter != null){
-				if (parent.hasFocus()) {
-					adapter.doSelectedAnimator();
-				}
+			if (hasFocus() && view instanceof BaseAdapterItem) {
+				mSelectedItem = (BaseAdapterItem) view;
+				animatorToSelected(mSelectedItem);
 			}
-			if(mOnItemSelectedListener != null){
+			if (mOnItemSelectedListener != null) {
 				mOnItemSelectedListener.onItemSelected(parent, view, position, id);
 			}
 		}
 
 		@Override
 		public void onNothingSelected(AdapterView<?> parent) {
-			BaseAnimatorAdapter adapter = null;
-			if(getAdapter() instanceof AnimationAdapter){
-				adapter = (BaseAnimatorAdapter)((AnimationAdapter)getAdapter()).getDecoratedBaseAdapter();
-			}else if(getAdapter() instanceof BaseAnimatorAdapter){
-				adapter = (BaseAnimatorAdapter)getAdapter();
+			if (mSelectedItem != null) {
+				animatorToUnselected(mSelectedItem);
+				mSelectedItem = null;
 			}
-			if(adapter != null){
-				adapter.doUnselectedAnimator(null);
-			}
-			if(mOnItemSelectedListener != null){
+			if (mOnItemSelectedListener != null) {
 				mOnItemSelectedListener.onNothingSelected(parent);
 			}
 		}
 	};
-	
+
 	private OnFocusChangeListener mExternalFocusChangeListener = new OnFocusChangeListener() {
-		
+
 		@Override
 		public void onFocusChange(View v, boolean hasFocus) {
-			BaseAnimatorAdapter adapter = null;
-			if(getAdapter() instanceof AnimationAdapter){
-				adapter = (BaseAnimatorAdapter)((AnimationAdapter)getAdapter()).getDecoratedBaseAdapter();
-			}else if(getAdapter() instanceof BaseAnimatorAdapter){
-				adapter = (BaseAnimatorAdapter)getAdapter();
-			}
-			if(adapter != null){
-				if (hasFocus) {
-					int selectedPosition = getSelectedItemPosition();
-					if (selectedPosition >= 0) {
-						adapter.doSelectedAnimator();
-					}
-				} else {
-					if (!v.isInTouchMode()) {
-						adapter.doUnselectedAnimator(null);
+			if (hasFocus) {
+				if (mSelectedItem != null) {
+					animatorToUnselected(mSelectedItem);
+					mSelectedItem = null;
+				}
+				View selectedView = getSelectedView();
+				if(selectedView != null && selectedView instanceof BaseAdapterItem){
+					mSelectedItem = (BaseAdapterItem) selectedView;
+					animatorToSelected(mSelectedItem);
+				}
+			} else {
+				if (!v.isInTouchMode()) {
+					if (mSelectedItem != null) {
+						animatorToUnselected(mSelectedItem);
+						mSelectedItem = null;
 					}
 				}
 			}
-			if(mOnFocusChangeListener != null){
+			if (mOnFocusChangeListener != null) {
 				mOnFocusChangeListener.onFocusChange(v, hasFocus);
 			}
 		}
 	};
 
-	public void setRecyclable(boolean isRecyclable){
+	private void animatorToSelected(BaseAdapterItem item) {
+		// if (mHandler.hasMessages(WHAT_SELECTED_ANIMATOR)) {
+		// mHandler.removeMessages(WHAT_SELECTED_ANIMATOR);
+		// }
+		// Message msg = Message.obtain();
+		// msg.what = WHAT_SELECTED_ANIMATOR;
+		// msg.obj = item;
+		// mHandler.sendMessageDelayed(msg, 20);
+		item.toSelected(null);
+	}
+
+	private void animatorToUnselected(BaseAdapterItem item) {
+		item.toUnselected(null);
+	}
+
+	public void setRecyclable(boolean isRecyclable) {
 		mCanRecyclable = isRecyclable;
 	}
 
@@ -3993,9 +4009,9 @@ public class HListView extends AbsHListView {
 				int selectionPos = getSelectedItemPosition();
 				if (selectionPos != INVALID_POSITION && mCanRecyclable) {
 					if (selectionPos == getCount() - 1 && keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
-//						setSelection(0);
+						// setSelection(0);
 					} else if (selectionPos == 0 && keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
-//						setSelection(getCount() - 1);
+						// setSelection(getCount() - 1);
 					}
 				}
 			}
@@ -4007,11 +4023,12 @@ public class HListView extends AbsHListView {
 	};
 
 	private SynSmoothScrollListener mSynSmoothScrollListener;
-    public void setSynSmoothScrollListener(SynSmoothScrollListener synSmoothScrollListener) {
-        this.mSynSmoothScrollListener = synSmoothScrollListener;
-    }
 
-    public interface SynSmoothScrollListener{
-        public void synSmoothScrollBy( int distance, int duration, boolean linear );
-    }
+	public void setSynSmoothScrollListener(SynSmoothScrollListener synSmoothScrollListener) {
+		this.mSynSmoothScrollListener = synSmoothScrollListener;
+	}
+
+	public interface SynSmoothScrollListener {
+		public void synSmoothScrollBy(int distance, int duration, boolean linear);
+	}
 }

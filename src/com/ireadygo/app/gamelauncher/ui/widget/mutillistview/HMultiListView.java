@@ -53,7 +53,7 @@ public class HMultiListView extends LinearLayout {
 	private int mPaddingRight;
 	private int mPaddingBottom;
 
-	private BaseAdapterItem mSelectedItem;
+//	private BaseAdapterItem mSelectedItem;
 	private OnItemSelectedListener mOnItemSelectedListener;
 	private OnFocusChangeListener mOnFocusChangeListener;
 	private OnItemClickListener mOnItemClickListener;
@@ -594,14 +594,6 @@ public class HMultiListView extends LinearLayout {
 		@Override
 		public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 			Log.d("liu.js", "onItemSelected--parent=" + parent + "|position=" + position);
-			if (mSelectedItem != null) {
-				animatorToUnselected(mSelectedItem);
-				mSelectedItem = null;
-			}
-			if (hasFocus()) {
-				mSelectedItem = (BaseAdapterItem) view;
-				animatorToSelected(mSelectedItem);
-			}
 			if (mOnItemSelectedListener != null) {
 				ProxyAdapter adapter = (ProxyAdapter) parent.getAdapter();
 				if (adapter != null) {
@@ -613,10 +605,6 @@ public class HMultiListView extends LinearLayout {
 
 		@Override
 		public void onNothingSelected(AdapterView<?> parent) {
-			if (mSelectedItem != null) {
-				animatorToUnselected(mSelectedItem);
-				mSelectedItem = null;
-			}
 			if (mOnItemSelectedListener != null) {
 				mOnItemSelectedListener.onNothingSelected(parent);
 			}
@@ -628,27 +616,6 @@ public class HMultiListView extends LinearLayout {
 
 		@Override
 		public void onFocusChange(View view, boolean hasFocus) {
-			if (hasFocus) {
-				if (mSelectedItem != null) {
-					animatorToUnselected(mSelectedItem);
-					mSelectedItem = null;
-				}
-				HListView listView = (HListView) view;
-				BaseAdapterItem selectedItem = (BaseAdapterItem) listView.getSelectedView();
-				if (selectedItem == null) {
-					if (listView.getChildCount() > 0) {
-						mSelectedItem = ((BaseAdapterItem) listView.getChildAt(0));
-					}
-				} else {
-					mSelectedItem = selectedItem;
-				}
-				animatorToSelected(mSelectedItem);
-			} else {
-				if (mSelectedItem != null) {
-					animatorToUnselected(mSelectedItem);
-					mSelectedItem = null;
-				}
-			}
 			if (mOnFocusChangeListener != null) {
 				mOnFocusChangeListener.onFocusChange(view, hasFocus);
 			}
@@ -670,19 +637,6 @@ public class HMultiListView extends LinearLayout {
 
 	};
 
-	private void animatorToSelected(BaseAdapterItem item) {
-		if (mHandler.hasMessages(WHAT_SELECTED_ANIMATOR)) {
-			mHandler.removeMessages(WHAT_SELECTED_ANIMATOR);
-		}
-		Message msg = Message.obtain();
-		msg.what = WHAT_SELECTED_ANIMATOR;
-		msg.obj = item;
-		mHandler.sendMessageDelayed(msg, 20);
-	}
-
-	private void animatorToUnselected(BaseAdapterItem item) {
-		item.toUnselected(null);
-	}
 
 }
 
