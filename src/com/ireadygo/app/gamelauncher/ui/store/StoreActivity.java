@@ -8,6 +8,8 @@ import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
 import com.ireadygo.app.gamelauncher.ui.base.BaseMenuActivity;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
+import com.ireadygo.app.gamelauncher.ui.redirect.Anchor;
+import com.ireadygo.app.gamelauncher.ui.redirect.Anchor.Destination;
 
 public class StoreActivity extends BaseMenuActivity {
 
@@ -18,8 +20,38 @@ public class StoreActivity extends BaseMenuActivity {
 		getFocusView().setNextFocusRightId(R.id.store_menu_search);
 		getFocusView().setNextFocusUpId(R.id.store_menu_search);
 		getFocusView().setNextFocusDownId(R.id.store_menu_search);
+		requestMenuFocusByIntent(getIntent());
 	}
-	
+
+	private void requestMenuFocusByIntent(Intent intent) {
+		if (intent == null) {
+			return;
+		}
+		Anchor anchor = (Anchor) intent.getSerializableExtra(Anchor.EXTRA_ANCHOR);
+		if (anchor != null) {
+			Destination destination = anchor.getDestination();
+			int position = 0;
+			switch (destination) {
+			case STORE_SEARCH:
+				position = 0;
+				break;
+			case STORE_CATEGORY:
+				position = 1;
+				break;
+			case STORE_COLLECTION:
+				position = 2;
+				break;
+			case STORE_FAVORITE_APPS:
+				position = 3;
+				break;
+			case STORE_GAME_MANAGE:
+				position = 4;
+				break;
+			}
+			getMenuFragment().requestFocusByPosition(position);
+		}
+	}
+
 	@Override
 	public BaseMenuFragment createMenuFragment() {
 		return new StoreMenuFragment(this);

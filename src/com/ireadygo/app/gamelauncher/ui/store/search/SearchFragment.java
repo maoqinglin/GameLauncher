@@ -132,9 +132,7 @@ public class SearchFragment extends BaseContentFragment {
 		mSearchAdapter = new StoreAppNormalAdapter(getRootActivity(), mListView, mAppList);
 		mListView.setAdapter(mSearchAdapter);
 		mListView.setOnItemClickListener(mOnItemClickListener);
-		PagingIndicator indicator = getMenuActivity().getPagingIndicator();
-		mListView.setOnScrollListener(new ScrollListenerByIndicator(indicator));
-		indicator.bind(mListView);
+		bindPagingIndicator(mListView);
 		
 		mInputMethodManager = (InputMethodManager) getRootActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 	}

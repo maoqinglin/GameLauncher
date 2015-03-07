@@ -3,13 +3,15 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:clipChildren="false"
-    android:clipToPadding="false" >
+    android:clipToPadding="false"
+    android:duplicateParentState="true" >
 
     <ImageView
         android:id="@+id/background"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/item_background_selector"/>
+        android:duplicateParentState="true"
+        android:src="@drawable/item_background_selector" />
 
     <FrameLayout
         android:id="@+id/icon_layout"
@@ -25,7 +27,11 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|bottom" />
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="@dimen/common_image_item_text_margin_bottom"
+            android:textColor="@color/white"
+            android:textSize="@dimen/common_image_item_textsize"
+            android:visibility="gone" />
     </FrameLayout>
 
 </FrameLayout>

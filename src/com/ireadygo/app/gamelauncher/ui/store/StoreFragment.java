@@ -3,8 +3,6 @@ package com.ireadygo.app.gamelauncher.ui.store;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.animation.Animator;
-import android.animation.Animator.AnimatorListener;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,30 +14,25 @@ import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
-import com.ireadygo.app.gamelauncher.ui.menu.HomeMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.redirect.Anchor;
 import com.ireadygo.app.gamelauncher.ui.redirect.Anchor.Destination;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
-import com.ireadygo.app.gamelauncher.ui.widget.HListView;
-import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
+import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiBaseAdapter;
+import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 
 public class StoreFragment extends BaseContentFragment {
-	private HListView mListView;
-	private StoreAdapter mAdapter;
-	private static List<StoreOptionsPoster> sPosterItems = new ArrayList<StoreFragment.StoreOptionsPoster>();
+	private HMultiListView mMultiListView;
+	private HMultiBaseAdapter mMultiBaseAdapter;
+	private List<StoreInfo> mStoreDatas = new ArrayList<StoreInfo>();
 
 	public StoreFragment(Activity activity, BaseMenuFragment menuFragment) {
 		super(activity, menuFragment);
 	}
 
-	static {
-		initPosterData();
-	}
-
 	@Override
 	public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.store, container, false);
+		View view = inflater.inflate(R.layout.store_fragment, container, false);
 		initView(view);
 		return view;
 	}
@@ -47,133 +40,101 @@ public class StoreFragment extends BaseContentFragment {
 	@Override
 	protected void initView(View view) {
 		super.initView(view);
-		getOperationTipsLayout().setTipsVisible(TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
-		mListView = (HListView) view.findViewById(R.id.storeList);
-		mAdapter = new StoreAdapter(getRootActivity(), mListView, sPosterItems);
-		mListView.setAdapter(mAdapter.toAnimationAdapter());
-		mListView.setOnItemClickListener(mOnItemClickListener);
-	}
-
-	private static void initPosterData() {
-		StoreOptionsPoster posterItem = new StoreOptionsPoster();
-		posterItem.drawableId = R.drawable.store_recommend_poster_icon_default;
-		posterItem.titleId = R.string.store_options_recommend;
-		sPosterItems.add(posterItem);
-
-		posterItem = new StoreOptionsPoster();
-		posterItem.drawableId = R.drawable.store_category_poster_icon_default;
-		posterItem.titleId = R.string.store_menu_category;
-		sPosterItems.add(posterItem);
-
-		posterItem = new StoreOptionsPoster();
-		posterItem.drawableId = R.drawable.store_collection_poster_icon_default;
-		posterItem.titleId = R.string.store_menu_collection;
-		sPosterItems.add(posterItem);
-
-		posterItem = new StoreOptionsPoster();
-		posterItem.drawableId = R.drawable.store_search_poster_icon_default;
-		posterItem.titleId = R.string.store_menu_search;
-		sPosterItems.add(posterItem);
-
-		posterItem = new StoreOptionsPoster();
-		posterItem.drawableId = R.drawable.store_downloadmanage_poster_icon_default;
-		posterItem.titleId = R.string.store_menu_manager;
-		sPosterItems.add(posterItem);
-
-		//屏蔽商店设置 modify by linmaoqing 2015-2-4
-//		posterItem = new StoreOptionsPoster();
-//		posterItem.drawableId = R.drawable.store_settings_poster_icon_default;
-//		posterItem.titleId = R.string.store_options_settings;
-//		sPosterItems.add(posterItem);
+		initData();
+		mMultiListView = (HMultiListView) view.findViewById(R.id.store_list);
+		mMultiBaseAdapter = new StoreMultiAdapter(getRootActivity(), mStoreDatas, mMultiListView);
+		mMultiListView.setAdapter(mMultiBaseAdapter);
+		mMultiListView.setOnItemClickListener(mOnItemClickListener);
+		bindPagingIndicator(mMultiListView);
 	}
 
 	@Override
 	protected boolean isCurrentFocus() {
-		return mListView.hasFocus();
+		return mMultiListView.hasFocus();
 	}
 
-	@Override
-	public boolean onSunKey() {
-		View selectedView = mAdapter.getSelectedView();
-		int pos = mAdapter.getSelectedPos();
-		if (selectedView != null && pos != -1) {
-			mListView.performItemClick(selectedView, pos, 0);
-			return true;
-		}
-		return super.onSunKey();
+	private void initData() {
+		mStoreDatas.clear();
+		// 0
+		Anchor anchor = new Anchor(Destination.GAME_DETAIL);
+		// TODO 需要传入AppEntity
+		StoreInfo info = new StoreInfo(R.drawable.store_poster_large, anchor);
+		mStoreDatas.add(info);
+
+		info = new StoreInfo(R.drawable.store_icon_category, anchor);
+		mStoreDatas.add(info);
+
+		info = new StoreInfo(R.drawable.store_icon_category, anchor);
+		mStoreDatas.add(info);
+
+		info = new StoreInfo(R.drawable.store_poster_large, anchor);
+		mStoreDatas.add(info);
+
+		info = new StoreInfo(R.drawable.store_icon_category, anchor);
+		mStoreDatas.add(info);
+
+		info = new StoreInfo(R.drawable.store_icon_category, anchor);
+		mStoreDatas.add(info);
+
+		info = new StoreInfo(R.drawable.store_icon_category, anchor);
+		mStoreDatas.add(info);
+		// 7
+		info = new StoreInfo(R.drawable.store_icon_category, anchor);
+		mStoreDatas.add(info);
+		// 搜索
+		anchor = new Anchor(Destination.STORE_SEARCH);
+		info = new StoreInfo(R.drawable.store_icon_search, R.string.store_menu_search, anchor);
+		mStoreDatas.add(info);
+
+		anchor = new Anchor(Destination.STORE_CATEGORY);
+		info = new StoreInfo(R.drawable.store_icon_category, R.string.store_menu_category, anchor);
+		mStoreDatas.add(info);
+
+		anchor = new Anchor(Destination.STORE_COLLECTION);
+		info = new StoreInfo(R.drawable.store_icon_collection, R.string.store_menu_collection, anchor);
+		mStoreDatas.add(info);
+
+		anchor = new Anchor(Destination.STORE_FAVORITE_APPS);
+		info = new StoreInfo(R.drawable.store_icon_favorite_apps, R.string.store_menu_app, anchor);
+		mStoreDatas.add(info);
+
+		info = new StoreInfo(R.drawable.store_icon_manager, R.string.store_menu_manager, anchor);
+		mStoreDatas.add(info);
 	}
+
+	// @Override
+	// public boolean onSunKey() {
+	// View selectedView = mAdapter.getSelectedView();
+	// int pos = mAdapter.getSelectedPos();
+	// if (selectedView != null && pos != -1) {
+	// mListView.performItemClick(selectedView, pos, 0);
+	// return true;
+	// }
+	// return super.onSunKey();
+	// }
 
 	@Override
 	public boolean onMoonKey() {
-		getMenu().getCurrentItem().requestFocus();
-		return true;
+		return onBackKey();
 	}
 
 	@Override
 	public boolean onBackKey() {
-		return onMoonKey();
-	}
-
-	static class StoreOptionsPoster {
-		int drawableId;
-		int titleId;
+		return getMenu().getCurrentItem().requestFocus();
 	}
 
 	private OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-			Anchor anchor = null;
-			switch (position) {
-			case 0:
-				anchor = new Anchor(Destination.STORE_RECOMMEND);
-				break;
-			case 1:
-				anchor = new Anchor(Destination.STORE_CATEGORY);
-				break;
-			case 2:
-				anchor = new Anchor(Destination.STORE_COLLECTION);
-				break;
-			case 3:
-				anchor = new Anchor(Destination.STORE_SEARCH);
-				break;
-			case 4:
-				anchor = new Anchor(Destination.STORE_GAME_MANAGE);
-				break;
-			case 5:
-				anchor = new Anchor(Destination.STORE_SETTINGS);
-				break;
+			StoreInfo info = mStoreDatas.get(position);
+			Anchor anchor = info.getAnchor();
+			if (anchor != null) {
+				Intent intent = anchor.getIntent();
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+				getRootActivity().startActivity(intent);
+				SoundPoolManager.instance(getRootActivity()).play(SoundPoolManager.SOUND_ENTER);
 			}
-//			if(anchor != null){
-//				Intent intent = anchor.getIntent();
-//				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-//				getRootActivity().startActivity(intent);
-//				SoundPoolManager.instance(getRootActivity()).play(SoundPoolManager.SOUND_ENTER);
-//			}
-			StoreActivity.startSelf(getRootActivity());
 		}
 	};
-
-	protected View getCurrentFocusView() {
-		if (isCurrentFocus()) {
-			return mListView;
-		}
-		return null;
-	}
-
-	@Override
-	public Animator outAnimator(AnimatorListener listener) {
-		if (mAdapter != null) {
-			return mAdapter.outAnimator(listener);
-		}
-		return null;
-	}
-
-	@Override
-	public int getOutAnimatorDuration() {
-		if (mAdapter != null) {
-			return mAdapter.getOutAnimatorDuration();
-		}
-		return 0;
-	}
 }

@@ -68,13 +68,13 @@ public class HMultiListView extends LinearLayout {
 			switch (msg.what) {
 			case WHAT_SELECTED_ANIMATOR:
 				BaseAdapterItem item = (BaseAdapterItem) msg.obj;
-				if(item != null){
+				if (item != null) {
 					item.toSelected(null);
 				}
 				break;
 			case WHAT_UNSELECTED_ANIMATOR:
 				BaseAdapterItem itemUn = (BaseAdapterItem) msg.obj;
-				if(itemUn != null){
+				if (itemUn != null) {
 					itemUn.toUnselected(null);
 				}
 				break;
@@ -88,15 +88,12 @@ public class HMultiListView extends LinearLayout {
 		LayoutInflater.from(context).inflate(R.layout.hmutillistview_layout, this, true);
 		HListView upHListView = (HListView) findViewById(R.id.upHList);
 		upHListView.setPadding(mPaddingLeft, mPaddingTop, mPaddingRight, mVerticalSpacing / 2);
-		upHListView.setNextFocusLeftId(getNextFocusLeftId());
-		upHListView.setNextFocusRightId(getNextFocusRightId());
-		upHListView.setNextFocusUpId(getNextFocusUpId());
-		
+
 		HListView downHListView = (HListView) findViewById(R.id.downHList);
 		downHListView.setPadding(mPaddingLeft, mVerticalSpacing / 2, mPaddingRight, mPaddingBottom);
-		downHListView.setNextFocusLeftId(getNextFocusLeftId());
-		downHListView.setNextFocusRightId(getNextFocusRightId());
-		downHListView.setNextFocusDownId(getNextFocusDownId());
+
+		initFocusIds(upHListView, downHListView);
+
 		mHListViews.add(upHListView);
 		mHListViews.add(downHListView);
 		setHorizontalSpacing(mHorizontalSpacing);
@@ -126,6 +123,45 @@ public class HMultiListView extends LinearLayout {
 
 	public HMultiListView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
+	}
+
+	private void initFocusIds(HListView upHListView, HListView downHListView) {
+		int nextFocusLeftId = getNextFocusLeftId();
+		int nextFocusRightId = getNextFocusRightId();
+		int nextFocusUpId = getNextFocusUpId();
+		int nextFocusDownId = getNextFocusDownId();
+
+		int upListViewId = upHListView.getId();
+		int downListViewId = downHListView.getId();
+
+		if (nextFocusLeftId == View.NO_ID) {
+			upHListView.setNextFocusLeftId(upListViewId);
+			downHListView.setNextFocusLeftId(downListViewId);
+		} else {
+			upHListView.setNextFocusLeftId(nextFocusLeftId);
+			downHListView.setNextFocusLeftId(nextFocusLeftId);
+		}
+
+		if (nextFocusRightId == View.NO_ID) {
+			upHListView.setNextFocusRightId(upListViewId);
+			downHListView.setNextFocusRightId(downListViewId);
+		} else {
+			upHListView.setNextFocusRightId(nextFocusRightId);
+			downHListView.setNextFocusRightId(nextFocusRightId);
+		}
+		if (nextFocusUpId == View.NO_ID) {
+			upHListView.setNextFocusUpId(upListViewId);
+		} else {
+			upHListView.setNextFocusUpId(nextFocusUpId);
+		}
+
+		if (nextFocusDownId == View.NO_ID) {
+			downHListView.setNextFocusDownId(downListViewId);
+		} else {
+			downHListView.setNextFocusDownId(nextFocusDownId);
+		}
+		upHListView.setNextFocusDownId(downListViewId);
+		downHListView.setNextFocusUpId(upListViewId);
 	}
 
 	public void setHorizontalSpacing(int horizontalSpacing) {
@@ -173,7 +209,8 @@ public class HMultiListView extends LinearLayout {
 	}
 
 	/**
-	 *  返回选中的Item
+	 * 返回选中的Item
+	 * 
 	 * @return
 	 */
 	public Object getSelectedItem() {
@@ -321,7 +358,7 @@ public class HMultiListView extends LinearLayout {
 
 		@Override
 		public Object getItem(int position) {
-			if(position > data.size()-1){
+			if (position > data.size() - 1) {
 				return null;
 			}
 			return data.get(position);
@@ -336,7 +373,7 @@ public class HMultiListView extends LinearLayout {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			int realPos = getRealPos(position, listNum, dataIndex);
-			if(position > data.size()-1){
+			if (position > data.size() - 1) {
 				return HMultiListView.this.getEmptyView(realPos, convertView, parent);
 			}
 			return HMultiListView.this.getView(realPos, convertView, parent);
@@ -417,7 +454,7 @@ public class HMultiListView extends LinearLayout {
 
 	}
 
-	public void setOnScrollListener(OnScrollListener onScrollListener){
+	public void setOnScrollListener(OnScrollListener onScrollListener) {
 		this.mOnScrollListener = onScrollListener;
 	}
 
@@ -449,7 +486,7 @@ public class HMultiListView extends LinearLayout {
 			if (!view.isInTouchMode()) {
 				return;
 			}
-			
+
 			if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
 					|| scrollState == OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
 			}
@@ -465,7 +502,7 @@ public class HMultiListView extends LinearLayout {
 
 		@Override
 		public void onScroll(AbsHListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-			
+
 			for (int i = 0; i < mHListViews.size(); i++) {
 				if (i == mMainScrollListViewIndex && mOnScrollListener != null) {
 					mOnScrollListener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
@@ -506,14 +543,14 @@ public class HMultiListView extends LinearLayout {
 		this.mOnItemClickListener = onItemClickListener;
 	}
 
-	private void setInternalItemClickListener(OnItemClickListener onItemClickListener){
+	private void setInternalItemClickListener(OnItemClickListener onItemClickListener) {
 		if (onItemClickListener != null) {
 			for (HListView hListView : mHListViews) {
 				hListView.setOnItemClickListener(onItemClickListener);
 			}
 		}
 	}
-	
+
 	public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
 		if (onItemLongClickListener != null) {
 			for (HListView hListView : mHListViews) {
@@ -646,10 +683,10 @@ public class HMultiListView extends LinearLayout {
 	private void animatorToUnselected(BaseAdapterItem item) {
 		item.toUnselected(null);
 	}
-	
+
 }
 
-interface OnSyncItemClickListener { 
+interface OnSyncItemClickListener {
 	void onSyncItemClick(AdapterView<?> parent, View view, int position);
 }
 

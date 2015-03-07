@@ -12,6 +12,14 @@
     <dimen name="common_title_margin_left">20dp</dimen>
     <dimen name="common_title_size">72sp</dimen>
     <dimen name="common_title_prompt_size">36sp</dimen>
+    <dimen name="common_image_item_small_width">270dp</dimen>
+    <dimen name="common_image_item_small_height">340dp</dimen>
+    <dimen name="common_image_item_large_width">560dp</dimen>
+    <dimen name="common_image_item_large_height">340dp</dimen>
+    <dimen name="common_image_item_textsize">36sp</dimen>
+    <dimen name="common_image_item_text_margin_bottom">15dp</dimen>
+    <dimen name="common_list_item_divder_width">20dp</dimen>
+    <dimen name="common_list_vertical_space">46dp</dimen>
 
     <!-- 主页(main) -->
 
@@ -330,17 +338,17 @@
     <dimen name="store_detail_padding_bottom">30dp</dimen>
 
     <!-- 免商店-搜索 -->
-	<dimen name="search_edittext_width">830dp</dimen>
-	<dimen name="search_edittext_height">112dp</dimen>
-	<dimen name="search_edittext_margin_top">120dp</dimen>
-	<dimen name="search_edittext_textsize">48sp</dimen>
-	<dimen name="search_intro_margin_top">30dp</dimen>
-	<dimen name="search_intro_margin_bottom">30dp</dimen>
-	<dimen name="search_suggest_textsize">42sp</dimen>
-	<dimen name="search_suggest_height">146dp</dimen>
-	<dimen name="search_suggest_padding_left">50dp</dimen>
-	<dimen name="search_recommend_prompt_textsize">36sp</dimen>
-	<dimen name="search_list_diver_width">20dp</dimen>
+    <dimen name="search_edittext_width">830dp</dimen>
+    <dimen name="search_edittext_height">112dp</dimen>
+    <dimen name="search_edittext_margin_top">120dp</dimen>
+    <dimen name="search_edittext_textsize">48sp</dimen>
+    <dimen name="search_intro_margin_top">30dp</dimen>
+    <dimen name="search_intro_margin_bottom">30dp</dimen>
+    <dimen name="search_suggest_textsize">42sp</dimen>
+    <dimen name="search_suggest_height">146dp</dimen>
+    <dimen name="search_suggest_padding_left">50dp</dimen>
+    <dimen name="search_recommend_prompt_textsize">36sp</dimen>
+    <dimen name="search_list_diver_width">20dp</dimen>
 
     <!-- 免商店-推荐 -->
     <dimen name="store_recommend_item_width">471dp</dimen>

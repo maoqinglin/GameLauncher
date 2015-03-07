@@ -48,10 +48,7 @@ public class CategoryFragment extends BaseContentFragment {
 		mMultiListView = (HMultiListView) view.findViewById(R.id.category_list);
 		mAdapter = new CategoryMultiAdapter(getRootActivity(), mMultiListView);
 		mMultiListView.setAdapter(mAdapter);
-		PagingIndicator indicator = getMenuActivity().getPagingIndicator();
-		mMultiListView.setOnScrollListener(new ScrollListenerByIndicator(indicator));
-		HListView upListView = mMultiListView.getHListViews().get(0);
-		indicator.bind(upListView);
+		bindPagingIndicator(mMultiListView);
 		loadData(1);
 	}
 

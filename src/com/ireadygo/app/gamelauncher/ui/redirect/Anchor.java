@@ -8,7 +8,7 @@ import android.content.Intent;
 import com.ireadygo.app.gamelauncher.GameLauncherApplication;
 import com.ireadygo.app.gamelauncher.ui.account.AccountDetailActivity;
 import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
-import com.ireadygo.app.gamelauncher.ui.store.StoreDetailActivity;
+import com.ireadygo.app.gamelauncher.ui.store.StoreActivity;
 import com.ireadygo.app.gamelauncher.ui.store.category.CategoryDetailActivity;
 import com.ireadygo.app.gamelauncher.ui.store.collection.CollectionDetailActivity;
 
@@ -47,7 +47,7 @@ public class Anchor implements Serializable {
 		case STORE_SEARCH:
 		case STORE_GAME_MANAGE:
 		case STORE_SETTINGS:
-			clazz = StoreDetailActivity.class;
+			clazz = StoreActivity.class;
 			break;
 		case GAME_DETAIL:
 			clazz = DetailActivity.class;
@@ -65,8 +65,8 @@ public class Anchor implements Serializable {
 	}
 
 	public enum Destination {
-		GAME_DETAIL, STORE_RECOMMEND, STORE_CATEGORY, STORE_COLLECTION, STORE_SEARCH, STORE_GAME_MANAGE, //
-		STORE_SETTINGS, COLLECTION_DETAIL, CATEGORY_DETAIL,ACCOUNT_WEALTH, ACCOUNT_PERSONAL, ACCOUNT_RECHARGE, ACCOUNT_FREECARD
+		GAME_DETAIL, STORE_RECOMMEND, STORE_CATEGORY, STORE_COLLECTION, STORE_SEARCH, STORE_FAVORITE_APPS, STORE_GAME_MANAGE, //
+		STORE_SETTINGS, COLLECTION_DETAIL, CATEGORY_DETAIL, ACCOUNT_WEALTH, ACCOUNT_PERSONAL, ACCOUNT_RECHARGE, ACCOUNT_FREECARD
 	}
 
 	public String getArgs1() {

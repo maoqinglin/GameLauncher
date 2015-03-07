@@ -5,21 +5,17 @@ import java.util.List;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.FrameLayout.LayoutParams;
 
 import com.ireadygo.app.gamelauncher.R;
-import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryInfo;
 import com.ireadygo.app.gamelauncher.appstore.info.item.CollectionInfo;
 import com.ireadygo.app.gamelauncher.ui.item.ImageItem;
 import com.ireadygo.app.gamelauncher.ui.item.ImageItem.ImageItemHolder;
-import com.ireadygo.app.gamelauncher.ui.settings.SettingsInfo;
+import com.ireadygo.app.gamelauncher.ui.item.ImageItemLarge;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiBaseAdapter;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class CollectionMultiAdapter implements HMultiBaseAdapter {
 	private static final int LIST_NUM = 2;
@@ -41,14 +37,13 @@ public class CollectionMultiAdapter implements HMultiBaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
-			convertView = new ImageItem(mContext);
+			convertView = new ImageItemLarge(mContext);
 			ImageItemHolder holder1 = ((ImageItem) convertView).getHolder();
 			holder1.title.setText(position + "");
 		}
 		ImageItemHolder holder = ((ImageItem) convertView).getHolder();
 		Drawable drawable = mContext.getResources().getDrawable(R.drawable.store_poster_large);
 		holder.icon.setImageDrawable(drawable);
-		((ImageItem)convertView).setBackgroundDimens(drawable.getMinimumWidth(), drawable.getMinimumHeight());
 		
 //		CollectionInfo app = mCollectionDatas.get(position);
 //		String iconUrl = app.getPosterIconUrl();
@@ -77,7 +72,7 @@ public class CollectionMultiAdapter implements HMultiBaseAdapter {
 	@Override
 	public View getEmptyView(int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
-			convertView = new ImageItem(mContext);
+			convertView = new ImageItemLarge(mContext);
 		}
 		convertView.setVisibility(View.GONE);
 		return convertView;

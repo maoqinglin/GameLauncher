@@ -46,7 +46,6 @@ public class HomeMenuFragment extends BaseMenuFragment {
 		mSettingsMenu = (MenuItem) view.findViewById(R.id.menu_settings);
 		
 		addMenuItem(mUserMenu, getUserFragment());
-		addMenuItem(mStoreMenu, new StoreFragment(getRootActivity(), this));
 		addMenuItem(mGameMenu, new GameFragment(getRootActivity(), this));
 		addMenuItem(mStoreMenu, new StoreFragment(getRootActivity(), this));
 		addMenuItem(mAppMenu, new AppFragment(getRootActivity(), this));

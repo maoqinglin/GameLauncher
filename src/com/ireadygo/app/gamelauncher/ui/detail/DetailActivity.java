@@ -170,10 +170,12 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 				}
 			}
 		});
-		updateData(mAppEntity);
-		loadAppDetail(mAppEntity.getAppId());
-		//上报打开应用详情事件
-		StaticsUtils.onAppDetailOpen(mAppEntity.getAppId());
+		if(mAppEntity != null){
+			updateData(mAppEntity);
+			loadAppDetail(mAppEntity.getAppId());
+			//上报打开应用详情事件
+			StaticsUtils.onAppDetailOpen(mAppEntity.getAppId());
+		}
 		mDownloadBtn.requestFocus();
 	}
 

@@ -8,6 +8,7 @@ import android.animation.PropertyValuesHolder;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ import com.ireadygo.app.gamelauncher.helper.AnimatorHelper;
 public class ImageItem extends BaseAdapterItem {
 	private ImageItemHolder mHolder;
 	private Drawable mIconDrawable;
+	private String mTitle;
 	private Animator mSelectedAnimator;
 	private Animator mUnselectedAnimator;
 
@@ -44,10 +46,11 @@ public class ImageItem extends BaseAdapterItem {
 	private void initAttrs(Context context, AttributeSet attrs) {
 		TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Item);
 		mIconDrawable = a.getDrawable(R.styleable.Item_item_icon);
+		mTitle = a.getString(R.styleable.Item_item_title);
 		a.recycle();
 	}
 
-	private void initView(Context context) {
+	protected void initView(Context context) {
 		LayoutInflater.from(context).inflate(R.layout.image_item, this, true);
 		mHolder = new ImageItemHolder();
 		mHolder.background = (ImageView) findViewById(R.id.background);
@@ -59,6 +62,10 @@ public class ImageItem extends BaseAdapterItem {
 		}
 		mHolder.iconLayout = (ViewGroup) findViewById(R.id.icon_layout);
 		mHolder.title = (TextView) findViewById(R.id.title);
+		if (!TextUtils.isEmpty(mTitle)) {
+			mHolder.title.setVisibility(View.VISIBLE);
+			mHolder.title.setText(mTitle);
+		}
 	}
 
 	public ImageItemHolder getHolder() {
@@ -110,6 +117,11 @@ public class ImageItem extends BaseAdapterItem {
 	public void setBackgroundDimens(int width, int height) {
 		LayoutParams params = new LayoutParams(width, height);
 		mHolder.background.setLayoutParams(params);
+	}
+
+	public void setIconLayoutDimens(int width, int height) {
+		LayoutParams params = new LayoutParams(width, height);
+		mHolder.iconLayout.setLayoutParams(params);
 	}
 
 	public class ImageItemHolder {

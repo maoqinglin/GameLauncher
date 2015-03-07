@@ -12,10 +12,13 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
 import com.ireadygo.app.gamelauncher.ui.Config;
+import com.ireadygo.app.gamelauncher.ui.base.BaseMenuActivity.ScrollListenerByIndicator;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.HomeMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout;
+import com.ireadygo.app.gamelauncher.ui.widget.PagingIndicator;
+import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 import com.ireadygo.app.gamelauncher.utils.Utils;
 
 public abstract class BaseContentFragment extends BaseFragment {
@@ -26,10 +29,10 @@ public abstract class BaseContentFragment extends BaseFragment {
 	private Dialog mLoadingProgress;
 	private GameInfoHub mGameInfoHub;
 
-//	public BaseContentFragment(BaseMenuFragment menuFragment) {
-//		this.mMenuFragment = menuFragment;
-//		initCoordinateParams(Config.Content.INIT_X, Config.Content.INIT_Y);
-//	}
+	// public BaseContentFragment(BaseMenuFragment menuFragment) {
+	// this.mMenuFragment = menuFragment;
+	// initCoordinateParams(Config.Content.INIT_X, Config.Content.INIT_Y);
+	// }
 
 	public BaseContentFragment(Activity activity, BaseMenuFragment menuFragment) {
 		super(activity);
@@ -48,20 +51,22 @@ public abstract class BaseContentFragment extends BaseFragment {
 
 	@Override
 	public Animator inAnimator(AnimatorListener listener) {
-//		View rootView = getRootView();
-//		if (rootView == null) {
-//			return null;
-//		}
-//		AnimatorSet animatorSet = new AnimatorSet();
-//		Animator animatorX = ObjectAnimator.ofFloat(rootView, View.TRANSLATION_X, getInitX());
-//		Animator animatorY = ObjectAnimator.ofFloat(getRootView(), View.TRANSLATION_Y, Config.WINDOW_HEIGHT,
-//				Config.WINDOW_HEIGHT, getInitY());
-//		animatorSet.setDuration(Config.Animator.DURATION_SHORT);
-//		if (listener != null) {
-//			animatorSet.addListener(listener);
-//		}
-//		animatorSet.playTogether(animatorX, animatorY);
-//		animatorSet.start();
+		// View rootView = getRootView();
+		// if (rootView == null) {
+		// return null;
+		// }
+		// AnimatorSet animatorSet = new AnimatorSet();
+		// Animator animatorX = ObjectAnimator.ofFloat(rootView,
+		// View.TRANSLATION_X, getInitX());
+		// Animator animatorY = ObjectAnimator.ofFloat(getRootView(),
+		// View.TRANSLATION_Y, Config.WINDOW_HEIGHT,
+		// Config.WINDOW_HEIGHT, getInitY());
+		// animatorSet.setDuration(Config.Animator.DURATION_SHORT);
+		// if (listener != null) {
+		// animatorSet.addListener(listener);
+		// }
+		// animatorSet.playTogether(animatorX, animatorY);
+		// animatorSet.start();
 		return null;
 	}
 
@@ -101,7 +106,7 @@ public abstract class BaseContentFragment extends BaseFragment {
 	}
 
 	public void onLoseFocus(AnimatorListener listener) {
-		getRootActivity().translateToRight();		
+		getRootActivity().translateToRight();
 	}
 
 	private void obtainFocusAnimator(AnimatorListener listener) {
@@ -146,7 +151,7 @@ public abstract class BaseContentFragment extends BaseFragment {
 		returnFocus();
 		return true;
 	};
-	
+
 	@Override
 	public boolean onWaterKey() {
 		return true;
@@ -161,28 +166,41 @@ public abstract class BaseContentFragment extends BaseFragment {
 	public int getOutAnimatorDuration() {
 		return Config.Animator.DURATION_SHORT;
 	}
-	
+
 	protected void showLoadingProgress() {
-		if(mLoadingProgress == null){
+		if (mLoadingProgress == null) {
 			mLoadingProgress = Utils.createLoadingDialog(getRootActivity());
 			mLoadingProgress.setCancelable(false);
 		}
-		if(!mLoadingProgress.isShowing()){
+		if (!mLoadingProgress.isShowing()) {
 			mLoadingProgress.show();
 		}
 	}
-	
+
 	protected void dimissLoadingProgress() {
-		if(mLoadingProgress != null && mLoadingProgress.isShowing()){
+		if (mLoadingProgress != null && mLoadingProgress.isShowing()) {
 			mLoadingProgress.dismiss();
 		}
 	}
-	
+
 	protected GameInfoHub getGameInfoHub() {
 		return mGameInfoHub;
 	}
-	
+
 	protected BaseMenuActivity getMenuActivity() {
-		return (BaseMenuActivity)getRootActivity();
+		return (BaseMenuActivity) getRootActivity();
+	}
+
+	protected void bindPagingIndicator(HMultiListView multiListView) {
+		PagingIndicator indicator = getMenuActivity().getPagingIndicator();
+		multiListView.setOnScrollListener(new ScrollListenerByIndicator(indicator));
+		HListView upListView = multiListView.getHListViews().get(0);
+		indicator.bind(upListView);
+	}
+
+	protected void bindPagingIndicator(HListView hListView) {
+		PagingIndicator indicator = getMenuActivity().getPagingIndicator();
+		hListView.setOnScrollListener(new ScrollListenerByIndicator(indicator));
+		indicator.bind(hListView);
 	}
 }

@@ -66,10 +66,7 @@ public class CollectionFragment extends BaseContentFragment {
 			}
 
 		});
-		PagingIndicator indicator = getMenuActivity().getPagingIndicator();
-		mMultiListView.setOnScrollListener(new ScrollListenerByIndicator(indicator));
-		HListView upListView = mMultiListView.getHListViews().get(0);
-		indicator.bind(upListView);
+		bindPagingIndicator(mMultiListView);
 		loadData(1);
 	}
 
