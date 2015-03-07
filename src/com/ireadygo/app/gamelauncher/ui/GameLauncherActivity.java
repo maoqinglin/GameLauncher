@@ -8,7 +8,9 @@ import com.ireadygo.app.gamelauncher.GameLauncherApplication;
 import com.ireadygo.app.gamelauncher.account.AccountInfoAsyncTask;
 import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
 import com.ireadygo.app.gamelauncher.ui.base.BaseMenuActivity;
+import com.ireadygo.app.gamelauncher.ui.guide.GuideRegisterOrLoginActivity;
 import com.ireadygo.app.gamelauncher.ui.menu.HomeMenuFragment;
+import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
 import com.ireadygo.app.gamelauncher.utils.StaticsUtils;
 
 public class GameLauncherActivity extends BaseMenuActivity {
@@ -33,6 +35,11 @@ public class GameLauncherActivity extends BaseMenuActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		if (PreferenceUtils.isFirstLaunch()) {
+			Intent intent = new Intent(GameLauncherActivity.this, GuideRegisterOrLoginActivity.class);
+			startActivity(intent);
+			finish();
+		}
 		// 上报应用置前台的时间
 		StaticsUtils.onResume();
 	}

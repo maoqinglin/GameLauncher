@@ -38,13 +38,13 @@ public class GuideRegisterOrLoginActivity extends BaseGuideActivity {
 			
 			@Override
 			public void onRightBtnClickListener(View view) {
-				Intent intent = new Intent(GuideRegisterOrLoginActivity.this, AccountLoginActivity.class);
+				Intent intent = new Intent(GuideRegisterOrLoginActivity.this, AccountRegisterActivity.class);
 				startActivity(intent);
 			}
 			
 			@Override
 			public void onLeftBtnClickListener(View view) {
-				Intent intent = new Intent(GuideRegisterOrLoginActivity.this, AccountRegisterActivity.class);
+				Intent intent = new Intent(GuideRegisterOrLoginActivity.this, AccountLoginActivity.class);
 				startActivity(intent);
 			}
 		});

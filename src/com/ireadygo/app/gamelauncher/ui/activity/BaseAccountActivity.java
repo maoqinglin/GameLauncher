@@ -14,6 +14,7 @@ import com.ireadygo.app.gamelauncher.ui.account.AccountFragment;
 import com.ireadygo.app.gamelauncher.ui.account.AccountLoginActivity;
 import com.ireadygo.app.gamelauncher.ui.account.AccountRegisterActivity;
 import com.ireadygo.app.gamelauncher.ui.account.CustomerLoginResultListener;
+import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
 import com.ireadygo.app.gamelauncher.utils.StaticsUtils;
 import com.ireadygo.app.gamelauncher.utils.Utils;
 import com.snail.appstore.openapi.accountstatus.AccountStatusManager;
@@ -70,8 +71,9 @@ public class BaseAccountActivity extends BaseGuideActivity {
 
 	protected void onLoginSuccess() {
 		hideProgressDialog();
-		startActivityByFlag(mStartFlag);
+//		startActivityByFlag(mStartFlag);
 		sendAccountLoginBroadcast();
+		startGameLauncherActivity();
 		Toast.makeText(this, R.string.account_login_success, Toast.LENGTH_SHORT).show();
 	}
 
@@ -148,23 +150,23 @@ public class BaseAccountActivity extends BaseGuideActivity {
 		SoundPoolManager.instance(this).play(SoundPoolManager.SOUND_EXIT);
 		super.finish();
 	}
-	protected void startGameLauncherActivity(boolean isCancledLogin) {
-//		Intent intent = new Intent();
-//		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//		boolean isFirstLaunch = PreferenceUtils.isFirstLaunch();
-//		if (isFirstLaunch) {
-//			PreferenceUtils.setFirstLaunch(false);
-//			intent.setClass(this, AccountTicketRechargeActivity.class);
-//			//上报设备信息
-//			StaticsUtils.DeviceActive();
-//		} else {
-//			intent.setClass(this, GameLauncherActivity.class);
+	protected void startGameLauncherActivity() {
+		Intent intent = new Intent();
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		boolean isFirstLaunch = PreferenceUtils.isFirstLaunch();
+		if (isFirstLaunch) {
+			PreferenceUtils.setFirstLaunch(false);
+			intent.setClass(this, GameLauncherActivity.class);
+			//上报设备信息
+			StaticsUtils.DeviceActive();
+		} else {
+			intent.setClass(this, GameLauncherActivity.class);
 //			Bundle extras = new Bundle();
 //			FragmentAnchor.setBundleArgs(extras, FragmentAnchor.TAB_ACCOUNT, FragmentAnchor.ACCOUNT_PERSONAL, true);
 //			intent.putExtras(extras);
-//		}
-//		startActivity(intent);
-//		finish();
+		}
+		startActivity(intent);
+		finish();
 	}
 
 	protected void startLoginActivity() {
