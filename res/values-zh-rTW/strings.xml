@@ -344,6 +344,10 @@
     <string name="shortcut_detail">詳情</string>
     <string name="shortcut_back">返回</string>
     <string name="shortcut_uninstall">卸載</string>
+    <string name="device_active_success">設備激活成功！</string>
+    <string name="device_active_failed">設備激活失敗，請確保設備連接網絡，並重啟設備再次激活！</string>
+    <string name="device_bind_account_success">帳號綁定設備成功！</string>
+    <string name="device_bind_account_failed">帳號綁定設備失敗，請重新登陸帳號！</string>
 
     <!-- 按鍵提示層 -->
     <string name="key_sun">啟動</string>

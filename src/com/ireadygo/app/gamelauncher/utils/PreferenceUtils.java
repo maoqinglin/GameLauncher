@@ -88,6 +88,8 @@ public class PreferenceUtils {
 	public static final String KEY_FREE_FLOW_BIND_PHONE_NUM = "ak";
 	public static final String KEY_FREE_FLOW_MODE = "al";
 	public static final String KEY_OBOX_TYPE = "am";
+	public static final String KEY_DEVICE_ACTIVE = "an";
+	public static final String KEY_DEVICE_BIND_ACCOUNT = "ao";
 
 	private static final int USER_PHOTO_EXPIRED_TIME = 7 * 24 * 60 * 60 * 1000;
 
@@ -460,6 +462,26 @@ public class PreferenceUtils {
 	public static void saveOBoxType(String type) {
 		Editor editor = getSharePref().edit();
 		editor.putString(KEY_OBOX_TYPE, type);
+		editor.apply();
+	}
+
+	public static void setDeviceActive(boolean active) {
+		Editor editor = getSharePref().edit();
+		editor.putBoolean(KEY_DEVICE_ACTIVE, active);
+		editor.apply();
+	}
+
+	public static boolean hasDeviceActive() {
+		return getSharePref().getBoolean(KEY_DEVICE_ACTIVE, false);
+	}
+
+	public static String getDeviceBindAccount() {
+		return getSharePref().getString(KEY_DEVICE_BIND_ACCOUNT,DEFAULT_STRING);
+	}
+
+	public static void setDeviceBindAccount(String account) {
+		Editor editor = getSharePref().edit();
+		editor.putString(KEY_DEVICE_BIND_ACCOUNT, account);
 		editor.apply();
 	}
 

@@ -151,14 +151,14 @@ public class SettingsFragment extends BaseContentFragment {
 		public static final String HDMI = "";
 		public static final String ABOUT = "";
 		public static final String BRIGHTNESS = "";
-		public static final String TIME = "";
+		public static final String TIME = Settings.ACTION_DATE_SETTINGS;
 		public static final String KEYBOARD = "";
 		public static final String RESET = "";
 		public static final String DISPLAY = "";
 		public static final String WX = "";
 		public static final String NETWORK = "";
 		public static final String AP = "";
-		public static final String BLUTOOTH = "";
+		public static final String BLUTOOTH = Settings.ACTION_BLUETOOTH_SETTINGS;
 	}
 
 	@Override
@@ -171,7 +171,7 @@ public class SettingsFragment extends BaseContentFragment {
 		View selectedView = mHMultiListView.getSelectedView();
 		if (selectedView != null) {
 			SettingsItemHoder holder = (SettingsItemHoder) selectedView.getTag();
-//			SettingsInfo settingsItemEntity = holder.settingsItem;
+//			SettingsInfo settingsItemEntity = holder.;
 //			if (settingsItemEntity != null) {
 //				String action = settingsItemEntity.getIntentAction();
 //				if (!TextUtils.isEmpty(action)) {

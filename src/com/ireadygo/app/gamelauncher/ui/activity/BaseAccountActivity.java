@@ -2,16 +2,22 @@ package com.ireadygo.app.gamelauncher.ui.activity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.account.AccountManager;
+import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
+import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
 import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
 import com.ireadygo.app.gamelauncher.ui.GameLauncherActivity;
 import com.ireadygo.app.gamelauncher.ui.account.AccountLoginActivity;
 import com.ireadygo.app.gamelauncher.ui.account.AccountRegisterActivity;
 import com.ireadygo.app.gamelauncher.ui.account.CustomerLoginResultListener;
+import com.ireadygo.app.gamelauncher.ui.guide.GuideRegisterOrLoginActivity;
 import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
 import com.ireadygo.app.gamelauncher.utils.StaticsUtils;
 import com.ireadygo.app.gamelauncher.utils.Utils;
@@ -22,6 +28,8 @@ public class BaseAccountActivity extends BaseGuideActivity {
 	public static final String START_FLAG = "startFlag";
 	public static final int FLAG_START_BY_MAIN_ACTIVITY = 1;
 	public static final int FLAG_START_BY_ACCOUNT_DETAIL = 2;
+	public static final int SUCCESS_CODE = 1;
+	public static final int FAILED_CODE = 0;
 	public static final String ACTION_ACCOUNT_LOGIN = "com.ireadygo.app.gamelauncher.ACTION_ACCOUNT_LOGIN";
 	private boolean mIsResumed = false;
 	private Dialog mProgressDialog;
@@ -73,6 +81,10 @@ public class BaseAccountActivity extends BaseGuideActivity {
 		sendAccountLoginBroadcast();
 		startGameLauncherActivity();
 		Toast.makeText(this, R.string.account_login_success, Toast.LENGTH_SHORT).show();
+		if (TextUtils.isEmpty(PreferenceUtils.getDeviceBindAccount())) {
+			BindDeviceAccountTask task = new BindDeviceAccountTask();
+			task.execute();
+		}
 	}
 
 	private void startActivityByFlag(int startFlag){
@@ -198,5 +210,28 @@ public class BaseAccountActivity extends BaseGuideActivity {
 	private void sendAccountLoginBroadcast() {
 		Intent intent = new Intent(ACTION_ACCOUNT_LOGIN);
 		sendBroadcast(intent);
+	}
+
+	private class BindDeviceAccountTask extends AsyncTask<Void, Void, Integer> {
+		@Override
+		protected Integer doInBackground(Void... params) {
+			try {
+				GameInfoHub.instance(BaseAccountActivity.this).bindAccount();
+				return SUCCESS_CODE;
+			} catch (InfoSourceException e) {
+				e.printStackTrace();
+			}
+			return FAILED_CODE;
+		}
+
+		@Override
+		protected void onPostExecute(Integer result) {
+			if (result == SUCCESS_CODE) {
+				Toast.makeText(BaseAccountActivity.this,getString(R.string.device_bind_account_success), Toast.LENGTH_SHORT).show();
+				PreferenceUtils.setDeviceBindAccount(AccountManager.getInstance().getAccount(BaseAccountActivity.this));
+			} else {
+				Toast.makeText(BaseAccountActivity.this,getString(R.string.device_bind_account_failed), Toast.LENGTH_SHORT).show();
+			}
+		}
 	}
 }

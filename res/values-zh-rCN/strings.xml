@@ -343,6 +343,10 @@
     <string name="account_email_error">邮箱格式不正确！</string>
     <string name="account_login_failed">登录失败，请重试！</string>
     <string name="account_login_server_phonenumber">客服电话：(0512)67621007</string>
+    <string name="device_active_success">设备激活成功！</string>
+    <string name="device_active_failed">设备激活失败，请确保设备连接网络，并重启设备再次激活！</string>
+    <string name="device_bind_account_success">帐号绑定设备成功！</string>
+    <string name="device_bind_account_failed">帐号绑定设备失败，请重新登陆帐号！</string>
 
     <!-- 按键提示层 -->
     <string name="key_sun">启动</string>
