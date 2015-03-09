@@ -26,7 +26,7 @@
 
     <!-- 主菜单(menu) -->
     <dimen name="menu_image_width">60dp</dimen>
-    <dimen name="menu_item_margin_top">46dp</dimen>
+    <dimen name="menu_item_margin_top">36dp</dimen>
     <dimen name="menu_item_margin_left">40dp</dimen>
     <dimen name="menu_width">220dp</dimen>
     <dimen name="menu_home_margin_top">204dp</dimen>
@@ -95,7 +95,7 @@
     <dimen name="user_btn_height">112dp</dimen>
     <dimen name="user_save_layout_margin_top">146dp</dimen>
 
-        <!-- 个人-充值 -->
+    <!-- 个人-充值 -->
     <dimen name="user_recharge_spinner_item_margin_right">36dp</dimen>
     <dimen name="user_recharge_spinner_item_margin_left">36dp</dimen>
     <dimen name="user_recharge_spinner_item_height">144dp</dimen>
@@ -267,8 +267,10 @@
     <dimen name="photo_list_padding">60dp</dimen>
 
     <!-- 免账号-一键登录 -->
-    <dimen name="onekey_account_login_margin_left">100dp</dimen>
+    <dimen name="onekey_account_login_margin_left">200dp</dimen>
     <dimen name="onekey_btn_text_size">54sp</dimen>
+    <dimen name="onekey_btn_width">484dp</dimen>
+    <dimen name="onekey_btn_height">112dp</dimen>
 
     <!-- 免账号-资费 -->
     <dimen name="traiff_layout_margin_left">3dp</dimen>
@@ -432,8 +434,8 @@
     <dimen name="store_manager_menu_margin_left">100dp</dimen>
     <dimen name="store_manager_menu_margin_top">100dp</dimen>
     <dimen name="store_manager_hlv_margin_left">120dp</dimen>
-    <dimen name="store_manager_hlv_horizontal_spacing">120dp</dimen>
-    <dimen name="store_manager_hlv_vertical_spacing">46dp</dimen>
+    <dimen name="store_manager_hlv_horizontal_spacing">80dp</dimen>
+    <dimen name="store_manager_hlv_vertical_spacing">26dp</dimen>
     <dimen name="store_manager_speed_text_size">36sp</dimen>
     
     <!-- 免账号-卡槽购买 -->

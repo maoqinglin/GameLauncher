@@ -6,7 +6,6 @@ import java.util.List;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.view.View;
@@ -38,14 +37,12 @@ public class StoreManagerContentAdapter implements HMultiBaseAdapter{
 	private GameManagerType mType = GameManagerType.DOWNLOAD;
 	private HMultiListView mMultiListView;
 	private List<AppEntity> mGameManagerDatas = new ArrayList<AppEntity>();
-	private Drawable mDefaultIcon;
 
 	public StoreManagerContentAdapter(Context context, HMultiListView multiListView, GameManagerType type) {
 		mContext = context;
 		mMultiListView = multiListView;
 		mType = type;
 		mGameData = GameData.getInstance(mContext);
-		mDefaultIcon = mContext.getResources().getDrawable(R.drawable.store_app_icon_normal);
 		
 		refreshData();
 	}

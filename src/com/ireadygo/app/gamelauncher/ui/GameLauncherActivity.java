@@ -1,5 +1,6 @@
 package com.ireadygo.app.gamelauncher.ui;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,12 +9,14 @@ import com.ireadygo.app.gamelauncher.GameLauncherApplication;
 import com.ireadygo.app.gamelauncher.account.AccountInfoAsyncTask;
 import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
 import com.ireadygo.app.gamelauncher.ui.base.BaseMenuActivity;
+import com.ireadygo.app.gamelauncher.ui.guide.GuideOBoxIntroduceActivity;
 import com.ireadygo.app.gamelauncher.ui.guide.GuideRegisterOrLoginActivity;
 import com.ireadygo.app.gamelauncher.ui.menu.HomeMenuFragment;
 import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
 import com.ireadygo.app.gamelauncher.utils.StaticsUtils;
 
 public class GameLauncherActivity extends BaseMenuActivity {
+	private static final String ACTION_LANGUAGE_SETTINGS = "com.ireadygo.app.wizard.language";
 	private long mCreateTime = 0;
 	private long mResumeTime = 0;
 
@@ -36,9 +39,16 @@ public class GameLauncherActivity extends BaseMenuActivity {
 	protected void onResume() {
 		super.onResume();
 		if (PreferenceUtils.isFirstLaunch()) {
-			Intent intent = new Intent(GameLauncherActivity.this, GuideRegisterOrLoginActivity.class);
-			startActivity(intent);
-			finish();
+			try {
+				Intent intent = new Intent(ACTION_LANGUAGE_SETTINGS);
+				startActivity(intent);
+				finish();
+			} catch (ActivityNotFoundException e) {
+				e.printStackTrace();
+				Intent intent = new Intent(GameLauncherActivity.this, GuideOBoxIntroduceActivity.class);
+				startActivity(intent);
+				finish();
+			}
 		}
 		// 上报应用置前台的时间
 		StaticsUtils.onResume();

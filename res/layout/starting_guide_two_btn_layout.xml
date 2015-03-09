@@ -8,19 +8,19 @@
     <TextView
         android:id="@+id/leftBtn"
         style="@style/ClickBtnNormal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/account_green_btn_bg_selector"
+        android:layout_width="@dimen/onekey_btn_width"
+        android:layout_height="@dimen/onekey_btn_height"
+        android:background="@drawable/guide_btn_selector"
         android:text="@string/account_onekey_login_title"
         android:textSize="@dimen/onekey_btn_text_size" />
 
     <TextView
         android:id="@+id/rightBtn"
         style="@style/ClickBtnNormal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/onekey_btn_width"
+        android:layout_height="@dimen/onekey_btn_height"
         android:layout_marginLeft="@dimen/onekey_account_login_margin_left"
-        android:background="@drawable/account_blue_btn_bg_selector"
+        android:background="@drawable/guide_btn_selector"
         android:text="@string/account_login_btn"
         android:textSize="@dimen/onekey_btn_text_size" />
 

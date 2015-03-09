@@ -38,6 +38,8 @@ public class GuideTwoBtnLayout extends LinearLayout {
 
 		mRightBtn = (TextView) findViewById(R.id.rightBtn);
 		mRightBtn.setOnClickListener(mInnerOnClickListener);
+
+		mLeftBtn.requestFocus();
 	}
 
 	public void setOnLRBtnClickListener(OnLRBtnClickListener listener) {

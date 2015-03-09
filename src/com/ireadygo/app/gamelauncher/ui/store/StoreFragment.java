@@ -102,6 +102,7 @@ public class StoreFragment extends BaseContentFragment {
 		info = new StoreInfo(R.drawable.store_icon_favorite_apps, R.string.store_menu_app, anchor);
 		mStoreDatas.add(info);
 
+		anchor = new Anchor(Destination.STORE_GAME_MANAGE);
 		info = new StoreInfo(R.drawable.store_icon_manager, R.string.store_menu_manager, anchor);
 		mStoreDatas.add(info);
 	}

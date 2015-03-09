@@ -130,6 +130,7 @@
     <string name="store_manager_launchable">已安装</string>
     <string name="store_manager_delete_task_prompt">删除任务记录</string>
     <string name="store_manager_delete_task_msg">是否删除您的下载任务？</string>
+    <string name="store_manager_count">数量</string>
 
     <!-- 免商店-搜索(search) -->
     <string name="store_search">搜&#160;&#160;索</string>
@@ -361,6 +362,8 @@
     <string name="starting_guide_alipay_bind">支付宝绑定</string>
     <string name="starting_guide_alipay_skip">跳&#160;&#160;过</string>
     <string name="starting_guide_login_intro">你首次“登陆”或“注册”的账号\n将会与你所购买的套餐类型绑定在一起</string>
+    <string name="starting_guide_handler_intro">手柄说明</string>
+    <string name="starting_guide_obox_intro">主机说明</string>
 
     <!-- 错误显示 -->
     <string name="error_unknown">未知错误</string>

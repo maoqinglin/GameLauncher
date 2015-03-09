@@ -10,7 +10,7 @@ import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.ui.base.BaseActivity;
 
 public class BaseGuideActivity extends BaseActivity implements OnClickListener {
-	private TextView mGobackBtn;
+	private TextView mLTBtn;
 	private ImageView mWifiSettingsBtn;
 	private View mLineView;
 
@@ -20,9 +20,9 @@ public class BaseGuideActivity extends BaseActivity implements OnClickListener {
 	}
 
 	protected void initHeaderView(int headerTextId) {
-		mGobackBtn = (TextView) findViewById(R.id.gobackBtn);
-		mGobackBtn.setText(headerTextId);
-		mGobackBtn.setOnClickListener(this);
+		mLTBtn = (TextView) findViewById(R.id.gobackBtn);
+		mLTBtn.setText(headerTextId);
+		mLTBtn.setOnClickListener(this);
 
 		mWifiSettingsBtn = (ImageView) findViewById(R.id.guideWifiSettings);
 		mWifiSettingsBtn.setOnClickListener(this);
@@ -56,5 +56,9 @@ public class BaseGuideActivity extends BaseActivity implements OnClickListener {
 	
 	protected View getLine() {
 		return mLineView;
+	}
+
+	protected void setLTBtnText(String title) {
+		mLTBtn.setText(title);
 	}
 }

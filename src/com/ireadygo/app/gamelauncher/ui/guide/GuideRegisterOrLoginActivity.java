@@ -2,6 +2,7 @@ package com.ireadygo.app.gamelauncher.ui.guide;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 
 import com.ireadygo.app.gamelauncher.R;
@@ -30,6 +31,7 @@ public class GuideRegisterOrLoginActivity extends BaseGuideActivity {
 		initHeaderView(R.string.starting_guide_account_login_title);
 		mTipsLayout = (OperationTipsLayout) findViewById(R.id.operationTipsLayout);
 		mTipsLayout.setTipsVisible(TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
+		mTipsLayout.getPagingIndicator().setVisibility(View.GONE);
 
 		mGuideTwoBtnLayout = (GuideTwoBtnLayout) findViewById(R.id.guideTwoBtnLayout);
 		mGuideTwoBtnLayout.setLeftBtnText(R.string.starting_guide_login);
@@ -50,4 +52,16 @@ public class GuideRegisterOrLoginActivity extends BaseGuideActivity {
 		});
 	}
 
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if(keyCode == KeyEvent.KEYCODE_BACK) {
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+
+	@Override
+	public boolean onMoonKey() {
+		return true;
+	}
 }

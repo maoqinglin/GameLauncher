@@ -166,6 +166,15 @@
             android:screenOrientation="landscape"
             android:theme="@style/CustomerTheme" />
         <activity
+            android:name="com.ireadygo.app.gamelauncher.ui.guide.GuideOBoxIntroduceActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/CustomerTheme">
+            <intent-filter>
+                <action android:name="com.ireadygo.app.gamelauncher.GuideOBoxIntroduceActivity"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name="com.ireadygo.app.gamelauncher.ui.user.UserActivity"
             android:screenOrientation="landscape"
             android:theme="@style/CustomerTheme" />

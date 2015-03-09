@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/guide_bg"
     >
     <include
         android:id="@+id/guideLayout"
@@ -24,7 +25,7 @@
         android:gravity="center"
         android:maxLines="2"
         android:text="@string/starting_guide_login_intro"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="100dp"
         />
 
     <com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout 
