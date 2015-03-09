@@ -145,8 +145,27 @@ public class RemoteInfo implements IGameInfo {
 	}
 
 	@Override
-	public int obtainChildrenCount(String parentItemId) throws InfoSourceException {
-		return 0;
+	public int obtainChildrenCount(int type,String id) throws InfoSourceException {
+		ResultVO resultVO = null;
+		try {
+			resultVO = mAppPlatFormService.getListCountById(type, Long.parseLong(id));
+			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
+				if (resultVO.getObj() != null) {
+					PageListVO pageListVO = (PageListVO)resultVO.getObj();
+					return pageListVO.getPage().getITotalRowCount();
+				}
+			}
+			String errMsg = processRemoteResultCode(resultVO.getCode());
+			throw new InfoSourceException(errMsg);
+		} catch (InfoSourceException e) {
+			throw e;
+		} catch (HttpStatusCodeException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_NETWORK_ERROR,e.getCause());
+		} catch (JSONException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_CLIENT_ERROR,e.getCause());
+		} catch (Exception e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_ERROR,e.getCause());
+		}
 	}
 
 	/*

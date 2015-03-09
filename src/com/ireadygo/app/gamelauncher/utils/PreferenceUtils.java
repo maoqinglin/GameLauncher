@@ -90,6 +90,7 @@ public class PreferenceUtils {
 	public static final String KEY_OBOX_TYPE = "am";
 	public static final String KEY_DEVICE_ACTIVE = "an";
 	public static final String KEY_DEVICE_BIND_ACCOUNT = "ao";
+	public static final String KEY_CATEGORY_ITEM_COUNT_EXPIRED_TIME = "ap";
 
 	private static final int USER_PHOTO_EXPIRED_TIME = 7 * 24 * 60 * 60 * 1000;
 
@@ -319,6 +320,14 @@ public class PreferenceUtils {
 
 	public static boolean hasUpdatable() {
 		return getSharePref().getBoolean(HAS_UPDATABLE, false);
+	}
+
+	public static void setCategoryItemCountExpiredTime(long expiredTime) {
+		getSharePref().edit().putLong(KEY_CATEGORY_ITEM_COUNT_EXPIRED_TIME, expiredTime).apply();
+	}
+
+	public static long getCategoryItemCountExpiredTime() {
+		return getSharePref().getLong(KEY_CATEGORY_ITEM_COUNT_EXPIRED_TIME, DEFAULT_LONG);
 	}
 
 	public static void setCategoryExpiredTime(long expiredTime) {

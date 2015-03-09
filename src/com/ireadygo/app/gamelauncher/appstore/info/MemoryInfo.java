@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import android.R.integer;
 import android.content.Context;
 
 import com.ireadygo.app.gamelauncher.aidl.rentfree.AppTimeUploadResultItem;
@@ -34,6 +35,7 @@ public class MemoryInfo implements IGameInfo {
 	private HashMap<Integer, List<BannerItem>> mCachedBannerItems = new HashMap<Integer, List<BannerItem>>();
 	private ArrayList<KeywordItem> mCachedKeywordItems = new ArrayList<KeywordItem>();
 	private List<FeeConfigItem> mCachedFeeConfigItems = new ArrayList<FeeConfigItem>();
+	private HashMap<String, Integer> mCachedCategoryItemCount = new HashMap<String, Integer>();//id-count
 
 	private LocalInfo mLocalInfo;
 
@@ -47,9 +49,19 @@ public class MemoryInfo implements IGameInfo {
 	}
 
 	@Override
-	public int obtainChildrenCount(String parentItemId) throws InfoSourceException {
-		// TODO Auto-generated method stub
-		return 0;
+	public int obtainChildrenCount(int type,String id) throws InfoSourceException {
+		Integer categoryCount = 0;
+		if (mCachedCategoryItemCount.size() > 0) {
+			categoryCount = mCachedCategoryItemCount.get(id);
+			if (categoryCount == null) {
+				categoryCount = mLocalInfo.obtainChildrenCount(type, id);
+				cachedCategoryItemCount(id, categoryCount);
+			}
+			return categoryCount;
+		}
+		categoryCount = mLocalInfo.obtainChildrenCount(type, id);
+		cachedCategoryItemCount(id, categoryCount);
+		return categoryCount;
 	}
 
 	@Override
@@ -206,6 +218,12 @@ public class MemoryInfo implements IGameInfo {
 	public int[] getUserSlotNum() throws InfoSourceException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public void cachedCategoryItemCount(String id,int count) {
+		mCachedCategoryItemCount.put(id, count);
+		PreferenceUtils.setCategoryItemCountExpiredTime(System.currentTimeMillis());
+		mLocalInfo.cachedCategoryItemCount(id,count);
 	}
 
 	public void cachedCategoryItems(List<CategoryInfo> categoryItems) {

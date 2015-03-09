@@ -23,6 +23,7 @@ public class GameLauncherConfig {
 	public static final long BANNER_CACHED_EXPIRED_TIME = 2 * 60 * 60 *  1000;//2 hours
 	public static final long KEYWORD_CACHED_EXPIRED_TIME = 1 * 24 * 60 * 60 * 1000;//1 day
 	public static final long FEECONFIG_CACHED_EXPIRED_TIME = 1 * 24 * 60 * 60 * 1000;//1 day
+	public static final long CATEGORY_ITEM_COUNT_CACHED_EXPIRED_TIME = 7 * 24 * 60 * 60 * 1000;//7 day
 
 	public static final String PHONE_TYPE = "ANDROID";
 	public static final String GETUI_CLIENTID = PushManager.getInstance().getClientid(GameLauncherApplication.getApplication());

@@ -1,12 +1,16 @@
 package com.ireadygo.app.gamelauncher.appstore.info;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.R.integer;
 import android.content.Context;
 import android.content.SharedPreferences.Editor;
 import android.text.TextUtils;
@@ -38,25 +42,35 @@ public class LocalInfo implements IGameInfo {
 	private static final String CACHED_COLLECTIONS_NAME = "CACHED_COLLECTIONS";
 	private static final String CACHED_BANNERLIST_NAME = "CACHED_BANNERLIST";
 	private static final String CACHED_FEECONFIGLIST_NAME = "CACHED_FEECONFIGLIST";
+	private static final String CACHED_CATEGORY_ITEM_COUNT_NAME = "CACHED_CATEGORY_ITEM_COUNT_NAME";
 	private static final String CACHED_KEY_WORDS = "CACHED_KEY_WORDS";
 	private static final String CACHED_CATEGORYS = "CACHED_CATEGORYS";
 	private static final String CACHED_COLLECTIONS = "CACHED_COLLECTIONS";
 	private static final String CACHED_BANNERLIST = "CACHED_BANNERLIST";
 	private static final String CACHED_FEECONFIGLIST = "CACHED_BANNERLIST";
+	private static final String CACHED_CATEGORY_ITEM_COUNT = "CACHED_CATEGORY_ITEM_COUNT";
 	private static final int MAX_CACHED_ITEMS = 30;
 	private static final String ITEM_DIVIDER = ",";
 	private static final String ITEM_INNER_DIVIDER = "@";
+
+	private HashMap<String, Integer> mCategoryItemCount = new HashMap<String, Integer>();
 
 	private Context mContext;
 
 	public LocalInfo(Context context) {
 		mContext = context;
+		mCategoryItemCount = getCachedCategoryItemCount();
 	}
 
 	@Override
-	public int obtainChildrenCount(String parentItemId) throws InfoSourceException {
-		// TODO Auto-generated method stub
-		return 0;
+	public int obtainChildrenCount(int type,String id) throws InfoSourceException {
+		if (mCategoryItemCount.size() > 0) {
+			Integer count = mCategoryItemCount.get(id);
+			if (count != null) {
+				return count;
+			}
+		}
+		throw new InfoSourceException(InfoSourceException.MSG_NO_CACHED_DATA);
 	}
 
 	@Override
@@ -416,6 +430,50 @@ public class LocalInfo implements IGameInfo {
 		return result;
 	}
 
+	public void cachedCategoryItemCount(String categoryId,int itemCount) {
+		mCategoryItemCount.put(categoryId, itemCount);
+		Iterator iter = mCategoryItemCount.entrySet().iterator();
+		Editor editor = mContext.getSharedPreferences(CACHED_CATEGORY_ITEM_COUNT_NAME,Context.MODE_PRIVATE).edit();
+		JSONArray jsonArray = new JSONArray();
+		while (iter.hasNext()) {
+			Map.Entry entry = (Map.Entry) iter.next();
+			String id = (String)entry.getKey();
+			Integer count = (Integer)entry.getValue();
+			JSONObject object = new JSONObject();
+			try {
+				object.put(CATEGORY_ITEM_COUNT_JSON_KEY.SID, id);
+				object.put(CATEGORY_ITEM_COUNT_JSON_KEY.INum, count);
+				jsonArray.put(object);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			if (jsonArray.length() > 0) {
+				editor.putString(CACHED_CATEGORY_ITEM_COUNT, jsonArray.toString());
+				editor.commit();
+			}
+		}
+	}
+
+	private HashMap<String, Integer> getCachedCategoryItemCount() {
+		String categoryItemList = mContext.getSharedPreferences(CACHED_CATEGORY_ITEM_COUNT_NAME,Context.MODE_PRIVATE).getString(CACHED_CATEGORY_ITEM_COUNT, "");
+		if (TextUtils.isEmpty(categoryItemList)) {
+			return new HashMap<String, Integer>();
+		}
+		JSONArray categoryItemCountJsonArray;
+		try {
+			categoryItemCountJsonArray = new JSONArray(categoryItemList);
+			HashMap<String, Integer> result = new HashMap<String, Integer>();
+			for (int i = 0; i < categoryItemCountJsonArray.length(); i++) {
+				JSONObject object = categoryItemCountJsonArray.getJSONObject(i);
+				result.put(object.optString(CATEGORY_ITEM_COUNT_JSON_KEY.SID), object.optInt(CATEGORY_ITEM_COUNT_JSON_KEY.INum));
+			}
+			return result;
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return new HashMap<String, Integer>();
+		}
+	}
+
 	@Override
 	public int rechargeRabbitTicket(String num, String password) throws InfoSourceException {
 		return 0;
@@ -611,6 +669,11 @@ public class LocalInfo implements IGameInfo {
 		String INum = "INum";// 次数
 		String CPosterIcon = "CPosterIcon";//海报图标地址
 		String NAppId = "NAppId";//热词对应应用的ID
+	}
+
+	private interface CATEGORY_ITEM_COUNT_JSON_KEY {
+		String SID = "SID";// 分类ID
+		String INum = "INum";// 游戏数量
 	}
 
 	@Override

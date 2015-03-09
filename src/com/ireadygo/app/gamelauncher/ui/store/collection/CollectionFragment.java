@@ -49,13 +49,13 @@ public class CollectionFragment extends BaseContentFragment {
 	protected void initView(View view) {
 		super.initView(view);
 		mTitleLayout = (StatisticsTitleView) view.findViewById(R.id.title_layout);
-		mTitleLayout.setCount(269);
+		mTitleLayout.setCount(mCollectionList.size());
 		mTitleLayout.setTitle(R.string.collection_prompt);
 
 		mMultiListView = (HMultiListView) view.findViewById(R.id.collection_list);
-		for (int i = 0; i < 10; i++) {
-			mCollectionList.add(null);
-		}
+//		for (int i = 0; i < 10; i++) {
+//			mCollectionList.add(null);
+//		}
 		mAdapter = new CollectionMultiAdapter(getRootActivity(), mMultiListView, mCollectionList);
 		mMultiListView.setAdapter(mAdapter);
 		mMultiListView.setOnItemClickListener(new OnItemClickListener() {
@@ -67,7 +67,9 @@ public class CollectionFragment extends BaseContentFragment {
 
 		});
 		bindPagingIndicator(mMultiListView);
-		loadData(1);
+		if (mCollectionList.size() == 0) {
+			loadData(1);
+		}
 	}
 
 	private void loadData(int page) {
@@ -124,12 +126,8 @@ public class CollectionFragment extends BaseContentFragment {
 			if (isCancelled() || result == null || result.isEmpty()) {
 				return;
 			}
-			mCollectionList.clear();
-			// TODO
-			for (int i = 0; i < 20; i++) {
-				mCollectionList.add(result.get(0));
-			}
-			// mAppList.addAll(result);
+			mCollectionList.addAll(result);
+			mTitleLayout.setCount(mCollectionList.size());
 			mMultiListView.notifyDataSetChanged();
 		}
 	}

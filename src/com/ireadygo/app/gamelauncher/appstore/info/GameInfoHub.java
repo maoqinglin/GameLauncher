@@ -89,8 +89,28 @@ public class GameInfoHub implements IGameInfo {
 	}
 
 	@Override
-	public int obtainChildrenCount(String parentItemId) throws InfoSourceException {
-		return 0;
+	public int obtainChildrenCount(int type,String id) throws InfoSourceException {
+		if (!NetworkUtils.isNetworkConnected(mContext)) {
+			try {
+				return mMemoryInfo.obtainChildrenCount(type, id);
+			} catch (InfoSourceException e) {
+				throw new InfoSourceException(InfoSourceException.MSG_NETWORK_ERROR);
+			}
+		} else {
+			if (!isCategorysItemCountCachedExpired()) {
+				try {
+					return mMemoryInfo.obtainChildrenCount(type, id);
+				} catch (InfoSourceException e) {
+					int result = mRemoteInfo.obtainChildrenCount(type, id);
+					mMemoryInfo.cachedCategoryItemCount(id, result);
+					return result;
+				}
+			} else {
+				int result = mRemoteInfo.obtainChildrenCount(type, id);
+				mMemoryInfo.cachedCategoryItemCount(id, result);
+				return result;
+			}
+		}
 	}
 
 	@Override
@@ -286,6 +306,10 @@ public class GameInfoHub implements IGameInfo {
 	@Override
 	public int[] getUserSlotNum() throws InfoSourceException {
 		return mRemoteInfo.getUserSlotNum();
+	}
+
+	private boolean isCategorysItemCountCachedExpired() {
+		return (System.currentTimeMillis() - PreferenceUtils.getCategoryItemCountExpiredTime() > GameLauncherConfig.CATEGORY_ITEM_COUNT_CACHED_EXPIRED_TIME);
 	}
 
 	private boolean isCategorysCachedExpired() {

@@ -25,7 +25,8 @@ import com.snail.appstore.openapi.exception.HttpStatusCodeException;
 
 public interface IGameInfo {
 
-	int obtainChildrenCount(String parentItemId) throws InfoSourceException;
+	//获取指定id的合集或分类下游戏的个数
+	int obtainChildrenCount(int type,String id) throws InfoSourceException;
 
 	//获取指定分类的应用列表
 	ArrayList<AppEntity> obtainChildren(int dataType, String id,int page) throws InfoSourceException;

@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.ireadygo.app.gamelauncher.R;
+import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
+import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
+import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryInfo;
 import com.ireadygo.app.gamelauncher.ui.store.category.CategoryItem.CategoryItemHoder;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
@@ -112,6 +116,14 @@ public class CategoryMultiAdapter implements HMultiBaseAdapter {
 		return mCategoryDatas.get(position);
 	}
 
+	public int getAllItemCount() {
+		int sum = 0;
+		for (InternalCategoryInfo info : mCategoryDatas) {
+			sum = sum + info.count;
+		}
+		return sum;
+	}
+
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
@@ -140,7 +152,7 @@ public class CategoryMultiAdapter implements HMultiBaseAdapter {
 			holder.countLayout.setVisibility(View.INVISIBLE);
 		} else {
 			holder.countLayout.setVisibility(View.VISIBLE);
-			holder.count.setText(249 + "");
+			holder.count.setText(""+count);
 		}
 
 		return convertView;
@@ -196,4 +208,5 @@ public class CategoryMultiAdapter implements HMultiBaseAdapter {
 		convertView.setVisibility(View.GONE);
 		return convertView;
 	}
+
 }
