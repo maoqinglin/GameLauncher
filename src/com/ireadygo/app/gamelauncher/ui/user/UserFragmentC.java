@@ -10,20 +10,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.account.AccountManager;
 import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
 import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
+import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
 import com.ireadygo.app.gamelauncher.ui.activity.BindAlipayAccountActivity;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
+import com.ireadygo.app.gamelauncher.ui.item.BaseAdapterItem;
+import com.ireadygo.app.gamelauncher.ui.item.ImageItem;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
+import com.ireadygo.app.gamelauncher.ui.redirect.Anchor;
+import com.ireadygo.app.gamelauncher.ui.redirect.Anchor.Destination;
 
 public class UserFragmentC extends BaseContentFragment {
 
 	private TextView mAccount;
 	private TextView mAlipayAccountState;
+	private ImageItem mUserCenter,mNotice,mRecharge;
+	private BaseAdapterItem mSelectedItem;
 
 	public UserFragmentC(Activity activity, BaseMenuFragment menuFragment) {
 		super(activity, menuFragment);
@@ -42,6 +51,17 @@ public class UserFragmentC extends BaseContentFragment {
 		mAccount = (TextView)view.findViewById(R.id.account);
 		mAlipayAccountState = (TextView)view.findViewById(R.id.alipay_account_state);
 		mAlipayAccountState.setOnClickListener(mOnClickListener);
+		mUserCenter = (ImageItem)view.findViewById(R.id.user_center_layout);
+		mNotice = (ImageItem)view.findViewById(R.id.user_notice_layout);
+		mRecharge = (ImageItem)view.findViewById(R.id.user_recharge_layout);
+		
+		mUserCenter.setOnClickListener(mOnClickListener);
+		mNotice.setOnClickListener(mOnClickListener);
+		mRecharge.setOnClickListener(mOnClickListener);
+		mUserCenter.setOnFocusChangeListener(mOnFocusChangeListener);
+		mNotice.setOnFocusChangeListener(mOnFocusChangeListener);
+		mRecharge.setOnFocusChangeListener(mOnFocusChangeListener);
+
 		initData();
 	}
 
@@ -110,15 +130,36 @@ public class UserFragmentC extends BaseContentFragment {
 	private OnClickListener mOnClickListener = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
+			Anchor anchor = null;
 			switch (v.getId()) {
 			case R.id.alipay_account_state:
 //				skipToBindAlipayAccount(getRootActivity());
 				Intent intent = new Intent(getRootActivity(),UserActivity.class);
 				getRootActivity().startActivity(intent);
 				break;
-
+			case R.id.user_center_layout:
+				anchor = new Anchor(Destination.ACCOUNT_PERSONAL);
+				skipToUserUI(anchor);
+				break;
+			case R.id.user_notice_layout:
+				anchor = new Anchor(Destination.ACCOUNT_NOTICE);
+				skipToUserUI(anchor);
+				break;
+			case R.id.user_recharge_layout:
+				anchor = new Anchor(Destination.ACCOUNT_RECHARGE);
+				skipToUserUI(anchor);
+				break;
 			default:
 				break;
+			}
+		}
+
+		private void skipToUserUI(Anchor anchor) {
+			if (anchor != null) {
+				Intent intent = anchor.getIntent();
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+				getRootActivity().startActivity(intent);
+				SoundPoolManager.instance(getRootActivity()).play(SoundPoolManager.SOUND_ENTER);
 			}
 		}
 	};
@@ -129,6 +170,40 @@ public class UserFragmentC extends BaseContentFragment {
 		context.startActivity(intent);
 	}
 
+	private OnFocusChangeListener mOnFocusChangeListener = new OnFocusChangeListener() {
 
+		@Override
+		public void onFocusChange(View v, boolean hasFocus) {
+			if (hasFocus) {
+				if (mSelectedItem != null) {
+					animatorToUnselected(mSelectedItem);
+					mSelectedItem = null;
+				}
+				View selectedView = v;
+				if(selectedView != null && selectedView instanceof BaseAdapterItem){
+					mSelectedItem = (BaseAdapterItem) selectedView;
+					animatorToSelected(mSelectedItem);
+				}
+				if(v.isInTouchMode()){
+					v.performClick();
+				}
+			} else {
+				if (!v.isInTouchMode()) {
+					if (mSelectedItem != null) {
+						animatorToUnselected(mSelectedItem);
+						mSelectedItem = null;
+					}
+				}
+			}
+		}
+	};
+
+	private void animatorToSelected(BaseAdapterItem item) {
+		item.toSelected(null);
+	}
+
+	private void animatorToUnselected(BaseAdapterItem item) {
+		item.toUnselected(null);
+	}
 
 }

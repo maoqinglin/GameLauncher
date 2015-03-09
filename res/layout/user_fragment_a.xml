@@ -83,101 +83,10 @@
             android:textSize="@dimen/user_text_size" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/user_option_margin_top"
-        android:orientation="horizontal" >
-
-        <FrameLayout
-            android:id="@+id/user_center_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/user_option_margin_right"
-            android:focusable="true">
-
-            <ImageView
-                android:id="@+id/user_center_bg"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/corner_settings_item_bg_shape" />
-
-            <ImageView
-                android:id="@+id/user_center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/user_icon_center" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|bottom"
-                android:layout_marginBottom="@dimen/user_option_title_margin_bottom"
-                android:text="@string/user_center"
-                android:textColor="@color/white"
-                android:textSize="@dimen/user_text_size" >
-            </TextView>
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/user_notice_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/user_option_margin_right"
-            android:focusable="true">
-
-            <ImageView
-                android:id="@+id/user_notice_bg"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/corner_settings_item_bg_shape" />
-
-            <ImageView
-                android:id="@+id/user_notice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/user_icon_notice" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|bottom"
-                android:layout_marginBottom="@dimen/user_option_title_margin_bottom"
-                android:text="@string/user_notice"
-                android:textColor="@color/white"
-                android:textSize="@dimen/user_text_size" >
-            </TextView>
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/user_recharge_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/user_option_margin_right"
-            android:focusable="true">
-
-            <ImageView
-                android:id="@+id/user_recharge_bg"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/corner_settings_item_bg_shape" />
-
-            <ImageView
-                android:id="@+id/user_recharge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/user_icon_recharge" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|bottom"
-                android:layout_marginBottom="@dimen/user_option_title_margin_bottom"
-                android:text="@string/user_recharge"
-                android:textColor="@color/white"
-                android:textSize="@dimen/user_text_size" >
-            </TextView>
-        </FrameLayout>
-    </LinearLayout>
+ 	<include
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_marginTop="@dimen/user_option_margin_top"
+     layout="@layout/user_portal" />
 
 </LinearLayout>

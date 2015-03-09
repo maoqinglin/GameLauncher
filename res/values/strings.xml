@@ -191,7 +191,7 @@
 
 
     <!-- 个人 -->
-    <string name="personal_account">Account:%1$s</string>
+    <string name="personal_account_title">Account:</string>
     <string name="personal_account_unlogin">Has not login</string>
     <string name="user_alipay_account_bind"><u>Bind Alipay Account</u></string>
     <string name="user_play_time_title">Play Time of this Month:</string>

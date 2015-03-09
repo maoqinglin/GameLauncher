@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:menuItem="http://schemas.android.com/apk/res/com.ireadygo.app.gamelauncher"
-    android:id="@+id/store_menu"
     android:layout_width="@dimen/menu_width"
     android:layout_height="wrap_content"
     android:clipChildren="false"
@@ -15,7 +14,7 @@
         android:id="@+id/account_menu_personal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:nextFocusDown="@+id/account_menu_notice"
+        android:nextFocusDown="@+id/account_menu_recharge"
         android:nextFocusLeft="@+id/account_menu_personal"
         android:nextFocusRight="@+id/upHList"
         android:nextFocusUp="@+id/account_menu_personal"
@@ -31,6 +30,7 @@
         android:nextFocusLeft="@+id/account_menu_notice"
         android:nextFocusRight="@+id/upHList"
         android:nextFocusUp="@+id/account_menu_personal"
+        android:visibility="gone"
         menuItem:menu_title="@string/account_notice" >
     </com.ireadygo.app.gamelauncher.ui.menu.TextMenu>
 
@@ -42,8 +42,8 @@
         android:nextFocusDown="@+id/account_menu_recharge"
         android:nextFocusLeft="@+id/account_menu_recharge"
         android:nextFocusRight="@+id/upHList"
-        android:nextFocusUp="@+id/account_menu_notice"
-        menuItem:menu_title="@string/account_freecard" >
+        android:nextFocusUp="@+id/account_menu_personal"
+        menuItem:menu_title="@string/account_recharge" >
     </com.ireadygo.app.gamelauncher.ui.menu.TextMenu>
 
 </LinearLayout>

@@ -1,30 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="@dimen/user_content_width"
     android:layout_height="match_parent"
-    android:layout_marginLeft="110dp"
-    android:orientation="vertical"
-    android:weightSum="1" >
+    android:layout_marginLeft="@dimen/user_content_margin_left"
+    android:orientation="vertical" >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="160dp" >
+        android:layout_marginTop="@dimen/user_info_margin_top" >
 
         <ImageView
             android:id="@+id/personal_photo"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:src="@drawable/account_detail_personal_icon" />
+            android:layout_width="@dimen/user_photo_width"
+            android:layout_height="@dimen/user_photo_height"
+            android:background="@drawable/user_photo_bg_selector"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:nextFocusDown="@+id/personal_sex"
+            android:src="@drawable/account_photo_default" />
 
         <TextView
             android:id="@+id/account_title"
             style="@style/TextLabelSmallLight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="@dimen/user_title_margin_left"
             android:layout_toRightOf="@id/personal_photo"
-            android:text="@string/my_pass" />
+            android:text="@string/personal_account_title" />
 
         <TextView
             android:id="@+id/account"
@@ -33,8 +36,8 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@id/account_title"
             android:layout_below="@id/account_title"
-            android:gravity="center_vertical"
-            android:text="123456789" />
+            android:layout_marginTop="@dimen/user_margin_top"
+            android:gravity="center_vertical" />
 
         <TextView
             android:id="@+id/nickname_title"
@@ -48,20 +51,20 @@
         <EditText
             android:id="@+id/personal_nickname"
             style="@style/TextLabelMiddleLight"
-            android:layout_width="480dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/user_edit_width"
+            android:layout_height="@dimen/user_edit_height"
             android:layout_alignBottom="@+id/personal_photo"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="370dp"
+            android:layout_marginTop="@dimen/user_nickname_margin_top"
+            android:background="@drawable/user_edit_bg_selector"
             android:gravity="center_vertical"
-            android:paddingLeft="25dp"
-            android:text="惊讶的锦衣卫" />
+            android:paddingLeft="@dimen/user_nickname_padding_left" />
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp" >
+        android:layout_marginTop="@dimen/user_sex_layout_margin_top" >
 
         <TextView
             android:id="@+id/sex_title"
@@ -73,20 +76,25 @@
         <Spinner
             android:id="@+id/personal_sex"
             style="@style/AccountSpinner"
-            android:layout_width="480dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/user_edit_width"
+            android:layout_height="@dimen/user_edit_height"
             android:layout_alignLeft="@id/sex_title"
             android:layout_below="@id/sex_title"
-            android:gravity="center_vertical" />
+            android:layout_marginTop="@dimen/user_nickname_margin_top"
+            android:background="@drawable/user_edit_bg_selector"
+            android:gravity="center_vertical"
+            android:nextFocusUp="@+id/personal_photo" />
 
         <TextView
             android:id="@+id/personal_modify_pwd"
             style="@style/TextLabelMiddleLight"
-            android:layout_width="480dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/user_btn_width"
+            android:layout_height="@dimen/user_btn_height"
             android:layout_alignBottom="@+id/personal_sex"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="370dp"
+            android:background="@drawable/user_btn_bg_selector"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:gravity="center"
             android:text="@string/personal_modify_password" />
     </RelativeLayout>
@@ -94,23 +102,28 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp" >
+        android:layout_marginTop="@dimen/user_save_layout_margin_top" >
 
         <TextView
             android:id="@+id/personal_save"
             style="@style/TextLabelMiddleLight"
-            android:layout_width="480dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/user_btn_width"
+            android:layout_height="@dimen/user_btn_height"
+            android:background="@drawable/user_btn_bg_selector"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:gravity="center"
             android:text="@string/personal_save" />
 
         <TextView
             android:id="@+id/personal_logout_btn"
             style="@style/TextLabelMiddleLight"
-            android:layout_width="480dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/user_btn_width"
+            android:layout_height="@dimen/user_btn_height"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="370dp"
+            android:background="@drawable/user_btn_bg_selector"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:gravity="center"
             android:text="@string/account_logout" />
     </RelativeLayout>

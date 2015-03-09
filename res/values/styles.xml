@@ -97,7 +97,7 @@
 
     <style name="TextLabelExtraSmallLight" parent="@style/Label">
         <item name="android:textSize">24sp</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/white_first_transparency</item>
     </style>
 
     <style name="TextLabelSmallLight" parent="@style/Label">
@@ -215,7 +215,7 @@
     </style>
 
     <style name="AccountSpinner" parent="@android:style/Widget.Spinner.DropDown">
-        <item name="android:background">@android:color/transparent</item>
+        <item name="android:background">@android:color/white</item>
         <item name="android:popupBackground">@drawable/corner_white_shape</item>
         <item name="android:spinnerMode">dropdown</item>
         <item name="android:dropDownVerticalOffset">10dp</item>

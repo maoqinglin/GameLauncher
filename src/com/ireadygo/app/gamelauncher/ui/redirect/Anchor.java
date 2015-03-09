@@ -10,6 +10,7 @@ import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
 import com.ireadygo.app.gamelauncher.ui.store.StoreActivity;
 import com.ireadygo.app.gamelauncher.ui.store.category.CategoryDetailActivity;
 import com.ireadygo.app.gamelauncher.ui.store.collection.CollectionDetailActivity;
+import com.ireadygo.app.gamelauncher.ui.user.UserActivity;
 
 public class Anchor implements Serializable {
 	public static final String EXTRA_ANCHOR = "EXTRA_ANCHOR";
@@ -54,8 +55,9 @@ public class Anchor implements Serializable {
 		case ACCOUNT_WEALTH:
 		case ACCOUNT_FREECARD:
 		case ACCOUNT_PERSONAL:
+//		case ACCOUNT_NOTICE:
 		case ACCOUNT_RECHARGE:
-//			clazz = AccountDetailActivity.class;
+			clazz = UserActivity.class;
 			break;
 		default:
 			break;
@@ -65,7 +67,7 @@ public class Anchor implements Serializable {
 
 	public enum Destination {
 		GAME_DETAIL, STORE_RECOMMEND, STORE_CATEGORY, STORE_COLLECTION, STORE_SEARCH, STORE_FAVORITE_APPS, STORE_GAME_MANAGE, //
-		STORE_SETTINGS, COLLECTION_DETAIL, CATEGORY_DETAIL, ACCOUNT_WEALTH, ACCOUNT_PERSONAL, ACCOUNT_RECHARGE, ACCOUNT_FREECARD
+		STORE_SETTINGS, COLLECTION_DETAIL, CATEGORY_DETAIL, ACCOUNT_WEALTH, ACCOUNT_PERSONAL, ACCOUNT_NOTICE, ACCOUNT_RECHARGE, ACCOUNT_FREECARD
 	}
 
 	public String getArgs1() {

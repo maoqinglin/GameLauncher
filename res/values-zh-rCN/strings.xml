@@ -190,6 +190,7 @@
 
 
     <!-- 个人 -->
+    <string name="personal_account_title">账号:</string>
     <string name="personal_account">我的账号：%1$s</string>
     <string name="personal_account_unlogin">未登录</string>
     <string name="user_alipay_account_bind"><u>绑定支付宝</u></string>
@@ -303,14 +304,13 @@
     <string name="recharge_arm_ticket_recharged_tip">已充值%1$d个卡槽，有效时长：%2$d天</string>
     <string name="recharge_arm_ticket_recharged_tip_permanent">已充值%1$d个卡槽，有效时长：永久</string>
     <string name="recharge_arm_ticket_purpose_title">卡槽礼券可用于：在“我的应用”桌面上，增加更多第三方应用</string>
-    <string name="recharge_arm_ticket_recharge_title">卡槽礼券充值</string>
+    <string name="recharge_arm_ticket_recharge_title">礼券充值</string>
     <string name="recharge_account_traiff_recharge">资费充值</string>
-    <string name="my_pass">我的通行证：</string>
-    <string name="snail_point">游戏点券</string>
+    <string name="snail_point">蜗牛点券</string>
 
     <string-array name="recharge_ticket_types">
-        <item>游戏礼券</item>
-        <item>蜗牛礼券</item>
+        <item>蜗牛点券</item>
+        <item>兔兔礼券</item>
     </string-array>
 
     <!-- 免账号-登录/注册/一键登录 -->

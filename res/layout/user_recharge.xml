@@ -2,13 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="110dp"
+    android:layout_marginLeft="@dimen/user_content_margin_left"
     android:orientation="vertical" >
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/user_content_width"
         android:layout_height="wrap_content"
-        android:layout_marginTop="160dp" >
+        android:layout_marginTop="@dimen/user_recharge_margin_top" >
 
         <TextView
             android:id="@+id/balance_title"
@@ -23,8 +23,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/balance_title"
-            android:layout_marginTop="30dp"
-            android:text="200"
+            android:layout_marginTop="@dimen/user_recharge_rabbit_currency_margin_top"
+            android:text="0"
             android:textStyle="bold" />
 
         <TextView
@@ -41,9 +41,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/rabbit_currency"
-            android:layout_marginLeft="100dp"
+            android:layout_marginLeft="@dimen/user_recharge_snail_point_margin_left"
             android:layout_toRightOf="@id/rabbit_currency"
-            android:text="1800"
+            android:text="0"
             android:textStyle="bold" />
 
         <TextView
@@ -58,25 +58,26 @@
         <TextView
             android:id="@+id/rabbit_recharge"
             style="@style/TextLabelMiddleLight"
-            android:layout_width="480dp"
-            android:layout_height="106dp"
+            android:layout_width="@dimen/user_recharge_rabbit_recharge_width"
+            android:layout_height="@dimen/user_recharge_rabbit_recharge_height"
             android:layout_alignBottom="@id/snail_point_title"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="464dp"
-            android:background="@drawable/corner_orange_shape"
+            android:background="@drawable/user_btn_bg_selector"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:gravity="center"
             android:text="@string/recharge_rubbit_recharge" />
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginBottom="60dp"
-        android:layout_marginTop="60dp"
+        android:layout_height="@dimen/user_recharge_line_height"
+        android:layout_marginBottom="@dimen/user_recharge_line_margin_bottom"
+        android:layout_marginTop="@dimen/user_recharge_line_margin_top"
         android:background="@color/white" />
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/user_content_width"
         android:layout_height="wrap_content" >
 
         <TextView
@@ -89,35 +90,39 @@
         <Spinner
             android:id="@+id/snail_point_select"
             style="@style/AccountSpinner"
-            android:layout_width="580dp"
-            android:layout_height="106dp"
+            android:layout_width="@dimen/user_recharge_edit_width"
+            android:layout_height="@dimen/user_recharge_edit_height"
             android:layout_below="@id/gift_certificate_recharge_title"
-            android:layout_marginTop="22dp"
+            android:layout_marginTop="@dimen/user_recharge_snail_point_select_margin_top"
+            android:background="@drawable/user_edit_bg_selector"
             android:entries="@array/recharge_ticket_types"
             android:focusable="true"
-            android:focusableInTouchMode="false"
-            android:gravity="center_vertical"
+            android:focusableInTouchMode="true"
+            android:nextFocusUp="@+id/rabbit_recharge"
+            android:gravity="center"
             android:text="@string/snail_point" />
 
         <com.ireadygo.app.gamelauncher.ui.widget.CustomerEditText
             android:id="@+id/gift_certificate_recharge"
             style="@style/TextLabelMiddleLight"
-            android:layout_width="580dp"
-            android:layout_height="106dp"
+            android:layout_width="@dimen/user_recharge_edit_width"
+            android:layout_height="@dimen/user_recharge_edit_height"
             android:layout_below="@id/snail_point_select"
-            android:layout_marginTop="36dp"
-            android:background="@drawable/custom_edittext_bg_selector"
-            android:text="12345679" />
+            android:layout_marginTop="@dimen/user_recharge_gift_certificate_recharge_margin_top"
+            android:background="@drawable/user_edit_bg_selector"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
 
         <TextView
             android:id="@+id/gift_certificate_recharge_btn"
             style="@style/TextLabelMiddleLight"
-            android:layout_width="480dp"
-            android:layout_height="106dp"
+            android:layout_width="@dimen/user_recharge_rabbit_recharge_width"
+            android:layout_height="@dimen/user_recharge_rabbit_recharge_height"
             android:layout_alignBottom="@id/gift_certificate_recharge"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="464dp"
-            android:background="@drawable/corner_orange_shape"
+            android:background="@drawable/user_btn_bg_selector"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:gravity="center"
             android:text="@string/recharge_ticket_recharge" />
     </RelativeLayout>

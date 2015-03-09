@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.ireadygo.app.gamelauncher"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:orientation="horizontal" >
+
+    <com.ireadygo.app.gamelauncher.ui.item.ImageItemSmall
+        android:id="@+id/user_center_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/user_option_margin_right"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:nextFocusDown="@+id/user_center_layout"
+        android:nextFocusLeft="@+id/menu_account"
+        app:item_icon="@drawable/user_icon_center"
+        app:item_title="@string/user_center" />
+
+    <com.ireadygo.app.gamelauncher.ui.item.ImageItemSmall
+        android:id="@+id/user_notice_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/user_option_margin_right"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:nextFocusDown="@+id/user_notice_layout"
+        android:visibility="gone"
+        app:item_icon="@drawable/user_icon_notice"
+        app:item_title="@string/user_notice" />
+
+    <com.ireadygo.app.gamelauncher.ui.item.ImageItemSmall
+        android:id="@+id/user_recharge_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/user_option_margin_right"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:nextFocusDown="@+id/user_recharge_layout"
+        app:item_icon="@drawable/user_icon_recharge"
+        app:item_title="@string/user_recharge" />
+
+</LinearLayout>

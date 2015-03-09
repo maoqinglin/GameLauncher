@@ -7,6 +7,9 @@ import java.util.List;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnDismissListener;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
@@ -44,15 +47,21 @@ import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
 import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserHeaderImgItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserInfoItem;
+import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
 import com.ireadygo.app.gamelauncher.ui.SnailKeyCode;
+import com.ireadygo.app.gamelauncher.ui.account.OneKeyLoginActivity;
+import com.ireadygo.app.gamelauncher.ui.activity.BaseAccountActivity;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
+import com.ireadygo.app.gamelauncher.ui.guide.GuideRegisterOrLoginActivity;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
+import com.ireadygo.app.gamelauncher.ui.widget.ConfirmDialog;
 import com.ireadygo.app.gamelauncher.utils.NetworkUtils;
 import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
 import com.ireadygo.app.gamelauncher.utils.Utils;
 
 public class UserPersonalFragment extends BaseContentFragment implements OnClickListener, OnFocusChangeListener {
 
+	public static final String ACTION_ACCOUNT_LOGOUT = "com.ireadygo.app.gamelauncher.ACTION_ACCOUNT_LOGOUT";
 	private static final int SAVE_SUCCESS = 1;
 	private static final int SAVE_FAILED = 2;
 	private static final int IMAGE_LOAD_SUCCESS = 3;// 加载完成一张图片
@@ -71,6 +80,7 @@ public class UserPersonalFragment extends BaseContentFragment implements OnClick
 	private GridView photoGrid;
 	private PhotoAdapter mPhotoAdapter;
 	private List<UserHeaderImgItem> mUserPhotoLists = new ArrayList<UserHeaderImgItem>();
+	private boolean mShouldRequestOnDismiss = true;
 
 	public UserPersonalFragment(Activity activity, BaseMenuFragment menuFragment) {
 		super(activity, menuFragment);
@@ -93,6 +103,18 @@ public class UserPersonalFragment extends BaseContentFragment implements OnClick
 		mNicknameView = (EditText) view.findViewById(R.id.personal_nickname);
 
 		mSexSpinner = (Spinner) view.findViewById(R.id.personal_sex);
+		mSexSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+				mSexSpinner.setSelection(position);
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+
+			}
+		});
 
 		mModifyPwdBtn = view.findViewById(R.id.personal_modify_pwd);
 		mModifyPwdBtn.setOnClickListener(this);
@@ -148,21 +170,17 @@ public class UserPersonalFragment extends BaseContentFragment implements OnClick
 			showSystemPhotoListDialog();
 			new GetHeaderImageListThread().start();
 			break;
-		// case R.id.personal_sex_layout:
-		// mSexSpinner.performClick();
-		// break;
-		case R.id.personal_logout_btn:
-			// ((AccountDetailActivity) getRootActivity()).showLogoutDialog();
+		case R.id.personal_sex:
+			mSexSpinner.performClick();
 			break;
 		case R.id.personal_modify_pwd:
 			AccountManager.getInstance().gotoChangePwdPage((Activity) getRootActivity(), true);
 			break;
 		case R.id.personal_save:
-			// UserInfoItem userInfo = new UserInfoItem();
-			// userInfo.setSNickname(mNicknameView.getText().toString().trim());
-			// userInfo.setCAge(String.valueOf(mAgeSpinner.getSelectedItemPosition()));
-			// userInfo.setCSex(getSex());
 			saveUserInfo();
+			break;
+		case R.id.personal_logout_btn:
+			showLogoutDialog();
 			break;
 		default:
 			break;
@@ -277,7 +295,7 @@ public class UserPersonalFragment extends BaseContentFragment implements OnClick
 		mIdView.setText(AccountManager.getInstance().getAccount(getRootActivity()));
 
 		// 性别
-		ArrayAdapter<String> sexAdapter = new AgeAdapter(getRootActivity(), R.layout.account_age_item,
+		ArrayAdapter<String> sexAdapter = new SexAdapter(getRootActivity(), R.layout.account_age_item,
 				R.id.accountAgeItem, getRootActivity().getResources().getStringArray(R.array.personal_sex_array));
 		mSexSpinner.setAdapter(sexAdapter);
 		if (userInfo != null) {
@@ -330,12 +348,7 @@ public class UserPersonalFragment extends BaseContentFragment implements OnClick
 			final String sex = getSex();
 			final String url = (String) mPhotoView.getTag();
 			final String phone = "";
-			String birthdayTmp = "";
-			if (mUserInfoItem.getDBirthday() != null) {
-				SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
-				birthdayTmp = format.format(mUserInfoItem.getDBirthday());
-			}
-			final String birthday = birthdayTmp;
+			final String birthday = "";
 			new Thread() {
 				public void run() {
 					try {
@@ -406,14 +419,14 @@ public class UserPersonalFragment extends BaseContentFragment implements OnClick
 		}
 	}
 
-	private class AgeAdapter extends ArrayAdapter<String> {
+	private class SexAdapter extends ArrayAdapter<String> {
 		private Spinner mSpinner;
 
-		public AgeAdapter(Context context, int resource, int textViewResourceId) {
+		public SexAdapter(Context context, int resource, int textViewResourceId) {
 			super(context, resource, textViewResourceId);
 		}
 
-		public AgeAdapter(Context context, int resource, int textViewResourceId, String[] objects) {
+		public SexAdapter(Context context, int resource, int textViewResourceId, String[] objects) {
 			super(context, resource, textViewResourceId, objects);
 		}
 
@@ -499,4 +512,48 @@ public class UserPersonalFragment extends BaseContentFragment implements OnClick
 		}
 	}
 
+	public void showLogoutDialog() {
+		final ConfirmDialog dialog = new ConfirmDialog(getRootActivity());
+		dialog.setPrompt(R.string.personal_logout_confirm_prompt).setMsg(R.string.personal_logout_confirm_msg)
+				.setConfirmClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						AccountManager.getInstance().logout(getRootActivity());
+						GameLauncherApplication.getApplication().setUserInfoItem(null);
+						sendLogoutBroadcast();
+						mShouldRequestOnDismiss = false;
+						dialog.dismiss();
+						Intent intent = new Intent(getRootActivity(), GuideRegisterOrLoginActivity.class);
+						intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//						intent.putExtra(GuideRegisterOrLoginActivity.START_FLAG,
+//								BaseAccountActivity.FLAG_START_BY_ACCOUNT_DETAIL);
+						SoundPoolManager.instance(getRootActivity()).play(SoundPoolManager.SOUND_ENTER);
+						getRootActivity().startActivity(intent);
+					}
+				});
+		dialog.setOnDismissListener(new OnDismissListener() {
+
+			@Override
+			public void onDismiss(DialogInterface dialog) {
+				if (mShouldRequestOnDismiss) {
+					// mFreecardMenu.requestFocus();
+				} else {
+					mShouldRequestOnDismiss = true;
+				}
+			}
+		});
+		//设置对话框大小
+		Window win = dialog.getWindow();
+		WindowManager.LayoutParams p = win.getAttributes();//获取对话框当前的参数值  
+		p.height = getResources().getDimensionPixelSize(R.dimen.confirm_dialog_height);
+		p.width = getResources().getDimensionPixelSize(R.dimen.confirm_dialog_width);
+		win.setAttributes(p);
+		dialog.show();
+	}
+
+	private void sendLogoutBroadcast() {
+		Intent intent = new Intent(ACTION_ACCOUNT_LOGOUT);
+		getRootActivity().sendBroadcast(intent);
+	}
 }

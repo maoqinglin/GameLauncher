@@ -6,13 +6,37 @@ import android.os.Bundle;
 
 import com.ireadygo.app.gamelauncher.ui.base.BaseMenuActivity;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
+import com.ireadygo.app.gamelauncher.ui.redirect.Anchor;
+import com.ireadygo.app.gamelauncher.ui.redirect.Anchor.Destination;
 
 public class UserActivity extends BaseMenuActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		int position = getIntent().getIntExtra(EXTRA_FOCUS_POSITION, 0);
-		getMenuFragment().requestFocusByPosition(position);
+		requestMenuFocusByIntent(getIntent());
+	}
+
+	private void requestMenuFocusByIntent(Intent intent) {
+		if (intent == null) {
+			return;
+		}
+		Anchor anchor = (Anchor) intent.getSerializableExtra(Anchor.EXTRA_ANCHOR);
+		if (anchor != null) {
+			Destination destination = anchor.getDestination();
+			int position = 0;
+			switch (destination) {
+			case ACCOUNT_PERSONAL:
+				position = 0;
+				break;
+//			case ACCOUNT_NOTICE:
+//				position = 1;
+//				break;
+			case ACCOUNT_RECHARGE:
+				position = 1;
+				break;
+			}
+			getMenuFragment().requestFocusByPosition(position);
+		}
 	}
 
 	@Override

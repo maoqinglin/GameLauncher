@@ -22,11 +22,11 @@ public class UserMenuFragment extends BaseMenuFragment {
 	public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.account_menu_fragment, container, false);
 		MenuItem personalCenterMenu = (MenuItem) view.findViewById(R.id.account_menu_personal);
-		MenuItem noticeMenu = (MenuItem) view.findViewById(R.id.account_menu_notice);
+//		MenuItem noticeMenu = (MenuItem) view.findViewById(R.id.account_menu_notice);
 		MenuItem rechargeMenu = (MenuItem) view.findViewById(R.id.account_menu_recharge);
 
 		addMenuItem(personalCenterMenu, new UserPersonalFragment(getRootActivity(), this));
-		addMenuItem(noticeMenu, new UserNoticeFragment(getRootActivity(), this));
+//		addMenuItem(noticeMenu, new UserNoticeFragment(getRootActivity(), this));
 		addMenuItem(rechargeMenu, new UserRechargeFragment(getRootActivity(), this));
 		return view;
 	}

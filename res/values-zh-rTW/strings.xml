@@ -187,6 +187,7 @@
 
 
     <!-- 個人 -->
+    <string name="personal_account_title">賬號：</string>
     <string name="personal_account">我的賬號：%1$s</string>
     <string name="personal_account_unlogin">未登錄</string>
     <string name="user_alipay_account_bind"><u>綁定支付寶</u></string>
