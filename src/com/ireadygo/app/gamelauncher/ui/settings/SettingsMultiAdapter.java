@@ -41,8 +41,7 @@ public class SettingsMultiAdapter implements HMultiBaseAdapter {
 		SettingsInfo info = mDataList.get(position);
 		holder.icon.setImageDrawable(info.getItemIcon());
 		holder.name.setText(info.getItemName());
-		convertView.setTag(holder);
-		
+		convertView.setTag(info);
 		return convertView;
 	}
 

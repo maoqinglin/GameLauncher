@@ -6,8 +6,10 @@ import java.util.List;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceActivity;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
@@ -29,6 +31,7 @@ import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 public class SettingsFragment extends BaseContentFragment {
 
 	private static final String TAG = "SettingsFragment";
+	private static final String FLAG_ETHERNET = "ETHERNET";
 	protected HMultiListView mHMultiListView;
 
 	protected boolean mIsAttach;
@@ -129,6 +132,10 @@ public class SettingsFragment extends BaseContentFragment {
 							setWallPaper();
 							return;
 						}
+						if (FLAG_ETHERNET.equals(action)) {
+//							setEthernet(getRootActivity());
+							return;
+						}
 						try {
 							Utilities.startActivitySafely(view, new Intent(action), null);
 						} catch (ActivityNotFoundException e) {
@@ -148,15 +155,15 @@ public class SettingsFragment extends BaseContentFragment {
 		public static final String SETTINGS = Settings.ACTION_SETTINGS;
 		public static final String WALL_PAPER = Intent.ACTION_SET_WALLPAPER;
 		public static final String HANDLE = "com.ireadygo.app.devicemanager.ui.HandlesBattery";
-		public static final String HDMI = "";
-		public static final String ABOUT = "";
+		public static final String HDMI = "android.settings.HDMI_SETTINGS";
+		public static final String ABOUT = Settings.ACTION_DEVICE_INFO_SETTINGS;
 		public static final String BRIGHTNESS = "";
 		public static final String TIME = Settings.ACTION_DATE_SETTINGS;
-		public static final String KEYBOARD = "";
+		public static final String KEYBOARD = Settings.ACTION_INPUT_METHOD_SETTINGS;
 		public static final String RESET = "";
-		public static final String DISPLAY = "";
-		public static final String WX = "";
-		public static final String NETWORK = "";
+		public static final String DISPLAY = "com.nvidia.settings.MIRACAST_SETTINGS";
+		public static final String WX = SETTINGS;
+		public static final String NETWORK = FLAG_ETHERNET;
 		public static final String AP = "";
 		public static final String BLUTOOTH = Settings.ACTION_BLUETOOTH_SETTINGS;
 	}
@@ -170,14 +177,13 @@ public class SettingsFragment extends BaseContentFragment {
 	public boolean onSunKey() {
 		View selectedView = mHMultiListView.getSelectedView();
 		if (selectedView != null) {
-			SettingsItemHoder holder = (SettingsItemHoder) selectedView.getTag();
-//			SettingsInfo settingsItemEntity = holder.;
-//			if (settingsItemEntity != null) {
-//				String action = settingsItemEntity.getIntentAction();
-//				if (!TextUtils.isEmpty(action)) {
-//					Utilities.startActivitySafely(selectedView, new Intent(action), null);
-//				}
-//			}
+			SettingsInfo info = (SettingsInfo) selectedView.getTag();
+			if (info != null) {
+				String action = info.getIntentAction();
+				if (!TextUtils.isEmpty(action)) {
+					Utilities.startActivitySafely(selectedView, new Intent(action), null);
+				}
+			}
 		}
 		return true;
 	}
@@ -197,5 +203,17 @@ public class SettingsFragment extends BaseContentFragment {
 		final Intent pickWallpaper = new Intent(Intent.ACTION_SET_WALLPAPER);
 		Intent chooser = Intent.createChooser(pickWallpaper, "chooser_wallpaper");
 		mActivity.startActivity(chooser);
+	}
+
+	private void setEthernet(Context context) {
+		Intent intent = new Intent();
+		intent.setClassName("com.android.settings", "com.android.settings.SubSettings");
+		intent.setAction(Intent.ACTION_MAIN);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		intent.putExtra(PreferenceActivity.EXTRA_SHOW_FRAGMENT, "com.android.settings.ethernet.EthernetSettings");
+		try {
+			context.startActivity(intent);;
+		} catch (ActivityNotFoundException e) {
+		}
 	}
 }
