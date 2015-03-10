@@ -3,16 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/tips_height"
     android:layout_marginLeft="@dimen/content_padding_left_default"
-    android:clipChildren="false"
-    android:paddingTop="@dimen/tips_layout_padding_top" >
+    android:layout_marginRight="@dimen/tips_shortcut_margin"
+    android:clipChildren="false" >
 
     <LinearLayout
         android:id="@+id/ll_tips_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:gravity="left|center_vertical"
+        android:gravity="left"
         android:orientation="horizontal" >
 
         <TextView
@@ -41,15 +40,15 @@
         android:id="@+id/paging_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/tips_indicator_margin_bottom" />
 
     <LinearLayout
         android:id="@+id/ll_tips_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/tips_shortcut_margin"
         android:gravity="right|center_vertical"
         android:orientation="horizontal" >
 

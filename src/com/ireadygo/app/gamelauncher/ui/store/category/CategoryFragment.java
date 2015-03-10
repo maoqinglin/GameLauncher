@@ -47,7 +47,6 @@ public class CategoryFragment extends BaseContentFragment {
 		mAllItemCount = 0;
 		mTitleLayout = (StatisticsTitleView) view.findViewById(R.id.title_layout);
 		mTitleLayout.setCount(mAllItemCount);
-		mTitleLayout.setTitle("商店内游戏数量");
 		mMultiListView = (HMultiListView) view.findViewById(R.id.category_list);
 		mAdapter = new CategoryMultiAdapter(getRootActivity(), mMultiListView);
 		mMultiListView.setAdapter(mAdapter);

@@ -2,7 +2,7 @@
 <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/menu_image"
     android:layout_width="@dimen/menu_image_width"
-    android:layout_height="@dimen/menu_image_width" >
-    
+    android:layout_height="@dimen/menu_image_width"
+    android:layout_gravity="center" >
 
 </ImageView>

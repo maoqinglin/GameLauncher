@@ -10,19 +10,16 @@
         android:id="@+id/title_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:stat_title="@string/store_title_prompt"
         android:paddingLeft="@dimen/content_fragment_padding_left" >
     </com.ireadygo.app.gamelauncher.ui.widget.StatisticsTitleView>
 
     <com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView
         android:id="@+id/store_list"
+        style="@style/MultiListNormal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:nextFocusLeft="@+id/menu_store"
-        app:hlv_horizontal_spacing="@dimen/common_list_item_divder_width"
-        app:hlv_vertical_spacing="@dimen/common_list_vertical_space"
-        app:padding_left="@dimen/content_fragment_padding_left"
-        app:padding_right="@dimen/content_fragment_list_padding_right"
-        app:padding_top="@dimen/content_fragment_list_padding_top" >
+        android:nextFocusLeft="@+id/menu_store" >
     </com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView>
 
 </LinearLayout>

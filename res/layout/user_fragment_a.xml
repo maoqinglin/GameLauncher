@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res/com.ireadygo.app.gamelauncher"
-    android:layout_width="@dimen/content_fragment_width"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingTop="@dimen/content_fragment_padding_top" >
+    android:paddingLeft="@dimen/content_fragment_padding_left"
+    android:paddingTop="@dimen/user_padding_top" >
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -83,10 +84,10 @@
             android:textSize="@dimen/user_text_size" />
     </LinearLayout>
 
- 	<include
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:layout_marginTop="@dimen/user_option_margin_top"
-     layout="@layout/user_portal" />
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/user_option_margin_top"
+        layout="@layout/user_portal" />
 
 </LinearLayout>

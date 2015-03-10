@@ -14,18 +14,20 @@
     <!-- 主菜单(menu) -->
     <string name="menu_store">游戏商店</string>
     <string name="menu_game">我的游戏</string>
-    <string name="menu_app">应用</string>
-    <string name="menu_settings">设定</string>
+    <string name="menu_app">应&#160;用</string>
+    <string name="menu_settings">设&#160;定</string>
 
     <!-- 我的游戏-推荐下载 -->
     <string name="mygame_recommend_app_download">推荐下载</string>
     <string name="mygame_empty_tip">空空如也，快去免商店转转吧～！</string>
+    <string name="game_title_prompt">已安装游戏</string>
 
     <!-- 推荐下载(game_recommend) -->
 
 
     <!-- 我的应用(app) -->
     <string name="myapp_folder_title_system">系统文件夹</string>
+    <string name="app_title_prompt">已安装应用</string>
 
     <!-- 设置(settings) -->
     <string name="settings_systemupgrade">系统升级</string>
@@ -68,13 +70,14 @@
     <string name="notification_upgrade_little_title">\t个应用可进行更新</string>
 
     <!-- 免商店(store) -->
+    <string name="store_title_prompt">商店内游戏数量</string>
 
 
     <!-- 免商店-选项(store_options) -->
-    <string name="store_menu_search">搜索</string>
-    <string name="store_options_recommend">推荐</string>
-    <string name="store_menu_collection">合集</string>
-    <string name="store_menu_category">分类</string>
+    <string name="store_menu_search">搜&#160;索</string>
+    <string name="store_options_recommend">推&#160;荐</string>
+    <string name="store_menu_collection">合&#160;集</string>
+    <string name="store_menu_category">分&#160;类</string>
     <string name="store_menu_app">常用应用</string>
     <string name="store_menu_manager">游戏管理</string>
     <string name="store_options_settings">商店设置</string>
@@ -110,8 +113,8 @@
     <string name="category_intro_pzl">斗地主/棋类/麻将/桌游/德州扑克/纸牌</string>
 
     <!-- 免商店-合集(collection) -->
-    <string name="collection_prompt">商店内合集数量</string>
-    <string name="collection_detail_prompt">合集内游戏数量</string>
+    <string name="collection_title_prompt">商店内合集数量</string>
+    <string name="collection_detail_title_prompt">合集内游戏数量</string>
 
     <!-- 免商店-合集/分类-游戏列表(collection_detail) -->
 

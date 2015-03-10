@@ -17,15 +17,17 @@
     <string name="menu_app">應用</string>
     <string name="menu_settings">設定</string>
 
-    <!-- 我的遊戲-推薦下載 -->
+    <!-- 我的遊戲 -->
     <string name="mygame_recommend_app_download">推薦下載</string>
     <string name="mygame_empty_tip">空空如也，快去免商店轉轉吧～！</string>
+    <string name="game_title_prompt">已安裝遊戲</string>
 
     <!-- 推薦下載(game_recommend) -->
 
 
     <!-- 我的應用(app) -->
     <string name="myapp_folder_title_system">系統檔夾</string>
+    <string name="app_title_prompt">已安裝應用</string>
 
     <!-- 設置(settings) -->
     <string name="settings_systemupgrade">系統升級</string>
@@ -65,6 +67,7 @@
     <string name="notification_upgrade_little_title">\t個應用可進行更新</string>
 
     <!-- 免商店(store) -->
+    <string name="store_title_prompt">商店內遊戲數量</string>
 
 
     <!-- 免商店-選項(store_options) -->
@@ -107,8 +110,8 @@
     <string name="category_intro_pzl">鬥地主/棋類/麻將/桌遊/德州撲克/紙牌</string>
 
     <!-- 免商店-合集(collection) -->
-    <string name="collection_prompt">商店內合集數量</string>
-    <string name="collection_detail_prompt">合集內遊戲數量</string>
+    <string name="collection_title_prompt">商店內合集數量</string>
+    <string name="collection_detail_title_prompt">合集內遊戲數量</string>
 
     <!-- 免商店-合集/分類-遊戲列表(collection_detail) -->
 

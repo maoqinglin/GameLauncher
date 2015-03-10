@@ -56,6 +56,7 @@ public class SettingsItem extends BaseAdapterItem {
 		}
 		mHolder.background.setImageResource(R.drawable.settings_item_bg_shape);
 		mSelectedAnimator = createAnimator(listener, 0.25f, 1.15f, 1.15f, 1.23f, 1.0f, Config.SettingsIcon.TITLE_SLEECTED_TRANSLATE_Y);
+		mSelectedAnimator.setDuration(300);
 		mSelectedAnimator.start();
 	}
 
@@ -66,6 +67,7 @@ public class SettingsItem extends BaseAdapterItem {
 		}
 		mHolder.background.setImageResource(R.drawable.corner_settings_item_bg_shape);
 		mUnselectedAnimator = createAnimator(listener, 0.25f, 1, 1, 1, 0.8f, Config.SettingsIcon.TITLE_UNSLEECTED_TRANSLATE_Y);
+		mUnselectedAnimator.setDuration(150);
 		mUnselectedAnimator.start();
 	}
 

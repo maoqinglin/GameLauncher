@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/mygame_root"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/content_fragment_height"
-    android:clipChildren="false" >
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/content_fragment_padding_top" >
 
     <com.ireadygo.app.gamelauncher.ui.widget.StatisticsTitleView
         android:id="@+id/statistics_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:stat_title="游戏个数" />
+        android:paddingLeft="@dimen/content_fragment_padding_left"
+        app:stat_title="@string/app_title_prompt" />
 
     <com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView
         android:id="@+id/mutillist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/MultiListNormal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@+id/statistics_view"
-        android:layout_marginTop="@dimen/mygame_mhlv_margin_top"
-        app:hlv_horizontal_spacing="@dimen/mygame_mhlv_horizontal_spacing"
-        app:hlv_vertical_spacing="@dimen/mygame_mhlv_vertical_spacing" >
+        android:nextFocusLeft="@+id/menu_app" >
     </com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView>
 
 </RelativeLayout>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/mygame_root"
     android:layout_width="match_parent"
     android:layout_height="@dimen/content_fragment_height" xmlns:app1="http://schemas.android.com/apk/res/com.ireadygo.app.gamelauncher">
 

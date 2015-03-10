@@ -20,12 +20,14 @@
     <!-- 我的游戏-推荐下载 -->
     <string name="mygame_recommend_app_download">Recommend</string>
     <string name="mygame_empty_tip">There is no games! Go to find one in Free-Store</string>
+    <string name="game_title_prompt">已安装游戏</string>
 
     <!-- 推荐下载(game_recommend) -->
 
 
     <!-- 我的应用(app) -->
     <string name="myapp_folder_title_system">System</string>
+    <string name="app_title_prompt">已安装应用</string>
 
     <!-- 设置(settings) -->
     <string name="settings_systemupgrade">Upgrade</string>
@@ -69,6 +71,7 @@
     <string name="notification_upgrade_little_title">\tapps have new version to be upgraded</string>
 
     <!-- 免商店(store) -->
+    <string name="store_title_prompt">商店内游戏数量</string>
 
 
     <!-- 免商店-选项(store_options) -->
@@ -111,8 +114,8 @@
     <string name="category_intro_pzl">Dou Di Zhu/Chess/Mahjong/BRPG/Dezhou Poker/Card</string>
 
     <!-- 免商店-合集(collection) -->
-    <string name="collection_prompt">商店内合集数量</string>
-    <string name="collection_detail_prompt">合集内游戏数量</string>
+    <string name="collection_title_prompt">商店内合集数量</string>
+    <string name="collection_detail_title_prompt">合集内游戏数量</string>
 
     <!-- 免商店-合集/分类-游戏列表(collection_detail) -->
 

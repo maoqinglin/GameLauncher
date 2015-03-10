@@ -1,24 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/mygame_root"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/content_fragment_height" >
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/content_fragment_padding_top" >
 
-    <com.ireadygo.app.gamelauncher.ui.store.StoreEmptyView
-        android:id="@+id/empty"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/mygame_emptyview_margin_bottom"
-        android:visibility="gone" >
-    </com.ireadygo.app.gamelauncher.ui.store.StoreEmptyView>
-
-    <com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView
-        android:id="@+id/mutillist"
+    <com.ireadygo.app.gamelauncher.ui.widget.StatisticsTitleView
+        android:id="@+id/statistics_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:hlv_horizontal_spacing="@dimen/mygame_mhlv_horizontal_spacing"
-        app:hlv_vertical_spacing="@dimen/mygame_mhlv_vertical_spacing" >
-    </com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView>
+        android:paddingLeft="@dimen/content_fragment_padding_left"
+        app:stat_title="@string/game_title_prompt" />
 
-</RelativeLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <com.ireadygo.app.gamelauncher.ui.store.StoreEmptyView
+            android:id="@+id/empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/mygame_emptyview_margin_bottom"
+            android:visibility="gone" >
+        </com.ireadygo.app.gamelauncher.ui.store.StoreEmptyView>
+
+        <com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView
+            android:id="@+id/mutillist"
+            style="@style/MultiListNormal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:nextFocusLeft="@+id/menu_game" >
+        </com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView>
+    </FrameLayout>
+
+</LinearLayout>

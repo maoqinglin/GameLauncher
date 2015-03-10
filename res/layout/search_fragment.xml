@@ -39,6 +39,7 @@
 
     <com.ireadygo.app.gamelauncher.ui.widget.HListView
         android:id="@+id/search_list"
+        style="@style/HListNormal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipChildren="false"
@@ -46,12 +47,7 @@
         android:nextFocusDown="@+id/search_list"
         android:nextFocusLeft="@+id/store_menu_search"
         android:nextFocusRight="@+id/search_list"
-        android:nextFocusUp="@+id/search_edittext"
-        android:paddingLeft="@dimen/content_fragment_padding_left"
-        android:paddingRight="@dimen/content_fragment_list_padding_right"
-        android:paddingTop="@dimen/content_fragment_list_padding_top"
-        android:paddingBottom="@dimen/content_fragment_list_padding_top"
-        app:hlv_dividerWidth="@dimen/search_list_diver_width" >
+        android:nextFocusUp="@+id/search_edittext" >
     </com.ireadygo.app.gamelauncher.ui.widget.HListView>
 
 </LinearLayout>

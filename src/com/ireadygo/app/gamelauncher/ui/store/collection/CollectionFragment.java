@@ -50,12 +50,12 @@ public class CollectionFragment extends BaseContentFragment {
 		super.initView(view);
 		mTitleLayout = (StatisticsTitleView) view.findViewById(R.id.title_layout);
 		mTitleLayout.setCount(mCollectionList.size());
-		mTitleLayout.setTitle(R.string.collection_prompt);
+		mTitleLayout.setTitle(R.string.collection_title_prompt);
 
 		mMultiListView = (HMultiListView) view.findViewById(R.id.collection_list);
-//		for (int i = 0; i < 10; i++) {
-//			mCollectionList.add(null);
-//		}
+		// for (int i = 0; i < 10; i++) {
+		// mCollectionList.add(null);
+		// }
 		mAdapter = new CollectionMultiAdapter(getRootActivity(), mMultiListView, mCollectionList);
 		mMultiListView.setAdapter(mAdapter);
 		mMultiListView.setOnItemClickListener(new OnItemClickListener() {
