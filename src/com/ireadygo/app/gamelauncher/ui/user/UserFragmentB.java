@@ -18,7 +18,7 @@ import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.account.AccountManager;
 import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
 import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
-import com.ireadygo.app.gamelauncher.appstore.info.item.RentReliefItem;
+import com.ireadygo.app.gamelauncher.appstore.info.item.RentReliefInfo;
 import com.ireadygo.app.gamelauncher.ui.activity.BindAlipayAccountActivity;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
@@ -160,9 +160,9 @@ public class UserFragmentB extends BaseContentFragment {
 		}
 	}
 
-	private class LoadPlayTimeTask extends AsyncTask<Void, Void, RentReliefItem> {
+	private class LoadPlayTimeTask extends AsyncTask<Void, Void, RentReliefInfo> {
 		@Override
-		protected RentReliefItem doInBackground(Void... params) {
+		protected RentReliefInfo doInBackground(Void... params) {
 			try {
 				String account = GameInfoHub.instance(getRootActivity()).getSNCorrespondBindAccount(Build.SERIAL);
 				if (!TextUtils.isEmpty(account) && account.equals(AccountManager.getInstance().getAccount(getRootActivity()))) {
@@ -175,7 +175,7 @@ public class UserFragmentB extends BaseContentFragment {
 		}
 
 		@Override
-		protected void onPostExecute(RentReliefItem result) {
+		protected void onPostExecute(RentReliefInfo result) {
 			if (result != null) {
 				int playTime = secondToHour(result.getAppTime());
 				int remainTime = secondToHour(result.getAppRemainTime());

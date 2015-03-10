@@ -18,7 +18,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.FreeFlowStatusItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.KeywordItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.QuotaItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.RechargePhoneItem;
-import com.ireadygo.app.gamelauncher.appstore.info.item.RentReliefItem;
+import com.ireadygo.app.gamelauncher.appstore.info.item.RentReliefInfo;
 import com.ireadygo.app.gamelauncher.appstore.info.item.SlotConfigItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.SubscribeResultItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserHeaderImgItem;
@@ -440,7 +440,7 @@ public class MemoryInfo implements IGameInfo {
 	}
 
 	@Override
-	public RentReliefItem getRentReliefAppTime() throws InfoSourceException {
+	public RentReliefInfo getRentReliefAppTime() throws InfoSourceException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -448,19 +448,6 @@ public class MemoryInfo implements IGameInfo {
 	@Override
 	public AppTimeUploadResultItem saveAppTime(String cPackage, long nAppTime,String cReqId,String sign) throws InfoSourceException {
 		return null;
-	}
-
-	@Override
-	public void renewalBox() throws InfoSourceException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void appPayment(String nAppId, String cAppOrder, String cAppAccuntId, String cGoodId, String sGoodName,
-			Integer iGoodNum, Integer nMoney) throws InfoSourceException {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -512,7 +499,7 @@ public class MemoryInfo implements IGameInfo {
 	}
 
 	@Override
-	public String queryTicketBalance() throws InfoSourceException {
+	public List<AppEntity> getCommonApp() throws InfoSourceException {
 		// TODO Auto-generated method stub
 		return null;
 	}

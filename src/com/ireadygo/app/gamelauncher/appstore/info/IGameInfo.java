@@ -15,7 +15,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.FreeFlowStatusItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.KeywordItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.QuotaItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.RechargePhoneItem;
-import com.ireadygo.app.gamelauncher.appstore.info.item.RentReliefItem;
+import com.ireadygo.app.gamelauncher.appstore.info.item.RentReliefInfo;
 import com.ireadygo.app.gamelauncher.appstore.info.item.SlotConfigItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.SubscribeResultItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserHeaderImgItem;
@@ -148,6 +148,9 @@ public interface IGameInfo {
 	//获取预装列表
 	List<AppEntity> getPreLoadList() throws InfoSourceException;
 
+	//常用应用
+	List<AppEntity> getCommonApp() throws InfoSourceException;
+
 	// 激活OBOX
 	void activateBox(String cSN) throws InfoSourceException;
 
@@ -155,17 +158,10 @@ public interface IGameInfo {
 	List<String> getRentReliefAppList() throws InfoSourceException;
 
 	// 获取游戏时长
-	RentReliefItem getRentReliefAppTime() throws InfoSourceException;
+	RentReliefInfo getRentReliefAppTime() throws InfoSourceException;
 
 	// 设置游戏时长
 	AppTimeUploadResultItem saveAppTime(String cPackage, long nAppTime,String cReqId,String sign) throws InfoSourceException;
-
-	// 续费
-	void renewalBox() throws InfoSourceException;
-
-	// 主机应用支付
-	void appPayment(String nAppId, String cAppOrder, String cAppAccuntId, String cGoodId, String sGoodName,
-			Integer iGoodNum, Integer nMoney) throws InfoSourceException;
 
 	//查询指定SN号对应渠道信息接口
 	String getSaleType(String cSN) throws InfoSourceException;
@@ -190,9 +186,6 @@ public interface IGameInfo {
 
 	//查询已返还月度租金总额的接口
 	String getRebateMoney() throws InfoSourceException;
-
-	//查询蜗牛游戏点券数量的接口
-	String queryTicketBalance() throws InfoSourceException;
 
 	//清除缓存
 	void cleanCached();

@@ -23,7 +23,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.GameState;
 import com.ireadygo.app.gamelauncher.appstore.info.item.KeywordItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.QuotaItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.RechargePhoneItem;
-import com.ireadygo.app.gamelauncher.appstore.info.item.RentReliefItem;
+import com.ireadygo.app.gamelauncher.appstore.info.item.RentReliefInfo;
 import com.ireadygo.app.gamelauncher.appstore.info.item.SlotConfigItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.SubscribeResultItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserHeaderImgItem;
@@ -1574,17 +1574,20 @@ public class RemoteInfo implements IGameInfo {
 	}
 
 	@Override
-	public RentReliefItem getRentReliefAppTime() throws InfoSourceException {
+	public RentReliefInfo getRentReliefAppTime() throws InfoSourceException {
 		try {
 			ResultVO resultVO = mAppPlatFormService.getRentReliefAppTime();
 			
 			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
-				RentReliefItem item = new RentReliefItem();
+				RentReliefInfo item = new RentReliefInfo();
 				if (resultVO.getObj() != null) {
 					RentReliefAppTime rentAppTime = (RentReliefAppTime)resultVO.getObj();
 					item.setAppTime(Long.valueOf(rentAppTime.getNAppTime()));
 					item.setAppRemainTime(Long.valueOf(rentAppTime.getNAppRemainTime()));
 					item.setRenewalMoney(rentAppTime.getCRenewalMoney());
+					item.setTargetTime(Long.valueOf(rentAppTime.getNTargetTime()));
+					item.setExpirationDate(rentAppTime.getCExpirationDate());
+					item.setRemainExpirationMonth(rentAppTime.getIRemainExpirationMonth());
 				}
 				return item;
 			}
@@ -1610,47 +1613,6 @@ public class RemoteInfo implements IGameInfo {
 				uploadResult.setPackageName(cPackage);
 				uploadResult.setResult(AppTimeUploadResultItem.SUCCESS);
 				return uploadResult;
-			}
-			String errMsg = processRemoteResultCode(resultVO.getCode());
-			throw new InfoSourceException(errMsg);
-		} catch (InfoSourceException e) {
-			throw e;
-		} catch (HttpStatusCodeException e) {
-			throw new InfoSourceException(InfoSourceException.MSG_NETWORK_ERROR,e.getCause());
-		} catch (JSONException e) {
-			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_CLIENT_ERROR,e.getCause());
-		} catch (Exception e) {
-			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_ERROR,e.getCause());
-		}
-	}
-
-	@Override
-	public void renewalBox() throws InfoSourceException {
-		try {
-			ResultVO resultVO = mAppPlatFormService.renewalBox();
-			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
-				return;
-			}
-			String errMsg = processRemoteResultCode(resultVO.getCode());
-			throw new InfoSourceException(errMsg);
-		} catch (InfoSourceException e) {
-			throw e;
-		} catch (HttpStatusCodeException e) {
-			throw new InfoSourceException(InfoSourceException.MSG_NETWORK_ERROR,e.getCause());
-		} catch (JSONException e) {
-			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_CLIENT_ERROR,e.getCause());
-		} catch (Exception e) {
-			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_ERROR,e.getCause());
-		}
-	}
-
-	@Override
-	public void appPayment(String nAppId, String cAppOrder, String cAppAccuntId, String cGoodId, String sGoodName,
-			Integer iGoodNum, Integer nMoney) throws InfoSourceException {
-		try {
-			ResultVO resultVO = mAppPlatFormService.appPayment(nAppId, cAppOrder, cAppAccuntId, cGoodId, sGoodName, iGoodNum, nMoney);
-			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
-				return;
 			}
 			String errMsg = processRemoteResultCode(resultVO.getCode());
 			throw new InfoSourceException(errMsg);
@@ -1844,14 +1806,21 @@ public class RemoteInfo implements IGameInfo {
 	}
 
 	@Override
-	public String queryTicketBalance() throws InfoSourceException {
+	public List<AppEntity> getCommonApp() throws InfoSourceException {
+		ResultVO resultVO;
 		try {
-			ResultVO resultVO = mAppPlatFormService.queryTicketBalance();
+			resultVO = mAppPlatFormService.getHotApp();
 			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
-				if (resultVO.getObj() == null) {
-					return null;
+				List<AppEntity> results = new ArrayList<AppEntity>();
+				if (resultVO.getObj() != null) {
+					
+					List<AppListItemVO> appListItemVOs = (List<AppListItemVO>)resultVO.getObj();
+					for (AppListItemVO appListItemVO : appListItemVOs) {
+						AppEntity app = listItemToAppEntity(appListItemVO);
+						results.add(app);
+					}
 				}
-				return (String)resultVO.getObj();
+				return results;
 			}
 			String errMsg = processRemoteResultCode(resultVO.getCode());
 			throw new InfoSourceException(errMsg);
@@ -1865,4 +1834,5 @@ public class RemoteInfo implements IGameInfo {
 			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_ERROR,e.getCause());
 		}
 	}
+
 }
