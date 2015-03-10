@@ -1,17 +1,25 @@
 package com.ireadygo.app.gamelauncher.ui.menu;
 
+import android.animation.Animator;
+import android.animation.Animator.AnimatorListener;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.ireadygo.app.gamelauncher.R;
+import com.ireadygo.app.gamelauncher.helper.AnimatorHelper;
 
 public class ImageMenu extends MenuItem {
 	private Drawable mIconDrawable;
-	private ImageView mImageView;
+	private ImageView mIconView;
+	private ImageView mBackgroundView;
 
 	public ImageMenu(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -36,82 +44,68 @@ public class ImageMenu extends MenuItem {
 
 	private void init(Context context) {
 		LayoutInflater.from(context).inflate(R.layout.menu_image, this, true);
-		mImageView = (ImageView) findViewById(R.id.menu_image);
+		mIconView = (ImageView) findViewById(R.id.menu_image);
+		mBackgroundView = (ImageView) findViewById(R.id.menu_background);
 		if (mIconDrawable != null) {
-			mImageView.setImageDrawable(mIconDrawable);
+			mIconView.setImageDrawable(mIconDrawable);
 		}
 	}
 
 	public ImageView getImageView() {
-		return mImageView;
+		return mIconView;
 	}
 
-	// public void toInit() {
-	// float destAlpha = Config.MenuItem.INIT_ALPHA;
-	// float destScale = Config.MenuItem.INIT_SCALE;
-	// boolean hasBackground = false;
-	// int destTitleY = Config.MenuItem.INIT_TITLE_Y;
-	// doAnimator(null, hasBackground, destAlpha, destScale, destTitleY);
-	// }
-	//
-	// public void toFocusedOnMenuFocused(AnimatorListener listener) {
-	// doAnimator(listener, true, Config.MenuItem.FOCUSED_ALPHA,
-	// Config.MenuItem.FOCUSED_SCALE, Config.MenuItem.FOCUSED_TITLE_Y);
-	// }
-	//
-	// public void toSelectedOnMenuSelected() {
-	// doAnimator(null, false, Config.MenuItem.SELECTED_ALPHA,
-	// Config.MenuItem.SELECTED_SCALE, Config.MenuItem.SELECTED_TITLE_Y);
-	// }
-	//
-	// public void toNoFocusedOnMenuFocused() {
-	// doAnimator(null, false, Config.MenuItem.NO_FOCUSED_ALPHA,
-	// Config.MenuItem.NO_FOCUSED_SCALE, Config.MenuItem.NO_FOCUSED_TITLE_Y);
-	// }
-	//
-	// public void toNoSelectedOnMenuSelected() {
-	// doAnimator(null, false, Config.MenuItem.NO_SELECTED_ALPHA,
-	// Config.MenuItem.NO_SELECTED_SCALE, Config.MenuItem.NO_SELECTED_TITLE_Y);
-	// }
-	//
-	// private void doAnimator(AnimatorListener listener, boolean hasBackground,
-	// float destAlpha, float destScale,
-	// int destTitleY) {
-	// ObjectAnimator animBg;
-	// if (hasBackground) {
-	// setBackground(mBgDrawable);
-	// animBg = ObjectAnimator.ofFloat(mMenuBackground, View.ALPHA, 0, 1);
-	// } else {
-	// animBg = ObjectAnimator.ofFloat(mMenuBackground, View.ALPHA, 1, 0);
-	// animBg.addListener(new AnimatorListenerAdapter() {
-	// @Override
-	// public void onAnimationEnd(Animator animation) {
-	// setBackground(null);
-	// }
-	//
-	// @Override
-	// public void onAnimationCancel(Animator animation) {
-	// setBackground(null);
-	// }
-	// });
-	// }
-	// ObjectAnimator animTitle = ObjectAnimator.ofFloat(mMenuTitle,
-	// View.TRANSLATION_Y, destTitleY);
-	// ObjectAnimator animAlpha = ObjectAnimator.ofFloat(this, View.ALPHA,
-	// getAlpha(), destAlpha);
-	// ObjectAnimator animScaleX = ObjectAnimator.ofFloat(this, View.SCALE_X,
-	// getScaleX(), destScale);
-	// ObjectAnimator animScaleY = ObjectAnimator.ofFloat(this, View.SCALE_Y,
-	// getScaleY(), destScale);
-	// AnimatorSet animatorSet = new AnimatorSet();
-	// animatorSet.playTogether(animBg, animTitle, animAlpha, animScaleX,
-	// animScaleY);
-	// animatorSet.setInterpolator(new AccelerateDecelerateInterpolator());
-	// animatorSet.setDuration(200);
-	// if (listener != null) {
-	// animatorSet.addListener(listener);
-	// }
-	// animatorSet.start();
-	// }
-	//
+	@Override
+	public void toFocused(AnimatorListener listener) {
+		toSelected(listener);
+		super.toFocused(listener);
+	}
+
+	@Override
+	public void toUnfocused(AnimatorListener listener) {
+		toUnselected(listener);
+		super.toUnfocused(listener);
+	}
+	
+	@Override
+	public void toSelected(AnimatorListener listener) {
+		if (mUnselectedAnimator != null && mUnselectedAnimator.isRunning()) {
+			mUnselectedAnimator.cancel();
+		}
+		float iconScale = 1.371f;
+		float bgScaleX = AnimatorHelper.calcBgScaleX(5, getWidth(), iconScale);
+		float bgScaleY = AnimatorHelper.calcBgScaleY(0.5f, 5, getHeight(), getHeight(), iconScale);
+		mSelectedAnimator = createAnimator(listener, iconScale, bgScaleX, bgScaleY);
+		mSelectedAnimator.start();
+	}
+
+	@Override
+	public void toUnselected(AnimatorListener listener) {
+		if (mSelectedAnimator != null && mSelectedAnimator.isRunning()) {
+			mSelectedAnimator.cancel();
+		}
+		mUnselectedAnimator = createAnimator(listener, 1, 1, 1);
+		mUnselectedAnimator.start();
+	}
+
+	private Animator createAnimator(AnimatorListener listener, float iconScale, float bgScaleX, float bgScaleY) {
+		AnimatorSet animatorSet = new AnimatorSet();
+
+		PropertyValuesHolder iconScaleXHolder = PropertyValuesHolder.ofFloat(View.SCALE_X, iconScale);
+		PropertyValuesHolder iconScaleYHolder = PropertyValuesHolder.ofFloat(View.SCALE_Y, iconScale);
+		ObjectAnimator animatorIcon = ObjectAnimator.ofPropertyValuesHolder(mIconView, iconScaleXHolder,
+				iconScaleYHolder);
+
+		PropertyValuesHolder bgScaleXHolder = PropertyValuesHolder.ofFloat(View.SCALE_X, bgScaleX);
+		PropertyValuesHolder bgScaleYHolder = PropertyValuesHolder.ofFloat(View.SCALE_Y, bgScaleY);
+		ObjectAnimator animatorBg = ObjectAnimator.ofPropertyValuesHolder(mBackgroundView, bgScaleXHolder,
+				bgScaleYHolder);
+
+		animatorSet.playTogether(animatorIcon, animatorBg);
+		animatorSet.setDuration(200);
+		if (listener != null) {
+			animatorSet.addListener(listener);
+		}
+		return animatorSet;
+	}
 }

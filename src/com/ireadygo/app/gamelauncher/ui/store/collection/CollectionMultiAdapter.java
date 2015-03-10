@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView.ScaleType;
 
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.info.item.CollectionInfo;
@@ -52,6 +53,7 @@ public class CollectionMultiAdapter implements HMultiBaseAdapter {
 //		if (TextUtils.isEmpty(iconUrl)) {
 //			iconUrl = app.getIconUrl();
 //		}
+		holder.icon.setScaleType(ScaleType.FIT_XY);
 		String iconUrl = app.getIconUrl();
 		ImageLoader.getInstance().displayImage(iconUrl, holder.icon);
 		return convertView;

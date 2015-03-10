@@ -54,12 +54,16 @@ public class TextMenu extends MenuItem {
 	}
 
 	@Override
+	public void toSelected(AnimatorListener listener) {
+		super.toSelected(listener);
+		mTextView.setTextColor(Color.WHITE);
+	}
+
+	@Override
 	public void toUnfocused(AnimatorListener listener) {
 		super.toUnfocused(listener);
 		mTextView.setTextColor(Color.WHITE);
-		if(mUnfocusedAnimator == null){
-			mUnfocusedAnimator = createAnimator(listener, 150, 0.3f, TEXT_SCALE_DEFAULT);
-		}
+		mUnfocusedAnimator = createAnimator(listener, 150, 0.3f, TEXT_SCALE_DEFAULT);
 		mUnfocusedAnimator.start();
 	}
 
@@ -67,9 +71,7 @@ public class TextMenu extends MenuItem {
 	public void toFocused(AnimatorListener listener) {
 		super.toFocused(listener);
 		mTextView.setTextColor(0xffffb300);
-		if(mFocusedAnimator == null){
-			mFocusedAnimator = createAnimator(listener, 300, 1, 1);
-		}
+		mFocusedAnimator = createAnimator(listener, 300, 1, 1);
 		mFocusedAnimator.start();
 	}
 

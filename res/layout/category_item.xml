@@ -7,7 +7,7 @@
         android:id="@+id/category_item_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/item_background_selected_shape" />
+        android:src="@drawable/item_background_selected_rectangle" />
 
     <FrameLayout
         android:id="@+id/category_item_icon_layout"

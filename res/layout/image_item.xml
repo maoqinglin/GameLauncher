@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:duplicateParentState="true"
-        android:src="@drawable/item_background_selector" />
+        android:src="@drawable/item_background_rectangle_selector" />
 
     <FrameLayout
         android:id="@+id/icon_layout"

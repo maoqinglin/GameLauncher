@@ -6,25 +6,25 @@
     android:layout_height="match_parent"
     android:clipChildren="false"
     android:clipToPadding="false"
-    android:gravity="right"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingRight="@dimen/menu_padding_right"
     android:paddingTop="@dimen/menu_home_margin_top" >
 
     <com.ireadygo.app.gamelauncher.ui.menu.ImageMenu
         android:id="@+id/menu_user"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:nextFocusDown="@+id/menu_game"
         android:nextFocusLeft="@+id/menu_user"
         android:nextFocusRight="@+id/alipay_account_state"
         android:nextFocusUp="@+id/menu_user"
-        menuItem:menu_icon="@drawable/menu_personal_selector" >
+        menuItem:menu_icon="@drawable/menu_user_icon" >
     </com.ireadygo.app.gamelauncher.ui.menu.ImageMenu>
 
     <com.ireadygo.app.gamelauncher.ui.menu.TextMenu
         android:id="@+id/menu_game"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/menu_item_margin_top"
         android:nextFocusDown="@+id/menu_store"
@@ -36,7 +36,7 @@
 
     <com.ireadygo.app.gamelauncher.ui.menu.TextMenu
         android:id="@+id/menu_store"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/menu_item_margin_top"
         android:nextFocusDown="@+id/menu_app"
@@ -48,7 +48,7 @@
 
     <com.ireadygo.app.gamelauncher.ui.menu.TextMenu
         android:id="@+id/menu_app"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/menu_item_margin_top"
         android:nextFocusDown="@+id/menu_settings"
@@ -60,7 +60,7 @@
 
     <com.ireadygo.app.gamelauncher.ui.menu.TextMenu
         android:id="@+id/menu_settings"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/menu_item_margin_top"
         android:nextFocusDown="@+id/menu_settings"

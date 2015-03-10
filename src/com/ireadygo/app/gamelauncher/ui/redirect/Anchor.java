@@ -26,8 +26,7 @@ public class Anchor implements Serializable {
 	public Intent getIntent() {
 		Intent intent = new Intent();
 		intent.putExtra(EXTRA_ANCHOR, this);
-		intent.setClass(GameLauncherApplication.getApplication().getCurrentActivity(),
-				getActivityClassByDestination(mDestination));
+		intent.setClass(GameLauncherApplication.getApplication(), getActivityClassByDestination(mDestination));
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		return intent;
 	}
@@ -55,7 +54,7 @@ public class Anchor implements Serializable {
 		case ACCOUNT_WEALTH:
 		case ACCOUNT_FREECARD:
 		case ACCOUNT_PERSONAL:
-//		case ACCOUNT_NOTICE:
+			// case ACCOUNT_NOTICE:
 		case ACCOUNT_RECHARGE:
 			clazz = UserActivity.class;
 			break;
