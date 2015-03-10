@@ -1,8 +1,14 @@
 package com.ireadygo.app.gamelauncher.ui.user;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
+import android.animation.Animator.AnimatorListener;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -19,6 +25,7 @@ import com.ireadygo.app.gamelauncher.account.AccountManager;
 import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
 import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
 import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
+import com.ireadygo.app.gamelauncher.helper.AnimatorHelper;
 import com.ireadygo.app.gamelauncher.ui.activity.BindAlipayAccountActivity;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.item.BaseAdapterItem;
@@ -34,6 +41,8 @@ public class UserFragmentC extends BaseContentFragment {
 	private TextView mAlipayAccountState;
 	private ImageItem mUserCenter,mNotice,mRecharge;
 	private BaseAdapterItem mSelectedItem;
+	private Animator mAlipayTextSelectAnimator;
+	private Animator mAlipayTextUnSelectAnimator;
 
 	public UserFragmentC(Activity activity, BaseMenuFragment menuFragment) {
 		super(activity, menuFragment);
@@ -53,17 +62,21 @@ public class UserFragmentC extends BaseContentFragment {
 		mAccount = (TextView)view.findViewById(R.id.account);
 		mAlipayAccountState = (TextView)view.findViewById(R.id.alipay_account_state);
 		mAlipayAccountState.setOnClickListener(mOnClickListener);
+		mAlipayAccountState.setOnFocusChangeListener(mAlipayTextOnFocusChangeListener);
 		mUserCenter = (ImageItem)view.findViewById(R.id.user_center_layout);
 		mNotice = (ImageItem)view.findViewById(R.id.user_notice_layout);
 		mRecharge = (ImageItem)view.findViewById(R.id.user_recharge_layout);
-		
 		mUserCenter.setOnClickListener(mOnClickListener);
 		mNotice.setOnClickListener(mOnClickListener);
 		mRecharge.setOnClickListener(mOnClickListener);
 		mUserCenter.setOnFocusChangeListener(mOnFocusChangeListener);
 		mNotice.setOnFocusChangeListener(mOnFocusChangeListener);
 		mRecharge.setOnFocusChangeListener(mOnFocusChangeListener);
+	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
 		initData();
 	}
 
@@ -75,6 +88,7 @@ public class UserFragmentC extends BaseContentFragment {
 	private void initData() {
 		setAccount();
 		initAlipayAccountState();
+		updateNextFocus();
 	}
 
 	private void initAlipayAccountState() {
@@ -123,9 +137,10 @@ public class UserFragmentC extends BaseContentFragment {
 		protected void onPostExecute(String result) {
 			if (!TextUtils.isEmpty(result)) {
 				setAlipayAccountState(true);
-				return;
+			} else {
+				setAlipayAccountState(false);
 			}
-			setAlipayAccountState(false);
+			updateNextFocus();
 		}
 	}
 
@@ -135,9 +150,7 @@ public class UserFragmentC extends BaseContentFragment {
 			Anchor anchor = null;
 			switch (v.getId()) {
 			case R.id.alipay_account_state:
-//				skipToBindAlipayAccount(getRootActivity());
-				Intent intent = new Intent(getRootActivity(),UserActivity.class);
-				getRootActivity().startActivity(intent);
+				skipToBindAlipayAccount();
 				break;
 			case R.id.user_center_layout:
 				anchor = new Anchor(Destination.ACCOUNT_PERSONAL);
@@ -166,10 +179,9 @@ public class UserFragmentC extends BaseContentFragment {
 		}
 	};
 
-	private void skipToBindAlipayAccount(Context context) {
-		Intent intent = new Intent(context,BindAlipayAccountActivity.class);
-		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|intent.FLAG_ACTIVITY_NEW_TASK);
-		context.startActivity(intent);
+	private void skipToBindAlipayAccount() {
+		LoadAlipayBindUrlTask task = new LoadAlipayBindUrlTask();
+		task.execute();
 	}
 
 	private OnFocusChangeListener mOnFocusChangeListener = new OnFocusChangeListener() {
@@ -207,5 +219,84 @@ public class UserFragmentC extends BaseContentFragment {
 	private void animatorToUnselected(BaseAdapterItem item) {
 		item.toUnselected(null);
 	}
+
+	private OnFocusChangeListener mAlipayTextOnFocusChangeListener = new OnFocusChangeListener() {
+		
+		@Override
+		public void onFocusChange(View v, boolean hasFocus) {
+			if (hasFocus) {
+				mAlipayAccountState.setTextColor(getResources().getColor(R.color.orange));
+				if (mAlipayTextUnSelectAnimator != null && mAlipayTextUnSelectAnimator.isRunning()) {
+					mAlipayTextUnSelectAnimator.cancel();
+				}
+				mAlipayTextSelectAnimator = createTextAnimator(mAlipayAccountState, 1.088f);
+				mAlipayTextSelectAnimator.start();
+			} else {
+				mAlipayAccountState.setTextColor(getResources().getColor(R.color.white));
+				if (mAlipayTextSelectAnimator != null && mAlipayTextSelectAnimator.isRunning()) {
+					mAlipayTextSelectAnimator.cancel();
+				}
+				mAlipayTextUnSelectAnimator = createTextAnimator(mAlipayAccountState, 1);
+				mAlipayTextUnSelectAnimator.start();
+			}
+		}
+	};
+
+	private Animator createTextAnimator(View view,float textScale) {
+		AnimatorSet animatorSet = new AnimatorSet();
+
+		PropertyValuesHolder iconScaleXHolder = PropertyValuesHolder.ofFloat(View.SCALE_X, textScale);
+		PropertyValuesHolder iconScaleYHolder = PropertyValuesHolder.ofFloat(View.SCALE_Y, textScale);
+		ObjectAnimator animatorText = ObjectAnimator.ofPropertyValuesHolder(view, iconScaleXHolder,
+				iconScaleYHolder);
+		animatorSet.play(animatorText);
+		animatorSet.setDuration(200);
+		return animatorSet;
+	}
+
+	private void updateNextFocus() {
+		if (getMenu().getCurrentItem() == null) {
+			return;
+		}
+		if (mAlipayAccountState.getVisibility() == View.GONE) {
+			getMenu().getCurrentItem().setNextFocusRightId(R.id.user_center_layout);
+			mUserCenter.setNextFocusUpId(R.id.user_center_layout);
+			mUserCenter.setNextFocusDownId(R.id.user_center_layout);
+			mRecharge.setNextFocusUpId(R.id.user_recharge_layout);
+			mRecharge.setNextFocusDownId(R.id.user_recharge_layout);
+		} else {
+			getMenu().getCurrentItem().setNextFocusRightId(R.id.alipay_account_state);
+			mUserCenter.setNextFocusUpId(R.id.alipay_account_state);
+			mUserCenter.setNextFocusDownId(R.id.user_center_layout);
+			mRecharge.setNextFocusUpId(R.id.alipay_account_state);
+			mRecharge.setNextFocusDownId(R.id.user_recharge_layout);
+		}
+	}
+
+	private void skipWebsite(String url) {
+		Uri uri = Uri.parse(url);
+		Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+		getRootActivity().startActivity(intent);
+	}
+
+	private class LoadAlipayBindUrlTask extends AsyncTask<Void, Void, String> {
+		@Override
+		protected String doInBackground(Void... params) {
+			try {
+				return GameInfoHub.instance(getRootActivity()).bindPayment();
+			} catch (InfoSourceException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			if (!TextUtils.isEmpty(result)) {
+				skipWebsite(result);
+			}
+		}
+	}
+
 
 }

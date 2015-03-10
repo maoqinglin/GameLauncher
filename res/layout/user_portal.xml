@@ -15,7 +15,8 @@
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:nextFocusDown="@+id/user_center_layout"
-        android:nextFocusLeft="@+id/menu_account"
+        android:nextFocusUp="@+id/alipay_account_state"
+        android:nextFocusLeft="@+id/menu_user"
         app:item_icon="@drawable/user_icon_center"
         app:item_title="@string/user_center" />
 
@@ -39,6 +40,7 @@
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:nextFocusDown="@+id/user_recharge_layout"
+        android:nextFocusUp="@+id/alipay_account_state"
         app:item_icon="@drawable/user_icon_recharge"
         app:item_title="@string/user_recharge" />
 

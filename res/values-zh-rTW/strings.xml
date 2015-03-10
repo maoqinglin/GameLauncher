@@ -199,6 +199,7 @@
     <string name="personal_account_title">賬號：</string>
     <string name="personal_account">我的賬號：%1$s</string>
     <string name="personal_account_unlogin">未登錄</string>
+    <string name="user_not_bind_account">(非本機套餐帳號)</string>
     <string name="user_alipay_account_bind"><u>綁定支付寶</u></string>
     <string name="user_play_time_title">本月任務遊戲時間：</string>
     <string name="personal_play_time_state">%1$d/%2$d\t小時</string>

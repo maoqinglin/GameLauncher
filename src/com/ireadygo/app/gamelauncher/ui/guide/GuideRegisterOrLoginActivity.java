@@ -32,10 +32,6 @@ public class GuideRegisterOrLoginActivity extends BaseGuideActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.starting_guide_login_register_layout);
 		initUI();
-		if (!PreferenceUtils.hasDeviceActive()) {
-			DeviceActiveTask task = new DeviceActiveTask();
-			task.execute();
-		}
 	}
 
 
@@ -75,29 +71,6 @@ public class GuideRegisterOrLoginActivity extends BaseGuideActivity {
 	@Override
 	public boolean onMoonKey() {
 		return true;
-	}
-
-	private class DeviceActiveTask extends AsyncTask<Void, Void, Integer> {
-		@Override
-		protected Integer doInBackground(Void... params) {
-			try {
-				GameInfoHub.instance(GuideRegisterOrLoginActivity.this).activateBox(Build.SERIAL);
-				return SUCCESS_CODE;
-			} catch (InfoSourceException e) {
-				e.printStackTrace();
-			}
-			return FAILED_CODE;
-		}
-
-		@Override
-		protected void onPostExecute(Integer result) {
-			if (result == SUCCESS_CODE) {
-				Toast.makeText(GuideRegisterOrLoginActivity.this,getString(R.string.device_active_success), Toast.LENGTH_SHORT).show();
-				PreferenceUtils.setDeviceActive(true);
-			} else {
-				Toast.makeText(GuideRegisterOrLoginActivity.this,getString(R.string.device_active_failed), Toast.LENGTH_SHORT).show();
-			}
-		}
 	}
 
 }

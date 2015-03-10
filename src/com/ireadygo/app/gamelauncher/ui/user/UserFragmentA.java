@@ -1,10 +1,12 @@
 package com.ireadygo.app.gamelauncher.ui.user;
 
-import java.util.List;
-
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,8 +16,8 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.view.View.OnFocusChangeListener;
+import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -23,24 +25,33 @@ import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.account.AccountManager;
 import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
 import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
-import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryInfo;
 import com.ireadygo.app.gamelauncher.appstore.info.item.RentReliefInfo;
-import com.ireadygo.app.gamelauncher.ui.activity.BindAlipayAccountActivity;
+import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
+import com.ireadygo.app.gamelauncher.ui.item.BaseAdapterItem;
+import com.ireadygo.app.gamelauncher.ui.item.ImageItem;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
+import com.ireadygo.app.gamelauncher.ui.redirect.Anchor;
+import com.ireadygo.app.gamelauncher.ui.redirect.Anchor.Destination;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
+import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
 
 public class UserFragmentA extends BaseContentFragment {
 
+	private static final float DISABLE_ALPHA = 0.3f;
+	private static final float ENABLE_ALPHA = 1.0f;
 	private TextView mAccount;
 	private TextView mAlipayAccountState;
 	private ProgressBar mPlayTime;
 	private TextView mPlayTimeState;
 	private TextView mFeedbackRent;
 	private TextView mExpiredDate;
-	private int mFeedbackMonth = 0;
-	private int mPlayTimeHours = 0;
-	private String mAccountStr;
+	private TextView mNotBindTip;
+	private TextView mPlayTimeTitle;
+	private BaseAdapterItem mSelectedItem;
+	private ImageItem mUserCenter,mNotice,mRecharge;
+	private Animator mAlipayTextSelectAnimator;
+	private Animator mAlipayTextUnSelectAnimator;
 
 	public UserFragmentA(Activity activity, BaseMenuFragment menuFragment) {
 		super(activity, menuFragment);
@@ -60,10 +71,27 @@ public class UserFragmentA extends BaseContentFragment {
 		mAccount = (TextView)view.findViewById(R.id.account);
 		mAlipayAccountState = (TextView)view.findViewById(R.id.alipay_account_state);
 		mAlipayAccountState.setOnClickListener(mOnClickListener);
+		mAlipayAccountState.setOnFocusChangeListener(mAlipayTextOnFocusChangeListener);
 		mPlayTime = (ProgressBar)view.findViewById(R.id.play_time_progress);
 		mPlayTimeState = (TextView)view.findViewById(R.id.play_time_state);
 		mFeedbackRent = (TextView)view.findViewById(R.id.feedback_rent);
 		mExpiredDate = (TextView)view.findViewById(R.id.expired_date);
+		mNotBindTip = (TextView)view.findViewById(R.id.not_bind_account);
+		mPlayTimeTitle = (TextView)view.findViewById(R.id.play_time_title);
+		mUserCenter = (ImageItem)view.findViewById(R.id.user_center_layout);
+		mNotice = (ImageItem)view.findViewById(R.id.user_notice_layout);
+		mRecharge = (ImageItem)view.findViewById(R.id.user_recharge_layout);
+		mUserCenter.setOnClickListener(mOnClickListener);
+		mNotice.setOnClickListener(mOnClickListener);
+		mRecharge.setOnClickListener(mOnClickListener);
+		mUserCenter.setOnFocusChangeListener(mOnFocusChangeListener);
+		mNotice.setOnFocusChangeListener(mOnFocusChangeListener);
+		mRecharge.setOnFocusChangeListener(mOnFocusChangeListener);
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
 		initData();
 	}
 
@@ -72,13 +100,23 @@ public class UserFragmentA extends BaseContentFragment {
 		return true;
 	}
 
+
 	private void initData() {
 		setAccount();
-		initProgressBar(20);
 		initAlipayAccountState();
-		initFeedbackState();
-		initPlayTime();
-		setExpiredDate("2017-5-10");
+		if (!PreferenceUtils.getDeviceBindAccount()
+				.equalsIgnoreCase(AccountManager.getInstance().getAccount(getRootActivity()))) {
+			mNotBindTip.setVisibility(View.VISIBLE);
+			disableFeedbackState();
+			disablePlaystate();
+			disableExpiredDate();
+		} else {
+			mNotBindTip.setVisibility(View.GONE);
+			initFeedbackState();
+			initPlayTime();
+			initExpiredDate();
+			updateNextFocus();
+		}
 	}
 
 
@@ -95,7 +133,7 @@ public class UserFragmentA extends BaseContentFragment {
 	}
 
 	private void initAlipayAccountState() {
-		setAlipayAccountState(false);
+		setAlipayAccountState(true);
 		if (!AccountManager.getInstance().isLogined(getRootActivity())) {
 			return;
 		}
@@ -104,20 +142,48 @@ public class UserFragmentA extends BaseContentFragment {
 	}
 
 	private void initPlayTime() {
-		setPlayTimeProgress(0);
+		setPlayTimeProgress(0,20);
 		setPlayTimeState(0, 20);
 		if (AccountManager.getInstance().isLogined(getRootActivity())) {
 			LoadPlayTimeTask task = new LoadPlayTimeTask();
 			task.execute();
 		}
+		mPlayTime.setAlpha(ENABLE_ALPHA);
+		mPlayTimeState.setAlpha(ENABLE_ALPHA);
+		mPlayTimeTitle.setAlpha(ENABLE_ALPHA);
 	}
 
 	private void initFeedbackState() {
 		setFeedbackRent(0);
+		mFeedbackRent.setAlpha(ENABLE_ALPHA);
 		if (AccountManager.getInstance().isLogined(getRootActivity())) {
 			LoadFeedbackMonthTask task = new LoadFeedbackMonthTask();
 			task.execute();
 		}
+	}
+
+	private void initExpiredDate() {
+		setExpiredDate("");
+		mExpiredDate.setAlpha(ENABLE_ALPHA);
+	}
+
+	private void disableFeedbackState() {
+		setFeedbackRent(0);
+		mFeedbackRent.setAlpha(DISABLE_ALPHA);
+		mFeedbackRent.invalidate();
+	}
+
+	private void disablePlaystate() {
+		setPlayTimeProgress(0, 20);
+		setPlayTimeState(0, 20);
+		mPlayTime.setAlpha(DISABLE_ALPHA);
+		mPlayTimeState.setAlpha(DISABLE_ALPHA);
+		mPlayTimeTitle.setAlpha(DISABLE_ALPHA);
+	}
+
+	private void disableExpiredDate() {
+		setExpiredDate("");
+		mExpiredDate.setAlpha(DISABLE_ALPHA);
 	}
 
 	private void setAlipayAccountState(boolean hasBond) {
@@ -128,11 +194,8 @@ public class UserFragmentA extends BaseContentFragment {
 		}
 	}
 
-	private void initProgressBar(int max) {
-		mPlayTime.setMax(max);
-	}
-
-	private void setPlayTimeProgress(int playHour) {
+	private void setPlayTimeProgress(int playHour,int maxHour) {
+		mPlayTime.setMax(maxHour);
 		mPlayTime.setProgress(playHour);
 	}
 
@@ -142,14 +205,14 @@ public class UserFragmentA extends BaseContentFragment {
 
 	private void setFeedbackRent(int months) {
 		Spanned colorMonths = Html.fromHtml(getRootActivity().getString(R.string.personal_months_reduction_pre)
-				+ "<font color='#fbae1a' size='40px'>" + months + "</FONT>"
+				+ "<font>" + months + "</font>"
 				+ getRootActivity().getString(R.string.personal_months_reduction_post));
 		mFeedbackRent.setText(colorMonths);
 	}
 
 	private void setExpiredDate(String expiredDate) {
 		Spanned date = Html.fromHtml(getRootActivity().getString(R.string.personal_expired_date)
-				+ "<font color='#fbae1a' size='40px'>" + expiredDate + "</FONT>");
+				+ "<font>" + expiredDate + "</font>");
 		mExpiredDate.setText(date);
 	}
 
@@ -170,9 +233,10 @@ public class UserFragmentA extends BaseContentFragment {
 		protected void onPostExecute(String result) {
 			if (!TextUtils.isEmpty(result)) {
 				setAlipayAccountState(true);
-				return;
+			} else {
+				setAlipayAccountState(false);
 			}
-			setAlipayAccountState(false);
+			updateNextFocus();
 		}
 	}
 
@@ -181,7 +245,7 @@ public class UserFragmentA extends BaseContentFragment {
 		protected RentReliefInfo doInBackground(Void... params) {
 			try {
 				String account = GameInfoHub.instance(getRootActivity()).getSNCorrespondBindAccount(Build.SERIAL);
-				if (!TextUtils.isEmpty(account) && account.equals(AccountManager.getInstance().getAccount(getRootActivity()))) {
+				if (!TextUtils.isEmpty(account) && account.equalsIgnoreCase(AccountManager.getInstance().getAccount(getRootActivity()))) {
 					return GameInfoHub.instance(getRootActivity()).getRentReliefAppTime();
 				}
 			} catch (InfoSourceException e) {
@@ -195,8 +259,9 @@ public class UserFragmentA extends BaseContentFragment {
 			if (result != null) {
 				int playTime = secondToHour(result.getAppTime());
 				int remainTime = secondToHour(result.getAppRemainTime());
-				setPlayTimeProgress(playTime);
+				setPlayTimeProgress(playTime,playTime + remainTime);
 				setPlayTimeState(playTime, playTime + remainTime);
+				setExpiredDate(result.getExpirationDate().toString());
 			}
 		}
 	}
@@ -225,24 +290,159 @@ public class UserFragmentA extends BaseContentFragment {
 		return (int)(second / 3600);
 	}
 
+
+	private void skipToBindAlipayAccount() {
+		LoadAlipayBindUrlTask task = new LoadAlipayBindUrlTask();
+		task.execute();
+	}
+
 	private OnClickListener mOnClickListener = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
+			Anchor anchor = null;
 			switch (v.getId()) {
 			case R.id.alipay_account_state:
-				skipToBindAlipayAccount(getRootActivity());
+				skipToBindAlipayAccount();
 				break;
-
+			case R.id.user_center_layout:
+				anchor = new Anchor(Destination.ACCOUNT_PERSONAL);
+				skipToUserUI(anchor);
+				break;
+			case R.id.user_notice_layout:
+				anchor = new Anchor(Destination.ACCOUNT_NOTICE);
+				skipToUserUI(anchor);
+				break;
+			case R.id.user_recharge_layout:
+				anchor = new Anchor(Destination.ACCOUNT_RECHARGE);
+				skipToUserUI(anchor);
+				break;
 			default:
 				break;
 			}
 		}
+
+		private void skipToUserUI(Anchor anchor) {
+			if (anchor != null) {
+				Intent intent = anchor.getIntent();
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+				getRootActivity().startActivity(intent);
+				SoundPoolManager.instance(getRootActivity()).play(SoundPoolManager.SOUND_ENTER);
+			}
+		}
 	};
 
-	private void skipToBindAlipayAccount(Context context) {
-		Intent intent = new Intent(context,BindAlipayAccountActivity.class);
-		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|intent.FLAG_ACTIVITY_NEW_TASK);
-		context.startActivity(intent);
+	private OnFocusChangeListener mOnFocusChangeListener = new OnFocusChangeListener() {
+
+		@Override
+		public void onFocusChange(View v, boolean hasFocus) {
+			if (hasFocus) {
+				if (mSelectedItem != null) {
+					animatorToUnselected(mSelectedItem);
+					mSelectedItem = null;
+				}
+				View selectedView = v;
+				if(selectedView != null && selectedView instanceof BaseAdapterItem){
+					mSelectedItem = (BaseAdapterItem) selectedView;
+					animatorToSelected(mSelectedItem);
+				}
+				if(v.isInTouchMode()){
+					v.performClick();
+				}
+			} else {
+				if (!v.isInTouchMode()) {
+					if (mSelectedItem != null) {
+						animatorToUnselected(mSelectedItem);
+						mSelectedItem = null;
+					}
+				}
+			}
+		}
+	};
+
+	private void animatorToSelected(BaseAdapterItem item) {
+		item.toSelected(null);
+	}
+
+	private void animatorToUnselected(BaseAdapterItem item) {
+		item.toUnselected(null);
+	}
+
+	private OnFocusChangeListener mAlipayTextOnFocusChangeListener = new OnFocusChangeListener() {
+		
+		@Override
+		public void onFocusChange(View v, boolean hasFocus) {
+			if (hasFocus) {
+				mAlipayAccountState.setTextColor(getResources().getColor(R.color.orange));
+				if (mAlipayTextUnSelectAnimator != null && mAlipayTextUnSelectAnimator.isRunning()) {
+					mAlipayTextUnSelectAnimator.cancel();
+				}
+				mAlipayTextSelectAnimator = createTextAnimator(mAlipayAccountState, 1.088f);
+				mAlipayTextSelectAnimator.start();
+			} else {
+				mAlipayAccountState.setTextColor(getResources().getColor(R.color.white));
+				if (mAlipayTextSelectAnimator != null && mAlipayTextSelectAnimator.isRunning()) {
+					mAlipayTextSelectAnimator.cancel();
+				}
+				mAlipayTextUnSelectAnimator = createTextAnimator(mAlipayAccountState, 1);
+				mAlipayTextUnSelectAnimator.start();
+			}
+		}
+	};
+
+	private Animator createTextAnimator(View view,float textScale) {
+		AnimatorSet animatorSet = new AnimatorSet();
+
+		PropertyValuesHolder iconScaleXHolder = PropertyValuesHolder.ofFloat(View.SCALE_X, textScale);
+		PropertyValuesHolder iconScaleYHolder = PropertyValuesHolder.ofFloat(View.SCALE_Y, textScale);
+		ObjectAnimator animatorText = ObjectAnimator.ofPropertyValuesHolder(view, iconScaleXHolder,
+				iconScaleYHolder);
+		animatorSet.play(animatorText);
+		animatorSet.setDuration(200);
+		return animatorSet;
+	}
+
+	private void updateNextFocus() {
+		if (getMenu().getCurrentItem() == null) {
+			return;
+		}
+		if (mAlipayAccountState.getVisibility() == View.GONE) {
+			getMenu().getCurrentItem().setNextFocusRightId(R.id.user_center_layout);
+			mUserCenter.setNextFocusUpId(R.id.user_center_layout);
+			mUserCenter.setNextFocusDownId(R.id.user_center_layout);
+			mRecharge.setNextFocusUpId(R.id.user_recharge_layout);
+			mRecharge.setNextFocusDownId(R.id.user_recharge_layout);
+		} else {
+			getMenu().getCurrentItem().setNextFocusRightId(R.id.alipay_account_state);
+			mUserCenter.setNextFocusUpId(R.id.alipay_account_state);
+			mUserCenter.setNextFocusDownId(R.id.user_center_layout);
+			mRecharge.setNextFocusUpId(R.id.alipay_account_state);
+			mRecharge.setNextFocusDownId(R.id.user_recharge_layout);
+		}
+	}
+
+	private void skipWebsite(String url) {
+		Uri uri = Uri.parse(url);
+		Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+		getRootActivity().startActivity(intent);
+	}
+
+	private class LoadAlipayBindUrlTask extends AsyncTask<Void, Void, String> {
+		@Override
+		protected String doInBackground(Void... params) {
+			try {
+				return GameInfoHub.instance(getRootActivity()).bindPayment();
+			} catch (InfoSourceException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			if (!TextUtils.isEmpty(result)) {
+				skipWebsite(result);
+			}
+		}
 	}
 
 

@@ -17,7 +17,6 @@ import com.ireadygo.app.gamelauncher.ui.GameLauncherActivity;
 import com.ireadygo.app.gamelauncher.ui.account.AccountLoginActivity;
 import com.ireadygo.app.gamelauncher.ui.account.AccountRegisterActivity;
 import com.ireadygo.app.gamelauncher.ui.account.CustomerLoginResultListener;
-import com.ireadygo.app.gamelauncher.ui.guide.GuideRegisterOrLoginActivity;
 import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
 import com.ireadygo.app.gamelauncher.utils.StaticsUtils;
 import com.ireadygo.app.gamelauncher.utils.Utils;
@@ -79,12 +78,15 @@ public class BaseAccountActivity extends BaseGuideActivity {
 		hideProgressDialog();
 //		startActivityByFlag(mStartFlag);
 		sendAccountLoginBroadcast();
-		startGameLauncherActivity();
 		Toast.makeText(this, R.string.account_login_success, Toast.LENGTH_SHORT).show();
-		if (TextUtils.isEmpty(PreferenceUtils.getDeviceBindAccount())) {
-			BindDeviceAccountTask task = new BindDeviceAccountTask();
+		if (!PreferenceUtils.hasDeviceActive()) {
+			DeviceActiveTask task = new DeviceActiveTask();
 			task.execute();
+			return;
 		}
+		CheckBindAccountTask tast = new CheckBindAccountTask();
+		tast.execute();
+		startGameLauncherActivity();
 	}
 
 	private void startActivityByFlag(int startFlag){
@@ -171,10 +173,8 @@ public class BaseAccountActivity extends BaseGuideActivity {
 			StaticsUtils.DeviceActive();
 		} else {
 			intent.setClass(this, GameLauncherActivity.class);
-//			Bundle extras = new Bundle();
-//			FragmentAnchor.setBundleArgs(extras, FragmentAnchor.TAB_ACCOUNT, FragmentAnchor.ACCOUNT_PERSONAL, true);
-//			intent.putExtras(extras);
 		}
+		SoundPoolManager.instance(this).play(SoundPoolManager.SOUND_EXIT);
 		startActivity(intent);
 		finish();
 	}
@@ -231,6 +231,55 @@ public class BaseAccountActivity extends BaseGuideActivity {
 				PreferenceUtils.setDeviceBindAccount(AccountManager.getInstance().getAccount(BaseAccountActivity.this));
 			} else {
 				Toast.makeText(BaseAccountActivity.this,getString(R.string.device_bind_account_failed), Toast.LENGTH_SHORT).show();
+			}
+		}
+	}
+
+	private class DeviceActiveTask extends AsyncTask<Void, Void, Integer> {
+		@Override
+		protected Integer doInBackground(Void... params) {
+			try {
+				GameInfoHub.instance(BaseAccountActivity.this).activateBox(Build.SERIAL);
+				return SUCCESS_CODE;
+			} catch (InfoSourceException e) {
+				e.printStackTrace();
+			}
+			return FAILED_CODE;
+		}
+
+		@Override
+		protected void onPostExecute(Integer result) {
+			if (result == SUCCESS_CODE) {
+				Toast.makeText(BaseAccountActivity.this,getString(R.string.device_active_success), Toast.LENGTH_SHORT).show();
+				PreferenceUtils.setDeviceActive(true);
+				//激活成功，绑定帐号
+				if (TextUtils.isEmpty(PreferenceUtils.getDeviceBindAccount())) {
+					BindDeviceAccountTask task = new BindDeviceAccountTask();
+					task.execute();
+				}
+				//激活成功，进入系统
+				startGameLauncherActivity();
+			} else {
+				Toast.makeText(BaseAccountActivity.this,getString(R.string.device_active_failed), Toast.LENGTH_SHORT).show();
+			}
+		}
+	}
+
+	private class CheckBindAccountTask extends AsyncTask<Void, Void, String> {
+		@Override
+		protected String doInBackground(Void... params) {
+			try {
+				return GameInfoHub.instance(BaseAccountActivity.this).getSNCorrespondBindAccount(Build.SERIAL);
+			} catch (InfoSourceException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			if (!TextUtils.isEmpty(result)) {
+				PreferenceUtils.setDeviceBindAccount(result);
 			}
 		}
 	}

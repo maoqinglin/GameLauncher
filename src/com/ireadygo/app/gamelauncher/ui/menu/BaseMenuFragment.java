@@ -60,6 +60,9 @@ public abstract class BaseMenuFragment extends BaseFragment {
 	}
 
 	protected void addMenuItem(MenuItem menuItem, BaseContentFragment fragment) {
+		if (isSameMenuItem(menuItem)) {
+			return;
+		}
 		menuItem.setOnFocusChangeListener(mItemFocusChangeListener);
 		menuItem.setContentFragment(fragment);
 		menuItem.setIndex(mMenuItemList.size());
@@ -70,9 +73,19 @@ public abstract class BaseMenuFragment extends BaseFragment {
 		if (menuIndex > -1 && menuIndex < mMenuItemList.size()) {
 			MenuItem menuItem = mMenuItemList.get(menuIndex);
 			if (newFragment != null) {
+				switchFragment(menuItem.getContentFragment(),newFragment);
 				menuItem.setContentFragment(newFragment);
 			}
 		}
+	}
+
+	private boolean isSameMenuItem(MenuItem menuItem) {
+		for (MenuItem item : mMenuItemList) {
+			if (item.getIndex() == menuItem.getIndex()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public Status getState() {

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.ireadygo.app.gamelauncher.GameLauncherApplication;
+import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.account.AccountInfoAsyncTask;
 import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
 import com.ireadygo.app.gamelauncher.ui.base.BaseMenuActivity;
@@ -23,6 +24,10 @@ public class GameLauncherActivity extends BaseMenuActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		getFocusView().setNextFocusLeftId(R.id.menu_user);
+		getFocusView().setNextFocusRightId(R.id.menu_user);
+		getFocusView().setNextFocusUpId(R.id.menu_user);
+		getFocusView().setNextFocusDownId(R.id.menu_user);
 		mCreateTime = System.currentTimeMillis();
 		// // 初始化个推
 		// PushManager.getInstance().initialize(this);
@@ -33,6 +38,7 @@ public class GameLauncherActivity extends BaseMenuActivity {
 		setShouldTranslate(true);
 		GameLauncherApplication.getApplication().setGameLauncherActivity(this);
 		new AccountInfoAsyncTask(this, null).execute();
+		getMenuFragment().requestFocusByPosition(0);
 	}
 
 	@Override
