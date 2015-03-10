@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.ireadygo.app.gamelauncher.R;
+import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
@@ -29,6 +31,7 @@ public class FavoriteAppsFragment extends BaseContentFragment {
 
 	public FavoriteAppsFragment(Activity activity, BaseMenuFragment menuFragment) {
 		super(activity, menuFragment);
+		new LoadDataTask().execute();
 	}
 
 	@Override
@@ -63,4 +66,29 @@ public class FavoriteAppsFragment extends BaseContentFragment {
 		return mMultiListView.hasFocus();
 	}
 
+	private class LoadDataTask extends AsyncTask<Void, Void, List<AppEntity>> {
+
+		@Override
+		protected List<AppEntity> doInBackground(Void... params) {
+			try {
+				List<AppEntity> appEntities = getGameInfoHub().getCommonApp();
+				return appEntities;
+			} catch (InfoSourceException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(List<AppEntity> result) {
+			super.onPostExecute(result);
+			if (result == null || result.isEmpty()) {
+				return;
+			}
+			mAppEntities.addAll(result);
+			if (!isCancelled() && mMultiListView != null) {
+				mMultiListView.notifyDataSetChanged();
+			}
+		}
+	}
 }

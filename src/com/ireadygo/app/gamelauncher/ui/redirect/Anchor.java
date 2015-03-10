@@ -46,6 +46,7 @@ public class Anchor implements Serializable {
 		case STORE_SEARCH:
 		case STORE_GAME_MANAGE:
 		case STORE_SETTINGS:
+		case STORE_FAVORITE_APPS:
 			clazz = StoreActivity.class;
 			break;
 		case GAME_DETAIL:
