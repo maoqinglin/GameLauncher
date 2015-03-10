@@ -64,6 +64,11 @@ public class GameLauncherActivity extends BaseMenuActivity {
 		super.onPause();
 	}
 
+	@Override
+	public boolean onBackKey() {
+		return true;
+	}
+
 	// @Override
 	// public boolean onKeyUp(int keyCode, KeyEvent event) {
 	// switch (keyCode) {

@@ -67,7 +67,7 @@ public abstract class KeyEventFragment implements SnailKeyCode {
 	}
 
 	public boolean onMoonKey() {
-		return false;
+		return onBackKey();
 	}
 
 	public boolean onSunKey() {

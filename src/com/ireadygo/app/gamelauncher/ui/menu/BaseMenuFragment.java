@@ -126,19 +126,19 @@ public abstract class BaseMenuFragment extends BaseFragment {
 		return super.onKeyDown(keyCode, event);
 	}
 
-	@Override
-	public boolean onBackKey() {
-		if (mStatus.isFocused()) {
-			getRootActivity().removeFragment(mCurrentFocusItem.getContentFragment());
-			mCurrentFocusItem.clearFocus();
-			if (mHandler.hasMessages(WHAT_CONTENT_OBTAIN_FOCUS)) {
-				mHandler.removeMessages(WHAT_CONTENT_OBTAIN_FOCUS);
-			}
-			toInitStatus();
-		}
-		return true;
-	}
-
+//	@Override
+//	public boolean onBackKey() {
+//		if (mStatus.isFocused()) {
+//			getRootActivity().removeFragment(mCurrentFocusItem.getContentFragment());
+//			mCurrentFocusItem.clearFocus();
+//			if (mHandler.hasMessages(WHAT_CONTENT_OBTAIN_FOCUS)) {
+//				mHandler.removeMessages(WHAT_CONTENT_OBTAIN_FOCUS);
+//			}
+//			toInitStatus();
+//		}
+//		return true;
+//	}
+	
 	private void switchFocusedItem(MenuItem prevFocusedItem, MenuItem currFocusedItem) {
 		mPrevFocusItem = prevFocusedItem;
 		mCurrentFocusItem = currFocusedItem;

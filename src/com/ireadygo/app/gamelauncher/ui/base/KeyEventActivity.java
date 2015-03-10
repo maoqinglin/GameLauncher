@@ -12,55 +12,68 @@ public class KeyEventActivity extends Activity implements SnailKeyCode {
 			if(onMountKey()){
 				return true;
 			}
+			break;
 		case SnailKeyCode.WATER_KEY:
 			if(onWaterKey()){
 				return true;
 			}
+			break;
 		case SnailKeyCode.SUN_KEY:
 		case KeyEvent.KEYCODE_DPAD_CENTER:
 			if(onSunKey()){
 				return true;
 			}
+			break;
 		case SnailKeyCode.MOON_KEY:
 			if(onMoonKey()){
 				return true;
 			}
+			break;
 		case SnailKeyCode.L1_KEY:
 			if(onL1Key()){
 				return true;
 			}
+			break;
 		case SnailKeyCode.R1_KEY:
 			if(onR1Key()){
 				return true;
 			}
+			break;
 		case SnailKeyCode.BACK_KEY:
 			if(onBackKey()){
 				return true;
 			}
+			break;
 		case SnailKeyCode.L2_KEY:
 			if(onL2Key()){
 				return true;
 			}
+			break;
 		case SnailKeyCode.R2_KEY:
 			if(onR2Key()){
 				return true;
 			}
+			break;
 		case SnailKeyCode.LEFT_KEY:
 			if(onLeftKey()){
 				return true;
 			}
+			break;
 		case SnailKeyCode.RIGHT_KEY:
 			if(onRightKey()){
 				return true;
 			}
+			break;
 		case SnailKeyCode.UP_KEY:
 			if(onUpKey()){
 				return true;
 			}
+			break;
 		case SnailKeyCode.DOWN_KEY:
 			if(onDownKey()){
 				return true;
 			}
+			break;
 		default:
 			break;
 		}

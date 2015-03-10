@@ -23,6 +23,12 @@ public class StoreActivity extends BaseMenuActivity {
 		requestMenuFocusByIntent(getIntent());
 	}
 
+	@Override
+	public boolean onBackKey() {
+		finish();
+		return true;
+	}
+
 	private void requestMenuFocusByIntent(Intent intent) {
 		if (intent == null) {
 			return;

@@ -26,4 +26,10 @@ public class CategoryDetailActivity extends BaseMenuActivity {
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		context.startActivity(intent);
 	}
+	
+	@Override
+	public boolean onBackKey() {
+		finish();
+		return true;
+	}
 }
