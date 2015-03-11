@@ -131,11 +131,11 @@
     </style>
 
     <style name="StoreButtonNormal">
-        <item name="android:background">@drawable/store_search_btn_bg_selector</item>
         <item name="android:gravity">center</item>
         <item name="android:focusable">true</item>
         <item name="android:focusableInTouchMode">true</item>
         <item name="android:clickable">true</item>
+        <item name="android:textSize">36sp</item>
         <item name="android:textColor">@color/store_btn_normal_color_selector</item>
     </style>
 

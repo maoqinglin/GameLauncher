@@ -48,6 +48,10 @@
     <string name="settings_about">關於</string>
     <string name="settings_hdmi">HDMI</string>
 
+    <!-- 微信二維碼 -->
+    <string name="wx_title">微信二維碼</string>
+    <string name="wx_intro">掃描微信遙控器二維碼</string>
+    
     <!-- 壁紙 -->
     <string name="wallpaper_set">設置壁紙</string>
     <string name="wallpaper_snail">蝸牛壁紙</string>

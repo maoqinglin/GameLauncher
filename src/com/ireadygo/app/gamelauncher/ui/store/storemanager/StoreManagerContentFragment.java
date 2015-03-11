@@ -165,14 +165,11 @@ public class StoreManagerContentFragment extends BaseContentFragment {
 
 	private void initListener() {
 		mStoreManagerAdapter.setOperatorListener(mOperatorListener);
-		mStoreManagerAdapter
-				.setOnChildFocusChange(new OnChildFocusChangeListener() {
+		mStoreManagerAdapter.setOnChildFocusChange(new OnChildFocusChangeListener() {
 
 					@Override
-					public void onChildFocusChange(
-							StoreManagerItemHolder holder, boolean hasFocus) {
-						if (hasFocus
-								|| mStoreManagerAdapter.getGameManagerType() == GameManagerType.DOWNLOAD) {
+					public void onChildFocusChange(StoreManagerItemHolder holder, boolean hasFocus, AppEntity otherApp) {
+						if (hasFocus || mStoreManagerAdapter.getGameManagerType() == GameManagerType.DOWNLOAD) {
 							holder.statusLayout.setVisibility(View.VISIBLE);
 						} else {
 							holder.statusLayout.setVisibility(View.GONE);

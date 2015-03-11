@@ -154,7 +154,7 @@ public class StoreManagerContentAdapter implements HMultiBaseAdapter{
 			@Override
 			public void onFocusChange(boolean hasFocus) {
 				if(mFocusChangeListener != null) {
-					mFocusChangeListener.onChildFocusChange(holder, hasFocus);
+					mFocusChangeListener.onChildFocusChange(holder, hasFocus, appEntity);
 				}
 			}
 		});
@@ -181,7 +181,7 @@ public class StoreManagerContentAdapter implements HMultiBaseAdapter{
 			}
 		});
 		
-		holder.downloadDisplayLayout.setOnLongClickListener(new OnLongClickListener() {
+		holder.downloadSpeedLayout.setOnLongClickListener(new OnLongClickListener() {
 			
 			@Override
 			public boolean onLongClick(View v) {
@@ -193,7 +193,7 @@ public class StoreManagerContentAdapter implements HMultiBaseAdapter{
 			}
 		});
 		
-		holder.downloadDisplayLayout.setOnClickListener(new OnClickListener() {
+		holder.downloadSpeedLayout.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -203,7 +203,7 @@ public class StoreManagerContentAdapter implements HMultiBaseAdapter{
 			}
 		});
 		
-		holder.downloadDisplayLayout.setOnLongClickListener(new OnLongClickListener() {
+		holder.downloadSpeedLayout.setOnLongClickListener(new OnLongClickListener() {
 			
 			@Override
 			public boolean onLongClick(View v) {
@@ -239,15 +239,6 @@ public class StoreManagerContentAdapter implements HMultiBaseAdapter{
 
 	}
 
-	private void updateStateView(StoreManagerItemHolder holder, GameState state, int drawableId) {
-		if(mType == GameManagerType.DOWNLOAD && state != GameState.TRANSFERING) {
-			holder.statusLayout.setVisibility(View.VISIBLE);
-		} else {
-			holder.statusLayout.setVisibility(View.GONE);
-		}
-		holder.status.setBackgroundResource(drawableId);
-	}
-
 	private String formatSpeedText(long speed) {
 		String speedStr = "";
 		int kb = 1024;
@@ -262,73 +253,89 @@ public class StoreManagerContentAdapter implements HMultiBaseAdapter{
 		return speedStr;
 	}
 
-	private void updateProgressView(StoreManagerItemHolder holder, String size, String speed, int progress, int visible) {
-		holder.downloadDisplayLayout.setVisibility(visible);
+	private void updateProgressView(StoreManagerItem item, String size, String speed, int progress, int visible) {
+		StoreManagerItemHolder holder = item.getHolder();
+
+		holder.progressBar.setProgress(progress);
+		holder.progressBar.setVisibility(visible);
+
+		if(item.isItemFocus()) {
+			holder.downloadSpeedLayout.setVisibility(View.GONE);
+		} else {
+			holder.downloadSpeedLayout.setVisibility(visible);
+		}
+
 		holder.downloadSpeed.setVisibility(visible);
 		holder.downloadSpeed.setText(speed);
 		holder.downloadSize.setVisibility(visible);
 		holder.downloadSize.setText(size);
-		if (!TextUtils.isEmpty(speed)) {
-			holder.downloadDisplayLayout.setBackgroundColor(mContext.getResources().getColor(
-					R.color.semitransparent_game_download_bg));
+		if (!TextUtils.isEmpty(speed) && !item.isItemFocus()) {
+			holder.icon.setAlpha(0.5f);
 		} else {
-			holder.downloadDisplayLayout.setBackgroundColor(mContext.getResources().getColor(
-					android.R.color.transparent));
+			holder.icon.setAlpha(1.0f);
 		}
 	}
 
-	public void updateOnStateChange(StoreManagerItem item, AppEntity app) {
+	private void updateStateView(StoreManagerItem item, GameState state, int drawableId) {
 		StoreManagerItemHolder holder = item.getHolder();
+		if((mType == GameManagerType.DOWNLOAD && state != GameState.TRANSFERING) || item.isItemFocus()) {
+			holder.statusLayout.setVisibility(View.VISIBLE);
+		} else {
+			holder.statusLayout.setVisibility(View.GONE);
+		}
+		holder.status.setBackgroundResource(drawableId);
+	}
 
+	public void updateOnStateChange(StoreManagerItem item, AppEntity app) {
 		switch (app.getGameState()) {
 		case DEFAULT:
-			updateStateView(holder, app.getGameState(), R.drawable.store_manager_status_queue);
-			updateProgressView(holder, null, null, 100, View.INVISIBLE);
+			updateStateView(item, app.getGameState(), R.drawable.store_manager_status_queue);
+			updateProgressView(item, null, null, 100, View.INVISIBLE);
 			break;
 		case TRANSFERING:
-			updateStateView(holder, app.getGameState(), 0);
+			updateStateView(item, app.getGameState(), R.drawable.store_manager_status_pause);
 			if (app.getTotalSize() != 0) {
 				int progress = (int) (app.getDownloadSize() * 100 / app.getTotalSize());
 				String sizeString = Formatter.formatFileSize(mContext, app.getDownloadSize()) + " / "
 						+ Formatter.formatFileSize(mContext, app.getTotalSize());
 				String speedString = formatSpeedText(app.getDownloadSpeed());
 
-				updateProgressView(holder, sizeString, speedString, progress, View.VISIBLE);
+				updateProgressView(item, sizeString, speedString, progress, View.VISIBLE);
 			}
 			break;
 		case QUEUING:
-			updateStateView(holder, app.getGameState(), R.drawable.store_manager_status_queue);
+			updateStateView(item, app.getGameState(), R.drawable.store_manager_status_queue);
 			if (app.getTotalSize() != 0) {
 				int progress2 = (int) (app.getDownloadSize() * 100 / app.getTotalSize());
-				updateProgressView(holder, null, null, progress2, View.INVISIBLE);
+				updateProgressView(item, null, null, progress2, View.INVISIBLE);
 			}
 			break;
 		case UPGRADEABLE:
-			updateStateView(holder, app.getGameState(), R.drawable.store_manager_status_upgrable);
-			updateProgressView(holder, null, null, 100, View.INVISIBLE);
+			updateStateView(item, app.getGameState(), R.drawable.store_manager_status_upgrable);
+			updateProgressView(item, null, null, 100, View.INVISIBLE);
 			break;
 		case PAUSED:
-			updateStateView(holder, app.getGameState(), R.drawable.store_manager_status_transfering);
+			updateStateView(item, app.getGameState(), R.drawable.store_manager_status_transfering);
 			if (app.getTotalSize() != 0) {
 				int progress3 = (int) (app.getDownloadSize() * 100 / app.getTotalSize());
-				updateProgressView(holder, null, null, progress3, View.INVISIBLE);
+				updateProgressView(item, null, null, progress3, View.INVISIBLE);
 			}
 			break;
 		case INSTALLABLE:
-			updateStateView(holder, app.getGameState(), R.drawable.store_manager_status_install);
-			updateProgressView(holder, null, null, 100, View.INVISIBLE);
+			updateStateView(item, app.getGameState(), R.drawable.store_manager_status_install);
+			updateProgressView(item, null, null, 100, View.INVISIBLE);
 			break;
 		case INSTALLING:
-			updateStateView(holder, app.getGameState(), R.drawable.store_manager_status_install);
-			updateProgressView(holder, null, null, 100, View.INVISIBLE);
+			updateStateView(item, app.getGameState(), R.drawable.store_manager_status_install);
+			updateProgressView(item, null, null, 100, View.INVISIBLE);
 			break;
 		case LAUNCHABLE:
-			updateStateView(holder, app.getGameState(), R.drawable.store_manager_status_launch);
-			updateProgressView(holder, null, null, 100, View.INVISIBLE);
+			updateStateView(item, app.getGameState(), R.drawable.store_manager_status_launch);
+			updateProgressView(item, null, null, 100, View.INVISIBLE);
 			break;
 		case ERROR:
-			updateStateView(holder, app.getGameState(), R.drawable.store_manager_status_error);
-			updateProgressView(holder, null, null, 100, View.INVISIBLE);
+			updateStateView(item, app.getGameState(), R.drawable.store_manager_status_error);
+			updateProgressView(item, null, null, 100, View.INVISIBLE);
 			break;
 		default:
 			break;
@@ -366,6 +373,6 @@ public class StoreManagerContentAdapter implements HMultiBaseAdapter{
 	}
 
 	public interface OnChildFocusChangeListener {
-		void onChildFocusChange(StoreManagerItemHolder holder, boolean hasFocus);
+		void onChildFocusChange(StoreManagerItemHolder holder, boolean hasFocus, AppEntity app);
 	}
 }

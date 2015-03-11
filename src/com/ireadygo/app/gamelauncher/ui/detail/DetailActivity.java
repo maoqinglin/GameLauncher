@@ -109,20 +109,12 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 					if (mRootView.getScrollY() > 0) {
 						mRootView.smoothScrollTo(0, 0);
 					}
-					mDownloadBtn.setTextColor(Color.WHITE);
-					if (mProgressBar.isShown()) {
-						mDownloadBtn.setBackgroundResource(R.drawable.store_detail_btn_focused);
-					} else {
-						mDownloadBtn.setBackgroundResource(R.drawable.store_normal_btn_bg_selector);
-					}
+
+					mDownloadBtn.setBackgroundResource(R.drawable.account_btn_bg_normal);
+					mDownloadBtn.setTextColor(getResources().getColor(R.color.orange_normal));
 				} else {
-					if (mProgressBar.isShown()) {
-						mDownloadBtn.setTextColor(Color.WHITE);
-						mDownloadBtn.setBackgroundColor(Color.TRANSPARENT);
-					} else {
-						mDownloadBtn.setTextColor(getResources().getColor(R.color.red_normal));
-						mDownloadBtn.setBackgroundResource(R.drawable.store_normal_btn_bg_selector);
-					}
+					mDownloadBtn.setTextColor(Color.WHITE);
+					mDownloadBtn.setBackgroundResource(R.drawable.store_detail_btn_focused);
 				}
 			}
 		});
@@ -273,20 +265,16 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 			mDownloadBtn.setText(textId);
 			mProgressBar.setProgress(0);
 			mProgressBar.setVisibility(View.GONE);
-			mDownloadBtn.setBackgroundResource(R.drawable.store_normal_btn_bg_selector);
-			if (mDownloadBtn.isFocused()) {
-				mDownloadBtn.setTextColor(getResources().getColor(R.color.white));
-			} else {
-				mDownloadBtn.setTextColor(getResources().getColor(R.color.red_normal));
-			}
 		} else {
 			mProgressBar.setVisibility(View.VISIBLE);
+		}
+		
+		if(mDownloadBtn.isFocused()) {
+			mDownloadBtn.setTextColor(getResources().getColor(R.color.orange_normal));
+			mDownloadBtn.setBackgroundResource(R.drawable.account_btn_bg_normal);
+		} else {
 			mDownloadBtn.setTextColor(getResources().getColor(R.color.white));
-			if (mDownloadBtn.isFocused()) {
-				mDownloadBtn.setBackgroundResource(R.drawable.store_detail_btn_focused);
-			} else {
-				mDownloadBtn.setBackgroundColor(Color.TRANSPARENT);
-			}
+			mDownloadBtn.setBackgroundResource(R.drawable.store_detail_btn_focused);
 		}
 	}
 

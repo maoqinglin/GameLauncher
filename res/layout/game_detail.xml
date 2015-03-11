@@ -115,13 +115,15 @@
                             style="?android:attr/progressBarStyleHorizontal"
                             android:layout_width="@dimen/detail_download_btn_width"
                             android:layout_height="@dimen/detail_download_btn_height"
-                            android:background="@android:color/darker_gray"
+                            android:background="@android:color/transparent"
                             android:layout_alignBottom="@id/playNumbers"
                             android:layout_alignParentRight="true"
                             android:layout_gravity="bottom"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
                             android:max="100"
                             android:progress="0"
-                            android:progressDrawable="@drawable/progress_selector"
+                            android:progressDrawable="@drawable/progress_selector_green"
                             android:visibility="gone" />
 
                         <TextView
@@ -132,6 +134,7 @@
                             android:layout_alignBottom="@id/playNumbers"
                             android:layout_alignParentRight="true"
                             android:layout_gravity="bottom"
+                            android:nextFocusDown="@+id/pictureList"
                             android:text="@string/detail_download" />
                     </RelativeLayout>
                 </LinearLayout>

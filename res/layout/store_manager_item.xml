@@ -9,9 +9,9 @@
 
     <ImageView
         android:id="@+id/background"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/game_item_bg" />
+        android:layout_width="@dimen/mygame_app_width"
+        android:layout_height="@dimen/mygame_app_bg_height"
+        android:background="@drawable/corner_settings_item_bg_shape" />
 
     <RelativeLayout
         android:id="@+id/icon_layout"
@@ -27,9 +27,11 @@
             android:id="@+id/title"
             style="@style/mygame_game_text_style"
             android:layout_width="@dimen/mygame_app_width"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/mygame_app_name_height"
             android:layout_below="@+id/icon"
-            android:gravity="center" />
+            android:gravity="center"
+            android:scaleX="0.8"
+            android:scaleY="0.8" />
 
         <ImageView
             android:id="@+id/delete_icon"
@@ -45,10 +47,10 @@
         android:id="@+id/manager_item_speed_layout"
         android:layout_width="@dimen/mygame_app_width"
         android:layout_height="@dimen/mygame_app_height"
-        android:background="@android:color/transparent"
         android:gravity="center"
         android:orientation="vertical"
-        android:visibility="gone" >
+        android:visibility="gone"
+        android:background="@android:color/transparent" >
 
         <TextView
             android:id="@+id/manager_item_download_speed"
@@ -71,7 +73,6 @@
         android:id="@+id/manager_item_status_layout"
         android:layout_width="@dimen/mygame_app_width"
         android:layout_height="@dimen/mygame_app_height"
-        android:background="@android:color/transparent"
         android:visibility="gone" >
 
         <TextView
@@ -84,4 +85,18 @@
             android:contentDescription="@null" />
     </FrameLayout>
 
+    <ProgressBar
+        android:id="@+id/manager_item_download_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="@dimen/store_manager_progress_width"
+        android:layout_height="@dimen/store_manager_progress_height"
+        android:background="@android:color/darker_gray"
+        android:max="100"
+        android:progress="0"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:progressDrawable="@drawable/progress_selector_yellow"
+        android:layout_marginTop="@dimen/store_manager_progress_margin_top"
+        android:layout_marginLeft="@dimen/store_manager_progress_margin_left"
+        />
 </FrameLayout>

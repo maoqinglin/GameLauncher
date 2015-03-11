@@ -1,14 +1,18 @@
 package com.ireadygo.app.gamelauncher.ui.settings;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.preference.PreferenceActivity;
 import android.provider.Settings;
 import android.text.TextUtils;
@@ -16,13 +20,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import com.ireadygo.app.gamelauncher.GameLauncherConfig;
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.game.utils.Utilities;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
-import com.ireadygo.app.gamelauncher.ui.settings.SettingsItem.SettingsItemHoder;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
@@ -110,6 +113,9 @@ public class SettingsFragment extends BaseContentFragment {
 		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_about_selector),
 				getResources().getString(R.string.settings_about), SettingsIntentAction.ABOUT));
 
+		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_reset_selector),
+				getResources().getString(R.string.settings_reset), SettingsIntentAction.RESET));
+		
 		return settingsList;
 	}
 
@@ -136,6 +142,14 @@ public class SettingsFragment extends BaseContentFragment {
 //							setEthernet(getRootActivity());
 							return;
 						}
+						if(SettingsIntentAction.BRIGHTNESS.equals(action)) {
+							UserHandle userHandle = reflectUserHandle();
+							if(userHandle != null) {
+								mActivity.sendBroadcastAsUser(new Intent(action), userHandle);
+							}
+							return;
+						}
+
 						try {
 							Utilities.startActivitySafely(view, new Intent(action), null);
 						} catch (ActivityNotFoundException e) {
@@ -147,6 +161,28 @@ public class SettingsFragment extends BaseContentFragment {
 		}
 	};
 
+	private UserHandle reflectUserHandle() {
+		try {
+			Class cls = UserHandle.class;  
+			Class[] paramTypes = { int.class };  
+			Object[] params = { -3 };  
+			Constructor con = cls.getConstructor(paramTypes);
+			UserHandle userHandle = (UserHandle) con.newInstance(params);
+			return userHandle;
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		}  
+		return null;
+	}
+
 	public static class SettingsIntentAction {
 		public static final String SYSTEM_UPGRADE = "com.ireadygo.app.systemupgrade.activity.UpgradeHomeActivity";
 		public static final String LANGUAGE = Settings.ACTION_LOCALE_SETTINGS;
@@ -157,12 +193,12 @@ public class SettingsFragment extends BaseContentFragment {
 		public static final String HANDLE = "com.ireadygo.app.devicemanager.ui.HandlesBattery";
 		public static final String HDMI = "android.settings.HDMI_SETTINGS";
 		public static final String ABOUT = Settings.ACTION_DEVICE_INFO_SETTINGS;
-		public static final String BRIGHTNESS = "";
+		public static final String BRIGHTNESS = "android.intent.action.SHOW_BRIGHTNESS_DIALOG";
 		public static final String TIME = Settings.ACTION_DATE_SETTINGS;
 		public static final String KEYBOARD = Settings.ACTION_INPUT_METHOD_SETTINGS;
-		public static final String RESET = "";
+		public static final String RESET = "com.android.settings.MasterClear";
 		public static final String DISPLAY = "com.nvidia.settings.MIRACAST_SETTINGS";
-		public static final String WX = SETTINGS;
+		public static final String WX = "com.ireadygo.app.gamelauncher.WeiXinQRcodeActivity";
 		public static final String NETWORK = FLAG_ETHERNET;
 		public static final String AP = "";
 		public static final String BLUTOOTH = Settings.ACTION_BLUETOOTH_SETTINGS;
@@ -181,7 +217,17 @@ public class SettingsFragment extends BaseContentFragment {
 			if (info != null) {
 				String action = info.getIntentAction();
 				if (!TextUtils.isEmpty(action)) {
+
+					if(SettingsIntentAction.BRIGHTNESS.equals(action)) {
+						UserHandle userHandle = reflectUserHandle();
+						if(userHandle != null) {
+							mActivity.sendBroadcastAsUser(new Intent(action), userHandle);
+						}
+						return true;
+					}
+
 					Utilities.startActivitySafely(selectedView, new Intent(action), null);
+					return true;
 				}
 			}
 		}
@@ -207,13 +253,15 @@ public class SettingsFragment extends BaseContentFragment {
 
 	private void setEthernet(Context context) {
 		Intent intent = new Intent();
-		intent.setClassName("com.android.settings", "com.android.settings.SubSettings");
+		intent.setClassName("com.android.settings", "com.android.settings.Settings");
 		intent.setAction(Intent.ACTION_MAIN);
-		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 		intent.putExtra(PreferenceActivity.EXTRA_SHOW_FRAGMENT, "com.android.settings.ethernet.EthernetSettings");
 		try {
-			context.startActivity(intent);;
+			mActivity.startActivity(intent);
 		} catch (ActivityNotFoundException e) {
+			Toast.makeText(mActivity, "Activity is Not found!", Toast.LENGTH_SHORT).show();
+			e.printStackTrace();
 		}
 	}
 }

@@ -9,7 +9,8 @@
         android:id="@+id/store_manager_title_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/content_fragment_padding_left" >
+        android:paddingLeft="@dimen/content_fragment_padding_left"
+        android:paddingTop="@dimen/content_fragment_padding_top" >
     </com.ireadygo.app.gamelauncher.ui.widget.StatisticsTitleView>
 
     <LinearLayout
@@ -62,12 +63,11 @@
     </LinearLayout>
 
     <com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView
+        style="@style/MultiListNormal"
         android:id="@+id/manager_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/store_manager_title_layout"
-        android:layout_marginTop="@dimen/store_manager_menu_margin_top"
-        android:layout_marginLeft="@dimen/store_manager_hlv_margin_left"
         android:layout_toRightOf="@+id/store_manager_option_layout"
         android:focusable="false"
         app:hlv_horizontal_spacing="@dimen/store_manager_hlv_horizontal_spacing"

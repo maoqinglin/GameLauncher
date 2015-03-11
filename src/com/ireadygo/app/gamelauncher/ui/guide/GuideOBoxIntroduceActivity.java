@@ -67,7 +67,7 @@ public class GuideOBoxIntroduceActivity extends BaseGuideActivity {
 	@Override
 	public boolean onSunKey() {
 		onClick(mKeepOnBtn);
-		return super.onSunKey();
+		return true;
 	}
 
      @Override

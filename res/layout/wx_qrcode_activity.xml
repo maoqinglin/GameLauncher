@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/weixin_qrcode_bg"
+    >
+    <include layout="@layout/starting_guide_title_layout" />
+    
+    <LinearLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/wx_qrcode_layout_margin_top"
+        android:layout_marginLeft="@dimen/wx_qrcode_layout_margin_left"
+        android:background="@drawable/weixin_qrcode_layout_bg"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+        
+        <TextView 
+            style="@style/TextLabelSmallLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/wx_intro"
+            android:layout_marginTop="@dimen/wx_qrcode_text_margin_top"
+            />
+        
+        <ImageView 
+            android:id="@+id/wx_qrcode_image"
+            android:contentDescription="@null"
+            android:layout_width="@dimen/wx_qrcode_image_width"
+            android:layout_height="@dimen/wx_qrcode_image_height"
+            android:layout_marginTop="@dimen/wx_qrcode_image_margin_top"
+            android:background="@color/white"/>
+        
+    </LinearLayout>
+
+</RelativeLayout>

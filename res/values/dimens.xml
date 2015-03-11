@@ -153,6 +153,14 @@
     <dimen name="settings_list_padding_bottom">120dp</dimen>
     <dimen name="settings_name_margin_bottom">60dp</dimen>
     <dimen name="settings_name_txt_size">36sp</dimen>
+    
+    <!-- 微信二维码 -->
+    <dimen name="wx_qrcode_image_width">356dp</dimen>
+    <dimen name="wx_qrcode_image_height">356dp</dimen>
+    <dimen name="wx_qrcode_layout_margin_top">284dp</dimen>
+    <dimen name="wx_qrcode_layout_margin_left">240dp</dimen>
+    <dimen name="wx_qrcode_text_margin_top">36dp</dimen>
+    <dimen name="wx_qrcode_image_margin_top">68dp</dimen>
 
     <!-- 免账号 -->
     <dimen name="account_item_init_width">300dp</dimen>
@@ -433,12 +441,19 @@
     <dimen name="store_download_expandlist_indicatorPaddingTop">-120dp</dimen>
     <dimen name="store_download_expandlist_indicatorPaddingLeft">15dp</dimen>
     <dimen name="store_download_speed_text_size">30sp</dimen>
-    <dimen name="store_manager_menu_margin_left">100dp</dimen>
-    <dimen name="store_manager_menu_margin_top">100dp</dimen>
+    <dimen name="store_manager_menu_margin_left">20dp</dimen>
+    <dimen name="store_manager_menu_margin_top">70dp</dimen>
+    <dimen name="store_manager_menu_width">120dp</dimen>
+    <dimen name="store_manager_menu_height">120dp</dimen>
+    <dimen name="store_manager_icon_text_margin_left">30dp</dimen>
     <dimen name="store_manager_hlv_margin_left">120dp</dimen>
     <dimen name="store_manager_hlv_horizontal_spacing">80dp</dimen>
     <dimen name="store_manager_hlv_vertical_spacing">26dp</dimen>
-    <dimen name="store_manager_speed_text_size">36sp</dimen>
+    <dimen name="store_manager_speed_text_size">27sp</dimen>
+    <dimen name="store_manager_progress_margin_top">230dp</dimen>
+    <dimen name="store_manager_progress_margin_left">20dp</dimen>
+    <dimen name="store_manager_progress_width">230dp</dimen>
+    <dimen name="store_manager_progress_height">5dp</dimen>
 
     <!-- 免账号-卡槽购买 -->
     <dimen name="slot_padding_top">0dp</dimen>
@@ -515,5 +530,6 @@
     <dimen name="statusbar_icon_width">78dp</dimen>
     <dimen name="statusbar_padding_right">20dp</dimen>
     <dimen name="statusbar_time_width">120dp</dimen>
+    
 
 </resources>

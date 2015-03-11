@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.ireadygo.app.gamelauncher.R;
@@ -27,6 +28,7 @@ public class StoreManagerItem extends BaseAdapterItem {
 	private Animator mSelectedAnimator;
 	private Animator mUnselectedAnimator;
 	private OnItemFocusChangeListener mListener;
+	private boolean mIsItemFocus;
 
 	public StoreManagerItem(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -45,24 +47,28 @@ public class StoreManagerItem extends BaseAdapterItem {
 
 	@Override
 	public void toSelected(AnimatorListener listener) {
+		mIsItemFocus = true;
 		if(mListener != null) {
 			mListener.onFocusChange(true);
 		}
 		if (mUnselectedAnimator != null && mUnselectedAnimator.isRunning()) {
 			mUnselectedAnimator.cancel();
 		}
+		mHolder.background.setImageResource(R.drawable.settings_item_bg_shape);
 		mSelectedAnimator = createAnimator(listener, 1.1f, 1.2f);
 		mSelectedAnimator.start();
 	}
 
 	@Override
 	public void toUnselected(AnimatorListener listener) {
+		mIsItemFocus = false;
 		if(mListener != null) {
 			mListener.onFocusChange(false);
 		}
 		if (mSelectedAnimator != null && mSelectedAnimator.isRunning()) {
 			mSelectedAnimator.cancel();
 		}
+		mHolder.background.setImageResource(R.drawable.corner_app_item_bg_shape);
 		mUnselectedAnimator = createAnimator(listener, 1, 1);
 		mUnselectedAnimator.start();
 	}
@@ -89,13 +95,18 @@ public class StoreManagerItem extends BaseAdapterItem {
 		
 		mHolder.statusLayout = (FrameLayout) findViewById(R.id.manager_item_status_layout);
 		mHolder.status = (TextView) findViewById(R.id.manager_item_status);
-		mHolder.downloadDisplayLayout = (LinearLayout) findViewById(R.id.manager_item_speed_layout);
+		mHolder.downloadSpeedLayout = (LinearLayout) findViewById(R.id.manager_item_speed_layout);
 		mHolder.downloadSpeed = (TextView) findViewById(R.id.manager_item_download_speed);
 		mHolder.downloadSize = (TextView) findViewById(R.id.manager_item_download_size);
+		mHolder.progressBar = (ProgressBar) findViewById(R.id.manager_item_download_progress);
 	}
 
 	public StoreManagerItemHolder getHolder() {
 		return mHolder;
+	}
+
+	public boolean isItemFocus() {
+		return mIsItemFocus;
 	}
 
 	private Animator createAnimator(AnimatorListener listener, float scaleIcon, float scaleBg) {
@@ -136,8 +147,9 @@ public class StoreManagerItem extends BaseAdapterItem {
 		
 		public FrameLayout statusLayout;
 		public TextView status;
-		public LinearLayout downloadDisplayLayout;
+		public LinearLayout downloadSpeedLayout;
 		public TextView downloadSpeed;
 		public TextView downloadSize;
+		public ProgressBar progressBar;
 	}
 }

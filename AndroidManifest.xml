@@ -178,6 +178,15 @@
             android:name="com.ireadygo.app.gamelauncher.ui.user.UserActivity"
             android:screenOrientation="landscape"
             android:theme="@style/CustomerTheme" />
+         <activity
+            android:name="com.ireadygo.app.gamelauncher.ui.wx.WeiXinQRcodeActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/CustomerTheme">
+             <intent-filter>
+                <action android:name="com.ireadygo.app.gamelauncher.WeiXinQRcodeActivity"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <!-- service -->
         <service android:name="com.ireadygo.app.gamelauncher.service.GameLauncherService" />

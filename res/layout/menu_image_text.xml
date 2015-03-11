@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/menu_image"
-        android:layout_width="@dimen/menu_image_width"
-        android:layout_height="@dimen/menu_image_width"
+        android:layout_width="@dimen/store_manager_menu_width"
+        android:layout_height="@dimen/store_manager_menu_height"
         android:layout_marginLeft="@dimen/menu_item_margin_left"
         android:duplicateParentState="true"
         android:contentDescription="@null" />
@@ -17,10 +17,10 @@
     <TextView
         android:id="@+id/menu_text"
         style="@style/MenuTitle"
-        android:layout_marginTop="@dimen/menu_item_margin_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:duplicateParentState="true"
+        android:layout_marginLeft="@dimen/store_manager_icon_text_margin_left"
         android:textColor="@color/menu_title_selector"
         android:visibility="invisible" />
 

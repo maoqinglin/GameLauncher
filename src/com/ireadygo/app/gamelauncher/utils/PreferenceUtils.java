@@ -91,8 +91,30 @@ public class PreferenceUtils {
 	public static final String KEY_DEVICE_ACTIVE = "an";
 	public static final String KEY_DEVICE_BIND_ACCOUNT = "ao";
 	public static final String KEY_CATEGORY_ITEM_COUNT_EXPIRED_TIME = "ap";
+	public static final String KEY_WX_QR_URL_EXPIRETIME = "aq";
+	public static final String KEY_WX_QR_URL = "ar";
 
 	private static final int USER_PHOTO_EXPIRED_TIME = 7 * 24 * 60 * 60 * 1000;
+
+	public static void saveWxQrUrl(String url) {
+		Editor editor = getSharePref().edit();
+		editor.putString(KEY_WX_QR_URL, url);
+		editor.apply();
+	}
+
+	public static String getWxQrUrl() {
+		return getSharePref().getString(KEY_WX_QR_URL, DEFAULT_STRING);
+	}
+
+	public static void saveWxQrUrlExpiretime(long time) {
+		Editor editor = getSharePref().edit();
+		editor.putLong(KEY_WX_QR_URL_EXPIRETIME, time);
+		editor.apply();
+	}
+
+	public static long getWxQrUrlExpiretime() {
+		return getSharePref().getLong(KEY_WX_QR_URL_EXPIRETIME, 0);
+	}
 
 	public static void saveBindPhoneNum(String phone) {
 		Editor editor = getSharePref().edit();

@@ -41,6 +41,7 @@ import android.os.Build;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
@@ -350,8 +351,7 @@ public final class Utilities {
 			activity.startActivityForResult(intent, requestCode);
 		} catch (ActivityNotFoundException e) {
 			// TODO by linmaoqing
-			// Toast.makeText(activity, R.string.activity_not_found,
-			// Toast.LENGTH_SHORT).show();
+			 Toast.makeText(activity, "activity is not found", Toast.LENGTH_SHORT).show();
 		} catch (SecurityException e) {
 			// TODO by linmaoqing
 			// Toast.makeText(activity, R.string.activity_not_found,
