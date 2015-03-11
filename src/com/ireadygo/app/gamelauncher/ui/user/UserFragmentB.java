@@ -22,6 +22,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.RentReliefInfo;
 import com.ireadygo.app.gamelauncher.ui.activity.BindAlipayAccountActivity;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
+import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
 
 public class UserFragmentB extends BaseContentFragment {
 
@@ -46,6 +47,7 @@ public class UserFragmentB extends BaseContentFragment {
 	@Override
 	protected void initView(View view) {
 		super.initView(view);
+		getOperationTipsLayout().setTipsVisible(TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
 		mAccount = (TextView)view.findViewById(R.id.account);
 		mAlipayAccountState = (TextView)view.findViewById(R.id.alipay_account_state);
 		mAlipayAccountState.setOnClickListener(mOnClickListener);

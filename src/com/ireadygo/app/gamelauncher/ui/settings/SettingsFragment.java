@@ -27,7 +27,9 @@ import com.ireadygo.app.gamelauncher.game.utils.Utilities;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
+import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
+import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 
 @SuppressLint("ValidFragment")
@@ -61,6 +63,8 @@ public class SettingsFragment extends BaseContentFragment {
 		mSettingsMultiAdapter = new SettingsMultiAdapter(getRootActivity(), initData(),2,mHMultiListView);
 		mHMultiListView.setAdapter(mSettingsMultiAdapter);
 		mHMultiListView.setOnItemClickListener(mOnItemClickListener);
+
+		getOperationTipsLayout().setTipsVisible(TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
 	}
 
 	private List<SettingsInfo> initData() {

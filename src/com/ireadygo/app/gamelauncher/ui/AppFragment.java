@@ -61,6 +61,7 @@ public class AppFragment extends BaseContentFragment implements Callbacks {
 	@Override
 	protected void initView(View view) {
 		super.initView(view);
+		getOperationTipsLayout().setAllVisible(View.VISIBLE);
 		mHMultiListView = (HMultiListView)view.findViewById(R.id.mutillist);
 		mStatisticsView = (StatisticsTitleView)view.findViewById(R.id.statistics_view);
 		mAppAdapter = new AppAdapter(getRootActivity(), mAppList, LIST_NUM, mHMultiListView);

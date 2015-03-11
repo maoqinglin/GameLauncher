@@ -55,6 +55,7 @@ import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.guide.GuideRegisterOrLoginActivity;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.widget.ConfirmDialog;
+import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
 import com.ireadygo.app.gamelauncher.utils.NetworkUtils;
 import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
 import com.ireadygo.app.gamelauncher.utils.Utils;
@@ -96,6 +97,7 @@ public class UserPersonalFragment extends BaseContentFragment implements OnClick
 
 	public void initView(View view) {
 		super.initView(view);
+		getOperationTipsLayout().setTipsVisible(TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
 		mPhotoView = (ImageView) view.findViewById(R.id.personal_photo);
 		mPhotoView.setOnClickListener(this);
 

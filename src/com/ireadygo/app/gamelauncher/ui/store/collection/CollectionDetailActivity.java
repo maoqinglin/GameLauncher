@@ -20,6 +20,7 @@ import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
 import com.ireadygo.app.gamelauncher.ui.store.StoreAppMultiAdapter;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
+import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout;
 import com.ireadygo.app.gamelauncher.ui.widget.StatisticsTitleView;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiBaseAdapter;
@@ -52,7 +53,8 @@ public class CollectionDetailActivity extends BaseActivity implements OnClickLis
 		mMultiListView.setAdapter(mAdapter);
 		
 		mTipsLayout = (OperationTipsLayout)findViewById(R.id.tips_layout);
-		mTipsLayout.setAllVisible(View.VISIBLE);
+		mTipsLayout.setTipsVisible(TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
+		
 		
 		mCategoryId = getIntent().getLongExtra(EXTRA_CATEGORY_ID, -1);
 		if (mCategoryId > 0) {

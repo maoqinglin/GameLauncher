@@ -41,6 +41,7 @@ import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.store.StoreAppNormalAdapter;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
 import com.ireadygo.app.gamelauncher.ui.widget.PagingIndicator;
+import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
 import com.ireadygo.app.gamelauncher.utils.Utils;
 import com.snail.appstore.openapi.AppPlatFormConfig;
 
@@ -84,6 +85,7 @@ public class SearchFragment extends BaseContentFragment {
 	@Override
 	protected void initView(View view) {
 		super.initView(view);
+		getOperationTipsLayout().setTipsVisible(TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
 		mListView = (HListView) view.findViewById(R.id.search_list);
 		mSearchPrompt = (TextView)view.findViewById(R.id.search_recommend_prompt);
 		mSearchInputView = (AutoCompleteTextView) view.findViewById(R.id.search_edittext);

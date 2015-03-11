@@ -23,7 +23,6 @@ import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 import com.ireadygo.app.gamelauncher.utils.Utils;
 
 public abstract class BaseContentFragment extends BaseFragment {
-	private OperationTipsLayout mOperationTipsLayout;
 	private BaseMenuFragment mMenuFragment;
 	private int mFocusedX = Config.Content.FOCUSED_X;
 	private int mFocusedY = Config.Content.FOCUSED_Y;
@@ -43,11 +42,11 @@ public abstract class BaseContentFragment extends BaseFragment {
 	}
 
 	protected void initView(View view) {
-		mOperationTipsLayout = (OperationTipsLayout) view.findViewById(R.id.tipsLayout);
+		
 	}
 
 	protected OperationTipsLayout getOperationTipsLayout() {
-		return mOperationTipsLayout;
+		return getMenuActivity().getTipsLayout();
 	}
 
 	@Override

@@ -148,6 +148,7 @@ public class StoreManagerContentFragment extends BaseContentFragment {
 	@Override
 	protected void initView(View view) {
 		super.initView(view);
+		getOperationTipsLayout().setAllVisible(View.VISIBLE);
 		mTitleLayout = (StatisticsTitleView) view.findViewById(R.id.store_manager_title_layout);
 
 		mHMultiListView = (HMultiListView) view.findViewById(R.id.manager_viewpager);

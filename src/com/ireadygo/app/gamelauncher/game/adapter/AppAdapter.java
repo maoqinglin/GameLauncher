@@ -67,31 +67,29 @@ public class AppAdapter implements HMultiBaseAdapter {
 
 	public void bindView(final int position, View convertView) {
 		convertView.setVisibility(View.VISIBLE);
-		final AppItemHolder holder = ((AppItem)convertView).getHolder();
-		if (null != holder) {
-			if (appList.size() > 0 && position < appList.size()) {
-				if(appList.get(position).getAppIcon() != null){
-					holder.icon.setImageBitmap(appList.get(position).getAppIcon());
-					holder.title.setText(appList.get(position).getTitle());
-					if (appList.get(position).getTitle().toString().contains("太极熊猫")) {
-						AppEntity app = GameData.getInstance(mContext).getGameById("38");
-						if (app == null) {
-							app = GameData.getInstance(mContext).getGameByPkgName("com.snailgames.taiji");
-						}
-						if (app != null && !TextUtils.isEmpty(app.getLocalIconUrl())) {
-							holder.icon.setImageBitmap(PictureUtil.readBitmap(mContext, app.getLocalIconUrl()));
-						}
+		final AppItemHolder holder = ((AppItem) convertView).getHolder();
+		if (null != holder && !appList.isEmpty()) {
+			if (appList.get(position).getAppIcon() != null) {
+				holder.icon.setImageBitmap(appList.get(position).getAppIcon());
+				holder.title.setText(appList.get(position).getTitle().toString().trim());
+				if (appList.get(position).getTitle().toString().contains("太极熊猫")) {
+					AppEntity app = GameData.getInstance(mContext).getGameById("38");
+					if (app == null) {
+						app = GameData.getInstance(mContext).getGameByPkgName("com.snailgames.taiji");
 					}
-
-					updateDeleteView(holder,appList.get(position));
-					holder.uninstallIcon.setOnClickListener(new OnClickListener() {
-
-						@Override
-						public void onClick(View v) {
-							PackageUtils.unInstallApp(mContext, appList.get(position).packageName);
-						}
-					});
+					if (app != null && !TextUtils.isEmpty(app.getLocalIconUrl())) {
+						holder.icon.setImageBitmap(PictureUtil.readBitmap(mContext, app.getLocalIconUrl()));
+					}
 				}
+
+				updateDeleteView(holder, appList.get(position));
+				holder.uninstallIcon.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						PackageUtils.unInstallApp(mContext, appList.get(position).packageName);
+					}
+				});
 			}
 		}
 	}
