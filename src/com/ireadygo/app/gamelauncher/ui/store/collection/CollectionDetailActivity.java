@@ -18,16 +18,16 @@ import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
 import com.ireadygo.app.gamelauncher.ui.base.BaseActivity;
 import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
 import com.ireadygo.app.gamelauncher.ui.store.StoreAppMultiAdapter;
-import com.ireadygo.app.gamelauncher.ui.store.category.CategoryLayout;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
+import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout;
 import com.ireadygo.app.gamelauncher.ui.widget.StatisticsTitleView;
-import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiBaseAdapter;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 import com.snail.appstore.openapi.AppPlatFormConfig;
 
 public class CollectionDetailActivity extends BaseActivity implements OnClickListener {
+	public static final String EXTRA_CATEGORY_ID = "CategoryID";
 	private StatisticsTitleView mTitleLayout;
 	private HMultiListView mMultiListView;
 	private OperationTipsLayout mTipsLayout;
@@ -54,7 +54,7 @@ public class CollectionDetailActivity extends BaseActivity implements OnClickLis
 		mTipsLayout = (OperationTipsLayout)findViewById(R.id.tips_layout);
 		mTipsLayout.setAllVisible(View.VISIBLE);
 		
-		mCategoryId = getIntent().getLongExtra(CategoryLayout.EXTRA_CATEGORY_ID, -1);
+		mCategoryId = getIntent().getLongExtra(EXTRA_CATEGORY_ID, -1);
 		if (mCategoryId > 0) {
 			loadCategoryDetail();
 		}
@@ -165,7 +165,7 @@ public class CollectionDetailActivity extends BaseActivity implements OnClickLis
 
 	public static void startSelf(Context context, long categoryId) {
 		Intent intent = new Intent(context, CollectionDetailActivity.class);
-		intent.putExtra(CategoryLayout.EXTRA_CATEGORY_ID, categoryId);
+		intent.putExtra(EXTRA_CATEGORY_ID, categoryId);
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		context.startActivity(intent);
 	}

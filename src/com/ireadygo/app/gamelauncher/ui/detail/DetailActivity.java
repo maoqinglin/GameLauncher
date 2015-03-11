@@ -53,6 +53,11 @@ import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 
 public class DetailActivity extends BaseActivity implements OnClickListener {
 	public static final String EXTRAS_APP_ENTITY = "EXTRAS_APP_ENTITY";
+	public static final String EXTRAS_APP_ID = "EXTRAS_APP_ID";
+
+	private AppEntity mAppEntity;
+	private long mAppId;
+
 	private ScrollView mRootView;
 	private View mGobackView;
 	private ImageView mIconView;
@@ -65,7 +70,6 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 	private TextView mDownloadBtn;
 	private ImageView mIntroDownArrowView;
 	private HListView mPictureListView;
-	private AppEntity mAppEntity;
 	private DetailScreenshotAdapter mPictureAdapter;
 	private GameManager mGameManager;
 	private AppStateListener mStateListener = new AppStateListener();
@@ -85,8 +89,8 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 	}
 
 	private void initView() {
-		mRootView = (ScrollView)findViewById(R.id.detailRootView);
-		
+		mRootView = (ScrollView) findViewById(R.id.detailRootView);
+
 		mGobackView = findViewById(R.id.goback);
 		mGobackView.setOnClickListener(this);
 
@@ -101,18 +105,18 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 		mDownloadBtn.setOnFocusChangeListener(new OnFocusChangeListener() {
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
-				if(hasFocus){
-					if(mRootView.getScrollY() > 0){
+				if (hasFocus) {
+					if (mRootView.getScrollY() > 0) {
 						mRootView.smoothScrollTo(0, 0);
 					}
 					mDownloadBtn.setTextColor(Color.WHITE);
-					if(mProgressBar.isShown()) {
+					if (mProgressBar.isShown()) {
 						mDownloadBtn.setBackgroundResource(R.drawable.store_detail_btn_focused);
 					} else {
 						mDownloadBtn.setBackgroundResource(R.drawable.store_normal_btn_bg_selector);
 					}
 				} else {
-					if(mProgressBar.isShown()) {
+					if (mProgressBar.isShown()) {
 						mDownloadBtn.setTextColor(Color.WHITE);
 						mDownloadBtn.setBackgroundColor(Color.TRANSPARENT);
 					} else {
@@ -143,7 +147,7 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 		mIntroView.setText(Utils.stringFilter(mIntroView.getText().toString()));
 
 		mPictureListView = (HListView) findViewById(R.id.pictureList);
-		mPictureAdapter = new DetailScreenshotAdapter(mPictureListView,null, this);
+		mPictureAdapter = new DetailScreenshotAdapter(mPictureListView, null, this);
 		mPictureListView.setAdapter(mPictureAdapter);
 		mPictureListView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -152,10 +156,15 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 				ScreenPictureActivity.startSelf(DetailActivity.this, mAppEntity, position);
 			}
 		});
-		
+
 		Bundle bundle = getIntent().getExtras();
 		if (bundle != null) {
 			mAppEntity = bundle.getParcelable(EXTRAS_APP_ENTITY);
+			if (mAppEntity == null) {
+				mAppId = bundle.getLong(EXTRAS_APP_ID);				
+			}else{
+				mAppId = Long.parseLong(mAppEntity.getAppId());
+			}
 		}
 		mIntroLayout.addOnLayoutChangeListener(new OnLayoutChangeListener() {
 
@@ -170,12 +179,10 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 				}
 			}
 		});
-		if(mAppEntity != null){
-			updateData(mAppEntity);
-			loadAppDetail(mAppEntity.getAppId());
-			//上报打开应用详情事件
-			StaticsUtils.onAppDetailOpen(mAppEntity.getAppId());
-		}
+		updateData(mAppEntity);
+		loadAppDetail(mAppId + "");
+		// 上报打开应用详情事件
+		StaticsUtils.onAppDetailOpen(mAppId + "");
 		mDownloadBtn.requestFocus();
 	}
 
@@ -227,7 +234,7 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 	}
 
 	private void updateDownloadBtn(String pkgName) {
-		if(mAppEntity == null || !mAppEntity.getPkgName().equals(pkgName)) {
+		if (mAppEntity == null || !mAppEntity.getPkgName().equals(pkgName)) {
 			return;
 		}
 		GameState state = mGameManager.getGameStateManager().getGameState(pkgName);
@@ -262,12 +269,12 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 		case MOVING:
 			break;
 		}
-		if(state != GameState.TRANSFERING) {
+		if (state != GameState.TRANSFERING) {
 			mDownloadBtn.setText(textId);
 			mProgressBar.setProgress(0);
 			mProgressBar.setVisibility(View.GONE);
 			mDownloadBtn.setBackgroundResource(R.drawable.store_normal_btn_bg_selector);
-			if(mDownloadBtn.isFocused()) {
+			if (mDownloadBtn.isFocused()) {
 				mDownloadBtn.setTextColor(getResources().getColor(R.color.white));
 			} else {
 				mDownloadBtn.setTextColor(getResources().getColor(R.color.red_normal));
@@ -275,7 +282,7 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 		} else {
 			mProgressBar.setVisibility(View.VISIBLE);
 			mDownloadBtn.setTextColor(getResources().getColor(R.color.white));
-			if(mDownloadBtn.isFocused()) {
+			if (mDownloadBtn.isFocused()) {
 				mDownloadBtn.setBackgroundResource(R.drawable.store_detail_btn_focused);
 			} else {
 				mDownloadBtn.setBackgroundColor(Color.TRANSPARENT);
@@ -356,7 +363,7 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 		finish();
 		return true;
 	}
-	
+
 	@Override
 	protected void onDestroy() {
 		mGameManager.removeDownloadListener(mStateListener);
@@ -374,7 +381,8 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 			}
 			String appId = params[0];
 			try {
-//				return GameInfoHub.instance(GameDetailActivity.this).obtainItemByIdFrmRemote(appId);
+				// return
+				// GameInfoHub.instance(GameDetailActivity.this).obtainItemByIdFrmRemote(appId);
 				return GameInfoHub.instance(DetailActivity.this).obtainItemById(appId);
 			} catch (InfoSourceException e) {
 				e.printStackTrace();
@@ -399,9 +407,11 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 					@Override
 					public void onLoadingStarted(String arg0, View arg1) {
 					}
+
 					@Override
 					public void onLoadingFailed(String arg0, View arg1, FailReason arg2) {
 					}
+
 					@SuppressWarnings("deprecation")
 					@Override
 					public void onLoadingComplete(String arg0, View arg1, Bitmap arg2) {
@@ -409,6 +419,7 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 							mView.setBackground(new BitmapDrawable(arg2));
 						}
 					}
+
 					@Override
 					public void onLoadingCancelled(String arg0, View arg1) {
 					}
@@ -459,13 +470,13 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 
 		@Override
 		public void onDownloadProgressChange(AppEntity app) {
-			if(mAppEntity == null || !mAppEntity.getAppId().equals(app.getAppId())) {
+			if (mAppEntity == null || !mAppEntity.getAppId().equals(app.getAppId())) {
 				return;
 			}
 			GameState state = mGameManager.getGameStateManager().getGameState(app.getPkgName());
-			if(state == GameState.TRANSFERING) {
+			if (state == GameState.TRANSFERING) {
 				int progress = (int) (app.getDownloadSize() * 100 / app.getTotalSize());
-				if(progress <= 100) {
+				if (progress <= 100) {
 					mProgressBar.setProgress(progress);
 					mDownloadBtn.setText(progress + "%");
 				} else {
@@ -489,9 +500,9 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 		SoundPoolManager.instance(this).play(SoundPoolManager.SOUND_EXIT);
 		super.finish();
 	}
-	
+
 	private OnFocusChangeListener mIntroFocusChangeListener = new OnFocusChangeListener() {
-		
+
 		@Override
 		public void onFocusChange(View v, boolean hasFocus) {
 			int textHeight = mIntroLayout.getChildAt(0).getHeight() + mIntroLayout.getPaddingBottom()

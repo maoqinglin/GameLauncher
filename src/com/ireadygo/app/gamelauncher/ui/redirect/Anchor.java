@@ -13,21 +13,31 @@ import com.ireadygo.app.gamelauncher.ui.store.collection.CollectionDetailActivit
 import com.ireadygo.app.gamelauncher.ui.user.UserActivity;
 
 public class Anchor implements Serializable {
-	public static final String EXTRA_ANCHOR = "EXTRA_ANCHOR";
+	public static final String EXTRA_DESTINATION = "EXTRA_DESTINATION";
 	private static final long serialVersionUID = 1L;
 
 	private Destination mDestination;
 	private String mArgs1;
+	private Intent mIntent;
 
 	public Anchor(Destination destination) {
 		this.mDestination = destination;
+		mIntent = newIntent();
 	}
 
 	public Intent getIntent() {
+		return mIntent;
+	}
+
+	private Intent newIntent() {
 		Intent intent = new Intent();
-		intent.putExtra(EXTRA_ANCHOR, this);
-		intent.setClass(GameLauncherApplication.getApplication(), getActivityClassByDestination(mDestination));
-		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		if (mDestination == Destination.WEBPAGE) {
+			intent.setAction("android.intent.action.VIEW");
+		} else {
+			intent.putExtra(EXTRA_DESTINATION, mDestination);
+			intent.setClass(GameLauncherApplication.getApplication(), getActivityClassByDestination(mDestination));
+			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		}
 		return intent;
 	}
 
@@ -67,7 +77,7 @@ public class Anchor implements Serializable {
 
 	public enum Destination {
 		GAME_DETAIL, STORE_RECOMMEND, STORE_CATEGORY, STORE_COLLECTION, STORE_SEARCH, STORE_FAVORITE_APPS, STORE_GAME_MANAGE, //
-		STORE_SETTINGS, COLLECTION_DETAIL, CATEGORY_DETAIL, ACCOUNT_WEALTH, ACCOUNT_PERSONAL, ACCOUNT_NOTICE, ACCOUNT_RECHARGE, ACCOUNT_FREECARD
+		STORE_SETTINGS, COLLECTION_DETAIL, CATEGORY_DETAIL, ACCOUNT_WEALTH, ACCOUNT_PERSONAL, ACCOUNT_NOTICE, ACCOUNT_RECHARGE, ACCOUNT_FREECARD, WEBPAGE
 	}
 
 	public String getArgs1() {

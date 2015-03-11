@@ -1,7 +1,10 @@
 package com.ireadygo.app.gamelauncher.appstore.info.item;
 
 public class BannerItem {
-
+	public static final int TYPE_GAME = 1;
+	public static final int TYPE_COLLECTION = 2;
+	public static final int TYPE_WEBPAGE = 3;
+	
 	private Long NAppId;
 	private Integer IBannerId;
 	private String CDownloadUrl;

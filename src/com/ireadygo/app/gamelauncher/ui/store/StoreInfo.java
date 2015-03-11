@@ -1,11 +1,18 @@
 package com.ireadygo.app.gamelauncher.ui.store;
 
+import android.graphics.drawable.Drawable;
+
 import com.ireadygo.app.gamelauncher.ui.redirect.Anchor;
 
 public class StoreInfo {
 	private Anchor mAnchor;
 	private int mDrawableId;
 	private int mTitleId;
+	private Drawable mDrawable;
+
+	public StoreInfo() {
+
+	}
 
 	public StoreInfo(int drawableId, Anchor anchor) {
 		this.mDrawableId = drawableId;
@@ -18,11 +25,19 @@ public class StoreInfo {
 		this.mAnchor = anchor;
 	}
 
+	public Drawable getDrawable() {
+		return mDrawable;
+	}
+
+	public void setDrawable(Drawable drawable) {
+		this.mDrawable = drawable;
+	}
+
 	public Anchor getAnchor() {
 		return mAnchor;
 	}
 
-	public void setmAnchor(Anchor anchor) {
+	public void setAnchor(Anchor anchor) {
 		this.mAnchor = anchor;
 	}
 
@@ -42,4 +57,10 @@ public class StoreInfo {
 		this.mTitleId = titleId;
 	}
 
+	public void copyFrom(StoreInfo otherInfo) {
+		this.mAnchor = otherInfo.getAnchor();
+		this.mDrawable = otherInfo.getDrawable();
+		this.mDrawableId = otherInfo.getDrawableId();
+		this.mTitleId = otherInfo.getTitleId();
+	}
 }

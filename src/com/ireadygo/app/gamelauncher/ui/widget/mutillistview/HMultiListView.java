@@ -317,7 +317,6 @@ public class HMultiListView extends LinearLayout {
 	public void notifyDataSetChanged() {
 		if (mHMultiBaseAdapter != null) {
 			initDataLists(mHMultiBaseAdapter.getHListNum(), mHMultiBaseAdapter.getData());
-			Log.i("chen.r", "mHMultiBaseAdapter Data : " + mHMultiBaseAdapter.getData().size());
 		}
 		for (BaseAdapter baseAdapter : mBaseAdapters) {
 			baseAdapter.notifyDataSetChanged();

@@ -18,14 +18,13 @@ import com.ireadygo.app.gamelauncher.ui.base.BaseActivity;
 import com.ireadygo.app.gamelauncher.ui.base.KeyEventFragment;
 import com.ireadygo.app.gamelauncher.ui.redirect.Anchor;
 import com.ireadygo.app.gamelauncher.ui.redirect.Anchor.Destination;
-import com.ireadygo.app.gamelauncher.ui.store.category.CategoryLayout;
 import com.ireadygo.app.gamelauncher.ui.store.recommend.RecommendLayout;
 import com.ireadygo.app.gamelauncher.ui.widget.CustomFrameLayout;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
 
 public class StoreDetailActivity extends BaseActivity {
-//	public static final String EXTRA_MENU_TYPE = "MENU_TYPE";
+	// public static final String EXTRA_MENU_TYPE = "MENU_TYPE";
 	private StoreOptionsLayout mOptionsLayout;
 	private CustomFrameLayout mContentLayout;
 	private SparseArray<StoreBaseContentLayout> mContentChildArray = new SparseArray<StoreBaseContentLayout>();
@@ -33,20 +32,20 @@ public class StoreDetailActivity extends BaseActivity {
 	private OperationTipsLayout mTipsLayout;
 	private int mLastKeyCode = -1;
 	private long mLastKeyTime;
-	
 
 	// private Animator mLayoutEnterAnimator, mLayoutExitAnimator;
 
-//	public StoreDetailActivity(Activity activity) {
-//		super(activity);
-//	}
-	
-//	@Override
-//	public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//		View view = inflater.inflate(R.layout.store_detail, container, false);
-//		initView(view);
-//		return view;
-//	}
+	// public StoreDetailActivity(Activity activity) {
+	// super(activity);
+	// }
+
+	// @Override
+	// public View createView(LayoutInflater inflater, ViewGroup container,
+	// Bundle savedInstanceState) {
+	// View view = inflater.inflate(R.layout.store_detail, container, false);
+	// initView(view);
+	// return view;
+	// }
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,19 +65,18 @@ public class StoreDetailActivity extends BaseActivity {
 		if (intent == null) {
 			return;
 		}
-		Anchor anchor = (Anchor)intent.getSerializableExtra(Anchor.EXTRA_ANCHOR);
-		if(anchor != null){
-			Destination destination = anchor.getDestination();
-			mOptionsLayout.requestOptionsFocusByTag(destination);			
+		Destination destination = (Destination) intent.getSerializableExtra(Anchor.EXTRA_DESTINATION);
+		if (destination != null) {
+			mOptionsLayout.requestOptionsFocusByTag(destination);
 		}
 	}
 
 	protected void initView() {
 		mOptionsLayout = (StoreOptionsLayout) findViewById(R.id.storeOptionsLayout);
-//		mOptionsLayout.setFragment(this);
+		// mOptionsLayout.setFragment(this);
 		mContentLayout = (CustomFrameLayout) findViewById(R.id.storeContentLayout);
 
-//		replaceContentLayout(LayoutTag.RECOMMEND);
+		// replaceContentLayout(LayoutTag.RECOMMEND);
 		mOptionsLayout.setOnChildFocusChangeListener(new OnChildFocusChangeListener() {
 
 			@Override
@@ -109,8 +107,8 @@ public class StoreDetailActivity extends BaseActivity {
 				}
 			}
 		});
-		mTipsLayout = (OperationTipsLayout)findViewById(R.id.tipsLayout);
-//		mTipsLayout.setTipsGone(OperationTipsLayout.FLAG_TIPS_SUN,OperationTipsLayout.FLAG_TIPs_WATER);
+		mTipsLayout = (OperationTipsLayout) findViewById(R.id.tipsLayout);
+		// mTipsLayout.setTipsGone(OperationTipsLayout.FLAG_TIPS_SUN,OperationTipsLayout.FLAG_TIPs_WATER);
 	}
 
 	public StoreOptionsLayout getOptionsLayout() {
@@ -138,12 +136,12 @@ public class StoreDetailActivity extends BaseActivity {
 			targetLayout = createContentLayoutByTag(layoutTag);
 		}
 		mContentLayout.addViewInLayout(targetLayout);
-		//TODO
-//		mContentChildArray.put(layoutTag, targetLayout);
+		// TODO
+		// mContentChildArray.put(layoutTag, targetLayout);
 		mCurrentContentChild = targetLayout;
-//		if (targetLayout instanceof StoreGamesLayout) {
-//			((StoreGamesLayout) targetLayout).refreshDataBySwitchLayout();
-//		}
+		// if (targetLayout instanceof StoreGamesLayout) {
+		// ((StoreGamesLayout) targetLayout).refreshDataBySwitchLayout();
+		// }
 		mContentLayout.requestLayout();
 		mContentLayout.invalidate();
 	}
@@ -158,19 +156,19 @@ public class StoreDetailActivity extends BaseActivity {
 		StoreBaseContentLayout contentLayout = null;
 		switch (layoutTag) {
 		case LayoutTag.SEARCH:
-//			contentLayout = new SearchLayout(this, layoutTag, this);
+			// contentLayout = new SearchLayout(this, layoutTag, this);
 			break;
 		case LayoutTag.RECOMMEND:
 			contentLayout = new RecommendLayout(this, layoutTag, this);
 			break;
 		case LayoutTag.COLLECTION:
-//			contentLayout = new CollectionLayout(this, layoutTag, this);
+			// contentLayout = new CollectionLayout(this, layoutTag, this);
 			break;
 		case LayoutTag.CATEGORY:
-			contentLayout = new CategoryLayout(this, layoutTag, this);
+			// contentLayout = new CategoryLayout(this, layoutTag, this);
 			break;
 		case LayoutTag.GAME_MANAGE:
-//			contentLayout = new StoreGamesLayout(this, layoutTag, this);
+			// contentLayout = new StoreGamesLayout(this, layoutTag, this);
 			break;
 		}
 		return contentLayout;
@@ -209,9 +207,7 @@ public class StoreDetailActivity extends BaseActivity {
 		mLastKeyCode = keyCode;
 		mLastKeyTime = System.currentTimeMillis();
 		if (mOptionsLayout != null && mOptionsLayout.hasFocus()) {
-			if (SnailKeyCode.MOON_KEY == keyCode 
-					|| SnailKeyCode.BACK_KEY == keyCode
-					|| SnailKeyCode.UP_KEY == keyCode) {
+			if (SnailKeyCode.MOON_KEY == keyCode || SnailKeyCode.BACK_KEY == keyCode || SnailKeyCode.UP_KEY == keyCode) {
 				finish();
 				return true;
 			}
@@ -231,20 +227,20 @@ public class StoreDetailActivity extends BaseActivity {
 		}
 	}
 
-//	@Override
-//	protected boolean isCurrentFocus() {
-//		if (mOptionsLayout.hasFocus()) {
-//			return true;
-//		}
-//		if (mCurrentContentChild == null) {
-//			return false;
-//		}
-//		return mCurrentContentChild.hasFocus();
-//	}
-//
-//	@Override
-//	public void onDestoryView() {
-//		super.onDestoryView();
-//		mContentChildArray.clear();
-//	}
+	// @Override
+	// protected boolean isCurrentFocus() {
+	// if (mOptionsLayout.hasFocus()) {
+	// return true;
+	// }
+	// if (mCurrentContentChild == null) {
+	// return false;
+	// }
+	// return mCurrentContentChild.hasFocus();
+	// }
+	//
+	// @Override
+	// public void onDestoryView() {
+	// super.onDestoryView();
+	// mContentChildArray.clear();
+	// }
 }

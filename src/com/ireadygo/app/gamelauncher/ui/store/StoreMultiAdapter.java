@@ -18,10 +18,13 @@ import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 public class StoreMultiAdapter implements HMultiBaseAdapter {
 	private Context mContext;
 	private List<StoreInfo> mStoreDatas = new ArrayList<StoreInfo>();
+	private List<StoreInfo> mRecommendDatas = new ArrayList<StoreInfo>();// 位置0-7的数据，从服务器获取
 	private HMultiListView mMultiListView;
 
-	public StoreMultiAdapter(Context mContext, List<StoreInfo> mStoreDatas, HMultiListView listView) {
+	public StoreMultiAdapter(Context mContext, List<StoreInfo> recommendDatas, List<StoreInfo> mStoreDatas,
+			HMultiListView listView) {
 		this.mContext = mContext;
+		this.mRecommendDatas = recommendDatas;
 		this.mStoreDatas = mStoreDatas;
 		this.mMultiListView = listView;
 	}
@@ -40,14 +43,20 @@ public class StoreMultiAdapter implements HMultiBaseAdapter {
 			item = new ImageItemSmall(mContext);
 		}
 		ImageItemHolder holder = item.getHolder();
-		StoreInfo info = mStoreDatas.get(position);
-		if (position < 8) {
+		StoreInfo info;
+		if (position < mRecommendDatas.size()) {
+			info = mRecommendDatas.get(position);
 			holder.title.setVisibility(View.GONE);
 		} else {
+			info = mStoreDatas.get(position - mRecommendDatas.size());
 			holder.title.setVisibility(View.VISIBLE);
 			holder.title.setText(info.getTitleId());
 		}
-		holder.icon.setImageResource(info.getDrawableId());
+		if (info.getDrawable() != null) {
+			holder.icon.setImageDrawable(info.getDrawable());
+		} else {
+			holder.icon.setImageResource(info.getDrawableId());
+		}
 		return item;
 	}
 
@@ -63,12 +72,15 @@ public class StoreMultiAdapter implements HMultiBaseAdapter {
 
 	@Override
 	public List<?> getData() {
-		return mStoreDatas;
+		ArrayList<StoreInfo> infoList = new ArrayList<StoreInfo>();
+		infoList.addAll(mRecommendDatas);
+		infoList.addAll(mStoreDatas);
+		return infoList;
 	}
 
 	@Override
 	public View getEmptyView(int position, View convertView, ViewGroup parent) {
-		if(convertView == null){
+		if (convertView == null) {
 			convertView = new ImageItemSmall(mContext);
 		}
 		convertView.setVisibility(View.GONE);

@@ -33,10 +33,9 @@ public class StoreActivity extends BaseMenuActivity {
 		if (intent == null) {
 			return;
 		}
-		Anchor anchor = (Anchor) intent.getSerializableExtra(Anchor.EXTRA_ANCHOR);
-		if (anchor != null) {
-			Destination destination = anchor.getDestination();
-			int position = 0;
+		Destination destination = (Destination) intent.getSerializableExtra(Anchor.EXTRA_DESTINATION);
+		int position = 0;
+		if (destination != null) {
 			switch (destination) {
 			case STORE_SEARCH:
 				position = 0;
@@ -54,8 +53,8 @@ public class StoreActivity extends BaseMenuActivity {
 				position = 4;
 				break;
 			}
-			getMenuFragment().requestFocusByPosition(position);
 		}
+		getMenuFragment().requestFocusByPosition(position);
 	}
 
 	@Override

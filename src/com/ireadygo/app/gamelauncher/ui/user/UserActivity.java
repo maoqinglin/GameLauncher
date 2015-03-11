@@ -20,23 +20,22 @@ public class UserActivity extends BaseMenuActivity {
 		if (intent == null) {
 			return;
 		}
-		Anchor anchor = (Anchor) intent.getSerializableExtra(Anchor.EXTRA_ANCHOR);
-		if (anchor != null) {
-			Destination destination = anchor.getDestination();
-			int position = 0;
+		Destination destination = (Destination) intent.getSerializableExtra(Anchor.EXTRA_DESTINATION);
+		int position = 0;
+		if (destination != null) {
 			switch (destination) {
 			case ACCOUNT_PERSONAL:
 				position = 0;
 				break;
-//			case ACCOUNT_NOTICE:
-//				position = 1;
-//				break;
+			// case ACCOUNT_NOTICE:
+			// position = 1;
+			// break;
 			case ACCOUNT_RECHARGE:
 				position = 1;
 				break;
 			}
-			getMenuFragment().requestFocusByPosition(position);
 		}
+		getMenuFragment().requestFocusByPosition(position);
 	}
 
 	@Override
@@ -48,7 +47,7 @@ public class UserActivity extends BaseMenuActivity {
 	public boolean onBackKey() {
 		return true;
 	}
-	
+
 	public static void startSelf(Context context, int focusPosition) {
 		Intent intent = new Intent(context, UserActivity.class);
 		intent.putExtra(EXTRA_FOCUS_POSITION, focusPosition);
