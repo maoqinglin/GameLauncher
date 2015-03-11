@@ -10,7 +10,8 @@ import com.ireadygo.app.gamelauncher.R;
 
 public class StoreEmptyView extends FrameLayout {
 	private TextView mTitleView;
-	
+	private TextView mRefreshBtn;
+
 	public StoreEmptyView(Context context, AttributeSet attrs) {
 		this(context, attrs, 0);
 	}
@@ -26,8 +27,10 @@ public class StoreEmptyView extends FrameLayout {
 	}
 
 	private void initView() {
+		setBackgroundColor(0xFFFF00);
 		LayoutInflater.from(getContext()).inflate(R.layout.store_empty_view, this, true);
-		mTitleView = (TextView)findViewById(R.id.empty_title);
+		mTitleView = (TextView) findViewById(R.id.empty_title);
+		mRefreshBtn = (TextView) findViewById(R.id.refresh_btn);
 	}
 
 	@Override
@@ -35,8 +38,12 @@ public class StoreEmptyView extends FrameLayout {
 		super.onFinishInflate();
 
 	}
-	
-	public TextView getTitleView(){
+
+	public TextView getTitleView() {
 		return mTitleView;
+	}
+
+	public TextView getRefreshBtn() {
+		return mRefreshBtn;
 	}
 }

@@ -51,6 +51,7 @@ public class CategoryDetailContentFragment extends BaseContentFragment {
 		mMultiListView = (HMultiListView) view.findViewById(R.id.category_detail_list);
 		mMultiAdapter = new StoreAppMultiAdapter(getRootActivity(), mMultiListView, mAppEntities);
 		mMultiListView.setAdapter(mMultiAdapter);
+		setEmptyView(mMultiListView, R.string.store_empty_title, View.GONE, 0);
 		loadCategoryDetail();
 	}
 

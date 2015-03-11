@@ -14,13 +14,10 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 
-import com.google.zxing.maxicode.MaxiCodeReader;
 import com.ireadygo.app.gamelauncher.R;
-import com.ireadygo.app.gamelauncher.game.info.ItemInfo;
 import com.ireadygo.app.gamelauncher.ui.BaseAnimatorAdapter;
 import com.ireadygo.app.gamelauncher.ui.SnailKeyCode;
 import com.ireadygo.app.gamelauncher.ui.item.BaseAdapterItem;
@@ -53,11 +50,13 @@ public class HMultiListView extends LinearLayout {
 	private int mPaddingRight;
 	private int mPaddingBottom;
 
-//	private BaseAdapterItem mSelectedItem;
+	// private BaseAdapterItem mSelectedItem;
 	private OnItemSelectedListener mOnItemSelectedListener;
 	private OnFocusChangeListener mOnFocusChangeListener;
 	private OnItemClickListener mOnItemClickListener;
 	private OnScrollListener mOnScrollListener;
+
+	private View mEmptyView;
 
 	enum TouchScrollState {
 		NONE, UPTOUCH, DOWNTOUCH
@@ -287,8 +286,22 @@ public class HMultiListView extends LinearLayout {
 				List<T> dataList = (List<T>) mDataLists.get(dataListIndex);
 				dataList.add((T) list.get(j));
 			}
+			if (isEmpty(mDataLists)) {
+				showEmptyView();
+			}
 			mMaxCount = size % listNum == 0 ? size / listNum : size / listNum + 1;
 		}
+	}
+
+	private boolean isEmpty(List<List<?>> dataLists) {
+		boolean isEmpty = true;
+		for (int i = 0; i < dataLists.size(); i++) {
+			if (!dataLists.get(i).isEmpty()) {
+				isEmpty = false;
+				break;
+			}
+		}
+		return isEmpty;
 	}
 
 	public BaseAdapter getAdapter() {
@@ -300,11 +313,31 @@ public class HMultiListView extends LinearLayout {
 		return null;
 	}
 
-	private View getEmptyView(int arg0, View arg1, ViewGroup arg2) {
+	private View getEmptyItem(int arg0, View arg1, ViewGroup arg2) {
 		if (mHMultiBaseAdapter != null) {
 			return mHMultiBaseAdapter.getEmptyView(arg0, arg1, arg2);
 		}
 		return null;
+	}
+
+	private void showEmptyView() {
+		if (mEmptyView == null) {
+			return;
+		}
+		if (getParent() == null) {
+			return;
+		}
+		if (mEmptyView.getParent() == null) {
+			((ViewGroup) getParent()).addView(mEmptyView);
+		}
+		mEmptyView.setVisibility(View.VISIBLE);
+	}
+
+	private void hideEmptyView() {
+		if (mEmptyView == null) {
+			return;
+		}
+		mEmptyView.setVisibility(View.GONE);
 	}
 
 	private View getView(int arg0, View arg1, ViewGroup arg2) {
@@ -373,7 +406,7 @@ public class HMultiListView extends LinearLayout {
 		public View getView(int position, View convertView, ViewGroup parent) {
 			int realPos = getRealPos(position, listNum, dataIndex);
 			if (position > data.size() - 1) {
-				return HMultiListView.this.getEmptyView(realPos, convertView, parent);
+				return HMultiListView.this.getEmptyItem(realPos, convertView, parent);
 			}
 			return HMultiListView.this.getView(realPos, convertView, parent);
 		}
@@ -588,6 +621,24 @@ public class HMultiListView extends LinearLayout {
 		return false;
 	}
 
+	public void setEmptyView(View emptyView) {
+		if (mEmptyView != null && mEmptyView.getParent() != null) {
+			((ViewGroup) mEmptyView.getParent()).removeView(mEmptyView);
+		}
+		mEmptyView = emptyView;
+		if (emptyView != null && getParent() != null) {
+			emptyView.setVisibility(View.GONE);
+			ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+					ViewGroup.LayoutParams.MATCH_PARENT);
+			((ViewGroup) getParent()).addView(emptyView,params);
+			if (isEmpty(mDataLists)) {
+				showEmptyView();
+			} else {
+				hideEmptyView();
+			}
+		}
+	}
+
 	private OnItemSelectedListener mInternalItemSelectedListener = new OnItemSelectedListener() {
 
 		@Override
@@ -635,7 +686,6 @@ public class HMultiListView extends LinearLayout {
 		}
 
 	};
-
 
 }
 

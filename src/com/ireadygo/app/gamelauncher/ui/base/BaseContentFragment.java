@@ -15,6 +15,7 @@ import com.ireadygo.app.gamelauncher.ui.Config;
 import com.ireadygo.app.gamelauncher.ui.base.BaseMenuActivity.ScrollListenerByIndicator;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.HomeMenuFragment;
+import com.ireadygo.app.gamelauncher.ui.store.StoreEmptyView;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout;
 import com.ireadygo.app.gamelauncher.ui.widget.PagingIndicator;
@@ -212,5 +213,13 @@ public abstract class BaseContentFragment extends BaseFragment {
 		hListView.setOnScrollListener(new ScrollListenerByIndicator(indicator));
 		indicator.setInterpolation(interpolation);
 		indicator.bind(hListView);
+	}
+
+	protected void setEmptyView(HMultiListView hMultiListView, int titleId, int refreshBtnVisiable, int paddingRight) {
+		StoreEmptyView emptyView = new StoreEmptyView(getRootActivity());
+		emptyView.getRefreshBtn().setVisibility(refreshBtnVisiable);
+		emptyView.getTitleView().setText(titleId);
+		emptyView.setPadding(0, 0, paddingRight, 0);
+		hMultiListView.setEmptyView(emptyView);
 	}
 }

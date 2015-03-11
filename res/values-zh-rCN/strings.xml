@@ -410,7 +410,9 @@
     <string name="extend_install_error">服务器数据错误，请重新下载！</string>
     <string name="extend_install_success">安装成功</string>
     <string name="extend_nearly_open">即将开放，敬请期待！</string>
-    <string name="extend_store_empty_title">空空如也，快去免商店转转吧～！</string>
-    <string name="store_load_empty_title">网络不给力~！</string>
+    <string name="game_empty_title">空空如也,快去下载游戏吧~</string>
+    <string name="update_empty_title">太棒了！都是最新的了~</string>
+    <string name="store_empty_title">网络不给力,加载失败...</string>
+    <string name="store_try_refresh">刷新试试</string>
 
 </resources>

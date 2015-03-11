@@ -158,10 +158,11 @@ public class StoreManagerContentFragment extends BaseContentFragment {
 
 		mStoreManagerAdapter = new StoreManagerContentAdapter(getRootActivity(), mHMultiListView, GameManagerType.DOWNLOAD);
 		mHMultiListView.setAdapter(mStoreManagerAdapter);
-
+		
 		mTitleLayout.setCount(mStoreManagerAdapter.getData().size());
 		mTitleLayout.setTitle(getResources().getString(R.string.store_manager_downloading)
 				+ getResources().getString(R.string.store_manager_count));
+		
 	}
 
 	private void initListener() {

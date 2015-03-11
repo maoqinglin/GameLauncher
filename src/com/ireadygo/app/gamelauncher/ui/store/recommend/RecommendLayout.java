@@ -156,7 +156,7 @@ public class RecommendLayout extends StoreBaseContentLayout {
 		protected void onPostExecute(List<BannerItem> result) {
 			dimissLoadingProgress();
 			StoreEmptyView emptyView = new StoreEmptyView(mContext);
-			emptyView.getTitleView().setText(R.string.store_load_empty_title);
+//			emptyView.getTitleView().setText(R.string.store_load_empty_title);
 			Utils.setEmptyView(emptyView, mListView);
 			if (isCancelled() || result == null || result.isEmpty()) {
 				return;

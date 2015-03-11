@@ -25,6 +25,7 @@ import com.ireadygo.app.gamelauncher.game.info.ShortcutInfo;
 import com.ireadygo.app.gamelauncher.game.utils.Utilities;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
+import com.ireadygo.app.gamelauncher.ui.store.StoreEmptyView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
@@ -32,13 +33,13 @@ import com.ireadygo.app.gamelauncher.utils.PackageUtils;
 import com.ireadygo.app.gamelauncher.utils.StaticsUtils;
 
 @SuppressLint("ValidFragment")
-public class GameFragment extends BaseContentFragment implements Callbacks{
+public class GameFragment extends BaseContentFragment implements Callbacks {
 
 	private static final int LIST_NUM = 2;
 	private List<ItemInfo> mGameList = new ArrayList<ItemInfo>();
 
 	private HMultiListView mHMultiListView;
-	private AppAdapter mAppAdapter ;
+	private AppAdapter mAppAdapter;
 
 	public GameFragment(Activity activity, BaseMenuFragment menuFragment) {
 		super(activity, menuFragment);
@@ -61,6 +62,8 @@ public class GameFragment extends BaseContentFragment implements Callbacks{
 		mAppAdapter = new AppAdapter(getRootActivity(), mGameList, LIST_NUM, mHMultiListView);
 		mHMultiListView.setOnItemClickListener(mOnItemClickListener);
 		mHMultiListView.setAdapter(mAppAdapter);
+		int paddingRight = getResources().getDimensionPixelOffset(R.dimen.menu_width);
+		setEmptyView(mHMultiListView, R.string.game_empty_title, View.GONE, paddingRight);
 	}
 
 	@Override
@@ -68,7 +71,7 @@ public class GameFragment extends BaseContentFragment implements Callbacks{
 		return hasFocus(mHMultiListView);
 	}
 
-	@Override 
+	@Override
 	public boolean onBackKey() {
 		return onMoonKey();
 	}
@@ -76,26 +79,27 @@ public class GameFragment extends BaseContentFragment implements Callbacks{
 	@Override
 	public void bindGames(List<ItemInfo> infos) {
 		mGameList = infos;
-		if(mHMultiListView != null){
+		if (mHMultiListView != null) {
 			mHMultiListView.notifyDataSetChanged();
 		}
 	}
 
 	@Override
 	public void bindApps(List<ItemInfo> infos) {
-		
+
 	}
 
 	@Override
 	public void bindFolders(HashMap<Long, FolderInfo> folders) {
-		
+
 	}
 
-	private void notifyDataSetChanged(){
-		if(mHMultiListView != null){
+	private void notifyDataSetChanged() {
+		if (mHMultiListView != null) {
 			mHMultiListView.notifyDataSetChanged();
 		}
 	}
+
 	@Override
 	public void gameAddOrUpdate(ItemInfo info, boolean isAdd) {
 		notifyDataSetChanged();
@@ -105,7 +109,6 @@ public class GameFragment extends BaseContentFragment implements Callbacks{
 	public void gameRemove(ItemInfo info) {
 		notifyDataSetChanged();
 	}
-
 
 	OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
 
@@ -117,13 +120,14 @@ public class GameFragment extends BaseContentFragment implements Callbacks{
 
 	};
 
-	private void doAction(View view, int position,ItemInfo gameInfo) {
-		if(gameInfo == null){
+	private void doAction(View view, int position, ItemInfo gameInfo) {
+		if (gameInfo == null) {
 			return;
 		}
 		if (!mAppAdapter.isLongClickable() && gameInfo instanceof ShortcutInfo) {
 			Utilities.startActivitySafely(view, gameInfo.getIntent(), null);
-			GameData.getInstance(getRootActivity()).updateLastLaunchTime(gameInfo.packageName, System.currentTimeMillis());
+			GameData.getInstance(getRootActivity()).updateLastLaunchTime(gameInfo.packageName,
+					System.currentTimeMillis());
 			GameLauncherAppState.getInstance(getRootActivity()).getModel()
 					.updateModifiedTime(gameInfo.packageName, System.currentTimeMillis());
 			// 上报外部启动免商店游戏
@@ -139,13 +143,13 @@ public class GameFragment extends BaseContentFragment implements Callbacks{
 		if (v == null) {
 			return false;
 		}
-		doAction(v, mHMultiListView.getSelectedItemPosition(), (ItemInfo)mHMultiListView.getSelectedItem());
+		doAction(v, mHMultiListView.getSelectedItemPosition(), (ItemInfo) mHMultiListView.getSelectedItem());
 		return true;
 	}
 
 	public boolean onMoonKey() {
 		getRootActivity().findViewById(R.id.menu_game).requestFocus();
-		if(mAppAdapter != null){
+		if (mAppAdapter != null) {
 			mAppAdapter.unDisplayGameDeleteView();
 		}
 		return true;

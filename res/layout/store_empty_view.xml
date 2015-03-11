@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <TextView
-        android:id="@+id/empty_title"
-        style="@style/TextLabelSmallLight"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/extend_store_empty_title" />
+        android:layout_centerInParent="true"
+        android:orientation="vertical" >
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/empty_title"
+            style="@style/TextLabelMiddleLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/store_empty_title" />
+
+        <TextView
+            android:id="@+id/refresh_btn"
+            style="@style/TextLabelMiddleLight"
+            android:layout_width="@dimen/store_refresh_btn_width"
+            android:layout_height="@dimen/store_refresh_btn_height"
+            android:layout_marginTop="@dimen/store_refresh_btn_margin_top"
+            android:background="@drawable/user_btn_bg_selector"
+            android:gravity="center"
+            android:visibility="gone"
+            android:text="@string/store_try_refresh" />
+    </LinearLayout>
+
+</RelativeLayout>

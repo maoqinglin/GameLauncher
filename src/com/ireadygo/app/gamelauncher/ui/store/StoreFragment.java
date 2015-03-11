@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -156,9 +157,9 @@ public class StoreFragment extends BaseContentFragment {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			StoreInfo info;
-			if(position < mRecommendDatas.size()){
+			if (position < mRecommendDatas.size()) {
 				info = mRecommendDatas.get(position);
-			}else{
+			} else {
 				info = mStoreDatas.get(position - mRecommendDatas.size());
 			}
 			Anchor anchor = info.getAnchor();
@@ -209,8 +210,10 @@ public class StoreFragment extends BaseContentFragment {
 						break;
 					case BannerItem.TYPE_WEBPAGE:
 						anchor = new Anchor(Destination.WEBPAGE);
-						Uri uri = Uri.parse(item.getCHtmlUrl());
-						anchor.getIntent().setData(uri);
+						if (!TextUtils.isEmpty(item.getCHtmlUrl())) {
+							Uri uri = Uri.parse(item.getCHtmlUrl());
+							anchor.getIntent().setData(uri);
+						}
 						break;
 					}
 					info.setAnchor(anchor);

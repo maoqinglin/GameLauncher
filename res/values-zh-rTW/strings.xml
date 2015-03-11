@@ -411,7 +411,9 @@
     <string name="extend_install_error">伺服器數據錯誤，請重新下載！</string>
     <string name="extend_install_success">安裝成功</string>
     <string name="extend_nearly_open">即將開放，敬請期待！</string>
-    <string name="extend_store_empty_title">空空如也，快去免商店轉轉吧～！</string>
-    <string name="store_load_empty_title">網路不給力~！</string>
+    <string name="game_empty_title">空空如也，快去下載遊戲吧~</string>
+    <string name="update_empty_title">太棒了！都是最新的了~</string>
+    <string name="store_empty_title">網絡不給力，加載失敗...</string>
+    <string name="store_try_refresh">刷新試試</string>
 
 </resources>

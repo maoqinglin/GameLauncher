@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -18,6 +19,7 @@ import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
 import com.ireadygo.app.gamelauncher.ui.base.BaseActivity;
 import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
 import com.ireadygo.app.gamelauncher.ui.store.StoreAppMultiAdapter;
+import com.ireadygo.app.gamelauncher.ui.store.StoreEmptyView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
@@ -86,6 +88,10 @@ public class CollectionDetailActivity extends BaseActivity implements OnClickLis
 				}
 			}
 		});
+		StoreEmptyView emptyView = new StoreEmptyView(this);
+		emptyView.getRefreshBtn().setVisibility(View.GONE);
+		emptyView.getTitleView().setText(R.string.store_empty_title);
+		mMultiListView.setEmptyView(emptyView);
 	}
 
 	private void loadCategoryDetail() {

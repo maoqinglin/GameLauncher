@@ -53,6 +53,7 @@ public class FavoriteAppsFragment extends BaseContentFragment {
 		mMultiListView = (HMultiListView) view.findViewById(R.id.favorite_apps_list);
 		mAdapter = new StoreAppMultiAdapter(getRootActivity(), mMultiListView, mAppEntities);
 		mMultiListView.setAdapter(mAdapter);
+		setEmptyView(mMultiListView, R.string.store_empty_title, View.GONE, 0);
 		mMultiListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override

@@ -72,6 +72,7 @@ public class CollectionFragment extends BaseContentFragment {
 		if (mCollectionList.size() == 0) {
 			loadData(1);
 		}
+		setEmptyView(mMultiListView, R.string.store_empty_title, View.GONE, 0);
 	}
 
 	private void loadData(int page) {

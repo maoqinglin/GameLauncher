@@ -409,8 +409,10 @@
     <string name="extend_install_error">Server data error,Please try again!</string>
     <string name="extend_install_success">install success</string>
     <string name="extend_nearly_open">It is comming soon!</string>
-    <string name="extend_store_empty_title">There is no games! Go to find one in Free-Store!</string>
-    <string name="store_load_empty_title">网络不给力~！</string>
+    <string name="game_empty_title">空空如也,快去下载游戏吧~</string>
+    <string name="update_empty_title">太棒了！都是最新的了~</string>
+    <string name="store_empty_title">网络不给力,加载失败...</string>
+    <string name="store_try_refresh">刷新试试</string>
     <!-- 常用应用(FavoriteApps) -->
     <string name="favorite_apps_title_prompt">商店内应用数量</string>
 </resources>

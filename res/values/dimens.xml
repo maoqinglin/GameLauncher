@@ -361,6 +361,9 @@
     <dimen name="store_app_icon_normal_width">300dp</dimen>
     <dimen name="store_app_icon_normal_height">300dp</dimen>
     <dimen name="store_app_normal_bg_height">372dp</dimen>
+    <dimen name="store_refresh_btn_width">486dp</dimen>
+    <dimen name="store_refresh_btn_height">109dp</dimen>
+    <dimen name="store_refresh_btn_margin_top">60dp</dimen>
 
     <!-- 免商店-详情 -->
     <dimen name="store_options_width">192dp</dimen>

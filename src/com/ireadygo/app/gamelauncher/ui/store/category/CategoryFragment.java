@@ -55,6 +55,7 @@ public class CategoryFragment extends BaseContentFragment {
 		bindPagingIndicator(mMultiListView);
 		loadData(1);
 		loadCategoryItemsCount();
+		setEmptyView(mMultiListView, R.string.store_empty_title, View.GONE, 0);
 	}
 
 	@Override
@@ -124,7 +125,7 @@ public class CategoryFragment extends BaseContentFragment {
 	}
 
 	private void loadCategoryItemsCount() {
-		List<InternalCategoryInfo> infoList = (List<InternalCategoryInfo>)mAdapter.getData();
+		List<InternalCategoryInfo> infoList = (List<InternalCategoryInfo>) mAdapter.getData();
 		for (InternalCategoryInfo info : infoList) {
 			LoadItemCountTask task = new LoadItemCountTask(info);
 			task.execute();
