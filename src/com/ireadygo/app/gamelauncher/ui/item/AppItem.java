@@ -16,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ireadygo.app.gamelauncher.R;
+import com.ireadygo.app.gamelauncher.helper.AnimatorHelper;
+import com.ireadygo.app.gamelauncher.ui.Config;
 
 public class AppItem extends BaseAdapterItem {
 	private AppItemHolder mHolder;
@@ -68,7 +70,8 @@ public class AppItem extends BaseAdapterItem {
 		if (mUnselectedAnimator != null && mUnselectedAnimator.isRunning()) {
 			mUnselectedAnimator.cancel();
 		}
-		mSelectedAnimator = createAnimator(listener, 1.1f, 1.2f);
+		mHolder.background.setImageResource(R.drawable.settings_item_bg_shape);
+		mSelectedAnimator = AnimatorHelper.createSelectAnimator(listener, mHolder.background, mHolder.icon, mHolder.title);
 		mSelectedAnimator.start();
 	}
 
@@ -77,29 +80,9 @@ public class AppItem extends BaseAdapterItem {
 		if (mSelectedAnimator != null && mSelectedAnimator.isRunning()) {
 			mSelectedAnimator.cancel();
 		}
-		mUnselectedAnimator = createAnimator(listener, 1, 1);
+		mHolder.background.setImageResource(R.drawable.corner_settings_item_bg_shape);
+		mUnselectedAnimator = AnimatorHelper.createUnselectAnimator(listener, mHolder.background, mHolder.icon, mHolder.title);
 		mUnselectedAnimator.start();
-	}
-
-	private Animator createAnimator(AnimatorListener listener, float scaleIcon, float scaleBg) {
-		AnimatorSet animatorSet = new AnimatorSet();
-
-		PropertyValuesHolder iconScaleXHolder = PropertyValuesHolder.ofFloat(View.SCALE_X, scaleIcon);
-		PropertyValuesHolder iconScaleYHolder = PropertyValuesHolder.ofFloat(View.SCALE_Y, scaleIcon);
-		ObjectAnimator animatorIcon = ObjectAnimator.ofPropertyValuesHolder(mHolder.iconLayout, iconScaleXHolder,
-				iconScaleYHolder);
-
-		PropertyValuesHolder bgScaleXHolder = PropertyValuesHolder.ofFloat(View.SCALE_X, scaleBg);
-		PropertyValuesHolder bgScaleYHolder = PropertyValuesHolder.ofFloat(View.SCALE_Y, scaleBg);
-		ObjectAnimator animatorBg = ObjectAnimator.ofPropertyValuesHolder(mHolder.background, bgScaleXHolder,
-				bgScaleYHolder);
-
-		animatorSet.playTogether(animatorIcon, animatorBg);
-		animatorSet.setDuration(200);
-		if (listener != null) {
-			animatorSet.addListener(listener);
-		}
-		return animatorSet;
 	}
 
 	public class AppItemHolder {

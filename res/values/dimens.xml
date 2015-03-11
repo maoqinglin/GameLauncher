@@ -40,6 +40,8 @@
     <dimen name="mygame_app_width">270dp</dimen>
     <dimen name="mygame_app_height">270dp</dimen>
     <dimen name="mygame_app_text_size">36sp</dimen>
+    <dimen name="mygame_app_name_height">70dp</dimen>
+    <dimen name="mygame_app_bg_height">340dp</dimen>
     <dimen name="mygame_app_drawable_padding">15dp</dimen>
     <dimen name="mygame_hlistview_margin_top">90dp</dimen>
     <dimen name="myapp_hlistview_padding_top">240dp</dimen>

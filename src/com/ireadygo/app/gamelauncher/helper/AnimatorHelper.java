@@ -18,8 +18,8 @@ public class AnimatorHelper {
 		float icScale = 1.08f;
 		int icHeight = icon.getHeight();
 		float titleScale = 1;
-		float bgScaleX = calcBgScaleX(6, width, icScale);
-		float bgScaleY = calcBgScaleY(bgPivotY, 6, bgHeight, icHeight, icScale);
+		float bgScaleX = calcBgScaleX(10, width, icScale);
+		float bgScaleY = calcBgScaleY(bgPivotY, 10, bgHeight, icHeight, icScale);
 		int titleTranslateY = getTitleTranslateY(bgHeight, bgScaleY, bgPivotY);
 		Log.d("liu.js", "titleTranslateY--" + titleTranslateY);
 		AnimatorInfo info = new AnimatorInfo(background, icon, title, width, bgHeight, icHeight, bgPivotX, bgPivotY,

@@ -8,6 +8,7 @@
     <color name="black_zero_transparency">#B21c1c1c</color>
     <color name="black_first_transparency">#7F1c1c1c</color>
     <color name="black_second_transparency">#4C1c1c1c</color>
+    <color name="black_third_transparency">#661c1c1c</color>
     <color name="red_normal">#fc5353</color>
     <color name="orange_normal">#ffb300</color>
     <color name="earthy_yellow">#ffb300</color>
