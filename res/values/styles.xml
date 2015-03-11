@@ -73,8 +73,6 @@
         <item name="android:textColor">@drawable/game_item_color_selector</item>
         <item name="android:singleLine">true</item>
         <item name="android:ellipsize">none</item>
-        <item name="android:paddingLeft">@dimen/mygame_game_name_padding</item>
-        <item name="android:paddingRight">@dimen/mygame_game_name_padding</item>
     </style>
 
     <style name="settings_text_style">

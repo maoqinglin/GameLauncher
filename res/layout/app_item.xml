@@ -14,7 +14,7 @@
         android:src="@drawable/corner_app_item_bg_shape" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/mygame_app_width"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
@@ -42,9 +42,10 @@
         <TextView
             android:id="@+id/title"
             style="@style/mygame_game_text_style"
-            android:layout_width="@dimen/mygame_app_width"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/mygame_app_name_height"
             android:gravity="center"
+            android:layout_gravity="center_horizontal"
             android:scaleX="0.8"
             android:scaleY="0.8" />
     </LinearLayout>
