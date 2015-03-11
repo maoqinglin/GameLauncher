@@ -41,7 +41,6 @@
                     android:gravity="center"
                     android:lines="2"
                     android:singleLine="false"
-                    android:text="角色扮演"
                     android:textColor="@color/white"
                     android:textSize="@dimen/category_item_title_size" />
 
@@ -59,42 +58,36 @@
                     <TextView
                         android:layout_gravity="center"
                         android:padding="@dimen/category_item_intro_padding"
-                        android:text="回合"
                         android:textColor="@color/white_first_transparency"
                         android:textSize="@dimen/category_item_intro_size" />
 
                     <TextView
                         android:layout_gravity="center"
                         android:padding="@dimen/category_item_intro_padding"
-                        android:text="回合制"
                         android:textColor="@color/white_first_transparency"
                         android:textSize="@dimen/category_item_intro_size" />
 
                     <TextView
                         android:layout_gravity="center"
                         android:padding="@dimen/category_item_intro_padding"
-                        android:text="回合"
                         android:textColor="@color/white_first_transparency"
                         android:textSize="@dimen/category_item_intro_size" />
 
                     <TextView
                         android:layout_gravity="center"
                         android:padding="@dimen/category_item_intro_padding"
-                        android:text="回合"
                         android:textColor="@color/white_first_transparency"
                         android:textSize="@dimen/category_item_intro_size" />
 
                     <TextView
                         android:layout_gravity="center"
                         android:padding="@dimen/category_item_intro_padding"
-                        android:text="回合"
                         android:textColor="@color/white_first_transparency"
                         android:textSize="@dimen/category_item_intro_size" />
 
                     <TextView
                         android:layout_gravity="center"
                         android:padding="@dimen/category_item_intro_padding"
-                        android:text="回合"
                         android:textColor="@color/white_first_transparency"
                         android:textSize="@dimen/category_item_intro_size" />
                 </GridLayout>
