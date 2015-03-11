@@ -17,6 +17,7 @@ import com.ireadygo.app.gamelauncher.ui.GameLauncherActivity;
 import com.ireadygo.app.gamelauncher.ui.account.AccountLoginActivity;
 import com.ireadygo.app.gamelauncher.ui.account.AccountRegisterActivity;
 import com.ireadygo.app.gamelauncher.ui.account.CustomerLoginResultListener;
+import com.ireadygo.app.gamelauncher.ui.guide.GuideAlipayActivity;
 import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
 import com.ireadygo.app.gamelauncher.utils.StaticsUtils;
 import com.ireadygo.app.gamelauncher.utils.Utils;
@@ -179,6 +180,21 @@ public class BaseAccountActivity extends BaseGuideActivity {
 		finish();
 	}
 
+	protected void startAlipayActivity() {
+		Intent intent = new Intent();
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		boolean isFirstLaunch = PreferenceUtils.isFirstLaunch();
+		intent.setClass(this, GuideAlipayActivity.class);
+		if (isFirstLaunch) {
+			PreferenceUtils.setFirstLaunch(false);
+			//上报设备信息
+			StaticsUtils.DeviceActive();
+		}
+		SoundPoolManager.instance(this).play(SoundPoolManager.SOUND_EXIT);
+		startActivity(intent);
+		finish();
+	}
+
 	protected void startLoginActivity() {
 		Intent intent = new Intent(this, AccountLoginActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -257,8 +273,8 @@ public class BaseAccountActivity extends BaseGuideActivity {
 					BindDeviceAccountTask task = new BindDeviceAccountTask();
 					task.execute();
 				}
-				//激活成功，进入系统
-				startGameLauncherActivity();
+				//激活成功，跳转绑定支付宝
+				startAlipayActivity();
 			} else {
 				Toast.makeText(BaseAccountActivity.this,getString(R.string.device_active_failed), Toast.LENGTH_SHORT).show();
 			}

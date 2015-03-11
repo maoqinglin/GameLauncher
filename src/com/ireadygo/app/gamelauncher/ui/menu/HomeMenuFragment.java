@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -84,7 +85,13 @@ public class HomeMenuFragment extends BaseMenuFragment {
 		protected void onPostExecute(String result) {
 			if (!TextUtils.isEmpty(result)) {
 				PreferenceUtils.saveOBoxType(result);
-				updateMenuItem(0, getUserFragment());
+				new Handler().postDelayed(new Runnable() {
+					
+					@Override
+					public void run() {
+						updateMenuItem(0, getUserFragment());
+					}
+				}, 200);
 			}
 		}
 	}

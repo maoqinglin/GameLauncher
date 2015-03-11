@@ -107,14 +107,14 @@
     <string name="category_title_rsg">竞技飞行</string>
     <string name="category_title_spt">体育竞技</string>
     <string name="category_title_pzl">益智棋牌</string>
-    <string name="category_intro_slg">切东西/找茬/减压/宠物/答题/音乐节奏</string>
+    <string name="category_intro_slg">切东西/找茬/减压/宠物/答题/音乐</string>
     <string name="category_intro_olg">回合制/即时战略/养成/武侠/魔幻/动漫</string>
     <string name="category_intro_stg">横版/射击/3D/飞行/坦克/狙击</string>
     <string name="category_intro_rpg">回合制/即时战斗/养成/武侠/魔幻/动漫</string>
     <string name="category_intro_sim">纸牌/战棋/经营/历史/战争/DOTA</string>
     <string name="category_intro_rsg">跑酷/赛车/摩托/赛艇/飞机</string>
-    <string name="category_intro_spt">街机/篮球/足球/网球/台球/其他球类</string>
-    <string name="category_intro_pzl">斗地主/棋类/麻将/桌游/德州扑克/纸牌</string>
+    <string name="category_intro_spt">街机/篮球/足球/网球/台球/其他</string>
+    <string name="category_intro_pzl">斗地主/棋类/麻将/桌游/扑克/纸牌</string>
 
     <!-- 免商店-合集(collection) -->
     <string name="collection_title_prompt">商店内合集数量</string>
@@ -356,6 +356,10 @@
     <string name="device_active_failed">设备激活失败，请确保设备连接网络，并重启设备再次激活！</string>
     <string name="device_bind_account_success">帐号绑定设备成功！</string>
     <string name="device_bind_account_failed">帐号绑定设备失败，请重新登陆帐号！</string>
+    <string name="shortcut_confirm">确定</string>
+    <string name="shortcut_detail">详情</string>
+    <string name="shortcut_back">取消</string>
+    <string name="shortcut_uninstall">卸载</string>
 
     <!-- 按键提示层 -->
     <string name="key_sun">启动</string>
@@ -368,6 +372,7 @@
 
     <!-- 开机引导 -->
     <string name="starting_guide_key_title">按键说明</string>
+    <string name="starting_guide_obox_continue">继续</string>
     <string name="starting_guide_account_login_title">账号登陆</string>
     <string name="starting_guide_alipay_title">支付宝绑定</string>
     <string name="starting_guide_login">登&#160;&#160;陆</string>

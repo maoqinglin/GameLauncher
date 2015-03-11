@@ -27,6 +27,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
@@ -138,6 +139,19 @@ public class SearchFragment extends BaseContentFragment {
 		bindPagingIndicator(mListView);
 		
 		mInputMethodManager = (InputMethodManager) getRootActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+
+		ImageView searchIntro = (ImageView)view.findViewById(R.id.search_intro);
+		if (!isLocaleCHN()) {
+			searchIntro.setVisibility(View.INVISIBLE);
+		}
+	}
+
+	private boolean isLocaleCHN() {
+		String locale = getRootActivity().getResources().getConfiguration().locale.getCountry();
+		if (!TextUtils.isEmpty(locale) && ("CN".equals(locale) || "TW".equals(locale))) {
+			return true;
+		}
+		return false;
 	}
 
 	private void initData() {

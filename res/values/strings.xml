@@ -20,14 +20,14 @@
     <!-- 我的游戏-推荐下载 -->
     <string name="mygame_recommend_app_download">Recommend</string>
     <string name="mygame_empty_tip">There is no games! Go to find one in Free-Store</string>
-    <string name="game_title_prompt">已安装游戏</string>
+    <string name="game_title_prompt">Installed Games</string>
 
     <!-- 推荐下载(game_recommend) -->
 
 
     <!-- 我的应用(app) -->
     <string name="myapp_folder_title_system">System</string>
-    <string name="app_title_prompt">已安装应用</string>
+    <string name="app_title_prompt">Installed APPs</string>
 
     <!-- 设置(settings) -->
     <string name="settings_systemupgrade">Upgrade</string>
@@ -71,7 +71,7 @@
     <string name="notification_upgrade_little_title">\tapps have new version to be upgraded</string>
 
     <!-- 免商店(store) -->
-    <string name="store_title_prompt">商店内游戏数量</string>
+    <string name="store_title_prompt">Games:</string>
 
 
     <!-- 免商店-选项(store_options) -->
@@ -79,8 +79,8 @@
     <string name="store_options_recommend">Recommend</string>
     <string name="store_menu_collection">Album</string>
     <string name="store_menu_category">Category</string>
-    <string name="store_menu_app">常用应用</string>
-    <string name="store_menu_manager">Game Manager</string>
+    <string name="store_menu_app">APPs</string>
+    <string name="store_menu_manager">Manage</string>
     <string name="store_options_settings">Store Settings</string>
 
     <!-- 免商店-选项缩写 -->
@@ -97,7 +97,7 @@
     <!-- 免商店-分类(category) -->
     <string name="category_item_count_suffix">Games</string>
     <string name="category_title_slg">SLG</string>
-    <string name="category_title_olg">Off-Line Game</string>
+    <string name="category_title_olg">OLG</string>
     <string name="category_title_stg">STG</string>
     <string name="category_title_rpg">RPG</string>
     <string name="category_title_sim">SIM</string>
@@ -105,17 +105,17 @@
     <string name="category_title_spt">SPT</string>
     <string name="category_title_pzl">PZL</string>
     <string name="category_intro_slg">Quick/Pet/Answer/Music</string>
-    <string name="category_intro_olg">SLG/RTS/Kongfu/Magic/Animate</string>
+    <string name="category_intro_olg">SLG/RTS/Magic/Kongfu/Animate</string>
     <string name="category_intro_stg">Shoting/3D/SSG/Tank/Sniper</string>
-    <string name="category_intro_rpg">SLG/RTS/Kongfu/Magic/Animate</string>
+    <string name="category_intro_rpg">SLG/RTS/Magic/Kongfu/Animate</string>
     <string name="category_intro_sim">Card/Chess/SIM/History/War/DOTA</string>
     <string name="category_intro_rsg">Parkour/Race/Motor/Row/Plane</string>
     <string name="category_intro_spt">Arcade/Soccer/Tennis/Billiard/ETC</string>
     <string name="category_intro_pzl">Chess/Mahjong/BRPG/Poker/Card</string>
 
     <!-- 免商店-合集(collection) -->
-    <string name="collection_title_prompt">商店内合集数量</string>
-    <string name="collection_detail_title_prompt">合集内游戏数量</string>
+    <string name="collection_title_prompt">Albums</string>
+    <string name="collection_detail_title_prompt">Games</string>
 
     <!-- 免商店-合集/分类-游戏列表(collection_detail) -->
 
@@ -134,11 +134,12 @@
     <string name="store_manager_launchable">Installed</string>
     <string name="store_manager_delete_task_prompt">Delete Task</string>
     <string name="store_manager_delete_task_msg">Are you sure to delete the download task？</string>
+    <string name="store_manager_count">Count</string>
 
     <!-- 免商店-搜索(search) -->
     <string name="store_search">Search</string>
-    <string name="search_recommend_prompt">Recently all in search of game</string>
     <string name="search_recommend_result">Search Result</string>
+    <string name="search_recommend_prompt">Most popular games:</string>
 
     <!-- 免商店-设置(store_settings) -->
     <string-array name="store_settings_titles">
@@ -369,14 +370,16 @@
 
     <!-- 开机引导 -->
     <string name="starting_guide_key_title">Key Instruction</string>
-    <string name="starting_guide_account_login_title">账号登陆</string>
-    <string name="starting_guide_alipay_title">支付宝绑定</string>
-    <string name="starting_guide_login">登&#160;&#160;陆</string>
-    <string name="starting_guide_register">注&#160;&#160;册</string>
-    <string name="starting_guide_alipay_bind">支付宝绑定</string>
-    <string name="starting_guide_alipay_skip">跳&#160;&#160;过</string>
-    <string name="starting_guide_login_intro">你首次“登陆”或“注册”的账号\n将会与你所购买的套餐类型绑定在一起</string>
-    <string name="starting_guide_handler_intro">手柄说明</string>
+    <string name="starting_guide_account_login_title">Account Login</string>
+    <string name="starting_guide_obox_continue">Continue</string>
+    <string name="starting_guide_alipay_title">Bind Alipay Account</string>
+    <string name="starting_guide_login">Login</string>
+    <string name="starting_guide_register">Register</string>
+    <string name="starting_guide_alipay_bind">Bind Alipay</string>
+    <string name="starting_guide_alipay_skip">Continue</string>
+    <string name="starting_guide_login_intro">Your Accout first logined or registered,\nwill be bond with the device!</string>
+    <string name="starting_guide_handler_intro">Handle Instruction</string>
+    <string name="starting_guide_obox_intro">OBox Instruction</string>
 
     <!-- 错误显示 -->
     <string name="error_unknown">Unknown Error!</string>
@@ -416,5 +419,5 @@
     <string name="store_empty_title">网络不给力,加载失败...</string>
     <string name="store_try_refresh">刷新试试</string>
     <!-- 常用应用(FavoriteApps) -->
-    <string name="favorite_apps_title_prompt">商店内应用数量</string>
+    <string name="favorite_apps_title_prompt">APPs</string>
 </resources>

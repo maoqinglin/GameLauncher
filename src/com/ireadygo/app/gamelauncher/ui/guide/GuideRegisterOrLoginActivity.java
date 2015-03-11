@@ -22,8 +22,6 @@ import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
 
 public class GuideRegisterOrLoginActivity extends BaseGuideActivity {
 
-	private static final int SUCCESS_CODE = 1;
-	private static final int FAILED_CODE = 0;
 	private GuideTwoBtnLayout mGuideTwoBtnLayout;
 	private OperationTipsLayout mTipsLayout;
 

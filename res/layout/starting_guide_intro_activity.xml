@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:text="继  续 "
+            android:text="@string/starting_guide_obox_continue"
             android:layout_marginRight="150dp"
             android:layout_marginBottom="50dp"
             android:background="@drawable/guide_btn_selector" />

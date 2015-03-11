@@ -4,6 +4,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 
 import com.ireadygo.app.gamelauncher.GameLauncherApplication;
 import com.ireadygo.app.gamelauncher.R;
@@ -38,7 +39,12 @@ public class GameLauncherActivity extends BaseMenuActivity {
 		setShouldTranslate(true);
 		GameLauncherApplication.getApplication().setGameLauncherActivity(this);
 		new AccountInfoAsyncTask(this, null).execute();
-		getMenuFragment().requestFocusByPosition(0);
+		new Handler().postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				getMenuFragment().requestFocusByPosition(0);
+			}
+		}, 500);
 	}
 
 	@Override

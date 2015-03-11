@@ -104,13 +104,13 @@
     <string name="category_title_rsg">競技飛行</string>
     <string name="category_title_spt">體育競技</string>
     <string name="category_title_pzl">益智棋牌</string>
-    <string name="category_intro_slg">切東西/找茬/減壓/寵物/答題/音樂節奏</string>
+    <string name="category_intro_slg">切東西/找茬/減壓/寵物/答題/音樂</string>
     <string name="category_intro_olg">回合制/即時戰略/養成/武俠/魔幻/動漫</string>
     <string name="category_intro_stg">橫版/射擊/3D/飛行/坦克/狙擊</string>
     <string name="category_intro_rpg">回合制/即時戰鬥/養成/武俠/魔幻/動漫</string>
     <string name="category_intro_sim">紙牌/戰棋/經營/歷史/戰爭/DOTA</string>
     <string name="category_intro_rsg">跑酷/賽車/摩托/賽艇/飛機</string>
-    <string name="category_intro_spt">街機/籃球/足球/網球/檯球/其他球類</string>
+    <string name="category_intro_spt">街機/籃球/足球/網球/檯球/其他</string>
     <string name="category_intro_pzl">鬥地主/棋類/麻將/桌遊/德州撲克/紙牌</string>
 
     <!-- 免商店-合集(collection) -->
@@ -369,6 +369,7 @@
 
     <!-- 開機引導 -->
     <string name="starting_guide_key_title">按鍵說明</string>
+    <string name="starting_guide_obox_continue">繼續</string>
     <string name="starting_guide_account_login_title">帳號登陸</string>
     <string name="starting_guide_alipay_title">支付寶綁定</string>
     <string name="starting_guide_login">登&#160;&#160;陸</string>

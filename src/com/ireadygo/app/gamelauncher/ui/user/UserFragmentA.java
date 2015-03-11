@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
+import android.animation.Animator.AnimatorListener;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -444,6 +445,5 @@ public class UserFragmentA extends BaseContentFragment {
 			}
 		}
 	}
-
 
 }

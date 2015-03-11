@@ -13,7 +13,7 @@ import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
 
 public class GuideOBoxIntroduceActivity extends BaseGuideActivity {
 
-	private static final int[] RES_IMAGE_ID = new int[]{R.drawable.guide_intro_1, R.drawable.guide_intro_2, R.drawable.guide_intro_3};
+	private static final int[] RES_IMAGE_ID = new int[]{R.drawable.helper_image_01, R.drawable.helper_image_02, R.drawable.helper_image_03};
 	private OperationTipsLayout mTipsLayout;
 	private TextView mKeepOnBtn;
 	private ImageView mIntroImageView;
