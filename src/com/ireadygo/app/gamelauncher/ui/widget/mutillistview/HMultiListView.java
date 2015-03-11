@@ -163,6 +163,30 @@ public class HMultiListView extends LinearLayout {
 		downHListView.setNextFocusUpId(upListViewId);
 	}
 
+	@Override
+	public void setNextFocusDownId(int nextFocusDownId) {
+		super.setNextFocusDownId(nextFocusDownId);
+		initFocusIds(mHListViews.get(0), mHListViews.get(1));
+	}
+	
+	@Override
+	public void setNextFocusLeftId(int nextFocusLeftId) {
+		super.setNextFocusLeftId(nextFocusLeftId);
+		initFocusIds(mHListViews.get(0), mHListViews.get(1));
+	}
+	
+	@Override
+	public void setNextFocusRightId(int nextFocusRightId) {
+		super.setNextFocusRightId(nextFocusRightId);
+		initFocusIds(mHListViews.get(0), mHListViews.get(1));
+	}
+	
+	@Override
+	public void setNextFocusUpId(int nextFocusUpId) {
+		super.setNextFocusUpId(nextFocusUpId);
+		initFocusIds(mHListViews.get(0), mHListViews.get(1));
+	}
+	
 	public void setHorizontalSpacing(int horizontalSpacing) {
 		if (horizontalSpacing < 0) {
 			throw new IllegalArgumentException("horizontalSpacing must >= 0 ");

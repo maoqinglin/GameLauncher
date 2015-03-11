@@ -11,10 +11,12 @@ import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
+import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 
 import com.ireadygo.app.gamelauncher.GameLauncher;
@@ -27,6 +29,7 @@ import com.ireadygo.app.gamelauncher.appstore.manager.GameManager.GameManagerExc
 import com.ireadygo.app.gamelauncher.appstore.manager.GameManager.InstallListener;
 import com.ireadygo.app.gamelauncher.appstore.manager.GameManager.UninstallListener;
 import com.ireadygo.app.gamelauncher.appstore.manager.UpdateManager;
+import com.ireadygo.app.gamelauncher.ui.SnailKeyCode;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
@@ -171,13 +174,56 @@ public class StoreManagerContentFragment extends BaseContentFragment {
 
 					@Override
 					public void onChildFocusChange(StoreManagerItemHolder holder, boolean hasFocus, AppEntity otherApp) {
-						if (hasFocus || mStoreManagerAdapter.getGameManagerType() == GameManagerType.DOWNLOAD) {
+						if(hasFocus) {
+							switch (mStoreManagerAdapter.getGameManagerType()) {
+							case DOWNLOAD:
+								mHMultiListView.setNextFocusLeftId(R.id.manager_download);
+								break;
+
+							case UPGRADE:
+								mHMultiListView.setNextFocusLeftId(R.id.manager_upgrade);
+								break;
+
+							case INSTALLED:
+								mHMultiListView.setNextFocusLeftId(R.id.manager_installed);
+								break;
+
+							default:
+								break;
+							}
+						}
+						if (hasFocus) {
 							holder.statusLayout.setVisibility(View.VISIBLE);
 						} else {
-							holder.statusLayout.setVisibility(View.GONE);
+							holder.statusLayout.setVisibility(View.INVISIBLE);
 						}
 					}
 				});
+
+		mHMultiListView.setOnFocusChangeListener(new OnFocusChangeListener() {
+			
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				if(!hasFocus) {
+					switch (mStoreManagerAdapter.getGameManagerType()) {
+					case DOWNLOAD:
+						mHMultiListView.setNextFocusLeftId(R.id.manager_download);
+						break;
+
+					case UPGRADE:
+						mHMultiListView.setNextFocusLeftId(R.id.manager_upgrade);
+						break;
+
+					case INSTALLED:
+						mHMultiListView.setNextFocusLeftId(R.id.manager_installed);
+						break;
+
+					default:
+						break;
+					}
+				}
+			}
+		});
 
 		mDldMenuItem.setOnFocusChangeListener(mBtnListener);
 		mUpgradeMenuItem.setOnFocusChangeListener(mBtnListener);

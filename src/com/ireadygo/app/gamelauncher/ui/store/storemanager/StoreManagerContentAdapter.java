@@ -18,7 +18,6 @@ import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.data.GameData;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.appstore.info.item.GameState;
-import com.ireadygo.app.gamelauncher.ui.item.AppItem;
 import com.ireadygo.app.gamelauncher.ui.store.storemanager.StoreManagerContentFragment.GameManagerType;
 import com.ireadygo.app.gamelauncher.ui.store.storemanager.StoreManagerItem.OnItemFocusChangeListener;
 import com.ireadygo.app.gamelauncher.ui.store.storemanager.StoreManagerItem.StoreManagerItemHolder;
@@ -110,6 +109,7 @@ public class StoreManagerContentAdapter implements HMultiBaseAdapter{
 		if (convertView == null) {
 			convertView = new StoreManagerItem(mContext);
 		}
+		convertView.setVisibility(View.VISIBLE);
 		if(!mGameManagerDatas.isEmpty()) {
 			StoreManagerItem item = (StoreManagerItem) convertView;
 			AppEntity app = mGameManagerDatas.get(position);
@@ -281,7 +281,7 @@ public class StoreManagerContentAdapter implements HMultiBaseAdapter{
 		if((mType == GameManagerType.DOWNLOAD && state != GameState.TRANSFERING) || item.isItemFocus()) {
 			holder.statusLayout.setVisibility(View.VISIBLE);
 		} else {
-			holder.statusLayout.setVisibility(View.GONE);
+			holder.statusLayout.setVisibility(View.INVISIBLE);
 		}
 		holder.status.setBackgroundResource(drawableId);
 	}
@@ -360,7 +360,7 @@ public class StoreManagerContentAdapter implements HMultiBaseAdapter{
 	@Override
 	public View getEmptyView(int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
-			convertView = new AppItem(mContext);
+			convertView = new StoreManagerItem(mContext);
 		}
 		convertView.setVisibility(View.GONE);
 		return convertView;
