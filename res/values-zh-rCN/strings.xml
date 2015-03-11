@@ -138,6 +138,7 @@
     <!-- 免商店-搜索(search) -->
     <string name="store_search">搜&#160;&#160;索</string>
     <string name="search_recommend_prompt">最近大家都在搜的游戏</string>
+    <string name="search_recommend_result">搜索结果</string>
 
     <!-- 免商店-设置(store_settings) -->
     <string-array name="store_settings_titles">

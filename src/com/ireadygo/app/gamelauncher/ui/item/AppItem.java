@@ -71,7 +71,7 @@ public class AppItem extends BaseAdapterItem {
 			mUnselectedAnimator.cancel();
 		}
 		mHolder.background.setImageResource(R.drawable.settings_item_bg_shape);
-		mSelectedAnimator = AnimatorHelper.createSelectAnimator(listener, mHolder.background, mHolder.icon, mHolder.title);
+		mSelectedAnimator = AnimatorHelper.createSelectAnimator(listener, mHolder.background, mHolder.iconLayout, mHolder.title);
 		mSelectedAnimator.start();
 	}
 
@@ -80,8 +80,8 @@ public class AppItem extends BaseAdapterItem {
 		if (mSelectedAnimator != null && mSelectedAnimator.isRunning()) {
 			mSelectedAnimator.cancel();
 		}
-		mHolder.background.setImageResource(R.drawable.corner_settings_item_bg_shape);
-		mUnselectedAnimator = AnimatorHelper.createUnselectAnimator(listener, mHolder.background, mHolder.icon, mHolder.title);
+		mHolder.background.setImageResource(R.drawable.corner_app_item_bg_shape);
+		mUnselectedAnimator = AnimatorHelper.createUnselectAnimator(listener, mHolder.background, mHolder.iconLayout, mHolder.title);
 		mUnselectedAnimator.start();
 	}
 

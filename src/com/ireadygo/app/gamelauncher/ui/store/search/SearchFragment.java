@@ -49,6 +49,7 @@ public class SearchFragment extends BaseContentFragment {
 	private static final int WHAT_RESTART_INPUT_METHOD = 1;
 	private AutoCompleteTextView mSearchInputView;
 	private HListView mListView;
+	private TextView mSearchPrompt;
 
 	private ArrayAdapter<String> mKeywordAdapter;
 	private SearchKeywordTask mSearchKeywordTask;
@@ -84,7 +85,7 @@ public class SearchFragment extends BaseContentFragment {
 	protected void initView(View view) {
 		super.initView(view);
 		mListView = (HListView) view.findViewById(R.id.search_list);
-
+		mSearchPrompt = (TextView)view.findViewById(R.id.search_recommend_prompt);
 		mSearchInputView = (AutoCompleteTextView) view.findViewById(R.id.search_edittext);
 		mSearchInputView.addTextChangedListener(mKeywordTextWatcher);
 		mKeywordAdapter = new SearchArrayAdapter(getRootActivity(), R.layout.search_suggest_textview);
@@ -331,6 +332,9 @@ public class SearchFragment extends BaseContentFragment {
 			mAppList.clear();
 			mAppList.addAll(result);
 			mSearchAdapter.notifyDataSetChanged();
+			if(!TextUtils.isEmpty(getKeyword())){
+				mSearchPrompt.setText(getRootActivity().getString(R.string.search_recommend_result));
+			}
 		}
 	}
 

@@ -24,6 +24,7 @@ import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.ui.BaseAnimatorAdapter;
 import com.ireadygo.app.gamelauncher.ui.Config;
+import com.ireadygo.app.gamelauncher.ui.item.AppItem;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -31,9 +32,11 @@ public class StoreAppNormalAdapter extends BaseAnimatorAdapter {
 	private LayoutInflater mInflater;
 	private List<AppEntity> mAppList;
 	private Bitmap mDefaultBmp;
+	private Context mContext;
 
 	public StoreAppNormalAdapter(Context context, HListView hListView, List<AppEntity> appList) {
 		super(hListView);
+		mContext = context;
 		this.mAppList = appList;
 		mInflater = LayoutInflater.from(context);
 		mDefaultBmp = BitmapFactory.decodeResource(context.getResources(), R.drawable.store_app_icon_normal);
@@ -61,7 +64,7 @@ public class StoreAppNormalAdapter extends BaseAnimatorAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
 		if (convertView == null) {
-			convertView = mInflater.inflate(R.layout.store_app_item_normal, parent, false);
+			convertView = new AppItem(mContext);
 			holder = new ViewHolder();
 			holder.background = (ImageView) convertView.findViewById(R.id.background);
 			holder.icon = (ImageView) convertView.findViewById(R.id.icon);

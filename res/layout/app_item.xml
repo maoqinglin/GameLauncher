@@ -11,37 +11,42 @@
         android:id="@+id/background"
         android:layout_width="@dimen/mygame_app_width"
         android:layout_height="@dimen/mygame_app_bg_height"
-        android:src="@drawable/corner_settings_item_bg_shape" />
+        android:src="@drawable/corner_app_item_bg_shape" />
 
-    <RelativeLayout
-        android:id="@+id/icon_layout"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
 
-        <ImageView
-            android:id="@+id/icon"
-            android:layout_width="@dimen/mygame_app_width"
-            android:layout_height="@dimen/mygame_app_height" />
+        <RelativeLayout
+            android:id="@+id/icon_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="@dimen/mygame_app_width"
+                android:layout_height="@dimen/mygame_app_height"
+                android:background="@drawable/app_item_icon_bg" />
+
+            <ImageView
+                android:id="@+id/delete_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/icon"
+                android:layout_alignTop="@+id/icon"
+                android:src="@drawable/icon_gametask_delete"
+                android:visibility="invisible" />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/title"
             style="@style/mygame_game_text_style"
             android:layout_width="@dimen/mygame_app_width"
             android:layout_height="@dimen/mygame_app_name_height"
-            android:layout_below="@+id/icon"
+            android:gravity="center"
             android:scaleX="0.8"
-        	android:scaleY="0.8"
-            android:gravity="center" />
-
-        <ImageView
-            android:id="@+id/delete_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/icon"
-            android:layout_alignRight="@+id/icon"
-            android:src="@drawable/icon_gametask_delete"
-            android:visibility="invisible" />
-
-    </RelativeLayout>
+            android:scaleY="0.8" />
+    </LinearLayout>
 
 </FrameLayout>
