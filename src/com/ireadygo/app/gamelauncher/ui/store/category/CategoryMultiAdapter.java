@@ -129,6 +129,7 @@ public class CategoryMultiAdapter implements HMultiBaseAdapter {
 		if (convertView == null) {
 			convertView = new CategoryItem(mContext);
 		}
+		convertView.setVisibility(View.VISIBLE);
 		CategoryItemHoder holder = ((CategoryItem) convertView).getHolder();
 		InternalCategoryInfo info = mCategoryDatas.get(position);
 		holder.icon.setImageResource(info.iconId);

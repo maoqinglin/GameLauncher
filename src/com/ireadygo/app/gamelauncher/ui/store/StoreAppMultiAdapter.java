@@ -43,6 +43,7 @@ public class StoreAppMultiAdapter implements HMultiBaseAdapter {
 		if (convertView == null) {
 			convertView = new AppItem(mContext);
 		}
+		convertView.setVisibility(View.VISIBLE);
 		AppItemHolder holder = ((AppItem) convertView).getHolder();
 		AppEntity app = mAppEntities.get(position);
 		String iconUrl = app.getPosterIconUrl();

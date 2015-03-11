@@ -37,6 +37,7 @@ public class SettingsMultiAdapter implements HMultiBaseAdapter {
 		if (convertView == null) {
 			convertView = new SettingsItem(mContext);
 		}
+		convertView.setVisibility(View.VISIBLE);
 		SettingsItemHoder holder = ((SettingsItem)convertView).getHolder();
 		SettingsInfo info = mDataList.get(position);
 		holder.icon.setImageDrawable(info.getItemIcon());
