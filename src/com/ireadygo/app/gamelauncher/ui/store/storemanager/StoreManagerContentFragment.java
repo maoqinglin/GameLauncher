@@ -174,6 +174,8 @@ public class StoreManagerContentFragment extends BaseContentFragment {
 					@Override
 					public void onChildFocusChange(StoreManagerItemHolder holder, boolean hasFocus, AppEntity otherApp) {
 						if(hasFocus) {
+							holder.status.setVisibility(View.VISIBLE);
+
 							switch (mStoreManagerAdapter.getGameManagerType()) {
 							case DOWNLOAD:
 								mHMultiListView.setNextFocusLeftId(R.id.manager_download);
@@ -190,11 +192,8 @@ public class StoreManagerContentFragment extends BaseContentFragment {
 							default:
 								break;
 							}
-						}
-						if (hasFocus) {
-							holder.statusLayout.setVisibility(View.VISIBLE);
 						} else {
-							holder.statusLayout.setVisibility(View.INVISIBLE);
+							holder.status.setVisibility(View.INVISIBLE);
 						}
 					}
 				});

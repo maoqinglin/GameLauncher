@@ -11,7 +11,7 @@
         android:id="@+id/background"
         android:layout_width="@dimen/mygame_app_width"
         android:layout_height="@dimen/mygame_app_bg_height"
-        android:background="@drawable/corner_settings_item_bg_shape" />
+        android:src="@drawable/corner_app_item_bg_shape" />
 
     <LinearLayout
         android:layout_width="@dimen/mygame_app_width"
@@ -53,10 +53,12 @@
         android:id="@+id/manager_item_speed_layout"
         android:layout_width="@dimen/mygame_app_width"
         android:layout_height="@dimen/mygame_app_height"
+        android:background="@android:color/transparent"
         android:gravity="center"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:orientation="vertical"
-        android:visibility="gone"
-        android:background="@android:color/transparent" >
+        android:visibility="gone" >
 
         <TextView
             android:id="@+id/manager_item_download_speed"
@@ -75,34 +77,30 @@
             android:textSize="@dimen/store_manager_speed_text_size" />
     </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/manager_item_status_layout"
-        android:layout_width="@dimen/mygame_app_width"
-        android:layout_height="@dimen/mygame_app_height"
-        android:visibility="gone" >
-
-        <TextView
-            android:id="@+id/manager_item_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/store_manager_status_queue"
-            android:clickable="true"
-            android:contentDescription="@null" />
-    </FrameLayout>
+    <TextView
+        android:id="@+id/manager_item_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|top"
+        android:background="@drawable/store_manager_status_queue"
+        android:layout_marginTop="@dimen/store_manager_status_margin_top"
+        android:clickable="true"
+        android:contentDescription="@null"
+        android:visibility="invisible" />
 
     <ProgressBar
         android:id="@+id/manager_item_download_progress"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="@dimen/store_manager_progress_width"
         android:layout_height="@dimen/store_manager_progress_height"
+        android:layout_marginLeft="@dimen/store_manager_progress_margin_left"
+        android:layout_marginTop="@dimen/store_manager_progress_margin_top"
         android:background="@android:color/darker_gray"
-        android:max="100"
-        android:progress="0"
         android:focusable="false"
         android:focusableInTouchMode="false"
+        android:max="100"
+        android:progress="0"
         android:progressDrawable="@drawable/progress_selector_yellow"
-        android:layout_marginTop="@dimen/store_manager_progress_margin_top"
-        android:layout_marginLeft="@dimen/store_manager_progress_margin_left"
-        />
+        android:visibility="invisible" />
+
 </FrameLayout>

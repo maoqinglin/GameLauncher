@@ -1,16 +1,11 @@
 package com.ireadygo.app.gamelauncher.ui.guide;
 
 import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Toast;
 
 import com.ireadygo.app.gamelauncher.R;
-import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
-import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
 import com.ireadygo.app.gamelauncher.ui.account.AccountLoginActivity;
 import com.ireadygo.app.gamelauncher.ui.account.AccountRegisterActivity;
 import com.ireadygo.app.gamelauncher.ui.activity.BaseGuideActivity;
@@ -18,7 +13,6 @@ import com.ireadygo.app.gamelauncher.ui.widget.GuideTwoBtnLayout;
 import com.ireadygo.app.gamelauncher.ui.widget.GuideTwoBtnLayout.OnLRBtnClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
-import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
 
 public class GuideRegisterOrLoginActivity extends BaseGuideActivity {
 
@@ -35,6 +29,7 @@ public class GuideRegisterOrLoginActivity extends BaseGuideActivity {
 
 	private void initUI() {
 		initHeaderView(R.string.starting_guide_account_login_title);
+		getWifiSettingsBtn().setVisibility(View.VISIBLE);
 		mTipsLayout = (OperationTipsLayout) findViewById(R.id.operationTipsLayout);
 		mTipsLayout.setTipsVisible(View.GONE, TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
 

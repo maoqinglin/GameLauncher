@@ -33,7 +33,7 @@ public class WeiXinQRcodeActivity extends BaseGuideActivity {
 	private static final String KEY_ITEM = "ITEM";
 	private static final String VALUE_QR = "QR";
 	private ImageView mQRCodeView;
-	private long mExpiretime = 1800;
+	private long mExpiretime = 1800 * 1000;
 
 	private BroadcastReceiver mReceiver = new BroadcastReceiver() {
 		
@@ -47,7 +47,7 @@ public class WeiXinQRcodeActivity extends BaseGuideActivity {
 					JSONObject json = new JSONObject(msg);
 					String url = json.getString(KEY_URL);
 					long time = json.getLong(KEY_EXPIRETIME);
-					mQRCodeView.setImageBitmap(createQRImage(url, mQRCodeView.getWidth(), mQRCodeView.getHeight()));
+					mQRCodeView.setImageBitmap(createQRImage(url));
 
 					if(time != 0) {
 						mExpiretime = time;
@@ -82,7 +82,7 @@ public class WeiXinQRcodeActivity extends BaseGuideActivity {
 				|| TextUtils.isEmpty(url)) {
 			queryWxQrUrl();
 		} else {
-			mQRCodeView.setImageBitmap(createQRImage(url, mQRCodeView.getWidth(), mQRCodeView.getHeight()));
+			mQRCodeView.setImageBitmap(createQRImage(url));
 		}
 	}
 
@@ -99,8 +99,11 @@ public class WeiXinQRcodeActivity extends BaseGuideActivity {
      * @param height
      * @return
      */
-	private Bitmap createQRImage(String url, int width, int height) {
+	private Bitmap createQRImage(String url) {
 		try {
+			int width = getResources().getDimensionPixelSize(R.dimen.wx_qrcode_image_width);
+			int height = getResources().getDimensionPixelSize(R.dimen.wx_qrcode_image_height);
+
 			// 判断URL合法性
 			if (url == null || "".equals(url) || url.length() < 1) {
 				return null;

@@ -12,7 +12,6 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -93,7 +92,6 @@ public class StoreManagerItem extends BaseAdapterItem {
 		}
 		mHolder.title = (TextView) findViewById(R.id.title);
 		
-		mHolder.statusLayout = (FrameLayout) findViewById(R.id.manager_item_status_layout);
 		mHolder.status = (TextView) findViewById(R.id.manager_item_status);
 		mHolder.downloadSpeedLayout = (LinearLayout) findViewById(R.id.manager_item_speed_layout);
 		mHolder.downloadSpeed = (TextView) findViewById(R.id.manager_item_download_speed);
@@ -145,7 +143,6 @@ public class StoreManagerItem extends BaseAdapterItem {
 		public ImageView uninstallIcon;
 		public TextView title;
 		
-		public FrameLayout statusLayout;
 		public TextView status;
 		public LinearLayout downloadSpeedLayout;
 		public TextView downloadSpeed;

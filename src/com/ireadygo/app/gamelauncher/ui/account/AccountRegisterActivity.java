@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.ui.activity.BaseAccountActivity;
+import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout;
+import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
 
 public class AccountRegisterActivity extends BaseAccountActivity{
 	private TextView mErrorPromptView;
@@ -15,6 +17,7 @@ public class AccountRegisterActivity extends BaseAccountActivity{
 	private EditText mPasswordView;
 	private EditText mPasswordRepeatView;
 	private TextView mRegisterBtn;
+	private OperationTipsLayout mTipsLayout;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +28,10 @@ public class AccountRegisterActivity extends BaseAccountActivity{
 	
 	private void initView(){
 		initHeaderView(R.string.account_register_btn);
+		mTipsLayout = (OperationTipsLayout) findViewById(R.id.operationTipsLayout);
+		mTipsLayout.setTipsVisible(TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
+		mTipsLayout.getPagingIndicator().setVisibility(View.GONE);
+
 		mErrorPromptView = (TextView)findViewById(R.id.errorPrompt);
 		mUsernameView = (EditText)findViewById(R.id.username);
 		mPasswordView = (EditText)findViewById(R.id.password);

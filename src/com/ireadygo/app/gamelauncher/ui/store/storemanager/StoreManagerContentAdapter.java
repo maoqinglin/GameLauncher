@@ -258,17 +258,15 @@ public class StoreManagerContentAdapter implements HMultiBaseAdapter{
 
 		holder.progressBar.setProgress(progress);
 		holder.progressBar.setVisibility(visible);
+		holder.downloadSpeed.setText(speed);
+		holder.downloadSize.setText(size);
 
 		if(item.isItemFocus()) {
-			holder.downloadSpeedLayout.setVisibility(View.GONE);
+			holder.downloadSpeedLayout.setVisibility(View.INVISIBLE);
 		} else {
 			holder.downloadSpeedLayout.setVisibility(visible);
 		}
 
-		holder.downloadSpeed.setVisibility(visible);
-		holder.downloadSpeed.setText(speed);
-		holder.downloadSize.setVisibility(visible);
-		holder.downloadSize.setText(size);
 		if (!TextUtils.isEmpty(speed) && !item.isItemFocus()) {
 			holder.icon.setAlpha(0.5f);
 		} else {
@@ -279,9 +277,9 @@ public class StoreManagerContentAdapter implements HMultiBaseAdapter{
 	private void updateStateView(StoreManagerItem item, GameState state, int drawableId) {
 		StoreManagerItemHolder holder = item.getHolder();
 		if((mType == GameManagerType.DOWNLOAD && state != GameState.TRANSFERING) || item.isItemFocus()) {
-			holder.statusLayout.setVisibility(View.VISIBLE);
+			holder.status.setVisibility(View.VISIBLE);
 		} else {
-			holder.statusLayout.setVisibility(View.INVISIBLE);
+			holder.status.setVisibility(View.INVISIBLE);
 		}
 		holder.status.setBackgroundResource(drawableId);
 	}

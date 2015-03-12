@@ -287,6 +287,8 @@
         <item name="android:background">@drawable/login_edittext_bg_selector</item>
         <item name="android:drawablePadding">@dimen/login_edittext_drawable_padding</item>
         <item name="android:paddingLeft">@dimen/login_edittext_padding_left</item>
+        <item name="android:paddingTop">@dimen/login_edittext_padding_top</item>
+        <item name="android:paddingBottom">@dimen/login_edittext_padding_bottom</item>
         <item name="android:textColorHint">@color/white_first_transparency</item>
     </style>
 

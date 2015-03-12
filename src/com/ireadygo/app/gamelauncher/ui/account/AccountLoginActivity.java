@@ -30,6 +30,10 @@ public class AccountLoginActivity extends BaseAccountActivity {
 
 	private void initView() {
 		initHeaderView(R.string.account_login_btn);
+		mTipsLayout = (OperationTipsLayout) findViewById(R.id.operationTipsLayout);
+		mTipsLayout.setTipsVisible(TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
+		mTipsLayout.getPagingIndicator().setVisibility(View.GONE);
+
 		mErrorPromptView = (TextView) findViewById(R.id.loginErrorPrompt);
 
 		mUsernameView = (EditText) findViewById(R.id.username);
