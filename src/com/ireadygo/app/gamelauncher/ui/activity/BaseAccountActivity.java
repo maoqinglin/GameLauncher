@@ -1,13 +1,16 @@
 package com.ireadygo.app.gamelauncher.ui.activity;
 
+import android.R.integer;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.ireadygo.app.gamelauncher.GameLauncherConfig;
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.account.AccountManager;
 import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
@@ -23,6 +26,7 @@ import com.ireadygo.app.gamelauncher.utils.StaticsUtils;
 import com.ireadygo.app.gamelauncher.utils.Utils;
 import com.snail.appstore.openapi.accountstatus.AccountStatusManager;
 import com.snailgame.mobilesdk.LoginResultListener;
+import com.snailgame.sdkcore.open.InitCompleteListener;
 
 public class BaseAccountActivity extends BaseGuideActivity {
 	public static final String START_FLAG = "startFlag";
@@ -30,6 +34,9 @@ public class BaseAccountActivity extends BaseGuideActivity {
 	public static final int FLAG_START_BY_ACCOUNT_DETAIL = 2;
 	public static final int SUCCESS_CODE = 1;
 	public static final int FAILED_CODE = 0;
+	public static final String TYPE_A = "A";
+	public static final String TYPE_B = "B";
+	public static final String TYPE_C = "C";
 	public static final String ACTION_ACCOUNT_LOGIN = "com.ireadygo.app.gamelauncher.ACTION_ACCOUNT_LOGIN";
 	private boolean mIsResumed = false;
 	private Dialog mProgressDialog;
@@ -77,12 +84,13 @@ public class BaseAccountActivity extends BaseGuideActivity {
 
 	protected void onLoginSuccess() {
 		hideProgressDialog();
-//		startActivityByFlag(mStartFlag);
 		sendAccountLoginBroadcast();
 		Toast.makeText(this, R.string.account_login_success, Toast.LENGTH_SHORT).show();
 		if (!PreferenceUtils.hasDeviceActive()) {
 			DeviceActiveTask task = new DeviceActiveTask();
 			task.execute();
+			LoadOBoxTypeTask loadOBoxTypeTask = new LoadOBoxTypeTask();
+			loadOBoxTypeTask.execute();
 			return;
 		}
 		CheckBindAccountTask tast = new CheckBindAccountTask();
@@ -90,19 +98,19 @@ public class BaseAccountActivity extends BaseGuideActivity {
 		startGameLauncherActivity();
 	}
 
-	private void startActivityByFlag(int startFlag){
-		Intent intent = new Intent();
-		if (mStartFlag == FLAG_START_BY_MAIN_ACTIVITY) {
-			intent.setClass(this, GameLauncherActivity.class);
-		} else if (mStartFlag == FLAG_START_BY_ACCOUNT_DETAIL) {
-//			intent.setClass(this, AccountDetailActivity.class);
-//			intent.putExtra(AccountFragment.ACCOUNT_LAYOUT_FLAG, AccountFragment.LAYOUT_FLAG_MYWEALTH);
-		}
-		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		SoundPoolManager.instance(this).play(SoundPoolManager.SOUND_EXIT);
-		startActivity(intent);
-		finish();
-	}
+//	private void startActivityByFlag(int startFlag){
+//		Intent intent = new Intent();
+//		if (mStartFlag == FLAG_START_BY_MAIN_ACTIVITY) {
+//			intent.setClass(this, GameLauncherActivity.class);
+//		} else if (mStartFlag == FLAG_START_BY_ACCOUNT_DETAIL) {
+////			intent.setClass(this, AccountDetailActivity.class);
+////			intent.putExtra(AccountFragment.ACCOUNT_LAYOUT_FLAG, AccountFragment.LAYOUT_FLAG_MYWEALTH);
+//		}
+//		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//		SoundPoolManager.instance(this).play(SoundPoolManager.SOUND_EXIT);
+//		startActivity(intent);
+//		finish();
+//	}
 
 	protected void onLoginFailed(int code) {
 		hideProgressDialog();
@@ -183,13 +191,7 @@ public class BaseAccountActivity extends BaseGuideActivity {
 	protected void startAlipayActivity() {
 		Intent intent = new Intent();
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		boolean isFirstLaunch = PreferenceUtils.isFirstLaunch();
 		intent.setClass(this, GuideAlipayActivity.class);
-		if (isFirstLaunch) {
-			PreferenceUtils.setFirstLaunch(false);
-			//上报设备信息
-			StaticsUtils.DeviceActive();
-		}
 		SoundPoolManager.instance(this).play(SoundPoolManager.SOUND_EXIT);
 		startActivity(intent);
 		finish();
@@ -273,6 +275,10 @@ public class BaseAccountActivity extends BaseGuideActivity {
 					BindDeviceAccountTask task = new BindDeviceAccountTask();
 					task.execute();
 				}
+				//激活成功，设置首次开机标志
+				if (PreferenceUtils.isFirstLaunch()) {
+					PreferenceUtils.setFirstLaunch(false);
+				}
 				//激活成功，跳转绑定支付宝
 				startAlipayActivity();
 			} else {
@@ -296,6 +302,40 @@ public class BaseAccountActivity extends BaseGuideActivity {
 		protected void onPostExecute(String result) {
 			if (!TextUtils.isEmpty(result)) {
 				PreferenceUtils.setDeviceBindAccount(result);
+			}
+		}
+	}
+
+	private class LoadOBoxTypeTask extends AsyncTask<Void, Void, String> {
+		@Override
+		protected String doInBackground(Void... params) {
+			try {
+				return GameInfoHub.instance(BaseAccountActivity.this).getSaleType(Build.SERIAL);
+			} catch (InfoSourceException e) {
+				e.printStackTrace();
+			}
+			return null;
+			
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			if (!TextUtils.isEmpty(result)) {
+				PreferenceUtils.saveOBoxType(result);
+				if (TYPE_A.equals(result)) {
+					GameLauncherConfig.sChannel = "1883";
+				} else if (TYPE_B.equals(result)) {
+					GameLauncherConfig.sChannel = "1884";
+				} else {
+					GameLauncherConfig.sChannel = "1882";
+				}
+				AccountManager.getInstance().init(BaseAccountActivity.this, new InitCompleteListener() {
+					@Override
+					public void onComplete(int arg0) {
+						//上报设备信息
+						StaticsUtils.DeviceActive();
+					}
+				});
 			}
 		}
 	}

@@ -7,12 +7,13 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.ireadygo.app.gamelauncher.GameLauncherApplication;
+import com.ireadygo.app.gamelauncher.GameLauncherConfig;
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.account.AccountInfoAsyncTask;
+import com.ireadygo.app.gamelauncher.account.AccountManager;
 import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
 import com.ireadygo.app.gamelauncher.ui.base.BaseMenuActivity;
 import com.ireadygo.app.gamelauncher.ui.guide.GuideOBoxIntroduceActivity;
-import com.ireadygo.app.gamelauncher.ui.guide.GuideRegisterOrLoginActivity;
 import com.ireadygo.app.gamelauncher.ui.menu.HomeMenuFragment;
 import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
 import com.ireadygo.app.gamelauncher.utils.StaticsUtils;
@@ -32,7 +33,12 @@ public class GameLauncherActivity extends BaseMenuActivity {
 		// // 上报终端个推信息
 		// AccountManager.getInstance().uploadGetuiInfo(this);
 		// 上报应用启动时间
-		StaticsUtils.onCreate();
+		if (PreferenceUtils.hasDeviceActive()) {
+			mCreateTime = System.currentTimeMillis();
+			StaticsUtils.onCreate();
+		} else {
+			AccountManager.getInstance().init(this, GameLauncherConfig.sChannel);
+		}
 		setShouldTranslate(true);
 		GameLauncherApplication.getApplication().setGameLauncherActivity(this);
 		new AccountInfoAsyncTask(this, null).execute();
@@ -60,15 +66,19 @@ public class GameLauncherActivity extends BaseMenuActivity {
 			}
 		}
 		// 上报应用置前台的时间
-		StaticsUtils.onResume();
+		if (PreferenceUtils.hasDeviceActive()) {
+			StaticsUtils.onResume();
+		}
 	}
 
 	@Override
 	protected void onPause() {
-		// 上报应用置后台的时间
-		long frontLastTime = System.currentTimeMillis() - mResumeTime;
-		if (frontLastTime >= 0) {
-			StaticsUtils.onPause(frontLastTime);
+		if (PreferenceUtils.hasDeviceActive()) {
+			// 上报应用置后台的时间
+			long frontLastTime = System.currentTimeMillis() - mResumeTime;
+			if (frontLastTime >= 0) {
+				StaticsUtils.onPause(frontLastTime);
+			}
 		}
 		super.onPause();
 	}
@@ -101,10 +111,12 @@ public class GameLauncherActivity extends BaseMenuActivity {
 
 	@Override
 	protected void onDestroy() {
-		// 上报应用关闭的时间，打开时长
-		long openLastTime = System.currentTimeMillis() - mCreateTime;
-		if (openLastTime >= 0) {
-			StaticsUtils.onDestroy(System.currentTimeMillis() - mCreateTime);
+		if (PreferenceUtils.hasDeviceActive()) {
+			// 上报应用关闭的时间，打开时长
+			long openLastTime = System.currentTimeMillis() - mCreateTime;
+			if (openLastTime >= 0) {
+				StaticsUtils.onDestroy(System.currentTimeMillis() - mCreateTime);
+			}
 		}
 		super.onDestroy();
 	}

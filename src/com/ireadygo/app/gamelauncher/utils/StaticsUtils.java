@@ -170,7 +170,7 @@ public class StaticsUtils {
 	}
 
 	private static void send(String url, boolean b, String addData) {
-		SnailStatistics.commitOneEvent(GameLauncherApplication.getApplication(), url, b, addData,GameLauncherConfig.CHANNEL);
+		SnailStatistics.commitOneEvent(GameLauncherApplication.getApplication(), url, b, addData,GameLauncherConfig.sChannel);
 	}
 
 

@@ -50,7 +50,24 @@ public class AccountManager {
 
 	/** 初始化 **/
 	public void init(Activity activity, InitCompleteListener listener) {
-		SnailCommplatform.getInstance().snailInit(activity, GameLauncherConfig.CHANNEL, listener);
+		SnailCommplatform.getInstance().snailInit(activity, GameLauncherConfig.sChannel, listener);
+	}
+
+	public void init(Activity activity,String channelId) {
+		SnailCommplatform.getInstance().snailInit(activity, channelId, new InitCompleteListener() {
+			@Override
+			public void onComplete(int arg0) {
+				switch (arg0) {
+				case OnInitCompleteListener.FLAG_NORMAL:
+					mIsInitSuccess = true;
+					break;
+				case OnInitCompleteListener.FLAG_FORCE_CLOSE:
+				default:
+					Log.e(TAG, "One Key Login failed!");
+					break;
+				}
+			}
+		});
 	}
 
 	/** 一键登陆 **/
@@ -199,7 +216,7 @@ public class AccountManager {
 					String tags[] = GameInfoHub.instance(context).uploadGeituiInfo(
 							GameLauncherConfig.GETUI_CLIENTID,
 							GameLauncherConfig.GETUI_APPID,
-							GameLauncherConfig.CHANNEL,
+							GameLauncherConfig.sChannel,
 							GameLauncherConfig.PHONE_TYPE);
 					//根据返回的tag，设置个推的tag
 					if (tags != null && tags.length > 0) {
