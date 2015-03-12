@@ -15,17 +15,10 @@
 
     <com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView
         android:id="@+id/favorite_apps_list"
+        style="@style/MultiListNormal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:nextFocusDown="@+id/favorite_apps_list"
-        android:nextFocusLeft="@+id/store_menu_category"
-        android:nextFocusRight="@+id/favorite_apps_list"
-        android:nextFocusUp="@+id/favorite_apps_list"
-        app:hlv_horizontal_spacing="@dimen/common_list_item_divder_width"
-        app:hlv_vertical_spacing="@dimen/common_list_vertical_space"
-        app:padding_left="@dimen/content_fragment_padding_left"
-        app:padding_right="@dimen/content_fragment_list_padding_right"
-        app:padding_top="@dimen/content_fragment_list_padding_top" >
+        android:nextFocusLeft="@+id/store_menu_app" >
     </com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView>
 
 </LinearLayout>

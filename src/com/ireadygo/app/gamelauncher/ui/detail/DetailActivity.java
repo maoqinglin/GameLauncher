@@ -73,7 +73,7 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 	private DetailScreenshotAdapter mPictureAdapter;
 	private GameManager mGameManager;
 	private AppStateListener mStateListener = new AppStateListener();
-	private View mView;
+	private View mDecorView;
 	private ProgressBar mProgressBar;
 
 	@Override
@@ -84,7 +84,7 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 		mGameManager.addDownloadListener(mStateListener);
 		mGameManager.addInstallListener(mStateListener);
 		mGameManager.addUninstallListener(mStateListener);
-		mView = getWindow().getDecorView();
+		mDecorView = getWindow().getDecorView();
 		initView();
 	}
 
@@ -403,8 +403,8 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 					@SuppressWarnings("deprecation")
 					@Override
 					public void onLoadingComplete(String arg0, View arg1, Bitmap arg2) {
-						if (mView != null) {
-							mView.setBackground(new BitmapDrawable(arg2));
+						if (mDecorView != null) {
+							mDecorView.setBackground(new BitmapDrawable(arg2));
 						}
 					}
 

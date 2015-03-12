@@ -43,11 +43,6 @@ public class UserActivity extends BaseMenuActivity {
 		return new UserMenuFragment(this);
 	}
 
-	@Override
-	public boolean onBackKey() {
-		return true;
-	}
-
 	public static void startSelf(Context context, int focusPosition) {
 		Intent intent = new Intent(context, UserActivity.class);
 		intent.putExtra(EXTRA_FOCUS_POSITION, focusPosition);
