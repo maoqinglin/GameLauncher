@@ -251,9 +251,9 @@ public class UserFragmentB extends BaseContentFragment {
 		protected void onPostExecute(RentReliefInfo result) {
 			if (result != null) {
 				int playTime = secondToHour(result.getAppTime());
-				int remainTime = secondToHour(result.getAppRemainTime());
-				setPlayTimeProgress(playTime,playTime + remainTime);
-				setPlayTimeState(playTime, playTime + remainTime);
+				int targetTime = secondToHour(result.getTargetTime());
+				setPlayTimeProgress(playTime,targetTime);
+				setPlayTimeState(playTime, targetTime);
 				setFeedbackMonth(result.getRemainExpirationMonth());
 			}
 		}

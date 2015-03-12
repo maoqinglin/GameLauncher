@@ -314,6 +314,10 @@
     <string name="recharge_account_traiff_recharge">資費充值</string>
     <string name="my_pass">我的通行證：</string>
     <string name="snail_point">遊戲點券</string>
+    <string name="recharge_snail_point_invalid">主機代金券無效</string>
+    <string name="recharge_snail_point_used">主機代金券已經被使用</string>
+    <string name="recharge_snail_point_has_bind">主機已經綁定代金券</string>
+    <string name="recharge_box_not_exist">主機不存在</string>
 
     <string-array name="recharge_ticket_types">
         <item>遊戲點券</item>

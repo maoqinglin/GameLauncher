@@ -35,6 +35,7 @@ import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.widget.ConfirmDialog;
 import com.ireadygo.app.gamelauncher.ui.widget.CustomerEditText;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
+import com.ireadygo.app.gamelauncher.utils.DeviceUtil;
 import com.ireadygo.app.gamelauncher.utils.NetworkUtils;
 import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
 import com.snailgame.mobilesdk.OnQueryBalanceListener;
@@ -52,7 +53,6 @@ public class UserRechargeFragment extends BaseContentFragment implements OnClick
 	private ProgressDialog mProgressDialog;
 	private CustomerEditText mTicketNum;
 	private int mResultCount = 0;
-	private int mExpiredDays = 0;
 	private GameInfoHub mGameInfoHub;
 
 	public UserRechargeFragment(Activity activity, BaseMenuFragment menuFragment) {
@@ -189,7 +189,7 @@ public class UserRechargeFragment extends BaseContentFragment implements OnClick
 			confirmDialog.setPrompt(getRootActivity().getString(R.string.recharge_arm_ticket_recharge_title));
 			confirmDialog.setCancelText(getRootActivity().getString(R.string.cancel));
 		}
-		confirmDialog.setMsgTextSize(16);
+		confirmDialog.setMsgTextSize(48);
 		confirmDialog.setMsg(getRootActivity().getString(R.string.recharge_confirm, AccountManager.getInstance().getAccount(getRootActivity())));
 		confirmDialog.setCancelClickListener(new OnClickListener() {
 
@@ -253,11 +253,9 @@ public class UserRechargeFragment extends BaseContentFragment implements OnClick
 
 			try {
 				if (mTicketTypeValue == 0) {
-					mResultCount = mGameInfoHub.rechargeRabbitTicket(num, "");
+					mGameInfoHub.bindTicket(num, "", DeviceUtil.getMacAddr(getRootActivity()));
 				} else {
-					int[] result = mGameInfoHub.rechargeSlotTicket(num);
-					mResultCount = result[0];
-					mExpiredDays = result[1];
+					mResultCount = mGameInfoHub.rechargeRabbitTicket(num, "");
 				}
 				return getRootActivity().getString(R.string.recharge_succeed);
 			} catch (InfoSourceException e) {
@@ -271,14 +269,14 @@ public class UserRechargeFragment extends BaseContentFragment implements OnClick
 					return getRootActivity().getString(R.string.recharge_rabbit_ticket_type_match);
 				} else if(e.getMessage().equals(InfoSourceException.MSG_RABBIT_TICKET_ONE_BIND_ERROR)) {
 					return getRootActivity().getString(R.string.recharge_rabbit_ticket_one_bind);
-				} else if (e.getMessage().equals(InfoSourceException.MSG_SLOT_TICKET_NOT_EXIST_ERROR)) {
-					return getRootActivity().getString(R.string.recharge_slot_ticket_not_exist);
-				} else if (e.getMessage().equals(InfoSourceException.MSG_SLOT_TICKET_ONE_BIND_ERROR)) {
-					return getRootActivity().getString(R.string.recharge_slot_ticket_one_bind);
-				} else if (e.getMessage().equals(InfoSourceException.MSG_SLOT_TICKET_TYPE_MATCH_ERROR)) {
-					return getRootActivity().getString(R.string.recharge_slot_ticket_type_match);
-				} else if (e.getMessage().equals(InfoSourceException.MSG_SLOT_TICKET_USED_ERROR)) {
-					return getRootActivity().getString(R.string.recharge_slot_ticket_used);
+				} else if (e.getMessage().equals(InfoSourceException.MSG_BOX_TICKET_INVALID)) {
+					getRootActivity().getString(R.string.recharge_snail_point_invalid);
+				} else if (e.getMessage().equals(InfoSourceException.MSG_BOX_TICKET_ALREADY_IN_USE)) {
+					getRootActivity().getString(R.string.recharge_snail_point_used);
+				} else if (e.getMessage().equals(InfoSourceException.MSG_BOX_TICKET_HAS_BINDING)) {
+					getRootActivity().getString(R.string.recharge_snail_point_has_bind);
+				} else if (e.getMessage().equals(InfoSourceException.MSG_BOX_NOT_EXIST)) {
+					getRootActivity().getString(R.string.recharge_box_not_exist);
 				} else if (e.getMessage().equals(InfoSourceException.MSG_IMEI_NOT_KNOWN)) {
 					return getRootActivity().getString(R.string.recharge_imei_unknown);
 				} else if (e.getMessage().equals(InfoSourceException.MSG_ACCOUNT_OUTDATE)) {
