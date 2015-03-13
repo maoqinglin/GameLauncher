@@ -14,12 +14,17 @@
         app:stat_title="@string/collection_title_prompt" >
     </com.ireadygo.app.gamelauncher.ui.widget.StatisticsTitleView>
 
-    <com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView
-        android:id="@+id/collection_list"
-        style="@style/MultiListNormal"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:nextFocusLeft="@+id/store_menu_collection" >
-    </com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView>
+        android:layout_height="match_parent" >
+
+        <com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView
+            android:id="@+id/collection_list"
+            style="@style/MultiListNormal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:nextFocusLeft="@+id/store_menu_collection" >
+        </com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView>
+    </FrameLayout>
 
 </LinearLayout>

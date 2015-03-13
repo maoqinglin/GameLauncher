@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res/com.ireadygo.app.gamelauncher"
     android:layout_width="@dimen/content_fragment_width"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:paddingTop="@dimen/category_detail_padding_top" >
 
     <com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView
@@ -14,4 +13,4 @@
         android:nextFocusLeft="@+id/store_menu_collection" >
     </com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView>
 
-</LinearLayout>
+</FrameLayout>

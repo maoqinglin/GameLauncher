@@ -35,6 +35,8 @@ public class HMultiListView extends LinearLayout {
 	private static final int NUM_LIST_VIEW = 2;
 	private static final int WHAT_SELECTED_ANIMATOR = 1;
 	private static final int WHAT_UNSELECTED_ANIMATOR = 2;
+	private static final int WHAT_SHOW_EMPTYVIEW= 3;
+	private static final int DELAY_SHOW_EMPTYVIEW = 500;
 
 	private HMultiBaseAdapter mHMultiBaseAdapter;
 	private List<HListView> mHListViews = new ArrayList<HListView>();
@@ -76,6 +78,9 @@ public class HMultiListView extends LinearLayout {
 				if (itemUn != null) {
 					itemUn.toUnselected(null);
 				}
+				break;
+			case WHAT_SHOW_EMPTYVIEW:
+				showEmptyView();
 				break;
 			default:
 				break;
@@ -312,7 +317,10 @@ public class HMultiListView extends LinearLayout {
 				dataList.add((T) list.get(j));
 			}
 			if (isEmpty(mDataLists)) {
-				showEmptyView();
+				mHandler.removeMessages(WHAT_SHOW_EMPTYVIEW);
+				mHandler.sendEmptyMessageDelayed(WHAT_SHOW_EMPTYVIEW, DELAY_SHOW_EMPTYVIEW);
+			}else{
+				hideEmptyView();
 			}
 			mMaxCount = size % listNum == 0 ? size / listNum : size / listNum + 1;
 		}
@@ -362,6 +370,7 @@ public class HMultiListView extends LinearLayout {
 		if (mEmptyView == null) {
 			return;
 		}
+		mHandler.removeMessages(WHAT_SHOW_EMPTYVIEW);
 		mEmptyView.setVisibility(View.GONE);
 	}
 
@@ -655,7 +664,8 @@ public class HMultiListView extends LinearLayout {
 					ViewGroup.LayoutParams.MATCH_PARENT);
 			((ViewGroup) getParent()).addView(emptyView, params);
 			if (isEmpty(mDataLists)) {
-				showEmptyView();
+				mHandler.removeMessages(WHAT_SHOW_EMPTYVIEW);
+				mHandler.sendEmptyMessageDelayed(WHAT_SHOW_EMPTYVIEW, DELAY_SHOW_EMPTYVIEW);
 			} else {
 				hideEmptyView();
 			}
