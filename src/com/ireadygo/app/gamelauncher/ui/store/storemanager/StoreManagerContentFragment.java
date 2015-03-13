@@ -11,12 +11,10 @@ import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
-import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 
 import com.ireadygo.app.gamelauncher.GameLauncher;
@@ -29,7 +27,6 @@ import com.ireadygo.app.gamelauncher.appstore.manager.GameManager.GameManagerExc
 import com.ireadygo.app.gamelauncher.appstore.manager.GameManager.InstallListener;
 import com.ireadygo.app.gamelauncher.appstore.manager.GameManager.UninstallListener;
 import com.ireadygo.app.gamelauncher.appstore.manager.UpdateManager;
-import com.ireadygo.app.gamelauncher.ui.SnailKeyCode;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
@@ -37,6 +34,8 @@ import com.ireadygo.app.gamelauncher.ui.menu.ImageTextMenu;
 import com.ireadygo.app.gamelauncher.ui.store.storemanager.StoreManagerContentAdapter.OnChildFocusChangeListener;
 import com.ireadygo.app.gamelauncher.ui.store.storemanager.StoreManagerContentAdapter.OperatorListener;
 import com.ireadygo.app.gamelauncher.ui.store.storemanager.StoreManagerItem.StoreManagerItemHolder;
+import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
+import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.ConfirmDialog;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
 import com.ireadygo.app.gamelauncher.ui.widget.StatisticsTitleView;
@@ -223,6 +222,35 @@ public class StoreManagerContentFragment extends BaseContentFragment {
 					}
 				}
 			}
+
+		});
+
+		mHMultiListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				AppEntity appEntity = (AppEntity)mStoreManagerAdapter.getItem(position);
+				if(appEntity != null){
+					switch (appEntity.getGameState()) {
+					case INSTALLABLE:
+					case INSTALLING:
+						mGameManager.install(appEntity);
+						break;
+						
+					case LAUNCHABLE:
+						mGameManager.launch(appEntity.getPkgName());
+						break;
+						
+					case UPGRADEABLE:
+						mGameManager.upgrade(appEntity);
+						break;
+						
+					default:
+						mGameManager.download(appEntity);
+						break;
+					}
+				}
+			}
 		});
 
 		mDldMenuItem.setOnFocusChangeListener(mBtnListener);
@@ -405,4 +433,75 @@ public class StoreManagerContentFragment extends BaseContentFragment {
 		DOWNLOAD, UPGRADE, INSTALLED
 	}
 
+	public boolean onSunKey() {
+		View v = mHMultiListView.getSelectedView();
+		if (v == null) {
+			return false;
+		}
+		AppEntity appEntity = getCurrentSelectedItem();
+		if(appEntity != null){
+			mGameManager.launch(appEntity.getPkgName());
+		}
+		return true;
+	}
+
+	@Override
+	public boolean onBackKey() {
+		return onMoonKey();
+	}
+
+	@Override
+	public boolean onMoonKey() {
+		setNextFocus();
+		return true;
+	}
+
+	@Override
+	public boolean onWaterKey() {
+		// 卸载游戏
+		AppEntity appEntity = getCurrentSelectedItem();
+		if (appEntity != null) {
+			PackageUtils.unInstallApp(getRootActivity(), appEntity.getPkgName());
+		}
+		return true;
+	}
+
+	@Override
+	public boolean onMountKey(){
+		AppEntity appEntity = getCurrentSelectedItem();
+		if (appEntity != null) {
+			DetailActivity.startSelf(getRootActivity(), appEntity);
+		}
+		return true;
+	}
+
+	private void setNextFocus() {
+		switch (mStoreManagerAdapter.getGameManagerType()) {
+		case DOWNLOAD:
+			mDldMenuItem.requestFocus();
+			break;
+
+		case UPGRADE:
+			mUpgradeMenuItem.requestFocus();
+			break;
+
+		case INSTALLED:
+			mInstalledMenuItem.requestFocus();
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	private AppEntity getCurrentSelectedItem() {
+		AppEntity appEntity = null;
+		if (null != mHMultiListView) {
+			Object selectedItem = mHMultiListView.getSelectedItem();
+			if (null != selectedItem && selectedItem instanceof AppEntity) {
+				appEntity = (AppEntity) selectedItem;
+			}
+		}
+		return appEntity;
+	}
 }

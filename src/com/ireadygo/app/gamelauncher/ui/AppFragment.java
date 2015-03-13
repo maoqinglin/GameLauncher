@@ -80,11 +80,6 @@ public class AppFragment extends BaseContentFragment implements Callbacks {
 	}
 
 	@Override
-	public boolean onBackKey() {
-		return onMoonKey();
-	}
-
-	@Override
 	public void bindGames(List<ItemInfo> infos) {
 		
 	}
@@ -185,6 +180,11 @@ public class AppFragment extends BaseContentFragment implements Callbacks {
 		}
 		doAction(v, mHMultiListView.getSelectedItemPosition(), (ItemInfo)mHMultiListView.getSelectedItem());
 		return true;
+	}
+
+	@Override
+	public boolean onBackKey() {
+		return onMoonKey();
 	}
 
 	public boolean onMoonKey() {

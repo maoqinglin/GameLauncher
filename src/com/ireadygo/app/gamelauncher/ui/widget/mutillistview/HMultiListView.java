@@ -36,7 +36,7 @@ public class HMultiListView extends LinearLayout {
 	private static final int WHAT_SELECTED_ANIMATOR = 1;
 	private static final int WHAT_UNSELECTED_ANIMATOR = 2;
 	private static final int WHAT_SHOW_EMPTYVIEW= 3;
-	private static final int DELAY_SHOW_EMPTYVIEW = 500;
+	private static final int DELAY_SHOW_EMPTYVIEW = 3000;
 
 	private HMultiBaseAdapter mHMultiBaseAdapter;
 	private List<HListView> mHListViews = new ArrayList<HListView>();
