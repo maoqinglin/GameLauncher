@@ -1,5 +1,6 @@
 package com.ireadygo.app.gamelauncher.ui;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -64,6 +65,7 @@ public class GameLauncherActivity extends BaseMenuActivity {
 				startActivity(intent);
 				finish();
 			}
+			openBluetooth();
 		}
 		// 上报应用置前台的时间
 		if (PreferenceUtils.hasDeviceActive()) {
@@ -131,6 +133,16 @@ public class GameLauncherActivity extends BaseMenuActivity {
 	@Override
 	public HomeMenuFragment createMenuFragment() {
 		return new HomeMenuFragment(this);
+	}
+
+	private void openBluetooth() {
+		BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+		if (adapter == null) {
+			return;
+		}
+		if (!adapter.isEnabled()) {
+			adapter.enable();
+		}
 	}
 
 }
