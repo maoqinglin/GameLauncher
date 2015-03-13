@@ -97,7 +97,7 @@ public class UserPersonalFragment extends BaseContentFragment implements OnClick
 
 	public void initView(View view) {
 		super.initView(view);
-		getOperationTipsLayout().setTipsVisible(TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
+		getOperationTipsLayout().setTipsVisible(View.GONE, TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
 		mPhotoView = (ImageView) view.findViewById(R.id.personal_photo);
 		mPhotoView.setOnClickListener(this);
 

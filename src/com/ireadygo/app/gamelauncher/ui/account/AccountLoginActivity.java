@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.ui.activity.BaseAccountActivity;
+import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout;
+import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
 
 public class AccountLoginActivity extends BaseAccountActivity {
 	private static final String FACTORY_CODE = "0000";
@@ -17,6 +19,7 @@ public class AccountLoginActivity extends BaseAccountActivity {
 	private TextView mLoginBtn;
 	private TextView mRegisterBtn;
 	private TextView mErrorPromptView;
+	private OperationTipsLayout mTipsLayout;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +40,8 @@ public class AccountLoginActivity extends BaseAccountActivity {
 
 		mRegisterBtn = (TextView) findViewById(R.id.registerBtn);
 		mRegisterBtn.setOnClickListener(this);
-
+		mTipsLayout = (OperationTipsLayout)findViewById(R.id.tips_layout);
+		mTipsLayout.setTipsVisible(View.GONE, TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
 	}
 
 	@Override

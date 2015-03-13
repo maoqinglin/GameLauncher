@@ -32,8 +32,7 @@ public class GuideAlipayActivity extends BaseGuideActivity {
 	private void initUI() {
 		initHeaderView(R.string.starting_guide_alipay_title);
 		mTipsLayout = (OperationTipsLayout) findViewById(R.id.operationTipsLayout);
-		mTipsLayout.setTipsVisible(TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
-		mTipsLayout.getPagingIndicator().setVisibility(View.GONE);
+		mTipsLayout.setTipsVisible(View.GONE, TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
 
 		mGuideTwoBtnLayout = (GuideTwoBtnLayout) findViewById(R.id.guideTwoBtnLayout);
 		mGuideTwoBtnLayout.setLeftBtnText(R.string.starting_guide_alipay_bind);

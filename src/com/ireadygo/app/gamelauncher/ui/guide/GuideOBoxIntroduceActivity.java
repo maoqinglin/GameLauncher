@@ -30,8 +30,7 @@ public class GuideOBoxIntroduceActivity extends BaseGuideActivity {
 
 		initHeaderView(R.string.starting_guide_handler_intro);
 		mTipsLayout = (OperationTipsLayout) findViewById(R.id.operationTipsLayout);
-		mTipsLayout.setTipsVisible(TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
-		mTipsLayout.getPagingIndicator().setVisibility(View.GONE);
+		mTipsLayout.setTipsVisible(View.GONE, TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
 
 		mIntroImageView = (ImageView) findViewById(R.id.guideIntroImage);
 		mIntroImageView.setImageResource(RES_IMAGE_ID[mPos]);

@@ -50,6 +50,7 @@ public class OperationTipsLayout extends RelativeLayout {
 	}
 
 	public void setTipsVisible(TipFlag... flagList) {
+		mPagingIndicator.setVisibility(View.VISIBLE);
 		if (flagList == null) {
 			return;
 		}
@@ -57,6 +58,11 @@ public class OperationTipsLayout extends RelativeLayout {
 		for (TipFlag flag : flagList) {
 			setVisibleByFlag(flag, View.VISIBLE);
 		}
+	}
+
+	public void setTipsVisible(int visible, TipFlag... flagList) {
+		setTipsVisible(flagList);
+		mPagingIndicator.setVisibility(visible);
 	}
 
 	private void setVisibleByFlag(TipFlag flag, int isVisible) {
@@ -86,6 +92,7 @@ public class OperationTipsLayout extends RelativeLayout {
 		tipsMoonTxt.setVisibility(isVisible);
 		tipsMoontainTxt.setVisibility(isVisible);
 		tipsWaterTxt.setVisibility(isVisible);
+		mPagingIndicator.setVisibility(isVisible);
 	}
 
 	public PagingIndicator getPagingIndicator() {

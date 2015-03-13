@@ -75,7 +75,7 @@ public class UserRechargeFragment extends BaseContentFragment implements OnClick
 	@Override
 	protected void initView(View view) {
 		super.initView(view);
-		getOperationTipsLayout().setTipsVisible(TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
+		getOperationTipsLayout().setTipsVisible(View.GONE, TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
 		mRubbitCurrency = (TextView) view.findViewById(R.id.rabbit_currency);
 		mSnailPoint = (TextView) view.findViewById(R.id.snail_point);
 		mTicketType = (Spinner)view.findViewById(R.id.snail_point_select);

@@ -47,7 +47,7 @@ public class CategoryDetailContentFragment extends BaseContentFragment {
 	@Override
 	protected void initView(View view) {
 		super.initView(view);
-		getOperationTipsLayout().setTipsVisible(TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
+		getOperationTipsLayout().setTipsVisible(View.VISIBLE, TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
 		mMultiListView = (HMultiListView) view.findViewById(R.id.category_detail_list);
 		mMultiAdapter = new StoreAppMultiAdapter(getRootActivity(), mMultiListView, mAppEntities);
 		mMultiListView.setAdapter(mMultiAdapter);

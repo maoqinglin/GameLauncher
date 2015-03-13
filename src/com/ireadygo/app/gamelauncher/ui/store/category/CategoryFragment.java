@@ -45,7 +45,7 @@ public class CategoryFragment extends BaseContentFragment {
 	@Override
 	protected void initView(View view) {
 		super.initView(view);
-		getOperationTipsLayout().setTipsVisible(TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
+		getOperationTipsLayout().setTipsVisible(View.VISIBLE, TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
 		mAllItemCount = 0;
 		mTitleLayout = (StatisticsTitleView) view.findViewById(R.id.title_layout);
 		mTitleLayout.setCount(mAllItemCount);
