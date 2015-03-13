@@ -423,4 +423,6 @@
     <string name="store_empty_title">網絡不給力，加載失敗...</string>
     <string name="store_try_refresh">刷新試試</string>
 
+    <!-- 常用应用(FavoriteApps) -->
+    <string name="favorite_apps_title_prompt">商店內應用數量</string>
 </resources>

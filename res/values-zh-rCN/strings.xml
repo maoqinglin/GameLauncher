@@ -425,5 +425,7 @@
     <string name="update_empty_title">太棒了！都是最新的了~</string>
     <string name="store_empty_title">网络不给力,加载失败...</string>
     <string name="store_try_refresh">刷新试试</string>
+    <!-- 常用应用(FavoriteApps) -->
+    <string name="favorite_apps_title_prompt">商店内应用数量</string>
 
 </resources>

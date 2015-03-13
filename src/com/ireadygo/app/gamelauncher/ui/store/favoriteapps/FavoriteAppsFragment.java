@@ -47,8 +47,8 @@ public class FavoriteAppsFragment extends BaseContentFragment {
 		super.initView(view);
 		getOperationTipsLayout().setTipsVisible(TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
 		mTitleLayout = (StatisticsTitleView) view.findViewById(R.id.title_layout);
-		mTitleLayout.setCount(269);
 		mTitleLayout.setTitle(R.string.favorite_apps_title_prompt);
+		mTitleLayout.setCount(mAppEntities.size());
 
 		mMultiListView = (HMultiListView) view.findViewById(R.id.favorite_apps_list);
 		mAdapter = new StoreAppMultiAdapter(getRootActivity(), mMultiListView, mAppEntities);
@@ -91,6 +91,9 @@ public class FavoriteAppsFragment extends BaseContentFragment {
 			mAppEntities.addAll(result);
 			if (!isCancelled() && mMultiListView != null) {
 				mMultiListView.notifyDataSetChanged();
+			}
+			if(mTitleLayout != null){
+				mTitleLayout.setCount(mAppEntities.size());
 			}
 		}
 	}
