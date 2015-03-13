@@ -362,7 +362,7 @@
     <string name="device_active_failed">Device active failed!Please confirm network connected and restart!</string>
     <string name="device_bind_account_success">Device bind account success!</string>
     <string name="device_bind_account_failed">Device bind account failed,please login again!</string>
-    <string name="user_identity_overdue">用户身份过期，请重新登录！</string>
+    <string name="user_identity_overdue">Account expired,please login again!</string>
 
     <!-- 按键提示层 -->
     <string name="key_sun">Confirm</string>
@@ -419,10 +419,10 @@
     <string name="extend_install_error">Server data error,Please try again!</string>
     <string name="extend_install_success">install success</string>
     <string name="extend_nearly_open">It is comming soon!</string>
-    <string name="game_empty_title">空空如也,快去下载游戏吧~</string>
-    <string name="update_empty_title">太棒了！都是最新的了~</string>
-    <string name="store_empty_title">网络不给力,加载失败...</string>
-    <string name="store_try_refresh">刷新试试</string>
+    <string name="game_empty_title">Go to find a game!</string>
+    <string name="update_empty_title">wonderful,there is no games to be updated!</string>
+    <string name="store_empty_title">Network error!</string>
+    <string name="store_try_refresh">Please try refresh!</string>
     <!-- 常用应用(FavoriteApps) -->
-    <string name="favorite_apps_title_prompt">商店内应用数量</string>
+    <string name="favorite_apps_title_prompt">APPs</string>
 </resources>
