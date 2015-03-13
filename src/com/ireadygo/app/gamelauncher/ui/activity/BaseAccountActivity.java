@@ -93,8 +93,8 @@ public class BaseAccountActivity extends BaseGuideActivity {
 			loadOBoxTypeTask.execute();
 			return;
 		}
-		CheckBindAccountTask tast = new CheckBindAccountTask();
-		tast.execute();
+		CheckBindAccountTask task = new CheckBindAccountTask();
+		task.execute();
 		startGameLauncherActivity();
 	}
 
@@ -302,6 +302,9 @@ public class BaseAccountActivity extends BaseGuideActivity {
 		protected void onPostExecute(String result) {
 			if (!TextUtils.isEmpty(result)) {
 				PreferenceUtils.setDeviceBindAccount(result);
+			} else {
+				BindDeviceAccountTask task = new BindDeviceAccountTask();
+				task.execute();
 			}
 		}
 	}
