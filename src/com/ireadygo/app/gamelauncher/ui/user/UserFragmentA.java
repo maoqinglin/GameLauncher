@@ -413,7 +413,7 @@ public class UserFragmentA extends BaseContentFragment {
 			mRecharge.setNextFocusUpId(R.id.user_recharge_layout);
 			mRecharge.setNextFocusDownId(R.id.user_recharge_layout);
 		} else {
-			getMenu().getCurrentItem().setNextFocusRightId(R.id.alipay_account_state);
+			getMenu().getCurrentItem().setNextFocusRightId(R.id.user_center_layout);
 			mUserCenter.setNextFocusUpId(R.id.alipay_account_state);
 			mUserCenter.setNextFocusDownId(R.id.user_center_layout);
 			mRecharge.setNextFocusUpId(R.id.alipay_account_state);
