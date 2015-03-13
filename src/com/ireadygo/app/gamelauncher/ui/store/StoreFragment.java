@@ -21,6 +21,7 @@ import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
 import com.ireadygo.app.gamelauncher.appstore.info.item.BannerItem;
 import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
+import com.ireadygo.app.gamelauncher.ui.activity.WebviewActivity;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
@@ -79,11 +80,11 @@ public class StoreFragment extends BaseContentFragment {
 		mRecommendDatas.add(info);
 
 		anchor = new Anchor(Destination.GAME_DETAIL);
-		info = new StoreInfo(R.drawable.store_icon_category, anchor);
+		info = new StoreInfo(R.drawable.store_poster_small, anchor);
 		mRecommendDatas.add(info);
 
 		anchor = new Anchor(Destination.GAME_DETAIL);
-		info = new StoreInfo(R.drawable.store_icon_category, anchor);
+		info = new StoreInfo(R.drawable.store_poster_small, anchor);
 		mRecommendDatas.add(info);
 
 		anchor = new Anchor(Destination.GAME_DETAIL);
@@ -91,19 +92,19 @@ public class StoreFragment extends BaseContentFragment {
 		mRecommendDatas.add(info);
 
 		anchor = new Anchor(Destination.GAME_DETAIL);
-		info = new StoreInfo(R.drawable.store_icon_category, anchor);
+		info = new StoreInfo(R.drawable.store_poster_small, anchor);
 		mRecommendDatas.add(info);
 
 		anchor = new Anchor(Destination.GAME_DETAIL);
-		info = new StoreInfo(R.drawable.store_icon_category, anchor);
+		info = new StoreInfo(R.drawable.store_poster_small, anchor);
 		mRecommendDatas.add(info);
 
 		anchor = new Anchor(Destination.GAME_DETAIL);
-		info = new StoreInfo(R.drawable.store_icon_category, anchor);
+		info = new StoreInfo(R.drawable.store_poster_small, anchor);
 		mRecommendDatas.add(info);
 		// 7
 		anchor = new Anchor(Destination.GAME_DETAIL);
-		info = new StoreInfo(R.drawable.store_icon_category, anchor);
+		info = new StoreInfo(R.drawable.store_poster_small, anchor);
 		mRecommendDatas.add(info);
 		// 搜索
 		anchor = new Anchor(Destination.STORE_SEARCH);
@@ -206,13 +207,13 @@ public class StoreFragment extends BaseContentFragment {
 						break;
 					case BannerItem.TYPE_COLLECTION:
 						anchor = new Anchor(Destination.COLLECTION_DETAIL);
-						anchor.getIntent().putExtra(CollectionDetailActivity.EXTRA_CATEGORY_ID, paramsId);
+						anchor.getIntent().putExtra(CollectionDetailActivity.EXTRA_COLLECTION_ID, paramsId);
 						break;
 					case BannerItem.TYPE_WEBPAGE:
 						anchor = new Anchor(Destination.WEBPAGE);
 						if (!TextUtils.isEmpty(item.getCHtmlUrl())) {
-							Uri uri = Uri.parse(item.getCHtmlUrl());
-							anchor.getIntent().setData(uri);
+//							Uri uri = Uri.parse(item.getCHtmlUrl());
+							anchor.getIntent().putExtra(WebviewActivity.EXTRA_URL, item.getCHtmlUrl());
 						}
 						break;
 					}

@@ -30,7 +30,7 @@ import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 import com.snail.appstore.openapi.AppPlatFormConfig;
 
 public class CollectionDetailActivity extends BaseActivity implements OnClickListener {
-	public static final String EXTRA_CATEGORY_ID = "CategoryID";
+	public static final String EXTRA_COLLECTION_ID = "CollectionID";
 	private StatisticsTitleView mTitleLayout;
 	private HMultiListView mMultiListView;
 	private OperationTipsLayout mTipsLayout;
@@ -39,7 +39,7 @@ public class CollectionDetailActivity extends BaseActivity implements OnClickLis
 	private GameInfoHub mGameInfoHub;
 	private long mPageIndex = 1;
 	private boolean mLoadingData = false;
-	private long mCategoryId = -1;
+	private long mCollectionId = -1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +58,9 @@ public class CollectionDetailActivity extends BaseActivity implements OnClickLis
 		mTipsLayout.setTipsVisible(TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
 		
 		
-		mCategoryId = getIntent().getLongExtra(EXTRA_CATEGORY_ID, -1);
-		if (mCategoryId > 0) {
-			loadCategoryDetail();
+		mCollectionId = getIntent().getLongExtra(EXTRA_COLLECTION_ID, -1);
+		if (mCollectionId > 0) {
+			loadCollectionDetail();
 		}
 		// mMultiListView.setOnScrollListener(new OnScrollListener() {
 		//
@@ -94,9 +94,9 @@ public class CollectionDetailActivity extends BaseActivity implements OnClickLis
 		mMultiListView.setEmptyView(emptyView);
 	}
 
-	private void loadCategoryDetail() {
-		if (!mLoadingData && mCategoryId > 0) {
-			new LoadCategoryDetailTask().execute(mCategoryId + "", mPageIndex + "");
+	private void loadCollectionDetail() {
+		if (!mLoadingData && mCollectionId > 0) {
+			new LoadCategoryDetailTask().execute(mCollectionId + "", mPageIndex + "");
 			mLoadingData = true;
 		}
 	}
@@ -171,9 +171,9 @@ public class CollectionDetailActivity extends BaseActivity implements OnClickLis
 		}
 	}
 
-	public static void startSelf(Context context, long categoryId) {
+	public static void startSelf(Context context, long collectionId) {
 		Intent intent = new Intent(context, CollectionDetailActivity.class);
-		intent.putExtra(EXTRA_CATEGORY_ID, categoryId);
+		intent.putExtra(EXTRA_COLLECTION_ID, collectionId);
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		context.startActivity(intent);
 	}

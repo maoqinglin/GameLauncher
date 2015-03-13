@@ -3,8 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/tips_height"
     android:layout_marginLeft="@dimen/content_padding_left_default"
-    android:layout_marginRight="@dimen/tips_shortcut_margin"
-    android:clipChildren="false" >
+    android:layout_marginRight="@dimen/tips_shortcut_margin" >
 
     <LinearLayout
         android:id="@+id/ll_tips_left"

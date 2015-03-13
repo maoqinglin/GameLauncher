@@ -320,7 +320,11 @@ public class UserRechargeFragment extends BaseContentFragment implements OnClick
 		switch (v.getId()) {
 		case R.id.rabbit_recharge:
 			MobclickAgent.onEvent(getRootActivity(), "rabbit_recharge");
-			AccountManager.getInstance().gotoCharge(getRootActivity(), true);
+			try {
+				AccountManager.getInstance().gotoCharge(getRootActivity(), true);
+			} catch (Exception e) {
+				Toast.makeText(getRootActivity(), R.string.user_identity_overdue, Toast.LENGTH_SHORT).show();
+			}
 			break;
 		case R.id.gift_certificate_recharge_btn:
 			showRechargeDialog();

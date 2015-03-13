@@ -19,9 +19,10 @@ import com.ireadygo.app.gamelauncher.ui.widget.WebViewLayout;
 import com.ireadygo.app.gamelauncher.utils.DeviceUtil;
 import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
 
-public class BindAlipayAccountActivity extends Activity {
-
+public class WebviewActivity extends Activity {
+	public static final String EXTRA_URL = "EXTRA_URL";
 	private WebViewLayout mWebView;
+	private String mUrl = "";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +35,14 @@ public class BindAlipayAccountActivity extends Activity {
 	private void initUI() {
 		mWebView = (WebViewLayout) findViewById(R.id.webview);
 		mWebView.getWebView().setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-		LoadAlipayBindUrlTask task = new LoadAlipayBindUrlTask();
-		task.execute();
-//		mWebView.loadUrl(ACCOUNT_STORE_URL);
+//		if(getIntent().getExtras() != null){
+//			mUrl = getIntent().getExtras().getString(EXTRA_URL);
+//		}
+		mUrl = getIntent().getStringExtra(EXTRA_URL);
+		Log.d("liu.js", "WebviewActivity--url=" + mUrl);
+		if (mUrl != null) {
+			mWebView.loadUrl(mUrl);
+		}
 	}
 
 	@Override
@@ -51,25 +57,6 @@ public class BindAlipayAccountActivity extends Activity {
 			}
 		}
 		return super.onKeyDown(keyCode, event);
-	}
-
-	private class LoadAlipayBindUrlTask extends AsyncTask<Void, Void, String> {
-		@Override
-		protected String doInBackground(Void... params) {
-			try {
-				return GameInfoHub.instance(BindAlipayAccountActivity.this).bindPayment();
-			} catch (InfoSourceException e) {
-				e.printStackTrace();
-			}
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(String result) {
-			if (!TextUtils.isEmpty(result)) {
-				mWebView.loadUrl(result);
-			}
-		}
 	}
 
 }

@@ -24,21 +24,21 @@ import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 
 public class CategoryMultiAdapter implements HMultiBaseAdapter {
 	/** 创意休闲 **/
-	public static final String CATEGORY_ID_SLG = "1";
+	public static final int CATEGORY_ID_SLG = 1;
 	/** 动作射击 **/
-	public static final String CATEGORY_ID_STG = "2";
+	public static final int CATEGORY_ID_STG = 2;
 	/** 益智棋牌 **/
-	public static final String CATEGORY_ID_PZL = "3";
+	public static final int CATEGORY_ID_PZL = 3;
 	/** 角色扮演 **/
-	public static final String CATEGORY_ID_RPG = "4";
+	public static final int CATEGORY_ID_RPG = 4;
 	/** 体育竞技 **/
-	public static final String CATEGORY_ID_SPT = "5";
+	public static final int CATEGORY_ID_SPT = 5;
 	/** 单机游戏 **/
-	public static final String CATEGORY_ID_OLG = "6";
+	public static final int CATEGORY_ID_OLG = 6;
 	/** 经营策略 **/
-	public static final String CATEGORY_ID_SIM = "7";
+	public static final int CATEGORY_ID_SIM = 7;
 	/** 竞技飞行 **/
-	public static final String CATEGORY_ID_RSG = "8";
+	public static final int CATEGORY_ID_RSG = 8;
 
 	private static final int LIST_NUM = 2;
 	private Context mContext;
@@ -153,7 +153,7 @@ public class CategoryMultiAdapter implements HMultiBaseAdapter {
 			holder.countLayout.setVisibility(View.INVISIBLE);
 		} else {
 			holder.countLayout.setVisibility(View.VISIBLE);
-			holder.count.setText(""+count);
+			holder.count.setText("" + count);
 		}
 
 		return convertView;
@@ -175,18 +175,18 @@ public class CategoryMultiAdapter implements HMultiBaseAdapter {
 	}
 
 	static class InternalCategoryInfo {
-		String categoryId;
+		int categoryId;
 		int titleId;
 		int iconId;
 		int titleBgId;
 		String[] intros;
 		int count;
 
-		public InternalCategoryInfo(){
-			
+		public InternalCategoryInfo() {
+
 		}
 
-		public InternalCategoryInfo(String categoryId, int titleId, int iconId, int bgId, String intro) {
+		public InternalCategoryInfo(int categoryId, int titleId, int iconId, int bgId, String intro) {
 			this.categoryId = categoryId;
 			this.titleId = titleId;
 			this.iconId = iconId;

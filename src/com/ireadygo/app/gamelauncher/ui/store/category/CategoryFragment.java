@@ -105,7 +105,7 @@ public class CategoryFragment extends BaseContentFragment {
 		@Override
 		protected Integer doInBackground(Void... params) {
 			try {
-				return GameInfoHub.instance(getRootActivity()).obtainChildrenCount(1, info.categoryId);
+				return GameInfoHub.instance(getRootActivity()).obtainChildrenCount(1, info.categoryId + "");
 			} catch (InfoSourceException e) {
 				e.printStackTrace();
 			}

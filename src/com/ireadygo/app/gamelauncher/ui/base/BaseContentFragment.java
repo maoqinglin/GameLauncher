@@ -171,7 +171,7 @@ public abstract class BaseContentFragment extends BaseFragment {
 	protected void showLoadingProgress() {
 		if (mLoadingProgress == null) {
 			mLoadingProgress = Utils.createLoadingDialog(getRootActivity());
-			mLoadingProgress.setCancelable(false);
+			mLoadingProgress.setCancelable(true);
 		}
 		if (!mLoadingProgress.isShowing()) {
 			mLoadingProgress.show();

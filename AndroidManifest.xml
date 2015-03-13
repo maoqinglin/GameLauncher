@@ -144,7 +144,7 @@
             android:theme="@style/CustomerTheme" >
         </activity>
         <activity
-            android:name="com.ireadygo.app.gamelauncher.ui.activity.BindAlipayAccountActivity"
+            android:name="com.ireadygo.app.gamelauncher.ui.activity.WebviewActivity"
             android:screenOrientation="landscape"
             android:theme="@style/CustomerTheme" />
         <activity

@@ -17,6 +17,7 @@ import android.view.View.OnFocusChangeListener;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.ireadygo.app.gamelauncher.ui.Config;
+import com.ireadygo.app.gamelauncher.ui.OnChildFocusChangeListener;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.base.BaseFragment;
 
@@ -26,6 +27,7 @@ public abstract class BaseMenuFragment extends BaseFragment {
 	private MenuItem mPrevFocusItem;
 	private MenuItem mCurrentFocusItem;
 	private MenuItem mCurrentSelectedItem;
+	private OnChildFocusChangeListener mOnChildFocusChangeListener;
 
 	private List<MenuItem> mMenuItemList = new ArrayList<MenuItem>();
 
@@ -66,12 +68,12 @@ public abstract class BaseMenuFragment extends BaseFragment {
 		mMenuItemList.add(menuItem);
 	}
 
-	protected void updateMenuItem(int menuIndex,BaseContentFragment newFragment) {
+	protected void updateMenuItem(int menuIndex, BaseContentFragment newFragment) {
 		if (menuIndex > -1 && menuIndex < mMenuItemList.size()) {
 			MenuItem menuItem = mMenuItemList.get(menuIndex);
 			if (newFragment != null) {
-				if(mMenuItemList.indexOf(getCurrentItem()) == menuIndex){
-					switchFragment(menuItem.getContentFragment(),newFragment);
+				if (mMenuItemList.indexOf(getCurrentItem()) == menuIndex) {
+					switchFragment(menuItem.getContentFragment(), newFragment);
 				}
 				menuItem.setContentFragment(newFragment);
 			}
@@ -104,13 +106,22 @@ public abstract class BaseMenuFragment extends BaseFragment {
 					getRootActivity().addFragment(menuItem.getContentFragment());
 					toFocusedStatus(menuItem);
 				}
+				getRootActivity().updateFocusViewNextFocusId(v.getId());
 			} else {// 丢失焦点
 				Message msg = Message.obtain(mHandler, WHAT_CONTENT_OBTAIN_FOCUS);
 				msg.obj = menuItem;
 				msg.sendToTarget();
 			}
+			if (mOnChildFocusChangeListener != null) {
+				int index = mMenuItemList.indexOf(v);
+				mOnChildFocusChangeListener.onChildFocusChange(index, v, hasFocus);
+			}
 		}
 	};
+
+	public void setOnChildFocusChangeListener(OnChildFocusChangeListener listener) {
+		this.mOnChildFocusChangeListener = listener;
+	}
 
 	private void switchFragment(BaseContentFragment currFragment, final BaseContentFragment targetFragment) {
 		getRootActivity().replaceFragmentWithAnimation(currFragment, targetFragment);
@@ -129,19 +140,19 @@ public abstract class BaseMenuFragment extends BaseFragment {
 		return super.onKeyDown(keyCode, event);
 	}
 
-//	@Override
-//	public boolean onBackKey() {
-//		if (mStatus.isFocused()) {
-//			getRootActivity().removeFragment(mCurrentFocusItem.getContentFragment());
-//			mCurrentFocusItem.clearFocus();
-//			if (mHandler.hasMessages(WHAT_CONTENT_OBTAIN_FOCUS)) {
-//				mHandler.removeMessages(WHAT_CONTENT_OBTAIN_FOCUS);
-//			}
-//			toInitStatus();
-//		}
-//		return true;
-//	}
-	
+	// @Override
+	// public boolean onBackKey() {
+	// if (mStatus.isFocused()) {
+	// getRootActivity().removeFragment(mCurrentFocusItem.getContentFragment());
+	// mCurrentFocusItem.clearFocus();
+	// if (mHandler.hasMessages(WHAT_CONTENT_OBTAIN_FOCUS)) {
+	// mHandler.removeMessages(WHAT_CONTENT_OBTAIN_FOCUS);
+	// }
+	// toInitStatus();
+	// }
+	// return true;
+	// }
+
 	private void switchFocusedItem(MenuItem prevFocusedItem, MenuItem currFocusedItem) {
 		mPrevFocusItem = prevFocusedItem;
 		mCurrentFocusItem = currFocusedItem;

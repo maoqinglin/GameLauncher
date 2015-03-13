@@ -26,7 +26,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
 import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
 import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
 import com.ireadygo.app.gamelauncher.helper.AnimatorHelper;
-import com.ireadygo.app.gamelauncher.ui.activity.BindAlipayAccountActivity;
+import com.ireadygo.app.gamelauncher.ui.activity.WebviewActivity;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.item.BaseAdapterItem;
 import com.ireadygo.app.gamelauncher.ui.item.ImageItem;

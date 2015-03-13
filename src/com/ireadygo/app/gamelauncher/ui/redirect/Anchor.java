@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 
 import com.ireadygo.app.gamelauncher.GameLauncherApplication;
+import com.ireadygo.app.gamelauncher.ui.activity.WebviewActivity;
 import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
 import com.ireadygo.app.gamelauncher.ui.store.StoreActivity;
 import com.ireadygo.app.gamelauncher.ui.store.category.CategoryDetailActivity;
@@ -31,13 +32,9 @@ public class Anchor implements Serializable {
 
 	private Intent newIntent() {
 		Intent intent = new Intent();
-		if (mDestination == Destination.WEBPAGE) {
-			intent.setAction("android.intent.action.VIEW");
-		} else {
-			intent.putExtra(EXTRA_DESTINATION, mDestination);
-			intent.setClass(GameLauncherApplication.getApplication(), getActivityClassByDestination(mDestination));
-			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		}
+		intent.putExtra(EXTRA_DESTINATION, mDestination);
+		intent.setClass(GameLauncherApplication.getApplication(), getActivityClassByDestination(mDestination));
+		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		return intent;
 	}
 
@@ -68,6 +65,9 @@ public class Anchor implements Serializable {
 			// case ACCOUNT_NOTICE:
 		case ACCOUNT_RECHARGE:
 			clazz = UserActivity.class;
+			break;
+		case WEBPAGE:
+			clazz = WebviewActivity.class;
 			break;
 		default:
 			break;

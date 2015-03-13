@@ -15,8 +15,11 @@ import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
 import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
+import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.store.StoreAppMultiAdapter;
+import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
+import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiBaseAdapter;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
@@ -31,9 +34,9 @@ public class CategoryDetailContentFragment extends BaseContentFragment {
 	private long mCurrPageIndex = 1;
 	private boolean mLoadingData = false;
 
-	public CategoryDetailContentFragment(Activity activity, BaseMenuFragment menuFragment, String categoryId) {
+	public CategoryDetailContentFragment(Activity activity, BaseMenuFragment menuFragment, int categoryId) {
 		super(activity, menuFragment);
-		this.mCategoryId = Long.parseLong(categoryId);
+		this.mCategoryId = categoryId;
 		mGameInfoHub = GameInfoHub.instance(activity);
 	}
 
@@ -53,6 +56,14 @@ public class CategoryDetailContentFragment extends BaseContentFragment {
 		mMultiListView.setAdapter(mMultiAdapter);
 		setEmptyView(mMultiListView, R.string.store_empty_title, View.GONE, 0);
 		loadCategoryDetail();
+		mMultiListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				DetailActivity.startSelf(getRootActivity(), mAppEntities.get(position));
+			}
+		});
+		updateNextFocusIdByCategoryId((int) mCategoryId);
 	}
 
 	@Override
@@ -94,6 +105,35 @@ public class CategoryDetailContentFragment extends BaseContentFragment {
 			mMultiListView.notifyDataSetChanged();
 			mCurrPageIndex++;
 			mLoadingData = false;
+		}
+	}
+
+	private void updateNextFocusIdByCategoryId(int categoryId) {
+		switch (categoryId) {
+		case CategoryMultiAdapter.CATEGORY_ID_SLG:
+			mMultiListView.setNextFocusLeftId(R.id.category_detail_menu_slg);
+			break;
+		case CategoryMultiAdapter.CATEGORY_ID_STG:
+			mMultiListView.setNextFocusLeftId(R.id.category_detail_menu_stg);
+			break;
+		case CategoryMultiAdapter.CATEGORY_ID_PZL:
+			mMultiListView.setNextFocusLeftId(R.id.category_detail_menu_pzl);
+			break;
+		case CategoryMultiAdapter.CATEGORY_ID_RPG:
+			mMultiListView.setNextFocusLeftId(R.id.category_detail_menu_rpg);
+			break;
+		case CategoryMultiAdapter.CATEGORY_ID_SPT:
+			mMultiListView.setNextFocusLeftId(R.id.category_detail_menu_spt);
+			break;
+		case CategoryMultiAdapter.CATEGORY_ID_OLG:
+			mMultiListView.setNextFocusLeftId(R.id.category_detail_menu_olg);
+			break;
+		case CategoryMultiAdapter.CATEGORY_ID_SIM:
+			mMultiListView.setNextFocusLeftId(R.id.category_detail_menu_sim);
+			break;
+		case CategoryMultiAdapter.CATEGORY_ID_RSG:
+			mMultiListView.setNextFocusLeftId(R.id.category_detail_menu_rsg);
+			break;
 		}
 	}
 }

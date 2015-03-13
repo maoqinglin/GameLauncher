@@ -25,10 +25,7 @@ public class GameLauncherActivity extends BaseMenuActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getFocusView().setNextFocusLeftId(R.id.menu_user);
-		getFocusView().setNextFocusRightId(R.id.menu_user);
-		getFocusView().setNextFocusUpId(R.id.menu_user);
-		getFocusView().setNextFocusDownId(R.id.menu_user);
+		updateFocusViewNextFocusId(R.id.menu_user);
 		mCreateTime = System.currentTimeMillis();
 		// // 初始化个推
 		// PushManager.getInstance().initialize(this);

@@ -361,6 +361,7 @@
     <string name="device_active_failed">設備激活失敗，請確保設備連接網絡，並重啟設備再次激活！</string>
     <string name="device_bind_account_success">帳號綁定設備成功！</string>
     <string name="device_bind_account_failed">帳號綁定設備失敗，請重新登陸帳號！</string>
+    <string name="user_identity_overdue">用戶身份過期，請重新登錄！</string>
 
     <!-- 按鍵提示層 -->
     <string name="key_sun">啟動</string>

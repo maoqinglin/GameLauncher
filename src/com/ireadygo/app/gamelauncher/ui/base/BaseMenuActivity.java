@@ -49,6 +49,13 @@ public abstract class BaseMenuActivity extends BaseActivity {
 		addFragment(mMenuFragment);
 	}
 
+	public void updateFocusViewNextFocusId(int nextFocusId) {
+		getFocusView().setNextFocusLeftId(nextFocusId);
+		getFocusView().setNextFocusRightId(nextFocusId);
+		getFocusView().setNextFocusUpId(nextFocusId);
+		getFocusView().setNextFocusDownId(nextFocusId);
+	}
+	
 	@Override
 	protected void onResume() {
 		super.onResume();

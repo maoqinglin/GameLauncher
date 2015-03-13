@@ -40,7 +40,6 @@ public class OperationTipsLayout extends RelativeLayout {
 		tipsMoonTxt = (TextView) findViewById(R.id.tips_moon);
 		tipsMoontainTxt = (TextView) findViewById(R.id.tips_mountain);
 		tipsWaterTxt = (TextView) findViewById(R.id.tips_water);
-		setClipChildren(false);
 	}
 
 	@Override
