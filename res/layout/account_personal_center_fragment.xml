@@ -10,15 +10,23 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/user_info_margin_top" >
 
+        <FrameLayout 
+            android:id="@+id/photo_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:addStatesFromChildren="true"
+            android:padding="@dimen/user_photo_padding"
+            android:background="@drawable/user_photo_bg_selector"
+            >
         <ImageView
             android:id="@+id/personal_photo"
             android:layout_width="@dimen/user_photo_width"
             android:layout_height="@dimen/user_photo_height"
-            android:background="@drawable/user_photo_bg_selector"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:nextFocusDown="@+id/personal_sex"
             android:src="@drawable/account_photo_default" />
+        </FrameLayout>
 
         <TextView
             android:id="@+id/account_title"
@@ -26,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/user_title_margin_left"
-            android:layout_toRightOf="@id/personal_photo"
+            android:layout_toRightOf="@id/photo_layout"
             android:text="@string/personal_account_title" />
 
         <TextView
@@ -53,7 +61,7 @@
             style="@style/TextLabelMiddleLight"
             android:layout_width="@dimen/user_edit_width"
             android:layout_height="@dimen/user_edit_height"
-            android:layout_alignBottom="@+id/personal_photo"
+            android:layout_alignBottom="@+id/photo_layout"
             android:layout_alignParentRight="true"
             android:layout_marginTop="@dimen/user_nickname_margin_top"
             android:background="@drawable/user_edit_bg_selector"

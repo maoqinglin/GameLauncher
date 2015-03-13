@@ -85,6 +85,7 @@
     <dimen name="user_info_margin_top">190dp</dimen>
     <dimen name="user_photo_width">186dp</dimen>
     <dimen name="user_photo_height">186dp</dimen>
+     <dimen name="user_photo_padding">5dp</dimen>
     <dimen name="user_title_margin_left">30dp</dimen>
     <dimen name="user_margin_top">40dp</dimen>
     <dimen name="user_edit_width">480dp</dimen>
