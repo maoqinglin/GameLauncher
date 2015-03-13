@@ -48,7 +48,6 @@ public class CollectionDetailActivity extends BaseActivity implements OnClickLis
 		mGameInfoHub = GameInfoHub.instance(this);
 		mTitleLayout = (StatisticsTitleView)findViewById(R.id.title_layout);
 		mTitleLayout.setTitle(R.string.collection_detail_title_prompt);
-		mTitleLayout.setCount(255);
 		
 		mMultiListView = (HMultiListView)findViewById(R.id.collection_detail_list);
 		mAdapter = new StoreAppMultiAdapter(this, mMultiListView, mApps);
@@ -132,6 +131,7 @@ public class CollectionDetailActivity extends BaseActivity implements OnClickLis
 			}
 			mApps.addAll(result);
 			mMultiListView.notifyDataSetChanged();
+			mTitleLayout.setCount(mApps.size());
 			mPageIndex++;
 			mLoadingData = false;
 		}
