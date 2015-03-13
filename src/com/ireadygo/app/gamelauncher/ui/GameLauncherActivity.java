@@ -37,7 +37,6 @@ public class GameLauncherActivity extends BaseMenuActivity {
 		if (PreferenceUtils.hasDeviceActive()) {
 			mCreateTime = System.currentTimeMillis();
 			StaticsUtils.onCreate();
-		} else {
 			AccountManager.getInstance().init(this, GameLauncherConfig.sChannel);
 		}
 		setShouldTranslate(true);
