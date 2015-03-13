@@ -358,6 +358,8 @@
     <string name="shortcut_detail">Detail</string>
     <string name="shortcut_back">Back</string>
     <string name="shortcut_uninstall">Uninstall</string>
+    <string name="shortcut_l1">Previous</string>
+    <string name="shortcut_r1">Next</string>
     <string name="device_active_success">Device active success!</string>
     <string name="device_active_failed">Device active failed!Please confirm network connected and restart!</string>
     <string name="device_bind_account_success">Device bind account success!</string>

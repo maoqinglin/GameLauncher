@@ -11,11 +11,11 @@ import com.ireadygo.app.gamelauncher.R;
 
 public class OperationTipsLayout extends RelativeLayout {
 
-	private TextView tipsSunTxt, tipsMoonTxt, tipsMoontainTxt, tipsWaterTxt;
+	private TextView tipsSunTxt, tipsMoonTxt, tipsMoontainTxt, tipsWaterTxt, tipsL1Txt, tipsR1Txt;
 	private PagingIndicator mPagingIndicator;
 
 	public enum TipFlag {
-		FLAG_ALL, FLAG_TIPS_SUN, FLAG_TIPS_MOON, FLAG_TIPS_MOONTAIN, FLAG_TIPS_WATER
+		FLAG_ALL, FLAG_TIPS_SUN, FLAG_TIPS_MOON, FLAG_TIPS_MOONTAIN, FLAG_TIPS_WATER, FLAG_TIPS_L1, FLAG_TIPS_R1
 	}
 
 	public OperationTipsLayout(Context context, AttributeSet attrs, int defStyle) {
@@ -40,6 +40,9 @@ public class OperationTipsLayout extends RelativeLayout {
 		tipsMoonTxt = (TextView) findViewById(R.id.tips_moon);
 		tipsMoontainTxt = (TextView) findViewById(R.id.tips_mountain);
 		tipsWaterTxt = (TextView) findViewById(R.id.tips_water);
+		tipsL1Txt = (TextView) findViewById(R.id.tips_l1);
+		tipsR1Txt = (TextView) findViewById(R.id.tips_r1);
+		setClipChildren(false);
 	}
 
 	@Override
@@ -80,6 +83,12 @@ public class OperationTipsLayout extends RelativeLayout {
 			break;
 		case FLAG_TIPS_WATER:
 			tipsWaterTxt.setVisibility(isVisible);
+			break;
+		case FLAG_TIPS_L1:
+			tipsL1Txt.setVisibility(isVisible);
+			break;
+		case FLAG_TIPS_R1:
+			tipsR1Txt.setVisibility(isVisible);
 			break;
 		default:
 			throw new NumberFormatException("params is valid");

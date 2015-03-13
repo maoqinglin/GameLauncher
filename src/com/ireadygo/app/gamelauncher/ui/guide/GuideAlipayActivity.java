@@ -44,6 +44,7 @@ public class GuideAlipayActivity extends BaseGuideActivity {
 				Intent intent = new Intent(GuideAlipayActivity.this, GameLauncherActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 				startActivity(intent);
+				finish();
 			}
 			
 			@Override

@@ -2,6 +2,7 @@ package com.ireadygo.app.gamelauncher.ui.guide;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,6 +14,8 @@ import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
 
 public class GuideOBoxIntroduceActivity extends BaseGuideActivity {
 
+	private static final String ACTION_WIFI = "com.ireadygo.app.wizard.wifisettings.WifiSettings";
+	private static final String ACTION_LANGUAGE = "com.ireadygo.app.wizard.language";
 	private static final int[] RES_IMAGE_ID = new int[]{R.drawable.helper_image_01, R.drawable.helper_image_02, R.drawable.helper_image_03};
 	private OperationTipsLayout mTipsLayout;
 	private TextView mKeepOnBtn;
@@ -30,7 +33,8 @@ public class GuideOBoxIntroduceActivity extends BaseGuideActivity {
 
 		initHeaderView(R.string.starting_guide_handler_intro);
 		mTipsLayout = (OperationTipsLayout) findViewById(R.id.operationTipsLayout);
-		mTipsLayout.setTipsVisible(View.GONE, TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
+		mTipsLayout.setTipsVisible(TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_L1, TipFlag.FLAG_TIPS_R1);
+		mTipsLayout.getPagingIndicator().setVisibility(View.GONE);
 
 		mIntroImageView = (ImageView) findViewById(R.id.guideIntroImage);
 		mIntroImageView.setImageResource(RES_IMAGE_ID[mPos]);
@@ -48,8 +52,7 @@ public class GuideOBoxIntroduceActivity extends BaseGuideActivity {
 		}
 	}
 
-	@Override
-	public void onClick(View v) {
+	private void nextPage() {
 		mKeepOnBtn.requestFocus();
 		mPos++;
 		if(mPos > RES_IMAGE_ID.length - 1) {
@@ -60,25 +63,65 @@ public class GuideOBoxIntroduceActivity extends BaseGuideActivity {
 
 		updateLTBtnText();
 		mIntroImageView.setImageResource(RES_IMAGE_ID[mPos]);
+	}
+
+	private void previousPage() {
+		mKeepOnBtn.requestFocus();
+    	mPos--;
+    	if(mPos < 0) {
+    		mPos = 0;
+    		previousActivity();
+    		return;
+    	}
+
+    	updateLTBtnText();
+    	mIntroImageView.setImageResource(RES_IMAGE_ID[mPos]);
+	}
+
+	private void previousActivity() {
+		String entry = getIntent().getStringExtra("Entry");
+		if(!TextUtils.isEmpty(entry)) {
+			if(entry.equals("WifiSettings")) {
+				startActivity(new Intent(ACTION_WIFI));
+				finish();
+				return;
+			}
+
+			if(entry.equals("LanguageSettings")) {
+				startActivity(new Intent(ACTION_LANGUAGE));
+				finish();
+				return;
+			}
+		}
+	}
+
+	@Override
+	public void onClick(View v) {
+		nextPage();
 		super.onClick(v);
 	}
 
 	@Override
 	public boolean onSunKey() {
-		onClick(mKeepOnBtn);
+		nextPage();
 		return true;
 	}
 
-     @Override
-    public boolean onMoonKey() {
-    	mKeepOnBtn.requestFocus();
-    	mPos--;
-    	if(mPos < 0) {
-    		mPos = 0;
-    	}
+	@Override
+	public boolean onL1Key() {
+		previousPage();
+		return true;
+	}
 
-    	updateLTBtnText();
-    	mIntroImageView.setImageResource(RES_IMAGE_ID[mPos]);
+	@Override
+	public boolean onR1Key() {
+		nextPage();
+		return true;
+	}
+
+	@Override
+    public boolean onMoonKey() {
+    	previousPage();
     	return true;
     }
 }

@@ -29,8 +29,7 @@ public class AccountRegisterActivity extends BaseAccountActivity{
 	private void initView(){
 		initHeaderView(R.string.account_register_btn);
 		mTipsLayout = (OperationTipsLayout) findViewById(R.id.operationTipsLayout);
-		mTipsLayout.setTipsVisible(TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
-		mTipsLayout.getPagingIndicator().setVisibility(View.GONE);
+		mTipsLayout.setTipsVisible(View.GONE, TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
 
 		mErrorPromptView = (TextView)findViewById(R.id.errorPrompt);
 		mUsernameView = (EditText)findViewById(R.id.username);
@@ -39,7 +38,6 @@ public class AccountRegisterActivity extends BaseAccountActivity{
 		
 		mRegisterBtn = (TextView)findViewById(R.id.registerBtn);
 		mRegisterBtn.setOnClickListener(this);
-		
 	}
 	
 	@Override

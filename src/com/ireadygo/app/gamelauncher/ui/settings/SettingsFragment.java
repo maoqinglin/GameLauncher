@@ -87,9 +87,6 @@ public class SettingsFragment extends BaseContentFragment {
 		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_time_selector),
 				getResources().getString(R.string.settings_time), SettingsIntentAction.TIME));
 
-		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_bluetooth_selector),
-				getResources().getString(R.string.settings_bluetooth), SettingsIntentAction.BLUTOOTH));
-
 		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_keyboard_selector),
 				getResources().getString(R.string.settings_keyboard), SettingsIntentAction.KEYBOARD));
 
@@ -102,8 +99,11 @@ public class SettingsFragment extends BaseContentFragment {
 		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_display_selector),
 				getResources().getString(R.string.settings_display), SettingsIntentAction.DISPLAY));
 
-		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_brightness_selector),
-				getResources().getString(R.string.settings_brightness), SettingsIntentAction.BRIGHTNESS));
+//		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_brightness_selector),
+//				getResources().getString(R.string.settings_brightness), SettingsIntentAction.BRIGHTNESS));
+		
+		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_bluetooth_selector),
+				getResources().getString(R.string.settings_bluetooth), SettingsIntentAction.BLUTOOTH));
 
 		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_wallpaper_selector),
 				getResources().getString(R.string.settings_wallpaper), SettingsIntentAction.WALL_PAPER));
@@ -142,10 +142,13 @@ public class SettingsFragment extends BaseContentFragment {
 							setWallPaper();
 							return;
 						}
-						if (FLAG_ETHERNET.equals(action)) {
-//							setEthernet(getRootActivity());
+
+						if(SettingsIntentAction.AP.equals(action)
+								|| SettingsIntentAction.RESET.equals(action)) {
+							skipSettings(action);
 							return;
 						}
+
 						if(SettingsIntentAction.BRIGHTNESS.equals(action)) {
 							UserHandle userHandle = reflectUserHandle();
 							if(userHandle != null) {
@@ -189,23 +192,25 @@ public class SettingsFragment extends BaseContentFragment {
 
 	public static class SettingsIntentAction {
 		public static final String SYSTEM_UPGRADE = "com.ireadygo.app.systemupgrade.activity.UpgradeHomeActivity";
-		public static final String LANGUAGE = Settings.ACTION_LOCALE_SETTINGS;
 		public static final String HELP = "com.ireadygo.app.gamelauncher.ui.activity.HelperActivity";
-		public static final String WIFI = Settings.ACTION_WIFI_SETTINGS;
-		public static final String SETTINGS = Settings.ACTION_SETTINGS;
-		public static final String WALL_PAPER = Intent.ACTION_SET_WALLPAPER;
 		public static final String HANDLE = "com.ireadygo.app.devicemanager.ui.HandlesBattery";
-		public static final String HDMI = "android.settings.HDMI_SETTINGS";
+		public static final String WX = "com.ireadygo.app.gamelauncher.WeiXinQRcodeActivity";
+
+		public static final String WIFI = Settings.ACTION_WIFI_SETTINGS;
+		public static final String BLUTOOTH = Settings.ACTION_BLUETOOTH_SETTINGS;
+		public static final String LANGUAGE = Settings.ACTION_LOCALE_SETTINGS;
+		public static final String SETTINGS = Settings.ACTION_SETTINGS;
 		public static final String ABOUT = Settings.ACTION_DEVICE_INFO_SETTINGS;
-		public static final String BRIGHTNESS = "android.intent.action.SHOW_BRIGHTNESS_DIALOG";
 		public static final String TIME = Settings.ACTION_DATE_SETTINGS;
 		public static final String KEYBOARD = Settings.ACTION_INPUT_METHOD_SETTINGS;
-		public static final String RESET = "com.android.settings.MasterClear";
+
+		public static final String WALL_PAPER = Intent.ACTION_SET_WALLPAPER;
+		public static final String HDMI = "android.settings.HDMI_SETTINGS";
+		public static final String BRIGHTNESS = "android.intent.action.SHOW_BRIGHTNESS_DIALOG";
+		public static final String RESET = "com.android.settings.Settings$PrivacySettingsActivity";
 		public static final String DISPLAY = "com.nvidia.settings.MIRACAST_SETTINGS";
-		public static final String WX = "com.ireadygo.app.gamelauncher.WeiXinQRcodeActivity";
-		public static final String NETWORK = FLAG_ETHERNET;
-		public static final String AP = "";
-		public static final String BLUTOOTH = Settings.ACTION_BLUETOOTH_SETTINGS;
+		public static final String NETWORK = Settings.ACTION_WIRELESS_SETTINGS;
+		public static final String AP = "com.android.settings.Settings$TetherSettingsActivity";
 	}
 
 	@Override
@@ -221,6 +226,12 @@ public class SettingsFragment extends BaseContentFragment {
 			if (info != null) {
 				String action = info.getIntentAction();
 				if (!TextUtils.isEmpty(action)) {
+
+					if(SettingsIntentAction.AP.equals(action)
+							|| SettingsIntentAction.RESET.equals(action)) {
+						skipSettings(action);
+						return true;
+					}
 
 					if(SettingsIntentAction.BRIGHTNESS.equals(action)) {
 						UserHandle userHandle = reflectUserHandle();
@@ -255,9 +266,25 @@ public class SettingsFragment extends BaseContentFragment {
 		mActivity.startActivity(chooser);
 	}
 
+	private void skipSettings(String activityName) {
+		Intent intent = new Intent("/");
+		ComponentName cm = new ComponentName("com.android.settings", activityName);
+		intent.setComponent(cm);
+		intent.setAction("android.intent.action.VIEW");
+		try {
+			mActivity.startActivityForResult(intent, 0);
+		} catch (ActivityNotFoundException e) {
+			Toast.makeText(mActivity, "Activity is Not found!", Toast.LENGTH_SHORT).show();
+			e.printStackTrace();
+		}
+	}
+
 	private void setEthernet(Context context) {
+		/*
 		Intent intent = new Intent();
-		intent.setClassName("com.android.settings", "com.android.settings.Settings");
+//		intent.setClassName("com.android.settings", "com.android.settings.Settings");
+		ComponentName cm = new ComponentName("com.android.settings","com.android.settings.SubSettings");
+		intent.setComponent(cm);
 		intent.setAction(Intent.ACTION_MAIN);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 		intent.putExtra(PreferenceActivity.EXTRA_SHOW_FRAGMENT, "com.android.settings.ethernet.EthernetSettings");
@@ -266,6 +293,7 @@ public class SettingsFragment extends BaseContentFragment {
 		} catch (ActivityNotFoundException e) {
 			Toast.makeText(mActivity, "Activity is Not found!", Toast.LENGTH_SHORT).show();
 			e.printStackTrace();
-		}
+		}*/
+		
 	}
 }

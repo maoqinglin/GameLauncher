@@ -71,6 +71,27 @@
             android:text="@string/shortcut_back"
             android:textSize="@dimen/tips_text_size"
             android:visibility="gone" />
+        
+        <TextView
+            android:id="@+id/tips_l1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/tips_l1"
+            android:drawablePadding="@dimen/tips_drawable_padding"
+            android:paddingRight="@dimen/tips_padding_right"
+            android:text="@string/shortcut_l1"
+            android:textSize="@dimen/tips_text_size"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tips_r1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/tips_r1"
+            android:drawablePadding="@dimen/tips_drawable_padding"
+            android:text="@string/shortcut_r1"
+            android:textSize="@dimen/tips_text_size"
+            android:visibility="gone" />
     </LinearLayout>
 
 </RelativeLayout>

@@ -44,7 +44,7 @@ import com.ireadygo.app.gamelauncher.utils.PackageUtils;
 
 public class StoreManagerContentFragment extends BaseContentFragment {
 
-	private HMultiListView mHMultiListView;
+	private HMultiListView mStoreManagerListView;
 	private StoreManagerContentAdapter mStoreManagerAdapter;
 	private StatisticsTitleView mTitleLayout;
 
@@ -153,18 +153,18 @@ public class StoreManagerContentFragment extends BaseContentFragment {
 		getOperationTipsLayout().setAllVisible(View.VISIBLE);
 		mTitleLayout = (StatisticsTitleView) view.findViewById(R.id.store_manager_title_layout);
 
-		mHMultiListView = (HMultiListView) view.findViewById(R.id.manager_viewpager);
+		mStoreManagerListView = (HMultiListView) view.findViewById(R.id.manager_viewpager);
 		mDldMenuItem = (ImageTextMenu) view.findViewById(R.id.manager_download);
 		mUpgradeMenuItem = (ImageTextMenu) view.findViewById(R.id.manager_upgrade);
 		mInstalledMenuItem = (ImageTextMenu) view.findViewById(R.id.manager_installed);
 
-		mStoreManagerAdapter = new StoreManagerContentAdapter(getRootActivity(), mHMultiListView, GameManagerType.DOWNLOAD);
-		mHMultiListView.setAdapter(mStoreManagerAdapter);
+		mStoreManagerAdapter = new StoreManagerContentAdapter(getRootActivity(), mStoreManagerListView, GameManagerType.DOWNLOAD);
+		mStoreManagerListView.setAdapter(mStoreManagerAdapter);
 		
 		mTitleLayout.setCount(mStoreManagerAdapter.getData().size());
 		mTitleLayout.setTitle(getResources().getString(R.string.store_manager_downloading)
 				+ getResources().getString(R.string.store_manager_count));
-		
+		setEmptyView(mStoreManagerListView, R.string.game_empty_title, View.GONE, 0);
 	}
 
 	private void initListener() {
@@ -178,15 +178,15 @@ public class StoreManagerContentFragment extends BaseContentFragment {
 
 							switch (mStoreManagerAdapter.getGameManagerType()) {
 							case DOWNLOAD:
-								mHMultiListView.setNextFocusLeftId(R.id.manager_download);
+								mStoreManagerListView.setNextFocusLeftId(R.id.manager_download);
 								break;
 
 							case UPGRADE:
-								mHMultiListView.setNextFocusLeftId(R.id.manager_upgrade);
+								mStoreManagerListView.setNextFocusLeftId(R.id.manager_upgrade);
 								break;
 
 							case INSTALLED:
-								mHMultiListView.setNextFocusLeftId(R.id.manager_installed);
+								mStoreManagerListView.setNextFocusLeftId(R.id.manager_installed);
 								break;
 
 							default:
@@ -198,22 +198,22 @@ public class StoreManagerContentFragment extends BaseContentFragment {
 					}
 				});
 
-		mHMultiListView.setOnFocusChangeListener(new OnFocusChangeListener() {
+		mStoreManagerListView.setOnFocusChangeListener(new OnFocusChangeListener() {
 			
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
 				if(!hasFocus) {
 					switch (mStoreManagerAdapter.getGameManagerType()) {
 					case DOWNLOAD:
-						mHMultiListView.setNextFocusLeftId(R.id.manager_download);
+						mStoreManagerListView.setNextFocusLeftId(R.id.manager_download);
 						break;
 
 					case UPGRADE:
-						mHMultiListView.setNextFocusLeftId(R.id.manager_upgrade);
+						mStoreManagerListView.setNextFocusLeftId(R.id.manager_upgrade);
 						break;
 
 					case INSTALLED:
-						mHMultiListView.setNextFocusLeftId(R.id.manager_installed);
+						mStoreManagerListView.setNextFocusLeftId(R.id.manager_installed);
 						break;
 
 					default:
@@ -224,7 +224,7 @@ public class StoreManagerContentFragment extends BaseContentFragment {
 
 		});
 
-		mHMultiListView.setOnItemClickListener(new OnItemClickListener() {
+		mStoreManagerListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -263,13 +263,13 @@ public class StoreManagerContentFragment extends BaseContentFragment {
 
 	@Override
 	protected boolean isCurrentFocus() {
-		return mHMultiListView.hasFocus() || mDldMenuItem.isFocused()
+		return mStoreManagerListView.hasFocus() || mDldMenuItem.isFocused()
 				|| mUpgradeMenuItem.isFocused()
 				|| mInstalledMenuItem.isFocused();
 	}
 
 	private void updateCurrentLayout() {
-		if (mStoreManagerAdapter == null || mHMultiListView == null) {
+		if (mStoreManagerAdapter == null || mStoreManagerListView == null) {
 			return;
 		}
 		updateDldLayout();
@@ -299,11 +299,11 @@ public class StoreManagerContentFragment extends BaseContentFragment {
 	}
 
 	private void updateDldStatus(AppEntity app) {
-		if (mStoreManagerAdapter == null || mHMultiListView == null) {
+		if (mStoreManagerAdapter == null || mStoreManagerListView == null) {
 			return;
 		}
 		if (mStoreManagerAdapter.getGameManagerType() == GameManagerType.DOWNLOAD) {
-			List<HListView> hListViews = mHMultiListView.getHListViews();
+			List<HListView> hListViews = mStoreManagerListView.getHListViews();
 			for (HListView hListView : hListViews) {
 				int start = hListView.getFirstVisiblePosition();
 				for (int i = start, j = hListView.getLastVisiblePosition(); i <= j; i++) {
@@ -334,7 +334,7 @@ public class StoreManagerContentFragment extends BaseContentFragment {
 				view.setSelected(true);
 				onClick(view);
 			} else {
-				if (mHMultiListView.hasFocus()) {
+				if (mStoreManagerListView.hasFocus()) {
 					view.setSelected(true);
 				} else {
 					view.setSelected(false);
@@ -351,6 +351,7 @@ public class StoreManagerContentFragment extends BaseContentFragment {
 					mTitleLayout.setCount(mStoreManagerAdapter.getData().size());
 					mTitleLayout.setTitle(getResources().getString(R.string.store_manager_downloading)
 							+ getResources().getString(R.string.store_manager_count));
+					setEmptyView(mStoreManagerListView, R.string.game_empty_title, View.GONE, 0);
 				}
 				break;
 
@@ -360,6 +361,7 @@ public class StoreManagerContentFragment extends BaseContentFragment {
 					mTitleLayout.setCount(mStoreManagerAdapter.getData().size());
 					mTitleLayout.setTitle(getResources().getString(R.string.store_manager_updatable)
 							+ getResources().getString(R.string.store_manager_count));
+					setEmptyView(mStoreManagerListView, R.string.update_empty_title, View.GONE, 0);
 				}
 				break;
 
@@ -433,7 +435,7 @@ public class StoreManagerContentFragment extends BaseContentFragment {
 	}
 
 	public boolean onSunKey() {
-		View v = mHMultiListView.getSelectedView();
+		View v = mStoreManagerListView.getSelectedView();
 		if (v == null) {
 			return false;
 		}
@@ -495,8 +497,8 @@ public class StoreManagerContentFragment extends BaseContentFragment {
 
 	private AppEntity getCurrentSelectedItem() {
 		AppEntity appEntity = null;
-		if (null != mHMultiListView) {
-			Object selectedItem = mHMultiListView.getSelectedItem();
+		if (null != mStoreManagerListView) {
+			Object selectedItem = mStoreManagerListView.getSelectedItem();
 			if (null != selectedItem && selectedItem instanceof AppEntity) {
 				appEntity = (AppEntity) selectedItem;
 			}
