@@ -21,7 +21,7 @@ import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
 import com.ireadygo.app.gamelauncher.appstore.info.item.BannerItem;
 import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
-import com.ireadygo.app.gamelauncher.ui.activity.WebviewActivity;
+import com.ireadygo.app.gamelauncher.ui.activity.CustomWebviewActivity;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
@@ -157,11 +157,14 @@ public class StoreFragment extends BaseContentFragment {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-			StoreInfo info;
+			StoreInfo info = null;
 			if (position < mRecommendDatas.size()) {
 				info = mRecommendDatas.get(position);
-			} else {
+			} else if(position - mRecommendDatas.size() < mStoreDatas.size()){
 				info = mStoreDatas.get(position - mRecommendDatas.size());
+			}
+			if(info == null){
+				return;
 			}
 			Anchor anchor = info.getAnchor();
 			if (anchor != null) {
@@ -213,7 +216,7 @@ public class StoreFragment extends BaseContentFragment {
 						anchor = new Anchor(Destination.WEBPAGE);
 						if (!TextUtils.isEmpty(item.getCHtmlUrl())) {
 //							Uri uri = Uri.parse(item.getCHtmlUrl());
-							anchor.getIntent().putExtra(WebviewActivity.EXTRA_URL, item.getCHtmlUrl());
+							anchor.getIntent().putExtra(CustomWebviewActivity.EXTRA_URL, item.getCHtmlUrl());
 						}
 						break;
 					}

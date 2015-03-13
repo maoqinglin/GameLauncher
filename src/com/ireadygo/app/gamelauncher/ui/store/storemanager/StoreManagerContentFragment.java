@@ -75,24 +75,7 @@ public class StoreManagerContentFragment extends BaseContentFragment {
 		@Override
 		public void operator(View view, AppEntity appEntity,
 				GameManagerType type) {
-			switch (appEntity.getGameState()) {
-			case INSTALLABLE:
-			case INSTALLING:
-				mGameManager.install(appEntity);
-				break;
-
-			case LAUNCHABLE:
-				mGameManager.launch(appEntity.getPkgName());
-				break;
-
-			case UPGRADEABLE:
-				mGameManager.upgrade(appEntity);
-				break;
-
-			default:
-				mGameManager.download(appEntity);
-				break;
-			}
+			operatorItem(appEntity);
 		}
 
 		@Override
@@ -230,24 +213,7 @@ public class StoreManagerContentFragment extends BaseContentFragment {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				AppEntity appEntity = (AppEntity)mStoreManagerAdapter.getItem(position);
 				if(appEntity != null){
-					switch (appEntity.getGameState()) {
-					case INSTALLABLE:
-					case INSTALLING:
-						mGameManager.install(appEntity);
-						break;
-						
-					case LAUNCHABLE:
-						mGameManager.launch(appEntity.getPkgName());
-						break;
-						
-					case UPGRADEABLE:
-						mGameManager.upgrade(appEntity);
-						break;
-						
-					default:
-						mGameManager.download(appEntity);
-						break;
-					}
+					operatorItem(appEntity);
 				}
 			}
 		});
@@ -434,14 +400,31 @@ public class StoreManagerContentFragment extends BaseContentFragment {
 		DOWNLOAD, UPGRADE, INSTALLED
 	}
 
-	public boolean onSunKey() {
-		View v = mStoreManagerListView.getSelectedView();
-		if (v == null) {
-			return false;
+	private void operatorItem(AppEntity appEntity) {
+		switch (appEntity.getGameState()) {
+		case INSTALLABLE:
+		case INSTALLING:
+			mGameManager.install(appEntity);
+			break;
+			
+		case LAUNCHABLE:
+			mGameManager.launch(appEntity.getPkgName());
+			break;
+			
+		case UPGRADEABLE:
+			mGameManager.upgrade(appEntity);
+			break;
+			
+		default:
+			mGameManager.download(appEntity);
+			break;
 		}
+	}
+
+	public boolean onSunKey() {
 		AppEntity appEntity = getCurrentSelectedItem();
 		if(appEntity != null){
-			mGameManager.launch(appEntity.getPkgName());
+			operatorItem(appEntity);
 		}
 		return true;
 	}
@@ -459,10 +442,9 @@ public class StoreManagerContentFragment extends BaseContentFragment {
 
 	@Override
 	public boolean onWaterKey() {
-		// 卸载游戏
 		AppEntity appEntity = getCurrentSelectedItem();
 		if (appEntity != null) {
-			PackageUtils.unInstallApp(getRootActivity(), appEntity.getPkgName());
+			deleteItem(appEntity);
 		}
 		return true;
 	}
@@ -477,22 +459,27 @@ public class StoreManagerContentFragment extends BaseContentFragment {
 	}
 
 	private void setNextFocus() {
-		switch (mStoreManagerAdapter.getGameManagerType()) {
-		case DOWNLOAD:
-			mDldMenuItem.requestFocus();
-			break;
+		if(mDldMenuItem.isFocused() || mUpgradeMenuItem.isFocused() || mInstalledMenuItem.isFocused()) {
+			getMenu().getCurrentItem().requestFocus();
+		} else {
+			switch (mStoreManagerAdapter.getGameManagerType()) {
+			case DOWNLOAD:
+				mDldMenuItem.requestFocus();
+				break;
 
-		case UPGRADE:
-			mUpgradeMenuItem.requestFocus();
-			break;
+			case UPGRADE:
+				mUpgradeMenuItem.requestFocus();
+				break;
 
-		case INSTALLED:
-			mInstalledMenuItem.requestFocus();
-			break;
+			case INSTALLED:
+				mInstalledMenuItem.requestFocus();
+				break;
 
-		default:
-			break;
+			default:
+				break;
+			}
 		}
+		
 	}
 
 	private AppEntity getCurrentSelectedItem() {

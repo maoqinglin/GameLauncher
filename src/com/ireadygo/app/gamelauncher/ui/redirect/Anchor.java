@@ -6,7 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 
 import com.ireadygo.app.gamelauncher.GameLauncherApplication;
-import com.ireadygo.app.gamelauncher.ui.activity.WebviewActivity;
+import com.ireadygo.app.gamelauncher.ui.activity.CustomWebviewActivity;
 import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
 import com.ireadygo.app.gamelauncher.ui.store.StoreActivity;
 import com.ireadygo.app.gamelauncher.ui.store.category.CategoryDetailActivity;
@@ -67,7 +67,7 @@ public class Anchor implements Serializable {
 			clazz = UserActivity.class;
 			break;
 		case WEBPAGE:
-			clazz = WebviewActivity.class;
+			clazz = CustomWebviewActivity.class;
 			break;
 		default:
 			break;

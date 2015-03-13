@@ -363,7 +363,7 @@
     <string name="shortcut_confirm">确定</string>
     <string name="shortcut_detail">详情</string>
     <string name="shortcut_back">取消</string>
-    <string name="shortcut_uninstall">卸载</string>
+    <string name="shortcut_uninstall">删除</string>
     <string name="user_identity_overdue">用户身份过期，请重新登录！</string>
     <string name="shortcut_l1">上一页</string>
     <string name="shortcut_r1">下一页</string>
