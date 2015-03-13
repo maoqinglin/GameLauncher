@@ -357,7 +357,7 @@
     <string name="shortcut_confirm">Confirm</string>
     <string name="shortcut_detail">Detail</string>
     <string name="shortcut_back">Back</string>
-    <string name="shortcut_uninstall">Uninstall</string>
+    <string name="shortcut_uninstall">Delete</string>
     <string name="shortcut_l1">Previous</string>
     <string name="shortcut_r1">Next</string>
     <string name="device_active_success">Device active success!</string>

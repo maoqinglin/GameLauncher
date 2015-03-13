@@ -19,7 +19,7 @@ import com.ireadygo.app.gamelauncher.ui.widget.WebViewLayout;
 import com.ireadygo.app.gamelauncher.utils.DeviceUtil;
 import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
 
-public class WebviewActivity extends Activity {
+public class CustomWebviewActivity extends Activity {
 	public static final String EXTRA_URL = "EXTRA_URL";
 	private WebViewLayout mWebView;
 	private String mUrl = "";

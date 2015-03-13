@@ -358,7 +358,7 @@
     <string name="shortcut_back">返回</string>
     <string name="shortcut_l1">上一頁</string>
     <string name="shortcut_r1">下一頁</string>
-    <string name="shortcut_uninstall">卸載</string>
+    <string name="shortcut_uninstall">删除</string>
     <string name="device_active_success">設備激活成功！</string>
     <string name="device_active_failed">設備激活失敗，請確保設備連接網絡，並重啟設備再次激活！</string>
     <string name="device_bind_account_success">帳號綁定設備成功！</string>

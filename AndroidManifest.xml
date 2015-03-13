@@ -144,7 +144,7 @@
             android:theme="@style/CustomerTheme" >
         </activity>
         <activity
-            android:name="com.ireadygo.app.gamelauncher.ui.activity.WebviewActivity"
+            android:name="com.ireadygo.app.gamelauncher.ui.activity.CustomWebviewActivity"
             android:screenOrientation="landscape"
             android:theme="@style/CustomerTheme" />
         <activity
