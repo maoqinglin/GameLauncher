@@ -1,5 +1,6 @@
 package com.ireadygo.app.gamelauncher.ui;
 
+import android.app.Dialog;
 import android.bluetooth.BluetoothAdapter;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -18,17 +19,48 @@ import com.ireadygo.app.gamelauncher.ui.guide.GuideOBoxIntroduceActivity;
 import com.ireadygo.app.gamelauncher.ui.menu.HomeMenuFragment;
 import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
 import com.ireadygo.app.gamelauncher.utils.StaticsUtils;
+import com.ireadygo.app.gamelauncher.utils.Utils;
 
 public class GameLauncherActivity extends BaseMenuActivity {
 	private static final String ACTION_LANGUAGE_SETTINGS = "com.ireadygo.app.wizard.language";
+	private Dialog mLoadingProgress;
 	private long mCreateTime = 0;
 	private long mResumeTime = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		updateFocusViewNextFocusId(R.id.menu_user);
-		mCreateTime = System.currentTimeMillis();
+		if (PreferenceUtils.isFirstLaunch()) {
+			showLoadingProgress();
+			new Handler().postDelayed(new Runnable() {
+
+				@Override
+				public void run() {
+					dimissLoadingProgress();
+					try {
+						Intent intent = new Intent(ACTION_LANGUAGE_SETTINGS);
+						intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+						startActivity(intent);
+						finish();
+					} catch (ActivityNotFoundException e) {
+						e.printStackTrace();
+						Intent intent = new Intent(GameLauncherActivity.this, GuideOBoxIntroduceActivity.class);
+						intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+						startActivity(intent);
+						finish();
+					}
+				}
+			}, 5000);
+		}else{
+			initView();
+			updateFocusViewNextFocusId(R.id.menu_user);
+			new Handler().postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					getMenuFragment().requestFocusByPosition(0);
+				}
+			}, 500);
+		}
 		// // 初始化个推
 		// PushManager.getInstance().initialize(this);
 		// // 上报终端个推信息
@@ -42,19 +74,37 @@ public class GameLauncherActivity extends BaseMenuActivity {
 		setShouldTranslate(true);
 		GameLauncherApplication.getApplication().setGameLauncherActivity(this);
 		new AccountInfoAsyncTask(this, null).execute();
-		new Handler().postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				getMenuFragment().requestFocusByPosition(0);
-			}
-		}, 500);
+		openBluetooth();
 	}
 
+	protected void showLoadingProgress() {
+		if (mLoadingProgress == null) {
+			mLoadingProgress = Utils.createLoadingDialog(this);
+			mLoadingProgress.setCancelable(true);
+		}
+		if (!mLoadingProgress.isShowing()) {
+			mLoadingProgress.show();
+		}
+	}
+
+	protected void dimissLoadingProgress() {
+		if (mLoadingProgress != null && mLoadingProgress.isShowing()) {
+			mLoadingProgress.dismiss();
+		}
+	}
+	
 	@Override
 	protected void onResume() {
 		super.onResume();
+//		if (PreferenceUtils.isFirstLaunch()) {
+//			Intent intent = new Intent(this, EntryActivity.class);
+//			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//			startActivity(intent);
+//		} 
+		
 		// 上报应用置前台的时间
 		if (PreferenceUtils.hasDeviceActive()) {
+			mResumeTime = System.currentTimeMillis();
 			StaticsUtils.onResume();
 		}
 	}

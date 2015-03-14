@@ -1,6 +1,7 @@
 package com.ireadygo.app.gamelauncher.ui.detail;
 
 import java.text.DecimalFormat;
+import java.util.Random;
 
 import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
@@ -153,8 +154,8 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 		if (bundle != null) {
 			mAppEntity = bundle.getParcelable(EXTRAS_APP_ENTITY);
 			if (mAppEntity == null) {
-				mAppId = bundle.getLong(EXTRAS_APP_ID);				
-			}else{
+				mAppId = bundle.getLong(EXTRAS_APP_ID);
+			} else {
 				mAppId = Long.parseLong(mAppEntity.getAppId());
 			}
 		}
@@ -187,7 +188,10 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 			mNameView.setText("");
 			setVersionName("");
 			setSizeText(0);
-			mPlayNumbersView.setText("0");
+			int max = 1000000;
+			int min = 1000;
+			int playNumbers = new Random().nextInt(max) % (max - min + 1) + min;
+			mPlayNumbersView.setText(playNumbers + "");
 			mIntroView.setText("");
 			mDownloadBtn.setNextFocusRightId(mDownloadBtn.getId());
 		} else {
@@ -268,8 +272,8 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 		} else {
 			mProgressBar.setVisibility(View.VISIBLE);
 		}
-		
-		if(mDownloadBtn.isFocused()) {
+
+		if (mDownloadBtn.isFocused()) {
 			mDownloadBtn.setTextColor(getResources().getColor(R.color.orange_normal));
 			mDownloadBtn.setBackgroundResource(R.drawable.account_btn_bg_normal);
 		} else {

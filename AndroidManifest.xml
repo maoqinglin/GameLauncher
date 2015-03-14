@@ -67,7 +67,13 @@
             android:stateNotNeeded="true"
             android:theme="@style/CustomerTheme" >
             <intent-filter>
-                <action android:name="com.ireadygo.app.gamelauncher.entry"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.MONKEY" />
+            </intent-filter>
+            <intent-filter>
                 <action android:name="com.ireadygo.app.gamelauncher.LaunchNotifier" />
 
                 <category android:name="android.intent.category.DEFAULT" />
@@ -75,15 +81,11 @@
         </activity>
         <activity
             android:name="com.ireadygo.app.gamelauncher.ui.EntryActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|navigation"
-            android:screenOrientation="landscape"
             android:theme="@style/CustomerTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.HOME" />
-                <category android:name="android.intent.category.MONKEY" />
             </intent-filter>
         </activity>
         <activity

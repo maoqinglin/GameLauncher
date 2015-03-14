@@ -13,6 +13,7 @@ public class UserActivity extends BaseMenuActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		initView();
 		requestMenuFocusByIntent(getIntent());
 	}
 

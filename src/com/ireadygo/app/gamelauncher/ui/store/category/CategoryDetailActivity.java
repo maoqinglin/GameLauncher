@@ -11,6 +11,7 @@ public class CategoryDetailActivity extends BaseMenuActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		initView();
 		int position = getIntent().getIntExtra(EXTRA_FOCUS_POSITION, 0);
 		getMenuFragment().requestFocusByPosition(position);
 	}

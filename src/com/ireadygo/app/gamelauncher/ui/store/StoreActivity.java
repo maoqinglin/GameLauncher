@@ -16,6 +16,7 @@ public class StoreActivity extends BaseMenuActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		initView();
 		updateFocusViewNextFocusId(R.id.store_menu_search);
 		requestMenuFocusByIntent(getIntent());
 	}

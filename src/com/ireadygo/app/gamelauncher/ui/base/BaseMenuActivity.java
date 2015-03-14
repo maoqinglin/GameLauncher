@@ -40,6 +40,9 @@ public abstract class BaseMenuActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mFragmentManager = new CustomFragmentManager(this);
+	}
+
+	protected void initView() {
 		setContentView(R.layout.main);
 		mMainLayout = (CustomFrameLayout) findViewById(R.id.main_layout);
 		mFocusView = findViewById(R.id.focusView);
@@ -48,7 +51,7 @@ public abstract class BaseMenuActivity extends BaseActivity {
 		mMenuFragment = createMenuFragment();
 		addFragment(mMenuFragment);
 	}
-
+	
 	public void updateFocusViewNextFocusId(int nextFocusId) {
 		getFocusView().setNextFocusLeftId(nextFocusId);
 		getFocusView().setNextFocusRightId(nextFocusId);
