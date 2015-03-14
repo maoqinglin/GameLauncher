@@ -39,6 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/user_alipay_account_state_margin_left"
             android:nextFocusDown="@+id/user_center_layout"
+            android:nextFocusLeft="@+id/menu_user"
             android:focusable="true"
             android:text="@string/user_alipay_account_bind"
             android:textColor="@color/white"

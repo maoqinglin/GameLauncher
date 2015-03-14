@@ -89,7 +89,6 @@ public class UserFragmentC extends BaseContentFragment {
 	private void initData() {
 		setAccount();
 		initAlipayAccountState();
-		updateNextFocus();
 	}
 
 	private void initAlipayAccountState() {
@@ -141,7 +140,6 @@ public class UserFragmentC extends BaseContentFragment {
 			} else {
 				setAlipayAccountState(false);
 			}
-			updateNextFocus();
 		}
 	}
 
@@ -255,24 +253,6 @@ public class UserFragmentC extends BaseContentFragment {
 		return animatorSet;
 	}
 
-	private void updateNextFocus() {
-		if (getMenu().getCurrentItem() == null) {
-			return;
-		}
-		if (mAlipayAccountState.getVisibility() == View.GONE) {
-			getMenu().getCurrentItem().setNextFocusRightId(R.id.user_center_layout);
-			mUserCenter.setNextFocusUpId(R.id.user_center_layout);
-			mUserCenter.setNextFocusDownId(R.id.user_center_layout);
-			mRecharge.setNextFocusUpId(R.id.user_recharge_layout);
-			mRecharge.setNextFocusDownId(R.id.user_recharge_layout);
-		} else {
-			getMenu().getCurrentItem().setNextFocusRightId(R.id.user_center_layout);
-			mUserCenter.setNextFocusUpId(R.id.alipay_account_state);
-			mUserCenter.setNextFocusDownId(R.id.user_center_layout);
-			mRecharge.setNextFocusUpId(R.id.alipay_account_state);
-			mRecharge.setNextFocusDownId(R.id.user_recharge_layout);
-		}
-	}
 
 	private void skipWebsite(String url) {
 		Uri uri = Uri.parse(url);
