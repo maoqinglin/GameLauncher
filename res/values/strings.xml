@@ -428,4 +428,7 @@
     <string name="store_try_refresh">Please try refresh!</string>
     <!-- 常用应用(FavoriteApps) -->
     <string name="favorite_apps_title_prompt">APPs</string>
+
+    <string name="wx_title">WeChat two-dimensional code</string>
+    <string name="wx_intro">Scanning WeChat two-dimensional code</string>
 </resources>
