@@ -62,21 +62,28 @@
             android:clearTaskOnLaunch="true"
             android:configChanges="keyboardHidden|orientation|screenSize|navigation"
             android:label="@string/app_name"
-            android:launchMode="singleInstance"
+            android:launchMode="singleTask"
             android:screenOrientation="landscape"
             android:stateNotNeeded="true"
             android:theme="@style/CustomerTheme" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.HOME" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.MONKEY" />
-            </intent-filter>
-            <intent-filter>
+                <action android:name="com.ireadygo.app.gamelauncher.entry"/>
                 <action android:name="com.ireadygo.app.gamelauncher.LaunchNotifier" />
 
                 <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.ireadygo.app.gamelauncher.ui.EntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|navigation"
+            android:screenOrientation="landscape"
+            android:theme="@style/CustomerTheme" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.MONKEY" />
             </intent-filter>
         </activity>
         <activity
@@ -168,9 +175,10 @@
         <activity
             android:name="com.ireadygo.app.gamelauncher.ui.guide.GuideOBoxIntroduceActivity"
             android:screenOrientation="landscape"
-            android:theme="@style/CustomerTheme">
+            android:theme="@style/CustomerTheme" >
             <intent-filter>
-                <action android:name="com.ireadygo.app.gamelauncher.GuideOBoxIntroduceActivity"/>
+                <action android:name="com.ireadygo.app.gamelauncher.GuideOBoxIntroduceActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -178,12 +186,13 @@
             android:name="com.ireadygo.app.gamelauncher.ui.user.UserActivity"
             android:screenOrientation="landscape"
             android:theme="@style/CustomerTheme" />
-         <activity
+        <activity
             android:name="com.ireadygo.app.gamelauncher.ui.wx.WeiXinQRcodeActivity"
             android:screenOrientation="landscape"
-            android:theme="@style/CustomerTheme">
-             <intent-filter>
-                <action android:name="com.ireadygo.app.gamelauncher.WeiXinQRcodeActivity"/>
+            android:theme="@style/CustomerTheme" >
+            <intent-filter>
+                <action android:name="com.ireadygo.app.gamelauncher.WeiXinQRcodeActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

@@ -53,19 +53,6 @@ public class GameLauncherActivity extends BaseMenuActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if (PreferenceUtils.isFirstLaunch()) {
-			try {
-				Intent intent = new Intent(ACTION_LANGUAGE_SETTINGS);
-				startActivity(intent);
-				finish();
-			} catch (ActivityNotFoundException e) {
-				e.printStackTrace();
-				Intent intent = new Intent(GameLauncherActivity.this, GuideOBoxIntroduceActivity.class);
-				startActivity(intent);
-				finish();
-			}
-			openBluetooth();
-		}
 		// 上报应用置前台的时间
 		if (PreferenceUtils.hasDeviceActive()) {
 			StaticsUtils.onResume();
