@@ -137,6 +137,7 @@ public class StoreManagerContentFragment extends BaseContentFragment {
 		mTitleLayout = (StatisticsTitleView) view.findViewById(R.id.store_manager_title_layout);
 
 		mStoreManagerListView = (HMultiListView) view.findViewById(R.id.manager_viewpager);
+		mStoreManagerListView.setIsDelayScroll(false);
 		mDldMenuItem = (ImageTextMenu) view.findViewById(R.id.manager_download);
 		mUpgradeMenuItem = (ImageTextMenu) view.findViewById(R.id.manager_upgrade);
 		mInstalledMenuItem = (ImageTextMenu) view.findViewById(R.id.manager_installed);

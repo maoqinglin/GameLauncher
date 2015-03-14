@@ -50,6 +50,7 @@ public class CategoryFragment extends BaseContentFragment {
 		mTitleLayout = (StatisticsTitleView) view.findViewById(R.id.title_layout);
 		mTitleLayout.setCount(mAllItemCount);
 		mMultiListView = (HMultiListView) view.findViewById(R.id.category_list);
+		mMultiListView.setIsDelayScroll(false);
 		mAdapter = new CategoryMultiAdapter(getRootActivity(), mMultiListView);
 		mMultiListView.setAdapter(mAdapter);
 		bindPagingIndicator(mMultiListView);

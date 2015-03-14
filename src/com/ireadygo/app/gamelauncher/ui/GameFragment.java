@@ -61,6 +61,7 @@ public class GameFragment extends BaseContentFragment implements Callbacks {
 		mHMultiListView = (HMultiListView)view.findViewById(R.id.mutillist);
 		mAppAdapter = new AppAdapter(getRootActivity(), mGameList, LIST_NUM, mHMultiListView);
 		mHMultiListView.setOnItemClickListener(mOnItemClickListener);
+		mHMultiListView.setIsDelayScroll(false);
 		mHMultiListView.setAdapter(mAppAdapter);
 		int paddingRight = getResources().getDimensionPixelOffset(R.dimen.menu_width);
 		setEmptyView(mHMultiListView, R.string.game_empty_title, View.GONE, paddingRight);

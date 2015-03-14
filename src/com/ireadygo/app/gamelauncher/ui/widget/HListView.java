@@ -154,7 +154,7 @@ public class HListView extends AbsHListView {
 	// Keeps focused children visible through resizes
 	private FocusSelector mFocusSelector;
 
-	private static final int TRANSLATE_ANIMATION_DURATION = 200; // in ms
+	private static final int TRANSLATE_ANIMATION_DURATION = 300; // in ms
 	private long mLastKeyStartTime = -1;
 	private int mLastKeyCode = -1;
 	private static final int KEY_INTERNAL = 200;
