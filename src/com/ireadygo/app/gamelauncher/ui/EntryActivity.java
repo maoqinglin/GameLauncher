@@ -19,9 +19,9 @@ public class EntryActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		openBluetooth();
 		if (PreferenceUtils.isFirstLaunch()) {
 			showLoadingProgress();
-			openBluetooth();
 			new Handler().postDelayed(new Runnable() {
 
 				@Override
