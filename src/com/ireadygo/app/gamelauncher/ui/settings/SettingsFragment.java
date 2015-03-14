@@ -62,6 +62,7 @@ public class SettingsFragment extends BaseContentFragment {
 		mHMultiListView = (HMultiListView) view.findViewById(R.id.mutillist);
 		mSettingsMultiAdapter = new SettingsMultiAdapter(getRootActivity(), initData(),2,mHMultiListView);
 		mHMultiListView.setAdapter(mSettingsMultiAdapter);
+		mHMultiListView.setIsDelayScroll(false);
 		mHMultiListView.setOnItemClickListener(mOnItemClickListener);
 
 		getOperationTipsLayout().setTipsVisible(TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);

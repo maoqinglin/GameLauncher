@@ -38,6 +38,7 @@ public class CategoryDetailContentFragment extends BaseContentFragment {
 		super(activity, menuFragment);
 		this.mCategoryId = categoryId;
 		mGameInfoHub = GameInfoHub.instance(activity);
+		loadCategoryDetail();
 	}
 
 	@Override
@@ -55,7 +56,6 @@ public class CategoryDetailContentFragment extends BaseContentFragment {
 		mMultiAdapter = new StoreAppMultiAdapter(getRootActivity(), mMultiListView, mAppEntities);
 		mMultiListView.setAdapter(mMultiAdapter);
 		setEmptyView(mMultiListView, R.string.store_empty_title, View.GONE, 0);
-		loadCategoryDetail();
 		mMultiListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -102,7 +102,9 @@ public class CategoryDetailContentFragment extends BaseContentFragment {
 				return;
 			}
 			mAppEntities.addAll(result);
-			mMultiListView.notifyDataSetChanged();
+			if(mMultiListView != null){
+				mMultiListView.notifyDataSetChanged();
+			}
 			mCurrPageIndex++;
 			mLoadingData = false;
 		}

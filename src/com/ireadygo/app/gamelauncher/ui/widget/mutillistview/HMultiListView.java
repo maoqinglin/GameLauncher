@@ -35,7 +35,7 @@ public class HMultiListView extends LinearLayout {
 	private static final int NUM_LIST_VIEW = 2;
 	private static final int WHAT_SELECTED_ANIMATOR = 1;
 	private static final int WHAT_UNSELECTED_ANIMATOR = 2;
-	private static final int WHAT_SHOW_EMPTYVIEW= 3;
+	private static final int WHAT_SHOW_EMPTYVIEW = 3;
 	private static final int DELAY_SHOW_EMPTYVIEW = 3000;
 
 	private HMultiBaseAdapter mHMultiBaseAdapter;
@@ -59,6 +59,7 @@ public class HMultiListView extends LinearLayout {
 	private OnScrollListener mOnScrollListener;
 
 	private View mEmptyView;
+	private boolean mIsDelayScroll = true;
 
 	enum TouchScrollState {
 		NONE, UPTOUCH, DOWNTOUCH
@@ -319,7 +320,7 @@ public class HMultiListView extends LinearLayout {
 			if (isEmpty(mDataLists)) {
 				mHandler.removeMessages(WHAT_SHOW_EMPTYVIEW);
 				mHandler.sendEmptyMessageDelayed(WHAT_SHOW_EMPTYVIEW, DELAY_SHOW_EMPTYVIEW);
-			}else{
+			} else {
 				hideEmptyView();
 			}
 			mMaxCount = size % listNum == 0 ? size / listNum : size / listNum + 1;
@@ -509,10 +510,26 @@ public class HMultiListView extends LinearLayout {
 			hListView.setSynSmoothScrollListener(new SynSmoothScrollListener() {
 
 				@Override
-				public void synSmoothScrollBy(int distance, int duration, boolean linear) {
+				public void synSmoothScrollBy(final int distance, final int duration, final boolean linear) {
 					for (final HListView otherListView : mHListViews) {
 						if (hListView.getId() != otherListView.getId()) {
-							otherListView.smoothScrollBy(distance, duration, linear);
+							// for(HListView listView:mHListViews){
+							// if(listView != parent){
+							// setSelectionByPostion(listView, position);
+							// }
+							// }
+							if (mIsDelayScroll) {
+								setSelectionByPostion(otherListView, hListView.getSelectedItemPosition());
+								mHandler.post(new Runnable() {
+
+									@Override
+									public void run() {
+										otherListView.smoothScrollBy(distance, duration, linear);
+									}
+								});
+							} else {
+								otherListView.smoothScrollBy(distance, duration, linear);
+							}
 						}
 					}
 				}
@@ -754,6 +771,11 @@ public class HMultiListView extends LinearLayout {
 			}
 		}
 	}
+
+	public void setIsDelayScroll(boolean isDelayScroll) {
+		this.mIsDelayScroll = isDelayScroll;
+	}
+
 }
 
 interface OnSyncItemClickListener {

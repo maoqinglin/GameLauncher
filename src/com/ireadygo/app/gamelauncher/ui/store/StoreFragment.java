@@ -61,6 +61,7 @@ public class StoreFragment extends BaseContentFragment {
 		getOperationTipsLayout().setTipsVisible(View.VISIBLE, TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
 		mMultiListView = (HMultiListView) view.findViewById(R.id.store_list);
 		mMultiBaseAdapter = new StoreMultiAdapter(getRootActivity(), mRecommendDatas, mStoreDatas, mMultiListView);
+		mMultiListView.setIsDelayScroll(false);
 		mMultiListView.setAdapter(mMultiBaseAdapter);
 		mMultiListView.setOnItemClickListener(mOnItemClickListener);
 		bindPagingIndicator(mMultiListView, mInterpolation);

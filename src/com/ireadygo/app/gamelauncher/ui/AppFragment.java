@@ -65,6 +65,7 @@ public class AppFragment extends BaseContentFragment implements Callbacks {
 		mHMultiListView = (HMultiListView)view.findViewById(R.id.mutillist);
 		mStatisticsView = (StatisticsTitleView)view.findViewById(R.id.statistics_view);
 		mAppAdapter = new AppAdapter(getRootActivity(), mAppList, LIST_NUM, mHMultiListView);
+		mHMultiListView.setIsDelayScroll(false);
 		mHMultiListView.setAdapter(mAppAdapter);
 		mHMultiListView.setOnItemClickListener(mOnItemClickListener);
 		mHMultiListView.setOnItemSelectedListener(mOnItemSelectedListener);
