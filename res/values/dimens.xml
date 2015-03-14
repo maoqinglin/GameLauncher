@@ -5,8 +5,8 @@
     <dimen name="mygame_app_icon_size">300dp</dimen>
 
     <!-- 公共 -->
-    <dimen name="common_app_item_small_width">68dp</dimen>
-    <dimen name="common_app_item_middle_icon_height">110dp</dimen>
+    <dimen name="common_app_item_small_icon_width">110dp</dimen>
+    <dimen name="common_app_item_small_icon_height">110dp</dimen>
     <dimen name="common_item_shape_internal_radius">4dp</dimen>
     <dimen name="common_item_shape_external_radius">10dp</dimen>
     <dimen name="common_title_margin_left">20dp</dimen>

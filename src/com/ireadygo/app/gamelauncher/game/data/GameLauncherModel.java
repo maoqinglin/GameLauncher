@@ -843,8 +843,8 @@ public class GameLauncherModel{
         if (posterIcon == null) {
             posterIcon = GameLauncherAppState.getInstance(mContext).getIconCache().getIcon(item.getIntent());
         }
-        int iconWidth = mContext.getResources().getDimensionPixelSize(R.dimen.common_app_item_small_width);
-        int iconHeigth = mContext.getResources().getDimensionPixelSize(R.dimen.common_app_item_middle_icon_height);
+        int iconWidth = mContext.getResources().getDimensionPixelSize(R.dimen.common_app_item_small_icon_width);
+        int iconHeigth = mContext.getResources().getDimensionPixelSize(R.dimen.common_app_item_small_icon_height);
         if (posterIcon.getHeight() > iconHeigth || posterIcon.getWidth() > iconWidth) {
         	ItemInfo.writeBitmap(values, PictureUtil.zoomImage(posterIcon, iconWidth, iconHeigth));
         } else {
