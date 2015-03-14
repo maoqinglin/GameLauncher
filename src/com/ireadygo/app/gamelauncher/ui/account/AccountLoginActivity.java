@@ -1,6 +1,5 @@
 package com.ireadygo.app.gamelauncher.ui.account;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -13,7 +12,6 @@ import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
 
 public class AccountLoginActivity extends BaseAccountActivity {
-	private static final String FACTORY_CODE = "0000";
 	private EditText mUsernameView;
 	private EditText mPasswordView;
 	private TextView mLoginBtn;
@@ -54,17 +52,6 @@ public class AccountLoginActivity extends BaseAccountActivity {
 			String password = mPasswordView.getEditableText().toString();
 			if (TextUtils.isEmpty(account)) {
 				mErrorPromptView.setText(R.string.account_login_username_empty_prompt);
-				return;
-			}
-			//增加启动工厂测试程序
-			if (FACTORY_CODE.equals(account)) {
-				Intent intent = new Intent(Intent.ACTION_MAIN);
-				intent.setClassName("com.android.factorytest", "com.android.factorytest.MainActivity");
-				try {
-					startActivity(intent);
-				} catch (Exception e) {
-//					Log.e(LOG_TAG, "Unable to start activity " + intent.toString());
-				}
 				return;
 			}
 			if (TextUtils.isEmpty(password)) {
