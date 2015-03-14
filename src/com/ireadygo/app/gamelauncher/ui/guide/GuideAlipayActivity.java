@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Toast;
 
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
@@ -76,6 +77,8 @@ public class GuideAlipayActivity extends BaseGuideActivity {
 		protected void onPostExecute(String result) {
 			if (!TextUtils.isEmpty(result)) {
 				skipWebsite(result);
+			} else {
+				Toast.makeText(GuideAlipayActivity.this,getString(R.string.user_alipay_account_bind_error), Toast.LENGTH_SHORT).show();
 			}
 		}
 	}

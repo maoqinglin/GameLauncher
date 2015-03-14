@@ -201,6 +201,7 @@
     <string name="personal_account_unlogin">Has not login</string>
     <string name="user_not_bind_account">(Not bind account)</string>
     <string name="user_alipay_account_bind"><u>Bind Alipay Account</u></string>
+    <string name="user_alipay_account_bind_error">Get alipay account URL error!</string>
     <string name="user_play_time_title">Play Time of this Month:</string>
     <string name="personal_play_time_state">%1$d/%2$d\tHours</string>
     <string name="personal_months_reduction_pre">Months reduction of next year:\t</string>

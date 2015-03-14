@@ -21,6 +21,7 @@ import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.account.AccountManager;
@@ -442,6 +443,8 @@ public class UserFragmentA extends BaseContentFragment {
 		protected void onPostExecute(String result) {
 			if (!TextUtils.isEmpty(result)) {
 				skipWebsite(result);
+			} else {
+				Toast.makeText(getRootActivity(), getRootActivity().getString(R.string.user_alipay_account_bind_error), Toast.LENGTH_SHORT).show();
 			}
 		}
 	}
