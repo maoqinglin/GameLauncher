@@ -30,7 +30,7 @@ import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 import com.snail.appstore.openapi.AppPlatFormConfig;
 
 public class CollectionDetailActivity extends BaseActivity implements OnClickListener {
-	public static final String EXTRA_COLLECTION_ID = "CollectionID";
+	public static final String EXTRA_COLLECTION_ID = "CollectionId";
 	private StatisticsTitleView mTitleLayout;
 	private HMultiListView mMultiListView;
 	private OperationTipsLayout mTipsLayout;
@@ -95,7 +95,7 @@ public class CollectionDetailActivity extends BaseActivity implements OnClickLis
 
 	private void loadCollectionDetail() {
 		if (!mLoadingData && mCollectionId > 0) {
-			new LoadCategoryDetailTask().execute(mCollectionId + "", mPageIndex + "");
+			new LoadCollectionDetailTask().execute(mCollectionId + "", mPageIndex + "");
 			mLoadingData = true;
 		}
 	}
@@ -106,7 +106,7 @@ public class CollectionDetailActivity extends BaseActivity implements OnClickLis
 		return true;
 	}
 
-	private class LoadCategoryDetailTask extends AsyncTask<String, Void, List<AppEntity>> {
+	private class LoadCollectionDetailTask extends AsyncTask<String, Void, List<AppEntity>> {
 
 		@Override
 		protected List<AppEntity> doInBackground(String... params) {
@@ -116,7 +116,7 @@ public class CollectionDetailActivity extends BaseActivity implements OnClickLis
 			String id = params[0];
 			int page = Integer.parseInt(params[1]);
 			try {
-				return mGameInfoHub.obtainChildren(AppPlatFormConfig.DATA_TYPE_CATEGORY, id, page);
+				return mGameInfoHub.obtainChildren(AppPlatFormConfig.DATA_TYPE_COLLECTION, id, page);
 			} catch (InfoSourceException e) {
 				e.printStackTrace();
 			}
