@@ -158,6 +158,13 @@ public class SettingsFragment extends BaseContentFragment {
 							return;
 						}
 
+						if (SettingsIntentAction.WX.equals(action)) {
+							Intent wxIntent = new Intent(action);
+							wxIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+							mActivity.startActivity(wxIntent);
+							return;
+						}
+
 						try {
 							Utilities.startActivitySafely(view, new Intent(action), null);
 						} catch (ActivityNotFoundException e) {
