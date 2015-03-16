@@ -64,7 +64,7 @@ public class CollectionFragment extends BaseContentFragment {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				if (position > 0 && position < mCollectionList.size()) {
+				if (position >= 0 && position < mCollectionList.size()) {
 					CollectionInfo collection = (CollectionInfo) mAdapter.getItem(position);
 					if (collection != null) {
 						startCollectionDetailActivity(collection.getCollectionId(), collection.getPosterBgUrl());
