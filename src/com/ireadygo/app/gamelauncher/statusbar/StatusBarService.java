@@ -90,14 +90,12 @@ public class StatusBarService extends Service {
 			} else if (ACTION_HANDLE_CONNECTED.equals(action)) {
 				BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
 				int index = intent.getIntExtra(EXTRA_LED_COLOR_INDEX, -1);
-				Log.d("liu.js", "Launcher--ACTION_HANDLE_CONNECTED--index=" + index);
 				if (index >= 0) {
 					mStatusBarView.handleConnected(device,index);
 				}
 			} else if (ACTION_HANDLE_DISCONNECTED.equals(action)) {
 				BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
 				int index = intent.getIntExtra(EXTRA_LED_COLOR_INDEX, -1);
-				Log.d("liu.js", "Launcher--ACTION_HANDLE_DISCONNECTED--index=" + index);
 				if (index >= 0) {
 					mStatusBarView.handleDisconnected(device,index);
 				}

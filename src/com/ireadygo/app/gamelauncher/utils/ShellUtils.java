@@ -336,7 +336,6 @@ public class ShellUtils {
 	public static boolean copyUnionpaySoToData(Context context) {
 		String soName = "liblthj_unipaybusiness20130328.so";
 		String soDir = "/data/app-lib/" + context.getPackageName();
-//		Log.d("liu.js", "copyUnionpaySoToData---name=" + soName + "|sodir=" + soDir);
 		InputStream soStream = null;
 		OutputStream soOutStream = null;
 		try {

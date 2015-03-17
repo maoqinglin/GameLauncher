@@ -70,7 +70,6 @@ public class CategoryItem extends BaseAdapterItem {
 
 	@Override
 	public void toUnselected(AnimatorListener listener) {
-		Log.d("liu.js", "toUnselected--" + this);
 		if (mSelectedAnimator != null && mSelectedAnimator.isRunning()) {
 			mSelectedAnimator.cancel();
 		}

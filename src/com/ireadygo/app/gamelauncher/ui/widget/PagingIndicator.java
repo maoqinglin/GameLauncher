@@ -75,21 +75,12 @@ public class PagingIndicator extends View {
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		Log.d("liu.js", "onMeasure--width=" + mBackgroundWidth);
 		setMeasuredDimension(mBackgroundWidth, mHeight);
 	}
 
 	@Override
 	protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-		Log.d("liu.js", "onLayout--changed=" + changed + "|left=" + left + "|right=" + right + "|mBackgroundWidth="
-				+ mBackgroundWidth);
 		super.onLayout(changed, left, top, left + mBackgroundWidth, top + mHeight);
-	}
-
-	@Override
-	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-		Log.d("liu.js", "onSizeChanged--w=" + w + "|oldw=" + oldw);
-		super.onSizeChanged(w, h, oldw, oldh);
 	}
 
 	private void scroll(int left) {
@@ -98,8 +89,6 @@ public class PagingIndicator extends View {
 		}
 		mIndicatorLeft = calcIndicatorLeft(left, mScale);
 		int maxIndicatorLeft = mBackgroundWidth - mIndicatorWidth;
-		// Log.d("liu.js", "scroll--mIndicatorLeft=" + mIndicatorLeft +
-		// "|maxIndicatorLeft=" + maxIndicatorLeft);
 		// 列表拖到最后时的处理
 		if (mIndicatorLeft >= maxIndicatorLeft - 2) {
 			mIndicatorLeft = maxIndicatorLeft;
@@ -123,7 +112,6 @@ public class PagingIndicator extends View {
 			int scrollX = listViewInfo.scrollX;
 			int listWidth = listViewInfo.listWidth;
 			int totalWidth = listViewInfo.listTotalWidth;
-			Log.d("liu.js", "refresh--scrollX=" + scrollX + "|listWidth=" + listWidth + "|totalWidth=" + totalWidth);
 			if (scrollX < 0 || listWidth < 0 || totalWidth < 0) {
 				return;
 			}
@@ -177,7 +165,6 @@ public class PagingIndicator extends View {
 		@Override
 		public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop,
 				int oldRight, int oldBottom) {
-			Log.d("liu.js", "onLayoutChange--v=" + v);
 			if (mIsBound) {
 				refresh(mListView);
 			}
@@ -248,7 +235,6 @@ public class PagingIndicator extends View {
 			info.scrollX = scrollX;
 			info.listWidth = listWidth;
 			info.listTotalWidth = totalWidth;
-			Log.d("liu.js", "scrollX=" + scrollX + "|totalWidth=" + totalWidth);
 			return info;
 		}
 	};

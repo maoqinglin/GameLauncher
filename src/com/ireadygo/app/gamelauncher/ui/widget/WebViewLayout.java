@@ -105,8 +105,6 @@ public class WebViewLayout extends FrameLayout {
 	private class SampleWebViewClient extends WebViewClient {
 		@Override
 		public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-//			Log.d("liu.js", "onReceivedError--errorCode=" + errorCode + "|failingUrl=" + failingUrl + "|description="
-//					+ description);
 			if (isLoading()) {
 				mIsLoading = false;
 			}
@@ -119,7 +117,6 @@ public class WebViewLayout extends FrameLayout {
 
 		@Override
 		public void onPageFinished(WebView view, String url) {
-//			Log.d("liu.js", "onPageFinished-url=" + url);
 			super.onPageFinished(view, url);
 			mIsLoading = false;
 		}

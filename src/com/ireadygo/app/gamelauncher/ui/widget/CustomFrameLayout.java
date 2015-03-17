@@ -22,7 +22,6 @@ public class CustomFrameLayout extends FrameLayout {
 	}
 
 	public void addViewInLayout(View child) {
-//		Log.d("liu.js", "CustomFrameLayout--addViewInLayout--view=" + child);
 		ViewGroup.LayoutParams params = child.getLayoutParams();
 		if (params == null) {
 			params = generateDefaultLayoutParams();
@@ -37,11 +36,9 @@ public class CustomFrameLayout extends FrameLayout {
 	@Override
 	public void addView(View child) {
 		super.addView(child);
-//		Log.d("liu.js", "CustomFrameLayout--addView--view=" + child);
 	}
 	
 	public void removeViewInLayout(View child) {
-//		Log.d("liu.js", "CustomFrameLayout--removeViewInLayout--view=" + child);
 		if(child.hasFocus()){
 			child.clearFocus();
 		}
@@ -50,7 +47,6 @@ public class CustomFrameLayout extends FrameLayout {
 	
 	@Override
 	public void removeView(View view) {
-//		Log.d("liu.js", "CustomFrameLayout--removeView--view=" + view);
 		super.removeView(view);
 	}
 }

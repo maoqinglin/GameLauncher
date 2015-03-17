@@ -97,7 +97,6 @@ public class SearchFragment extends BaseContentFragment {
 
 			@Override
 			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-				Log.d("liu.js", "onEditorAction--actionId=" + actionId);
 				switch (actionId) {
 				case EditorInfo.IME_ACTION_UNSPECIFIED:
 				case EditorInfo.IME_ACTION_SEARCH:
@@ -305,8 +304,6 @@ public class SearchFragment extends BaseContentFragment {
 		}
 
 		protected void onPostExecute(List<String> result) {
-			// Log.d("liu.js", "searchKeyword--onPostExecute--result=" +
-			// result);
 			if (isCancelled()) {
 				return;
 			}

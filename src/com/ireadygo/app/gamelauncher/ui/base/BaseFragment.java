@@ -40,23 +40,19 @@ public abstract class BaseFragment extends KeyEventFragment {
 
 	public final View onCreateView(final LayoutInflater inflater, final ViewGroup container,
 			final Bundle savedInstanceState) {
-//		 Log.d("liu.js", "onCreateView--" + getClass());
 		return createView(inflater, container, savedInstanceState);
 	}
 
 	public void onDestoryView() {
 		mRootView = null;
-//		 Log.d("liu.js", "onDestoryView--" + getClass());
 	}
 
 	public void onResume(){
 		this.mIsResumed = true;
-//		Log.d("liu.js", "onResume--" + this);
 	}
 	
 	public void onPause(){
 		this.mIsResumed = false;
-//		Log.d("liu.js", "onPause--" + this);
 	}
 	
 	public abstract View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);

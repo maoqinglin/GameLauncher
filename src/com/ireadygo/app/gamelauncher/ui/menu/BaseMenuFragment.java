@@ -88,7 +88,6 @@ public abstract class BaseMenuFragment extends BaseFragment {
 
 		@Override
 		public void onFocusChange(View v, boolean hasFocus) {
-			Log.d("liu.js", "onFocusChange--hasFocus=" + hasFocus + "|v=" + v);
 			final MenuItem menuItem = (MenuItem) v;
 			if (hasFocus) {// 得到焦点
 				if (mHandler.hasMessages(WHAT_CONTENT_OBTAIN_FOCUS)) {

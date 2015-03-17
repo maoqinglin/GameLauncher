@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -55,7 +56,7 @@ public class StoreMultiAdapter implements HMultiBaseAdapter {
 		if (info.getDrawable() != null) {
 			holder.icon.setImageDrawable(info.getDrawable());
 		} else {
-			holder.icon.setImageResource(info.getDrawableId());
+			holder.icon.setImageResource(info.getDefaultDrawableId());
 		}
 		return item;
 	}

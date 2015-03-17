@@ -132,7 +132,6 @@ public class NetworkUtils {
 		if (params != null && !params.isEmpty()) {
 			urlBuilder.append("?").append(encodeUrl(params));
 		}
-//		Log.d("liu.js", "get request" + urlBuilder.toString());
 		HttpGet httpGet = new HttpGet(urlBuilder.toString());
 		HttpResponse response = new DefaultHttpClient().execute(httpGet);
 		if (response.getStatusLine().getStatusCode() == 200) {

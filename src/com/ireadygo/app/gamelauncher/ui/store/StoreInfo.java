@@ -41,11 +41,11 @@ public class StoreInfo {
 		this.mAnchor = anchor;
 	}
 
-	public int getDrawableId() {
+	public int getDefaultDrawableId() {
 		return mDrawableId;
 	}
 
-	public void setDrawableId(int drawableId) {
+	public void setDefaultDrawableId(int drawableId) {
 		this.mDrawableId = drawableId;
 	}
 
@@ -60,7 +60,7 @@ public class StoreInfo {
 	public void copyFrom(StoreInfo otherInfo) {
 		this.mAnchor = otherInfo.getAnchor();
 		this.mDrawable = otherInfo.getDrawable();
-		this.mDrawableId = otherInfo.getDrawableId();
+//		this.mDrawableId = otherInfo.getDefaultDrawableId();
 		this.mTitleId = otherInfo.getTitleId();
 	}
 }

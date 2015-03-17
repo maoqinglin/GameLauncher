@@ -39,7 +39,6 @@ public class CustomWebviewActivity extends Activity {
 //			mUrl = getIntent().getExtras().getString(EXTRA_URL);
 //		}
 		mUrl = getIntent().getStringExtra(EXTRA_URL);
-		Log.d("liu.js", "WebviewActivity--url=" + mUrl);
 		if (mUrl != null) {
 			mWebView.loadUrl(mUrl);
 		}

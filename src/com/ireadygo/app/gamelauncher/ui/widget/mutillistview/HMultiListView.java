@@ -548,8 +548,6 @@ public class HMultiListView extends LinearLayout {
 
 		@Override
 		public void onScrollStateChanged(AbsHListView view, int scrollState) {
-			Log.d("liu.js", "onScrollStateChanged--scrollState=" + scrollState + "|view="
-					+ getResources().getResourceEntryName(view.getId()));
 			if (mOnScrollListener != null) {
 				mOnScrollListener.onScrollStateChanged(view, scrollState);
 			}
@@ -572,8 +570,6 @@ public class HMultiListView extends LinearLayout {
 
 		@Override
 		public void onScroll(AbsHListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-			Log.d("liu.js", "onScroll--view=" + getResources().getResourceEntryName(view.getId()) + "|isScroll="
-					+ isScroll());
 			if (mOnScrollListener != null) {
 				mOnScrollListener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
 			}
@@ -684,7 +680,6 @@ public class HMultiListView extends LinearLayout {
 
 		@Override
 		public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-			Log.d("liu.js", "onItemSelected--parent=" + parent + "|position=" + position);
 			if (mOnItemSelectedListener != null) {
 				ProxyAdapter adapter = (ProxyAdapter) parent.getAdapter();
 				if (adapter != null) {

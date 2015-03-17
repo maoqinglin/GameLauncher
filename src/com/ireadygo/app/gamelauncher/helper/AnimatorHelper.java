@@ -21,7 +21,6 @@ public class AnimatorHelper {
 		float bgScaleX = calcBgScaleX(10, width, icScale);
 		float bgScaleY = calcBgScaleY(bgPivotY, 10, bgHeight, icHeight, icScale);
 		int titleTranslateY = getTitleTranslateY(bgHeight, bgScaleY, bgPivotY);
-		Log.d("liu.js", "titleTranslateY--" + titleTranslateY);
 		AnimatorInfo info = new AnimatorInfo(background, icon, title, width, bgHeight, icHeight, bgPivotX, bgPivotY,
 				bgScaleX, bgScaleY, icScale, titleScale, titleTranslateY);
 		return doCreateAnimator(listener, info);

@@ -5,9 +5,9 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -16,7 +16,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.alipay.android.mini.uielement.an;
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
 import com.ireadygo.app.gamelauncher.appstore.info.item.BannerItem;
@@ -165,10 +164,10 @@ public class StoreFragment extends BaseContentFragment {
 			StoreInfo info = null;
 			if (position < mRecommendDatas.size()) {
 				info = mRecommendDatas.get(position);
-			} else if(position - mRecommendDatas.size() < mStoreDatas.size()){
+			} else if (position - mRecommendDatas.size() < mStoreDatas.size()) {
 				info = mStoreDatas.get(position - mRecommendDatas.size());
 			}
-			if(info == null){
+			if (info == null) {
 				return;
 			}
 			Anchor anchor = info.getAnchor();
@@ -201,12 +200,13 @@ public class StoreFragment extends BaseContentFragment {
 				List<StoreInfo> storeInfoList = new ArrayList<StoreInfo>();
 				for (BannerItem item : bannerItems) {
 					StoreInfo info = new StoreInfo();
-					Drawable drawable = new BitmapDrawable(getResources(), getGameInfoHub().getImageLoader()
-							.loadImageSync(item.getCPicUrl()));
-					info.setDrawable(drawable);
+					Bitmap bmp = getGameInfoHub().getImageLoader().loadImageSync(item.getCPicUrl());
+					if (bmp != null) {
+						Drawable drawable = new BitmapDrawable(getResources(), bmp);
+						info.setDrawable(drawable);
+					}
 					int type = Integer.parseInt(item.getCType());
 					long paramsId = item.getNParamId();
-					Log.d("liu.js", "type=" + type + "|paramsId=" + paramsId + "|appId=" + item.getNAppId());
 					Anchor anchor = null;
 					switch (type) {
 					case BannerItem.TYPE_GAME:
@@ -220,7 +220,7 @@ public class StoreFragment extends BaseContentFragment {
 					case BannerItem.TYPE_WEBPAGE:
 						anchor = new Anchor(Destination.WEBPAGE);
 						if (!TextUtils.isEmpty(item.getCHtmlUrl())) {
-//							Uri uri = Uri.parse(item.getCHtmlUrl());
+							// Uri uri = Uri.parse(item.getCHtmlUrl());
 							anchor.getIntent().putExtra(CustomWebviewActivity.EXTRA_URL, item.getCHtmlUrl());
 						}
 						break;
@@ -279,7 +279,6 @@ public class StoreFragment extends BaseContentFragment {
 			info.scrollX = scrollX;
 			info.listWidth = listWidth;
 			info.listTotalWidth = totalWidth;
-			Log.d("liu.js", "StoreFragment--scrollX=" + scrollX + "|totalWidth=" + totalWidth);
 			return info;
 		}
 	};
