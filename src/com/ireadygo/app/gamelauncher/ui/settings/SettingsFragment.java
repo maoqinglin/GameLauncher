@@ -158,16 +158,10 @@ public class SettingsFragment extends BaseContentFragment {
 							}
 							return;
 						}
-
-						if (SettingsIntentAction.WX.equals(action)) {
-							Intent wxIntent = new Intent(action);
-							wxIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-							mActivity.startActivity(wxIntent);
-							return;
-						}
-
+						Intent intent = new Intent(action);
+						intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 						try {
-							Utilities.startActivitySafely(view, new Intent(action), null);
+							Utilities.startActivitySafely(view, intent, null);
 						} catch (ActivityNotFoundException e) {
 							Log.e(TAG, "ActivityNotFoundException:" + e.getMessage());
 						}
@@ -224,38 +218,7 @@ public class SettingsFragment extends BaseContentFragment {
 
 	@Override
 	protected boolean isCurrentFocus() {
-		return mHMultiListView.isCurrentFocus();
-	}
-
-	@Override
-	public boolean onSunKey() {
-		View selectedView = mHMultiListView.getSelectedView();
-		if (selectedView != null) {
-			SettingsInfo info = (SettingsInfo) selectedView.getTag();
-			if (info != null) {
-				String action = info.getIntentAction();
-				if (!TextUtils.isEmpty(action)) {
-
-					if(SettingsIntentAction.AP.equals(action)
-							|| SettingsIntentAction.RESET.equals(action)) {
-						skipSettings(action);
-						return true;
-					}
-
-					if(SettingsIntentAction.BRIGHTNESS.equals(action)) {
-						UserHandle userHandle = reflectUserHandle();
-						if(userHandle != null) {
-							mActivity.sendBroadcastAsUser(new Intent(action), userHandle);
-						}
-						return true;
-					}
-
-					Utilities.startActivitySafely(selectedView, new Intent(action), null);
-					return true;
-				}
-			}
-		}
-		return true;
+		return mHMultiListView.hasFocus();
 	}
 
 	@Override
@@ -272,6 +235,7 @@ public class SettingsFragment extends BaseContentFragment {
 	private void setWallPaper() {
 		final Intent pickWallpaper = new Intent(Intent.ACTION_SET_WALLPAPER);
 		Intent chooser = Intent.createChooser(pickWallpaper, "chooser_wallpaper");
+		chooser.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 		mActivity.startActivity(chooser);
 	}
 

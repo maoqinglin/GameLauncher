@@ -140,15 +140,6 @@ public class GameFragment extends BaseContentFragment implements Callbacks {
 		}
 	}
 
-	public boolean onSunKey() {
-		View v = mHMultiListView.getSelectedView();
-		if (v == null) {
-			return false;
-		}
-		doAction(v, mHMultiListView.getSelectedItemPosition(), (ItemInfo) mHMultiListView.getSelectedItem());
-		return true;
-	}
-
 	public boolean onMoonKey() {
 		getRootActivity().findViewById(R.id.menu_game).requestFocus();
 		if (mAppAdapter != null) {

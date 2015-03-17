@@ -175,15 +175,6 @@ public class AppFragment extends BaseContentFragment implements Callbacks {
 		}
 	};
 
-	public boolean onSunKey() {
-		View v = mHMultiListView.getSelectedView();
-		if (v == null) {
-			return false;
-		}
-		doAction(v, mHMultiListView.getSelectedItemPosition(), (ItemInfo)mHMultiListView.getSelectedItem());
-		return true;
-	}
-
 	@Override
 	public boolean onBackKey() {
 		return onMoonKey();

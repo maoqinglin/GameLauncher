@@ -256,15 +256,6 @@ public class HMultiListView extends LinearLayout {
 		return mHListViews;
 	}
 
-	public boolean isCurrentFocus() {
-		for (HListView hListView : mHListViews) {
-			if (hListView.hasFocus()) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	public void setAdapter(HMultiBaseAdapter hMultiListBaseAdapter) {
 		mHMultiBaseAdapter = hMultiListBaseAdapter;
 		if (hMultiListBaseAdapter != null) {

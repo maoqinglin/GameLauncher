@@ -88,7 +88,7 @@ public class SearchFragment extends BaseContentFragment {
 		super.initView(view);
 		getOperationTipsLayout().setTipsVisible(TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
 		mListView = (HListView) view.findViewById(R.id.search_list);
-		mSearchPrompt = (TextView)view.findViewById(R.id.search_recommend_prompt);
+		mSearchPrompt = (TextView) view.findViewById(R.id.search_recommend_prompt);
 		mSearchInputView = (AutoCompleteTextView) view.findViewById(R.id.search_edittext);
 		mSearchInputView.addTextChangedListener(mKeywordTextWatcher);
 		mKeywordAdapter = new SearchArrayAdapter(getRootActivity(), R.layout.search_suggest_textview);
@@ -99,6 +99,7 @@ public class SearchFragment extends BaseContentFragment {
 			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 				Log.d("liu.js", "onEditorAction--actionId=" + actionId);
 				switch (actionId) {
+				case EditorInfo.IME_ACTION_UNSPECIFIED:
 				case EditorInfo.IME_ACTION_SEARCH:
 					startSearchApp();
 					break;
@@ -132,15 +133,15 @@ public class SearchFragment extends BaseContentFragment {
 		});
 
 		initData();
-		
+
 		mSearchAdapter = new StoreAppNormalAdapter(getRootActivity(), mListView, mAppList);
 		mListView.setAdapter(mSearchAdapter);
 		mListView.setOnItemClickListener(mOnItemClickListener);
 		bindPagingIndicator(mListView);
-		
+
 		mInputMethodManager = (InputMethodManager) getRootActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 
-		ImageView searchIntro = (ImageView)view.findViewById(R.id.search_intro);
+		ImageView searchIntro = (ImageView) view.findViewById(R.id.search_intro);
 		if (!isLocaleCHN()) {
 			searchIntro.setVisibility(View.INVISIBLE);
 		}
@@ -205,14 +206,7 @@ public class SearchFragment extends BaseContentFragment {
 							mHandler.sendEmptyMessageDelayed(WHAT_RESTART_INPUT_METHOD, 180);
 						}
 					}
-
 				});
-			}
-		} else if (mListView.hasFocus()) {
-			int selectedPos = mListView.getSelectedItemPosition();
-			View selectedView = mListView.getSelectedView();
-			if (selectedView != null && selectedPos != -1) {
-				mListView.performItemClick(selectedView, selectedPos, 0);
 			}
 		}
 		return super.onSunKey();
@@ -253,6 +247,11 @@ public class SearchFragment extends BaseContentFragment {
 
 	// 根据关键字搜索对应的应用
 	private void startSearchApp() {
+		mInputMethodManager.hideSoftInputFromWindow(mSearchInputView.getWindowToken(),
+				InputMethodManager.HIDE_NOT_ALWAYS);
+		if (mSearchInputView.isPopupShowing()) {
+			mSearchInputView.dismissDropDown();
+		}
 		String keyword = getKeyword();
 		new SearchAppTask().execute(keyword);
 	}
@@ -348,7 +347,7 @@ public class SearchFragment extends BaseContentFragment {
 			mAppList.clear();
 			mAppList.addAll(result);
 			mSearchAdapter.notifyDataSetChanged();
-			if(!TextUtils.isEmpty(getKeyword())){
+			if (!TextUtils.isEmpty(getKeyword())) {
 				mSearchPrompt.setText(getRootActivity().getString(R.string.search_recommend_result));
 			}
 		}

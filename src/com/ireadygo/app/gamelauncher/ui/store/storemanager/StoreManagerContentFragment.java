@@ -424,14 +424,6 @@ public class StoreManagerContentFragment extends BaseContentFragment {
 		}
 	}
 
-	public boolean onSunKey() {
-		AppEntity appEntity = getCurrentSelectedItem();
-		if(appEntity != null){
-			operatorItem(appEntity);
-		}
-		return true;
-	}
-
 	@Override
 	public boolean onBackKey() {
 		return onMoonKey();

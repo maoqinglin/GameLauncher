@@ -99,16 +99,6 @@ public class CollectionFragment extends BaseContentFragment {
 		return mMultiListView.hasFocus();
 	}
 
-	@Override
-	public boolean onSunKey() {
-		int selectedIndex = mMultiListView.getSelectedItemPosition();
-		if (selectedIndex > -1 && selectedIndex < mCollectionList.size()) {
-			CollectionInfo collection = mCollectionList.get(selectedIndex);
-			startCollectionDetailActivity(collection.getCollectionId(), collection.getPosterBgUrl());
-		}
-		return super.onSunKey();
-	}
-
 	private class LoadCollectionTask extends AsyncTask<Integer, Void, List<CollectionInfo>> {
 
 		@Override
