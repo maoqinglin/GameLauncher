@@ -130,7 +130,9 @@ public class RemoteInfo implements IGameInfo {
 	private static final String KEY_REQ_TIME = "dTime";
 	private static final String KEY_SLOT_NUM = "iSlotNum";
 	private static final String VALUE_NEED_UPDATE = "1";
-
+	private static final String TYPE_APP = "1";
+	private static final String TYPE_GAME = "2";
+	private static final String TYPE_ALL = "";
 
 	public RemoteInfo(Context context) {
 		mContext = context;
@@ -503,7 +505,7 @@ public class RemoteInfo implements IGameInfo {
 		}
 		try {
 			ResultVO resultVO = mAppPlatFormService.getAppUpdateList(sbPkgNameList.toString(),
-					sbVersionCodeList.toString(), String.valueOf(AppPlatFormConfig.IPLATFORMID), "");
+					sbVersionCodeList.toString(), String.valueOf(AppPlatFormConfig.IPLATFORMID), TYPE_ALL);
 			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
 				List<AppEntity> results = new ArrayList<AppEntity>();
 				if (resultVO.getObj() != null) {
@@ -542,7 +544,7 @@ public class RemoteInfo implements IGameInfo {
 		}
 		try {
 			ResultVO resultVO = mAppPlatFormService.getAppMappingList(sbPkgNameList.toString(),
-					sbVersionCodeList.toString(), String.valueOf(AppPlatFormConfig.IPLATFORMID), "");
+					sbVersionCodeList.toString(), String.valueOf(AppPlatFormConfig.IPLATFORMID), TYPE_GAME);
 			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
 				List<Long> results = new ArrayList<Long>();
 				if (resultVO.getObj() != null) {
