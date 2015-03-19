@@ -50,7 +50,7 @@ public class AccountManager {
 
 	/** 初始化 **/
 	public void init(Activity activity, InitCompleteListener listener) {
-		SnailCommplatform.getInstance().snailInit(activity, GameLauncherConfig.sChannel, listener);
+		SnailCommplatform.getInstance().snailInit(activity, GameLauncherConfig.getChennelId(), listener);
 	}
 
 	public void init(Activity activity,String channelId) {
@@ -216,7 +216,7 @@ public class AccountManager {
 					String tags[] = GameInfoHub.instance(context).uploadGeituiInfo(
 							GameLauncherConfig.GETUI_CLIENTID,
 							GameLauncherConfig.GETUI_APPID,
-							GameLauncherConfig.sChannel,
+							GameLauncherConfig.getChennelId(),
 							GameLauncherConfig.PHONE_TYPE);
 					//根据返回的tag，设置个推的tag
 					if (tags != null && tags.length > 0) {

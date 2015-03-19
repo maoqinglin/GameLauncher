@@ -1,8 +1,10 @@
 package com.ireadygo.app.gamelauncher;
 
+import android.os.Environment;
 import android.text.TextUtils;
 
 import com.igexin.sdk.PushManager;
+import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
 
 public class GameLauncherConfig {
 	public static final String AUTHORITY = "com.ireadygo.app.gamelauncher";
@@ -35,7 +37,21 @@ public class GameLauncherConfig {
 	public static final String OBOX_TYPE_B = "B";
 	public static final String OBOX_TYPE_C = "C";
 	public static final String OBOX_DEFAULT_TYPE = OBOX_TYPE_C;
-	public static  String sChannel = "1882";
+	public static final String DEFAULT_CHENNEL_ID = "1882";
+	public static final String DEFAULT_PLATFORM_ID = "5";
+	public static final String TYPE_A_PLATFORM_ID = "1883";
+	public static final String TYPE_B_PLATFORM_ID = "1884";
+	public static final String TYPE_C_PLATFORM_ID = DEFAULT_CHENNEL_ID;
+
+	//保存免商店SDK所需的平台信息
+	public static final String SDDATA_FILE_NAME = Environment.getExternalStorageDirectory() + "/FreeStore/snail_data";
+	public static final String SD_IMAGE_PATH = Environment.getExternalStorageDirectory() + "/FreeStore/Image/";
+	// 版本号字段
+	public static final String KEY_PLATFORM_VERSION = "CPlatformVersion";
+	// 渠道字段
+	public static final String KEY_CHANNEL_ID = "CChannel";
+	// 平台号字段
+	public static final String KEY_PLATFORM_ID = "IPlatformId";
 
 	
 	public static final String[] SLOT_WHITE_LIST = {
@@ -58,5 +74,17 @@ public class GameLauncherConfig {
 			}
 		}
 		return false;
+	}
+
+	public static String getChennelId() {
+		String id = PreferenceUtils.getChennelID();
+		if (TextUtils.isEmpty(id)) {
+			return DEFAULT_CHENNEL_ID;
+		}
+		return id;
+	}
+
+	public static String getPlatformId() {
+		return DEFAULT_PLATFORM_ID;
 	}
 }

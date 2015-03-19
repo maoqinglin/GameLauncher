@@ -1,7 +1,11 @@
 package com.ireadygo.app.gamelauncher.utils;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.text.DecimalFormat;
+
+import org.apache.http.util.EncodingUtils;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -188,7 +192,7 @@ public class StorageUtils {
 				return APP_INSTALL_DEVICE;
 			}
 		}
-        return installPathId;
+		return installPathId;
 	}
 
 	public static String getExternalStoragePath() {
@@ -197,5 +201,71 @@ public class StorageUtils {
 
 	public static String getSecondaryExternalStoragePath() {
 		return System.getenv("SECONDARY_STORAGE");
+	}
+
+	/**
+	 * 写入SD卡文件
+	 * 
+	 * @param fileName
+	 *            文件名
+	 * @param message
+	 *            内容
+	 */
+	public static void writeFileSdcard(String fileName, String message) {
+		try {
+			mkDir(fileName);
+			FileOutputStream fout = new FileOutputStream(fileName);
+			byte[] bytes = message.getBytes();
+			fout.write(bytes);
+			fout.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 读取SD卡文件
+	 * 
+	 * @param fileName
+	 *            文件名
+	 * @return 内容
+	 */
+	public static String readFileSdcard(String fileName) {
+		String res = "";
+		try {
+			FileInputStream fin = new FileInputStream(fileName);
+			int length = fin.available();
+			byte[] buffer = new byte[length];
+			fin.read(buffer);
+			res = EncodingUtils.getString(buffer, "UTF-8");
+			fin.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	/**
+	 * 创建文件夹
+	 * 
+	 * @param fileName
+	 *            文件名
+	 */
+	public static void mkDir(String fileName) {
+		try {
+			File file = new File(fileName);
+			if (file.exists())
+				return;
+
+			if (file.isDirectory()) {
+				file.mkdirs();
+			} else {
+				File parent = file.getParentFile();
+				if (!parent.exists())
+					parent.mkdirs();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

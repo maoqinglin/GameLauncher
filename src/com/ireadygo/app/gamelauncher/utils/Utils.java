@@ -48,12 +48,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ireadygo.app.gamelauncher.GameLauncherConfig;
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.download.DownloadException;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.appstore.install.InstallMessage;
 import com.ireadygo.app.gamelauncher.appstore.manager.GameManager.GameManagerException;
+import com.ireadygo.app.gamelauncher.ui.GameLauncherActivity;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
+import com.snail.appstore.openapi.json.JSONObject;
 
 /**
  * Class containing some static utility methods.
@@ -392,6 +395,35 @@ public class Utils {
 		}
 		return false;
 
+	}
+
+	/**
+	 * 将应用版本号、渠道号、平台号保存到文件
+	 */
+	public static void saveFreeStoreData(Context context) {
+		String data = StorageUtils.readFileSdcard(GameLauncherConfig.SDDATA_FILE_NAME);
+		if (TextUtils.isEmpty(data)) {
+			try {
+				JSONObject obj = new JSONObject(data);
+				String channelId = obj.getString(GameLauncherConfig.KEY_CHANNEL_ID);
+				String versionName = obj.getString(GameLauncherConfig.KEY_PLATFORM_VERSION);
+				if (channelId.equals(GameLauncherConfig.getChennelId())
+						&& versionName.equals(getAppVersionName(context)))
+					return;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		JSONObject saveObj = new JSONObject();
+		try {
+			saveObj.put(GameLauncherConfig.KEY_CHANNEL_ID, GameLauncherConfig.getChennelId());
+			saveObj.put(GameLauncherConfig.KEY_PLATFORM_VERSION, getAppVersionName(context));
+			saveObj.put(GameLauncherConfig.KEY_PLATFORM_ID, String.valueOf(GameLauncherConfig.getPlatformId()));
+			StorageUtils.writeFileSdcard(GameLauncherConfig.SDDATA_FILE_NAME, saveObj.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

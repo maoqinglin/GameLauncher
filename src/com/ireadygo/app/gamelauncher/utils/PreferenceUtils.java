@@ -93,6 +93,7 @@ public class PreferenceUtils {
 	public static final String KEY_CATEGORY_ITEM_COUNT_EXPIRED_TIME = "ap";
 	public static final String KEY_WX_QR_URL_EXPIRETIME = "aq";
 	public static final String KEY_WX_QR_URL = "ar";
+	public static final String KEY_PLATFORM_CHANNEL_ID = "as";
 
 	private static final int USER_PHOTO_EXPIRED_TIME = 7 * 24 * 60 * 60 * 1000;
 
@@ -513,6 +514,16 @@ public class PreferenceUtils {
 	public static void setDeviceBindAccount(String account) {
 		Editor editor = getSharePref().edit();
 		editor.putString(KEY_DEVICE_BIND_ACCOUNT, account);
+		editor.apply();
+	}
+
+	public static String getChennelID() {
+		return getSharePref().getString(KEY_PLATFORM_CHANNEL_ID, DEFAULT_STRING);
+	}
+
+	public static void saveChennelID(String id) {
+		Editor editor = getSharePref().edit();
+		editor.putString(KEY_PLATFORM_CHANNEL_ID, id);
 		editor.apply();
 	}
 

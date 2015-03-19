@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 
 import com.ireadygo.app.gamelauncher.GameLauncherApplication;
 import com.ireadygo.app.gamelauncher.GameLauncherConfig;
@@ -19,7 +20,9 @@ import com.ireadygo.app.gamelauncher.ui.guide.GuideOBoxIntroduceActivity;
 import com.ireadygo.app.gamelauncher.ui.menu.HomeMenuFragment;
 import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
 import com.ireadygo.app.gamelauncher.utils.StaticsUtils;
+import com.ireadygo.app.gamelauncher.utils.StorageUtils;
 import com.ireadygo.app.gamelauncher.utils.Utils;
+import com.snail.appstore.openapi.json.JSONObject;
 
 public class GameLauncherActivity extends BaseMenuActivity {
 	private static final String ACTION_LANGUAGE_SETTINGS = "com.ireadygo.app.wizard.language";
@@ -69,7 +72,7 @@ public class GameLauncherActivity extends BaseMenuActivity {
 		if (PreferenceUtils.hasDeviceActive()) {
 			mCreateTime = System.currentTimeMillis();
 			StaticsUtils.onCreate();
-			AccountManager.getInstance().init(this, GameLauncherConfig.sChannel);
+			AccountManager.getInstance().init(this, GameLauncherConfig.getChennelId());
 		}
 		setShouldTranslate(true);
 		GameLauncherApplication.getApplication().setGameLauncherActivity(this);
@@ -96,16 +99,12 @@ public class GameLauncherActivity extends BaseMenuActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-//		if (PreferenceUtils.isFirstLaunch()) {
-//			Intent intent = new Intent(this, EntryActivity.class);
-//			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//			startActivity(intent);
-//		} 
-		
+
 		// 上报应用置前台的时间
 		if (PreferenceUtils.hasDeviceActive()) {
 			mResumeTime = System.currentTimeMillis();
 			StaticsUtils.onResume();
+			Utils.saveFreeStoreData(GameLauncherActivity.this);
 		}
 	}
 
@@ -126,26 +125,6 @@ public class GameLauncherActivity extends BaseMenuActivity {
 		return true;
 	}
 
-	// @Override
-	// public boolean onKeyUp(int keyCode, KeyEvent event) {
-	// switch (keyCode) {
-	// case SnailKeyCode.UP_KEY:
-	// case SnailKeyCode.DOWN_KEY:
-	// case SnailKeyCode.LEFT_KEY:
-	// case SnailKeyCode.RIGHT_KEY:
-	// if(mMenuFragment.getState().isFocused()) {
-	// SoundPoolManager.instance(this).play(SoundPoolManager.SOUND_MENU);
-	// } else if(mMenuFragment.getState().isSelected()) {
-	// SoundPoolManager.instance(this).play(SoundPoolManager.SOUND_SELECT);
-	// }
-	// break;
-	//
-	// default:
-	// break;
-	// }
-	//
-	// return super.onKeyUp(keyCode, event);
-	// }
 
 	@Override
 	protected void onDestroy() {
@@ -180,5 +159,6 @@ public class GameLauncherActivity extends BaseMenuActivity {
 			adapter.enable();
 		}
 	}
+
 
 }

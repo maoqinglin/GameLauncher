@@ -326,17 +326,18 @@ public class BaseAccountActivity extends BaseGuideActivity {
 			if (!TextUtils.isEmpty(result)) {
 				PreferenceUtils.saveOBoxType(result);
 				if (TYPE_A.equals(result)) {
-					GameLauncherConfig.sChannel = "1883";
+					PreferenceUtils.saveChennelID(GameLauncherConfig.TYPE_A_PLATFORM_ID);
 				} else if (TYPE_B.equals(result)) {
-					GameLauncherConfig.sChannel = "1884";
+					PreferenceUtils.saveChennelID(GameLauncherConfig.TYPE_B_PLATFORM_ID);
 				} else {
-					GameLauncherConfig.sChannel = "1882";
+					PreferenceUtils.saveChennelID(GameLauncherConfig.TYPE_C_PLATFORM_ID);
 				}
 				AccountManager.getInstance().init(BaseAccountActivity.this, new InitCompleteListener() {
 					@Override
 					public void onComplete(int arg0) {
 						//上报设备信息
 						StaticsUtils.DeviceActive();
+						Utils.saveFreeStoreData(BaseAccountActivity.this);
 					}
 				});
 			}
