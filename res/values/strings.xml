@@ -76,7 +76,7 @@
 
     <!-- 免商店-选项(store_options) -->
     <string name="store_menu_search">Search</string>
-    <string name="store_options_recommend">Recommend</string>
+    <string name="store_menu_recommend">Recommend</string>
     <string name="store_menu_collection">Album</string>
     <string name="store_menu_category">Category</string>
     <string name="store_menu_app">APPs</string>

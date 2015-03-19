@@ -79,7 +79,7 @@
 
     <!-- 免商店-选项(store_options) -->
     <string name="store_menu_search">搜&#160;索</string>
-    <string name="store_options_recommend">推&#160;荐</string>
+    <string name="store_menu_recommend">推&#160;荐</string>
     <string name="store_menu_collection">合&#160;集</string>
     <string name="store_menu_category">分&#160;类</string>
     <string name="store_menu_app">常用应用</string>

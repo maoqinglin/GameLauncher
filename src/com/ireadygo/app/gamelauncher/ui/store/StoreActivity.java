@@ -38,17 +38,20 @@ public class StoreActivity extends BaseMenuActivity {
 			case STORE_SEARCH:
 				position = 0;
 				break;
-			case STORE_CATEGORY:
+			case STORE_RECOMMEND:
 				position = 1;
 				break;
-			case STORE_COLLECTION:
+			case STORE_CATEGORY:
 				position = 2;
 				break;
-			case STORE_FAVORITE_APPS:
+			case STORE_COLLECTION:
 				position = 3;
 				break;
-			case STORE_GAME_MANAGE:
+			case STORE_FAVORITE_APPS:
 				position = 4;
+				break;
+			case STORE_GAME_MANAGE:
+				position = 5;
 				break;
 			}
 		}

@@ -202,6 +202,7 @@ public abstract class BaseContentFragment extends BaseFragment {
 
 	protected void bindPagingIndicator(HMultiListView multiListView, Interpolation interpolation) {
 		PagingIndicator indicator = getMenuActivity().getPagingIndicator();
+		indicator.setVisibility(View.VISIBLE);
 		multiListView.setOnScrollListener(new ScrollListenerByIndicator(indicator));
 		HListView upListView = multiListView.getHListViews().get(0);
 		indicator.setInterpolation(interpolation);
@@ -210,6 +211,7 @@ public abstract class BaseContentFragment extends BaseFragment {
 
 	protected void bindPagingIndicator(HListView hListView, Interpolation interpolation) {
 		PagingIndicator indicator = getMenuActivity().getPagingIndicator();
+		indicator.setVisibility(View.VISIBLE);
 		hListView.setOnScrollListener(new ScrollListenerByIndicator(indicator));
 		indicator.setInterpolation(interpolation);
 		indicator.bind(hListView);

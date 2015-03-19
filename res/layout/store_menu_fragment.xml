@@ -15,11 +15,23 @@
         android:id="@+id/store_menu_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:nextFocusDown="@+id/store_menu_category"
+        android:nextFocusDown="@+id/store_menu_recommand"
         android:nextFocusLeft="@+id/store_menu_search"
         android:nextFocusRight="@+id/upHList"
         android:nextFocusUp="@+id/store_menu_search"
         menuItem:menu_title="@string/store_menu_search" >
+    </com.ireadygo.app.gamelauncher.ui.menu.TextMenu>
+
+    <com.ireadygo.app.gamelauncher.ui.menu.TextMenu
+        android:id="@+id/store_menu_recommand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/menu_item_margin_top"
+        android:nextFocusDown="@+id/store_menu_category"
+        android:nextFocusLeft="@+id/store_menu_search"
+        android:nextFocusRight="@+id/upHList"
+        android:nextFocusUp="@+id/store_menu_search"
+        menuItem:menu_title="@string/store_menu_recommend" >
     </com.ireadygo.app.gamelauncher.ui.menu.TextMenu>
 
     <com.ireadygo.app.gamelauncher.ui.menu.TextMenu
@@ -30,7 +42,7 @@
         android:nextFocusDown="@+id/store_menu_collection"
         android:nextFocusLeft="@+id/store_menu_category"
         android:nextFocusRight="@+id/upHList"
-        android:nextFocusUp="@+id/store_menu_search"
+        android:nextFocusUp="@+id/store_menu_recommand"
         menuItem:menu_title="@string/store_menu_category" >
     </com.ireadygo.app.gamelauncher.ui.menu.TextMenu>
 

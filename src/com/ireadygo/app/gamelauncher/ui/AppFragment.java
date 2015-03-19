@@ -63,6 +63,7 @@ public class AppFragment extends BaseContentFragment implements Callbacks {
 		super.initView(view);
 		getOperationTipsLayout().setAllVisible(View.VISIBLE);
 		mHMultiListView = (HMultiListView)view.findViewById(R.id.mutillist);
+		bindPagingIndicator(mHMultiListView);
 		mStatisticsView = (StatisticsTitleView)view.findViewById(R.id.statistics_view);
 		mAppAdapter = new AppAdapter(getRootActivity(), mAppList, LIST_NUM, mHMultiListView);
 		mHMultiListView.setIsDelayScroll(false);

@@ -112,6 +112,10 @@ public class StoreFragment extends BaseContentFragment {
 		info = new StoreInfo(R.drawable.store_icon_search, R.string.store_menu_search, anchor);
 		mStoreDatas.add(info);
 
+		anchor = new Anchor(Destination.STORE_RECOMMEND);
+		info = new StoreInfo(R.drawable.store_icon_recommand, R.string.store_menu_recommend, anchor);
+		mStoreDatas.add(info);
+
 		anchor = new Anchor(Destination.STORE_CATEGORY);
 		info = new StoreInfo(R.drawable.store_icon_category, R.string.store_menu_category, anchor);
 		mStoreDatas.add(info);

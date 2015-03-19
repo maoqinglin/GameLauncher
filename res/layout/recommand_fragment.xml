@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.ireadygo.app.gamelauncher"
+    android:layout_width="@dimen/content_fragment_width"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/content_fragment_padding_top" >
+
+    <com.ireadygo.app.gamelauncher.ui.widget.StatisticsTitleView
+        android:id="@+id/title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/content_fragment_padding_left" >
+    </com.ireadygo.app.gamelauncher.ui.widget.StatisticsTitleView>
+
+    <com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView
+        android:id="@+id/recommand_list"
+        style="@style/MultiListNormal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:nextFocusLeft="@+id/store_menu_recommand" >
+    </com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView>
+
+</LinearLayout>

@@ -60,6 +60,7 @@ public class SettingsFragment extends BaseContentFragment {
 	protected void initView(View view) {
 		super.initView(view);
 		mHMultiListView = (HMultiListView) view.findViewById(R.id.mutillist);
+		bindPagingIndicator(mHMultiListView);
 		mSettingsMultiAdapter = new SettingsMultiAdapter(getRootActivity(), initData(),2,mHMultiListView);
 		mHMultiListView.setAdapter(mSettingsMultiAdapter);
 		mHMultiListView.setIsDelayScroll(false);
