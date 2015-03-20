@@ -285,6 +285,7 @@ public class StoreManagerContentAdapter implements HMultiBaseAdapter{
 	}
 
 	public void updateOnStateChange(StoreManagerItem item, AppEntity app) {
+		int progress = 0;
 		switch (app.getGameState()) {
 		case DEFAULT:
 			updateStateView(item, app.getGameState(), R.drawable.store_manager_status_queue);
@@ -293,7 +294,7 @@ public class StoreManagerContentAdapter implements HMultiBaseAdapter{
 		case TRANSFERING:
 			updateStateView(item, app.getGameState(), R.drawable.store_manager_status_pause);
 			if (app.getTotalSize() != 0) {
-				int progress = (int) (app.getDownloadSize() * 100 / app.getTotalSize());
+				progress = (int) (app.getDownloadSize() * 100 / app.getTotalSize());
 				String sizeString = Formatter.formatFileSize(mContext, app.getDownloadSize()) + " / "
 						+ Formatter.formatFileSize(mContext, app.getTotalSize());
 				String speedString = formatSpeedText(app.getDownloadSpeed());
@@ -304,8 +305,8 @@ public class StoreManagerContentAdapter implements HMultiBaseAdapter{
 		case QUEUING:
 			updateStateView(item, app.getGameState(), R.drawable.store_manager_status_queue);
 			if (app.getTotalSize() != 0) {
-				int progress2 = (int) (app.getDownloadSize() * 100 / app.getTotalSize());
-				updateProgressView(item, null, null, progress2, View.INVISIBLE);
+				progress = (int) (app.getDownloadSize() * 100 / app.getTotalSize());
+				updateProgressView(item, null, null, progress, View.INVISIBLE);
 			}
 			break;
 		case UPGRADEABLE:
@@ -315,8 +316,8 @@ public class StoreManagerContentAdapter implements HMultiBaseAdapter{
 		case PAUSED:
 			updateStateView(item, app.getGameState(), R.drawable.store_manager_status_transfering);
 			if (app.getTotalSize() != 0) {
-				int progress3 = (int) (app.getDownloadSize() * 100 / app.getTotalSize());
-				updateProgressView(item, null, null, progress3, View.INVISIBLE);
+				progress = (int) (app.getDownloadSize() * 100 / app.getTotalSize());
+				updateProgressView(item, null, null, progress, View.INVISIBLE);
 			}
 			break;
 		case INSTALLABLE:

@@ -27,13 +27,12 @@ public class WeiXinQRcodeActivity extends BaseGuideActivity {
 
 	private static final String ACTION_WX_PUBLICMANAGER = "action.ireadygo.app.wxpublicmanager";
 	private static final String ACTION_GAMELAUNCHER = "action.ireadygo.app.gamelauncher";
-	private static final String KEY_EXPIRETIME = "EXPIRETIME";
 	private static final String KEY_URL = "URL";
 	private static final String KEY_CMD = "CMD";
 	private static final String KEY_ITEM = "ITEM";
 	private static final String VALUE_QR = "QR";
 	private ImageView mQRCodeView;
-	private long mExpiretime = 1800 * 1000;
+	private static final long EXPIRETIME = 1800 * 1000;//30 min
 
 	private BroadcastReceiver mReceiver = new BroadcastReceiver() {
 		
@@ -46,12 +45,8 @@ public class WeiXinQRcodeActivity extends BaseGuideActivity {
 				try {
 					JSONObject json = new JSONObject(msg);
 					String url = json.getString(KEY_URL);
-					long time = json.getLong(KEY_EXPIRETIME);
 					mQRCodeView.setImageBitmap(createQRImage(url));
 
-					if(time != 0) {
-						mExpiretime = time;
-					}
 					PreferenceUtils.saveWxQrUrlExpiretime(System.currentTimeMillis());
 					PreferenceUtils.saveWxQrUrl(url);
 				} catch (JSONException e) {
@@ -78,7 +73,7 @@ public class WeiXinQRcodeActivity extends BaseGuideActivity {
 		registerReceiver(mReceiver, filter);
 
 		String url = PreferenceUtils.getWxQrUrl();
-		if(System.currentTimeMillis() - PreferenceUtils.getWxQrUrlExpiretime() > mExpiretime
+		if(System.currentTimeMillis() - PreferenceUtils.getWxQrUrlExpiretime() > EXPIRETIME
 				|| TextUtils.isEmpty(url)) {
 			queryWxQrUrl();
 		} else {

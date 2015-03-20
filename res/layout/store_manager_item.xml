@@ -85,7 +85,6 @@
         android:background="@drawable/store_manager_status_queue"
         android:layout_marginTop="@dimen/store_manager_status_margin_top"
         android:clickable="true"
-        android:contentDescription="@null"
         android:visibility="invisible" />
 
     <ProgressBar

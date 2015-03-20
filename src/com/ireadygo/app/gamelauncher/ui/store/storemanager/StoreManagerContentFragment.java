@@ -159,6 +159,8 @@ public class StoreManagerContentFragment extends BaseContentFragment {
 					public void onChildFocusChange(StoreManagerItemHolder holder, boolean hasFocus, AppEntity otherApp) {
 						if(hasFocus) {
 							holder.status.setVisibility(View.VISIBLE);
+							holder.downloadSpeedLayout.setVisibility(View.INVISIBLE);
+							holder.icon.setAlpha(1.0f);
 
 							switch (mStoreManagerAdapter.getGameManagerType()) {
 							case DOWNLOAD:
