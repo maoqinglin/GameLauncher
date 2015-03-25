@@ -47,6 +47,7 @@
     <string name="settings_reset">恢复出厂设置</string>
     <string name="settings_about">关于</string>
     <string name="settings_hdmi">HDMI</string>
+    <string name="settings_controller">右摇杆设置</string>
 
     <!-- 微信二维码 -->
     <string name="wx_title">微信二维码</string>

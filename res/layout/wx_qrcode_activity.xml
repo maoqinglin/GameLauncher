@@ -29,7 +29,8 @@
             android:layout_width="@dimen/wx_qrcode_image_width"
             android:layout_height="@dimen/wx_qrcode_image_height"
             android:layout_marginTop="@dimen/wx_qrcode_image_margin_top"
-            android:background="@color/white"/>
+            android:background="@color/white"
+            android:src="@drawable/loading_progress_black"/>
         
     </LinearLayout>
 

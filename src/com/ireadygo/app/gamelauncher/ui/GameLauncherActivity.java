@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.TextUtils;
 
 import com.ireadygo.app.gamelauncher.GameLauncherApplication;
 import com.ireadygo.app.gamelauncher.GameLauncherConfig;
@@ -20,9 +19,7 @@ import com.ireadygo.app.gamelauncher.ui.guide.GuideOBoxIntroduceActivity;
 import com.ireadygo.app.gamelauncher.ui.menu.HomeMenuFragment;
 import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
 import com.ireadygo.app.gamelauncher.utils.StaticsUtils;
-import com.ireadygo.app.gamelauncher.utils.StorageUtils;
 import com.ireadygo.app.gamelauncher.utils.Utils;
-import com.snail.appstore.openapi.json.JSONObject;
 
 public class GameLauncherActivity extends BaseMenuActivity {
 	private static final String ACTION_LANGUAGE_SETTINGS = "com.ireadygo.app.wizard.language";

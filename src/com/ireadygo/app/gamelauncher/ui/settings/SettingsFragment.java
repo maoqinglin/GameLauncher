@@ -13,7 +13,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.preference.PreferenceActivity;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
@@ -27,7 +26,6 @@ import com.ireadygo.app.gamelauncher.game.utils.Utilities;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
-import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
@@ -103,6 +101,9 @@ public class SettingsFragment extends BaseContentFragment {
 
 //		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_brightness_selector),
 //				getResources().getString(R.string.settings_brightness), SettingsIntentAction.BRIGHTNESS));
+		
+		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_controller_selector),
+				getResources().getString(R.string.settings_controller), SettingsIntentAction.CONTROLLER));
 		
 		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_bluetooth_selector),
 				getResources().getString(R.string.settings_bluetooth), SettingsIntentAction.BLUTOOTH));
@@ -207,6 +208,7 @@ public class SettingsFragment extends BaseContentFragment {
 		public static final String TIME = Settings.ACTION_DATE_SETTINGS;
 		public static final String KEYBOARD = Settings.ACTION_INPUT_METHOD_SETTINGS;
 
+		public static final String CONTROLLER = "android.settings.CONTROLLER_SETTINGS";
 		public static final String WALL_PAPER = Intent.ACTION_SET_WALLPAPER;
 		public static final String HDMI = "android.settings.HDMI_SETTINGS";
 		public static final String BRIGHTNESS = "android.intent.action.SHOW_BRIGHTNESS_DIALOG";

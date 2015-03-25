@@ -47,6 +47,7 @@
     <string name="settings_reset">恢復出廠設置</string>
     <string name="settings_about">關於</string>
     <string name="settings_hdmi">HDMI</string>
+    <string name="settings_controller">右搖桿設置</string>
 
     <!-- 微信二維碼 -->
     <string name="wx_title">微信二維碼</string>

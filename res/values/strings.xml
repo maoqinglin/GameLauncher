@@ -47,6 +47,7 @@
     <string name="settings_reset">Reset</string>
     <string name="settings_about">about</string>
     <string name="settings_hdmi">HDMI</string>
+    <string name="settings_controller">Controller</string>
 
     <!-- 壁纸 -->
     <string name="wallpaper_set">Set wallpaper</string>

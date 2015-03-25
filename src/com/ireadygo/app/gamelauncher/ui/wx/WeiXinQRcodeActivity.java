@@ -32,7 +32,7 @@ public class WeiXinQRcodeActivity extends BaseGuideActivity {
 	private static final String KEY_ITEM = "ITEM";
 	private static final String VALUE_QR = "QR";
 	private ImageView mQRCodeView;
-	private static final long EXPIRETIME = 1800 * 1000;//30 min
+	private static final long EXPIRETIME = 1800;//30 min
 
 	private BroadcastReceiver mReceiver = new BroadcastReceiver() {
 		
