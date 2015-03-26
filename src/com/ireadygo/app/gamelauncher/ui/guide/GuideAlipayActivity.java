@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
 
@@ -12,6 +13,7 @@ import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
 import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
 import com.ireadygo.app.gamelauncher.ui.GameLauncherActivity;
+import com.ireadygo.app.gamelauncher.ui.SnailKeyCode;
 import com.ireadygo.app.gamelauncher.ui.activity.BaseGuideActivity;
 import com.ireadygo.app.gamelauncher.ui.widget.GuideTwoBtnLayout;
 import com.ireadygo.app.gamelauncher.ui.widget.GuideTwoBtnLayout.OnLRBtnClickListener;
@@ -54,6 +56,16 @@ public class GuideAlipayActivity extends BaseGuideActivity {
 				task.execute();
 			}
 		});
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if(event.getAction() == KeyEvent.ACTION_DOWN) {
+			if(keyCode == SnailKeyCode.BACK_KEY || keyCode == SnailKeyCode.MOON_KEY) {
+				
+			}
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 
 	private void skipWebsite(String url) {

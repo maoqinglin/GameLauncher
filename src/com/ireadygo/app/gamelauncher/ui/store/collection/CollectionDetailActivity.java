@@ -20,16 +20,19 @@ import com.ireadygo.app.gamelauncher.ui.base.BaseActivity;
 import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
 import com.ireadygo.app.gamelauncher.ui.store.StoreAppMultiAdapter;
 import com.ireadygo.app.gamelauncher.ui.store.StoreEmptyView;
+import com.ireadygo.app.gamelauncher.ui.widget.AbsHListView;
+import com.ireadygo.app.gamelauncher.ui.widget.AbsHListView.OnScrollListener;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
-import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout;
+import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
 import com.ireadygo.app.gamelauncher.ui.widget.StatisticsTitleView;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiBaseAdapter;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 import com.snail.appstore.openapi.AppPlatFormConfig;
 
-public class CollectionDetailActivity extends BaseActivity implements OnClickListener {
+public class CollectionDetailActivity extends BaseActivity implements
+		OnClickListener {
 	public static final String EXTRA_COLLECTION_ID = "CollectionId";
 	private StatisticsTitleView mTitleLayout;
 	private HMultiListView mMultiListView;
@@ -46,44 +49,48 @@ public class CollectionDetailActivity extends BaseActivity implements OnClickLis
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.store_collection_detail_activity);
 		mGameInfoHub = GameInfoHub.instance(this);
-		mTitleLayout = (StatisticsTitleView)findViewById(R.id.title_layout);
+		mTitleLayout = (StatisticsTitleView) findViewById(R.id.title_layout);
 		mTitleLayout.setTitle(R.string.collection_detail_title_prompt);
-		
-		mMultiListView = (HMultiListView)findViewById(R.id.collection_detail_list);
+
+		mMultiListView = (HMultiListView) findViewById(R.id.collection_detail_list);
 		mAdapter = new StoreAppMultiAdapter(this, mMultiListView, mApps);
 		mMultiListView.setAdapter(mAdapter);
-		
-		mTipsLayout = (OperationTipsLayout)findViewById(R.id.tips_layout);
-		mTipsLayout.setTipsVisible(TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
-		
-		
+
+		mTipsLayout = (OperationTipsLayout) findViewById(R.id.tips_layout);
+		mTipsLayout.setTipsVisible(TipFlag.FLAG_TIPS_SUN,
+				TipFlag.FLAG_TIPS_MOON);
+
 		mCollectionId = getIntent().getLongExtra(EXTRA_COLLECTION_ID, -1);
 		if (mCollectionId > 0) {
 			loadCollectionDetail();
 		}
-		// mMultiListView.setOnScrollListener(new OnScrollListener() {
-		//
-		// @Override
-		// public void onScrollStateChanged(AbsHListView view, int scrollState)
-		// {
-		//
-		// }
-		//
-		// @Override
-		// public void onScroll(AbsHListView view, int firstVisibleItem, int
-		// visibleItemCount, int totalItemCount) {
-		// if (!mLoadingData && firstVisibleItem >= totalItemCount -
-		// visibleItemCount - 1) {
-		// loadCategoryDetail();
-		// }
-		// }
-		// });
+
+		mMultiListView.setOnScrollListener(new OnScrollListener() {
+
+			@Override
+			public void onScrollStateChanged(AbsHListView view, int scrollState) {
+				//TODO
+			}
+
+			@Override
+			public void onScroll(AbsHListView view, int firstVisibleItem,
+					int visibleItemCount, int totalItemCount) {
+				if (!mLoadingData
+						&& firstVisibleItem >= totalItemCount
+								- visibleItemCount - 1) {
+					loadCollectionDetail();
+				}
+			}
+		});
+
 		mMultiListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
 				if (position >= 0 && position < mApps.size()) {
-					DetailActivity.startSelf(CollectionDetailActivity.this, mApps.get(position));
+					DetailActivity.startSelf(CollectionDetailActivity.this,
+							mApps.get(position));
 				}
 			}
 		});
@@ -95,7 +102,8 @@ public class CollectionDetailActivity extends BaseActivity implements OnClickLis
 
 	private void loadCollectionDetail() {
 		if (!mLoadingData && mCollectionId > 0) {
-			new LoadCollectionDetailTask().execute(mCollectionId + "", mPageIndex + "");
+			new LoadCollectionDetailTask().execute(mCollectionId + "",
+					mPageIndex + "");
 			mLoadingData = true;
 		}
 	}
@@ -106,7 +114,8 @@ public class CollectionDetailActivity extends BaseActivity implements OnClickLis
 		return true;
 	}
 
-	private class LoadCollectionDetailTask extends AsyncTask<String, Void, List<AppEntity>> {
+	private class LoadCollectionDetailTask extends
+			AsyncTask<String, Void, List<AppEntity>> {
 
 		@Override
 		protected List<AppEntity> doInBackground(String... params) {
@@ -116,7 +125,8 @@ public class CollectionDetailActivity extends BaseActivity implements OnClickLis
 			String id = params[0];
 			int page = Integer.parseInt(params[1]);
 			try {
-				return mGameInfoHub.obtainChildren(AppPlatFormConfig.DATA_TYPE_COLLECTION, id, page);
+				return mGameInfoHub.obtainChildren(
+						AppPlatFormConfig.DATA_TYPE_COLLECTION, id, page);
 			} catch (InfoSourceException e) {
 				e.printStackTrace();
 			}

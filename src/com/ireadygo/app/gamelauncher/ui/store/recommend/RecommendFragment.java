@@ -19,6 +19,8 @@ import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.store.StoreAppMultiAdapter;
+import com.ireadygo.app.gamelauncher.ui.widget.AbsHListView;
+import com.ireadygo.app.gamelauncher.ui.widget.AbsHListView.OnScrollListener;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
@@ -35,6 +37,8 @@ public class RecommendFragment extends BaseContentFragment {
 	private HMultiBaseAdapter mAdapter;
 	private StatisticsTitleView mTitleLayout;
 	private static final String BANNER_POSITION = "3";
+	private int mCurrPageIndex = 1;
+	private boolean mLoadingData = false;
 
 	public RecommendFragment(Activity activity, BaseMenuFragment menuFragment) {
 		super(activity, menuFragment);
@@ -60,6 +64,9 @@ public class RecommendFragment extends BaseContentFragment {
 		mMultiListView.setAdapter(mAdapter);
 		bindPagingIndicator(mMultiListView);
 		setEmptyView(mMultiListView, R.string.store_empty_title, View.GONE, 0);
+		if(mAppEntities.size() == 0){
+			loadData(1);
+		}
 		mMultiListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -68,14 +75,33 @@ public class RecommendFragment extends BaseContentFragment {
 			}
 
 		});
-		if(mAppEntities.size() == 0){
-			loadData(1);
-		}
+		mMultiListView.setOnScrollListener(new OnScrollListener() {
+			
+			@Override
+			public void onScrollStateChanged(AbsHListView view, int scrollState) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onScroll(AbsHListView view, int firstVisibleItem,
+					int visibleItemCount, int totalItemCount) {
+				if (!mLoadingData
+						&& firstVisibleItem >= totalItemCount
+								- visibleItemCount - 1) {
+					Log.i("chenrui", "The pageIndex : " + mCurrPageIndex);
+					loadData(mCurrPageIndex);
+				}
+			}
+		});
 	}
 
 	private void loadData(int page) {
-		new LoadDataTask().execute(page);
-		showLoadingProgress();
+		if(!mLoadingData) {
+			new LoadDataTask().execute(page);
+//			showLoadingProgress();
+			mLoadingData = true;
+		}
 	}
 
 	@Override
@@ -105,8 +131,9 @@ public class RecommendFragment extends BaseContentFragment {
 		@Override
 		protected void onPostExecute(List<BannerItem> result) {
 			super.onPostExecute(result);
-			dimissLoadingProgress();
+//			dimissLoadingProgress();
 			if (isCancelled() || result == null || result.isEmpty()) {
+				mLoadingData = false;
 				return;
 			}
 			List<AppEntity> appList = new ArrayList<AppEntity>();
@@ -122,6 +149,8 @@ public class RecommendFragment extends BaseContentFragment {
 			if(mTitleLayout != null){
 				mTitleLayout.setCount(mAppEntities.size());
 			}
+			mCurrPageIndex++;
+			mLoadingData = false;
 		}
 
 		private AppEntity bannerItemToAppEntity(BannerItem bannerItem) {

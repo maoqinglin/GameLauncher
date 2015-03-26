@@ -6,6 +6,7 @@ import java.util.List;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,8 @@ import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.store.StoreAppMultiAdapter;
+import com.ireadygo.app.gamelauncher.ui.widget.AbsHListView;
+import com.ireadygo.app.gamelauncher.ui.widget.AbsHListView.OnScrollListener;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
@@ -57,6 +60,7 @@ public class CategoryDetailContentFragment extends BaseContentFragment {
 		mMultiAdapter = new StoreAppMultiAdapter(getRootActivity(), mMultiListView, mAppEntities);
 		mMultiListView.setAdapter(mMultiAdapter);
 		setEmptyView(mMultiListView, R.string.store_empty_title, View.GONE, 0);
+		updateNextFocusIdByCategoryId((int) mCategoryId);
 		mMultiListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -64,7 +68,25 @@ public class CategoryDetailContentFragment extends BaseContentFragment {
 				DetailActivity.startSelf(getRootActivity(), mAppEntities.get(position));
 			}
 		});
-		updateNextFocusIdByCategoryId((int) mCategoryId);
+		mMultiListView.setOnScrollListener(new OnScrollListener() {
+			
+			@Override
+			public void onScrollStateChanged(AbsHListView view, int scrollState) {
+				
+			}
+			
+			@Override
+			public void onScroll(AbsHListView view, int firstVisibleItem,
+					int visibleItemCount, int totalItemCount) {
+				if (!mLoadingData
+						&& firstVisibleItem >= totalItemCount
+								- visibleItemCount - 1) {
+					Log.i("chenrui", "The pageIndex : " + mCurrPageIndex);
+					loadCategoryDetail();
+				}
+				
+			}
+		});
 	}
 
 	@Override

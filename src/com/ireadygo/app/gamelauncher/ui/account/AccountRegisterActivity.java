@@ -99,7 +99,12 @@ public class AccountRegisterActivity extends BaseAccountActivity{
 		return true;
 	}
 
-
+	@Override
+	protected void onLoginSuccess() {
+		finish();
+		super.onLoginSuccess();
+	}
+	
 	@Override
 	public boolean onSunKey() {
 		if (mRegisterBtn.hasFocus()) {

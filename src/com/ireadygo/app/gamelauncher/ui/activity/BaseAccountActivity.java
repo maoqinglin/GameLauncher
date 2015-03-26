@@ -170,6 +170,7 @@ public class BaseAccountActivity extends BaseGuideActivity {
 		SoundPoolManager.instance(this).play(SoundPoolManager.SOUND_EXIT);
 		super.finish();
 	}
+
 	protected void startGameLauncherActivity() {
 		Intent intent = new Intent();
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

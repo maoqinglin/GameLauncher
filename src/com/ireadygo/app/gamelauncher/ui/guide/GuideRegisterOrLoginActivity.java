@@ -8,13 +8,13 @@ import android.view.View;
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.ui.account.AccountLoginActivity;
 import com.ireadygo.app.gamelauncher.ui.account.AccountRegisterActivity;
-import com.ireadygo.app.gamelauncher.ui.activity.BaseGuideActivity;
+import com.ireadygo.app.gamelauncher.ui.activity.BaseAccountActivity;
 import com.ireadygo.app.gamelauncher.ui.widget.GuideTwoBtnLayout;
 import com.ireadygo.app.gamelauncher.ui.widget.GuideTwoBtnLayout.OnLRBtnClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
 
-public class GuideRegisterOrLoginActivity extends BaseGuideActivity {
+public class GuideRegisterOrLoginActivity extends BaseAccountActivity {
 
 	private GuideTwoBtnLayout mGuideTwoBtnLayout;
 	private OperationTipsLayout mTipsLayout;
@@ -50,6 +50,12 @@ public class GuideRegisterOrLoginActivity extends BaseGuideActivity {
 				startActivity(intent);
 			}
 		});
+	}
+
+	@Override
+	protected void onLoginSuccess() {
+		finish();
+		super.onLoginSuccess();
 	}
 
 	@Override
