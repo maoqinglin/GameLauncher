@@ -6,10 +6,12 @@ public class CategoryInfo extends AppEntity{
 	private String catetoryName;
 	private String categoryDes;
 	private String iconUrl;
+	private int appCounts;//游戏数量
 
-	public CategoryInfo(int categoryId, String categoryName, String categoryDec, String categoryUrl, String posterIcon,
+	public CategoryInfo(int categoryId, int appCounts, String categoryName, String categoryDec, String categoryUrl, String posterIcon,
 			String posterBg) {
 		setCategoryId(categoryId);
+		setAppCounts(appCounts);
 		setCatetoryName(categoryName);
 		setCategoryDes(categoryDec);
 		setIconUrl(categoryUrl);
@@ -23,6 +25,14 @@ public class CategoryInfo extends AppEntity{
 
 	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
+	}
+
+	public int getAppCounts() {
+		return appCounts;
+	}
+
+	public void setAppCounts(int appCounts) {
+		this.appCounts = appCounts;
 	}
 
 	public String getCatetoryName() {

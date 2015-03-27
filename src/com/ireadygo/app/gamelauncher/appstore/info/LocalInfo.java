@@ -80,6 +80,13 @@ public class LocalInfo implements IGameInfo {
 	}
 
 	@Override
+	public ArrayList<AppEntity> obtainCategotyChildren(String id, int page, String iPlatformId, int number)
+			throws InfoSourceException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public AppEntity obtainItemById(String appId) throws InfoSourceException {
 		// TODO Auto-generated method stub
 		return null;
@@ -287,13 +294,14 @@ public class LocalInfo implements IGameInfo {
 		ArrayList<CategoryInfo> result = new ArrayList<CategoryInfo>();
 		for (String category : categotyList) {
 			String[] categoryItems = category.split(ITEM_INNER_DIVIDER);
-			if (categoryItems.length == 4) {
-				CategoryInfo item = new CategoryInfo(Integer.valueOf((categoryItems[0])),
-						categoryItems[1],
+			if (categoryItems.length == 7) {
+				CategoryInfo item = new CategoryInfo(Integer.valueOf(categoryItems[0]),
+						Integer.valueOf(categoryItems[1]),
 						categoryItems[2],
 						categoryItems[3],
 						categoryItems[4],
-						categoryItems[5]);
+						categoryItems[5],
+						categoryItems[6]);
 				result.add(item);
 			}
 		}

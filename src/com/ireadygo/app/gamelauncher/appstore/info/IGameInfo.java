@@ -31,6 +31,7 @@ public interface IGameInfo {
 	//获取指定分类的应用列表
 	ArrayList<AppEntity> obtainChildren(int dataType, String id,int page) throws InfoSourceException;
 
+	ArrayList<AppEntity> obtainCategotyChildren(String id,int page,String iPlatformId, int number)throws InfoSourceException;
 
 	//获取应用详细信息
 	AppEntity obtainItemById(String appId) throws InfoSourceException;

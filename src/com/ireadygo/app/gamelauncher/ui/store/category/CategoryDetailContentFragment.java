@@ -33,6 +33,7 @@ public class CategoryDetailContentFragment extends BaseContentFragment {
 	private GameInfoHub mGameInfoHub;
 	private long mCurrPageIndex = 1;
 	private boolean mLoadingData = false;
+	private static final int PAGE_NUMBER = 50;
 
 	public CategoryDetailContentFragment(Activity activity, BaseMenuFragment menuFragment, int categoryId) {
 		super(activity, menuFragment);
@@ -88,7 +89,7 @@ public class CategoryDetailContentFragment extends BaseContentFragment {
 			String id = params[0];
 			int page = Integer.parseInt(params[1]);
 			try {
-				return mGameInfoHub.obtainChildren(AppPlatFormConfig.DATA_TYPE_CATEGORY, id, page);
+				return mGameInfoHub.obtainCategotyChildren(id, page, String.valueOf(AppPlatFormConfig.IPLATFORMID), PAGE_NUMBER);
 			} catch (InfoSourceException e) {
 				e.printStackTrace();
 			}

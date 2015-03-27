@@ -71,6 +71,13 @@ public class MemoryInfo implements IGameInfo {
 	}
 
 	@Override
+	public ArrayList<AppEntity> obtainCategotyChildren(String id, int page, String iPlatformId, int number)
+			throws InfoSourceException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public AppEntity obtainItemById(String appId) throws InfoSourceException {
 		// TODO Auto-generated method stub
 		return null;

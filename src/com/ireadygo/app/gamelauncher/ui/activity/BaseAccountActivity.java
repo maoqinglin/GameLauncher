@@ -138,7 +138,6 @@ public class BaseAccountActivity extends BaseGuideActivity {
 			if (mIsResumed) {
 				onLoginFailed(code);
 			}
-			AccountStatusManager.getInstance().clearLoginData();
 			//上报登录失败事件，及登录花费的时间
 			long loginFailedUsedTime = System.currentTimeMillis() - mLoginStartTime;
 			if (loginFailedUsedTime < 0) {

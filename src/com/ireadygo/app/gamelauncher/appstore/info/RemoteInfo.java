@@ -172,7 +172,7 @@ public class RemoteInfo implements IGameInfo {
 	}
 
 	/*
-	 * 获取分类下的应用列表
+	 * 获取合集或分类标签下的应用列表
 	 * 参数：分类的ID
 	 */
 
@@ -180,11 +180,48 @@ public class RemoteInfo implements IGameInfo {
 	public ArrayList<AppEntity> obtainChildren(int dataType, String id,int page) throws InfoSourceException {
 		ResultVO resultVO = null;
 		try {
-			if (AppPlatFormConfig.DATA_TYPE_CATEGORY == dataType) {
-				resultVO = mAppPlatFormService.getAppListByCategory(Long.parseLong(id), page);
-			} else if (AppPlatFormConfig.DATA_TYPE_COLLECTION == dataType) {
+			if (AppPlatFormConfig.DATA_TYPE_COLLECTION == dataType) {
 				resultVO = mAppPlatFormService.getAppListByCollection(Long.parseLong(id), page);
 			}
+			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
+				StringBuffer appIds = new StringBuffer();
+				HashMap<String, AppEntity> cachedChildrenList = new HashMap<String, AppEntity>();
+				ArrayList<AppEntity> result = new ArrayList<AppEntity>();
+				if (resultVO.getObj() != null) {
+					PageListVO pageListVO = (PageListVO)resultVO.getObj();
+					List<AppListItemVO> appListItemVOs = (List<AppListItemVO>)pageListVO.getList();
+					for (AppListItemVO appListItemVO : appListItemVOs) {
+						AppEntity app = listItemToAppEntity(appListItemVO);
+						result.add(app);
+						appIds.append(app.getAppId()).append(",");
+						cachedChildrenList.put(app.getAppId(), app);
+					}
+				}
+				return result;
+			}
+			String errMsg = processRemoteResultCode(resultVO.getCode());
+			throw new InfoSourceException(errMsg);
+		} catch (InfoSourceException e) {
+			throw e;
+		} catch (HttpStatusCodeException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_NETWORK_ERROR,e.getCause());
+		} catch (JSONException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_CLIENT_ERROR,e.getCause());
+		} catch (Exception e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_ERROR,e.getCause());
+		}
+	}
+
+	/*
+	 * 获取分类下的应用列表
+	 * 参数：分类的ID
+	 */
+
+	@Override
+	public ArrayList<AppEntity> obtainCategotyChildren(String id,int page,String iPlatformId, int number) throws InfoSourceException {
+		ResultVO resultVO = null;
+		try {
+			resultVO = mAppPlatFormService.getAppListByCategory(Long.parseLong(id), page,iPlatformId,number);
 			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
 				StringBuffer appIds = new StringBuffer();
 				HashMap<String, AppEntity> cachedChildrenList = new HashMap<String, AppEntity>();
@@ -1111,6 +1148,7 @@ public class RemoteInfo implements IGameInfo {
 	private CategoryInfo categoryItemToCategory(AppCategoryVO item) {
 		return new CategoryInfo(
 				item.getICategoryId(), 
+				item.getIContains(),
 				item.getSCategoryName(),
 				item.getSCategoryDesc(),
 				item.getCPicUrl(),

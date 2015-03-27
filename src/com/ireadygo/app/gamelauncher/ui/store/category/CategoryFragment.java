@@ -55,7 +55,6 @@ public class CategoryFragment extends BaseContentFragment {
 		mMultiListView.setAdapter(mAdapter);
 		bindPagingIndicator(mMultiListView);
 		loadData(1);
-		loadCategoryItemsCount();
 		setEmptyView(mMultiListView, R.string.store_empty_title, View.GONE, 0);
 	}
 
@@ -92,44 +91,18 @@ public class CategoryFragment extends BaseContentFragment {
 			if (isCancelled() || result == null || result.isEmpty()) {
 				return;
 			}
-		}
-	}
-
-	private class LoadItemCountTask extends AsyncTask<Void, Void, Integer> {
-
-		private InternalCategoryInfo info;
-
-		public LoadItemCountTask(InternalCategoryInfo categoryInfo) {
-			info = categoryInfo;
-		}
-
-		@Override
-		protected Integer doInBackground(Void... params) {
-			try {
-				return GameInfoHub.instance(getRootActivity()).obtainChildrenCount(1, info.categoryId + "");
-			} catch (InfoSourceException e) {
-				e.printStackTrace();
+			
+			List<InternalCategoryInfo> infoList = (List<InternalCategoryInfo>) mAdapter.getData();
+			for(CategoryInfo categoryInfo : result){
+				for(InternalCategoryInfo info :infoList){
+					if(categoryInfo.getCategoryId() == info.categoryId){
+						info.count = categoryInfo.getAppCounts();
+						postUpdateItemCount();
+						mAllItemCount = mAllItemCount + categoryInfo.getAppCounts();
+					}
+				}
 			}
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Integer result) {
-			if (isCancelled() || result == null) {
-				return;
-			}
-			info.count = result;
-			postUpdateItemCount();
-			mAllItemCount = mAllItemCount + result;
 			mTitleLayout.setCount(mAllItemCount);
-		}
-	}
-
-	private void loadCategoryItemsCount() {
-		List<InternalCategoryInfo> infoList = (List<InternalCategoryInfo>) mAdapter.getData();
-		for (InternalCategoryInfo info : infoList) {
-			LoadItemCountTask task = new LoadItemCountTask(info);
-			task.execute();
 		}
 	}
 

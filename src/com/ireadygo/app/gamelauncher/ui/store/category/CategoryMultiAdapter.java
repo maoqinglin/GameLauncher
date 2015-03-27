@@ -34,7 +34,7 @@ public class CategoryMultiAdapter implements HMultiBaseAdapter {
 	/** 体育竞技 **/
 	public static final int CATEGORY_ID_SPT = 5;
 	/** 单机游戏 **/
-	public static final int CATEGORY_ID_OLG = 6;
+	public static final int CATEGORY_ID_OLG = 35;
 	/** 经营策略 **/
 	public static final int CATEGORY_ID_SIM = 7;
 	/** 竞技飞行 **/

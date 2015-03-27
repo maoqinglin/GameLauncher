@@ -53,13 +53,14 @@ public class AccountManager {
 		SnailCommplatform.getInstance().snailInit(activity, GameLauncherConfig.getChennelId(), listener);
 	}
 
-	public void init(Activity activity,String channelId) {
+	public void init(final Activity activity,String channelId) {
 		SnailCommplatform.getInstance().snailInit(activity, channelId, new InitCompleteListener() {
 			@Override
 			public void onComplete(int arg0) {
 				switch (arg0) {
 				case OnInitCompleteListener.FLAG_NORMAL:
 					mIsInitSuccess = true;
+					AccountStatusManager.getInstance().setLoginData(getLoginUni(activity), getSessionId(activity));
 					break;
 				case OnInitCompleteListener.FLAG_FORCE_CLOSE:
 				default:
