@@ -20,12 +20,12 @@ public class GameLauncherConfig {
 	public static final boolean IGNORE_NETWORTYPE = OBOX_VERSION;//是否忽略网络类型，主机上不需要关注网络类型，掌机需要关注
 	public static final boolean SLOT_ENABLE = !OBOX_VERSION;//是否启用卡槽
 
-	public static final long CATEGORY_CACHED_EXPIRED_TIME = 1 * 24 * 60 * 60 * 1000;//1 day
-	public static final long COLLECTION_CACHED_EXPIRED_TIME = 4 * 60 * 60 * 1000;//4 hours
-	public static final long BANNER_CACHED_EXPIRED_TIME = 2 * 60 * 60 *  1000;//2 hours
-	public static final long KEYWORD_CACHED_EXPIRED_TIME = 1 * 24 * 60 * 60 * 1000;//1 day
-	public static final long FEECONFIG_CACHED_EXPIRED_TIME = 1 * 24 * 60 * 60 * 1000;//1 day
-	public static final long CATEGORY_ITEM_COUNT_CACHED_EXPIRED_TIME = 7 * 24 * 60 * 60 * 1000;//7 day
+	public static final long CATEGORY_CACHED_EXPIRED_TIME = 10 * 60 * 1000;//10min
+	public static final long COLLECTION_CACHED_EXPIRED_TIME = 10 * 60 * 1000;
+	public static final long BANNER_CACHED_EXPIRED_TIME = 10 * 60 *  1000;
+	public static final long KEYWORD_CACHED_EXPIRED_TIME = 10 * 60 * 1000;
+	public static final long FEECONFIG_CACHED_EXPIRED_TIME = 10 * 60 * 1000;
+	public static final long CATEGORY_ITEM_COUNT_CACHED_EXPIRED_TIME = 10 * 60 * 1000;
 
 	public static final String PHONE_TYPE = "ANDROID";
 	public static final String GETUI_CLIENTID = PushManager.getInstance().getClientid(GameLauncherApplication.getApplication());

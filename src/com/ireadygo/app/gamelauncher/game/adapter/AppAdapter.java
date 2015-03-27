@@ -68,8 +68,8 @@ public class AppAdapter implements HMultiBaseAdapter {
 	public void bindView(final int position, View convertView) {
 		convertView.setVisibility(View.VISIBLE);
 		final AppItemHolder holder = ((AppItem) convertView).getHolder();
-		if (null != holder && !appList.isEmpty()) {
-			if (appList.get(position).getAppIcon() != null) {
+		if (null != holder && !appList.isEmpty() && position < appList.size()) {
+			if (appList.get(position) != null && appList.get(position).getAppIcon() != null) {
 				holder.icon.setImageBitmap(appList.get(position).getAppIcon());
 				holder.title.setText(appList.get(position).getTitle().toString().trim());
 				if (appList.get(position).getTitle().toString().contains("太极熊猫")) {

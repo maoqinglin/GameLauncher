@@ -1278,12 +1278,10 @@ public class GameLauncherModel{
 						return;
 					}
 					appInfos.add(info);
-					Log.d("lmq", "dataSync--appInfos-isAdd = " + info);
 				} else if (info.appType == Favorites.APP_TYPE_GAME) {
 					if (dataFilter(gameInfos, info)) {
 						return;
 					}
-					Log.d("lmq", "dataSync---isAdd = " + info);
 					gameInfos.add(info);
 				}
 			} else {

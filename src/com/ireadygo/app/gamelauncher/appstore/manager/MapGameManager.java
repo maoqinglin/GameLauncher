@@ -11,6 +11,7 @@ import android.content.pm.PackageInfo;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.ireadygo.app.gamelauncher.GameLauncherConfig;
 import com.ireadygo.app.gamelauncher.appstore.data.GameData;
@@ -233,17 +234,6 @@ public class MapGameManager {
 					GameLauncherAppState.getInstance(mContext).getModel()
 					.updateInstalledAppInfo(app.getPkgName(), checkPkgDisplayState(app.getPkgName()),Favorites.APP_TYPE_GAME);
 				}
-			}
-			for (AppEntity app : gameList) {
-				if (results != null 
-						&& !TextUtils.isEmpty(app.getAppId())
-						&&results.contains(Long.parseLong(app.getAppId()))) {
-					continue;
-				}
-				//未匹配上的应用，设置不在免商店的标志
-				mGameData.updateInFreeStoreFlag(app.getPkgName(), AppEntity.NOT_IN_FREE_STORE);
-				GameLauncherAppState.getInstance(mContext).getModel()
-				.updateInstalledAppInfo(app.getPkgName(), checkPkgDisplayState(app.getPkgName()),Favorites.APP_TYPE_APPLICATION);
 			}
 			return true;
 		} catch (InfoSourceException e) {

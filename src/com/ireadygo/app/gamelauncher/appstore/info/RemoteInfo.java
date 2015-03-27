@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.ireadygo.app.gamelauncher.aidl.rentfree.AppTimeUploadResultItem;
 import com.ireadygo.app.gamelauncher.appstore.data.GameData;
@@ -130,8 +131,8 @@ public class RemoteInfo implements IGameInfo {
 	private static final String KEY_REQ_TIME = "dTime";
 	private static final String KEY_SLOT_NUM = "iSlotNum";
 	private static final String VALUE_NEED_UPDATE = "1";
-	private static final String TYPE_APP = "1";
-	private static final String TYPE_GAME = "2";
+	private static final String TYPE_GAME = "1";
+	private static final String TYPE_APP = "2";
 	private static final String TYPE_ALL = "";
 
 	public RemoteInfo(Context context) {
