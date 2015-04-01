@@ -367,6 +367,7 @@
     <string name="device_active_failed">Device active failed!Please confirm network connected and restart!</string>
     <string name="device_bind_account_success">Device bind account success!</string>
     <string name="device_bind_account_failed">Device bind account failed,please login again!</string>
+    <string name="device_bind_account_repeat">Device has bond another account!</string>
     <string name="user_identity_overdue">Account expired,please login again!</string>
 
     <!-- 按键提示层 -->

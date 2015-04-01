@@ -363,6 +363,7 @@
     <string name="device_active_failed">设备激活失败，请确保设备连接网络，并重启设备再次激活！</string>
     <string name="device_bind_account_success">帐号绑定设备成功！</string>
     <string name="device_bind_account_failed">帐号绑定设备失败，请重新登陆帐号！</string>
+    <string name="device_bind_account_repeat">设备已绑定其他免帐号！</string>
     <string name="shortcut_confirm">确定</string>
     <string name="shortcut_detail">详情</string>
     <string name="shortcut_back">取消</string>

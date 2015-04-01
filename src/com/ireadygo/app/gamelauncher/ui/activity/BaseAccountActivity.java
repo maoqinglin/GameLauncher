@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.view.InflateException;
 import android.widget.Toast;
 
 import com.ireadygo.app.gamelauncher.GameLauncherConfig;
@@ -231,12 +232,14 @@ public class BaseAccountActivity extends BaseGuideActivity {
 	}
 
 	private class BindDeviceAccountTask extends AsyncTask<Void, Void, Integer> {
+		private InfoSourceException err;
 		@Override
 		protected Integer doInBackground(Void... params) {
 			try {
 				GameInfoHub.instance(BaseAccountActivity.this).bindAccount();
 				return SUCCESS_CODE;
 			} catch (InfoSourceException e) {
+				err = e;
 				e.printStackTrace();
 			}
 			return FAILED_CODE;
@@ -248,7 +251,11 @@ public class BaseAccountActivity extends BaseGuideActivity {
 				Toast.makeText(BaseAccountActivity.this,getString(R.string.device_bind_account_success), Toast.LENGTH_SHORT).show();
 				PreferenceUtils.setDeviceBindAccount(AccountManager.getInstance().getAccount(BaseAccountActivity.this));
 			} else {
-				Toast.makeText(BaseAccountActivity.this,getString(R.string.device_bind_account_failed), Toast.LENGTH_SHORT).show();
+				if (err != null && InfoSourceException.MSG_BOX_HAS_BIND_OTHER_ACCOUNT.equals(err.getMessage())) {
+					Toast.makeText(BaseAccountActivity.this,getString(R.string.device_bind_account_repeat), Toast.LENGTH_SHORT).show();
+				} else {
+					Toast.makeText(BaseAccountActivity.this,getString(R.string.device_bind_account_failed), Toast.LENGTH_SHORT).show();
+				}
 			}
 		}
 	}
