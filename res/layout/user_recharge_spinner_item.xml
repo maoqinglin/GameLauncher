@@ -9,7 +9,7 @@
         android:layout_width="@dimen/user_recharge_spinner_item_width"
         android:layout_height="@dimen/user_recharge_spinner_item_height"
         android:paddingLeft="@dimen/user_recharge_spinner_item_margin_left"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:textSize="@dimen/user_recharge_spinner_item_text_size"
         android:textColor="@android:color/black" />
 

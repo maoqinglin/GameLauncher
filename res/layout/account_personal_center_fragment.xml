@@ -10,22 +10,22 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/user_info_margin_top" >
 
-        <FrameLayout 
+        <FrameLayout
             android:id="@+id/photo_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:addStatesFromChildren="true"
-            android:padding="@dimen/user_photo_padding"
             android:background="@drawable/user_photo_bg_selector"
-            >
-        <ImageView
-            android:id="@+id/personal_photo"
-            android:layout_width="@dimen/user_photo_width"
-            android:layout_height="@dimen/user_photo_height"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:nextFocusDown="@+id/personal_sex"
-            android:src="@drawable/account_photo_default" />
+            android:padding="@dimen/user_photo_padding" >
+
+            <ImageView
+                android:id="@+id/personal_photo"
+                android:layout_width="@dimen/user_photo_width"
+                android:layout_height="@dimen/user_photo_height"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:nextFocusDown="@+id/personal_sex"
+                android:src="@drawable/account_photo_default" />
         </FrameLayout>
 
         <TextView
@@ -81,24 +81,40 @@
             android:layout_height="wrap_content"
             android:text="@string/personal_sex" />
 
-        <Spinner
-            android:id="@+id/personal_sex"
-            style="@style/AccountSpinner"
+        <RelativeLayout
+            android:id="@+id/personal_sex_layout"
             android:layout_width="@dimen/user_edit_width"
             android:layout_height="@dimen/user_edit_height"
             android:layout_alignLeft="@id/sex_title"
             android:layout_below="@id/sex_title"
             android:layout_marginTop="@dimen/user_nickname_margin_top"
-            android:background="@drawable/user_edit_bg_selector"
-            android:gravity="center_vertical"
-            android:nextFocusUp="@+id/personal_photo" />
+            android:gravity="center_vertical" >
+
+            <Spinner
+                android:id="@+id/personal_sex"
+                style="@style/AccountSpinner"
+                android:layout_width="@dimen/user_edit_width"
+                android:layout_height="@dimen/user_edit_height"
+                android:background="@drawable/user_edit_bg_selector"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:nextFocusUp="@+id/personal_photo" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/user_sex_arrows_margin_right"
+                android:src="@drawable/user_spinner_down_arrows" />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/personal_modify_pwd"
             style="@style/TextLabelMiddleLight"
             android:layout_width="@dimen/user_btn_width"
             android:layout_height="@dimen/user_btn_height"
-            android:layout_alignBottom="@+id/personal_sex"
+            android:layout_alignBottom="@+id/personal_sex_layout"
             android:layout_alignParentRight="true"
             android:background="@drawable/user_btn_bg_selector"
             android:focusable="true"

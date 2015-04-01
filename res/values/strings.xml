@@ -213,6 +213,7 @@
     <string name="user_center">Personal Center</string>
     <string name="user_recharge">Recharge</string>
     <string name="user_notice">Notice</string>
+    <string name="user_recharge_input_hint">请输入序列号</string>
 
     <!-- 免账号 -->
     <string name="account_mywealth">Assets</string>

@@ -216,6 +216,7 @@
     <string name="user_center">个人中心</string>
     <string name="user_recharge">充值</string>
     <string name="user_notice">公告</string>
+    <string name="user_recharge_input_hint">请输入序列号</string>
 
     <!-- 免账号 -->
     <string name="account_mywealth">我的资产</string>

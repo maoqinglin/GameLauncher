@@ -336,6 +336,7 @@ public class UserFragmentA extends BaseContentFragment {
 		@Override
 		public void onFocusChange(View v, boolean hasFocus) {
 			if (hasFocus) {
+				v.bringToFront();
 				if (mSelectedItem != null) {
 					animatorToUnselected(mSelectedItem);
 					mSelectedItem = null;

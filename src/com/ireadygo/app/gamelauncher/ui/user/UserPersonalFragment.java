@@ -105,18 +105,18 @@ public class UserPersonalFragment extends BaseContentFragment implements OnClick
 		mNicknameView = (EditText) view.findViewById(R.id.personal_nickname);
 
 		mSexSpinner = (Spinner) view.findViewById(R.id.personal_sex);
-		mSexSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-
-			@Override
-			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-				mSexSpinner.setSelection(position);
-			}
-
-			@Override
-			public void onNothingSelected(AdapterView<?> parent) {
-
-			}
-		});
+//		mSexSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+//
+//			@Override
+//			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//				mSexSpinner.setSelection(position);
+//			}
+//
+//			@Override
+//			public void onNothingSelected(AdapterView<?> parent) {
+//
+//			}
+//		});
 
 		mModifyPwdBtn = view.findViewById(R.id.personal_modify_pwd);
 		mModifyPwdBtn.setOnClickListener(this);
@@ -454,6 +454,7 @@ public class UserPersonalFragment extends BaseContentFragment implements OnClick
 			TextView textview = (TextView) view.findViewById(R.id.accountAgeItem);
 			view.setOnClickListener(null);
 			textview.setTextAppearance(getRootActivity(), R.style.AccountAgeScopeSpinner);
+			view.setClickable(false);
 			return view;
 		}
 	}

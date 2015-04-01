@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/personal_age_item_margin_right"
         android:contentDescription="@null"
-        android:src="@drawable/icon_ticket_selected"
+        android:src="@drawable/user_recharge_spinner_item_selected_icon"
         android:visibility="invisible" />
 
 </LinearLayout>

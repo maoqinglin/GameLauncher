@@ -171,7 +171,7 @@
     </style>
 
     <style name="AccountAgeScopeSpinner">
-        <item name="android:clickable">true</item>
+        <item name="android:clickable">false</item>
         <item name="android:textSize">42sp</item>
     </style>
 

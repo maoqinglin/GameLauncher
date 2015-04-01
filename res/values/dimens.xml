@@ -94,6 +94,7 @@
     <dimen name="user_nickname_padding_left">30dp</dimen>
     <dimen name="user_sex_layout_margin_top">96dp</dimen>
     <dimen name="user_sex_margin_top">96dp</dimen>
+    <dimen name="user_sex_arrows_margin_right">48dp</dimen>
     <dimen name="user_btn_width">480dp</dimen>
     <dimen name="user_btn_height">112dp</dimen>
     <dimen name="user_save_layout_margin_top">146dp</dimen>
@@ -103,7 +104,7 @@
     <dimen name="user_recharge_spinner_item_margin_right">36dp</dimen>
     <dimen name="user_recharge_spinner_item_margin_left">36dp</dimen>
     <dimen name="user_recharge_spinner_item_height">144dp</dimen>
-    <dimen name="user_recharge_spinner_item_width">580dp</dimen>
+    <dimen name="user_recharge_spinner_item_width">540dp</dimen>
     <dimen name="user_recharge_spinner_item_text_size">48sp</dimen>
     <dimen name="user_recharge_margin_top">244dp</dimen>
     <dimen name="user_recharge_rabbit_currency_margin_top">24dp</dimen>
