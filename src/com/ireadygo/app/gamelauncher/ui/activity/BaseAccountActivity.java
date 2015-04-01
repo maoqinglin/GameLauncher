@@ -1,14 +1,11 @@
 package com.ireadygo.app.gamelauncher.ui.activity;
 
-import android.R.integer;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.TextUtils;
-import android.view.InflateException;
 import android.widget.Toast;
 
 import com.ireadygo.app.gamelauncher.GameLauncherConfig;

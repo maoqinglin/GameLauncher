@@ -47,6 +47,9 @@
             android:layout_height="@dimen/mygame_app_name_height"
             android:gravity="center"
             android:layout_gravity="center_horizontal"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
             android:scaleX="0.8"
             android:scaleY="0.8" />
     </LinearLayout>
