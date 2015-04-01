@@ -147,7 +147,7 @@ public class SettingsFragment extends BaseContentFragment {
 						}
 
 						if(SettingsIntentAction.AP.equals(action)
-								|| SettingsIntentAction.RESET.equals(action)) {
+								|| SettingsIntentAction.NETWORK.equals(action)) {
 							skipSettings(action);
 							return;
 						}
@@ -207,14 +207,14 @@ public class SettingsFragment extends BaseContentFragment {
 		public static final String ABOUT = Settings.ACTION_DEVICE_INFO_SETTINGS;
 		public static final String TIME = Settings.ACTION_DATE_SETTINGS;
 		public static final String KEYBOARD = Settings.ACTION_INPUT_METHOD_SETTINGS;
+		public static final String RESET = Settings.ACTION_PRIVACY_SETTINGS;
 
 		public static final String CONTROLLER = "android.settings.CONTROLLER_SETTINGS";
 		public static final String WALL_PAPER = Intent.ACTION_SET_WALLPAPER;
 		public static final String HDMI = "android.settings.HDMI_SETTINGS";
 		public static final String BRIGHTNESS = "android.intent.action.SHOW_BRIGHTNESS_DIALOG";
-		public static final String RESET = "com.android.settings.Settings$PrivacySettingsActivity";
 		public static final String DISPLAY = "com.nvidia.settings.MIRACAST_SETTINGS";
-		public static final String NETWORK = Settings.ACTION_WIRELESS_SETTINGS;
+		public static final String NETWORK = "com.android.settings.Settings$EthernetSettingsActivity";
 		public static final String AP = "com.android.settings.Settings$TetherSettingsActivity";
 	}
 
@@ -254,21 +254,4 @@ public class SettingsFragment extends BaseContentFragment {
 		}
 	}
 
-	private void setEthernet(Context context) {
-		/*
-		Intent intent = new Intent();
-//		intent.setClassName("com.android.settings", "com.android.settings.Settings");
-		ComponentName cm = new ComponentName("com.android.settings","com.android.settings.SubSettings");
-		intent.setComponent(cm);
-		intent.setAction(Intent.ACTION_MAIN);
-		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-		intent.putExtra(PreferenceActivity.EXTRA_SHOW_FRAGMENT, "com.android.settings.ethernet.EthernetSettings");
-		try {
-			mActivity.startActivity(intent);
-		} catch (ActivityNotFoundException e) {
-			Toast.makeText(mActivity, "Activity is Not found!", Toast.LENGTH_SHORT).show();
-			e.printStackTrace();
-		}*/
-		
-	}
 }

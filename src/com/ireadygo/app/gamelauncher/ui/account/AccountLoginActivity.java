@@ -70,12 +70,6 @@ public class AccountLoginActivity extends BaseAccountActivity {
 	}
 	
 	@Override
-	protected void onLoginSuccess() {
-		finish();
-		super.onLoginSuccess();
-	}
-
-	@Override
 	public boolean onSunKey() {
 		if (mLoginBtn.hasFocus()) {
 			onClick(mLoginBtn);
