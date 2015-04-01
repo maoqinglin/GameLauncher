@@ -11,7 +11,8 @@
         android:id="@+id/background"
         android:layout_width="@dimen/mygame_app_width"
         android:layout_height="@dimen/mygame_app_bg_height"
-        android:src="@drawable/corner_app_item_bg_shape" />
+        android:duplicateParentState="true"
+        android:src="@drawable/item_background_rectangle_selector" />
 
     <LinearLayout
         android:layout_width="@dimen/mygame_app_width"
