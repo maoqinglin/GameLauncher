@@ -36,13 +36,33 @@
             android:text="@string/recharge_rubbit_currency" />
 
         <TextView
-            android:id="@+id/snail_point"
+            android:id="@+id/rabbit_ticket"
             style="@style/TextLabelExtraBigLight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/rabbit_currency"
             android:layout_marginLeft="@dimen/user_recharge_snail_point_margin_left"
-            android:layout_toRightOf="@id/rabbit_currency"
+            android:layout_alignLeft="@id/rabbit_currency"
+            android:text="0"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/rabbit_ticket_title"
+            style="@style/TextLabelExtraSmallLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/rabbit_ticket"
+            android:layout_below="@+id/rabbit_ticket"
+            android:text="@string/rabbit_ticket" />
+
+        <TextView
+            android:id="@+id/snail_point"
+            style="@style/TextLabelExtraBigLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/rabbit_ticket"
+            android:layout_marginLeft="@dimen/user_recharge_snail_point_margin_left"
+            android:layout_alignLeft="@id/rabbit_ticket"
             android:text="0"
             android:textStyle="bold" />
 
@@ -64,9 +84,9 @@
             android:layout_alignParentRight="true"
             android:background="@drawable/user_btn_bg_selector"
             android:focusable="true"
-            android:nextFocusDown="@+id/gift_certificate_recharge_btn"
             android:focusableInTouchMode="true"
             android:gravity="center"
+            android:nextFocusDown="@+id/gift_certificate_recharge_btn"
             android:text="@string/recharge_rubbit_recharge" />
     </RelativeLayout>
 
@@ -105,8 +125,8 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:gravity="center"
-                android:nextFocusUp="@+id/rabbit_recharge"
                 android:nextFocusLeft="@+id/account_menu_recharge"
+                android:nextFocusUp="@+id/rabbit_recharge"
                 android:text="@string/snail_point" />
 
             <ImageView
@@ -126,10 +146,10 @@
             android:layout_marginTop="@dimen/user_recharge_gift_certificate_recharge_margin_top"
             android:background="@drawable/user_edit_bg_selector"
             android:focusable="true"
-            android:nextFocusLeft="@+id/account_menu_recharge"
             android:focusableInTouchMode="true"
             android:hint="@string/user_recharge_input_hint"
-            android:textColorHint="@color/white_first_transparency" />
+            android:nextFocusLeft="@+id/account_menu_recharge"
+            android:textColorHint="@color/white_second_transparency" />
 
         <TextView
             android:id="@+id/gift_certificate_recharge_btn"
@@ -141,8 +161,8 @@
             android:background="@drawable/user_btn_bg_selector"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:nextFocusUp="@+id/rabbit_recharge"
             android:gravity="center"
+            android:nextFocusUp="@+id/rabbit_recharge"
             android:text="@string/recharge_ticket_recharge" />
     </RelativeLayout>
 

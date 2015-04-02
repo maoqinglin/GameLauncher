@@ -214,6 +214,7 @@
     <string name="user_recharge">充值</string>
     <string name="user_notice">公告</string>
     <string name="user_recharge_input_hint">請輸入序列號</string>
+    <string name="game_ticket_title">贈送蝸牛點券余額：%1$d\t蝸牛點券</string>
 
     <!-- 免帳號 -->
     <string name="account_mywealth">我的資產</string>
@@ -276,7 +277,7 @@
     <string name="recharge_rubbit_currency">兔兔幣</string>
     <string name="recharge_rubbit_ticket">兔兔禮券</string>
     <string name="recharge_rubbit_recharge">兔兔幣充值</string>
-    <string name="recharge_ticket_recharge">禮券充值</string>
+    <string name="recharge_ticket_recharge">立即充值</string>
     <string name="recharge_ticket_type_prompt">請選擇禮券類型</string>
     <string name="recharge_ticket_code_prompt">請輸入禮券碼</string>
     <string name="recharge_confirm">確認充值</string>
@@ -317,6 +318,7 @@
     <string name="recharge_account_traiff_recharge">資費充值</string>
     <string name="my_pass">我的通行證：</string>
     <string name="snail_point">遊戲點券</string>
+    <string name="rabbit_ticket">兔兔禮券</string>
     <string name="recharge_snail_point_invalid">主機代金券無效</string>
     <string name="recharge_snail_point_used">主機代金券已經被使用</string>
     <string name="recharge_snail_point_has_bind">主機已經綁定代金券</string>

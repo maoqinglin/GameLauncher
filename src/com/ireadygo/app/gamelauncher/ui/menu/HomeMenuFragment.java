@@ -46,14 +46,15 @@ public class HomeMenuFragment extends BaseMenuFragment {
 		mAppMenu = (MenuItem) view.findViewById(R.id.menu_app);
 		mSettingsMenu = (MenuItem) view.findViewById(R.id.menu_settings);
 		
-		addMenuItem(mUserMenu, getUserFragment());
+//		addMenuItem(mUserMenu, getUserFragment());
+		addMenuItem(mUserMenu, new UserFragmentC(getRootActivity(), this));
 		addMenuItem(mGameMenu, new GameFragment(getRootActivity(), this));
 		addMenuItem(mStoreMenu, new StoreFragment(getRootActivity(), this));
 		addMenuItem(mAppMenu, new AppFragment(getRootActivity(), this));
 		addMenuItem(mSettingsMenu, new SettingsFragment(getRootActivity(), this));
 
-		LoadOBoxTypeTask task = new LoadOBoxTypeTask();
-		task.execute();
+//		LoadOBoxTypeTask task = new LoadOBoxTypeTask();
+//		task.execute();
 		return view;
 	}
 

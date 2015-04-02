@@ -81,7 +81,7 @@
     <dimen name="user_option_margin_right">20dp</dimen>
     <dimen name="user_option_title_margin_bottom">20dp</dimen>
     <dimen name="user_content_margin_left">70dp</dimen>
-    <dimen name="user_content_width">1248dp</dimen>
+    <dimen name="user_content_width">1282dp</dimen>
     <dimen name="user_info_margin_top">190dp</dimen>
     <dimen name="user_photo_width">186dp</dimen>
     <dimen name="user_photo_height">186dp</dimen>
@@ -108,7 +108,7 @@
     <dimen name="user_recharge_spinner_item_text_size">48sp</dimen>
     <dimen name="user_recharge_margin_top">244dp</dimen>
     <dimen name="user_recharge_rabbit_currency_margin_top">24dp</dimen>
-    <dimen name="user_recharge_snail_point_margin_left">150dp</dimen>
+    <dimen name="user_recharge_snail_point_margin_left">260dp</dimen>
     <dimen name="user_recharge_rabbit_recharge_width">482dp</dimen>
 	<dimen name="user_recharge_rabbit_recharge_height">112dp</dimen>
 	<dimen name="user_recharge_line_margin_top">90dp</dimen>

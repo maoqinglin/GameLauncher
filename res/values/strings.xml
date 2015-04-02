@@ -201,6 +201,7 @@
     <string name="personal_account">Account：%1$s</string>
     <string name="personal_account_unlogin">Has not login</string>
     <string name="user_not_bind_account">(Not bind account)</string>
+    <string name="game_ticket_title">Game Ticket:%1$d</string>
     <string name="user_alipay_account_bind"><u>Bind Alipay Account</u></string>
     <string name="user_alipay_account_bind_error">Get alipay account URL error!</string>
     <string name="user_play_time_title">Play Time of this Month:</string>
@@ -213,7 +214,7 @@
     <string name="user_center">Personal Center</string>
     <string name="user_recharge">Recharge</string>
     <string name="user_notice">Notice</string>
-    <string name="user_recharge_input_hint">请输入序列号</string>
+    <string name="user_recharge_input_hint">Please enter sequence number</string>
 
     <!-- 免账号 -->
     <string name="account_mywealth">Assets</string>
@@ -277,7 +278,7 @@
     <string name="recharge_rubbit_currency">Rabbit Coin</string>
     <string name="recharge_rubbit_ticket">Rabbit Certificate</string>
     <string name="recharge_rubbit_recharge">Rabbit Deposit</string>
-    <string name="recharge_ticket_recharge">Certificate Recharge</string>
+    <string name="recharge_ticket_recharge">Recharge</string>
     <string name="recharge_ticket_type_prompt">Certificate Type</string>
     <string name="recharge_ticket_code_prompt">Certificate Number</string>
     <string name="recharge_confirm">Confirm</string>
@@ -317,7 +318,8 @@
     <string name="recharge_arm_ticket_recharge_title">Slot Certificate Deposit</string>
     <string name="recharge_account_traiff_recharge">Deposit</string>
     <string name="my_pass">My Pass:</string>
-    <string name="snail_point">Snail Point</string>
+    <string name="rabbit_ticket">Rabbit Ticket</string>
+    <string name="snail_point">Game Ticket</string>
     <string name="recharge_snail_point_invalid">OBox ticket is invalid</string>
     <string name="recharge_snail_point_used">The OBox ticket is already in use</string>
     <string name="recharge_snail_point_has_bind">The OBox has binding ticket</string>
