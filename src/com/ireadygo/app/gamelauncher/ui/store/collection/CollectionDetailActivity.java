@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -43,16 +42,17 @@ public class CollectionDetailActivity extends BaseActivity implements
 	private long mPageIndex = 1;
 	private boolean mLoadingData = false;
 	private long mCollectionId = -1;
+	private int mCollectionGames = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.store_collection_detail_activity);
 		mGameInfoHub = GameInfoHub.instance(this);
-		mTitleLayout = (StatisticsTitleView) findViewById(R.id.title_layout);
-		mTitleLayout.setTitle(R.string.collection_detail_title_prompt);
-
-		mMultiListView = (HMultiListView) findViewById(R.id.collection_detail_list);
+		mTitleLayout = (StatisticsTitleView)findViewById(R.id.title_layout);
+		mTitleLayout.setTitle(R.string.store_detail_title_prompt);
+		
+		mMultiListView = (HMultiListView)findViewById(R.id.collection_detail_list);
 		mAdapter = new StoreAppMultiAdapter(this, mMultiListView, mApps);
 		mMultiListView.setAdapter(mAdapter);
 
@@ -83,6 +83,27 @@ public class CollectionDetailActivity extends BaseActivity implements
 			}
 		});
 
+		mCollectionGames = getIntent().getIntExtra(CollectionFragment.EXTRA_COLLECTION_GAMES, 0);
+		if(mCollectionGames > 0){
+			mTitleLayout.setCount(mCollectionGames);
+		}
+		// mMultiListView.setOnScrollListener(new OnScrollListener() {
+		//
+		// @Override
+		// public void onScrollStateChanged(AbsHListView view, int scrollState)
+		// {
+		//
+		// }
+		//
+		// @Override
+		// public void onScroll(AbsHListView view, int firstVisibleItem, int
+		// visibleItemCount, int totalItemCount) {
+		// if (!mLoadingData && firstVisibleItem >= totalItemCount -
+		// visibleItemCount - 1) {
+		// loadCategoryDetail();
+		// }
+		// }
+		// });
 		mMultiListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -141,7 +162,6 @@ public class CollectionDetailActivity extends BaseActivity implements
 			}
 			mApps.addAll(result);
 			mMultiListView.notifyDataSetChanged();
-			mTitleLayout.setCount(mApps.size());
 			mPageIndex++;
 			mLoadingData = false;
 		}

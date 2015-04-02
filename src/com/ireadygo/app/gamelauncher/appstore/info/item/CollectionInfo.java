@@ -6,14 +6,16 @@ public class CollectionInfo extends AppEntity {
 	private String collectionName;
 	private String collectionDes;
 	private String iconUrl;
+	private int appCounts;//游戏数量
 
 	public CollectionInfo(){
 		
 	}
 
-	public CollectionInfo(int collectionId, String collectionName, String collectionDes, String iconUrl,
+	public CollectionInfo(int collectionId, int appCounts, String collectionName, String collectionDes, String iconUrl,
 			String posterIcon, String posterBg) {
 		setCollectionId(collectionId);
+		setAppCounts(appCounts);
 		setCollectionName(collectionName);
 		setCollectionDes(collectionDes);
 		setIconUrl(iconUrl);
@@ -27,6 +29,14 @@ public class CollectionInfo extends AppEntity {
 
 	public void setCollectionId(int collectionId) {
 		this.collectionId = collectionId;
+	}
+
+	public int getAppCounts() {
+		return appCounts;
+	}
+
+	public void setAppCounts(int appCounts) {
+		this.appCounts = appCounts;
 	}
 
 	public String getCollectionName() {

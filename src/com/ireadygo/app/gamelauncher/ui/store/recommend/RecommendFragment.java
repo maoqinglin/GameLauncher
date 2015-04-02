@@ -56,7 +56,7 @@ public class RecommendFragment extends BaseContentFragment {
 		super.initView(view);
 		getOperationTipsLayout().setTipsVisible(TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
 		mTitleLayout = (StatisticsTitleView) view.findViewById(R.id.title_layout);
-		mTitleLayout.setTitle(R.string.favorite_apps_title_prompt);
+		mTitleLayout.setTitle(R.string.recommend_title_prompt);
 		mTitleLayout.setCount(mAppEntities.size());
 
 		mMultiListView = (HMultiListView) view.findViewById(R.id.recommand_list);

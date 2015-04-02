@@ -24,6 +24,7 @@ import com.ireadygo.app.gamelauncher.ui.widget.AbsHListView.OnScrollListener;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
+import com.ireadygo.app.gamelauncher.ui.widget.StatisticsTitleView;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiBaseAdapter;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 import com.snail.appstore.openapi.AppPlatFormConfig;
@@ -37,6 +38,7 @@ public class CategoryDetailContentFragment extends BaseContentFragment {
 	private long mCurrPageIndex = 1;
 	private boolean mLoadingData = false;
 	private static final int PAGE_NUMBER = 50;
+	private StatisticsTitleView mTitleLayout;
 
 	public CategoryDetailContentFragment(Activity activity, BaseMenuFragment menuFragment, int categoryId) {
 		super(activity, menuFragment);
@@ -61,6 +63,8 @@ public class CategoryDetailContentFragment extends BaseContentFragment {
 		mMultiListView.setAdapter(mMultiAdapter);
 		setEmptyView(mMultiListView, R.string.store_empty_title, View.GONE, 0);
 		updateNextFocusIdByCategoryId((int) mCategoryId);
+		mTitleLayout = (StatisticsTitleView) view.findViewById(R.id.title_layout);
+		mTitleLayout.setCount(CategoryDetailActivity.getGamesByCategoryId(mCategoryId));
 		mMultiListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override

@@ -143,6 +143,8 @@ public class SearchFragment extends BaseContentFragment {
 		ImageView searchIntro = (ImageView) view.findViewById(R.id.search_intro);
 		if (!isLocaleCHN()) {
 			searchIntro.setVisibility(View.INVISIBLE);
+		}else{
+			searchIntro.setVisibility(View.VISIBLE);
 		}
 	}
 
@@ -310,7 +312,7 @@ public class SearchFragment extends BaseContentFragment {
 			if (result != null) {
 				mKeywordAdapter.clear();
 				mKeywordAdapter.addAll(result);
-				mKeywordAdapter.getFilter().filter(mKeyword);
+				mKeywordAdapter.getFilter().filter("");//不进行过滤，匹配所有
 				mKeywordAdapter.notifyDataSetChanged();
 			}
 		};

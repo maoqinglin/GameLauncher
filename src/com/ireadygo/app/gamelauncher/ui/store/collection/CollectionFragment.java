@@ -29,6 +29,7 @@ import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 
 public class CollectionFragment extends BaseContentFragment {
 	public static final String EXTRA_COLLECTION_ID = "CollectionId";
+	public static final String EXTRA_COLLECTION_GAMES = "Games";
 	public static final String EXTRA_POSTER_BG = "Poster_bg";
 	private HMultiListView mMultiListView;
 	private HMultiBaseAdapter mAdapter;
@@ -67,7 +68,7 @@ public class CollectionFragment extends BaseContentFragment {
 				if (position >= 0 && position < mCollectionList.size()) {
 					CollectionInfo collection = (CollectionInfo) mAdapter.getItem(position);
 					if (collection != null) {
-						startCollectionDetailActivity(collection.getCollectionId(), collection.getPosterBgUrl());
+						startCollectionDetailActivity(collection.getCollectionId(),collection.getAppCounts(), collection.getPosterBgUrl());
 					}
 				}
 			}
@@ -85,9 +86,10 @@ public class CollectionFragment extends BaseContentFragment {
 		showLoadingProgress();
 	}
 
-	private void startCollectionDetailActivity(long collectionId, String posterUrl) {
+	private void startCollectionDetailActivity(long collectionId, int games, String posterUrl) {
 		Intent intent = new Intent(getRootActivity(), CollectionDetailActivity.class);
 		intent.putExtra(EXTRA_COLLECTION_ID, collectionId);
+		intent.putExtra(EXTRA_COLLECTION_GAMES, games);
 		intent.putExtra(EXTRA_POSTER_BG, posterUrl);
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		SoundPoolManager.instance(getRootActivity()).play(SoundPoolManager.SOUND_ENTER);

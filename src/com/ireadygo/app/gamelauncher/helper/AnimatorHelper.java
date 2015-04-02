@@ -15,7 +15,7 @@ public class AnimatorHelper {
 		float bgPivotX = 0.5f;
 		int width = background.getWidth();
 		int bgHeight = background.getHeight();
-		float icScale = 1.2f;
+		float icScale = 1.1f;
 		int icHeight = icon.getHeight();
 		float titleScale = 1;
 		float bgScaleX = calcBgScaleX(10, width, icScale);

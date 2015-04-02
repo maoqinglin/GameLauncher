@@ -270,6 +270,8 @@ public class LocalInfo implements IGameInfo {
 			CategoryInfo item = categorys.get(i);
 			sb.append(item.getCategoryId())
 			.append(ITEM_INNER_DIVIDER)
+			.append(item.getAppCounts())
+			.append(ITEM_INNER_DIVIDER)
 			.append(item.getCatetoryName())
 			.append(ITEM_INNER_DIVIDER)
 			.append(item.getCategoryDes())
@@ -319,6 +321,8 @@ public class LocalInfo implements IGameInfo {
 			CollectionInfo item = collections.get(i);
 			sb.append(item.getCollectionId())
 			.append(ITEM_INNER_DIVIDER)
+			.append(item.getAppCounts())
+			.append(ITEM_INNER_DIVIDER)
 			.append(item.getCollectionName())
 			.append(ITEM_INNER_DIVIDER)
 			.append(item.getCollectionDes())
@@ -343,13 +347,14 @@ public class LocalInfo implements IGameInfo {
 		ArrayList<CollectionInfo> result = new ArrayList<CollectionInfo>();
 		for (String collection : collectionList) {
 			String[] collectionItems = collection.split(ITEM_INNER_DIVIDER);
-			if (collectionItems.length == 6) {
+			if (collectionItems.length == 7) {
 				CollectionInfo item = new CollectionInfo(Integer.valueOf(collectionItems[0]),
-						collectionItems[1],
+						Integer.valueOf(collectionItems[1]),
 						collectionItems[2],
 						collectionItems[3],
 						collectionItems[4],
-						collectionItems[5]);
+						collectionItems[5],
+						collectionItems[6]);
 				result.add(item);
 			}
 		}

@@ -1,16 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res/com.ireadygo.app.gamelauncher"
     android:layout_width="@dimen/content_fragment_width"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/category_detail_padding_top" >
+    android:orientation="vertical"
+    android:paddingTop="@dimen/content_fragment_padding_top" >
 
-    <com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView
+    <com.ireadygo.app.gamelauncher.ui.widget.StatisticsTitleView
+        android:id="@+id/title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/content_fragment_padding_left"
+        app:stat_title="@string/store_detail_title_prompt" >
+    </com.ireadygo.app.gamelauncher.ui.widget.StatisticsTitleView>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView
         android:id="@+id/category_detail_list"
         style="@style/MultiListNormal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="bottom"
         android:nextFocusLeft="@+id/category_detail_menu_olg" >
     </com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView>
+    </FrameLayout>
 
-</FrameLayout>
+</LinearLayout>

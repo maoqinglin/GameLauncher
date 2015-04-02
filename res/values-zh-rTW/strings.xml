@@ -72,7 +72,7 @@
     <string name="notification_upgrade_little_title">\t個應用可進行更新</string>
 
     <!-- 免商店(store) -->
-    <string name="store_title_prompt">商店內遊戲數量</string>
+    <string name="store_detail_title_prompt">遊戲數量</string>
 
 
     <!-- 免商店-選項(store_options) -->
@@ -93,9 +93,10 @@
     <string name="store_options_settings_short">商店設置</string>
 
     <!-- 免商店-推薦(recommend) -->
-
+	<string name="recommend_title_prompt">推薦遊戲數量</string>
 
     <!-- 免商店-分類(category) -->
+    <string name="category_title_prompt">分類遊戲數量</string>
     <string name="category_item_count_suffix">款</string>
     <string name="category_title_slg">創意休閒</string>
     <string name="category_title_olg">單機精選</string>
@@ -115,8 +116,7 @@
     <string name="category_intro_pzl">鬥地主/棋類/麻將/桌遊/德州撲克/紙牌</string>
 
     <!-- 免商店-合集(collection) -->
-    <string name="collection_title_prompt">商店內合集數量</string>
-    <string name="collection_detail_title_prompt">合集內遊戲數量</string>
+    <string name="collection_title_prompt">合集數量</string>
 
     <!-- 免商店-合集/分類-遊戲列表(collection_detail) -->
 
@@ -430,5 +430,5 @@
     <string name="store_try_refresh">刷新試試</string>
 
     <!-- 常用应用(FavoriteApps) -->
-    <string name="favorite_apps_title_prompt">商店內應用數量</string>
+    <string name="favorite_apps_title_prompt">常用應用數量</string>
 </resources>

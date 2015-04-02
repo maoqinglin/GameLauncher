@@ -1158,7 +1158,8 @@ public class RemoteInfo implements IGameInfo {
 
 	private CollectionInfo collectionItemToCollection(AppCollectionVO item) {
 		return new CollectionInfo(
-				item.getICollectionId(), 
+				item.getICollectionId(),
+				item.getIContains(),
 				item.getSCollectionName(),
 				item.getSCollectionDec(),
 				item.getCPicUrl(),

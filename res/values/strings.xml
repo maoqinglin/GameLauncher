@@ -72,7 +72,7 @@
     <string name="notification_upgrade_little_title">\tapps have new version to be upgraded</string>
 
     <!-- 免商店(store) -->
-    <string name="store_title_prompt">Games:</string>
+    <string name="store_detail_title_prompt">Games</string>
 
 
     <!-- 免商店-选项(store_options) -->
@@ -93,9 +93,10 @@
     <string name="store_options_settings_short">Settings</string>
 
     <!-- 免商店-推荐(recommend) -->
-
+	<string name="recommend_title_prompt">Games</string>
 
     <!-- 免商店-分类(category) -->
+    <string name="category_title_prompt">Games</string>
     <string name="category_item_count_suffix">Games</string>
     <string name="category_title_slg">SLG</string>
     <string name="category_title_olg">OLG</string>
@@ -116,7 +117,6 @@
 
     <!-- 免商店-合集(collection) -->
     <string name="collection_title_prompt">Albums</string>
-    <string name="collection_detail_title_prompt">Games</string>
 
     <!-- 免商店-合集/分类-游戏列表(collection_detail) -->
 

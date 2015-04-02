@@ -7,11 +7,13 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.text.TextUtils;
+import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.alipay.android.app.c;
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
 import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
@@ -44,6 +46,7 @@ public class CategoryMultiAdapter implements HMultiBaseAdapter {
 	private Context mContext;
 	private HMultiListView mMultiListView;
 	private List<InternalCategoryInfo> mCategoryDatas = new ArrayList<InternalCategoryInfo>();
+	private SparseArray<Integer> mCategoryGamesArray = new SparseArray<Integer>();
 
 	public CategoryMultiAdapter(Context context, HMultiListView multiListView) {
 		this.mContext = context;
@@ -53,10 +56,23 @@ public class CategoryMultiAdapter implements HMultiBaseAdapter {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				CategoryDetailActivity.startSelf(mContext, position);
+				initCategoryGameArray();
+				InternalCategoryInfo categoryInfo = mCategoryDatas.get(position);
+				int games = mCategoryGamesArray.get(categoryInfo.categoryId);
+				if(games > 0){
+					CategoryDetailActivity.startSelf(mContext, position, mCategoryGamesArray);
+				}
 			}
 
 		});
+	}
+
+	protected void initCategoryGameArray() {
+		for(InternalCategoryInfo categoryInfo :mCategoryDatas){
+			if(categoryInfo != null){
+				mCategoryGamesArray.put(categoryInfo.categoryId, categoryInfo.count);
+			}
+		}
 	}
 
 	private void initCategoryDatas() {
