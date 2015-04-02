@@ -201,7 +201,7 @@
     <string name="personal_account">Account：%1$s</string>
     <string name="personal_account_unlogin">Has not login</string>
     <string name="user_not_bind_account">(Not bind account)</string>
-    <string name="game_ticket_title">Game Ticket:%1$d</string>
+    <string name="game_ticket_title">Game Ticket:%1$s</string>
     <string name="user_alipay_account_bind"><u>Bind Alipay Account</u></string>
     <string name="user_alipay_account_bind_error">Get alipay account URL error!</string>
     <string name="user_play_time_title">Play Time of this Month:</string>

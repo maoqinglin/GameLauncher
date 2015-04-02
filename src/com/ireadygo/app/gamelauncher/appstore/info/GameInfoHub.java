@@ -519,4 +519,9 @@ public class GameInfoHub implements IGameInfo {
 		return mRemoteInfo.getCommonApp();
 	}
 
+	@Override
+	public String[] queryTicketInfo() throws InfoSourceException {
+		return mRemoteInfo.queryTicketInfo();
+	}
+
 }

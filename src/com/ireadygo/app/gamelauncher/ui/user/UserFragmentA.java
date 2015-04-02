@@ -350,11 +350,9 @@ public class UserFragmentA extends BaseContentFragment {
 					v.performClick();
 				}
 			} else {
-				if (!v.isInTouchMode()) {
-					if (mSelectedItem != null) {
-						animatorToUnselected(mSelectedItem);
-						mSelectedItem = null;
-					}
+				if (mSelectedItem != null) {
+					animatorToUnselected(mSelectedItem);
+					mSelectedItem = null;
 				}
 			}
 		}

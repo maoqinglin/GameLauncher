@@ -835,4 +835,10 @@ public class LocalInfo implements IGameInfo {
 		return null;
 	}
 
+	@Override
+	public String[] queryTicketInfo() throws InfoSourceException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

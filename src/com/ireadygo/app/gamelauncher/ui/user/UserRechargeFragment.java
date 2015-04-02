@@ -47,6 +47,7 @@ public class UserRechargeFragment extends BaseContentFragment implements OnClick
 	private int mTicketTypeValue = 0;
 	private TextView mRubbitCurrency;
 	private TextView mSnailPoint;
+	private TextView mRabbitTicket;
 	private TextView mRabbitRecharge;
 	private TextView mTicketRecharge;
 	private RechargeTask mRechargeTask;
@@ -78,6 +79,7 @@ public class UserRechargeFragment extends BaseContentFragment implements OnClick
 		getOperationTipsLayout().setTipsVisible(View.GONE, TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
 		mRubbitCurrency = (TextView) view.findViewById(R.id.rabbit_currency);
 		mSnailPoint = (TextView) view.findViewById(R.id.snail_point);
+		mRabbitTicket = (TextView)view.findViewById(R.id.rabbit_ticket);
 		mTicketType = (Spinner)view.findViewById(R.id.snail_point_select);
 		mTicketNum = (CustomerEditText) view.findViewById(R.id.gift_certificate_recharge);
 		mRabbitRecharge = (TextView) view.findViewById(R.id.rabbit_recharge);
@@ -106,7 +108,8 @@ public class UserRechargeFragment extends BaseContentFragment implements OnClick
 		});
 		
 		mRubbitCurrency.setText(String.valueOf(PreferenceUtils.getRabbitCoinBalance()));
-		mSnailPoint.setText(String.valueOf(PreferenceUtils.getRabbitTicketBalance()));
+		mSnailPoint.setText(String.valueOf(PreferenceUtils.getGameTicket()));
+		mRabbitTicket.setText(String.valueOf(PreferenceUtils.getRabbitTicketBalance()));
 		updateBalance();
 
 		mRabbitRecharge.setOnClickListener(this);
@@ -122,12 +125,12 @@ public class UserRechargeFragment extends BaseContentFragment implements OnClick
 			public void onResult(int code, int balance, int balanceQuan) {
 				if (code == StatusCode.OPERATION_SUCCESS) {
 					mRubbitCurrency.setText(String.valueOf(balance));
-					mSnailPoint.setText(String.valueOf(balanceQuan));
 					PreferenceUtils.saveRabbitCoinBalance(balance);
-					PreferenceUtils.saveRabbitTicketBalance(balanceQuan);
 				}
 			}
 		});
+		QueryTicketInfoTask task = new QueryTicketInfoTask();
+		task.execute();
 	}
 	private class TicketTypeAdapter extends ArrayAdapter<String> {
 
@@ -341,6 +344,28 @@ public class UserRechargeFragment extends BaseContentFragment implements OnClick
 	public void onFocusChange(View v, boolean hasFocus) {
 		if (hasFocus && v.isInTouchMode()) {
 			v.performClick();
+		}
+	}
+
+	private class QueryTicketInfoTask extends AsyncTask<Void, Void, String[]> {
+		@Override
+		protected String[] doInBackground(Void... params) {
+			try {
+				return GameInfoHub.instance(getRootActivity()).queryTicketInfo();
+			} catch (InfoSourceException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(String[] result) {
+			if (result != null && result.length == 2) {
+				mRabbitTicket.setText(result[0]);
+				mSnailPoint.setText(result[1]);
+				PreferenceUtils.saveRabbitTicketBalance(Integer.parseInt(result[0]));
+				PreferenceUtils.saveGameTicket(result[1]);
+			}
 		}
 	}
 }

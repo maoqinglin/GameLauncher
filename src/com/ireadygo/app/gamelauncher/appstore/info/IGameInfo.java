@@ -189,6 +189,9 @@ public interface IGameInfo {
 	//查询已返还月度租金总额的接口
 	String getRebateMoney() throws InfoSourceException;
 
+	//查询兔兔礼券和蜗牛点券的接口
+	String[] queryTicketInfo() throws InfoSourceException;
+
 	//清除缓存
 	void cleanCached();
 

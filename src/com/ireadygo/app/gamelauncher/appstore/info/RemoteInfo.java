@@ -61,6 +61,7 @@ import com.snail.appstore.openapi.vo.RentReliefAppTime;
 import com.snail.appstore.openapi.vo.RentReliefAppVO;
 import com.snail.appstore.openapi.vo.SlotRechargeVO;
 import com.snail.appstore.openapi.vo.SubscribeResultVO;
+import com.snail.appstore.openapi.vo.TicketInfoVO;
 import com.snail.appstore.openapi.vo.UserBasicVO;
 import com.snail.appstore.openapi.vo.UserHeaderVO;
 
@@ -71,9 +72,6 @@ public class RemoteInfo implements IGameInfo {
 	private Context mContext;
 	private static final String APP_SECRET = "AW9JLSINEI7ELL";
 	private static final String APP_KEY = "sdflkcxjvxc_e";
-//	private static final String APP_HOST_URL = "http://116.213.130.66";
-//	private static final String APP_HOST_URL = "http://116.213.130.12";
-//	private static final String APP_HOST_URL = "http://open.app.snail.com";
 	private static final String APP_HOST_URL = "http://api.app.snail.com";
 
 	private IAppPlatFormService mAppPlatFormService;
@@ -1882,6 +1880,33 @@ public class RemoteInfo implements IGameInfo {
 					}
 				}
 				return results;
+			}
+			String errMsg = processRemoteResultCode(resultVO.getCode());
+			throw new InfoSourceException(errMsg);
+		} catch (InfoSourceException e) {
+			throw e;
+		} catch (HttpStatusCodeException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_NETWORK_ERROR,e.getCause());
+		} catch (JSONException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_CLIENT_ERROR,e.getCause());
+		} catch (Exception e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_ERROR,e.getCause());
+		}
+	}
+
+	@Override
+	public String[] queryTicketInfo() throws InfoSourceException {
+		try {
+			ResultVO resultVO = mAppPlatFormService.queryTicketInfo();
+			
+			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
+				String [] result = new String[2];
+				if (resultVO.getObj() != null) {
+					TicketInfoVO ticketInfoVO = (TicketInfoVO)resultVO.getObj();
+					result[0] = ticketInfoVO.getRabbitTicket();
+					result[1] = ticketInfoVO.getGameTicket();
+				}
+				return result;
 			}
 			String errMsg = processRemoteResultCode(resultVO.getCode());
 			throw new InfoSourceException(errMsg);

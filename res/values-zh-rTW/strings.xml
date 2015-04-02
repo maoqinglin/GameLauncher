@@ -214,7 +214,7 @@
     <string name="user_recharge">充值</string>
     <string name="user_notice">公告</string>
     <string name="user_recharge_input_hint">請輸入序列號</string>
-    <string name="game_ticket_title">贈送蝸牛點券余額：%1$d\t蝸牛點券</string>
+    <string name="game_ticket_title">贈送蝸牛點券余額：%1$s\t蝸牛點券</string>
 
     <!-- 免帳號 -->
     <string name="account_mywealth">我的資產</string>

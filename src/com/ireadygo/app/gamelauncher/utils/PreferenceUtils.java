@@ -94,6 +94,7 @@ public class PreferenceUtils {
 	public static final String KEY_WX_QR_URL_EXPIRETIME = "aq";
 	public static final String KEY_WX_QR_URL = "ar";
 	public static final String KEY_PLATFORM_CHANNEL_ID = "as";
+	public static final String KEY_GAME_TICKET = "at";
 
 	private static final int USER_PHOTO_EXPIRED_TIME = 7 * 24 * 60 * 60 * 1000;
 
@@ -150,6 +151,16 @@ public class PreferenceUtils {
 	public static void saveRabbitCoinBalance(int balance) {
 		Editor editor = getSharePref().edit();
 		editor.putInt(KEY_RABBIT_COIN_BALANCE, balance);
+		editor.apply();
+	}
+
+	public static String getGameTicket() {
+		return getSharePref().getString(KEY_GAME_TICKET, "0");
+	}
+
+	public static void saveGameTicket(String balance) {
+		Editor editor = getSharePref().edit();
+		editor.putString(KEY_GAME_TICKET, balance);
 		editor.apply();
 	}
 

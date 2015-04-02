@@ -35,6 +35,7 @@ import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.redirect.Anchor;
 import com.ireadygo.app.gamelauncher.ui.redirect.Anchor.Destination;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
+import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
 
 public class UserFragmentC extends BaseContentFragment {
 
@@ -44,6 +45,7 @@ public class UserFragmentC extends BaseContentFragment {
 	private BaseAdapterItem mSelectedItem;
 	private Animator mAlipayTextSelectAnimator;
 	private Animator mAlipayTextUnSelectAnimator;
+	private TextView mGameTicket;
 
 	public UserFragmentC(Activity activity, BaseMenuFragment menuFragment) {
 		super(activity, menuFragment);
@@ -73,6 +75,7 @@ public class UserFragmentC extends BaseContentFragment {
 		mUserCenter.setOnFocusChangeListener(mOnFocusChangeListener);
 		mNotice.setOnFocusChangeListener(mOnFocusChangeListener);
 		mRecharge.setOnFocusChangeListener(mOnFocusChangeListener);
+		mGameTicket = (TextView)view.findViewById(R.id.game_ticket);
 	}
 
 	@Override
@@ -89,6 +92,7 @@ public class UserFragmentC extends BaseContentFragment {
 	private void initData() {
 		setAccount();
 		initAlipayAccountState();
+		updateGameTicket();
 	}
 
 	private void initAlipayAccountState() {
@@ -100,6 +104,15 @@ public class UserFragmentC extends BaseContentFragment {
 		task.execute();
 	}
 
+	private void setGameTicketNum(String num) {
+		mGameTicket.setText(getRootActivity().getString(R.string.game_ticket_title, num));
+	}
+
+	private void updateGameTicket() {
+		setGameTicketNum(PreferenceUtils.getGameTicket());
+		QueryTicketInfoTask task = new QueryTicketInfoTask();
+		task.execute();
+	}
 
 
 	private void setAccount() {
@@ -202,11 +215,9 @@ public class UserFragmentC extends BaseContentFragment {
 					v.performClick();
 				}
 			} else {
-				if (!v.isInTouchMode()) {
-					if (mSelectedItem != null) {
-						animatorToUnselected(mSelectedItem);
-						mSelectedItem = null;
-					}
+				if (mSelectedItem != null) {
+					animatorToUnselected(mSelectedItem);
+					mSelectedItem = null;
 				}
 			}
 		}
@@ -278,6 +289,26 @@ public class UserFragmentC extends BaseContentFragment {
 				skipWebsite(result);
 			} else {
 				Toast.makeText(getRootActivity(), getRootActivity().getString(R.string.user_alipay_account_bind_error), Toast.LENGTH_SHORT).show();
+			}
+		}
+	}
+
+	private class QueryTicketInfoTask extends AsyncTask<Void, Void, String[]> {
+		@Override
+		protected String[] doInBackground(Void... params) {
+			try {
+				return GameInfoHub.instance(getRootActivity()).queryTicketInfo();
+			} catch (InfoSourceException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(String[] result) {
+			if (result != null && result.length == 2) {
+				setGameTicketNum(result[1]);
+				PreferenceUtils.saveGameTicket(result[1]);
 			}
 		}
 	}
