@@ -516,4 +516,50 @@ public class PictureUtil {
 			return null;
 		}
 	}
+
+	/**
+	 * 矩形叠图处理
+	 * @param context
+	 * @param mask
+	 * @param icon
+	 * @param bottom
+	 * @return
+	 */
+	public static Bitmap decorateRectIcon(Context context, Bitmap mask, Bitmap icon, Bitmap bottom,Bitmap hightlight) {
+		if (null == icon) {
+			return null;
+		}
+		Bitmap maskedFigure = maskRectFigure(mask.getWidth(), mask.getHeight(), icon, mask);
+		return overlayRectBitmaps(bottom.getWidth(), bottom.getHeight(), bottom, maskedFigure,hightlight);
+	}
+
+	private static Bitmap maskRectFigure(int width, int height, Bitmap icon, Bitmap mask) {
+		Bitmap result = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+		Canvas canvas = new Canvas(result);
+		canvas.drawBitmap(mask, 0, 0, null);
+
+		Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+		paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
+		float left = (mask.getWidth() - icon.getWidth()) / 2;
+		float top = (mask.getHeight() - icon.getHeight()) / 2;
+		canvas.drawBitmap(icon, left, top, paint);
+
+		return result;
+	}
+
+	public static Bitmap overlayRectBitmaps(int width, int height, Bitmap... bitmaps) {
+		int maxWidth = 0;
+		for (Bitmap bitmap : bitmaps) {
+			if (bitmap.getWidth() >= maxWidth) {
+				maxWidth = bitmap.getWidth();
+			}
+		}
+		Bitmap result = Bitmap.createBitmap(width, height, Config.ARGB_8888);
+		Canvas canvas = new Canvas(result);
+		canvas.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+		for (Bitmap bitmap : bitmaps) {
+			canvas.drawBitmap(bitmap, 0, 0, null);
+		}
+		return result;
+	}
 }

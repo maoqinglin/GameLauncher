@@ -56,6 +56,7 @@
                     android:layout_height="@dimen/detail_icon_height"
                     android:layout_marginRight="@dimen/detail_icon_margin_right"
                     android:layout_marginTop="@dimen/detail_icon_margin_top"
+                    android:background="@drawable/app_item_icon_bg"
                     android:src="@drawable/store_app_icon_normal" />
 
                 <LinearLayout

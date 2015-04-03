@@ -145,6 +145,7 @@ public class UserPersonalFragment extends BaseContentFragment implements OnClick
 			case SAVE_SUCCESS:
 				hideProgressDialog();
 				Toast.makeText(getRootActivity(), R.string.personal_save_success, Toast.LENGTH_SHORT).show();
+				GameLauncherApplication.getApplication().setUserPhoto(mPhotoView.getDrawingCache());
 				break;
 			case SAVE_FAILED:
 				hideProgressDialog();

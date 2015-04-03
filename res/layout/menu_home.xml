@@ -18,8 +18,8 @@
         android:nextFocusDown="@+id/menu_game"
         android:nextFocusLeft="@+id/menu_user"
         android:nextFocusRight="@+id/user_center_layout"
-        android:nextFocusUp="@+id/menu_user"
-        menuItem:menu_icon="@drawable/menu_user_icon" >
+        menuItem:menu_icon="@drawable/account_photo_default_circle"
+        android:nextFocusUp="@+id/menu_user">
     </com.ireadygo.app.gamelauncher.ui.menu.ImageMenu>
 
     <com.ireadygo.app.gamelauncher.ui.menu.TextMenu

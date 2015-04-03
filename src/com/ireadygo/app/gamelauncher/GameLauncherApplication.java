@@ -1,8 +1,9 @@
 package com.ireadygo.app.gamelauncher;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.app.Application;
+import android.content.Intent;
+import android.graphics.Bitmap;
 
 import com.ireadygo.app.gamelauncher.GameLauncher.InitComplete;
 import com.ireadygo.app.gamelauncher.account.AccountManager;
@@ -22,6 +23,7 @@ public class GameLauncherApplication extends Application {
 	private UserInfoItem mUserInfoItem;
 	private SoundPoolManager mSoundPoolManager;
 	private static final String RENT_FREE_STATISTIC_ACTION = "com.ireadygo.app.rentfree.playtimestatisticservice.start";
+	private Bitmap mUserPhoto;
 
 	@Override
 	public void onCreate() {
@@ -89,5 +91,13 @@ public class GameLauncherApplication extends Application {
 	
 	public GameLauncherActivity getGameLauncherActivity(){
 		return this.mGameLauncherActivity;
+	}
+
+	public Bitmap getUserPhoto() {
+		return mUserPhoto;
+	}
+
+	public void setUserPhoto(Bitmap userPhoto) {
+		this.mUserPhoto = userPhoto;
 	}
 }
