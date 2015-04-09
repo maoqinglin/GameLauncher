@@ -260,9 +260,9 @@ public class RemoteInfo implements IGameInfo {
 				}
 				AppDetailVO appDetailVO = (AppDetailVO)resultVO.getObj();
 				AppEntity appDetail = detailToAppEntity(appDetailVO);
-				//先获取默认的下载地址
-				String downloadUrl = obtainNormalDownloadUrl(Long.parseLong(appDetail.getAppId()));
-				GameData.getInstance(mContext).updateDownloadPath(appDetail.getPkgName(), downloadUrl);
+//				//先获取默认的下载地址
+//				String downloadUrl = obtainNormalDownloadUrl(Long.parseLong(appDetail.getAppId()));
+//				GameData.getInstance(mContext).updateDownloadPath(appDetail.getPkgName(), downloadUrl);
 				return appDetail;
 			}
 			String errMsg = processRemoteResultCode(resultVO.getCode());

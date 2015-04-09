@@ -31,6 +31,7 @@ import android.widget.TextView;
 
 import com.ireadygo.app.gamelauncher.GameLauncher;
 import com.ireadygo.app.gamelauncher.R;
+import com.ireadygo.app.gamelauncher.appstore.data.GameData;
 import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
 import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
@@ -181,6 +182,7 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 
 	private void loadAppDetail(String appId) {
 		new LoadAppDetailTask().execute(appId);
+		showLoadingProgress();
 	}
 
 	private void updateData(AppEntity app) {
@@ -199,6 +201,7 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 			setVersionName(app.getVersionName());
 			setSizeText(app.getTotalSize());
 			mIntroView.setText("　　" + app.getDescription());
+			mPlayNumbersView.setText("" + app.getDownloadCounts());
 			if (TextUtils.isEmpty(app.getDescription())) {
 				mDownloadBtn.setNextFocusRightId(mDownloadBtn.getId());
 			} else {
@@ -271,6 +274,7 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 			mProgressBar.setVisibility(View.GONE);
 		} else {
 			mProgressBar.setVisibility(View.VISIBLE);
+			initProgressBar();
 		}
 
 		if (mDownloadBtn.isFocused()) {
@@ -309,6 +313,35 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 		intent.putExtras(bundle);
 		SoundPoolManager.instance(context).play(SoundPoolManager.SOUND_ENTER);
 		context.startActivity(intent);
+	}
+
+	private void initProgressBar() {
+		AppEntity app = GameData.getInstance(DetailActivity.this).getGameById(mAppEntity.getAppId());
+		if (app != null) {
+			updateProgressBar(app);
+		} else {
+			mProgressBar.setProgress(0);
+			mDownloadBtn.setText("0%");
+		}
+	}
+
+	private void updateProgressBar(AppEntity app) {
+		if (app == null) {
+			return;
+		}
+		GameState state = mGameManager.getGameStateManager().getGameState(app.getPkgName());
+		if (state == GameState.TRANSFERING) {
+			int progress = (int) (app.getDownloadSize() * 100 / app.getTotalSize());
+			if (progress <= 100 && progress >= 0) {
+				mProgressBar.setProgress(progress);
+				mDownloadBtn.setText(progress + "%");
+			} else {
+				mProgressBar.setProgress(0);
+				mProgressBar.setVisibility(View.GONE);
+			}
+		} else {
+			mProgressBar.setVisibility(View.GONE);
+		}
 	}
 
 	@Override
@@ -373,8 +406,6 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 			}
 			String appId = params[0];
 			try {
-				// return
-				// GameInfoHub.instance(GameDetailActivity.this).obtainItemByIdFrmRemote(appId);
 				return GameInfoHub.instance(DetailActivity.this).obtainItemById(appId);
 			} catch (InfoSourceException e) {
 				e.printStackTrace();
@@ -384,6 +415,7 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 
 		@Override
 		protected void onPostExecute(AppEntity result) {
+			dimissLoadingProgress();
 			if (isCancelled() || result == null) {
 				return;
 			}
@@ -465,19 +497,7 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 			if (mAppEntity == null || !mAppEntity.getAppId().equals(app.getAppId())) {
 				return;
 			}
-			GameState state = mGameManager.getGameStateManager().getGameState(app.getPkgName());
-			if (state == GameState.TRANSFERING) {
-				int progress = (int) (app.getDownloadSize() * 100 / app.getTotalSize());
-				if (progress <= 100 && progress >= 0) {
-					mProgressBar.setProgress(progress);
-					mDownloadBtn.setText(progress + "%");
-				} else {
-					mProgressBar.setProgress(0);
-					mProgressBar.setVisibility(View.GONE);
-				}
-			} else {
-				mProgressBar.setVisibility(View.GONE);
-			}
+			updateProgressBar(app);
 		}
 
 		@Override
