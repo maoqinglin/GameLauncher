@@ -27,6 +27,7 @@ import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.store.StoreEmptyView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
+import com.ireadygo.app.gamelauncher.ui.widget.StatisticsTitleView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 import com.ireadygo.app.gamelauncher.utils.PackageUtils;
@@ -40,6 +41,8 @@ public class GameFragment extends BaseContentFragment implements Callbacks {
 
 	private HMultiListView mHMultiListView;
 	private AppAdapter mAppAdapter;
+	
+	private StatisticsTitleView mStatisticsView;
 
 	public GameFragment(Activity activity, BaseMenuFragment menuFragment) {
 		super(activity, menuFragment);
@@ -58,6 +61,9 @@ public class GameFragment extends BaseContentFragment implements Callbacks {
 	protected void initView(View view) {
 		super.initView(view);
 		getOperationTipsLayout().setAllVisible(View.VISIBLE);
+		
+		mStatisticsView = (StatisticsTitleView)view.findViewById(R.id.statistics_view);
+		
 		mHMultiListView = (HMultiListView)view.findViewById(R.id.mutillist);
 		bindPagingIndicator(mHMultiListView);
 		mAppAdapter = new AppAdapter(getRootActivity(), mGameList, LIST_NUM, mHMultiListView);
@@ -66,6 +72,9 @@ public class GameFragment extends BaseContentFragment implements Callbacks {
 		mHMultiListView.setAdapter(mAppAdapter);
 		int paddingRight = getResources().getDimensionPixelOffset(R.dimen.menu_width);
 		setEmptyView(mHMultiListView, R.string.game_empty_title, View.GONE, paddingRight);
+		if(!mGameList.isEmpty()){
+			mStatisticsView.setCount(mGameList.size());
+		}
 	}
 
 	@Override
@@ -99,6 +108,7 @@ public class GameFragment extends BaseContentFragment implements Callbacks {
 	private void notifyDataSetChanged() {
 		if (mHMultiListView != null) {
 			mHMultiListView.notifyDataSetChanged();
+			mStatisticsView.setCount(mGameList.size());
 		}
 	}
 

@@ -317,7 +317,7 @@ public class IconDecorater {
 	public Drawable getFullResIcon(Resources resources, int iconId) {
 		Drawable d;
 		try {
-			d = resources.getDrawableForDensity(iconId, mIconDpi);
+			d = resources.getDrawableForDensity(iconId, 480);
 		} catch (Resources.NotFoundException e) {
 			d = null;
 		}

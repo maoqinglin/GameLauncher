@@ -25,6 +25,7 @@ import com.ireadygo.app.gamelauncher.game.info.ItemInfo;
 import com.ireadygo.app.gamelauncher.game.info.ShortcutInfo;
 import com.ireadygo.app.gamelauncher.game.utils.Utilities;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
+import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
 import com.ireadygo.app.gamelauncher.ui.menu.HomeMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.widget.AbsHListView;
 import com.ireadygo.app.gamelauncher.ui.widget.AbsHListView.OnScrollListener;

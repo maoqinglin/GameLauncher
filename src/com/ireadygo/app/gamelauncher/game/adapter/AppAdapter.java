@@ -4,13 +4,15 @@ import java.util.LinkedList;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView.ScaleType;
 
+import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.data.GameData;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.game.info.ItemInfo;
@@ -35,7 +37,7 @@ public class AppAdapter implements HMultiBaseAdapter {
 	public AppAdapter(Context context, List<ItemInfo> list, int listViewNum, HMultiListView hListView) {
 		mHMultiListView = hListView;
 		mListViewNum = listViewNum;
-		if(mHMultiListView != null){
+		if (mHMultiListView != null) {
 			mHMultiListView.setOnItemLongClickListener(mOnItemLongClickListener);
 		}
 		mContext = context;
@@ -69,27 +71,31 @@ public class AppAdapter implements HMultiBaseAdapter {
 		convertView.setVisibility(View.VISIBLE);
 		final AppItemHolder holder = ((AppItem) convertView).getHolder();
 		if (null != holder && !appList.isEmpty() && position < appList.size()) {
-			if (appList.get(position) != null && appList.get(position).getAppIcon() != null) {
-				holder.icon.setImageBitmap(appList.get(position).getAppIcon());
-				holder.title.setText(appList.get(position).getTitle().toString().trim());
-				if (appList.get(position).getTitle().toString().contains("太极熊猫")) {
-					AppEntity app = GameData.getInstance(mContext).getGameById("38");
-					if (app == null) {
-						app = GameData.getInstance(mContext).getGameByPkgName("com.snailgames.taiji");
+			ItemInfo info = appList.get(position);
+			if (info != null) {
+				Bitmap icon = info.getAppIcon();
+				if (icon != null) {
+					holder.icon.setImageBitmap(icon);
+					holder.title.setText(info.getTitle().toString().trim());
+					if (info.getTitle().toString().contains("太极熊猫")) {
+						AppEntity app = GameData.getInstance(mContext).getGameById("38");
+						if (app == null) {
+							app = GameData.getInstance(mContext).getGameByPkgName("com.snailgames.taiji");
+						}
+						if (app != null && !TextUtils.isEmpty(app.getLocalIconUrl())) {
+							holder.icon.setImageBitmap(PictureUtil.readBitmap(mContext, app.getLocalIconUrl()));
+						}
 					}
-					if (app != null && !TextUtils.isEmpty(app.getLocalIconUrl())) {
-						holder.icon.setImageBitmap(PictureUtil.readBitmap(mContext, app.getLocalIconUrl()));
-					}
+
+					updateDeleteView(holder, info);
+					holder.uninstallIcon.setOnClickListener(new OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+							PackageUtils.unInstallApp(mContext, appList.get(position).packageName);
+						}
+					});
 				}
-
-				updateDeleteView(holder, appList.get(position));
-				holder.uninstallIcon.setOnClickListener(new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						PackageUtils.unInstallApp(mContext, appList.get(position).packageName);
-					}
-				});
 			}
 		}
 	}

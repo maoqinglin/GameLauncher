@@ -172,8 +172,8 @@ public class ItemInfo {
 
     public static void writeBitmap(ContentValues values, Bitmap bitmap) {
         if (bitmap != null) {
-        	int iconWidth = GameLauncherApplication.getApplication().getResources().getDimensionPixelSize(R.dimen.mygame_game_width);
-            int iconHeigth = GameLauncherApplication.getApplication().getResources().getDimensionPixelSize(R.dimen.mygame_game_height);
+        	int iconWidth = GameLauncherApplication.getApplication().getResources().getDimensionPixelSize(R.dimen.mygame_app_width);
+            int iconHeigth = GameLauncherApplication.getApplication().getResources().getDimensionPixelSize(R.dimen.mygame_app_height);
             if (bitmap.getHeight() > iconHeigth || bitmap.getWidth() > iconWidth) {
             	bitmap = PictureUtil.zoomImage(bitmap, iconWidth, iconHeigth);
             }
