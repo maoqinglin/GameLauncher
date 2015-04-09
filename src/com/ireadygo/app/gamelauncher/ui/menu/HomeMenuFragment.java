@@ -55,14 +55,14 @@ public class HomeMenuFragment extends BaseMenuFragment {
 	public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.menu_home, container, false);
 		mUserMenu = (MenuItem)view.findViewById(R.id.menu_user);
-		mStoreMenu = (MenuItem) view.findViewById(R.id.menu_store);
 		mGameMenu = (MenuItem) view.findViewById(R.id.menu_game);
+		mStoreMenu = (MenuItem) view.findViewById(R.id.menu_store);
 		mAppMenu = (MenuItem) view.findViewById(R.id.menu_app);
 		mSettingsMenu = (MenuItem) view.findViewById(R.id.menu_settings);
 		
 		addMenuItem(mUserMenu, getUserFragment());
-		addMenuItem(mGameMenu, new GameFragment(getRootActivity(), this));
 		addMenuItem(mStoreMenu, new StoreFragment(getRootActivity(), this));
+		addMenuItem(mGameMenu, new GameFragment(getRootActivity(), this));
 		addMenuItem(mAppMenu, new AppFragment(getRootActivity(), this));
 		addMenuItem(mSettingsMenu, new SettingsFragment(getRootActivity(), this));
 		LoadOBoxTypeTask task = new LoadOBoxTypeTask();

@@ -468,7 +468,7 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 			GameState state = mGameManager.getGameStateManager().getGameState(app.getPkgName());
 			if (state == GameState.TRANSFERING) {
 				int progress = (int) (app.getDownloadSize() * 100 / app.getTotalSize());
-				if (progress <= 100) {
+				if (progress <= 100 && progress >= 0) {
 					mProgressBar.setProgress(progress);
 					mDownloadBtn.setText(progress + "%");
 				} else {

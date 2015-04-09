@@ -70,7 +70,7 @@ public class UserRechargeFragment extends BaseContentFragment implements OnClick
 
 	@Override
 	protected boolean isCurrentFocus() {
-		return hasFocus(mRabbitRecharge,mTicketRecharge,mTicketType);
+		return hasFocus(mRabbitRecharge, mTicketRecharge, mTicketType, mTicketNum);
 	}
 
 	@Override

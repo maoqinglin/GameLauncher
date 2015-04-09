@@ -2,7 +2,6 @@ package com.ireadygo.app.gamelauncher.ui.guide;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 
 import com.ireadygo.app.gamelauncher.R;
@@ -52,17 +51,16 @@ public class GuideRegisterOrLoginActivity extends BaseAccountActivity {
 		});
 	}
 
-//	@Override
-//	public boolean onKeyDown(int keyCode, KeyEvent event) {
-//		if(keyCode == KeyEvent.KEYCODE_BACK) {
-//			return true;
-//		}
-//		return super.onKeyDown(keyCode, event);
-//	}
+	@Override
+	public boolean onBackKey() {
+		finish();
+		return true;
+	}
 
 	@Override
 	public boolean onMoonKey() {
-		return true;
+		finish();
+		return onBackKey();
 	}
 
 }

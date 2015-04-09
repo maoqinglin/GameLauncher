@@ -12,10 +12,10 @@
 
 
     <!-- 主菜單(menu) -->
-    <string name="menu_store">遊戲商店</string>
+    <string name="menu_store">蝸牛商店</string>
     <string name="menu_game">我的遊戲</string>
-    <string name="menu_app">應用</string>
-    <string name="menu_settings">設定</string>
+    <string name="menu_app">我的應用</string>
+    <string name="menu_settings">主機設置</string>
 
     <!-- 我的遊戲 -->
     <string name="mygame_recommend_app_download">推薦下載</string>
@@ -80,7 +80,7 @@
     <string name="store_menu_recommend">推薦</string>
     <string name="store_menu_collection">合集</string>
     <string name="store_menu_category">分類</string>
-    <string name="store_menu_app">常用應用</string>
+    <string name="store_menu_app">電視應用</string>
     <string name="store_menu_manager">遊戲管理</string>
     <string name="store_options_settings">商店設置</string>
 

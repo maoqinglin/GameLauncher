@@ -12,10 +12,10 @@
 
 
     <!-- 主菜单(menu) -->
-    <string name="menu_store">游戏商店</string>
+    <string name="menu_store">蜗牛商店</string>
     <string name="menu_game">我的游戏</string>
-    <string name="menu_app">应&#160;用</string>
-    <string name="menu_settings">设&#160;定</string>
+    <string name="menu_app">我的应用</string>
+    <string name="menu_settings">主机设置</string>
 
     <!-- 我的游戏-推荐下载 -->
     <string name="mygame_recommend_app_download">推荐下载</string>
@@ -82,7 +82,7 @@
     <string name="store_menu_recommend">推&#160;荐</string>
     <string name="store_menu_collection">合&#160;集</string>
     <string name="store_menu_category">分&#160;类</string>
-    <string name="store_menu_app">常用应用</string>
+    <string name="store_menu_app">电视应用</string>
     <string name="store_menu_manager">游戏管理</string>
     <string name="store_options_settings">商店设置</string>
 

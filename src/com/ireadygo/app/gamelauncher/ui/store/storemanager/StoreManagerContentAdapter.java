@@ -293,7 +293,7 @@ public class StoreManagerContentAdapter implements HMultiBaseAdapter{
 			break;
 		case TRANSFERING:
 			updateStateView(item, app.getGameState(), R.drawable.store_manager_status_pause);
-			if (app.getTotalSize() != 0) {
+			if (app.getTotalSize() > 0) {
 				progress = (int) (app.getDownloadSize() * 100 / app.getTotalSize());
 				String sizeString = Formatter.formatFileSize(mContext, app.getDownloadSize()) + " / "
 						+ Formatter.formatFileSize(mContext, app.getTotalSize());
@@ -304,7 +304,7 @@ public class StoreManagerContentAdapter implements HMultiBaseAdapter{
 			break;
 		case QUEUING:
 			updateStateView(item, app.getGameState(), R.drawable.store_manager_status_queue);
-			if (app.getTotalSize() != 0) {
+			if (app.getTotalSize() > 0) {
 				progress = (int) (app.getDownloadSize() * 100 / app.getTotalSize());
 				updateProgressView(item, null, null, progress, View.INVISIBLE);
 			}
@@ -315,7 +315,7 @@ public class StoreManagerContentAdapter implements HMultiBaseAdapter{
 			break;
 		case PAUSED:
 			updateStateView(item, app.getGameState(), R.drawable.store_manager_status_transfering);
-			if (app.getTotalSize() != 0) {
+			if (app.getTotalSize() > 0) {
 				progress = (int) (app.getDownloadSize() * 100 / app.getTotalSize());
 				updateProgressView(item, null, null, progress, View.INVISIBLE);
 			}

@@ -10,7 +10,6 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -379,7 +378,6 @@ public class StoreManagerContentFragment extends BaseContentFragment {
 
 		@Override
 		public void onDownloadProgressChange(AppEntity app) {
-			Log.i("chen.r", "onDownloadProgressChange");
 			updateDldStatus(app);
 		}
 

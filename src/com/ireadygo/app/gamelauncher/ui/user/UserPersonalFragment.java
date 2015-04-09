@@ -1,6 +1,5 @@
 package com.ireadygo.app.gamelauncher.ui.user;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +30,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -49,12 +47,11 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.UserHeaderImgItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserInfoItem;
 import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
 import com.ireadygo.app.gamelauncher.ui.SnailKeyCode;
-import com.ireadygo.app.gamelauncher.ui.account.OneKeyLoginActivity;
-import com.ireadygo.app.gamelauncher.ui.activity.BaseAccountActivity;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.guide.GuideRegisterOrLoginActivity;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.widget.ConfirmDialog;
+import com.ireadygo.app.gamelauncher.ui.widget.CustomerEditText;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
 import com.ireadygo.app.gamelauncher.utils.NetworkUtils;
 import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
@@ -70,7 +67,7 @@ public class UserPersonalFragment extends BaseContentFragment implements OnClick
 	private TextView mIdView;// Id
 	private View mModifyPwdBtn;// 修改密码按钮
 	private View mSaveBtn;// 保存按钮
-	private EditText mNicknameView;// 昵称
+	private CustomerEditText mNicknameView;// 昵称
 	private Spinner mSexSpinner;// 性别
 	private View mLogoutBtn;// 退出账号按钮
 
@@ -103,7 +100,7 @@ public class UserPersonalFragment extends BaseContentFragment implements OnClick
 		mPhotoView.setOnFocusChangeListener(this);
 
 		mIdView = (TextView)view.findViewById(R.id.account);
-		mNicknameView = (EditText) view.findViewById(R.id.personal_nickname);
+		mNicknameView = (CustomerEditText) view.findViewById(R.id.personal_nickname);
 
 		mSexSpinner = (Spinner) view.findViewById(R.id.personal_sex);
 //		mSexSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {

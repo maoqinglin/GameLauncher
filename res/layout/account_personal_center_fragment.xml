@@ -25,6 +25,7 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:nextFocusDown="@+id/personal_sex"
+                android:nextFocusLeft="@+id/account_menu_personal"
                 android:src="@drawable/account_photo_default" />
         </FrameLayout>
 
@@ -56,7 +57,7 @@
             android:layout_alignLeft="@+id/personal_nickname"
             android:text="@string/personal_nickname" />
 
-        <EditText
+        <com.ireadygo.app.gamelauncher.ui.widget.CustomerEditText
             android:id="@+id/personal_nickname"
             style="@style/TextLabelMiddleLight"
             android:layout_width="@dimen/user_edit_width"
@@ -66,6 +67,8 @@
             android:layout_marginTop="@dimen/user_nickname_margin_top"
             android:background="@drawable/user_edit_bg_selector"
             android:gravity="center_vertical"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:paddingLeft="@dimen/user_nickname_padding_left" />
     </RelativeLayout>
 
@@ -98,6 +101,7 @@
                 android:background="@drawable/user_edit_bg_selector"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
+                android:nextFocusLeft="@+id/account_menu_personal"
                 android:nextFocusUp="@+id/personal_photo" />
 
             <ImageView
@@ -137,6 +141,7 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:gravity="center"
+            android:nextFocusLeft="@+id/account_menu_personal"
             android:text="@string/personal_save" />
 
         <TextView
