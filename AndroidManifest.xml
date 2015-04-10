@@ -94,6 +94,11 @@
             android:theme="@style/CustomerTheme" >
         </activity>
         <activity
+            android:name="com.ireadygo.app.gamelauncher.ui.HandleDescriptionActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/CustomerTheme" >
+        </activity>
+        <activity
             android:name="com.ireadygo.app.gamelauncher.ui.store.StoreActivity"
             android:launchMode="singleTop"
             android:screenOrientation="landscape"
@@ -249,6 +254,11 @@
                 <action android:name="android.intent.action.EXTERNAL_APPLICATIONS_AVAILABLE" />
             </intent-filter>
         </receiver>
+        <receiver android:name="com.ireadygo.app.gamelauncher.ui.BootCompletedReceiver">    
+            <intent-filter>    
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>    
+            </intent-filter>    
+        </receiver>   
         <!-- 蜗牛桌面 end -->
 
 

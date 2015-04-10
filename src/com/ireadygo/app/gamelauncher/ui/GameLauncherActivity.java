@@ -22,7 +22,6 @@ import com.ireadygo.app.gamelauncher.utils.StaticsUtils;
 import com.ireadygo.app.gamelauncher.utils.Utils;
 
 public class GameLauncherActivity extends BaseMenuActivity {
-	private static final String ACTION_LANGUAGE_SETTINGS = "com.ireadygo.app.wizard.language";
 	private Dialog mLoadingProgress;
 	private long mCreateTime = 0;
 	private long mResumeTime = 0;
@@ -38,9 +37,9 @@ public class GameLauncherActivity extends BaseMenuActivity {
 				public void run() {
 					dimissLoadingProgress();
 					try {
-						Intent intent = new Intent(ACTION_LANGUAGE_SETTINGS);
-						intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-						startActivity(intent);
+						Intent startIntent = new Intent(GameLauncherActivity.this, HandleDescriptionActivity.class);
+						startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+						startActivity(startIntent);
 						finish();
 					} catch (ActivityNotFoundException e) {
 						e.printStackTrace();
