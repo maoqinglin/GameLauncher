@@ -1232,6 +1232,7 @@ public class RemoteInfo implements IGameInfo {
 		app.setDownloadCounts(item.getIDownloadTimes());
 		app.setDownloadPath(item.getCDownloadUrl());
 		app.setSign(item.getCMd5());
+		app.setPosterIconUrl(item.getCPosterIcon());
 		return app;
 	}
 

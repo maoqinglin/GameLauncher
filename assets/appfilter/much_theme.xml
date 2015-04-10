@@ -7,16 +7,6 @@
         packageName="com.tencent.mm" />
 
     <application
-        className="com.tencent.mobileqq.activity.SplashActivity"
-        iconName="mobileqq.png"
-        packageName="com.tencent.mobileqq" />
-
-    <application
-        className="com.sina.weibo.SplashActivity"
-        iconName="weibo.png"
-        packageName="com.sina.weibo" />
-
-    <application
         className="com.android.mms.ui.BootActivity"
         iconName="message.png"
         packageName="com.android.mms" />
@@ -164,5 +154,257 @@
         className="com.estrongs.android.pop.view.FileExplorerActivity"
         iconName="fileexplorer.png"
         packageName="com.estrongs.android.pop" />
+
+    <!-- 第三方应用 -->
+
+    <application
+        className="com.yyw.box.login.LoginActivity"
+        iconName="115box.png"
+        packageName="com.yyw.box.androidclient" />
+
+    <application
+        className="com.qihoo360.mobilesafe.ui.index.AppEnterActivity"
+        iconName="360mobilesafetv.png"
+        packageName="com.qihoo360.mobilesafe_tv" />
+
+    <application
+        className="com.qipo.activity.VideoPlayerActivity"
+        iconName="alivideoplayer.png"
+        packageName="com.qipo" />
+
+    <application
+        className="tv.pps.tpad.WelcomeActivity"
+        iconName="pps.png"
+        packageName="tv.pps.tpad" />
+
+    <application
+        className="com.qiyi.video.ui.home.HomeActivity"
+        iconName="qiyi.png"
+        packageName="com.qiyi.video" />
+
+    <application
+        className="com.chuanke.tv.SplashActivity"
+        iconName="chuanke.png"
+        packageName="com.chuanke.tv" />
+
+    <application
+        className="com.baidu.BaiduMap.tv.BaiduMap"
+        iconName="baidumap.png"
+        packageName="com.baidu.BaiduMap.tv" />
+
+    <application
+        className="com.baofeng.tv.pubblico.activity.IndexActivity"
+        iconName="baofeng.png"
+        packageName="com.baofeng.tv" />
+
+    <application
+        className="com.changba.activity.Welcome"
+        iconName="changba.png"
+        packageName="com.changba" />
+
+    <application
+        className="com.joytouch.superlivebox.activity.LoadingActivity"
+        iconName="superlivebox.png"
+        packageName="com.joytouch.superlivebox" />
+
+    <application
+        className="com.douban.radio.app.WelcomeActivity"
+        iconName="douban.png"
+        packageName="com.douban.radio" />
+
+    <application
+        className="com.dangdang.tv.LoadingActivity"
+        iconName="dangdang.png"
+        packageName="com.dangdang.tv" />
+
+    <application
+        className="com.duomi.androidtv.activity.InitActivity"
+        iconName="duomi.png"
+        packageName="com.duomi.androidtv" />
+
+    <application
+        className="cn.damai.view.DamaiTVActivity"
+        iconName="damai.png"
+        packageName="cn.damai.tv.test" />
+
+    <application
+        className="com.moons.onlinetv.OnlineTV"
+        iconName="onlinetv.png"
+        packageName="com.moons.onlinetv" />
+
+    <application
+        className="com.elinkway.tvlive.WelcomActivity"
+        iconName="tvlive.png"
+        packageName="com.elinkway.tvlive" />
+
+    <application
+        className="com.fanshi.tvbrowser.MainActivity"
+        iconName="fanshitvbrowser.png"
+        packageName="com.fanshi.tvbrowser" />
+
+    <application
+        className="com.moretv.android.StartActivity"
+        iconName="moretv.png"
+        packageName="com.moretv.android" />
+
+    <application
+        className="com.tencent.QQVideo.Login.SplashScreen"
+        iconName="qq.png"
+        packageName="com.tencent.QQVideo" />
+
+    <application
+        className="com.dianping.v1.SplashScreenActivity"
+        iconName="dianping.png"
+        packageName="com.dianping.v1" />
+
+    <application
+        className="com.android.dazhihui.dzh.dzh"
+        iconName="dazhihui.png"
+        packageName="com.android.dazhihui" />
+
+    <application
+        className="com.ebodoo.fmhd.activity.FmBookShelfActivity"
+        iconName="ebodoo.png"
+        packageName="com.ebodoo.fmhd" />
+
+    <application
+        className="com.ifeng.easyVideo.StartActivity"
+        iconName="ifeng.png"
+        packageName="com.ifeng.easyVideo" />
+
+    <application
+        className="com.fyzb.activity.FyzbWelcomActivity"
+        iconName="fyzb.png"
+        packageName="com.fyzb.tv" />
+
+    <application
+        className="com.haodou.tv.recipe.WelcomeActivity"
+        iconName="haodou.png"
+        packageName="com.haodou.tv.recipe" />
+
+    <application
+        className="com.jingdong.app.tv.StartActivity"
+        iconName="jingdong.png"
+        packageName="com.jingdong.app.tv" />
+
+    <application
+        className="com.broadin.muyingshipu.LoadActivity"
+        iconName="muyingshipu.png"
+        packageName="com.broadin.muyingshipu" />
+
+    <application
+        className="com.adobe.reader.AdobeReader"
+        iconName="adobereader.png"
+        packageName="com.adobe.reader" />
+
+    <application
+        className="com.pplive.androidxl.FirstActivity"
+        iconName="pplive.png"
+        packageName="com.pplive.androidxl" />
+
+    <application
+        className="com.qunar.travelplan.tv.WelcomeActivity"
+        iconName="qunar.png"
+        packageName="com.qunar.travelplan.tv" />
+
+    <application
+        className="com.tencent.qqmusicpad.MainActivity"
+        iconName="qqmusicpad.png"
+        packageName="com.tencent.qqmusicpad" />
+
+    <application
+        className="com.sohutv.tv.activity.WelcomeActivity"
+        iconName="sohutv.png"
+        packageName="com.sohutv.tv" />
+
+    <application
+        className="com.suning.tv.ebuy.ui.index.IndexActivity"
+        iconName="suning.png"
+        packageName="com.suning.tv.ebuy" />
+
+    <application
+        className="com.tudou.tv.WelcomeActivity"
+        iconName="tudou.png"
+        packageName="com.tudou.tv" />
+
+    <application
+        className="com.togic.launcher.SplashActivity"
+        iconName="taijie.png"
+        packageName="com.togic.livevideo" />
+
+    <application
+        className="com.tencent.qqlivehd.activity.WelcomeActivity"
+        iconName="qqlivehd.png"
+        packageName="com.tencent.qqlivehd" />
+
+    <application
+        className="com.ucweb.tv.activity.MainActivity"
+        iconName="ucbrowser.png"
+        packageName="com.ucbrowser.tv" />
+
+    <application
+        className="net.myvst.UI.StartActivity"
+        iconName="myvst.png"
+        packageName="com.vst.live" />
+
+    <application
+        className="com.sina.weibotv.view.ActivitySplash"
+        iconName="sinaweibotv.png"
+        packageName="com.sina.weibotv" />
+
+    <application
+        className="com.slanissue.tv.erge.HomeActivity"
+        iconName="slanissue.png"
+        packageName="com.slanissue.tv.erge" />
+
+    <application
+        className="com.netease.vopen.tablet.activity.WelcomeActivity"
+        iconName="netease.png"
+        packageName="com.netease.vopen.tablet" />
+
+    <application
+        className="com.netease.newsreader.tv.biz.ad.AdActivity"
+        iconName="newsreader.png"
+        packageName="com.netease.newsreader.tv" />
+
+    <application
+        className="com.kankan.tv.homepage.StartupActivity"
+        iconName="kankan.png"
+        packageName="com.xunlei.kankan.tv" />
+
+    <application
+        className="air.common.pinyin.tv.android.A123qibu.com。AppEntry"
+        iconName="pinyin.png"
+        packageName="air.common.pinyin.tv.android.A123qibu.com" />
+
+    <application
+        className="com.youku.tv.WelcomeActivity"
+        iconName="youkutv.png"
+        packageName="com.youku.tv.c" />
+
+    <application
+        className="org.stagex.danmaku.activity.SplashActivity"
+        iconName="yuntu.png"
+        packageName="org.fungo.fungolivehd" />
+
+    <application
+        className="com.yinyuetai.yytv.tvbox.ui.WelcomeActivity"
+        iconName="yinyuetai.png"
+        packageName="com.yinyuetai.yytv.tvbox" />
+
+    <application
+        className="com.myzaker.ZAKER_HD.cover.CoverActivity"
+        iconName="myzaker.png"
+        packageName="com.myzaker.ZAKER_HD" />
+
+    <application
+        className="cn.etouch.ecalendarTv.LoadingActivity"
+        iconName="ecalendartv.png"
+        packageName="cn.etouch.ecalendarTv" />
+
+    <application
+        className="com.sohu.inputmethod.sogouoem.SogouIMELauncher"
+        iconName="sohuinputmethod.png"
+        packageName="com.sohu.inputmethod.sogouoem" />
 
 </applications>
