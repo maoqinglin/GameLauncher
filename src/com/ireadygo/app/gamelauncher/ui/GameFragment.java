@@ -65,7 +65,6 @@ public class GameFragment extends BaseContentFragment implements Callbacks {
 		mStatisticsView = (StatisticsTitleView)view.findViewById(R.id.statistics_view);
 		
 		mHMultiListView = (HMultiListView)view.findViewById(R.id.mutillist);
-		bindPagingIndicator(mHMultiListView);
 		mAppAdapter = new AppAdapter(getRootActivity(), mGameList, LIST_NUM, mHMultiListView);
 		mHMultiListView.setOnItemClickListener(mOnItemClickListener);
 		mHMultiListView.setIsDelayScroll(false);
@@ -75,6 +74,7 @@ public class GameFragment extends BaseContentFragment implements Callbacks {
 		if(!mGameList.isEmpty()){
 			mStatisticsView.setCount(mGameList.size());
 		}
+		bindPagingIndicator(mHMultiListView);
 	}
 
 	@Override

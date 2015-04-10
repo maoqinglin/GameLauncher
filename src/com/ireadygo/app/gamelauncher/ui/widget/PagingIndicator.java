@@ -117,8 +117,9 @@ public class PagingIndicator extends View {
 			}
 			if (totalWidth <= listWidth) {// 说明列表不能滑动
 				reset();
+			}else{
+				calcWidth(scrollX, listWidth, totalWidth);
 			}
-			calcWidth(scrollX, listWidth, totalWidth);
 		} else {
 			reset();
 		}

@@ -5,19 +5,22 @@
     android:layout_width="@dimen/settings_icon_bg_width"
     android:layout_height="@dimen/settings_icon_bg_height"
     android:clipChildren="false"
+    android:duplicateParentState="true"
     android:clipToPadding="false" >
 
     <ImageView
         android:id="@+id/settings_view_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/corner_settings_item_bg_shape" />
+        android:duplicateParentState="true"
+        android:src="@drawable/settings_item_bg_selector" />
 
     <ImageView
         android:id="@+id/settings_icon"
         android:layout_width="@dimen/settings_icon_width"
         android:layout_height="@dimen/settings_icon_height"
         android:layout_centerHorizontal="true"
+        android:scaleType="fitXY"
         android:layout_marginTop="@dimen/settings_icon_margin_top" />
 
     <ImageView

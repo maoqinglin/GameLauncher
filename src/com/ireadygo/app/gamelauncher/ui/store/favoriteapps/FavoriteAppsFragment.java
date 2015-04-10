@@ -62,6 +62,7 @@ public class FavoriteAppsFragment extends BaseContentFragment {
 			}
 
 		});
+		bindPagingIndicator(mMultiListView);
 	}
 
 	@Override

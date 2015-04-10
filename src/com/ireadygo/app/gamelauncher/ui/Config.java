@@ -158,7 +158,7 @@ public class Config {
 			
 		}
 		public static int TITLE_UNSLEECTED_TRANSLATE_Y = 0;
-		public static int TITLE_SLEECTED_TRANSLATE_Y = 45;
+		public static int TITLE_SLEECTED_TRANSLATE_Y = 35;
 	}
 	
 	private static int getInt(int dimenId) {

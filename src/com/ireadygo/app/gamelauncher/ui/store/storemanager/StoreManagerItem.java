@@ -53,7 +53,7 @@ public class StoreManagerItem extends BaseAdapterItem {
 		if (mUnselectedAnimator != null && mUnselectedAnimator.isRunning()) {
 			mUnselectedAnimator.cancel();
 		}
-		mHolder.background.setImageResource(R.drawable.settings_item_bg_shape);
+		mHolder.background.setImageResource(R.drawable.settings_item_bg_selected_shape);
 		mSelectedAnimator = createAnimator(listener, 1.1f, 1.2f);
 		mSelectedAnimator.start();
 	}

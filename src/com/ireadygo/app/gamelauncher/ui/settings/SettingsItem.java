@@ -10,7 +10,8 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -54,7 +55,6 @@ public class SettingsItem extends BaseAdapterItem {
 		if (mUnselectedAnimator != null && mUnselectedAnimator.isRunning()) {
 			mUnselectedAnimator.cancel();
 		}
-		mHolder.background.setImageResource(R.drawable.settings_item_bg_shape);
 		mSelectedAnimator = createAnimator(listener, 0.25f, 1.15f, 1.15f, 1.23f, 1.0f, Config.SettingsIcon.TITLE_SLEECTED_TRANSLATE_Y);
 		mSelectedAnimator.setDuration(300);
 		mSelectedAnimator.start();
@@ -65,7 +65,6 @@ public class SettingsItem extends BaseAdapterItem {
 		if (mSelectedAnimator != null && mSelectedAnimator.isRunning()) {
 			mSelectedAnimator.cancel();
 		}
-		mHolder.background.setImageResource(R.drawable.corner_settings_item_bg_shape);
 		mUnselectedAnimator = createAnimator(listener, 0.25f, 1, 1, 1, 0.8f, Config.SettingsIcon.TITLE_UNSLEECTED_TRANSLATE_Y);
 		mUnselectedAnimator.setDuration(150);
 		mUnselectedAnimator.start();
@@ -92,7 +91,7 @@ public class SettingsItem extends BaseAdapterItem {
 		ObjectAnimator gameNameAnim = ObjectAnimator.ofPropertyValuesHolder(mHolder.name, txtScaleXHolder,
 				txtScaleYHolder, txtTranslateYHolder);
 		animSet.playTogether(gameBgAnim, gameIconXAnim, gameIconYAnim, gameNameAnim);
-		animSet.setInterpolator(new AccelerateInterpolator());
+		animSet.setInterpolator(new AccelerateDecelerateInterpolator());
 		if (listener != null) {
 			animSet.addListener(listener);
 		}

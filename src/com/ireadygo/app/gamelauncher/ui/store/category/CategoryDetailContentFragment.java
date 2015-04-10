@@ -20,6 +20,8 @@ import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.store.StoreAppMultiAdapter;
 import com.ireadygo.app.gamelauncher.ui.widget.AbsHListView;
+import com.ireadygo.app.gamelauncher.ui.widget.HListView;
+import com.ireadygo.app.gamelauncher.ui.widget.PagingIndicator;
 import com.ireadygo.app.gamelauncher.ui.widget.AbsHListView.OnScrollListener;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
@@ -72,6 +74,7 @@ public class CategoryDetailContentFragment extends BaseContentFragment {
 				DetailActivity.startSelf(getRootActivity(), mAppEntities.get(position));
 			}
 		});
+		bindPagingIndicator(mMultiListView);
 		mMultiListView.setOnScrollListener(new OnScrollListener() {
 			
 			@Override
@@ -88,7 +91,10 @@ public class CategoryDetailContentFragment extends BaseContentFragment {
 					Log.i("chenrui", "The pageIndex : " + mCurrPageIndex);
 					loadCategoryDetail();
 				}
-				
+				PagingIndicator indicator = getMenuActivity().getPagingIndicator();
+				if(indicator != null){
+					indicator.onScroll((HListView) view);
+				}
 			}
 		});
 	}

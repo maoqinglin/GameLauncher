@@ -64,17 +64,16 @@ public class AppFragment extends BaseContentFragment implements Callbacks {
 		super.initView(view);
 		getOperationTipsLayout().setAllVisible(View.VISIBLE);
 		mHMultiListView = (HMultiListView)view.findViewById(R.id.mutillist);
-		bindPagingIndicator(mHMultiListView);
 		mStatisticsView = (StatisticsTitleView)view.findViewById(R.id.statistics_view);
 		mAppAdapter = new AppAdapter(getRootActivity(), mAppList, LIST_NUM, mHMultiListView);
 		mHMultiListView.setIsDelayScroll(false);
 		mHMultiListView.setAdapter(mAppAdapter);
 		mHMultiListView.setOnItemClickListener(mOnItemClickListener);
 		mHMultiListView.setOnItemSelectedListener(mOnItemSelectedListener);
-		mHMultiListView.setOnScrollListener(mOnScrollListener);
 		if(!mAppList.isEmpty()){
 			mStatisticsView.setCount(mAppList.size());
 		}
+		bindPagingIndicator(mHMultiListView);
 	}
 
 	@Override
@@ -91,7 +90,7 @@ public class AppFragment extends BaseContentFragment implements Callbacks {
 	public void bindApps(List<ItemInfo> infos) {
 		mAppList = infos;
 		if(mHMultiListView != null){
-			mHMultiListView.notifyDataSetChanged();
+			notifyDataSetChanged();
 		}
 	}
 
@@ -160,19 +159,6 @@ public class AppFragment extends BaseContentFragment implements Callbacks {
 		public void onNothingSelected(AdapterView<?> parent) {
 			// TODO Auto-generated method stub
 			
-		}
-	};
-
-	OnScrollListener mOnScrollListener = new OnScrollListener() {
-
-		@Override
-		public void onScrollStateChanged(AbsHListView view, int scrollState) {
-
-		}
-
-		@Override
-		public void onScroll(AbsHListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-
 		}
 	};
 

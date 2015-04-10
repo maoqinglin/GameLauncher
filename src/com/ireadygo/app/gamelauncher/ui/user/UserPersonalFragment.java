@@ -100,6 +100,7 @@ public class UserPersonalFragment extends BaseContentFragment implements OnClick
 		getOperationTipsLayout().setTipsVisible(View.GONE, TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
 		mPhotoView = (ImageView) view.findViewById(R.id.personal_photo);
 		mPhotoView.setOnClickListener(this);
+		mPhotoView.setOnFocusChangeListener(this);
 
 		mIdView = (TextView)view.findViewById(R.id.account);
 		mNicknameView = (EditText) view.findViewById(R.id.personal_nickname);

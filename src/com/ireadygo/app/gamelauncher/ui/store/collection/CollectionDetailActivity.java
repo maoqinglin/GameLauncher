@@ -16,15 +16,19 @@ import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
 import com.ireadygo.app.gamelauncher.ui.base.BaseActivity;
+import com.ireadygo.app.gamelauncher.ui.base.BaseMenuActivity.ScrollListenerByIndicator;
 import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
 import com.ireadygo.app.gamelauncher.ui.store.StoreAppMultiAdapter;
 import com.ireadygo.app.gamelauncher.ui.store.StoreEmptyView;
 import com.ireadygo.app.gamelauncher.ui.widget.AbsHListView;
+import com.ireadygo.app.gamelauncher.ui.widget.HListView;
+import com.ireadygo.app.gamelauncher.ui.widget.PagingIndicator;
 import com.ireadygo.app.gamelauncher.ui.widget.AbsHListView.OnScrollListener;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
+import com.ireadygo.app.gamelauncher.ui.widget.PagingIndicator.Interpolation;
 import com.ireadygo.app.gamelauncher.ui.widget.StatisticsTitleView;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiBaseAdapter;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
@@ -119,8 +123,17 @@ public class CollectionDetailActivity extends BaseActivity implements
 		emptyView.getRefreshBtn().setVisibility(View.GONE);
 		emptyView.getTitleView().setText(R.string.store_empty_title);
 		mMultiListView.setEmptyView(emptyView);
+		bindPagingIndicator(mMultiListView);
 	}
 
+	protected void bindPagingIndicator(HMultiListView multiListView) {
+		PagingIndicator indicator = mTipsLayout.getPagingIndicator();
+		indicator.setVisibility(View.VISIBLE);
+		multiListView.setOnScrollListener(new ScrollListenerByIndicator(indicator));
+		HListView upListView = multiListView.getHListViews().get(0);
+		indicator.bind(upListView);
+	}
+	
 	private void loadCollectionDetail() {
 		if (!mLoadingData && mCollectionId > 0) {
 			new LoadCollectionDetailTask().execute(mCollectionId + "",
@@ -173,16 +186,16 @@ public class CollectionDetailActivity extends BaseActivity implements
 		super.finish();
 	}
 
-	@Override
-	public boolean onSunKey() {
+	//@Override
+	//public boolean onSunKey() {
 		// if (mMultiListView.hasFocus()) {
 		// int selectIndex = mMultiListView.getSelectedItemPosition();
 		// if (selectIndex >= 0) {
 		// mMultiListView.performItemClick(mMultiListView, selectIndex, 0);
 		// }
 		// }
-		return true;
-	}
+		//return true;
+	//}
 
 	@Override
 	public boolean onMoonKey() {

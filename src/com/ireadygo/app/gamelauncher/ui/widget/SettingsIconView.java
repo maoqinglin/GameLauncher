@@ -65,7 +65,7 @@ public class SettingsIconView extends RelativeLayout implements ISelectedAnim{
 		AnimatorListener listener = new AnimatorListenerAdapter() {
 			@Override
 			public void onAnimationStart(Animator animation) {
-				mSettingsViewBg.setImageResource(R.drawable.settings_item_bg_shape);
+				mSettingsViewBg.setImageResource(R.drawable.settings_item_bg_selected_shape);
 			}
 		};
 		return createAnimator(listener, 0.25f, 1.2f, 1.32f, 2f, 1.0f, Config.SettingsIcon.TITLE_SLEECTED_TRANSLATE_Y);
@@ -76,7 +76,7 @@ public class SettingsIconView extends RelativeLayout implements ISelectedAnim{
 		AnimatorListener listener = new AnimatorListenerAdapter() {
 			@Override
 			public void onAnimationEnd(Animator animation) {
-				mSettingsViewBg.setImageResource(R.drawable.corner_settings_item_bg_shape);
+				mSettingsViewBg.setImageResource(R.drawable.settings_item_bg_unselected_shape);
 			}
 		};
 		return createAnimator(listener, 0.25f, 1, 1, 1, 0.8f, Config.SettingsIcon.TITLE_UNSLEECTED_TRANSLATE_Y);
