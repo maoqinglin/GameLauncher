@@ -551,6 +551,8 @@ public class LocalInfo implements IGameInfo {
 			jsonObject.put(BANNER_JSON_KEY.IBannerId, bannerItem.getIBannerId());
 			jsonObject.put(BANNER_JSON_KEY.CDownloadUrl, bannerItem.getCDownloadUrl());
 			jsonObject.put(BANNER_JSON_KEY.SPayDesc, bannerItem.getSPayDesc());
+			jsonObject.put(BANNER_JSON_KEY.CPosterIcon, bannerItem.getCPosterIcon());
+			jsonObject.put(BANNER_JSON_KEY.CPosterPic, bannerItem.getCPosterPic());
 			return jsonObject;
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -584,6 +586,8 @@ public class LocalInfo implements IGameInfo {
 		bannerItem.setIBannerId(object.optInt(BANNER_JSON_KEY.IBannerId));
 		bannerItem.setCDownloadUrl(object.optString(BANNER_JSON_KEY.CDownloadUrl));
 		bannerItem.setSPayDesc(object.optString(BANNER_JSON_KEY.SPayDesc));
+		bannerItem.setCPosterIcon(object.optString(BANNER_JSON_KEY.CPosterIcon));
+		bannerItem.setCPosterPic(object.optString(BANNER_JSON_KEY.CPosterPic));
 		return bannerItem;
 	}
 
@@ -675,6 +679,8 @@ public class LocalInfo implements IGameInfo {
 		String CDownloadUrl = "CDownloadUrl";
 		String ICategoryId = "ICategoryId";
 		String SPayDesc = "SPayDesc";
+		String CPosterIcon = "CPosterIcon";//海报icon
+		String CPosterPic = "CPosterPic";//海报图片
 	}
 
 	private interface KEYWORD_JSON_KEY {

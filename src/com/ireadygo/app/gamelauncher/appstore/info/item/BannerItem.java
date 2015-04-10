@@ -28,6 +28,8 @@ public class BannerItem {
 	private String CMd5; // 文件MD5
 	private String CMark;// 专题标识: 0:不显示 1:首发 2:合集 3:热门 4:推荐 5:独家 6:精品
 	private Integer ISize;// 文件大小
+	private String CPosterIcon;//海报icon
+    private String CPosterPic;//海报图片 
 
 	public Long getNAppId() {
 		if(NAppId == null){
@@ -219,5 +221,21 @@ public class BannerItem {
 
 	public void setISize(Integer iSize) {
 		ISize = iSize;
+	}
+
+	public String getCPosterIcon() {
+		return CPosterIcon;
+	}
+
+	public void setCPosterIcon(String cPosterIcon) {
+		CPosterIcon = cPosterIcon;
+	}
+
+	public String getCPosterPic() {
+		return CPosterPic;
+	}
+
+	public void setCPosterPic(String cPosterPic) {
+		CPosterPic = cPosterPic;
 	}
 }

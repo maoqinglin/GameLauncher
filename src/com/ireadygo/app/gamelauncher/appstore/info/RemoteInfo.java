@@ -1258,6 +1258,8 @@ public class RemoteInfo implements IGameInfo {
 		bannerItem.setCDownloadUrl(appBannerVO.getCDownloadUrl());
 		bannerItem.setIBannerId(appBannerVO.getIBannerId());
 		bannerItem.setICategoryId(appBannerVO.getICategoryId());
+		bannerItem.setCPosterIcon(appBannerVO.getCPosterIcon());
+		bannerItem.setCPosterPic(appBannerVO.getCPosterPic());
 		return bannerItem;
 	}
 

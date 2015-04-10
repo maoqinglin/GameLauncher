@@ -165,6 +165,7 @@ public class RecommendFragment extends BaseContentFragment {
 			appEntity.setFreeFlag(bannerItem.getIFlowFree());
 			appEntity.setSign(bannerItem.getCMd5());
 			appEntity.setTotalSize(bannerItem.getISize());
+			appEntity.setPosterIconUrl(bannerItem.getCPosterIcon());
 			return appEntity;
 		}
 	}
