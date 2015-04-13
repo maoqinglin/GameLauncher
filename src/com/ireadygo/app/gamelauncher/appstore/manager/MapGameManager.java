@@ -136,6 +136,11 @@ public class MapGameManager {
 
 	//对免商店安装游戏的匹配
 	private void mapFreeStoreGame(final AppEntity app) {
+		if (app.getIsInFreeStore() == AppEntity.IN_FREE_STORE) {
+			GameLauncherAppState.getInstance(mContext).getModel()
+			.handleGameAddOrUpdate(app.getPkgName(), Favorites.DISPLAY, Favorites.APP_TYPE_GAME);
+			return;
+		}
 		new Handler(mMapHandlerThread.getLooper()).postDelayed(new Runnable() {
 			@Override
 			public void run() {
@@ -229,7 +234,7 @@ public class MapGameManager {
 					if(app.getIsOccupySlot() != AppEntity.NOT_OCCUPY_SLOT){
 						app.setIsOccupySlot(AppEntity.OCCUPY_SLOT);
 					}
-					
+
 					mGameData.updateMappedAppData(app);
 					GameLauncherAppState.getInstance(mContext).getModel()
 					.updateInstalledAppInfo(app.getPkgName(), checkPkgDisplayState(app.getPkgName()),Favorites.APP_TYPE_GAME);

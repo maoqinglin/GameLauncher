@@ -260,9 +260,6 @@ public class RemoteInfo implements IGameInfo {
 				}
 				AppDetailVO appDetailVO = (AppDetailVO)resultVO.getObj();
 				AppEntity appDetail = detailToAppEntity(appDetailVO);
-//				//先获取默认的下载地址
-//				String downloadUrl = obtainNormalDownloadUrl(Long.parseLong(appDetail.getAppId()));
-//				GameData.getInstance(mContext).updateDownloadPath(appDetail.getPkgName(), downloadUrl);
 				return appDetail;
 			}
 			String errMsg = processRemoteResultCode(resultVO.getCode());
@@ -1217,6 +1214,11 @@ public class RemoteInfo implements IGameInfo {
 		app.setPosterBgUrl(item.getCPosterPic());
 		app.setDownloadPath(item.getCDownloadUrl());
 		app.setDownloadCounts(item.getIDownloadTimes());
+		if (!TextUtils.isEmpty(item.getCAppType()) && item.getCAppType().equals("1")) {
+			app.setIsInFreeStore(AppEntity.IN_FREE_STORE);
+		} else {
+			app.setIsInFreeStore(AppEntity.NOT_IN_FREE_STORE);
+		}
 		return app;
 	}
 
