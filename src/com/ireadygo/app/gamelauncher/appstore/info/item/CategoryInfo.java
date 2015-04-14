@@ -1,6 +1,8 @@
 package com.ireadygo.app.gamelauncher.appstore.info.item;
 
-public class CategoryInfo extends AppEntity{
+import java.io.Serializable;
+
+public class CategoryInfo extends AppEntity implements Serializable{
 	private static final long serialVersionUID = -5850512530441575140L;
 	private int categoryId;
 	private String catetoryName;

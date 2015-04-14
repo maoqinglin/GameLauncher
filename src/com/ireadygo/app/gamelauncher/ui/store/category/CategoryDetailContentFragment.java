@@ -15,6 +15,7 @@ import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
 import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
+import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryInfo;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
@@ -41,12 +42,15 @@ public class CategoryDetailContentFragment extends BaseContentFragment {
 	private boolean mLoadingData = false;
 	private static final int PAGE_NUMBER = 50;
 	private StatisticsTitleView mTitleLayout;
+	private CategoryInfo mCategoryInfo;
 
-	public CategoryDetailContentFragment(Activity activity, BaseMenuFragment menuFragment, int categoryId) {
+	public CategoryDetailContentFragment(Activity activity, BaseMenuFragment menuFragment, CategoryInfo categoryInfo) {
 		super(activity, menuFragment);
-		this.mCategoryId = categoryId;
+		this.mCategoryInfo = categoryInfo;
 		mGameInfoHub = GameInfoHub.instance(activity);
-		loadCategoryDetail();
+		if(mCategoryInfo != null){
+			loadCategoryDetail();
+		}
 	}
 
 	@Override
@@ -64,9 +68,11 @@ public class CategoryDetailContentFragment extends BaseContentFragment {
 		mMultiAdapter = new StoreAppMultiAdapter(getRootActivity(), mMultiListView, mAppEntities);
 		mMultiListView.setAdapter(mMultiAdapter);
 		setEmptyView(mMultiListView, R.string.store_empty_title, View.GONE, 0);
-		updateNextFocusIdByCategoryId((int) mCategoryId);
 		mTitleLayout = (StatisticsTitleView) view.findViewById(R.id.title_layout);
-		mTitleLayout.setCount(CategoryDetailActivity.getGamesByCategoryId(mCategoryId));
+		if(mCategoryInfo != null){
+			updateNextFocusIdByCategoryId((int) mCategoryInfo.getCategoryId());
+			mTitleLayout.setCount(mCategoryInfo.getAppCounts());
+		}
 		mMultiListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -105,8 +111,8 @@ public class CategoryDetailContentFragment extends BaseContentFragment {
 	}
 
 	private void loadCategoryDetail() {
-		if (!mLoadingData && mCategoryId > 0) {
-			new LoadCategoryDetailTask().execute(mCategoryId + "", mCurrPageIndex + "");
+		if (!mLoadingData && mCategoryInfo.getCategoryId() > 0) {
+			new LoadCategoryDetailTask().execute(mCategoryInfo.getCategoryId() + "", mCurrPageIndex + "");
 			mLoadingData = true;
 		}
 	}
@@ -144,31 +150,6 @@ public class CategoryDetailContentFragment extends BaseContentFragment {
 	}
 
 	private void updateNextFocusIdByCategoryId(int categoryId) {
-		switch (categoryId) {
-		case CategoryMultiAdapter.CATEGORY_ID_SLG:
-			mMultiListView.setNextFocusLeftId(R.id.category_detail_menu_slg);
-			break;
-		case CategoryMultiAdapter.CATEGORY_ID_STG:
-			mMultiListView.setNextFocusLeftId(R.id.category_detail_menu_stg);
-			break;
-		case CategoryMultiAdapter.CATEGORY_ID_PZL:
-			mMultiListView.setNextFocusLeftId(R.id.category_detail_menu_pzl);
-			break;
-		case CategoryMultiAdapter.CATEGORY_ID_RPG:
-			mMultiListView.setNextFocusLeftId(R.id.category_detail_menu_rpg);
-			break;
-		case CategoryMultiAdapter.CATEGORY_ID_SPT:
-			mMultiListView.setNextFocusLeftId(R.id.category_detail_menu_spt);
-			break;
-		case CategoryMultiAdapter.CATEGORY_ID_OLG:
-			mMultiListView.setNextFocusLeftId(R.id.category_detail_menu_olg);
-			break;
-		case CategoryMultiAdapter.CATEGORY_ID_SIM:
-			mMultiListView.setNextFocusLeftId(R.id.category_detail_menu_sim);
-			break;
-		case CategoryMultiAdapter.CATEGORY_ID_RSG:
-			mMultiListView.setNextFocusLeftId(R.id.category_detail_menu_rsg);
-			break;
-		}
+		mMultiListView.setNextFocusLeftId(categoryId+1000);
 	}
 }

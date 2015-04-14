@@ -233,7 +233,7 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 	}
 
 	private void updateDownloadBtn(String pkgName) {
-		if (mAppEntity == null || !mAppEntity.getPkgName().equals(pkgName)) {
+		if (mAppEntity == null || TextUtils.isEmpty(mAppEntity.getPkgName()) || !mAppEntity.getPkgName().equals(pkgName)) {
 			return;
 		}
 		GameState state = mGameManager.getGameStateManager().getGameState(pkgName);

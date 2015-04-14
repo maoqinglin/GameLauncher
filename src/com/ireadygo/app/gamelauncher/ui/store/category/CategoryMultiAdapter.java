@@ -23,6 +23,7 @@ import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiBaseAdapter;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class CategoryMultiAdapter implements HMultiBaseAdapter {
 	/** 创意休闲 **/
@@ -45,99 +46,17 @@ public class CategoryMultiAdapter implements HMultiBaseAdapter {
 	private static final int LIST_NUM = 2;
 	private Context mContext;
 	private HMultiListView mMultiListView;
-	private List<InternalCategoryInfo> mCategoryDatas = new ArrayList<InternalCategoryInfo>();
-	private SparseArray<Integer> mCategoryGamesArray = new SparseArray<Integer>();
+	private List<CategoryInfo> mCategoryDatas = new ArrayList<CategoryInfo>();
 
-	public CategoryMultiAdapter(Context context, HMultiListView multiListView) {
+	public CategoryMultiAdapter(Context context, HMultiListView multiListView, List<CategoryInfo> categoryDatas) {
 		this.mContext = context;
 		this.mMultiListView = multiListView;
-		initCategoryDatas();
-		multiListView.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				initCategoryGameArray();
-				InternalCategoryInfo categoryInfo = mCategoryDatas.get(position);
-				int games = mCategoryGamesArray.get(categoryInfo.categoryId);
-				if(games > 0){
-					CategoryDetailActivity.startSelf(mContext, position, mCategoryGamesArray);
-				}
-			}
-
-		});
-	}
-
-	protected void initCategoryGameArray() {
-		for(InternalCategoryInfo categoryInfo :mCategoryDatas){
-			if(categoryInfo != null){
-				mCategoryGamesArray.put(categoryInfo.categoryId, categoryInfo.count);
-			}
-		}
-	}
-
-	private void initCategoryDatas() {
-		Resources res = mContext.getResources();
-		// 创意休闲SLG
-		String intro = res.getString(R.string.category_intro_slg);
-		InternalCategoryInfo categoryInfo = new InternalCategoryInfo(CATEGORY_ID_SLG, R.string.category_title_slg,
-				R.drawable.category_item_bg_slg, R.drawable.category_item_title_bg_green, intro);
-		mCategoryDatas.add(categoryInfo);
-
-		// 动作射击STG
-		intro = res.getString(R.string.category_intro_stg);
-		categoryInfo = new InternalCategoryInfo(CATEGORY_ID_STG, R.string.category_title_stg,
-				R.drawable.category_item_bg_stg, R.drawable.category_item_title_bg_green, intro);
-		mCategoryDatas.add(categoryInfo);
-
-		// 益智棋牌PZL
-		intro = res.getString(R.string.category_intro_pzl);
-		categoryInfo = new InternalCategoryInfo(CATEGORY_ID_PZL, R.string.category_title_pzl,
-				R.drawable.category_item_bg_pzl, R.drawable.category_item_title_bg_brown, intro);
-		mCategoryDatas.add(categoryInfo);
-
-		// 角色扮演RPG
-		intro = res.getString(R.string.category_intro_rpg);
-		categoryInfo = new InternalCategoryInfo(CATEGORY_ID_RPG, R.string.category_title_rpg,
-				R.drawable.category_item_bg_rpg, R.drawable.category_item_title_bg_blue, intro);
-		mCategoryDatas.add(categoryInfo);
-
-		// 体育竞技SPT
-		intro = res.getString(R.string.category_intro_spt);
-		categoryInfo = new InternalCategoryInfo(CATEGORY_ID_SPT, R.string.category_title_spt,
-				R.drawable.category_item_bg_spt, R.drawable.category_item_title_bg_green, intro);
-		mCategoryDatas.add(categoryInfo);
-
-		// 单机精选OLG
-		intro = res.getString(R.string.category_intro_olg);
-		categoryInfo = new InternalCategoryInfo(CATEGORY_ID_OLG, R.string.category_title_olg,
-				R.drawable.category_item_bg_olg, R.drawable.category_item_title_bg_blue, intro);
-		mCategoryDatas.add(categoryInfo);
-
-		// 经营策略SIM
-		intro = res.getString(R.string.category_intro_sim);
-		categoryInfo = new InternalCategoryInfo(CATEGORY_ID_SIM, R.string.category_title_sim,
-				R.drawable.category_item_bg_sim, R.drawable.category_item_title_bg_brown, intro);
-		mCategoryDatas.add(categoryInfo);
-
-		// 竞技飞行RSG
-		intro = res.getString(R.string.category_intro_rsg);
-		categoryInfo = new InternalCategoryInfo(CATEGORY_ID_RSG, R.string.category_title_rsg,
-				R.drawable.category_item_bg_rsg, R.drawable.category_item_title_bg_brown, intro);
-		mCategoryDatas.add(categoryInfo);
-
+		mCategoryDatas = categoryDatas;
 	}
 
 	@Override
 	public Object getItem(int position) {
 		return mCategoryDatas.get(position);
-	}
-
-	public int getAllItemCount() {
-		int sum = 0;
-		for (InternalCategoryInfo info : mCategoryDatas) {
-			sum = sum + info.count;
-		}
-		return sum;
 	}
 
 	@Override
@@ -147,13 +66,14 @@ public class CategoryMultiAdapter implements HMultiBaseAdapter {
 		}
 		convertView.setVisibility(View.VISIBLE);
 		CategoryItemHoder holder = ((CategoryItem) convertView).getHolder();
-		InternalCategoryInfo info = mCategoryDatas.get(position);
-		holder.icon.setImageResource(info.iconId);
-		holder.titleLayout.setBackgroundResource(info.titleBgId);
-		holder.title.setText(info.titleId);
+		CategoryInfo info = mCategoryDatas.get(position);
+		if(!TextUtils.isEmpty(info.getPosterIconUrl())){
+			ImageLoader.getInstance().displayImage(info.getPosterIconUrl(), holder.icon);
+		}
+		holder.title.setText(info.getCatetoryName());
 
 		int introSize = 0;
-		String[] intros = info.intros;
+		String[] intros = info.getCategoryDes().split("/");
 		if (intros != null) {
 			introSize = intros.length;
 		}
@@ -164,7 +84,7 @@ public class CategoryMultiAdapter implements HMultiBaseAdapter {
 			introView.setText(intro);
 		}
 
-		int count = info.count;
+		int count = info.getAppCounts();
 		if (count < 0) {
 			holder.countLayout.setVisibility(View.INVISIBLE);
 		} else {
@@ -188,33 +108,6 @@ public class CategoryMultiAdapter implements HMultiBaseAdapter {
 	@Override
 	public List<?> getData() {
 		return mCategoryDatas;
-	}
-
-	static class InternalCategoryInfo {
-		int categoryId;
-		int titleId;
-		int iconId;
-		int titleBgId;
-		String[] intros;
-		int count;
-
-		public InternalCategoryInfo() {
-
-		}
-
-		public InternalCategoryInfo(int categoryId, int titleId, int iconId, int bgId, String intro) {
-			this.categoryId = categoryId;
-			this.titleId = titleId;
-			this.iconId = iconId;
-			this.titleBgId = bgId;
-			if (!TextUtils.isEmpty(intro)) {
-				this.intros = intro.split("/");
-			}
-		}
-
-		public void setCount(int count) {
-			this.count = count;
-		}
 	}
 
 	@Override

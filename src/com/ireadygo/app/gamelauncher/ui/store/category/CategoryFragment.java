@@ -1,5 +1,6 @@
 package com.ireadygo.app.gamelauncher.ui.store.category;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -12,14 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ireadygo.app.gamelauncher.R;
-import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
 import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
 import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryInfo;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
-import com.ireadygo.app.gamelauncher.ui.store.category.CategoryMultiAdapter.InternalCategoryInfo;
-import com.ireadygo.app.gamelauncher.ui.widget.StatisticsTitleView;
+import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
+import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
+import com.ireadygo.app.gamelauncher.ui.widget.StatisticsTitleView;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiBaseAdapter;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 
@@ -30,7 +31,8 @@ public class CategoryFragment extends BaseContentFragment {
 	private static final int MSG_UPDATE_ITEM_COUNT = 200;
 	private static final long DELAY_UPDATE_ITEM = 100;
 	private int mAllItemCount = 0;
-
+	private ArrayList<CategoryInfo> mCategoryDatas = new ArrayList<CategoryInfo>();
+	
 	public CategoryFragment(Activity activity, BaseMenuFragment menuFragment) {
 		super(activity, menuFragment);
 	}
@@ -48,14 +50,34 @@ public class CategoryFragment extends BaseContentFragment {
 		getOperationTipsLayout().setTipsVisible(View.VISIBLE, TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
 		mAllItemCount = 0;
 		mTitleLayout = (StatisticsTitleView) view.findViewById(R.id.title_layout);
-		mTitleLayout.setCount(mAllItemCount);
+		setItemCount();
 		mMultiListView = (HMultiListView) view.findViewById(R.id.category_list);
 		mMultiListView.setIsDelayScroll(false);
-		mAdapter = new CategoryMultiAdapter(getRootActivity(), mMultiListView);
+		mAdapter = new CategoryMultiAdapter(getRootActivity(), mMultiListView,mCategoryDatas);
 		mMultiListView.setAdapter(mAdapter);
+		mMultiListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				if (position >= 0 && position < mCategoryDatas.size()) {
+					CategoryDetailActivity.startSelf(getRootActivity(),position,mCategoryDatas);
+				}
+			}
+
+		});
 		bindPagingIndicator(mMultiListView);
-		loadData(1);
+		if (mCategoryDatas.size() == 0) {
+			loadData(1);
+		}
 		setEmptyView(mMultiListView, R.string.store_empty_title, View.GONE, 0);
+	}
+
+	private void setItemCount() {
+		for(CategoryInfo categoryInfo : mCategoryDatas){
+			mAllItemCount = mAllItemCount + categoryInfo.getAppCounts();
+		}
+		mTitleLayout.setCount(mAllItemCount);
+
 	}
 
 	@Override
@@ -65,6 +87,7 @@ public class CategoryFragment extends BaseContentFragment {
 
 	private void loadData(int page) {
 		new LoadCategoryTask().execute(page);
+		showLoadingProgress();
 	}
 
 	private class LoadCategoryTask extends AsyncTask<Integer, Void, List<CategoryInfo>> {
@@ -88,21 +111,18 @@ public class CategoryFragment extends BaseContentFragment {
 
 		@Override
 		protected void onPostExecute(List<CategoryInfo> result) {
+			dimissLoadingProgress();
 			if (isCancelled() || result == null || result.isEmpty()) {
 				return;
 			}
-			
-			List<InternalCategoryInfo> infoList = (List<InternalCategoryInfo>) mAdapter.getData();
+			mCategoryDatas.clear();
+			mCategoryDatas.addAll(result);
 			for(CategoryInfo categoryInfo : result){
-				for(InternalCategoryInfo info :infoList){
-					if(categoryInfo.getCategoryId() == info.categoryId){
-						info.count = categoryInfo.getAppCounts();
-						postUpdateItemCount();
-						mAllItemCount = mAllItemCount + categoryInfo.getAppCounts();
-					}
-				}
+				postUpdateItemCount();
+				mAllItemCount = mAllItemCount + categoryInfo.getAppCounts();
 			}
 			mTitleLayout.setCount(mAllItemCount);
+			mMultiListView.notifyDataSetChanged();
 		}
 	}
 

@@ -30,6 +30,7 @@
     <dimen name="menu_home_margin_top">204dp</dimen>
     <dimen name="menu_store_margin_top">204dp</dimen>
     <dimen name="menu_category_detail_margin_top">204dp</dimen>
+    <dimen name="menu_category_detail_padding_bottom">20dp</dimen>
     <dimen name="menu_padding_right">10dp</dimen>
     <dimen name="menu_title_size">48sp</dimen>
     <dimen name="menu_image_margin_right">25dp</dimen>

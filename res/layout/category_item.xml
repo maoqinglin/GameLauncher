@@ -29,7 +29,6 @@
                 android:id="@+id/category_item_title_layout"
                 android:layout_width="@dimen/category_item_title_layout_width"
                 android:layout_height="match_parent"
-                android:background="@drawable/category_item_title_bg_brown"
                 android:paddingBottom="@dimen/category_item_padding_bottom" >
 
                 <TextView
