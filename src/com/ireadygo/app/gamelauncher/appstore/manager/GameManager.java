@@ -307,6 +307,7 @@ public class GameManager {
 					app.setGameState(GameState.DEFAULT);
 					mGameStateManager.setGameState(app.getPkgName(), GameState.DEFAULT);
 					delete(app);
+					deleteCacheFile(app);
 					reportInstallError(app, new GameManagerException(GameManagerException.MSG_INSTALL_FAILED, ie));
 				} else {
 					app.setGameState(GameState.INSTALLABLE);
@@ -315,6 +316,17 @@ public class GameManager {
 				}
 			}
 		}, generateFilePath(app.getSavedPath(), app.getFileName()),app.getPkgName());
+	}
+
+	private void deleteCacheFile(final AppEntity app) {
+		if (!TextUtils.isEmpty(app.getFileName()) && !TextUtils.isEmpty(app.getSavedPath())) {
+			new Thread() {
+				@Override
+				public void run() {
+					new File(app.getSavedPath(), app.getFileName()).delete();
+				};
+			}.start();
+		}
 	}
 
 	private String generateFilePath(String filePath, String fileName) {
