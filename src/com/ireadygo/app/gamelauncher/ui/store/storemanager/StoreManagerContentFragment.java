@@ -90,6 +90,7 @@ public class StoreManagerContentFragment extends BaseContentFragment implements 
 		mUpgradeAdapter = null;
 		mInstalledApps.clear();
 		mInstalledAdapter = null;
+		mManagerType = GameManagerType.DOWNLOAD;
 	}
 
 	@Override
@@ -167,6 +168,9 @@ public class StoreManagerContentFragment extends BaseContentFragment implements 
 	}
 
 	private void updateLayoutByType(GameManagerType type) {
+		mDldMenuItem.setSelected(false);
+		mUpgradeMenuItem.setSelected(false);
+		mInstalledMenuItem.setSelected(false);
 		switch (type) {
 		case DOWNLOAD:
 			mTitleLayout.setCount(mDownloadApps.size());
@@ -175,6 +179,7 @@ public class StoreManagerContentFragment extends BaseContentFragment implements 
 			setEmptyView(mMultiListView, R.string.game_empty_title, View.GONE, 0);
 			mMultiListView.setNextFocusLeftId(R.id.manager_download);
 			mMultiListView.setIsDelayScroll(true);
+			mDldMenuItem.setSelected(true);
 			break;
 		case UPGRADE:
 			mTitleLayout.setCount(mUpgradeApps.size());
@@ -183,6 +188,7 @@ public class StoreManagerContentFragment extends BaseContentFragment implements 
 			setEmptyView(mMultiListView, R.string.update_empty_title, View.GONE, 0);
 			mMultiListView.setNextFocusLeftId(R.id.manager_upgrade);
 			mMultiListView.setIsDelayScroll(true);
+			mUpgradeMenuItem.setSelected(true);
 			break;
 		case INSTALLED:
 			mTitleLayout.setCount(mInstalledApps.size());
@@ -191,6 +197,7 @@ public class StoreManagerContentFragment extends BaseContentFragment implements 
 			setEmptyView(mMultiListView, R.string.game_empty_title, View.GONE, 0);
 			mMultiListView.setNextFocusLeftId(R.id.manager_installed);
 			mMultiListView.setIsDelayScroll(false);
+			mInstalledMenuItem.setSelected(true);
 			break;
 		}
 	}
@@ -421,17 +428,8 @@ public class StoreManagerContentFragment extends BaseContentFragment implements 
 	@Override
 	public void onFocusChange(View view, boolean hasFocus) {
 		if (hasFocus) {
-			mDldMenuItem.setSelected(false);
-			mUpgradeMenuItem.setSelected(false);
-			mInstalledMenuItem.setSelected(false);
-			view.setSelected(true);
 			onClick(view);
 		} else {
-			if (mMultiListView.hasFocus()) {
-				view.setSelected(true);
-			} else {
-				view.setSelected(false);
-			}
 		}
 	}
 

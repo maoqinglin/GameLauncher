@@ -63,7 +63,7 @@
     <dimen name="content_fragment_height">780dp</dimen>
     <dimen name="content_padding_left_default">150dp</dimen>
     <dimen name="content_fragment_width">1670dp</dimen>
-    <dimen name="content_fragment_padding_left">40dp</dimen>
+    <dimen name="content_fragment_padding_left">50dp</dimen>
     <dimen name="content_fragment_padding_top">75dp</dimen>
     <dimen name="content_fragment_list_padding_right">60dp</dimen>
     <dimen name="content_fragment_list_padding_top">45dp</dimen>
