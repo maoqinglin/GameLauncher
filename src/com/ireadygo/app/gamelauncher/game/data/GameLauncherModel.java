@@ -1421,6 +1421,39 @@ public class GameLauncherModel{
 		runOnWorkerThread(r);
 	}
 
+	public synchronized void updatePosterIcon(final String pkgName,final Bitmap posterIcon) {
+		Runnable r = new Runnable() {
+			public void run() {
+				synchronized (mLock) {
+					Cursor cursor = null;
+					try {
+						cursor = getCursorByPkgName(pkgName);
+						if (null == cursor || !cursor.moveToFirst()) {
+							//还没有加入数据库
+//							return;
+						} else {
+							updateAppPosterIcon(cursor,posterIcon);
+						}
+					} finally {
+						if (null != cursor) {
+							cursor.close();
+						}
+					}
+				}
+			}
+		};
+		runOnWorkerThread(r);
+	}
+
+	private synchronized void updateAppPosterIcon(Cursor cursor, Bitmap posterIcon) {
+		int itemId = cursor.getInt(cursor.getColumnIndex(Favorites._ID));
+		final Uri uri = GameLauncherSettings.Favorites.getContentUri(itemId, false);
+		final ContentResolver cr = mContext.getContentResolver();
+		ContentValues values = new ContentValues();
+		ItemInfo.writeBitmap(values, posterIcon);
+		cr.update(uri, values, null, null);
+	}
+
 	private Cursor updateCursorByPkgName(String pkgName) {
 		if (TextUtils.isEmpty(pkgName)) {
 			return null;

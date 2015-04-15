@@ -8,10 +8,12 @@ import java.util.concurrent.ExecutorService;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
+import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 
 import com.ireadygo.app.gamelauncher.GameLauncherConfig;
 import com.ireadygo.app.gamelauncher.appstore.data.GameData;
@@ -24,6 +26,9 @@ import com.ireadygo.app.gamelauncher.game.data.GameLauncherSettings.Favorites;
 import com.ireadygo.app.gamelauncher.utils.PackageUtils;
 import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
 import com.ireadygo.app.gamelauncher.widget.GameLauncherThreadPool;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.umeng.analytics.MobclickAgent;
 
 public class MapGameManager {
@@ -236,6 +241,8 @@ public class MapGameManager {
 					}
 
 					mGameData.updateMappedAppData(app);
+					//如果海报地址不为空，则下载海报填充到桌面数据库中
+					downloadPosterIcon(app);
 					GameLauncherAppState.getInstance(mContext).getModel()
 					.updateInstalledAppInfo(app.getPkgName(), checkPkgDisplayState(app.getPkgName()),Favorites.APP_TYPE_GAME);
 				}
@@ -245,6 +252,16 @@ public class MapGameManager {
 			e.printStackTrace();
 			//do nothing
 			return false;
+		}
+	}
+
+	private void downloadPosterIcon(AppEntity app) {
+		if (!TextUtils.isEmpty(app.getPosterIconUrl())) {
+			Bitmap posterIcon = ImageLoader.getInstance().loadImageSync(app.getPosterIconUrl());
+			if (posterIcon != null) {
+				mGameData.updatePosterIcon(app.getPkgName(), posterIcon);
+				GameLauncherAppState.getInstance(mContext).getModel().updatePosterIcon(app.getPkgName(), posterIcon);
+			}
 		}
 	}
 

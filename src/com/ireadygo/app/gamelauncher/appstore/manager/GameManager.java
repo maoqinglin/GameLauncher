@@ -302,7 +302,8 @@ public class GameManager {
 					reInstallApk(app.getPkgName(), app);
 				} else if (InstallMessage.PACKAGE_NOT_FOUND.equals(ie.getMessage())
 						|| InstallMessage.PACKAGE_UNREADABLE.equals(ie.getMessage())
-						|| InstallMessage.INVALID_APK.equals(ie.getMessage())) {
+						|| InstallMessage.INVALID_APK.equals(ie.getMessage())
+						|| InstallMessage.INSTALL_PARSE_FAILED_NO_CERTIFICATES.equals(ie.getMessage())) {
 					//文件不存在，修改为下载状态
 					app.setGameState(GameState.DEFAULT);
 					mGameStateManager.setGameState(app.getPkgName(), GameState.DEFAULT);
