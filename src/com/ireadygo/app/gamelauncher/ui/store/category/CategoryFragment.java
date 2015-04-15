@@ -31,7 +31,7 @@ public class CategoryFragment extends BaseContentFragment {
 	private static final int MSG_UPDATE_ITEM_COUNT = 200;
 	private static final long DELAY_UPDATE_ITEM = 100;
 	private int mAllItemCount = 0;
-	private ArrayList<CategoryInfo> mCategoryDatas = new ArrayList<CategoryInfo>();
+	private List<CategoryInfo> mCategoryDatas = new ArrayList<CategoryInfo>();
 	
 	public CategoryFragment(Activity activity, BaseMenuFragment menuFragment) {
 		super(activity, menuFragment);
@@ -116,8 +116,11 @@ public class CategoryFragment extends BaseContentFragment {
 				return;
 			}
 			mCategoryDatas.clear();
-			mCategoryDatas.addAll(result);
 			for(CategoryInfo categoryInfo : result){
+				if (categoryInfo.getAppCounts() <= 0) {
+					continue;
+				}
+				mCategoryDatas.add(categoryInfo);
 				postUpdateItemCount();
 				mAllItemCount = mAllItemCount + categoryInfo.getAppCounts();
 			}
