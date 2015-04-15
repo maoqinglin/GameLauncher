@@ -296,14 +296,15 @@ public class LocalInfo implements IGameInfo {
 		ArrayList<CategoryInfo> result = new ArrayList<CategoryInfo>();
 		for (String category : categotyList) {
 			String[] categoryItems = category.split(ITEM_INNER_DIVIDER);
-			if (categoryItems.length == 7) {
+			if (categoryItems.length == 8) {
 				CategoryInfo item = new CategoryInfo(Integer.valueOf(categoryItems[0]),
 						Integer.valueOf(categoryItems[1]),
 						categoryItems[2],
 						categoryItems[3],
 						categoryItems[4],
 						categoryItems[5],
-						categoryItems[6]);
+						categoryItems[6],
+						categoryItems[7]);
 				result.add(item);
 			}
 		}
@@ -843,6 +844,12 @@ public class LocalInfo implements IGameInfo {
 
 	@Override
 	public String[] queryTicketInfo() throws InfoSourceException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<AppEntity> obtainCategotyTagChildren(String id, int page) throws InfoSourceException {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -125,6 +125,11 @@ public class GameInfoHub implements IGameInfo {
 	}
 
 	@Override
+	public ArrayList<AppEntity> obtainCategotyTagChildren(String id, int page) throws InfoSourceException {
+		return mRemoteInfo.obtainCategotyTagChildren(id, page);
+	}
+
+	@Override
 	public AppEntity obtainItemById(String appId) throws InfoSourceException {
 		AppEntity app = mGameData.getGameById(appId);
 		if (app == null || app.isDldPathEmpty(mContext) || TextUtils.isEmpty(app.getDownloadPath())) {

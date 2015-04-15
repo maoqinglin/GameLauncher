@@ -9,13 +9,15 @@ public class CategoryInfo extends AppEntity implements Serializable{
 	private String categoryDes;
 	private String iconUrl;
 	private int appCounts;//游戏数量
+	private String categoryType;
 
-	public CategoryInfo(int categoryId, int appCounts, String categoryName, String categoryDec, String categoryUrl, String posterIcon,
+	public CategoryInfo(int categoryId, int appCounts, String categoryName, String categoryDec, String categoryType, String categoryUrl, String posterIcon,
 			String posterBg) {
 		setCategoryId(categoryId);
 		setAppCounts(appCounts);
 		setCatetoryName(categoryName);
 		setCategoryDes(categoryDec);
+		setCategoryType(categoryType);
 		setIconUrl(categoryUrl);
 		setPosterIconUrl(posterIcon);
 		setPosterBgUrl(posterBg);
@@ -61,4 +63,13 @@ public class CategoryInfo extends AppEntity implements Serializable{
 		this.iconUrl = iconUrl;
 	}
 
+	public String getCategoryType() {
+		return categoryType;
+	}
+
+	public void setCategoryType(String categoryType) {
+		this.categoryType = categoryType;
+	}
+
+	
 }

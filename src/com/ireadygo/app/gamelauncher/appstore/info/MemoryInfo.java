@@ -535,4 +535,10 @@ public class MemoryInfo implements IGameInfo {
 		return null;
 	}
 
+	@Override
+	public ArrayList<AppEntity> obtainCategotyTagChildren(String id, int page) throws InfoSourceException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -43,6 +43,8 @@ public class CategoryDetailContentFragment extends BaseContentFragment {
 	private static final int PAGE_NUMBER = 50;
 	private StatisticsTitleView mTitleLayout;
 	private CategoryInfo mCategoryInfo;
+	private static final String TYPE_CATEGORY = "1";
+	private static final String TYPE_TAG = "2";
 
 	public CategoryDetailContentFragment(Activity activity, BaseMenuFragment menuFragment, CategoryInfo categoryInfo) {
 		super(activity, menuFragment);
@@ -112,7 +114,7 @@ public class CategoryDetailContentFragment extends BaseContentFragment {
 
 	private void loadCategoryDetail() {
 		if (!mLoadingData && mCategoryInfo.getCategoryId() > 0) {
-			new LoadCategoryDetailTask().execute(mCategoryInfo.getCategoryId() + "", mCurrPageIndex + "");
+			new LoadCategoryDetailTask().execute(mCategoryInfo.getCategoryId() + "", mCurrPageIndex + "",mCategoryInfo.getCategoryType());
 			mLoadingData = true;
 		}
 	}
@@ -121,13 +123,18 @@ public class CategoryDetailContentFragment extends BaseContentFragment {
 
 		@Override
 		protected List<AppEntity> doInBackground(String... params) {
-			if (params == null || params.length < 2) {
+			if (params == null || params.length < 3) {
 				return null;
 			}
 			String id = params[0];
 			int page = Integer.parseInt(params[1]);
+			
 			try {
-				return mGameInfoHub.obtainCategotyChildren(id, page, String.valueOf(AppPlatFormConfig.IPLATFORMID), PAGE_NUMBER);
+				if(TYPE_CATEGORY.equals(params[2])){
+					return mGameInfoHub.obtainCategotyChildren(id, page, String.valueOf(AppPlatFormConfig.IPLATFORMID), PAGE_NUMBER);
+				}else if(TYPE_TAG.equals(params[2])){
+					return mGameInfoHub.obtainCategotyTagChildren(id, page);
+				}
 			} catch (InfoSourceException e) {
 				e.printStackTrace();
 			}

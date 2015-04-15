@@ -249,6 +249,43 @@ public class RemoteInfo implements IGameInfo {
 		}
 	}
 
+	/**
+	 * 获取标签游戏列表
+	 */
+	@Override
+	public ArrayList<AppEntity> obtainCategotyTagChildren(String id, int page) throws InfoSourceException {
+		ResultVO resultVO = null;
+		try {
+			resultVO = mAppPlatFormService.getAppListByCategoryTag(Long.parseLong(id), page);
+			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
+				StringBuffer appIds = new StringBuffer();
+				HashMap<String, AppEntity> cachedChildrenList = new HashMap<String, AppEntity>();
+				ArrayList<AppEntity> result = new ArrayList<AppEntity>();
+				if (resultVO.getObj() != null) {
+					PageListVO pageListVO = (PageListVO)resultVO.getObj();
+					List<AppListItemVO> appListItemVOs = (List<AppListItemVO>)pageListVO.getList();
+					for (AppListItemVO appListItemVO : appListItemVOs) {
+						AppEntity app = listItemToAppEntity(appListItemVO);
+						result.add(app);
+						appIds.append(app.getAppId()).append(",");
+						cachedChildrenList.put(app.getAppId(), app);
+					}
+				}
+				return result;
+			}
+			String errMsg = processRemoteResultCode(resultVO.getCode());
+			throw new InfoSourceException(errMsg);
+		} catch (InfoSourceException e) {
+			throw e;
+		} catch (HttpStatusCodeException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_NETWORK_ERROR,e.getCause());
+		} catch (JSONException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_CLIENT_ERROR,e.getCause());
+		} catch (Exception e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_ERROR,e.getCause());
+		}
+	}
+
 	//获取指定ID应用的详情
 	@Override
 	public AppEntity obtainItemById(String appId) throws InfoSourceException {
@@ -1146,6 +1183,7 @@ public class RemoteInfo implements IGameInfo {
 				item.getIContains(),
 				item.getSCategoryName(),
 				item.getSCategoryDesc(),
+				item.getCCategoryType(),
 				item.getCPicUrl(),
 				item.getCPosterIcon(),
 				item.getCPosterPic());
