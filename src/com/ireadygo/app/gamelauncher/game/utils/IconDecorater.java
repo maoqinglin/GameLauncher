@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
@@ -99,6 +100,19 @@ public class IconDecorater {
 		// initIconFlag();
 	}
 
+	public Bitmap decorateIcon(PackageInfo pkgInfo) {
+		PackageManager pm = mContext.getPackageManager();
+		Intent mainIntent = pm.getLaunchIntentForPackage(pkgInfo.packageName);
+		if (mainIntent != null) {
+			final ResolveInfo resolveInfo = pm.resolveActivity(mainIntent, 0);
+			if (resolveInfo != null) {
+				Bitmap icon = decorateIcon(resolveInfo);
+				return icon;
+			}
+		}
+		return null;
+	}
+
 	public Bitmap decorateIcon(ResolveInfo info) {
 		Bitmap icon = null;
 		ThemeApp app = new ThemeApp(info.activityInfo.applicationInfo.packageName, info.activityInfo.name);
@@ -108,14 +122,18 @@ public class IconDecorater {
 		}
 
 		if (icon == null) {
-			icon = drawableToBitmap(getFullResIcon(info));
-			//TODO 新版应用图标采用海报
-//			icon = decorateIcon(mContext.getResources(), icon);
+			Drawable iconDrawable = getFullResIcon(info);
+			if(iconDrawable instanceof BitmapDrawable){
+				icon = ((BitmapDrawable)iconDrawable).getBitmap();
+			}else{
+				icon = drawableToBitmap(iconDrawable);
+			}
+			// TODO 新版应用图标采用海报
+			// icon = decorateIcon(mContext.getResources(), icon);
 		}
 
 		return icon;
 	}
-
 
 	public void observeIconNeedUpdated(ItemInfo info, Bitmap icon, ComponentName componentName) {
 		String className = componentName == null ? "" : componentName.getClassName();
@@ -133,10 +151,10 @@ public class IconDecorater {
 			mObservedItemInfo.put(className, new WeakReference<ItemInfo>(info));
 			mObservedIcons.put(className, icon);
 		}
-		broadcastToUpdateUI(className,count);
+		broadcastToUpdateUI(className, count);
 	}
 
-	private void broadcastToUpdateUI(String className,int count) {
+	private void broadcastToUpdateUI(String className, int count) {
 		Intent intent = new Intent(ACTION_UPDATE_UI);
 		intent.putExtra(EXTRA_CLS_NAME, className);
 		intent.putExtra(EXTRA_UNREAD_COUNT, count);
@@ -200,7 +218,7 @@ public class IconDecorater {
 					}
 					Bitmap newIcon = markCountIcon(mContext.getResources(), mObservedIcons.get(clsName), unreadNum);
 					itemInfo.setAppIcon(newIcon);
-					broadcastToUpdateUI(clsName,unreadNum);
+					broadcastToUpdateUI(clsName, unreadNum);
 				}
 			}
 		}
@@ -213,17 +231,19 @@ public class IconDecorater {
 	public Bitmap decorateIcon(Resources resources, Bitmap icon, Bitmap bottom) {
 		int appIconSize = (int) resources.getDimension(R.dimen.mygame_app_icon_size);
 		Bitmap bitmapIcon = icon;
-//		int widthD = (int) (bitmapIcon.getWidth() * 0.04);
-//		int heightD = (int) (bitmapIcon.getHeight() * 0.04);
-//		bitmapIcon = PictureUtil.cutBitmap(bitmapIcon, new Rect(widthD, heightD, bitmapIcon.getWidth() - 2 * widthD,
-//				bitmapIcon.getHeight() - 2 * heightD), bitmapIcon.getConfig());
+		// int widthD = (int) (bitmapIcon.getWidth() * 0.04);
+		// int heightD = (int) (bitmapIcon.getHeight() * 0.04);
+		// bitmapIcon = PictureUtil.cutBitmap(bitmapIcon, new Rect(widthD,
+		// heightD, bitmapIcon.getWidth() - 2 * widthD,
+		// bitmapIcon.getHeight() - 2 * heightD), bitmapIcon.getConfig());
 		if (icon.getWidth() != appIconSize || icon.getHeight() != appIconSize) {
 			bitmapIcon = Bitmap.createScaledBitmap(icon, appIconSize, appIconSize, true);
 		}
 
 		Bitmap maskedIcon = maskIcon(mIconMask.getWidth(), mIconMask.getHeight(), bitmapIcon, mIconMask);
-		return overlayBitmaps(bottom.getWidth(), bottom.getHeight(), bottom, maskedIcon,mHighligth); //加底
-//		return overlayBitmaps(maskedIcon.getWidth(), maskedIcon.getHeight(), maskedIcon,mHighligth); //不加底
+		return overlayBitmaps(bottom.getWidth(), bottom.getHeight(), bottom, maskedIcon, mHighligth); // 加底
+		// return overlayBitmaps(maskedIcon.getWidth(), maskedIcon.getHeight(),
+		// maskedIcon,mHighligth); //不加底
 	}
 
 	public Drawable decorateIcon(Resources resources, Drawable drawable) {
@@ -245,7 +265,7 @@ public class IconDecorater {
 		Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 		paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
 		canvas.drawBitmap(icon, left, top, paint);
-//		canvas.drawBitmap(icon, 0, 0, paint);
+		// canvas.drawBitmap(icon, 0, 0, paint);
 		return result;
 	}
 
@@ -349,30 +369,31 @@ public class IconDecorater {
 	public void reLoadIconPattern() {
 		mIconPattern = LoadThemeUtil.getIconPattern(mContext);
 	}
+
 	// public void initIconFlag(){
 	// mIconFlag = MuchConfig.getInstance().isLauncherShortcutNeedBg();
 	// }
-	
-    public int observeFolderIconNeedUpdated(ArrayList<ShortcutInfo> infos) {
-        int unReadCount = 0;
-        if (infos != null) {
-            if (infos.isEmpty()) {
-                return 0;
-            }
-            for (ShortcutInfo info : infos) {
-                String className = info.getIntent().getComponent() == null ? "" : info.getIntent().getComponent()
-                        .getClassName();
-                if (!canIconBeObserved(className)) {
-                    continue;
-                }
 
-                String key = getUnreadQueryKey(className);
-                unReadCount = queryUnreadNum(key);
-                if (unReadCount > 0) {
-                    break; // 如果有未读记录，不需要遍历后面的item
-                }
-            }
-        }
-        return unReadCount;
-    }
+	public int observeFolderIconNeedUpdated(ArrayList<ShortcutInfo> infos) {
+		int unReadCount = 0;
+		if (infos != null) {
+			if (infos.isEmpty()) {
+				return 0;
+			}
+			for (ShortcutInfo info : infos) {
+				String className = info.getIntent().getComponent() == null ? "" : info.getIntent().getComponent()
+						.getClassName();
+				if (!canIconBeObserved(className)) {
+					continue;
+				}
+
+				String key = getUnreadQueryKey(className);
+				unReadCount = queryUnreadNum(key);
+				if (unReadCount > 0) {
+					break; // 如果有未读记录，不需要遍历后面的item
+				}
+			}
+		}
+		return unReadCount;
+	}
 }

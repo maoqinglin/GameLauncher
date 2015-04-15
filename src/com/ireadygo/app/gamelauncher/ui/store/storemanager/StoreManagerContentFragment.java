@@ -1,5 +1,6 @@
 package com.ireadygo.app.gamelauncher.ui.store.storemanager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -8,8 +9,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.content.LocalBroadcastManager;
-import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,6 +21,7 @@ import android.view.ViewGroup;
 
 import com.ireadygo.app.gamelauncher.GameLauncher;
 import com.ireadygo.app.gamelauncher.R;
+import com.ireadygo.app.gamelauncher.appstore.data.GameData;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.appstore.info.item.GameState;
 import com.ireadygo.app.gamelauncher.appstore.manager.GameManager;
@@ -27,106 +31,65 @@ import com.ireadygo.app.gamelauncher.appstore.manager.GameManager.InstallListene
 import com.ireadygo.app.gamelauncher.appstore.manager.GameManager.UninstallListener;
 import com.ireadygo.app.gamelauncher.appstore.manager.UpdateManager;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
-import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.ImageTextMenu;
-import com.ireadygo.app.gamelauncher.ui.store.storemanager.StoreManagerContentAdapter.OnChildFocusChangeListener;
-import com.ireadygo.app.gamelauncher.ui.store.storemanager.StoreManagerContentAdapter.OperatorListener;
-import com.ireadygo.app.gamelauncher.ui.store.storemanager.StoreManagerItem.StoreManagerItemHolder;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.ConfirmDialog;
-import com.ireadygo.app.gamelauncher.ui.widget.HListView;
 import com.ireadygo.app.gamelauncher.ui.widget.StatisticsTitleView;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 import com.ireadygo.app.gamelauncher.utils.PackageUtils;
 
-public class StoreManagerContentFragment extends BaseContentFragment {
-
-	private HMultiListView mStoreManagerListView;
-	private StoreManagerContentAdapter mStoreManagerAdapter;
+public class StoreManagerContentFragment extends BaseContentFragment implements OnClickListener, OnFocusChangeListener {
+	private HMultiListView mMultiListView;
 	private StatisticsTitleView mTitleLayout;
-
-	private InnerOperatorListener mListener = new InnerOperatorListener();
-	private InnerBtnOperatorListener mBtnListener = new InnerBtnOperatorListener();
-
 	private ImageTextMenu mDldMenuItem;
 	private ImageTextMenu mUpgradeMenuItem;
 	private ImageTextMenu mInstalledMenuItem;
 
 	private GameManager mGameManager;
+	private GameManagerType mManagerType = GameManagerType.DOWNLOAD;
 
-	private BroadcastReceiver mUpdateReceiver = new BroadcastReceiver() {
+	private List<AppEntity> mDownloadApps = new ArrayList<AppEntity>();
+	private StoreManagerAdapter mDownloadAdapter;
 
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			if (UpdateManager.ACTION_UPDATABLE_NOTIFICATION.equals(intent
-					.getAction())) {
-				if (mStoreManagerAdapter != null) {
-					updateUpgradeLayout();
-				}
-			}
-		}
-	};
+	private List<AppEntity> mUpgradeApps = new ArrayList<AppEntity>();
+	private StoreManagerAdapter mUpgradeAdapter;
 
-	private OperatorListener mOperatorListener = new OperatorListener() {
+	private List<AppEntity> mInstalledApps = new ArrayList<AppEntity>();
+	private StoreManagerInstalledAdapter mInstalledAdapter;
 
-		@Override
-		public void operator(View view, AppEntity appEntity,
-				GameManagerType type) {
-			operatorItem(appEntity);
-		}
-
-		@Override
-		public void openDetail(View view, AppEntity appEntity,
-				GameManagerType type) {
-			DetailActivity.startSelf(getRootActivity(), appEntity);
-		}
-
-		@Override
-		public void delete(View view, AppEntity appEntity, GameManagerType type) {
-			deleteItem(appEntity);
-		}
-	};
-
-	private void deleteItem(final AppEntity appEntity) {
-		if (appEntity.getGameState() == GameState.LAUNCHABLE
-				|| appEntity.getGameState() == GameState.UPGRADEABLE) {
-			PackageUtils.unInstallApp(getRootActivity(), appEntity.getPkgName());
-		} else {
-			final ConfirmDialog dialog = new ConfirmDialog(getRootActivity());
-			dialog.setPrompt(R.string.store_manager_delete_task_prompt)
-					.setMsg(R.string.store_manager_delete_task_msg)
-					.setConfirmClickListener(new OnClickListener() {
-
-						@Override
-						public void onClick(View v) {
-							dialog.dismiss();
-							mGameManager.delete(appEntity);
-						}
-					});
-			dialog.show();
-		}
-	}
-
-	public StoreManagerContentFragment(Activity activity,
-			BaseMenuFragment menuFragment) {
+	public StoreManagerContentFragment(Activity activity, BaseMenuFragment menuFragment) {
 		super(activity, menuFragment);
 		mGameManager = GameLauncher.instance().getGameManager();
-		mGameManager.addDownloadListener(mListener);
-		mGameManager.addInstallListener(mListener);
-		mGameManager.addUninstallListener(mListener);
-		IntentFilter filter = new IntentFilter(UpdateManager.ACTION_UPDATABLE_NOTIFICATION);
-		LocalBroadcastManager.getInstance(activity).registerReceiver(mUpdateReceiver, filter);
 	}
 
 	@Override
-	public View createView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		mGameManager.addDownloadListener(mDownloadListener);
+		mGameManager.addInstallListener(mInstallListener);
+		mGameManager.addUninstallListener(mUninstallListener);
+		IntentFilter filter = new IntentFilter(UpdateManager.ACTION_UPDATABLE_NOTIFICATION);
+		LocalBroadcastManager.getInstance(getRootActivity()).registerReceiver(mUpdateReceiver, filter);
+
 		View view = inflater.inflate(R.layout.store_manager_fragment, container, false);
 		initView(view);
-		initListener();
 		return view;
+	}
+
+	@Override
+	public void onDestoryView() {
+		super.onDestoryView();
+		mGameManager.removeDownloadListener(mDownloadListener);
+		mGameManager.removeInstallListener(mInstallListener);
+		mGameManager.removeUninstallListener(mUninstallListener);
+		LocalBroadcastManager.getInstance(getRootActivity()).unregisterReceiver(mUpdateReceiver);
+		mDownloadApps.clear();
+		mDownloadAdapter = null;
+		mUpgradeApps.clear();
+		mUpgradeAdapter = null;
+		mInstalledApps.clear();
+		mInstalledAdapter = null;
 	}
 
 	@Override
@@ -135,225 +98,269 @@ public class StoreManagerContentFragment extends BaseContentFragment {
 		getOperationTipsLayout().setAllVisible(View.VISIBLE);
 		mTitleLayout = (StatisticsTitleView) view.findViewById(R.id.store_manager_title_layout);
 
-		mStoreManagerListView = (HMultiListView) view.findViewById(R.id.manager_viewpager);
-		mStoreManagerListView.setIsDelayScroll(true);
-		mDldMenuItem = (ImageTextMenu) view.findViewById(R.id.manager_download);
-		mUpgradeMenuItem = (ImageTextMenu) view.findViewById(R.id.manager_upgrade);
-		mInstalledMenuItem = (ImageTextMenu) view.findViewById(R.id.manager_installed);
-
-		mStoreManagerAdapter = new StoreManagerContentAdapter(getRootActivity(), mStoreManagerListView, GameManagerType.DOWNLOAD);
-		mStoreManagerListView.setAdapter(mStoreManagerAdapter);
-		
-		mTitleLayout.setCount(mStoreManagerAdapter.getData().size());
-		mTitleLayout.setTitle(getResources().getString(R.string.store_manager_downloading)
-				+ getResources().getString(R.string.store_manager_count));
-		setEmptyView(mStoreManagerListView, R.string.game_empty_title, View.GONE, 0);
-	}
-
-	private void initListener() {
-		mStoreManagerAdapter.setOperatorListener(mOperatorListener);
-		mStoreManagerAdapter.setOnChildFocusChange(new OnChildFocusChangeListener() {
-
-					@Override
-					public void onChildFocusChange(StoreManagerItemHolder holder, boolean hasFocus, AppEntity otherApp) {
-						if(hasFocus) {
-							holder.status.setVisibility(View.VISIBLE);
-							holder.downloadSpeedLayout.setVisibility(View.INVISIBLE);
-							holder.icon.setAlpha(1.0f);
-
-							switch (mStoreManagerAdapter.getGameManagerType()) {
-							case DOWNLOAD:
-								mStoreManagerListView.setNextFocusLeftId(R.id.manager_download);
-								break;
-
-							case UPGRADE:
-								mStoreManagerListView.setNextFocusLeftId(R.id.manager_upgrade);
-								break;
-
-							case INSTALLED:
-								mStoreManagerListView.setNextFocusLeftId(R.id.manager_installed);
-								break;
-
-							default:
-								break;
-							}
-						} else {
-							holder.status.setVisibility(View.INVISIBLE);
-						}
-					}
-				});
-
-		mStoreManagerListView.setOnFocusChangeListener(new OnFocusChangeListener() {
-			
-			@Override
-			public void onFocusChange(View v, boolean hasFocus) {
-				if(!hasFocus) {
-					switch (mStoreManagerAdapter.getGameManagerType()) {
-					case DOWNLOAD:
-						mStoreManagerListView.setNextFocusLeftId(R.id.manager_download);
-						break;
-
-					case UPGRADE:
-						mStoreManagerListView.setNextFocusLeftId(R.id.manager_upgrade);
-						break;
-
-					case INSTALLED:
-						mStoreManagerListView.setNextFocusLeftId(R.id.manager_installed);
-						break;
-
-					default:
-						break;
-					}
-				}
-			}
-
-		});
-
-		mStoreManagerListView.setOnItemClickListener(new OnItemClickListener() {
+		mMultiListView = (HMultiListView) view.findViewById(R.id.manager_viewpager);
+		mMultiListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				AppEntity appEntity = (AppEntity)mStoreManagerAdapter.getItem(position);
-				if(appEntity != null){
-					operatorItem(appEntity);
+				AppEntity app = null;
+				switch (mManagerType) {
+				case DOWNLOAD:
+					app = mDownloadApps.get(position);
+					break;
+				case UPGRADE:
+					app = mUpgradeApps.get(position);
+					break;
+				case INSTALLED:
+					app = mInstalledApps.get(position);
+					break;
 				}
+				operatorItem(app);
 			}
 		});
 
-		mDldMenuItem.setOnFocusChangeListener(mBtnListener);
-		mUpgradeMenuItem.setOnFocusChangeListener(mBtnListener);
-		mInstalledMenuItem.setOnFocusChangeListener(mBtnListener);
+		mDldMenuItem = (ImageTextMenu) view.findViewById(R.id.manager_download);
+		mDldMenuItem.setOnFocusChangeListener(this);
+		mDldMenuItem.setOnClickListener(this);
 
-		mDldMenuItem.setOnClickListener(mBtnListener);
-		mUpgradeMenuItem.setOnClickListener(mBtnListener);
-		mInstalledMenuItem.setOnClickListener(mBtnListener);
+		mUpgradeMenuItem = (ImageTextMenu) view.findViewById(R.id.manager_upgrade);
+		mUpgradeMenuItem.setOnFocusChangeListener(this);
+		mUpgradeMenuItem.setOnClickListener(this);
+
+		mInstalledMenuItem = (ImageTextMenu) view.findViewById(R.id.manager_installed);
+		mInstalledMenuItem.setOnFocusChangeListener(this);
+		mInstalledMenuItem.setOnClickListener(this);
+
+		updateLayoutByType(mManagerType);
+
+		newAdapter();
+		setAdapter(mManagerType);
+	}
+
+	private void newAdapter() {
+		if (mDownloadAdapter == null) {
+			mDownloadAdapter = new StoreManagerAdapter(getRootActivity(), mMultiListView, mDownloadApps,
+					GameManagerType.DOWNLOAD);
+		}
+		if (mUpgradeAdapter == null) {
+			mUpgradeAdapter = new StoreManagerAdapter(getRootActivity(), mMultiListView, mUpgradeApps,
+					GameManagerType.UPGRADE);
+		}
+		if (mInstalledAdapter == null) {
+			mInstalledAdapter = new StoreManagerInstalledAdapter(getRootActivity(), mInstalledApps, 2, mMultiListView);
+		}
+		refreshAllData();
+	}
+
+	private void setAdapter(GameManagerType type) {
+		switch (type) {
+		case DOWNLOAD:
+			mMultiListView.setAdapter(mDownloadAdapter);
+			break;
+		case UPGRADE:
+			mMultiListView.setAdapter(mUpgradeAdapter);
+			break;
+		case INSTALLED:
+			mMultiListView.setAdapter(mInstalledAdapter);
+			break;
+		}
+	}
+
+	private void updateLayoutByType(GameManagerType type) {
+		switch (type) {
+		case DOWNLOAD:
+			mTitleLayout.setCount(mDownloadApps.size());
+			mTitleLayout.setTitle(getResources().getString(R.string.store_manager_downloading)
+					+ getResources().getString(R.string.store_manager_count));
+			setEmptyView(mMultiListView, R.string.game_empty_title, View.GONE, 0);
+			mMultiListView.setNextFocusLeftId(R.id.manager_download);
+			mMultiListView.setIsDelayScroll(true);
+			break;
+		case UPGRADE:
+			mTitleLayout.setCount(mUpgradeApps.size());
+			mTitleLayout.setTitle(getResources().getString(R.string.store_manager_updatable)
+					+ getResources().getString(R.string.store_manager_count));
+			setEmptyView(mMultiListView, R.string.update_empty_title, View.GONE, 0);
+			mMultiListView.setNextFocusLeftId(R.id.manager_upgrade);
+			mMultiListView.setIsDelayScroll(true);
+			break;
+		case INSTALLED:
+			mTitleLayout.setCount(mInstalledApps.size());
+			mTitleLayout.setTitle(getResources().getString(R.string.store_manager_launchable)
+					+ getResources().getString(R.string.store_manager_count));
+			setEmptyView(mMultiListView, R.string.game_empty_title, View.GONE, 0);
+			mMultiListView.setNextFocusLeftId(R.id.manager_installed);
+			mMultiListView.setIsDelayScroll(false);
+			break;
+		}
 	}
 
 	@Override
 	protected boolean isCurrentFocus() {
-		return mStoreManagerListView.hasFocus() || mDldMenuItem.isFocused()
-				|| mUpgradeMenuItem.isFocused()
-				|| mInstalledMenuItem.isFocused();
+		return hasFocus(mDldMenuItem, mUpgradeMenuItem, mInstalledMenuItem, mMultiListView);
 	}
 
-	private void updateCurrentLayout() {
-		if (mStoreManagerAdapter == null || mStoreManagerListView == null) {
-			return;
-		}
-		updateDldLayout();
-		updateUpgradeLayout();
-		updateInstalledLayout();
-	}
-
-	private void updateDldLayout() {
-		if (mStoreManagerAdapter.getGameManagerType() == GameManagerType.DOWNLOAD) {
-			mStoreManagerAdapter.refreshData(GameManagerType.DOWNLOAD);
-			mTitleLayout.setCount(mStoreManagerAdapter.getData().size());
-		}
-	}
-
-	private void updateUpgradeLayout() {
-		if (mStoreManagerAdapter.getGameManagerType() == GameManagerType.UPGRADE) {
-			mStoreManagerAdapter.refreshData(GameManagerType.UPGRADE);
-			mTitleLayout.setCount(mStoreManagerAdapter.getData().size());
+	private void operatorItem(AppEntity appEntity) {
+		switch (appEntity.getGameState()) {
+		case INSTALLABLE:
+		case INSTALLING:
+			mGameManager.install(appEntity);
+			break;
+		case LAUNCHABLE:
+			mGameManager.launch(appEntity.getPkgName());
+			break;
+		case UPGRADEABLE:
+			mGameManager.upgrade(appEntity);
+			break;
+		default:
+			mGameManager.download(appEntity);
+			break;
 		}
 	}
 
-	private void updateInstalledLayout() {
-		if (mStoreManagerAdapter.getGameManagerType() == GameManagerType.INSTALLED) {
-			mStoreManagerAdapter.refreshData(GameManagerType.INSTALLED);
-			mTitleLayout.setCount(mStoreManagerAdapter.getData().size());
+	@Override
+	public boolean onBackKey() {
+		if (mMultiListView.hasFocus()) {
+			switch (mManagerType) {
+			case DOWNLOAD:
+				mDldMenuItem.requestFocus();
+				break;
+			case UPGRADE:
+				mUpgradeMenuItem.requestFocus();
+				break;
+			case INSTALLED:
+				mInstalledMenuItem.requestFocus();
+				break;
+			}
+		} else {
+			getMenu().getCurrentItem().requestFocus();
 		}
+		return true;
 	}
 
-	private void updateDldStatus(AppEntity app) {
-		if (mStoreManagerAdapter == null || mStoreManagerListView == null) {
-			return;
-		}
-		if (mStoreManagerAdapter.getGameManagerType() == GameManagerType.DOWNLOAD) {
-			List<HListView> hListViews = mStoreManagerListView.getHListViews();
-			for (HListView hListView : hListViews) {
-				int start = hListView.getFirstVisiblePosition();
-				for (int i = start, j = hListView.getLastVisiblePosition(); i <= j; i++) {
-					AppEntity otherApp = (AppEntity) hListView.getItemAtPosition(i);
-					if (otherApp != null && !TextUtils.isEmpty(otherApp.getAppId())) {
-						if (otherApp.getAppId().equals(app.getAppId())) {
-							List<AppEntity> entities = mStoreManagerAdapter.getData();
-							int posOther = entities.indexOf(otherApp);
-							entities.set(posOther, otherApp);
-							View view = hListView.findViewByPosition(i);
-							if (view != null) {
-								mStoreManagerAdapter.updateOnStateChange((StoreManagerItem) view, app);
-							}
-							return;
-						}
+	@Override
+	public boolean onWaterKey() {
+		if (mMultiListView.hasFocus()) {
+			int selectedPos = mMultiListView.getSelectedItemPosition();
+			AppEntity app = null;
+			if (selectedPos >= 0) {
+				switch (mManagerType) {
+				case DOWNLOAD:
+					if (selectedPos < mDownloadApps.size()) {
+						app = mDownloadApps.get(selectedPos);
 					}
+					break;
+				case UPGRADE:
+					if (selectedPos < mUpgradeApps.size()) {
+						app = mUpgradeApps.get(selectedPos);
+					}
+					break;
+				case INSTALLED:
+					if (selectedPos < mInstalledApps.size()) {
+						app = mInstalledApps.get(selectedPos);
+					}
+					break;
 				}
 			}
+			if (app != null) {
+				deleteItem(app);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private void deleteItem(final AppEntity appEntity) {
+		if (appEntity.getGameState() == GameState.LAUNCHABLE || appEntity.getGameState() == GameState.UPGRADEABLE) {
+			PackageUtils.unInstallApp(getRootActivity(), appEntity.getPkgName());
+		} else {
+			final ConfirmDialog dialog = new ConfirmDialog(getRootActivity());
+			dialog.setPrompt(R.string.store_manager_delete_task_prompt).setMsg(R.string.store_manager_delete_task_msg)
+					.setConfirmClickListener(new OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+							dialog.dismiss();
+							mGameManager.delete(appEntity);
+							refreshDataByType(GameManagerType.DOWNLOAD);
+							refreshDataByType(GameManagerType.UPGRADE);
+						}
+					});
+			dialog.show();
 		}
 	}
 
-	private class InnerBtnOperatorListener implements OnClickListener,
-			OnFocusChangeListener {
+	private BroadcastReceiver mUpdateReceiver = new BroadcastReceiver() {
 
 		@Override
-		public void onFocusChange(View view, boolean hasFocus) {
-			if (hasFocus) {
-				view.setSelected(true);
-				onClick(view);
-			} else {
-				if (mStoreManagerListView.hasFocus()) {
-					view.setSelected(true);
-				} else {
-					view.setSelected(false);
-				}
+		public void onReceive(Context context, Intent intent) {
+			if (UpdateManager.ACTION_UPDATABLE_NOTIFICATION.equals(intent.getAction())) {
+				refreshDataByType(GameManagerType.UPGRADE);
 			}
 		}
+	};
+
+	private int updateDldAppEntity(AppEntity app) {
+		for (int i = 0; i < mDownloadApps.size(); i++) {
+			AppEntity oldApp = mDownloadApps.get(i);
+			if (oldApp.getPkgName().equals(app.getPkgName())) {
+				oldApp.copyFrom(app);
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	private DownloadListener mDownloadListener = new DownloadListener() {
 
 		@Override
-		public void onClick(View v) {
-			switch (v.getId()) {
-			case R.id.manager_download:
-				if (mStoreManagerAdapter.getGameManagerType() != GameManagerType.DOWNLOAD) {
-					mStoreManagerAdapter.refreshData(GameManagerType.DOWNLOAD);
-					mTitleLayout.setCount(mStoreManagerAdapter.getData().size());
-					mTitleLayout.setTitle(getResources().getString(R.string.store_manager_downloading)
-							+ getResources().getString(R.string.store_manager_count));
-					setEmptyView(mStoreManagerListView, R.string.game_empty_title, View.GONE, 0);
+		public void onDownloadStateChange(AppEntity app) {
+			switch (app.getGameState()) {
+			case PAUSED:
+			case TRANSFERING:
+			case QUEUING:
+				int pos = updateDldAppEntity(app);
+				if (pos >= 0 && mManagerType == GameManagerType.DOWNLOAD || mManagerType == GameManagerType.UPGRADE) {
+					mMultiListView.notifyDataSetChanged();
 				}
 				break;
-
-			case R.id.manager_upgrade:
-				if (mStoreManagerAdapter.getGameManagerType() != GameManagerType.UPGRADE) {
-					mStoreManagerAdapter.refreshData(GameManagerType.UPGRADE);
-					mTitleLayout.setCount(mStoreManagerAdapter.getData().size());
-					mTitleLayout.setTitle(getResources().getString(R.string.store_manager_updatable)
-							+ getResources().getString(R.string.store_manager_count));
-					setEmptyView(mStoreManagerListView, R.string.update_empty_title, View.GONE, 0);
-				}
-				break;
-
-			case R.id.manager_installed:
-				if (mStoreManagerAdapter.getGameManagerType() != GameManagerType.INSTALLED) {
-					mStoreManagerAdapter.refreshData(GameManagerType.INSTALLED);
-					mTitleLayout.setCount(mStoreManagerAdapter.getData().size());
-					mTitleLayout.setTitle(getResources().getString(R.string.store_manager_launchable)
-							+ getResources().getString(R.string.store_manager_count));
-				}
-				break;
-
 			default:
+				refreshDataByType(GameManagerType.DOWNLOAD);
 				break;
 			}
 		}
-	}
 
-	private class InnerOperatorListener implements DownloadListener,
-			InstallListener, UninstallListener {
+		@Override
+		public void onDownloadProgressChange(AppEntity app) {
+			int pos = updateDldAppEntity(app);
+			if (pos >= 0 && mManagerType == GameManagerType.DOWNLOAD || mManagerType == GameManagerType.UPGRADE) {
+				View view = mMultiListView.getItemView(pos);
+				if (view != null && view instanceof StoreManagerItem) {
+					StoreManagerItem item = (StoreManagerItem) view;
+					item.updateProgress(app.getDownloadSize(), app.getTotalSize(), app.getDownloadSpeed());
+				}
+			}
+		}
+
+		@Override
+		public void onDownloadItemAdd(AppEntity app) {
+			refreshAllData();
+		}
+
+		@Override
+		public void onDownloadError(AppEntity app, GameManagerException de) {
+			int pos = updateDldAppEntity(app);
+			if (pos >= 0 && mManagerType == GameManagerType.DOWNLOAD || mManagerType == GameManagerType.UPGRADE) {
+				mMultiListView.notifyDataSetChanged();
+			}
+		}
+	};
+
+	private InstallListener mInstallListener = new InstallListener() {
 
 		@Override
 		public void onInstallStateChange(AppEntity app) {
-			updateCurrentLayout();
+			refreshAllData();
 		}
 
 		@Override
@@ -365,124 +372,134 @@ public class StoreManagerContentFragment extends BaseContentFragment {
 		public void onInstallError(AppEntity app, GameManagerException ie) {
 
 		}
+	};
 
-		@Override
-		public void onDownloadItemAdd(AppEntity app) {
-			updateCurrentLayout();
-		}
-
-		@Override
-		public void onDownloadStateChange(AppEntity app) {
-			updateCurrentLayout();
-		}
-
-		@Override
-		public void onDownloadProgressChange(AppEntity app) {
-			updateDldStatus(app);
-		}
-
-		@Override
-		public void onDownloadError(AppEntity app, GameManagerException de) {
-			updateDldStatus(app);
-		}
-
-		@Override
-		public void onUninstallComplete(String pkgName) {
-			updateCurrentLayout();
-		}
+	private UninstallListener mUninstallListener = new UninstallListener() {
 
 		@Override
 		public void onUninstallError(String pkgName, GameManagerException ge) {
 
 		}
+
+		@Override
+		public void onUninstallComplete(String pkgName) {
+			refreshDataByType(GameManagerType.INSTALLED);
+		}
+	};
+
+	@Override
+	public void onClick(View v) {
+		GameManagerType type = mManagerType;
+		boolean isChangeType = false;
+		switch (v.getId()) {
+		case R.id.manager_download:
+			if (type != GameManagerType.DOWNLOAD) {
+				type = GameManagerType.DOWNLOAD;
+				isChangeType = true;
+			}
+			break;
+		case R.id.manager_upgrade:
+			if (type != GameManagerType.UPGRADE) {
+				type = GameManagerType.UPGRADE;
+				isChangeType = true;
+			}
+			break;
+		case R.id.manager_installed:
+			if (type != GameManagerType.INSTALLED) {
+				type = GameManagerType.INSTALLED;
+				isChangeType = true;
+			}
+			break;
+		}
+		if (isChangeType) {
+			mManagerType = type;
+			updateLayoutByType(type);
+			setAdapter(type);
+		}
 	}
 
+	@Override
+	public void onFocusChange(View view, boolean hasFocus) {
+		if (hasFocus) {
+			mDldMenuItem.setSelected(false);
+			mUpgradeMenuItem.setSelected(false);
+			mInstalledMenuItem.setSelected(false);
+			view.setSelected(true);
+			onClick(view);
+		} else {
+			if (mMultiListView.hasFocus()) {
+				view.setSelected(true);
+			} else {
+				view.setSelected(false);
+			}
+		}
+	}
+
+	private void refreshAllData() {
+		refreshDataByType(GameManagerType.DOWNLOAD);
+		refreshDataByType(GameManagerType.UPGRADE);
+		refreshDataByType(GameManagerType.INSTALLED);
+	}
+
+	private void refreshDataByType(GameManagerType type) {
+		new LoadDataThread(type).start();
+	}
+
+	private class LoadDataThread extends Thread {
+		private static final int WHAT_LOAD_DATA_SUCCESS = 1;
+		private GameManagerType mInternalType = GameManagerType.DOWNLOAD;
+
+		private Handler mMainHandler = new Handler(getRootActivity().getMainLooper()) {
+			public void handleMessage(Message msg) {
+				switch (msg.what) {
+				case WHAT_LOAD_DATA_SUCCESS:
+					updateLayoutByType(mManagerType);
+					if (mMultiListView != null && mManagerType == mInternalType) {
+						mMultiListView.notifyDataSetChanged();
+					}
+					break;
+				default:
+					break;
+				}
+			};
+		};
+
+		public LoadDataThread(GameManagerType type) {
+			Log.d("liu.js", "new LoadDataThread--type=" + type);
+			this.mInternalType = type;
+		}
+
+		@Override
+		public void run() {
+			List<AppEntity> apps = null;
+			switch (mInternalType) {
+			case DOWNLOAD:
+				apps = GameData.getInstance(getRootActivity()).getDownloadGames();
+				mDownloadApps.clear();
+				if (apps != null) {
+					mDownloadApps.addAll(apps);
+				}
+				break;
+			case UPGRADE:
+				apps = GameData.getInstance(getRootActivity()).getUpdateAbleGames(AppEntity.CAN_UPGRADE);
+				mUpgradeApps.clear();
+				if (apps != null) {
+					mUpgradeApps.addAll(apps);
+				}
+				break;
+			case INSTALLED:
+				apps = GameData.getInstance(getRootActivity()).getLauncherAbleGames();
+				mInstalledApps.clear();
+				if (apps != null) {
+					mInstalledApps.addAll(apps);
+				}
+				break;
+			}
+			mMainHandler.sendEmptyMessage(WHAT_LOAD_DATA_SUCCESS);
+		}
+	}
+	
 	public enum GameManagerType {
 		DOWNLOAD, UPGRADE, INSTALLED
-	}
-
-	private void operatorItem(AppEntity appEntity) {
-		switch (appEntity.getGameState()) {
-		case INSTALLABLE:
-		case INSTALLING:
-			mGameManager.install(appEntity);
-			break;
-			
-		case LAUNCHABLE:
-			mGameManager.launch(appEntity.getPkgName());
-			break;
-			
-		case UPGRADEABLE:
-			mGameManager.upgrade(appEntity);
-			break;
-			
-		default:
-			mGameManager.download(appEntity);
-			break;
-		}
-	}
-
-	@Override
-	public boolean onBackKey() {
-		return onMoonKey();
-	}
-
-	@Override
-	public boolean onMoonKey() {
-		setNextFocus();
-		return true;
-	}
-
-	@Override
-	public boolean onWaterKey() {
-		AppEntity appEntity = getCurrentSelectedItem();
-		if (appEntity != null) {
-			deleteItem(appEntity);
-		}
-		return true;
-	}
-
-	@Override
-	public boolean onMountKey(){
-		AppEntity appEntity = getCurrentSelectedItem();
-		if (appEntity != null) {
-			DetailActivity.startSelf(getRootActivity(), appEntity);
-		}
-		return true;
-	}
-
-	private void setNextFocus() {
-		if(mDldMenuItem.isFocused() || mUpgradeMenuItem.isFocused() || mInstalledMenuItem.isFocused()) {
-			getMenu().getCurrentItem().requestFocus();
-		} else {
-			switch (mStoreManagerAdapter.getGameManagerType()) {
-			case DOWNLOAD:
-				mDldMenuItem.requestFocus();
-				break;
-
-			case UPGRADE:
-				mUpgradeMenuItem.requestFocus();
-				break;
-
-			case INSTALLED:
-				mInstalledMenuItem.requestFocus();
-				break;
-
-			default:
-				break;
-			}
-		}
-		
-	}
-
-	private AppEntity getCurrentSelectedItem() {
-		AppEntity appEntity = null;
-		if (null != mStoreManagerListView) {
-			Object selectedItem = mStoreManagerListView.getSelectedItem();
-			if (null != selectedItem && selectedItem instanceof AppEntity) {
-				appEntity = (AppEntity) selectedItem;
-			}
-		}
-		return appEntity;
 	}
 }

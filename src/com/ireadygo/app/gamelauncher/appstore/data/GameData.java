@@ -307,7 +307,7 @@ public class GameData implements IDownloadData, IInstallData, Closeable {
 				+ GameAppStatusColumns.COLUMN_APP_GAME_STATUS + " =? or " + GameAppStatusColumns.COLUMN_APP_GAME_STATUS
 				+ " =? or " + GameAppStatusColumns.COLUMN_APP_GAME_STATUS + " =? or "
 				+ GameAppStatusColumns.COLUMN_APP_GAME_STATUS + " =? or " + GameAppStatusColumns.COLUMN_APP_GAME_STATUS
-				+ " =? " + " order by " + GameAppStatusColumns.COLUMN_CREATE_TIME + " desc ";
+				+ " =? ";
 		Cursor cursor = mDB.rawQuery(sql, new String[] { GameState.QUEUING.toString(),
 				GameState.TRANSFERING.toString(), GameState.PAUSED.toString(), GameState.ERROR.toString(),
 				GameState.INSTALLABLE.toString() });
@@ -533,14 +533,30 @@ public class GameData implements IDownloadData, IInstallData, Closeable {
 		return getGameListByStatus(GameState.LAUNCHABLE);
 	}
 
+//	@Override
+//	public List<AppEntity> getUpdateAbleGames(int updateFlag) {
+//		List<AppEntity> items = new ArrayList<AppEntity>();
+//		String sql = "select * from " + GameAppStatusColumns.TABLE_NAME + " where "
+//				+ GameAppStatusColumns.COLUMN_APP_GAME_STATUS + " =? and " + GameAppStatusColumns.COLUMN_IS_UPDATEABLE
+//				+ " =? ";
+//		Cursor cursor = mDB
+//				.rawQuery(sql, new String[] { GameState.UPGRADEABLE.toString(), String.valueOf(updateFlag) });
+//		if (cursor != null && cursor.moveToFirst()) {
+//			items = new ArrayList<AppEntity>(cursor.getCount());
+//			do {
+//				items.add(transferCursorToDldItem(cursor));
+//			} while (cursor.moveToNext());
+//		}
+//		closeCursor(cursor);
+//		return items;
+//	}
+	
 	@Override
 	public List<AppEntity> getUpdateAbleGames(int updateFlag) {
 		List<AppEntity> items = new ArrayList<AppEntity>();
 		String sql = "select * from " + GameAppStatusColumns.TABLE_NAME + " where "
-				+ GameAppStatusColumns.COLUMN_APP_GAME_STATUS + " =? and " + GameAppStatusColumns.COLUMN_IS_UPDATEABLE
-				+ " =? ";
-		Cursor cursor = mDB
-				.rawQuery(sql, new String[] { GameState.UPGRADEABLE.toString(), String.valueOf(updateFlag) });
+				+ GameAppStatusColumns.COLUMN_IS_UPDATEABLE + " =? ";
+		Cursor cursor = mDB.rawQuery(sql, new String[] { String.valueOf(updateFlag) });
 		if (cursor != null && cursor.moveToFirst()) {
 			items = new ArrayList<AppEntity>(cursor.getCount());
 			do {

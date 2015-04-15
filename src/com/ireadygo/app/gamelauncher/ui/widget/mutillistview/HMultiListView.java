@@ -762,6 +762,17 @@ public class HMultiListView extends LinearLayout {
 		this.mIsDelayScroll = isDelayScroll;
 	}
 
+	public View getItemView(int pos){
+		if(mHMultiBaseAdapter == null || mHMultiBaseAdapter.getData() == null){
+			return null;
+		}
+		if(pos < 0 || pos >= mHMultiBaseAdapter.getData().size()){
+			return null;
+		}
+		int row = pos % mHMultiBaseAdapter.getHListNum();
+		int column = pos / mHMultiBaseAdapter.getHListNum();
+		return mHListViews.get(row).findViewById(column);
+	}
 }
 
 interface OnSyncItemClickListener {

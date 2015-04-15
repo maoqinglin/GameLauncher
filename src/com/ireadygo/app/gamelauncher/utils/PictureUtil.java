@@ -279,6 +279,9 @@ public class PictureUtil {
 	}
 
 	public static Bitmap readBitmap(Context context, final String path) {
+		if(TextUtils.isEmpty(path)){
+			return null;
+		}
 		try {
 			FileInputStream stream = new FileInputStream(path);
 			BitmapFactory.Options opts = new BitmapFactory.Options();

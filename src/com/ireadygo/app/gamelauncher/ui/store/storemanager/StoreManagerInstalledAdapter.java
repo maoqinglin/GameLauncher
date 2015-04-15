@@ -1,56 +1,51 @@
-package com.ireadygo.app.gamelauncher.game.adapter;
+package com.ireadygo.app.gamelauncher.ui.store.storemanager;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView.ScaleType;
 
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.data.GameData;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
-import com.ireadygo.app.gamelauncher.game.info.ItemInfo;
-import com.ireadygo.app.gamelauncher.game.info.ShortcutInfo;
+import com.ireadygo.app.gamelauncher.game.data.GameLauncherAppState;
 import com.ireadygo.app.gamelauncher.ui.item.AppItem;
 import com.ireadygo.app.gamelauncher.ui.item.AppItem.AppItemHolder;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemLongClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiBaseAdapter;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
-import com.ireadygo.app.gamelauncher.utils.PackageUtils;
-import com.ireadygo.app.gamelauncher.utils.PictureUtil;
 
-public class AppAdapter implements HMultiBaseAdapter {
+public class StoreManagerInstalledAdapter implements HMultiBaseAdapter {
 
 	private Context mContext;
-	private List<ItemInfo> appList = new LinkedList<ItemInfo>();
-	private boolean mIsLongClickable;
+	private List<AppEntity> mAppList = new ArrayList<AppEntity>();
 	private HMultiListView mHMultiListView;
 	private int mListViewNum;
+	private PackageManager mPkgManager;
 
-	public AppAdapter(Context context, List<ItemInfo> list, int listViewNum, HMultiListView hListView) {
+	public StoreManagerInstalledAdapter(Context context, List<AppEntity> list, int listViewNum, HMultiListView hListView) {
 		mHMultiListView = hListView;
 		mListViewNum = listViewNum;
-		if (mHMultiListView != null) {
-			mHMultiListView.setOnItemLongClickListener(mOnItemLongClickListener);
-		}
 		mContext = context;
-		appList.clear();
-		this.appList = list;
+		mAppList.clear();
+		this.mAppList = list;
+		mPkgManager = mContext.getPackageManager();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		if (appList == null || position > appList.size() - 1) {
+		if (mAppList == null || position > mAppList.size() - 1) {
 			return null;
 		}
-		return appList.get(position);
+		return mAppList.get(position);
 	}
 
 	@Override
@@ -70,31 +65,33 @@ public class AppAdapter implements HMultiBaseAdapter {
 	public void bindView(final int position, View convertView) {
 		convertView.setVisibility(View.VISIBLE);
 		final AppItemHolder holder = ((AppItem) convertView).getHolder();
-		if (null != holder && !appList.isEmpty() && position < appList.size()) {
-			ItemInfo info = appList.get(position);
-			if (info != null) {
-				Bitmap icon = info.getAppIcon();
-				if (icon != null) {
-					holder.icon.setImageBitmap(icon);
-					holder.title.setText(info.getTitle().toString().trim());
-					updateDeleteView(holder, info);
-					holder.uninstallIcon.setOnClickListener(new OnClickListener() {
-
-						@Override
-						public void onClick(View v) {
-							PackageUtils.unInstallApp(mContext, appList.get(position).packageName);
-						}
-					});
-				}
-			}
+		if (position < mAppList.size()) {
+			AppEntity app = mAppList.get(position);
+			holder.title.setText(app.getName());
+			Log.d("liu.js", "displayIcon--start time=" + System.currentTimeMillis());
+			displayIcon(holder, app);
+			Log.d("liu.js", "displayIcon--end time=" + System.currentTimeMillis());
 		}
 	}
 
-	public void updateDeleteView(AppItemHolder holder, ItemInfo info) {
-		if (isLongClickable() && (info instanceof ShortcutInfo && !info.isSystemApp)) {
-			holder.uninstallIcon.setVisibility(View.VISIBLE);
+	private void displayIcon(AppItemHolder holder, AppEntity app) {
+		String pkgName = app.getPkgName();
+		Bitmap icon = GameData.getInstance(mContext).getPosterIconByPkgName(pkgName);
+		if (icon == null) {
+			// PackageInfo info = PackageUtils.getPkgInfo(mContext,
+			// app.getPkgName());
+			// if (info != null) {
+			// icon = new IconDecorater(mContext).decorateIcon(info);
+			// }
+			Intent intent = mPkgManager.getLaunchIntentForPackage(pkgName);
+			if (intent != null) {
+				icon = GameLauncherAppState.getInstance(mContext).getIconCache().getIcon(intent);
+			}
+		}
+		if (icon == null) {
+			holder.icon.setImageResource(R.drawable.store_app_icon_normal);
 		} else {
-			holder.uninstallIcon.setVisibility(View.INVISIBLE);
+			holder.icon.setImageBitmap(icon);
 		}
 	}
 
@@ -102,26 +99,10 @@ public class AppAdapter implements HMultiBaseAdapter {
 
 		@Override
 		public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-			mIsLongClickable = true;
 			mHMultiListView.notifyDataSetChanged();
 			return true;
 		}
 	};
-
-	public void unDisplayGameDeleteView() {
-		if (isLongClickable()) {
-			setIsLongClickable(false);
-			mHMultiListView.notifyDataSetChanged();
-		}
-	}
-
-	public boolean isLongClickable() {
-		return mIsLongClickable;
-	}
-
-	public void setIsLongClickable(boolean isLongClickable) {
-		this.mIsLongClickable = isLongClickable;
-	}
 
 	@Override
 	public BaseAdapter getAdapter() {
@@ -134,8 +115,8 @@ public class AppAdapter implements HMultiBaseAdapter {
 	}
 
 	@Override
-	public List<ItemInfo> getData() {
-		return appList;
+	public List<AppEntity> getData() {
+		return mAppList;
 	}
 
 	@Override

@@ -7,7 +7,7 @@
         <item name="android:textSize">48sp</item>
         <item name="android:shadowColor">#1F000000</item>
         <item name="android:shadowDx">2</item>
-        <item name="android:shadowDy">50</item>
+        <item name="android:shadowDy">5</item>
         <item name="android:shadowRadius">10</item>
     </style>
     <!-- 商店选项 -->

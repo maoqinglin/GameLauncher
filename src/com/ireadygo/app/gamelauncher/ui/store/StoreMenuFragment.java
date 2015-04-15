@@ -16,6 +16,7 @@ import com.ireadygo.app.gamelauncher.ui.store.favoriteapps.FavoriteAppsFragment;
 import com.ireadygo.app.gamelauncher.ui.store.recommend.RecommendFragment;
 import com.ireadygo.app.gamelauncher.ui.store.search.SearchFragment;
 import com.ireadygo.app.gamelauncher.ui.store.storemanager.StoreManagerContentFragment;
+import com.ireadygo.app.gamelauncher.ui.store.storemanager.StoreManagerContentFragment;
 
 public class StoreMenuFragment extends BaseMenuFragment {
 

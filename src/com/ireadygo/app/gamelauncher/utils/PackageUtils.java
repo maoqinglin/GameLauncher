@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.Signature;
 import android.graphics.Bitmap;
@@ -25,6 +26,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
+import com.ireadygo.app.gamelauncher.game.utils.IconDecorater;
 import com.umeng.analytics.MobclickAgent;
 
 public class PackageUtils {
@@ -186,9 +188,15 @@ public class PackageUtils {
 		}
 		PackageManager pm = context.getPackageManager();
 		if (null != pm) {
-			Drawable icon = pkgInfo.applicationInfo.loadIcon(pm);
-			if (null != icon) {
-				iconPath = copyImage2Local(context, PictureUtil.drawableToBitmap(icon));
+			Intent mainIntent = pm.getLaunchIntentForPackage(pkgInfo.packageName);
+			if(mainIntent != null){
+				final ResolveInfo resolveInfo = pm.resolveActivity(mainIntent, 0);
+				if(resolveInfo != null){
+					Bitmap icon = new IconDecorater(context).decorateIcon(resolveInfo);
+					if (null != icon) {
+						iconPath = copyImage2Local(context, icon);
+					}	
+				}
 			}
 		}
 		return iconPath;
@@ -242,32 +250,32 @@ public class PackageUtils {
 		}
 		return false;
 	}
-	
-    public static boolean isSystemApp(Context context, String packageName) throws NameNotFoundException {
-        if(TextUtils.isEmpty(packageName)){
-            return false;
-        }
-        android.content.pm.ApplicationInfo app = context.getPackageManager().getPackageInfo(packageName, 0).applicationInfo;
-        return isSystemApp(app);
-    }
-    
-    public static boolean isSystemApp(android.content.pm.ApplicationInfo app) {
-        return ((app.flags & android.content.pm.ApplicationInfo.FLAG_SYSTEM) != 0)
-                || ((app.flags & android.content.pm.ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0);
-    }
 
-    public static void unInstallApp(Context context, String pkgName) {
-        if (!TextUtils.isEmpty(pkgName)) {
-        	HashMap<String, String> map = new HashMap<String, String>();
-        	map.put("PkgName", pkgName);
-        	MobclickAgent.onEvent(context, "uninstall_app", map);
+	public static boolean isSystemApp(Context context, String packageName) throws NameNotFoundException {
+		if (TextUtils.isEmpty(packageName)) {
+			return false;
+		}
+		android.content.pm.ApplicationInfo app = context.getPackageManager().getPackageInfo(packageName, 0).applicationInfo;
+		return isSystemApp(app);
+	}
 
-        	Uri packageUri = Uri.parse("package:" + pkgName);
-            Intent deleteIntent = new Intent();
-            deleteIntent.setAction(Intent.ACTION_DELETE);
-            deleteIntent.setData(packageUri);
-            deleteIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(deleteIntent);
-        }
-    }
+	public static boolean isSystemApp(android.content.pm.ApplicationInfo app) {
+		return ((app.flags & android.content.pm.ApplicationInfo.FLAG_SYSTEM) != 0)
+				|| ((app.flags & android.content.pm.ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0);
+	}
+
+	public static void unInstallApp(Context context, String pkgName) {
+		if (!TextUtils.isEmpty(pkgName)) {
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("PkgName", pkgName);
+			MobclickAgent.onEvent(context, "uninstall_app", map);
+
+			Uri packageUri = Uri.parse("package:" + pkgName);
+			Intent deleteIntent = new Intent();
+			deleteIntent.setAction(Intent.ACTION_DELETE);
+			deleteIntent.setData(packageUri);
+			deleteIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			context.startActivity(deleteIntent);
+		}
+	}
 }

@@ -18,6 +18,7 @@ package com.ireadygo.app.gamelauncher.utils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -426,4 +427,17 @@ public class Utils {
 		}
 	}
 
+	public static String formatSpeedText(long speed) {
+		String speedStr = "";
+		int kb = 1024;
+		int mb = 1024 * kb;
+		if (speed < kb) {
+			speedStr = speed + "B/s";
+		} else if (speed < mb) {
+			speedStr = speed / kb + "KB/s";
+		} else {
+			speedStr = new DecimalFormat("#.00").format((float) speed / mb) + "MB/s";
+		}
+		return speedStr;
+	}
 }

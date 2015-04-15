@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clipChildren="false"
+    android:clipToPadding="false" >
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="@dimen/mygame_app_width"
+        android:layout_height="@dimen/mygame_app_bg_height"
+        android:src="@drawable/item_background_rectangle_selector" />
+
+    <LinearLayout
+        android:layout_width="@dimen/mygame_app_width"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:orientation="vertical" >
+
+        <FrameLayout
+            android:id="@+id/icon_layout"
+            android:layout_width="@dimen/mygame_app_width"
+            android:layout_height="@dimen/mygame_app_height"
+            android:clipChildren="false"
+            android:clipToPadding="false" >
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/app_item_icon" />
+
+            <View
+                android:id="@+id/mask"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/black_first_transparency" />
+
+            <LinearLayout
+                android:id="@+id/manager_item_speed_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/manager_item_download_speed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="50kb/s"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/store_manager_speed_text_size" />
+
+                <TextView
+                    android:id="@+id/manager_item_download_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="266MB/524MB"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/store_manager_speed_text_size" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/manager_item_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/store_manager_status_queue"
+                android:visibility="invisible" />
+
+            <ProgressBar
+                android:id="@+id/manager_item_download_progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="@dimen/store_manager_progress_width"
+                android:layout_height="@dimen/store_manager_progress_height"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_marginBottom="@dimen/store_manager_progress_margin_bottom"
+                android:background="@android:color/darker_gray"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:max="100"
+                android:progress="0"
+                android:progressDrawable="@drawable/progress_selector_yellow"
+                android:visibility="visible" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/mygame_game_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/mygame_app_name_height"
+            android:layout_gravity="center"
+            android:ellipsize="marquee"
+            android:gravity="center"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scaleX="0.9"
+            android:scaleY="0.9"
+            android:singleLine="true"
+            android:text="太极熊猫" />
+    </LinearLayout>
+
+</FrameLayout>
