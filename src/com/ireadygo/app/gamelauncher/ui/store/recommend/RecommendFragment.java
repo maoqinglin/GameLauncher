@@ -194,7 +194,6 @@ public class RecommendFragment extends BaseContentFragment {
 			info.scrollX = scrollX;
 			info.listWidth = listWidth;
 			info.listTotalWidth = totalWidth;
-			Log.d("liu.js", "StoreFragment--scrollX=" + scrollX + "|totalWidth=" + totalWidth);
 			return info;
 		}
 	};

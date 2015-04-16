@@ -13,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
 
 import com.ireadygo.app.gamelauncher.GameLauncher;
 import com.ireadygo.app.gamelauncher.R;
@@ -22,58 +23,65 @@ import com.ireadygo.app.gamelauncher.ui.base.BaseActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
+import com.viewpagerindicator.PageIndicator;
 
 public class ScreenPictureActivity extends BaseActivity {
 
 	private ViewPager mViewPager;
 	private ImageLoader mImageLoader;
 	private List<ImageView> mViews = new ArrayList<ImageView>();
+	private PageIndicator mPageIndicator;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.screen_picture_activity);
-		final AppEntity appEntity = (AppEntity)getIntent().getParcelableExtra("APP");
-		if(appEntity != null) {
+		final AppEntity appEntity = (AppEntity) getIntent().getParcelableExtra("APP");
+		if (appEntity != null) {
 			mImageLoader = GameLauncher.instance().getGameInfoHub().getImageLoader();
 			for (int i = 0; i < appEntity.getSceenshotUrlList().size(); i++) {
 				final ImageView imageView = new ImageView(this);
-				mImageLoader.displayImage(appEntity.getSceenshotUrlList().get(i), imageView, new ImageLoadingListener() {
+				imageView.setScaleType(ScaleType.CENTER_INSIDE);
+				mImageLoader.displayImage(appEntity.getSceenshotUrlList().get(i), imageView,
+						new ImageLoadingListener() {
 
-					@Override
-					public void onLoadingStarted(String imageUri, View view) {
-						
-					}
+							@Override
+							public void onLoadingStarted(String imageUri, View view) {
 
-					@Override
-					public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-						
-					}
+							}
 
-					@Override
-					public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-						if (loadedImage.getWidth() < loadedImage.getHeight()) {
-							Matrix matrix = new Matrix();
-							matrix.reset();
-							matrix.setRotate(-90);
-							imageView.setImageBitmap(Bitmap.createBitmap(loadedImage, 0, 0, loadedImage.getWidth(),
-									loadedImage.getHeight(), matrix, true));
-						} else {
-							imageView.setImageBitmap(loadedImage);
-						}
-					}
+							@Override
+							public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
 
-					@Override
-					public void onLoadingCancelled(String imageUri, View view) {
-						
-					}
-				});
+							}
+
+							@Override
+							public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+								if (appEntity != null && appEntity.isScreenshotVertical()) {
+									imageView.setImageBitmap(loadedImage);
+								} else {
+									Matrix matrix = new Matrix();
+									matrix.reset();
+									matrix.setRotate(-90);
+									imageView.setImageBitmap(Bitmap.createBitmap(loadedImage, 0, 0,
+											loadedImage.getWidth(), loadedImage.getHeight(), matrix, true));
+								}
+							}
+
+							@Override
+							public void onLoadingCancelled(String imageUri, View view) {
+
+							}
+						});
 				mViews.add(imageView);
 			}
 
 			mViewPager = (ViewPager) findViewById(R.id.viewpager);
 			mViewPager.setAdapter(new ScreenPageAdapter(mViews));
 			mViewPager.setCurrentItem(getIntent().getIntExtra("NO", 0));
+
+			mPageIndicator = (PageIndicator) findViewById(R.id.viewpager_indicator);
+			mPageIndicator.setViewPager(mViewPager);
 		}
 	}
 
@@ -95,7 +103,7 @@ public class ScreenPictureActivity extends BaseActivity {
 
 		@Override
 		public void destroyItem(ViewGroup container, int position, Object object) {
-			((ViewGroup)container).removeView(mList.get(position));
+			((ViewGroup) container).removeView(mList.get(position));
 		}
 
 		@Override
@@ -105,7 +113,7 @@ public class ScreenPictureActivity extends BaseActivity {
 
 		@Override
 		public Object instantiateItem(ViewGroup container, int position) {
-			((ViewGroup)container).addView(mList.get(position), 0);
+			((ViewGroup) container).addView(mList.get(position), 0);
 			return mList.get(position);
 		}
 
@@ -113,10 +121,10 @@ public class ScreenPictureActivity extends BaseActivity {
 		public boolean isViewFromObject(View arg0, Object arg1) {
 			return arg0 == (arg1);
 		}
-		
+
 	}
-	
-	public static void startSelf(Context context,AppEntity appEntity,int pictureIndex){
+
+	public static void startSelf(Context context, AppEntity appEntity, int pictureIndex) {
 		Intent intent = new Intent(context, ScreenPictureActivity.class);
 		Bundle bundle = new Bundle();
 		bundle.putParcelable("APP", appEntity);

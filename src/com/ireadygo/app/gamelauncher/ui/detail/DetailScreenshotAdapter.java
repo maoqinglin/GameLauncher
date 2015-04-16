@@ -101,11 +101,6 @@ public class DetailScreenshotAdapter extends BaseAdapter {
 			ImageLoader.getInstance().loadImage(mUrlList.get(position), new SimpleImageLoadingListener() {
 				@Override
 				public void onLoadingComplete(String url, View view, Bitmap bitmap) {
-					Log.d("liu.js", "\n\ronLoadingComplete--url=" + url);
-					Log.d("liu.js", "onLoadingComplete--view=" + view);
-					Log.d("liu.js", "onLoadingComplete--bitmap=" + bitmap);
-					Log.d("liu.js", "onLoadingComplete--iconView=" + iconView);
-					Log.d("liu.js", "onLoadingComplete--position=" + position);
 					if (mAppEntity.isScreenshotVertical()) {
 						iconView.setImageBitmap(bitmap);
 					} else {

@@ -10,7 +10,6 @@ import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
 public class BootCompletedReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		Log.d("liu.js", "开机启动完成");
 		if(!PreferenceUtils.isFirstLaunch()){
 			Intent startIntent = new Intent(context, HandleDescriptionActivity.class);
 			startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

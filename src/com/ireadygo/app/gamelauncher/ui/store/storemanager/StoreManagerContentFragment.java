@@ -464,7 +464,6 @@ public class StoreManagerContentFragment extends BaseContentFragment implements 
 		};
 
 		public LoadDataThread(GameManagerType type) {
-			Log.d("liu.js", "new LoadDataThread--type=" + type);
 			this.mInternalType = type;
 		}
 

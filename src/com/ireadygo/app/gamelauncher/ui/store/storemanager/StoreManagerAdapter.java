@@ -65,10 +65,8 @@ public class StoreManagerAdapter implements HMultiBaseAdapter {
 
 	private void displayIcon(StoreManagerItemHolder holder, AppEntity app) {
 		Bitmap icon = GameData.getInstance(mContext).getPosterIconByPkgName(app.getPkgName());
-		Log.d("liu.js", "displayIcon--poster=" + icon);
 		if(icon == null){
 			String iconUrl = app.getPosterIconUrl();
-			Log.d("liu.js", "displayIcon--remote poster=" + iconUrl);
 			if(TextUtils.isEmpty(iconUrl)){
 				iconUrl = app.getRemoteIconUrl();
 			}
@@ -77,9 +75,7 @@ public class StoreManagerAdapter implements HMultiBaseAdapter {
 				return;
 			}
 			iconUrl = app.getLocalIconUrl();
-			Log.d("liu.js", "displayIcon--LocaliconUrl=" + icon);
 			icon = PictureUtil.readBitmap(mContext, iconUrl);
-			Log.d("liu.js", "displayIcon--LocalIcon=" + icon);
 		}
 		if (icon == null) {
 			holder.icon.setImageResource(R.drawable.snail_icon_default);

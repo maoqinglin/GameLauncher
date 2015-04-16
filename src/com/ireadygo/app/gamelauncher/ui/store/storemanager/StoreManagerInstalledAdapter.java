@@ -68,9 +68,7 @@ public class StoreManagerInstalledAdapter implements HMultiBaseAdapter {
 		if (position < mAppList.size()) {
 			AppEntity app = mAppList.get(position);
 			holder.title.setText(app.getName());
-			Log.d("liu.js", "displayIcon--start time=" + System.currentTimeMillis());
 			displayIcon(holder, app);
-			Log.d("liu.js", "displayIcon--end time=" + System.currentTimeMillis());
 		}
 	}
 
