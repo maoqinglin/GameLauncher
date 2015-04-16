@@ -57,7 +57,7 @@
                     android:layout_marginRight="@dimen/detail_icon_margin_right"
                     android:layout_marginTop="@dimen/detail_icon_margin_top"
                     android:background="@drawable/app_item_icon_bg"
-                    android:src="@drawable/store_app_icon_normal" />
+                    android:src="@drawable/snail_icon_default" />
 
                 <LinearLayout
                     android:layout_width="@dimen/detail_name_layout_width"
@@ -195,7 +195,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:lineSpacingExtra="@dimen/detail_intro_line_spacing"
-                            android:text="　　在Android中，用户往往会把所有的字符串保存在string.xml中，目的是方便统一管理，并且利于国际化，但是在这些字符串中直接输入一些符号是不起任何效果的，比如空格，换行，大于号小于号等，这就需要使用转义字符来进行转移，这样才能在使用时正确显示字符。在Android中，用户往往会把所有的字符串保存在string.xml中，目的是方便统一管理，并且利于国际化，但是在这些字符串中直接输入一些符号是不起任何效果的，比如空格，换行，大于号小于号等，这就需要使用转义字符来进行转移，这样才能在使用时正确显示字符。用户往往会把所有的字符串保存在string.xml中，目的是方便统一管理，并且利于国际化，但是在这些字符串中直接输入一些符号是不起任何效果的，比如空格，换行，大于号小于号等，这就需要使用转义字符来进行转移，这样才能在使用时正确显示字符。在Android中，用户往往会把所有的字符串保存在string.xml中，目的是方便统一管理，并且利于国际化，但是在这些字符串中直接输入一些符号是不起任何效果的，比如空格，换行，大于号小于号等，这就需要使用转义字符来进行转移，这样才能在使用时正确显示字符。"
                             android:textColor="@color/white_first_transparency"
                             android:textSize="@dimen/detail_intro_text_size" />
                     </LinearLayout>

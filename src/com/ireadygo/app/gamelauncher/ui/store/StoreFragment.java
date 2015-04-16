@@ -76,35 +76,35 @@ public class StoreFragment extends BaseContentFragment {
 		mStoreDatas.clear();
 		// 0
 		Anchor anchor = new Anchor(Destination.GAME_DETAIL);
-		StoreInfo info = new StoreInfo(R.drawable.store_poster_large, anchor);
+		StoreInfo info = new StoreInfo(R.drawable.snail_icon_default, anchor);
 		mRecommendDatas.add(info);
 
 		anchor = new Anchor(Destination.GAME_DETAIL);
-		info = new StoreInfo(R.drawable.store_poster_small, anchor);
+		info = new StoreInfo(R.drawable.snail_icon_default, anchor);
 		mRecommendDatas.add(info);
 
 		anchor = new Anchor(Destination.GAME_DETAIL);
-		info = new StoreInfo(R.drawable.store_poster_small, anchor);
+		info = new StoreInfo(R.drawable.snail_icon_default, anchor);
 		mRecommendDatas.add(info);
 
 		anchor = new Anchor(Destination.GAME_DETAIL);
-		info = new StoreInfo(R.drawable.store_poster_large, anchor);
+		info = new StoreInfo(R.drawable.snail_icon_default, anchor);
 		mRecommendDatas.add(info);
 
 		anchor = new Anchor(Destination.GAME_DETAIL);
-		info = new StoreInfo(R.drawable.store_poster_small, anchor);
+		info = new StoreInfo(R.drawable.snail_icon_default, anchor);
 		mRecommendDatas.add(info);
 
 		anchor = new Anchor(Destination.GAME_DETAIL);
-		info = new StoreInfo(R.drawable.store_poster_small, anchor);
+		info = new StoreInfo(R.drawable.snail_icon_default, anchor);
 		mRecommendDatas.add(info);
 
 		anchor = new Anchor(Destination.GAME_DETAIL);
-		info = new StoreInfo(R.drawable.store_poster_small, anchor);
+		info = new StoreInfo(R.drawable.snail_icon_default, anchor);
 		mRecommendDatas.add(info);
 		// 7
 		anchor = new Anchor(Destination.GAME_DETAIL);
-		info = new StoreInfo(R.drawable.store_poster_small, anchor);
+		info = new StoreInfo(R.drawable.snail_icon_default, anchor);
 		mRecommendDatas.add(info);
 		// 搜索
 		anchor = new Anchor(Destination.STORE_SEARCH);

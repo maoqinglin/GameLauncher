@@ -30,7 +30,7 @@ public class StoreAppMultiAdapter implements HMultiBaseAdapter {
 		this.mContext = context;
 		this.mMultiListView = multiListView;
 		this.mAppEntities = appEntities;
-		mDefaultIcon = context.getResources().getDrawable(R.drawable.store_app_icon_normal);
+		mDefaultIcon = context.getResources().getDrawable(R.drawable.snail_icon_default);
 	}
 
 	@Override

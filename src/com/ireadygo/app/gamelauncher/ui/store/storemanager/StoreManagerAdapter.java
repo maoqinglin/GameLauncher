@@ -82,7 +82,7 @@ public class StoreManagerAdapter implements HMultiBaseAdapter {
 			Log.d("liu.js", "displayIcon--LocalIcon=" + icon);
 		}
 		if (icon == null) {
-			holder.icon.setImageResource(R.drawable.store_app_icon_normal);
+			holder.icon.setImageResource(R.drawable.snail_icon_default);
 		} else {
 			holder.icon.setImageBitmap(icon);
 		}

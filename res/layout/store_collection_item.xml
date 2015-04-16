@@ -24,7 +24,7 @@
             android:layout_width="@dimen/store_collection_item_icon_width"
             android:layout_height="@dimen/store_collection_item_icon_height"
             android:scaleType="fitXY"
-            android:src="@drawable/store_app_icon_large" />
+            android:src="@drawable/snail_icon_default" />
 
         <ImageView
             android:layout_width="@dimen/store_collection_item_icon_width"

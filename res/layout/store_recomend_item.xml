@@ -13,7 +13,7 @@
         android:id="@+id/icon"
         android:layout_width="@dimen/store_recommend_item_width"
         android:layout_height="@dimen/store_recommend_item_height"
-        android:src="@drawable/store_app_icon_mid" />
+        android:src="@drawable/snail_icon_default" />
 
     <RelativeLayout
         android:id="@+id/nameLayout"

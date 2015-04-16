@@ -295,8 +295,8 @@
     <!-- 免商店-应用详情 -->
     <dimen name="detail_screenshot_padding">3dp</dimen>
     <dimen name="detail_list_padding_bottom">60dp</dimen>
-    <dimen name="detail_list_padding_top_h">105dp</dimen>
-    <dimen name="detail_list_padding_top_vertical">72dp</dimen>
+    <dimen name="detail_list_padding_top_h">132dp</dimen>
+    <dimen name="detail_list_padding_top_vertical">42dp</dimen>
     <dimen name="detail_title_width">336dp</dimen>
     <dimen name="detail_title_height">90dp</dimen>
     <dimen name="detail_title_margin_bottom">45dp</dimen>

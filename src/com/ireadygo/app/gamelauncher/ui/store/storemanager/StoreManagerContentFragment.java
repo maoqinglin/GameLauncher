@@ -136,6 +136,7 @@ public class StoreManagerContentFragment extends BaseContentFragment implements 
 
 		newAdapter();
 		setAdapter(mManagerType);
+		bindPagingIndicator(mMultiListView);
 	}
 
 	private void newAdapter() {

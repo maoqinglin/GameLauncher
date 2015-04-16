@@ -32,6 +32,7 @@ import com.ireadygo.app.gamelauncher.ui.widget.AbsHListView.OnScrollListener;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemSelectedListener;
+import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
 import com.ireadygo.app.gamelauncher.ui.widget.StatisticsTitleView;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 import com.ireadygo.app.gamelauncher.utils.PackageUtils;
@@ -45,7 +46,8 @@ public class AppFragment extends BaseContentFragment implements Callbacks {
 
 	private HMultiListView mHMultiListView;
 	private StatisticsTitleView mStatisticsView;
-	private AppAdapter mAppAdapter ;
+	private AppAdapter mAppAdapter;
+
 	public AppFragment(Activity activity, HomeMenuFragment menuFragment) {
 		super(activity, menuFragment);
 	}
@@ -62,15 +64,15 @@ public class AppFragment extends BaseContentFragment implements Callbacks {
 	@Override
 	protected void initView(View view) {
 		super.initView(view);
-		getOperationTipsLayout().setAllVisible(View.VISIBLE);
-		mHMultiListView = (HMultiListView)view.findViewById(R.id.mutillist);
-		mStatisticsView = (StatisticsTitleView)view.findViewById(R.id.statistics_view);
+		getOperationTipsLayout().setTipsVisible(TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_WATER, TipFlag.FLAG_TIPS_MOON);
+		mHMultiListView = (HMultiListView) view.findViewById(R.id.mutillist);
+		mStatisticsView = (StatisticsTitleView) view.findViewById(R.id.statistics_view);
 		mAppAdapter = new AppAdapter(getRootActivity(), mAppList, LIST_NUM, mHMultiListView);
 		mHMultiListView.setIsDelayScroll(false);
 		mHMultiListView.setAdapter(mAppAdapter);
 		mHMultiListView.setOnItemClickListener(mOnItemClickListener);
 		mHMultiListView.setOnItemSelectedListener(mOnItemSelectedListener);
-		if(!mAppList.isEmpty()){
+		if (!mAppList.isEmpty()) {
 			mStatisticsView.setCount(mAppList.size());
 		}
 		bindPagingIndicator(mHMultiListView);
@@ -83,28 +85,29 @@ public class AppFragment extends BaseContentFragment implements Callbacks {
 
 	@Override
 	public void bindGames(List<ItemInfo> infos) {
-		
+
 	}
 
 	@Override
 	public void bindApps(List<ItemInfo> infos) {
 		mAppList = infos;
-		if(mHMultiListView != null){
+		if (mHMultiListView != null) {
 			notifyDataSetChanged();
 		}
 	}
 
 	@Override
 	public void bindFolders(HashMap<Long, FolderInfo> folders) {
-		
+
 	}
 
-	private void notifyDataSetChanged(){
-		if(mHMultiListView != null){
+	private void notifyDataSetChanged() {
+		if (mHMultiListView != null) {
 			mHMultiListView.notifyDataSetChanged();
 			mStatisticsView.setCount(mAppList.size());
 		}
 	}
+
 	@Override
 	public void gameAddOrUpdate(ItemInfo info, boolean isAdd) {
 		notifyDataSetChanged();
@@ -125,15 +128,16 @@ public class AppFragment extends BaseContentFragment implements Callbacks {
 
 	};
 
-	private void doAction(View view, int position,ItemInfo gameInfo) {
-		Log.d("lmq", "doAction---position = "+position+"--gameinfo = "+gameInfo);
-		if(gameInfo == null){
+	private void doAction(View view, int position, ItemInfo gameInfo) {
+		Log.d("lmq", "doAction---position = " + position + "--gameinfo = " + gameInfo);
+		if (gameInfo == null) {
 			return;
 		}
 
 		if (!mAppAdapter.isLongClickable() && gameInfo instanceof ShortcutInfo) {
 			Utilities.startActivitySafely(view, gameInfo.getIntent(), null);
-			GameData.getInstance(getRootActivity()).updateLastLaunchTime(gameInfo.packageName, System.currentTimeMillis());
+			GameData.getInstance(getRootActivity()).updateLastLaunchTime(gameInfo.packageName,
+					System.currentTimeMillis());
 			GameLauncherAppState.getInstance(getRootActivity()).getModel()
 					.updateModifiedTime(gameInfo.packageName, System.currentTimeMillis());
 			// 上报外部启动免商店游戏
@@ -158,7 +162,7 @@ public class AppFragment extends BaseContentFragment implements Callbacks {
 		@Override
 		public void onNothingSelected(AdapterView<?> parent) {
 			// TODO Auto-generated method stub
-			
+
 		}
 	};
 
@@ -169,7 +173,7 @@ public class AppFragment extends BaseContentFragment implements Callbacks {
 
 	public boolean onMoonKey() {
 		getRootActivity().findViewById(R.id.menu_app).requestFocus();
-		if(mAppAdapter != null){
+		if (mAppAdapter != null) {
 			mAppAdapter.unDisplayGameDeleteView();
 		}
 		return true;

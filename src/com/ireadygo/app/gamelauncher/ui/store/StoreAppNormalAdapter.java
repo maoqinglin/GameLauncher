@@ -39,7 +39,7 @@ public class StoreAppNormalAdapter extends BaseAnimatorAdapter {
 		mContext = context;
 		this.mAppList = appList;
 		mInflater = LayoutInflater.from(context);
-		mDefaultBmp = BitmapFactory.decodeResource(context.getResources(), R.drawable.store_app_icon_normal);
+		mDefaultBmp = BitmapFactory.decodeResource(context.getResources(), R.drawable.snail_icon_default);
 	}
 
 	@Override
