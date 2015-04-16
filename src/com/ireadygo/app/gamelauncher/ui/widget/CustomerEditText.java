@@ -32,7 +32,9 @@ public class CustomerEditText extends EditText {
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == SnailKeyCode.SUN_KEY) {
 			InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-			imm.showSoftInput(this, 0);
+			if (!imm.isActive()) {
+				imm.showSoftInput(this, 0);
+			}
 		}
 		return super.onKeyDown(keyCode, event);
 	}
