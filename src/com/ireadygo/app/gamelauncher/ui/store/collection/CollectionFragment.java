@@ -122,7 +122,7 @@ public class CollectionFragment extends BaseContentFragment {
 
 		@Override
 		protected void onPostExecute(List<CollectionInfo> result) {
-			dimissLoadingProgress();
+			dismissLoadingProgress();
 			if (isCancelled() || result == null || result.isEmpty()) {
 				return;
 			}

@@ -113,7 +113,7 @@ public class CategoryFragment extends BaseContentFragment {
 
 		@Override
 		protected void onPostExecute(List<CategoryInfo> result) {
-			dimissLoadingProgress();
+			dismissLoadingProgress();
 			if (isCancelled() || result == null || result.isEmpty()) {
 				return;
 			}

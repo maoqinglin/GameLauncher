@@ -176,12 +176,18 @@ public abstract class BaseContentFragment extends BaseFragment {
 		}
 	}
 
-	protected void dimissLoadingProgress() {
+	protected void dismissLoadingProgress() {
 		if (mLoadingProgress != null && mLoadingProgress.isShowing()) {
 			mLoadingProgress.dismiss();
 		}
 	}
 
+	@Override
+	public void onDestoryView() {
+		super.onDestoryView();
+		dismissLoadingProgress();
+	}
+	
 	protected GameInfoHub getGameInfoHub() {
 		return mGameInfoHub;
 	}
