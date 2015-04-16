@@ -69,6 +69,8 @@ public class LocalAppInfoManager {
 		mFilterPkgSet.add("com.broadcom.bt.app.bt3d");
 		mFilterPkgSet.add("com.sohu.inputmethod.sogouoem");
 		mFilterPkgSet.add("com.widevine.demo");
+		mFilterPkgSet.add("com.ireadygo.app.videorecorder");
+		mFilterPkgSet.add("com.snail.bigscreen");
 		mFilterPkgSet.add(mContext.getPackageName());
 	}
 
