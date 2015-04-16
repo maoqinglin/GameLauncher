@@ -52,7 +52,7 @@ public class StoreAppMultiAdapter implements HMultiBaseAdapter {
 			iconUrl = app.getRemoteIconUrl();
 		}
 		ImageLoader.getInstance().displayImage(iconUrl, holder.icon);
-		holder.title.setText(app.getName());
+		holder.title.setText(app.getName().trim());
 		return convertView;
 	}
 

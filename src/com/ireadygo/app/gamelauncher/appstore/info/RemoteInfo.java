@@ -1179,7 +1179,8 @@ public class RemoteInfo implements IGameInfo {
 
 	private CategoryInfo categoryItemToCategory(AppCategoryVO item) {
 		return new CategoryInfo(
-				item.getICategoryId(), 
+				item.getICategoryId(),
+				item.getIPlatformId(),
 				item.getIContains(),
 				item.getSCategoryName(),
 				item.getSCategoryDesc(),

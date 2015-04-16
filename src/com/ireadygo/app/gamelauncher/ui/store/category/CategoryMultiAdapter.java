@@ -70,7 +70,7 @@ public class CategoryMultiAdapter implements HMultiBaseAdapter {
 		if(!TextUtils.isEmpty(info.getPosterIconUrl())){
 			ImageLoader.getInstance().displayImage(info.getPosterIconUrl(), holder.icon);
 		}
-		holder.title.setText(info.getCatetoryName());
+		holder.title.setText(info.getCatetoryName().trim());
 
 		int introSize = 0;
 		String[] intros = info.getCategoryDes().split("/");

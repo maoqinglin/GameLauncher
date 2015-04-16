@@ -296,15 +296,16 @@ public class LocalInfo implements IGameInfo {
 		ArrayList<CategoryInfo> result = new ArrayList<CategoryInfo>();
 		for (String category : categotyList) {
 			String[] categoryItems = category.split(ITEM_INNER_DIVIDER);
-			if (categoryItems.length == 8) {
+			if (categoryItems.length == 9) {
 				CategoryInfo item = new CategoryInfo(Integer.valueOf(categoryItems[0]),
 						Integer.valueOf(categoryItems[1]),
-						categoryItems[2],
+						Integer.valueOf(categoryItems[2]),
 						categoryItems[3],
 						categoryItems[4],
 						categoryItems[5],
 						categoryItems[6],
-						categoryItems[7]);
+						categoryItems[7],
+						categoryItems[8]);
 				result.add(item);
 			}
 		}

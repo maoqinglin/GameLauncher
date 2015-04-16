@@ -23,6 +23,7 @@ import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
 import com.ireadygo.app.gamelauncher.ui.widget.StatisticsTitleView;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiBaseAdapter;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
+import com.snail.appstore.openapi.AppPlatFormConfig;
 
 public class CategoryFragment extends BaseContentFragment {
 	private HMultiListView mMultiListView;
@@ -32,6 +33,7 @@ public class CategoryFragment extends BaseContentFragment {
 	private static final long DELAY_UPDATE_ITEM = 100;
 	private int mAllItemCount = 0;
 	private List<CategoryInfo> mCategoryDatas = new ArrayList<CategoryInfo>();
+	private static final String TYPE_TAG = "2";
 	
 	public CategoryFragment(Activity activity, BaseMenuFragment menuFragment) {
 		super(activity, menuFragment);
@@ -117,12 +119,13 @@ public class CategoryFragment extends BaseContentFragment {
 			}
 			mCategoryDatas.clear();
 			for(CategoryInfo categoryInfo : result){
-				if (categoryInfo.getAppCounts() <= 0) {
-					continue;
+				if (TYPE_TAG.equals(categoryInfo.getCategoryType())
+						&& AppPlatFormConfig.IPLATFORMID == categoryInfo.getPlatformId()
+						&& categoryInfo.getAppCounts() > 0) {
+					mCategoryDatas.add(categoryInfo);
+					postUpdateItemCount();
+					mAllItemCount = mAllItemCount + categoryInfo.getAppCounts();
 				}
-				mCategoryDatas.add(categoryInfo);
-				postUpdateItemCount();
-				mAllItemCount = mAllItemCount + categoryInfo.getAppCounts();
 			}
 			mTitleLayout.setCount(mAllItemCount);
 			mMultiListView.notifyDataSetChanged();
