@@ -614,7 +614,7 @@ public class RemoteInfo implements IGameInfo {
 		}
 		try {
 			ResultVO resultVO = mAppPlatFormService.getAppMappingList(sbPkgNameList.toString(),
-					sbVersionCodeList.toString(), String.valueOf(AppPlatFormConfig.IPLATFORMID), TYPE_GAME);
+					sbVersionCodeList.toString(), "", TYPE_GAME);
 			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
 				List<Long> results = new ArrayList<Long>();
 				if (resultVO.getObj() != null) {

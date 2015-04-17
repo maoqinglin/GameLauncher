@@ -169,7 +169,7 @@ public class GameLauncherModel{
         }
 
         public void loadAllData() {
-            if (!hasInit()) {
+            if (needInit()) {
                 GameLauncherAppState.getLauncherProvider().loadDefaultFavoritesIfNecessary(R.xml.much_default_workspace);
                 mLocalAppInfoManager.initDatabase();
                 setInitFlag();
@@ -596,16 +596,16 @@ public class GameLauncherModel{
         }
     }
 
-    private boolean hasInit() {
+    private boolean needInit() {
         String spKey = GameLauncherAppState.getSharedPreferencesKey();
         SharedPreferences sp = mContext.getSharedPreferences(spKey, Context.MODE_PRIVATE);
-        return sp.getBoolean(GameLauncherProvider.LOCAL_DATA_INIT, false);
+        return sp.getBoolean(GameLauncherProvider.LOCAL_DATA_INIT, true);
     }
 
     private void setInitFlag() {
         String spKey = GameLauncherAppState.getSharedPreferencesKey();
         SharedPreferences sp = mContext.getSharedPreferences(spKey, Context.MODE_PRIVATE);
-        sp.edit().putBoolean(GameLauncherProvider.LOCAL_DATA_INIT, true).commit();
+        sp.edit().putBoolean(GameLauncherProvider.LOCAL_DATA_INIT, false).commit();
     }
     
  // If there is already a loader task running, tell it to stop.
