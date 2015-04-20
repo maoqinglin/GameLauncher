@@ -35,6 +35,7 @@ import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.ImageTextMenu;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
+import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
 import com.ireadygo.app.gamelauncher.ui.widget.ConfirmDialog;
 import com.ireadygo.app.gamelauncher.ui.widget.StatisticsTitleView;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
@@ -96,7 +97,7 @@ public class StoreManagerContentFragment extends BaseContentFragment implements 
 	@Override
 	protected void initView(View view) {
 		super.initView(view);
-		getOperationTipsLayout().setAllVisible(View.VISIBLE);
+		getOperationTipsLayout().setTipsVisible(TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_WATER, TipFlag.FLAG_TIPS_MOON);
 		mTitleLayout = (StatisticsTitleView) view.findViewById(R.id.store_manager_title_layout);
 
 		mMultiListView = (HMultiListView) view.findViewById(R.id.manager_viewpager);

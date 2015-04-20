@@ -43,7 +43,6 @@
             android:focusable="true"
             android:text="@string/user_alipay_account_bind"
             android:textColor="@color/white"
-            android:visibility="gone"
             android:textSize="@dimen/user_text_size" />
     </LinearLayout>
 
