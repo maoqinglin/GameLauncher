@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.ireadygo.app.gamelauncher"
-    android:versionCode="200008"
-    android:versionName="2.0.8"
+    android:versionCode="200009"
+    android:versionName="2.0.9"
     tools:ignore="OldTargetApi" >
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
