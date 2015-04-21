@@ -75,6 +75,10 @@ public class LocalAppInfoManager {
 		mFilterPkgSet.add(mContext.getPackageName());
 	}
 
+	public HashSet<String> getFilterPkgSet() {
+		return mFilterPkgSet;
+	}
+
 	public void initDatabase() {
         ArrayList<ItemInfoObject> dbItems = loadItemsFromDB();
         ArrayList<ItemInfoObject> mainItems = queryAllApps();

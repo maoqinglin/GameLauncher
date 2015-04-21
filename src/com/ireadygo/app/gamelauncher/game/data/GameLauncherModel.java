@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -237,6 +238,7 @@ public class GameLauncherModel{
 			synchronized (sBgLock) {
 				clearSBgDataStructures();
 
+				final HashSet<String> filterPkgSet = mLocalAppInfoManager.getFilterPkgSet();
 				final ArrayList<Long> itemsToRemove = new ArrayList<Long>();
 				final Uri contentUri = GameLauncherSettings.Favorites.CONTENT_URI;
 				final Cursor c = contentResolver.query(contentUri, null, null, null,
@@ -348,6 +350,11 @@ public class GameLauncherModel{
 									info.isSystemApp = PackageUtils.isSystemApp(mContext, info.packageName);
 									// check & update map of what's occupied
 									deleteOnItemOverlap.set(false);
+
+									if(filterPkgSet.contains(info.packageName)){
+										itemsToRemove.add(info.id);
+										continue;
+									}
 
 									GameLauncherAppState.getInstance(mContext).getIconDecorater()
 											.observeIconNeedUpdated(info, info.appIcon, info.intent.getComponent());
