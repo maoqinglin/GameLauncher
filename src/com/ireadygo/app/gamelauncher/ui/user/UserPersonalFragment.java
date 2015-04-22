@@ -46,10 +46,13 @@ import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserHeaderImgItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserInfoItem;
 import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
+import com.ireadygo.app.gamelauncher.ui.GameLauncherActivity;
 import com.ireadygo.app.gamelauncher.ui.SnailKeyCode;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.guide.GuideRegisterOrLoginActivity;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
+import com.ireadygo.app.gamelauncher.ui.redirect.Anchor;
+import com.ireadygo.app.gamelauncher.ui.redirect.Anchor.Destination;
 import com.ireadygo.app.gamelauncher.ui.widget.ConfirmDialog;
 import com.ireadygo.app.gamelauncher.ui.widget.CustomerEditText;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
@@ -523,15 +526,20 @@ public class UserPersonalFragment extends BaseContentFragment implements OnClick
 					public void onClick(View v) {
 						AccountManager.getInstance().logout(getRootActivity());
 						GameLauncherApplication.getApplication().setUserInfoItem(null);
+						GameLauncherApplication.getApplication().setUserPhoto(null);
 						sendLogoutBroadcast();
 						mShouldRequestOnDismiss = false;
 						dialog.dismiss();
-						Intent intent = new Intent(getRootActivity(), GuideRegisterOrLoginActivity.class);
+//						Intent intent = new Intent(getRootActivity(), GuideRegisterOrLoginActivity.class);
+//						intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//						SoundPoolManager.instance(getRootActivity()).play(SoundPoolManager.SOUND_ENTER);
+//						getRootActivity().startActivity(intent);
+						
+						Intent intent = new Intent(getRootActivity(), GameLauncherActivity.class);
 						intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//						intent.putExtra(GuideRegisterOrLoginActivity.START_FLAG,
-//								BaseAccountActivity.FLAG_START_BY_ACCOUNT_DETAIL);
 						SoundPoolManager.instance(getRootActivity()).play(SoundPoolManager.SOUND_ENTER);
 						getRootActivity().startActivity(intent);
+						
 					}
 				});
 		dialog.setOnDismissListener(new OnDismissListener() {

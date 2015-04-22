@@ -101,6 +101,10 @@ public abstract class BaseMenuActivity extends BaseActivity {
 		getCustomFragmentManager().replaceFragmentWithAnimation(mMainLayout, prevFragment, destFragment);
 	}
 
+	public void replaceFragmentWithNoAnimation(final BaseFragment prevFragment, final BaseFragment destFragment){
+		getCustomFragmentManager().replaceFragmentWithNoAnimation(mMainLayout, prevFragment, destFragment);
+	}
+	
 	public CustomFragmentManager getCustomFragmentManager() {
 		return mFragmentManager;
 	}

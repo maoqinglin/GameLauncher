@@ -91,11 +91,10 @@ public class GameLauncherActivity extends BaseMenuActivity {
 			mLoadingProgress.dismiss();
 		}
 	}
-	
+
 	@Override
 	protected void onResume() {
 		super.onResume();
-
 		// 上报应用置前台的时间
 		if (PreferenceUtils.hasDeviceActive()) {
 			mResumeTime = System.currentTimeMillis();

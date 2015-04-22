@@ -33,6 +33,7 @@ public class GuideRegisterOrLoginActivity extends BaseAccountActivity {
 		mTipsLayout.setTipsVisible(View.GONE, TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
 
 		mGuideTwoBtnLayout = (GuideTwoBtnLayout) findViewById(R.id.guideTwoBtnLayout);
+		mGuideTwoBtnLayout.leftBtnRequestFocus();
 		mGuideTwoBtnLayout.setLeftBtnText(R.string.starting_guide_login);
 		mGuideTwoBtnLayout.setRightBtnText(R.string.starting_guide_register);
 		mGuideTwoBtnLayout.setOnLRBtnClickListener(new OnLRBtnClickListener() {

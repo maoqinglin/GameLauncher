@@ -20,6 +20,7 @@ import com.ireadygo.app.gamelauncher.GameLauncherConfig;
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.account.AccountInfoAsyncTask;
 import com.ireadygo.app.gamelauncher.account.AccountInfoAsyncTask.AccountInfoListener;
+import com.ireadygo.app.gamelauncher.account.AccountManager;
 import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
 import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserInfoItem;
@@ -33,6 +34,7 @@ import com.ireadygo.app.gamelauncher.ui.store.StoreFragment;
 import com.ireadygo.app.gamelauncher.ui.user.UserFragmentA;
 import com.ireadygo.app.gamelauncher.ui.user.UserFragmentB;
 import com.ireadygo.app.gamelauncher.ui.user.UserFragmentC;
+import com.ireadygo.app.gamelauncher.ui.user.UserLoginFragment;
 import com.ireadygo.app.gamelauncher.utils.NetworkUtils;
 import com.ireadygo.app.gamelauncher.utils.PictureUtil;
 import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
@@ -54,12 +56,12 @@ public class HomeMenuFragment extends BaseMenuFragment {
 	@Override
 	public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.menu_home, container, false);
-		mUserMenu = (MenuItem)view.findViewById(R.id.menu_user);
+		mUserMenu = (MenuItem) view.findViewById(R.id.menu_user);
 		mGameMenu = (MenuItem) view.findViewById(R.id.menu_game);
 		mStoreMenu = (MenuItem) view.findViewById(R.id.menu_store);
 		mAppMenu = (MenuItem) view.findViewById(R.id.menu_app);
 		mSettingsMenu = (MenuItem) view.findViewById(R.id.menu_settings);
-		
+
 		addMenuItem(mUserMenu, getUserFragment());
 		addMenuItem(mStoreMenu, new StoreFragment(getRootActivity(), this));
 		addMenuItem(mGameMenu, new GameFragment(getRootActivity(), this));
@@ -74,9 +76,21 @@ public class HomeMenuFragment extends BaseMenuFragment {
 	public void onResume() {
 		super.onResume();
 		setUserPhoto();
+		MenuItem menu = getMenuItem(0);
+		if (menu != null) {
+			boolean isLogin = AccountManager.getInstance().isLogined(getRootActivity());
+			boolean isLoginFragment = (menu.getContentFragment() instanceof UserLoginFragment);
+			if ((isLogin && isLoginFragment) || (!isLogin && !isLoginFragment)) {
+				updateMenuItem(0, getUserFragment());
+			}
+		}
 	}
 
 	private void setUserPhoto() {
+		if(!AccountManager.getInstance().isLogined(getRootActivity())){
+			((ImageMenu) mUserMenu).getImageView().setImageResource(R.drawable.account_photo_default_circle);
+			return;
+		}
 		Bitmap userPhoto = GameLauncherApplication.getApplication().getUserPhoto();
 		if (userPhoto != null) {
 			decorateUserPhoto(userPhoto);
@@ -86,7 +100,7 @@ public class HomeMenuFragment extends BaseMenuFragment {
 				getRemotePhoto(infoItem.getCPhoto());
 			} else {
 				new Handler().postDelayed(new Runnable() {
-					
+
 					@Override
 					public void run() {
 						getAccountInfoAsync();
@@ -114,55 +128,60 @@ public class HomeMenuFragment extends BaseMenuFragment {
 
 			@Override
 			public void onFailed(int code) {
-				
+
 			}
 		}).execute();
 	}
 
-	private void getRemotePhoto(String photoUrl){
-		GameInfoHub.instance(getRootActivity()).getImageLoader().displayImage(photoUrl, ((ImageMenu)mUserMenu).getImageView(), new ImageLoadingListener() {
-			
-			@Override
-			public void onLoadingStarted(String arg0, View arg1) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void onLoadingFailed(String arg0, View arg1, FailReason arg2) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void onLoadingComplete(String arg0, View photoView, Bitmap bmp) {
-				if(bmp != null){
-//					GameLauncherApplication.getApplication().setUserPhoto(bmp);
-					decorateUserPhoto(bmp);
-				}
-			}
+	private void getRemotePhoto(String photoUrl) {
+		GameInfoHub.instance(getRootActivity()).getImageLoader()
+				.displayImage(photoUrl, ((ImageMenu) mUserMenu).getImageView(), new ImageLoadingListener() {
 
-			@Override
-			public void onLoadingCancelled(String arg0, View arg1) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+					@Override
+					public void onLoadingStarted(String arg0, View arg1) {
+						// TODO Auto-generated method stub
+
+					}
+
+					@Override
+					public void onLoadingFailed(String arg0, View arg1, FailReason arg2) {
+						// TODO Auto-generated method stub
+
+					}
+
+					@Override
+					public void onLoadingComplete(String arg0, View photoView, Bitmap bmp) {
+						if (bmp != null) {
+							// GameLauncherApplication.getApplication().setUserPhoto(bmp);
+							decorateUserPhoto(bmp);
+						}
+					}
+
+					@Override
+					public void onLoadingCancelled(String arg0, View arg1) {
+						// TODO Auto-generated method stub
+
+					}
+				});
 	}
 
 	private void decorateUserPhoto(Bitmap bmp) {
 		Bitmap mask = BitmapFactory.decodeResource(getRootActivity().getResources(), R.drawable.icon_mask);
-		((ImageMenu)mUserMenu).getImageView().setImageBitmap(PictureUtil.decorateIcon(getRootActivity(), mask, bmp, mask));
+		((ImageMenu) mUserMenu).getImageView().setImageBitmap(
+				PictureUtil.decorateIcon(getRootActivity(), mask, bmp, mask));
 	}
 
 	private BaseContentFragment getUserFragment() {
+		if (!AccountManager.getInstance().isLogined(getRootActivity())) {
+			return new UserLoginFragment(getRootActivity(), this);
+		}
 		String type = PreferenceUtils.getOBoxType();
 		if (GameLauncherConfig.OBOX_TYPE_A.equals(type)) {
 			return new UserFragmentA(getRootActivity(), this);
 		} else if (GameLauncherConfig.OBOX_TYPE_B.equals(type)) {
 			return new UserFragmentB(getRootActivity(), this);
 		} else if (GameLauncherConfig.OBOX_TYPE_C.equals(type)) {
-			return new UserFragmentC(getRootActivity(),this);
+			return new UserFragmentC(getRootActivity(), this);
 		}
 		return new UserFragmentC(getRootActivity(), this);
 	}
@@ -176,7 +195,7 @@ public class HomeMenuFragment extends BaseMenuFragment {
 				e.printStackTrace();
 			}
 			return null;
-			
+
 		}
 
 		@Override
@@ -184,7 +203,7 @@ public class HomeMenuFragment extends BaseMenuFragment {
 			if (!TextUtils.isEmpty(result)) {
 				PreferenceUtils.saveOBoxType(result);
 				new Handler().postDelayed(new Runnable() {
-					
+
 					@Override
 					public void run() {
 						updateMenuItem(0, getUserFragment());

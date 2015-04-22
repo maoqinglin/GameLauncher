@@ -73,7 +73,7 @@ public abstract class BaseMenuFragment extends BaseFragment {
 			MenuItem menuItem = mMenuItemList.get(menuIndex);
 			if (newFragment != null) {
 				if (mMenuItemList.indexOf(getCurrentItem()) == menuIndex) {
-					switchFragment(menuItem.getContentFragment(), newFragment);
+					switchFragmentWithNoAnimation(menuItem.getContentFragment(), newFragment);
 				}
 				menuItem.setContentFragment(newFragment);
 			}
@@ -122,8 +122,13 @@ public abstract class BaseMenuFragment extends BaseFragment {
 		this.mOnChildFocusChangeListener = listener;
 	}
 
-	private void switchFragment(BaseContentFragment currFragment, final BaseContentFragment targetFragment) {
+	private void switchFragmentWithAnimation(BaseContentFragment currFragment, final BaseContentFragment targetFragment) {
 		getRootActivity().replaceFragmentWithAnimation(currFragment, targetFragment);
+	}
+
+	private void switchFragmentWithNoAnimation(BaseContentFragment currFragment,
+			final BaseContentFragment targetFragment) {
+		getRootActivity().replaceFragmentWithNoAnimation(currFragment, targetFragment);
 	}
 
 	@Override
@@ -156,7 +161,7 @@ public abstract class BaseMenuFragment extends BaseFragment {
 		mPrevFocusItem = prevFocusedItem;
 		mCurrentFocusItem = currFocusedItem;
 		animatorSwitchFocusView(prevFocusedItem, currFocusedItem);
-		switchFragment(prevFocusedItem.getContentFragment(), currFocusedItem.getContentFragment());
+		switchFragmentWithAnimation(prevFocusedItem.getContentFragment(), currFocusedItem.getContentFragment());
 	}
 
 	// 菜单回到初始状态
@@ -290,6 +295,13 @@ public abstract class BaseMenuFragment extends BaseFragment {
 			return mCurrentSelectedItem;
 		}
 		return null;
+	}
+
+	public MenuItem getMenuItem(int index) {
+		if (index < 0 || index >= mMenuItemList.size()) {
+			return null;
+		}
+		return mMenuItemList.get(index);
 	}
 
 	public void requestFocusToDown() {

@@ -39,7 +39,24 @@ public class GuideTwoBtnLayout extends LinearLayout {
 		mRightBtn = (TextView) findViewById(R.id.rightBtn);
 		mRightBtn.setOnClickListener(mInnerOnClickListener);
 
+	}
+
+	public void leftBtnRequestFocus(){
 		mLeftBtn.requestFocus();
+	}
+
+	public void setLeftBtnNextFocus(){
+		mLeftBtn.setNextFocusLeftId(R.id.menu_user);
+		mLeftBtn.setNextFocusUpId(mLeftBtn.getId());
+		mLeftBtn.setNextFocusRightId(mRightBtn.getId());
+		mLeftBtn.setNextFocusDownId(mLeftBtn.getId());
+	}
+
+	public void setRightBtnNextFocus(){
+		mRightBtn.setNextFocusLeftId(mLeftBtn.getId());
+		mRightBtn.setNextFocusUpId(mRightBtn.getId());
+		mRightBtn.setNextFocusRightId(mRightBtn.getId());
+		mRightBtn.setNextFocusDownId(mRightBtn.getId());
 	}
 
 	public void setOnLRBtnClickListener(OnLRBtnClickListener listener) {

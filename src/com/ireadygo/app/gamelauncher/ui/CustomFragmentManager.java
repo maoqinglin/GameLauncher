@@ -63,7 +63,7 @@ public class CustomFragmentManager {
 	public void addFragmentInLayout(CustomFrameLayout container, BaseFragment fragment) {
 		View view = fragment.getRootView();
 		container.addViewInLayout(view);
-		if(!fragment.isResumed()){
+		if (!fragment.isResumed()) {
 			fragment.onResume();
 		}
 		if (!hasFragment(fragment)) {
@@ -86,7 +86,7 @@ public class CustomFragmentManager {
 	}
 
 	public void removeFragmentInLayout(CustomFrameLayout container, BaseFragment fragment) {
-		if(fragment.isResumed()){
+		if (fragment.isResumed()) {
 			fragment.onPause();
 		}
 		View view = fragment.getRootView();
@@ -147,6 +147,16 @@ public class CustomFragmentManager {
 		}
 	}
 
+	public void replaceFragmentWithNoAnimation(final CustomFrameLayout container, final BaseFragment prevFragment,
+			final BaseFragment destFragment) {
+		removeAddRunnable();
+		if (prevFragment == null) {
+			addFragmentWithAnimation(container, destFragment, null);
+			return;
+		}
+		replaceFragment(container, prevFragment, destFragment);
+	}
+
 	private class AddFragmentRunnable implements Runnable {
 		private CustomFrameLayout mContainer;
 		private BaseFragment mFragment;
@@ -167,7 +177,7 @@ public class CustomFragmentManager {
 		container.requestLayout();
 		container.invalidate();
 	}
-	
+
 	private class AddFragmentWithAnimatorRunnable implements Runnable {
 		private CustomFrameLayout mContainer;
 		private BaseFragment mFragment;
@@ -196,26 +206,26 @@ public class CustomFragmentManager {
 		mHandler.removeCallbacks(mAddFragmentRunnable);
 		mHandler.removeCallbacks(mAddFragmentWithAnimatorRunnable);
 	}
-	
-	public void onResume(){
-		if(mAddedFragmentList.size() == 0){
+
+	public void onResume() {
+		if (mAddedFragmentList.size() == 0) {
 			return;
 		}
-		for(int i = 0; i < mAddedFragmentList.size(); i ++){
+		for (int i = 0; i < mAddedFragmentList.size(); i++) {
 			BaseFragment fragment = mAddedFragmentList.valueAt(i);
-			if(!fragment.isResumed()){
+			if (!fragment.isResumed()) {
 				fragment.onResume();
 			}
 		}
 	}
-	
-	public void onPause(){
-		if(mAddedFragmentList.size() == 0){
+
+	public void onPause() {
+		if (mAddedFragmentList.size() == 0) {
 			return;
 		}
-		for(int i = 0; i < mAddedFragmentList.size(); i ++){
+		for (int i = 0; i < mAddedFragmentList.size(); i++) {
 			BaseFragment fragment = mAddedFragmentList.valueAt(i);
-			if(fragment.isResumed()){
+			if (fragment.isResumed()) {
 				fragment.onPause();
 			}
 		}

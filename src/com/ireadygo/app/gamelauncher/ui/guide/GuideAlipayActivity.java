@@ -38,6 +38,7 @@ public class GuideAlipayActivity extends BaseGuideActivity {
 		mTipsLayout.setTipsVisible(View.GONE, TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
 
 		mGuideTwoBtnLayout = (GuideTwoBtnLayout) findViewById(R.id.guideTwoBtnLayout);
+		mGuideTwoBtnLayout.leftBtnRequestFocus();
 		mGuideTwoBtnLayout.setLeftBtnText(R.string.starting_guide_alipay_bind);
 		mGuideTwoBtnLayout.setRightBtnText(R.string.starting_guide_alipay_skip);
 		mGuideTwoBtnLayout.setOnLRBtnClickListener(new OnLRBtnClickListener() {
