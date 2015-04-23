@@ -41,7 +41,7 @@ public class ScreenPictureActivity extends BaseActivity {
 			mImageLoader = GameLauncher.instance().getGameInfoHub().getImageLoader();
 			for (int i = 0; i < appEntity.getSceenshotUrlList().size(); i++) {
 				final ImageView imageView = new ImageView(this);
-				imageView.setScaleType(ScaleType.CENTER_INSIDE);
+				imageView.setScaleType(ScaleType.FIT_CENTER);
 				mImageLoader.displayImage(appEntity.getSceenshotUrlList().get(i), imageView,
 						new ImageLoadingListener() {
 
