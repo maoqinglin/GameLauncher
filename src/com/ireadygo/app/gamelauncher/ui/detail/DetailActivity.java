@@ -49,9 +49,17 @@ import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
 import com.ireadygo.app.gamelauncher.utils.StaticsUtils;
 import com.ireadygo.app.gamelauncher.utils.Utils;
+import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
+import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
+import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
 public class DetailActivity extends BaseActivity implements OnClickListener {
 	public static final String EXTRAS_APP_ENTITY = "EXTRAS_APP_ENTITY";
@@ -77,6 +85,9 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 	private AppStateListener mStateListener = new AppStateListener();
 	private View mDecorView;
 	private ProgressBar mProgressBar;
+	private DisplayImageOptions mDisplayImageOptions;
+	private ImageLoaderConfiguration mImageLoaderConfiguration;
+	private ImageLoader mImageLoader;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +98,38 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 		mGameManager.addInstallListener(mStateListener);
 		mGameManager.addUninstallListener(mStateListener);
 		mDecorView = getWindow().getDecorView();
+		configImageLoader();
 		initView();
+	}
+
+	private void configImageLoader() {
+		mDisplayImageOptions = new DisplayImageOptions.Builder()
+		.cacheInMemory(true)
+		.imageScaleType(ImageScaleType.EXACTLY)
+		.cacheOnDisc(true)
+		.bitmapConfig(Bitmap.Config.RGB_565)
+		.build();
+
+		mImageLoaderConfiguration = new ImageLoaderConfiguration.Builder(DetailActivity.this)
+		.threadPoolSize(3)
+		// default
+		.threadPriority(Thread.NORM_PRIORITY - 2)
+		.denyCacheImageMultipleSizesInMemory()
+		.discCacheFileNameGenerator(new Md5FileNameGenerator())
+		.tasksProcessingOrder(QueueProcessingType.LIFO)
+		.denyCacheImageMultipleSizesInMemory()
+		.memoryCache(new WeakMemoryCache())
+		.memoryCacheSize((int) (2 * 1024 * 1024))
+		.memoryCacheSizePercentage(13)
+		// default
+//		.discCache(new UnlimitedDiscCache(cacheDir))
+		// default
+		.discCacheSize(50 * 1024 * 1024).discCacheFileCount(100)
+		.discCacheFileNameGenerator(new HashCodeFileNameGenerator())
+		.defaultDisplayImageOptions(mDisplayImageOptions).writeDebugLogs() // Remove
+		.build();
+		mImageLoader = ImageLoader.getInstance();
+		mImageLoader.init(mImageLoaderConfiguration);
 	}
 
 	private void initView() {
@@ -190,10 +232,7 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 			mNameView.setText("");
 			setVersionName("");
 			setSizeText(0);
-			int max = 1000000;
-			int min = 1000;
-			int playNumbers = new Random().nextInt(max) % (max - min + 1) + min;
-			mPlayNumbersView.setText(playNumbers + "");
+			mPlayNumbersView.setText(0 + "");
 			mIntroView.setText("");
 			mDownloadBtn.setNextFocusRightId(mDownloadBtn.getId());
 		} else {
@@ -201,7 +240,8 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 			setVersionName(app.getVersionName());
 			setSizeText(app.getTotalSize());
 			mIntroView.setText("　　" + app.getDescription());
-			mPlayNumbersView.setText("" + app.getDownloadCounts());
+//			mPlayNumbersView.setText("" + app.getDownloadCounts());
+			mPlayNumbersView.setText("" + getRandomPlayNumber());
 			if (TextUtils.isEmpty(app.getDescription())) {
 				mDownloadBtn.setNextFocusRightId(mDownloadBtn.getId());
 			} else {
@@ -210,6 +250,12 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 			updateDownloadBtn(app.getPkgName());
 			mIntroFocusChangeListener.onFocusChange(mIntroLayout, mIntroLayout.hasFocus());
 		}
+	}
+
+	private int getRandomPlayNumber() {
+		int max = 10000;
+		int min = 1000;
+		return new Random().nextInt(max) % (max - min + 1) + min;
 	}
 
 	private void setVersionName(String versionName) {
@@ -415,6 +461,7 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 
 		@Override
 		protected void onPostExecute(AppEntity result) {
+			removeAllMsg();
 			dimissLoadingProgress();
 			if (isCancelled() || result == null) {
 				return;
@@ -425,9 +472,9 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 			if (TextUtils.isEmpty(iconUrl)) {
 				iconUrl = result.getRemoteIconUrl();
 			}
-			ImageLoader.getInstance().displayImage(iconUrl, mIconView);
+			mImageLoader.displayImage(iconUrl, mIconView);
 			if (!TextUtils.isEmpty(result.getPosterBgUrl())) {
-				ImageLoader.getInstance().loadImage(result.getPosterBgUrl(), new ImageLoadingListener() {
+				mImageLoader.loadImage(result.getPosterBgUrl(), new ImageLoadingListener() {
 					@Override
 					public void onLoadingStarted(String arg0, View arg1) {
 					}
