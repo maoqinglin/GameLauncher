@@ -240,6 +240,9 @@ public class MapGameManager {
 						app.setIsOccupySlot(AppEntity.OCCUPY_SLOT);
 					}
 
+					GameLauncherAppState.getInstance(mContext).getModel()
+					.updateAppTitle(app.getPkgName(), app.getName());
+
 					mGameData.updateMappedAppData(app);
 					//如果海报地址不为空，则下载海报填充到桌面数据库中
 					downloadPosterIcon(app);

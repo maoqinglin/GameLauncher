@@ -758,8 +758,13 @@ public class GameLauncherModel{
          */
         info.setIcon(icon);
         info.appIcon = icon;
+        // from the db
+        if (info.title == null) {
+            if (c != null) {
+                info.title = c.getString(titleIndex);
+            }
         // from the resource
-        if (resolveInfo != null) {
+        if (info.title == null && resolveInfo != null) {
             ComponentName key = getComponentNameFromResolveInfo(resolveInfo);
             if (labelCache != null && labelCache.containsKey(key)) {
                 info.title = labelCache.get(key);
@@ -770,11 +775,7 @@ public class GameLauncherModel{
                 }
             }
         }
-        // from the db
-        if (info.title == null) {
-            if (c != null) {
-                info.title = c.getString(titleIndex);
-            }
+
         }
         // fall back to the class name of the activity
         if (info.title == null) {
@@ -1453,12 +1454,45 @@ public class GameLauncherModel{
 		runOnWorkerThread(r);
 	}
 
+	public synchronized void updateAppTitle(final String pkgName,final String title) {
+		Runnable r = new Runnable() {
+			public void run() {
+				synchronized (mLock) {
+					Cursor cursor = null;
+					try {
+						cursor = getCursorByPkgName(pkgName);
+						if (null == cursor || !cursor.moveToFirst()) {
+							//还没有加入数据库
+//							return;
+						} else {
+							updateAppTitle(cursor,title);
+						}
+					} finally {
+						if (null != cursor) {
+							cursor.close();
+						}
+					}
+				}
+			}
+		};
+		runOnWorkerThread(r);
+	}
+
 	private synchronized void updateAppPosterIcon(Cursor cursor, Bitmap posterIcon) {
 		int itemId = cursor.getInt(cursor.getColumnIndex(Favorites._ID));
 		final Uri uri = GameLauncherSettings.Favorites.getContentUri(itemId, false);
 		final ContentResolver cr = mContext.getContentResolver();
 		ContentValues values = new ContentValues();
 		ItemInfo.writeBitmap(values, posterIcon);
+		cr.update(uri, values, null, null);
+	}
+
+	private synchronized void updateAppTitle(Cursor cursor, String title) {
+		int itemId = cursor.getInt(cursor.getColumnIndex(Favorites._ID));
+		final Uri uri = GameLauncherSettings.Favorites.getContentUri(itemId, false);
+		final ContentResolver cr = mContext.getContentResolver();
+		ContentValues values = new ContentValues();
+		values.put(Favorites.TITLE, title);
 		cr.update(uri, values, null, null);
 	}
 
