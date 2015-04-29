@@ -355,6 +355,7 @@ public class GameLauncherModel{
 										itemsToRemove.add(info.id);
 										continue;
 									}
+									Log.e("lilu", "name:"+info.title+" pkg:"+info.packageName+" intent:"+info.intent);
 
 									GameLauncherAppState.getInstance(mContext).getIconDecorater()
 											.observeIconNeedUpdated(info, info.appIcon, info.intent.getComponent());

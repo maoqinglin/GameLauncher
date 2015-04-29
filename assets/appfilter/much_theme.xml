@@ -150,6 +150,7 @@
         className="com.android.settings.Settings$WifiSettingsActivity"
         iconName="WLAN.png"
         packageName="com.android.settings" />
+
     <application
         className="com.estrongs.android.pop.view.FileExplorerActivity"
         iconName="fileexplorer.png"
@@ -406,5 +407,102 @@
         className="com.sohu.inputmethod.sogouoem.SogouIMELauncher"
         iconName="sohuinputmethod.png"
         packageName="com.sohu.inputmethod.sogouoem" />
+
+    <!-- 预装游戏 -->
+
+    <application
+        className="com.baxa.fctank.AppActivity"
+        iconName="tkdz.png"
+        packageName="com.baxa.fctank" />
+
+    <application
+        className="com.radiangames.joyjoy.com.unity3d.player.UnityPlayerProxyActivity"
+        iconName="qlwq.png"
+        packageName="com.radiangames.joyjoy" />
+
+    <application
+        className="com.vectorunit.redcmgeplaycn.snail.com.vectorunit.redcmgeplaycn.Red"
+        iconName="jlkt.png"
+        packageName="com.vectorunit.redcmgeplaycn.snail" />
+
+    <application
+        className="com.ArtInGames.AirAttackHD/com.unity3d.player.UnityPlayerProxyActivityMy"
+        iconName="zmkx.png"
+        packageName="com.ArtInGames.AirAttackHD" />
+
+    <application
+        className="com.oyatsukai.fractalcombat.thefractalactivity"
+        iconName="plkz.png"
+        packageName="com.oyatsukai.fractalcombat" />
+
+    <application
+        className="com.bluestar.StreetDunkGlobal.com.unity3d.player.UnityPlayerNativeActivity"
+        iconName="jtgl.png"
+        packageName="com.bluestar.StreetDunkGlobal" />
+
+    <application
+        className="com.shenyou.up.simulator"
+        iconName="qmppl.png"
+        packageName="com.shenyou.up" />
+
+    <application
+        className="com.FDGEntertainment.BeyondYnth.BeyondYnth"
+        iconName="cclxj.png"
+        packageName="com.FDGEntertainment.BeyondYnth" />
+
+    <application
+        className="com.animoca.amazon.deadsystem.muneris.unity.androidbridge.MunerisUnityPlayerNativeActivity"
+        iconName="swxt.png"
+        packageName="com.animoca.amazon.deadsystem" />
+
+    <application
+        className="org.cocos2dx.FishingJoy2.FishingJoy2"
+        iconName="bydr.png"
+        packageName="org.cocos2dx.FishingJoy2" />
+
+    <application
+        className="com.vectorunit.purple.amazon.Purple"
+        iconName="stkdc.jpg"
+        packageName="com.vectorunit.purple.amazon" />
+
+    <application
+        className="com.walnut.finalfuryJoystick.UnityPlayerProxyActivity"
+        iconName="qhzx.png"
+        packageName="com.walnut.finalfuryJoystick" />
+
+    <application
+        className="com.good.world2.MainActivity"
+        iconName="world2.jpg"
+        packageName="com.good.world2" />
+
+    <application
+        className="com.ratrodstudio.driftmania2.com.prime31.UnityPlayerNativeActivity"
+        iconName="fkpy.jpg"
+        packageName="com.ratrodstudio.driftmania2" />
+
+    <application
+        className="jp.co.sega.vtc.OneApk.jp.co.sega.vtc.VTCActivity"
+        iconName="tennis.png"
+        packageName="jp.co.sega.vtc.OneApk" />
+
+    <application
+        className="com.ratrodstudio.streetoutlaws.com.prime31.UnityPlayerNativeActivity"
+        iconName="fkpy2.png"
+        packageName="com.ratrodstudio.streetoutlaws" />
+
+    <application
+        className="com.GoldenTricycle.Clarc.com.unity3d.player.UnityPlayerProxyActivity"
+        iconName="jqr.png"
+        packageName="com.GoldenTricycle.Clarc" />
+
+    <application
+        className="com.baxa.bombermantvTwo.MainActivity"
+        iconName="zdr.png"
+        packageName="com.baxa.bombermantvTwo" />
+
+    <application
+        className="com.baxa.leidian3d.MainActivity"
+        iconName="bwbj.png"
+        packageName="com.baxa.leidian3d" />
 
 </applications>
