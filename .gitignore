@@ -7,3 +7,7 @@ temp/
 local.properties
 project.properties
 .settings/
+build/
+.idea
+GameLauncher.iml
+classpath

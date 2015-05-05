@@ -273,6 +273,11 @@ public class GameLauncherModel{
 								continue;
 							}
 							int itemType = c.getInt(itemTypeIndex);
+                            if(itemType == GameLauncherSettings.Favorites.ITEM_TYPE_FOLDER){
+                                id = c.getLong(idIndex);
+                                itemsToRemove.add(id);
+                                continue;
+                            }
 
 							switch (itemType) {
 							case GameLauncherSettings.Favorites.ITEM_TYPE_APPLICATION:
@@ -307,6 +312,7 @@ public class GameLauncherModel{
 									// Launcher.addDumpLog(TAG, "Invalid uri: "
 									// +
 									// intentDescription, true);
+                                    itemsToRemove.add(info.id);
 									continue;
 								}
 
@@ -351,13 +357,16 @@ public class GameLauncherModel{
 									// check & update map of what's occupied
 									deleteOnItemOverlap.set(false);
 
-									if(filterPkgSet.contains(info.packageName)){
-										itemsToRemove.add(info.id);
-										continue;
-									}
-									Log.e("lilu", "name:"+info.title+" pkg:"+info.packageName+" intent:"+info.intent);
+                                    if(filterPkgSet.contains(info.packageName)){
+                                        itemsToRemove.add(info.id);
+                                        continue;
+                                    }
+                                    if(container != Favorites.CONTAINER_DESKTOP){
+                                        itemsToRemove.add(info.id);
+                                        continue;
+                                    }
 
-									GameLauncherAppState.getInstance(mContext).getIconDecorater()
+                                    GameLauncherAppState.getInstance(mContext).getIconDecorater()
 											.observeIconNeedUpdated(info, info.appIcon, info.intent.getComponent());
 									switch (container) {
 									case GameLauncherSettings.Favorites.CONTAINER_DESKTOP:
@@ -389,13 +398,14 @@ public class GameLauncherModel{
 									// info, c,
 									// iconIndex);
 								} else {
+                                    itemsToRemove.add(id);
 									throw new RuntimeException("Unexpected null ShortcutInfo");
 								}
 								break;
 
 							case GameLauncherSettings.Favorites.ITEM_TYPE_FOLDER:
-								id = c.getLong(idIndex);
-								FolderInfo folderInfo = findOrMakeFolder(sBgFolders, id);
+                                id = c.getLong(idIndex);
+                                FolderInfo folderInfo = findOrMakeFolder(sBgFolders, id);
 								folderInfo.title = c.getString(titleIndex);
 								folderInfo.id = id;
 								container = c.getInt(containerIndex);
@@ -461,7 +471,7 @@ public class GameLauncherModel{
 			return loadedOldDb;
 		}
 
-		public void bindMyGame() {
+        public void bindMyGame() {
 			final Runnable r = new Runnable() {
 
 				@Override

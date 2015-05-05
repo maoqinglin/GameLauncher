@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.ireadygo.app.gamelauncher"
-    android:versionCode="200011"
-    android:versionName="2.0.11"
+    android:versionCode="200012"
+    android:versionName="2.0.12"
     tools:ignore="OldTargetApi" >
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
@@ -330,7 +330,9 @@
             android:name="com.alipay.android.app.MspService"
             android:exported="false"
             android:process="com.alipay.sdk" >
-            <intent-filter android:priority="800" />
+            <intent-filter android:priority="800" >
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
         </service>
 
         <activity android:name="com.alipay.android.app.sdk.WapPayActivity" >
@@ -393,7 +395,6 @@
 
 
         <!-- 友盟配置  start -->
-        <service android:name="com.umpay.huafubao.service.AppUpgradeService" />
 
         <meta-data
             android:name="UMENG_APPKEY"

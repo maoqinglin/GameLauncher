@@ -71,7 +71,7 @@ public class LocalAppInfoManager {
 		mFilterPkgSet.add("com.widevine.demo");
 		mFilterPkgSet.add("com.ireadygo.app.videorecorder");
 		mFilterPkgSet.add("com.snail.bigscreen");
-		mFilterPkgSet.add("com.broadoom.bt.app.bt3d");
+        mFilterPkgSet.add("com.android.mira4u");
 		mFilterPkgSet.add(mContext.getPackageName());
 	}
 
