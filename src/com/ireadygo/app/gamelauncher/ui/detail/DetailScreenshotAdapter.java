@@ -9,17 +9,17 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.FrameLayout.LayoutParams;
+import android.widget.ImageView;
 
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.ui.SimpleImageLoadingListener;
 import com.ireadygo.app.gamelauncher.ui.item.ImageItem;
 import com.ireadygo.app.gamelauncher.ui.item.ImageItem.ImageItemHolder;
-import com.ireadygo.app.gamelauncher.ui.widget.AbsHListView;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageSize;
 
 public class DetailScreenshotAdapter extends BaseAdapter {
 	private List<String> mUrlList;
@@ -98,9 +98,11 @@ public class DetailScreenshotAdapter extends BaseAdapter {
 			}
 		}
 		if (!isDataEmpty()) {
-			ImageLoader.getInstance().loadImage(mUrlList.get(position), new SimpleImageLoadingListener() {
+			ImageSize size = new ImageSize(mScreenshotMaxWidth / 2, mScreenshotMaxHeight / 2);
+			ImageLoader.getInstance().loadImage(mUrlList.get(position), size, new SimpleImageLoadingListener() {
 				@Override
 				public void onLoadingComplete(String url, View view, Bitmap bitmap) {
+					Log.d("DetailScreenshotAdapter", "width = " + bitmap.getWidth() +", height = " + bitmap.getHeight());
 					if (mAppEntity.isScreenshotVertical()) {
 						iconView.setImageBitmap(bitmap);
 					} else {
