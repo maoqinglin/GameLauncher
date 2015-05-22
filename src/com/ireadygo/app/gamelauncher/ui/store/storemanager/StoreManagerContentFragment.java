@@ -319,6 +319,17 @@ public class StoreManagerContentFragment extends BaseContentFragment implements 
 		}
 		return -1;
 	}
+	
+	private int updateUpgradeAppEntity(AppEntity app) {
+		for (int i = 0; i < mUpgradeApps.size(); i++) {
+			AppEntity oldApp = mUpgradeApps.get(i);
+			if (oldApp.getPkgName().equals(app.getPkgName())) {
+				oldApp.copyFrom(app);
+				return i;
+			}
+		}
+		return -1;
+	}
 
 	private DownloadListener mDownloadListener = new DownloadListener() {
 
@@ -329,7 +340,8 @@ public class StoreManagerContentFragment extends BaseContentFragment implements 
 			case TRANSFERING:
 			case QUEUING:
 				int pos = updateDldAppEntity(app);
-				if (pos >= 0 && mManagerType == GameManagerType.DOWNLOAD || mManagerType == GameManagerType.UPGRADE) {
+				int pos2 = updateUpgradeAppEntity(app);
+				if (pos >= 0 && pos2 >= 0 && mManagerType == GameManagerType.DOWNLOAD || mManagerType == GameManagerType.UPGRADE) {
 					mMultiListView.notifyDataSetChanged();
 				}
 				break;
