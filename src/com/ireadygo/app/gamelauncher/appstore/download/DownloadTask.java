@@ -329,6 +329,8 @@ public class DownloadTask {
 								break;
 							}
 						}
+					} else {
+						reportState(DownloadState.ERROR, e);
 					}
 					break;
 				}
