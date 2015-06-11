@@ -28,14 +28,12 @@ public class StoreMenuFragment extends BaseMenuFragment {
 	@Override
 	public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.store_menu_fragment, container, false);
-		MenuItem searchMenu = (MenuItem) view.findViewById(R.id.store_menu_search);
 		MenuItem recommandMenu = (MenuItem) view.findViewById(R.id.store_menu_recommand);
 		MenuItem categoryMenu = (MenuItem) view.findViewById(R.id.store_menu_category);
 		MenuItem collectionMenu = (MenuItem) view.findViewById(R.id.store_menu_collection);
 		MenuItem appMenu = (MenuItem) view.findViewById(R.id.store_menu_app);
 		MenuItem managerMenu = (MenuItem) view.findViewById(R.id.store_menu_manager);
 
-		addMenuItem(searchMenu, new SearchFragment(getRootActivity(), this));
 		addMenuItem(recommandMenu, new RecommendFragment(getRootActivity(), this));
 		addMenuItem(categoryMenu, new CategoryFragment(getRootActivity(), this));
 		addMenuItem(collectionMenu, new CollectionFragment(getRootActivity(), this));

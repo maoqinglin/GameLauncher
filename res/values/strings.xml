@@ -141,8 +141,55 @@
     <string name="store_search">Search</string>
     <string name="search_recommend_result">Search Result</string>
     <string name="search_recommend_prompt">Most popular games:</string>
+    <string name="serach_keyboard_character">ABC</string>
+    <string name="serach_keyboard_number">123</string>
+    <string name="search_result_empty">Sorry,did not find the corresponding search results </string>
+    <string name="search_keyword_most">Most input 6 letters in English</string>
+    <string-array name="search_keyboard_character_array">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+        <item>E</item>
+        <item>F</item>
+        <item>G</item>
+        
+        <item>H</item>
+        <item>I</item>
+        <item>J</item>
+        <item>K</item>
+        <item>L</item>
+        <item>M</item>
+        <item>N</item>
 
-    <!-- 免商店-设置(store_settings) -->
+        <item>O</item>
+        <item>P</item>
+        <item>Q</item>
+        <item>R</item>
+        <item>S</item>
+        <item>T</item>
+
+        <item>U</item>
+        <item>V</item>
+        <item>W</item>
+        <item>X</item>
+        <item>Y</item>
+        <item>Z</item>
+    </string-array>
+    <string-array name="search_keyboard_number_array">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </string-array>
+
+<!-- 免商店-设置(store_settings) -->
     <string-array name="store_settings_titles">
         <item>Download only when WIFI connected</item>
         <item>Enable installed package automatically delete</item>

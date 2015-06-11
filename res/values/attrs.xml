@@ -82,6 +82,13 @@
         <attr name="stat_title" format="reference|string"></attr>
         <attr name="Stat_count" format="reference|string"></attr>
     </declare-styleable>
+    
+	<declare-styleable name="Keyboard_Item">
+        <attr name="key_background" format="reference"></attr>
+        <attr name="key_icon" format="reference"></attr>
+        <attr name="key_title" format="reference|string"></attr>
+        <attr name="title_textsize" format="reference|dimension"></attr>
+    </declare-styleable>
   <string-array name="image_name">
         <item>helper_image_01</item>
         <item>helper_image_02</item>

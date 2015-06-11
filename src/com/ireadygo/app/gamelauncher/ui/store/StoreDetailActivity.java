@@ -84,7 +84,7 @@ public class StoreDetailActivity extends BaseActivity {
 				if (hasFocus) {
 					switch (v.getId()) {
 					case R.id.storeOptionsSearch:
-						replaceContentLayout(LayoutTag.SEARCH);
+//						replaceContentLayout(LayoutTag.SEARCH);
 						break;
 					case R.id.storeOptionsRecommend:
 						replaceContentLayout(LayoutTag.RECOMMEND);

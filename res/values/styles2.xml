@@ -10,6 +10,14 @@
         <item name="padding_bottom">@dimen/content_fragment_list_padding_top</item>
     </style>
 
+    <style name="MultiListNormalFormSearch">
+        <item name="hlv_horizontal_spacing">@dimen/common_list_item_divder_width</item>
+        <item name="hlv_vertical_spacing">@dimen/common_list_vertical_space</item>
+        <item name="padding_right">@dimen/content_fragment_list_padding_right</item>
+        <item name="padding_top">@dimen/content_fragment_list_padding_top</item>
+        <item name="padding_bottom">@dimen/content_fragment_list_padding_top</item>
+    </style>
+   
     <style name="HListNormal">
         <item name="hlv_dividerWidth">@dimen/common_list_item_divder_width</item>
         <item name="android:paddingLeft">@dimen/content_fragment_padding_left</item>

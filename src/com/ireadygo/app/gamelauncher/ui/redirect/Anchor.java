@@ -11,6 +11,7 @@ import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
 import com.ireadygo.app.gamelauncher.ui.store.StoreActivity;
 import com.ireadygo.app.gamelauncher.ui.store.category.CategoryDetailActivity;
 import com.ireadygo.app.gamelauncher.ui.store.collection.CollectionDetailActivity;
+import com.ireadygo.app.gamelauncher.ui.store.search.SearchActivity;
 import com.ireadygo.app.gamelauncher.ui.user.UserActivity;
 
 public class Anchor implements Serializable {
@@ -50,11 +51,13 @@ public class Anchor implements Serializable {
 		case STORE_RECOMMEND:
 		case STORE_CATEGORY:
 		case STORE_COLLECTION:
-		case STORE_SEARCH:
 		case STORE_GAME_MANAGE:
 		case STORE_SETTINGS:
 		case STORE_FAVORITE_APPS:
 			clazz = StoreActivity.class;
+			break;
+		case STORE_SEARCH:
+			clazz = SearchActivity.class;
 			break;
 		case GAME_DETAIL:
 			clazz = DetailActivity.class;

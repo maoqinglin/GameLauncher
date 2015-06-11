@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:orientation="vertical" >
+
+    <com.ireadygo.app.gamelauncher.ui.store.search.SearchIntroView
+        android:id="@+id/search_intro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </com.ireadygo.app.gamelauncher.ui.store.search.SearchIntroView>
+
+    <TextView
+        android:id="@+id/search_recommend_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/content_fragment_padding_left"
+        android:text="@string/search_recommend_prompt"
+        android:textColor="@color/white_first_transparency"
+        android:textSize="@dimen/search_recommend_prompt_textsize" />
+
+    <com.ireadygo.app.gamelauncher.ui.widget.HListView
+        android:id="@+id/search_recommand_list"
+        style="@style/HListNormal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:nextFocusDown="@+id/search_recommand_list"
+        android:nextFocusRight="@+id/search_recommand_list" >
+    </com.ireadygo.app.gamelauncher.ui.widget.HListView>
+
+</LinearLayout>

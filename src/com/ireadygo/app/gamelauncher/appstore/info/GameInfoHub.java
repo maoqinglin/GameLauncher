@@ -529,4 +529,10 @@ public class GameInfoHub implements IGameInfo {
 		return mRemoteInfo.queryTicketInfo();
 	}
 
+	@Override
+	public List<AppEntity> searchByPinYin(String word, int page, int number,
+			int iPlatformId, String cAppType) throws InfoSourceException {
+		return mRemoteInfo.searchByPinYin(word, page, number, iPlatformId, cAppType);
+	}
+
 }

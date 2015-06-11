@@ -66,7 +66,7 @@
     <dimen name="content_fragment_height">780dp</dimen>
     <dimen name="content_padding_left_default">150dp</dimen>
     <dimen name="content_fragment_width">1670dp</dimen>
-    <dimen name="content_fragment_padding_left">50dp</dimen>
+    <dimen name="content_fragment_padding_left">100dp</dimen>
     <dimen name="content_fragment_padding_top">75dp</dimen>
     <dimen name="content_fragment_list_padding_right">60dp</dimen>
     <dimen name="content_fragment_list_padding_top">45dp</dimen>
@@ -388,13 +388,24 @@
     <dimen name="search_edittext_height">112dp</dimen>
     <dimen name="search_edittext_margin_top">120dp</dimen>
     <dimen name="search_edittext_textsize">48sp</dimen>
-    <dimen name="search_intro_margin_top">30dp</dimen>
-    <dimen name="search_intro_margin_bottom">30dp</dimen>
+    <dimen name="search_intro_margin_top">105dp</dimen>
+    <dimen name="search_intro_margin_bottom">40dp</dimen>
     <dimen name="search_suggest_textsize">42sp</dimen>
     <dimen name="search_suggest_height">146dp</dimen>
     <dimen name="search_suggest_padding_left">50dp</dimen>
     <dimen name="search_recommend_prompt_textsize">36sp</dimen>
     <dimen name="search_list_diver_width">20dp</dimen>
+    <dimen name="search_keyboard_width">470dp</dimen>
+    <dimen name="search_keyboard_margin_top">90dp</dimen>
+    <dimen name="search_keyboard_marin_left">90dp</dimen>
+    <dimen name="search_input_padding_left">10dp</dimen>
+    <dimen name="search_keyboard_function_key_size">30sp</dimen>
+    <dimen name="search_keyboard_function_key_height">94dp</dimen>
+    <dimen name="search_keyboard_function_key_margin_top">30dp</dimen>
+    <dimen name="search_keyboard_grid_margin_top">22dp</dimen>
+    <dimen name="search_content_title_height">70dp</dimen>
+    <dimen name="search_key_width">94dp</dimen>
+    <dimen name="search_key_height">94dp</dimen>
 
     <!-- 免商店-推荐 -->
     <dimen name="store_recommend_item_width">471dp</dimen>

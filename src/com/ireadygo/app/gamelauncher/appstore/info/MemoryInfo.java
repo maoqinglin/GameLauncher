@@ -541,4 +541,11 @@ public class MemoryInfo implements IGameInfo {
 		return null;
 	}
 
+	@Override
+	public List<AppEntity> searchByPinYin(String word, int page, int number,
+			int iPlatformId, String cAppType) throws InfoSourceException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

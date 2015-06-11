@@ -530,6 +530,37 @@ public class RemoteInfo implements IGameInfo {
 	}
 
 	/*
+	 * 根据拼音获取搜索结果
+	 */
+	@Override
+	public List<AppEntity> searchByPinYin(String word, int page, int number, int iPlatformId, String cAppType) throws InfoSourceException {
+		try {
+			ResultVO resultVO = mAppPlatFormService.getGameListByPinYin(word, page, number, iPlatformId, cAppType);
+			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
+				List<AppEntity> results = new ArrayList<AppEntity>();
+				if (resultVO.getObj() != null) {
+					PageListVO pageListVO = (PageListVO)resultVO.getObj();
+					List<AppListItemVO> appListItemVOs = (List<AppListItemVO>)pageListVO.getList();
+					for (AppListItemVO item : appListItemVOs) {
+						results.add(listItemToAppEntity(item));
+					}
+				}
+				return results;
+			}
+			String errMsg = processRemoteResultCode(resultVO.getCode());
+			throw new InfoSourceException(errMsg);
+		} catch (InfoSourceException e) {
+			throw e;
+		} catch (HttpStatusCodeException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_NETWORK_ERROR,e.getCause());
+		} catch (JSONException e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_CLIENT_ERROR,e.getCause());
+		} catch (Exception e) {
+			throw new InfoSourceException(InfoSourceException.MSG_UNKNOWN_ERROR,e.getCause());
+		}
+	}
+
+	/*
 	 * 获取推荐页列表
 	 */
 	@Override

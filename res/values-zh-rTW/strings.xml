@@ -141,6 +141,53 @@
     <string name="store_search">搜&#160;&#160;索</string>
     <string name="search_recommend_prompt">最近大家都在搜的遊戲</string>
     <string name="search_recommend_result">搜索结果</string>
+    <string name="serach_keyboard_character">ABC</string>
+    <string name="serach_keyboard_number">123</string>
+    <string name="search_result_empty">抱歉，未找到相應搜索結果</string>
+    <string name="search_keyword_most">最多輸入6個英文字母</string>
+    <string-array name="search_keyboard_character_array">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+        <item>E</item>
+        <item>F</item>
+        <item>G</item>
+        
+        <item>H</item>
+        <item>I</item>
+        <item>J</item>
+        <item>K</item>
+        <item>L</item>
+        <item>M</item>
+        <item>N</item>
+
+        <item>O</item>
+        <item>P</item>
+        <item>Q</item>
+        <item>R</item>
+        <item>S</item>
+        <item>T</item>
+
+        <item>U</item>
+        <item>V</item>
+        <item>W</item>
+        <item>X</item>
+        <item>Y</item>
+        <item>Z</item>
+    </string-array>
+    <string-array name="search_keyboard_number_array">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </string-array>
 
     <!-- 免商店-設置(store_settings) -->
     <string-array name="store_settings_titles">

@@ -59,6 +59,9 @@ public interface IGameInfo {
 	//指定关键字执行搜索
 	List<AppEntity> searchByKeyword(String word, int page, int number, int iPlatformId, String cAppType, String cDynamic) throws InfoSourceException;
 
+	//指定拼音搜索
+	List<AppEntity> searchByPinYin(String word, int page, int number, int iPlatformId, String cAppType) throws InfoSourceException;
+
 	//获取指定页的banner图片
 	List<BannerItem> obtainBannerList(int page) throws InfoSourceException;
 

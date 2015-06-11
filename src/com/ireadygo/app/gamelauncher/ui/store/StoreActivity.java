@@ -35,23 +35,20 @@ public class StoreActivity extends BaseMenuActivity {
 		int position = 0;
 		if (destination != null) {
 			switch (destination) {
-			case STORE_SEARCH:
+			case STORE_RECOMMEND:
 				position = 0;
 				break;
-			case STORE_RECOMMEND:
+			case STORE_CATEGORY:
 				position = 1;
 				break;
-			case STORE_CATEGORY:
+			case STORE_COLLECTION:
 				position = 2;
 				break;
-			case STORE_COLLECTION:
+			case STORE_FAVORITE_APPS:
 				position = 3;
 				break;
-			case STORE_FAVORITE_APPS:
-				position = 4;
-				break;
 			case STORE_GAME_MANAGE:
-				position = 5;
+				position = 4;
 				break;
 			}
 		}
