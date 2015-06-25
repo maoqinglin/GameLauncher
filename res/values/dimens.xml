@@ -16,6 +16,7 @@
     <dimen name="common_image_item_large_height">340dp</dimen>
     <dimen name="common_image_item_textsize">36sp</dimen>
     <dimen name="common_image_item_text_margin_bottom">15dp</dimen>
+    <dimen name="common_image_item_text_tip_margin_bottom">65dp</dimen>
     <dimen name="common_list_item_divder_width">20dp</dimen>
     <dimen name="common_list_vertical_space">46dp</dimen>
     <dimen name="common_viewpager_indicator_radius">6dp</dimen>
@@ -147,14 +148,14 @@
 
     <!-- 设置 -->
     <dimen name="settings_margin_top">144dp</dimen>
-    <dimen name="settings_icon_bg_width">270dp</dimen>
-    <dimen name="settings_icon_bg_height">340dp</dimen>
+    <dimen name="settings_icon_bg_width">548dp</dimen>
+    <dimen name="settings_icon_bg_height">342dp</dimen>
     <dimen name="settings_icon_width">130dp</dimen>
     <dimen name="settings_icon_height">130dp</dimen>
-    <dimen name="settings_icon_margin_top">105dp</dimen>
+    <dimen name="settings_icon_margin_top">3dp</dimen>
     <dimen name="settings_list_padding_top">135dp</dimen>
     <dimen name="settings_list_padding_bottom">120dp</dimen>
-    <dimen name="settings_name_margin_bottom">60dp</dimen>
+    <dimen name="settings_name_margin_bottom">30dp</dimen>
     <dimen name="settings_name_txt_size">36sp</dimen>
     
     <!-- 微信二维码 -->

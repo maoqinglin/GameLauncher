@@ -70,7 +70,7 @@ public class GameLauncherActivity extends BaseMenuActivity {
 			StaticsUtils.onCreate();
 			AccountManager.getInstance().init(this, GameLauncherConfig.getChennelId());
 		}
-		setShouldTranslate(true);
+		setShouldTranslate(false);
 		GameLauncherApplication.getApplication().setGameLauncherActivity(this);
 		new AccountInfoAsyncTask(this, null).execute();
 		openBluetooth();

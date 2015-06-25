@@ -9,6 +9,7 @@
         <item name="android:shadowDx">2</item>
         <item name="android:shadowDy">5</item>
         <item name="android:shadowRadius">10</item>
+        
     </style>
     <!-- 商店选项 -->
     <style name="Options">

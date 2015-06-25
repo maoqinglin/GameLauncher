@@ -30,11 +30,12 @@
     <string name="app_title_prompt">Installed APPs</string>
 
     <!-- 设置(settings) -->
-    <string name="settings_systemupgrade">Upgrade</string>
+    <string name="settings_systemupgrade">Upgrade And Reset</string>
     <string name="settings_wx">WeChat</string>
     <string name="settings_language">Language</string>
     <string name="settings_help">Help</string>
-    <string name="settings_wifi">WIFI</string>
+    <string name="settings_network">Network Settings</string>
+    <string name="settings_network_not_connect">(Not Connect Any Network)</string>
     <string name="settings_wallpaper">Wallpaper</string>
     <string name="settings_handle_battery">Handle</string>
     <string name="settings_ap">OBox AP</string>
@@ -44,8 +45,8 @@
     <string name="settings_network">Ethernet</string>
     <string name="settings_display">Wireless Display</string>
     <string name="settings_brightness">Brightness</string>
-    <string name="settings_reset">Reset</string>
-    <string name="settings_about">about</string>
+    <string name="settings_favorite">Favorite</string>
+    <string name="settings_about">About OBox</string>
     <string name="settings_hdmi">HDMI</string>
     <string name="settings_controller">Controller</string>
 

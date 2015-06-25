@@ -278,7 +278,14 @@
             android:name="com.snailgame.mobilesdk.aas.ui.UserCenterActivity"
             android:screenOrientation="landscape" >
         </activity>
-        <activity android:name="com.snail.pay.Payment" >
+        <activity
+            android:name="com.snail.pay.Payment"
+            android:launchMode="singleTask"
+            android:theme="@style/SnailPayActivity" >
+        </activity>
+        <activity
+            android:name="com.snail.pay.NetworkHallPayment"
+            android:launchMode="singleTask" >
         </activity>
         <activity
             android:name="com.snailgame.mobilesdk.GetAccountActivity"
@@ -380,6 +387,8 @@
             android:excludeFromRecents="true" >
         </activity>
 
+		<service android:name="com.snailgame.mobilesdk.SDKService" />
+		
         <receiver android:name="com.snailgame.mobilesdk.PostSSOLoginReceiver" >
             <intent-filter>
                 <action android:name="com.snailgame.postssologin" >

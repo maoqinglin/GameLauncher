@@ -6,6 +6,7 @@ import android.animation.PropertyValuesHolder;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,12 +58,16 @@ public class TextMenu extends MenuItem {
 	public void toSelected(AnimatorListener listener) {
 		super.toSelected(listener);
 		mTextView.setTextColor(Color.WHITE);
+		mTextView.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.menu_nav_selected), null, null, null);
+		mTextView.setBackground(new BitmapDrawable());
 	}
 
 	@Override
 	public void toUnfocused(AnimatorListener listener) {
 		super.toUnfocused(listener);
 		mTextView.setTextColor(Color.WHITE);
+		mTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+		mTextView.setBackground(new BitmapDrawable());
 		mUnfocusedAnimator = createAnimator(listener, 150, 0.3f, TEXT_SCALE_DEFAULT);
 		mUnfocusedAnimator.start();
 	}
@@ -70,7 +75,10 @@ public class TextMenu extends MenuItem {
 	@Override
 	public void toFocused(AnimatorListener listener) {
 		super.toFocused(listener);
-		mTextView.setTextColor(0xffffb300);
+//		mTextView.setTextColor(0xffffb300);
+		mTextView.setTextColor(Color.WHITE);
+		mTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+		mTextView.setBackgroundResource(R.drawable.menu_nav_focused_bg);
 		mFocusedAnimator = createAnimator(listener, 300, 1, 1);
 		mFocusedAnimator.start();
 	}

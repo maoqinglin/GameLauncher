@@ -11,21 +11,35 @@ public class SettingsInfo implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private Drawable itemBg;
+	
 	private Drawable itemIcon;
 
 	private String itemName;
 	
+	private String tip;
+
 	private String intentAction;
 
 	public SettingsInfo(){
 
 	}
 
-	public SettingsInfo(Drawable itemIcon, String itemName, String intentAction) {
+	public SettingsInfo(Drawable itemBg, Drawable itemIcon, String itemName, String tip, String intentAction) {
 		super();
+		this.itemBg = itemBg;
 		this.itemIcon = itemIcon;
 		this.itemName = itemName;
+		this.tip = tip;
 		this.intentAction = intentAction;
+	}
+
+	public Drawable getItemBg() {
+		return itemBg;
+	}
+
+	public void setItemBg(Drawable itemBg) {
+		this.itemBg = itemBg;
 	}
 
 	public Drawable getItemIcon() {
@@ -45,6 +59,14 @@ public class SettingsInfo implements Serializable{
 		this.itemName = itemName;
 	}
 	
+	public String getTip() {
+		return tip;
+	}
+
+	public void setTip(String tip) {
+		this.tip = tip;
+	}
+
 	public String getIntentAction() {
 		return intentAction;
 	}

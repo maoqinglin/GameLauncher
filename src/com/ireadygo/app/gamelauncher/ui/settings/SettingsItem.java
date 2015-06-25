@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ireadygo.app.gamelauncher.R;
+import com.ireadygo.app.gamelauncher.helper.AnimatorHelper;
 import com.ireadygo.app.gamelauncher.ui.Config;
 import com.ireadygo.app.gamelauncher.ui.item.BaseAdapterItem;
 
@@ -40,10 +41,11 @@ public class SettingsItem extends BaseAdapterItem {
 	private void initView(Context context) {
 		View rootView = LayoutInflater.from(context).inflate(R.layout.settings_item, this, true);
 		mHolder = new SettingsItemHoder();
-		mHolder.viewLayout = (ViewGroup)rootView.findViewById(R.id.settings_item);
+		mHolder.iconLayout = (ViewGroup)rootView.findViewById(R.id.icon_layout);
 		mHolder.background = (ImageView) rootView.findViewById(R.id.settings_view_bg);
 		mHolder.icon = (ImageView) rootView.findViewById(R.id.settings_icon);
 		mHolder.name = (TextView) rootView.findViewById(R.id.settings_name);
+		mHolder.tip = (TextView) rootView.findViewById(R.id.settings_tip);
 	}
 
 	public SettingsItemHoder getHolder() {
@@ -55,8 +57,10 @@ public class SettingsItem extends BaseAdapterItem {
 		if (mUnselectedAnimator != null && mUnselectedAnimator.isRunning()) {
 			mUnselectedAnimator.cancel();
 		}
-		mSelectedAnimator = createAnimator(listener, 0.25f, 1.15f, 1.15f, 1.23f, 1.0f, Config.SettingsIcon.TITLE_SLEECTED_TRANSLATE_Y);
-		mSelectedAnimator.setDuration(300);
+		float iconScale = 1.088f;
+		float bgScaleX = AnimatorHelper.calcBgScaleX(10, getWidth(), iconScale);
+		float bgScaleY = AnimatorHelper.calcBgScaleY(0.5f, 10, getHeight(), getHeight(), iconScale);
+		mSelectedAnimator = createAnimator(listener, iconScale, bgScaleX, bgScaleY);
 		mSelectedAnimator.start();
 	}
 
@@ -65,45 +69,36 @@ public class SettingsItem extends BaseAdapterItem {
 		if (mSelectedAnimator != null && mSelectedAnimator.isRunning()) {
 			mSelectedAnimator.cancel();
 		}
-		mUnselectedAnimator = createAnimator(listener, 0.25f, 1, 1, 1, 0.8f, Config.SettingsIcon.TITLE_UNSLEECTED_TRANSLATE_Y);
-		mUnselectedAnimator.setDuration(150);
+		mUnselectedAnimator = createAnimator(listener, 1, 1, 1);
 		mUnselectedAnimator.start();
 	}
 
-	private Animator createAnimator(AnimatorListener listener, float bgPivotY, float bgScaleX, float bgScaleY,
-			float icScale, float titleScale, float titleTranslateY) {
-		AnimatorSet animSet = new AnimatorSet();
-		mHolder.background.setPivotX(mHolder.background.getWidth() / 2);
-		mHolder.background.setPivotY(mHolder.background.getHeight() * bgPivotY);
-		// 背景动画
-		PropertyValuesHolder scaleXHolder = PropertyValuesHolder.ofFloat(View.SCALE_X, bgScaleX);
-		PropertyValuesHolder scaleYHolder = PropertyValuesHolder.ofFloat(View.SCALE_Y, bgScaleY);
-		ObjectAnimator gameBgAnim = ObjectAnimator.ofPropertyValuesHolder(mHolder.background, scaleXHolder, scaleYHolder);
+	private Animator createAnimator(AnimatorListener listener, float iconScale, float bgScaleX, float bgScaleY) {
+		AnimatorSet animatorSet = new AnimatorSet();
 
-		// 游戏海报动画
-		ObjectAnimator gameIconXAnim = ObjectAnimator.ofFloat(mHolder.icon, View.SCALE_X, icScale);
-		ObjectAnimator gameIconYAnim = ObjectAnimator.ofFloat(mHolder.icon, View.SCALE_Y, icScale);
+		PropertyValuesHolder iconScaleXHolder = PropertyValuesHolder.ofFloat(View.SCALE_X, iconScale);
+		PropertyValuesHolder iconScaleYHolder = PropertyValuesHolder.ofFloat(View.SCALE_Y, iconScale);
+		ObjectAnimator animatorIcon = ObjectAnimator.ofPropertyValuesHolder(mHolder.iconLayout, iconScaleXHolder,
+				iconScaleYHolder);
 
-		// 游戏名称动画
-		PropertyValuesHolder txtScaleXHolder = PropertyValuesHolder.ofFloat(View.SCALE_X, titleScale);
-		PropertyValuesHolder txtScaleYHolder = PropertyValuesHolder.ofFloat(View.SCALE_Y, titleScale);
-		PropertyValuesHolder txtTranslateYHolder = PropertyValuesHolder.ofFloat(View.TRANSLATION_Y, titleTranslateY);
-		ObjectAnimator gameNameAnim = ObjectAnimator.ofPropertyValuesHolder(mHolder.name, txtScaleXHolder,
-				txtScaleYHolder, txtTranslateYHolder);
-		animSet.playTogether(gameBgAnim, gameIconXAnim, gameIconYAnim, gameNameAnim);
-		animSet.setInterpolator(new AccelerateDecelerateInterpolator());
+		PropertyValuesHolder bgScaleXHolder = PropertyValuesHolder.ofFloat(View.SCALE_X, bgScaleX);
+		PropertyValuesHolder bgScaleYHolder = PropertyValuesHolder.ofFloat(View.SCALE_Y, bgScaleY);
+		ObjectAnimator animatorBg = ObjectAnimator.ofPropertyValuesHolder(mHolder.background, bgScaleXHolder,
+				bgScaleYHolder);
+
+		animatorSet.playTogether(animatorIcon, animatorBg);
+		animatorSet.setDuration(200);
 		if (listener != null) {
-			animSet.addListener(listener);
+			animatorSet.addListener(listener);
 		}
-		return animSet;
+		return animatorSet;
 	}
-
+	
 	static class SettingsItemHoder {
-		ViewGroup viewLayout;
+		ViewGroup iconLayout;
 		ImageView background;
 		ImageView icon;
-		ImageView notificationIcon;
-		TextView info;
+		TextView tip;
 		TextView name;
 	}
 }

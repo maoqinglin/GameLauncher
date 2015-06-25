@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/setting_root"
-    android:layout_width="match_parent"
+    android:layout_width="@dimen/content_fragment_width"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingTop="@dimen/settings_margin_top" >

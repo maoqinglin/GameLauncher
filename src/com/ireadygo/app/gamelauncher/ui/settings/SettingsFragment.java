@@ -1,27 +1,22 @@
 package com.ireadygo.app.gamelauncher.ui.settings;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.UserHandle;
-import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.ireadygo.app.gamelauncher.R;
+import com.ireadygo.app.gamelauncher.appstore.download.Network;
+import com.ireadygo.app.gamelauncher.appstore.download.Network.NetworkListener;
 import com.ireadygo.app.gamelauncher.game.utils.Utilities;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
@@ -34,21 +29,23 @@ import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 public class SettingsFragment extends BaseContentFragment {
 
 	private static final String TAG = "SettingsFragment";
-	private static final String FLAG_ETHERNET = "ETHERNET";
 	protected HMultiListView mHMultiListView;
 
 	protected boolean mIsAttach;
-	private boolean mIsViewDestory = false;
 	private SettingsMultiAdapter mSettingsMultiAdapter;
 	private Activity mActivity;
+	private Network mNetwork;
+	private final InnerNetworkListener mInnerNetworkListener = new InnerNetworkListener();
 
 	public SettingsFragment(Activity activity, BaseMenuFragment menuFragment) {
 		super(activity, menuFragment);
 		mActivity = activity;
+		mNetwork = new Network(activity);
 	}
 
 	@Override
 	public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		mNetwork.addNetworkListener(mInnerNetworkListener);
 		View view = inflater.inflate(R.layout.settings_multi_fragment, container, false);
 		initView(view);
 		return view;
@@ -69,60 +66,24 @@ public class SettingsFragment extends BaseContentFragment {
 
 	private List<SettingsInfo> initData() {
 		List<SettingsInfo> settingsList = new ArrayList<SettingsInfo>();
-		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_wifi_selector),
-				getResources().getString(R.string.settings_wifi), SettingsIntentAction.WIFI));
+		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_network_bg),getResources().getDrawable(R.drawable.settings_ic_connection),
+				getResources().getString(R.string.settings_network), "", SettingsIntentAction.NETWORK));
 
-		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_upgrade_selector),
-				getResources().getString(R.string.settings_systemupgrade), SettingsIntentAction.SYSTEM_UPGRADE));
+		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_systemupgrade_bg),getResources().getDrawable(R.drawable.settings_ic_update),
+				getResources().getString(R.string.settings_systemupgrade), "", SettingsIntentAction.SYSTEM_UPGRADE));
 
-		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_wx_selector),
-				getResources().getString(R.string.settings_wx), SettingsIntentAction.WX));
-
-		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_handle_selector),
-				getResources().getString(R.string.settings_handle_battery), SettingsIntentAction.HANDLE));
-
-		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_ap_selector),
-				getResources().getString(R.string.settings_ap), SettingsIntentAction.AP));
-
-		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_time_selector),
-				getResources().getString(R.string.settings_time), SettingsIntentAction.TIME));
-
-		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_keyboard_selector),
-				getResources().getString(R.string.settings_keyboard), SettingsIntentAction.KEYBOARD));
-
-		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_network_selector),
-				getResources().getString(R.string.settings_network), SettingsIntentAction.NETWORK));
-
-		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_language_selector),
-				getResources().getString(R.string.settings_language), SettingsIntentAction.LANGUAGE));
-
-		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_display_selector),
-				getResources().getString(R.string.settings_display), SettingsIntentAction.DISPLAY));
-
-//		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_brightness_selector),
-//				getResources().getString(R.string.settings_brightness), SettingsIntentAction.BRIGHTNESS));
+		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_weixin_bg),getResources().getDrawable(R.drawable.settings_ic_wechat),
+				getResources().getString(R.string.settings_wx), "", SettingsIntentAction.WX));
 		
-		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_controller_selector),
-				getResources().getString(R.string.settings_controller), SettingsIntentAction.CONTROLLER));
-		
-		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_bluetooth_selector),
-				getResources().getString(R.string.settings_bluetooth), SettingsIntentAction.BLUTOOTH));
+		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_favorite_bg),getResources().getDrawable(R.drawable.settings_ic_favorite),
+				getResources().getString(R.string.settings_favorite), "", SettingsIntentAction.FAVORITE));
 
-		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_wallpaper_selector),
-				getResources().getString(R.string.settings_wallpaper), SettingsIntentAction.WALL_PAPER));
+		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_help_bg),getResources().getDrawable(R.drawable.settings_ic_help),
+				getResources().getString(R.string.settings_help), "", SettingsIntentAction.HELP));
 
-		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_hdmi_selector),
-				getResources().getString(R.string.settings_hdmi), SettingsIntentAction.HDMI));
+		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_about_bg),getResources().getDrawable(R.drawable.settings_ic_about),
+				getResources().getString(R.string.settings_about), "",SettingsIntentAction.ABOUT));
 
-		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_help_selector),
-				getResources().getString(R.string.settings_help), SettingsIntentAction.HELP));
-
-		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_about_selector),
-				getResources().getString(R.string.settings_about), SettingsIntentAction.ABOUT));
-
-		settingsList.add(new SettingsInfo(getResources().getDrawable(R.drawable.settings_reset_selector),
-				getResources().getString(R.string.settings_reset), SettingsIntentAction.RESET));
-		
 		return settingsList;
 	}
 
@@ -146,19 +107,6 @@ public class SettingsFragment extends BaseContentFragment {
 							return;
 						}
 
-						if(SettingsIntentAction.AP.equals(action)
-								|| SettingsIntentAction.NETWORK.equals(action)) {
-							skipSettings(action);
-							return;
-						}
-
-						if(SettingsIntentAction.BRIGHTNESS.equals(action)) {
-							UserHandle userHandle = reflectUserHandle();
-							if(userHandle != null) {
-								mActivity.sendBroadcastAsUser(new Intent(action), userHandle);
-							}
-							return;
-						}
 						Intent intent = new Intent(action);
 						intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 						try {
@@ -172,50 +120,13 @@ public class SettingsFragment extends BaseContentFragment {
 		}
 	};
 
-	private UserHandle reflectUserHandle() {
-		try {
-			Class cls = UserHandle.class;  
-			Class[] paramTypes = { int.class };  
-			Object[] params = { -3 };  
-			Constructor con = cls.getConstructor(paramTypes);
-			UserHandle userHandle = (UserHandle) con.newInstance(params);
-			return userHandle;
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		}  
-		return null;
-	}
-
 	public static class SettingsIntentAction {
-		public static final String SYSTEM_UPGRADE = "com.ireadygo.app.systemupgrade.activity.UpgradeHomeActivity";
-		public static final String HELP = "com.ireadygo.app.gamelauncher.ui.activity.HelperActivity";
-		public static final String HANDLE = "com.ireadygo.app.devicemanager.ui.HandlesBattery";
+		public static final String NETWORK = "com.ireadygo.settings";
+		public static final String SYSTEM_UPGRADE = "com.ireadygo.settings.ui.systemupgrade.start";
 		public static final String WX = "com.ireadygo.app.gamelauncher.WeiXinQRcodeActivity";
-
-		public static final String WIFI = Settings.ACTION_WIFI_SETTINGS;
-		public static final String BLUTOOTH = Settings.ACTION_BLUETOOTH_SETTINGS;
-		public static final String LANGUAGE = Settings.ACTION_LOCALE_SETTINGS;
-		public static final String SETTINGS = Settings.ACTION_SETTINGS;
-		public static final String ABOUT = Settings.ACTION_DEVICE_INFO_SETTINGS;
-		public static final String TIME = Settings.ACTION_DATE_SETTINGS;
-		public static final String KEYBOARD = Settings.ACTION_INPUT_METHOD_SETTINGS;
-		public static final String RESET = Settings.ACTION_PRIVACY_SETTINGS;
-
-		public static final String CONTROLLER = "android.settings.CONTROLLER_SETTINGS";
-		public static final String WALL_PAPER = Intent.ACTION_SET_WALLPAPER;
-		public static final String HDMI = "android.settings.HDMI_SETTINGS";
-		public static final String BRIGHTNESS = "android.intent.action.SHOW_BRIGHTNESS_DIALOG";
-		public static final String DISPLAY = "com.nvidia.settings.MIRACAST_SETTINGS";
-		public static final String NETWORK = "com.android.settings.Settings$EthernetSettingsActivity";
-		public static final String AP = "com.android.settings.Settings$TetherSettingsActivity";
+		public static final String FAVORITE = "android.ireadygo.settings.PreferenceMenuActivity";
+		public static final String ABOUT = "com.ireadygo.settings.about";
+		public static final String HELP = "com.ireadygo.settings.help";
 	}
 
 	@Override
@@ -241,17 +152,38 @@ public class SettingsFragment extends BaseContentFragment {
 		mActivity.startActivity(chooser);
 	}
 
-	private void skipSettings(String activityName) {
-		Intent intent = new Intent("/");
-		ComponentName cm = new ComponentName("com.android.settings", activityName);
-		intent.setComponent(cm);
-		intent.setAction("android.intent.action.VIEW");
-		try {
-			mActivity.startActivityForResult(intent, 0);
-		} catch (ActivityNotFoundException e) {
-			Toast.makeText(mActivity, "Activity is Not found!", Toast.LENGTH_SHORT).show();
-			e.printStackTrace();
-		}
+	@Override
+	public void onDestoryView() {
+		super.onDestoryView();
+		mNetwork.removeNetworkListener(mInnerNetworkListener);
 	}
 
+	private final class InnerNetworkListener implements NetworkListener {
+
+		@Override
+		public void onNetworkConnected() {
+			List<SettingsInfo> settingList = (List<SettingsInfo>)mSettingsMultiAdapter.getData();
+			for(SettingsInfo settingInfo : settingList){
+				if(SettingsIntentAction.NETWORK.equals(settingInfo.getIntentAction())){
+					settingInfo.setItemIcon(getResources().getDrawable(R.drawable.settings_ic_connection));
+					settingInfo.setTip("");
+					break;
+				}
+			}
+			notifyDataSet();
+		}
+
+		@Override
+		public void onNetworkDisconnected() {
+			List<SettingsInfo> settingList = (List<SettingsInfo>)mSettingsMultiAdapter.getData();
+			for(SettingsInfo settingInfo : settingList){
+				if(SettingsIntentAction.NETWORK.equals(settingInfo.getIntentAction())){
+					settingInfo.setItemIcon(getResources().getDrawable(R.drawable.settings_ic_not_connection));
+					settingInfo.setTip(getResources().getString(R.string.settings_network_not_connect));
+					break;
+				}
+			}
+			notifyDataSet();
+		}
+	}
 }

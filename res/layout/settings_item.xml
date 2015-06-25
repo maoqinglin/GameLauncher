@@ -1,61 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/settings_item"
     android:layout_width="@dimen/settings_icon_bg_width"
     android:layout_height="@dimen/settings_icon_bg_height"
     android:clipChildren="false"
-    android:duplicateParentState="true"
-    android:clipToPadding="false" >
+    android:clipToPadding="false"
+    android:duplicateParentState="true" >
 
     <ImageView
         android:id="@+id/settings_view_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:duplicateParentState="true"
-        android:src="@drawable/settings_item_bg_selector" />
+        android:duplicateParentState="true" 
+        android:src="@drawable/item_background_rectangle_selector"
+        />
 
-    <ImageView
-        android:id="@+id/settings_icon"
-        android:layout_width="@dimen/settings_icon_width"
-        android:layout_height="@dimen/settings_icon_height"
-        android:layout_centerHorizontal="true"
-        android:scaleType="fitXY"
-        android:layout_marginTop="@dimen/settings_icon_margin_top" />
-
-    <ImageView
-        android:id="@+id/notification_icon"
-        android:layout_width="@dimen/settings_icon_width"
-        android:layout_height="@dimen/settings_icon_height"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/settings_icon_margin_top"
-        android:visibility="gone" />
-
-    <TextView
-        android:id="@+id/info"
-        style="@style/mygame_game_text_style"
+    <FrameLayout
+        android:id="@+id/icon_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/settings_name_margin_bottom"
-        android:gravity="center"
-        android:scaleX="0.8"
-        android:scaleY="0.8"
-        android:visibility="gone"
-        android:textSize="@dimen/settings_name_txt_size" />
+        android:layout_height="match_parent"
+        android:layout_gravity="center" >
 
-    <TextView
-        android:id="@+id/settings_name"
-        style="@style/settings_text_style"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/settings_name_margin_bottom"
-        android:gravity="center"
-        android:scaleX="0.8"
-        android:scaleY="0.8"
-        android:textSize="@dimen/settings_name_txt_size" />
+        <ImageView
+            android:id="@+id/settings_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/settings_icon_margin_top"
+            android:scaleType="fitXY" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/settings_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="@dimen/common_image_item_text_tip_margin_bottom"
+            android:textColor="@color/white"
+            android:textSize="@dimen/common_image_item_textsize" />
+        <TextView
+            android:id="@+id/settings_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="@dimen/common_image_item_text_margin_bottom"
+            android:textColor="@color/white"
+            android:textSize="@dimen/common_image_item_textsize" />
+    </FrameLayout>
+
+</FrameLayout>
