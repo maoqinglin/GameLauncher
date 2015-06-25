@@ -67,30 +67,11 @@ public class OperationTipsLayout extends RelativeLayout {
 	}
 
 	private void setVisibleByFlag(TipFlag flag, int isVisible) {
-		switch (flag) {
-		case FLAG_ALL:
-			setAllVisible(View.VISIBLE);
-			break;
-		case FLAG_TIPS_SUN:
-			tipsSunTxt.setVisibility(isVisible);
-			break;
-		case FLAG_TIPS_MOON:
-			tipsMoonTxt.setVisibility(isVisible);
-			break;
-		case FLAG_TIPS_MOONTAIN:
-			tipsMoontainTxt.setVisibility(isVisible);
-			break;
-		case FLAG_TIPS_WATER:
-			tipsWaterTxt.setVisibility(isVisible);
-			break;
-		case FLAG_TIPS_L1:
-			tipsL1Txt.setVisibility(isVisible);
-			break;
-		case FLAG_TIPS_R1:
-			tipsR1Txt.setVisibility(isVisible);
-			break;
-		default:
-			throw new NumberFormatException("params is valid");
+		TextView textview = findTextView(flag);
+		if(textview == null){
+			setAllVisible(isVisible);
+		}else{
+			textview.setVisibility(isVisible);
 		}
 	}
 
@@ -103,5 +84,47 @@ public class OperationTipsLayout extends RelativeLayout {
 
 	public PagingIndicator getPagingIndicator() {
 		return mPagingIndicator;
+	}
+
+	public void setTipsText(TipFlag flag, String text) {
+		TextView textview = findTextView(flag);
+		if (textview != null) {
+			textview.setText(text);
+		}
+	}
+	public void setTipsText(TipFlag flag, int textId) {
+		TextView textview = findTextView(flag);
+		if (textview != null) {
+			textview.setText(textId);
+		}
+	}
+
+	private TextView findTextView(TipFlag flag) {
+		TextView textview = null;
+		switch (flag) {
+		case FLAG_ALL:
+			break;
+		case FLAG_TIPS_SUN:
+			textview = tipsSunTxt;
+			break;
+		case FLAG_TIPS_MOON:
+			textview = tipsMoonTxt;
+			break;
+		case FLAG_TIPS_MOONTAIN:
+			textview = tipsMoontainTxt;
+			break;
+		case FLAG_TIPS_WATER:
+			textview = tipsWaterTxt;
+			break;
+		case FLAG_TIPS_L1:
+			textview = tipsL1Txt;
+			break;
+		case FLAG_TIPS_R1:
+			textview = tipsR1Txt;
+			break;
+		default:
+			throw new NumberFormatException("params is valid");
+		}
+		return textview;
 	}
 }

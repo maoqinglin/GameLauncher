@@ -48,6 +48,7 @@ import com.snail.appstore.openapi.AppPlatFormConfig;
 
 public class SearchActivity extends BaseActivity implements OnClickListener, KeyCallback {
 	private static final int SEARCH_APP_MAX_SIZE = 12;
+	private static final int INPUT_MAX_SIZE = 6;
 	private static final int DIALOG_SHOW = 0;
 	private static final int DIALOG_DISMISS = 1;
 	private FrameLayout mSearchContent;
@@ -115,7 +116,8 @@ public class SearchActivity extends BaseActivity implements OnClickListener, Key
 
 	private void initView() {
 		mTipsLayout = (OperationTipsLayout) findViewById(R.id.tipsLayout);
-		mTipsLayout.setTipsVisible(TipFlag.FLAG_TIPS_SUN,TipFlag.FLAG_TIPS_MOON);
+		mTipsLayout.setTipsVisible(TipFlag.FLAG_TIPS_SUN,TipFlag.FLAG_TIPS_WATER,TipFlag.FLAG_TIPS_MOON);
+		mTipsLayout.setTipsText(TipFlag.FLAG_TIPS_MOON, R.string.goback);
 		mSearchContent = (FrameLayout) findViewById(R.id.search_content);
 		mSearchPrompt = (TextView) findViewById(R.id.search_recommend_prompt);
 
@@ -281,7 +283,7 @@ public class SearchActivity extends BaseActivity implements OnClickListener, Key
 	private boolean checkInputLen(final String originalTxt) {
 		boolean isValid = true;
 		int len = originalTxt.length();
-		if (len >= 6) {
+		if (len >= INPUT_MAX_SIZE) {
 			Toast.makeText(this, getResources().getString(R.string.search_keyword_most), Toast.LENGTH_SHORT).show();
 			isValid = false;
 		}
@@ -377,6 +379,13 @@ public class SearchActivity extends BaseActivity implements OnClickListener, Key
 		return onBackKey();
 	}
 
+	@Override
+	public boolean onWaterKey() {
+		keyRequestFocus();
+		mDelete.performClick();
+		return true;
+	}
+	
 	private String getKeyword() {
 		return mKeyWord.getText().toString().trim();
 	}
