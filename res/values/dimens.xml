@@ -27,9 +27,9 @@
 
     <!-- 主菜单(menu) -->
     <dimen name="menu_image_width">70dp</dimen>
-    <dimen name="menu_item_margin_top">36dp</dimen>
+    <dimen name="menu_item_margin_top">46dp</dimen>
     <dimen name="menu_item_margin_left">40dp</dimen>
-    <dimen name="menu_width">250dp</dimen>
+    <dimen name="menu_width">280dp</dimen>
     <dimen name="menu_home_margin_top">204dp</dimen>
     <dimen name="menu_store_margin_top">204dp</dimen>
     <dimen name="menu_category_detail_margin_top">204dp</dimen>
@@ -37,6 +37,8 @@
     <dimen name="menu_padding_right">10dp</dimen>
     <dimen name="menu_title_size">48sp</dimen>
     <dimen name="menu_image_margin_right">25dp</dimen>
+    <dimen name="menu_item_text_width">220dp</dimen>
+    <dimen name="menu_item_text_height">70dp</dimen>
 
     <!-- 我的游戏 -->
     <dimen name="mygame_app_width">270dp</dimen>
@@ -66,7 +68,7 @@
     <!-- 内容页面 -->
     <dimen name="content_fragment_height">780dp</dimen>
     <dimen name="content_padding_left_default">150dp</dimen>
-    <dimen name="content_fragment_width">1670dp</dimen>
+    <dimen name="content_fragment_width">1640dp</dimen>
     <dimen name="content_fragment_padding_left">100dp</dimen>
     <dimen name="content_fragment_padding_top">75dp</dimen>
     <dimen name="content_fragment_list_padding_right">60dp</dimen>

@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/menu_text"
-    style="@style/MenuTitle"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:gravity="center" >
+    android:gravity="center_horizontal" >
 
-</TextView>
+    <ImageView
+        android:id="@+id/menu_circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/menu_nav_selected"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/menu_text"
+        style="@style/MenuTitle"
+        android:layout_width="@dimen/menu_item_text_width"
+        android:layout_height="@dimen/menu_item_text_height"
+        android:layout_centerInParent="true"
+        android:gravity="center" />
+
+</RelativeLayout>

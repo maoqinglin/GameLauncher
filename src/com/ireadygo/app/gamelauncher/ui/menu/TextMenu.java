@@ -6,10 +6,10 @@ import android.animation.PropertyValuesHolder;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ireadygo.app.gamelauncher.R;
@@ -18,6 +18,7 @@ public class TextMenu extends MenuItem {
 	private static final float TEXT_SCALE_DEFAULT = 0.75f;
 	private String mText;
 	private TextView mTextView;
+	private ImageView mMenuCircle;
 
 	public TextMenu(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -41,8 +42,9 @@ public class TextMenu extends MenuItem {
 	}
 
 	private void init(Context context) {
-		LayoutInflater.from(context).inflate(R.layout.menu_text, this, true);
-		mTextView = (TextView) findViewById(R.id.menu_text);
+		View view = LayoutInflater.from(context).inflate(R.layout.menu_text, this, true);
+		mTextView = (TextView) view.findViewById(R.id.menu_text);
+		mMenuCircle = (ImageView) view.findViewById(R.id.menu_circle);
 		if (mText != null) {
 			mTextView.setText(mText);
 		}
@@ -58,16 +60,14 @@ public class TextMenu extends MenuItem {
 	public void toSelected(AnimatorListener listener) {
 		super.toSelected(listener);
 		mTextView.setTextColor(Color.WHITE);
-		mTextView.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.menu_nav_selected), null, null, null);
-		mTextView.setBackground(new BitmapDrawable());
+		mMenuCircle.setVisibility(View.VISIBLE);
 	}
 
 	@Override
 	public void toUnfocused(AnimatorListener listener) {
 		super.toUnfocused(listener);
 		mTextView.setTextColor(Color.WHITE);
-		mTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
-		mTextView.setBackground(new BitmapDrawable());
+		mMenuCircle.setVisibility(View.INVISIBLE);
 		mUnfocusedAnimator = createAnimator(listener, 150, 0.3f, TEXT_SCALE_DEFAULT);
 		mUnfocusedAnimator.start();
 	}
@@ -75,10 +75,8 @@ public class TextMenu extends MenuItem {
 	@Override
 	public void toFocused(AnimatorListener listener) {
 		super.toFocused(listener);
-//		mTextView.setTextColor(0xffffb300);
 		mTextView.setTextColor(Color.WHITE);
-		mTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
-		mTextView.setBackgroundResource(R.drawable.menu_nav_focused_bg);
+		mMenuCircle.setVisibility(View.INVISIBLE);
 		mFocusedAnimator = createAnimator(listener, 300, 1, 1);
 		mFocusedAnimator.start();
 	}

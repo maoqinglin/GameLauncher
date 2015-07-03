@@ -3,6 +3,7 @@ package com.ireadygo.app.gamelauncher.ui.store;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
@@ -17,8 +18,13 @@ public class StoreActivity extends BaseMenuActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		initView();
-		updateFocusViewNextFocusId(R.id.store_menu_search);
-		requestMenuFocusByIntent(getIntent());
+		updateFocusViewNextFocusId(R.id.store_menu_recommand);
+		new Handler().postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				requestMenuFocusByIntent(getIntent());
+			}
+		}, 500);
 	}
 
 	@Override

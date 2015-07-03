@@ -8,11 +8,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.ireadygo.app.gamelauncher.GameLauncherApplication;
@@ -28,7 +26,7 @@ import com.ireadygo.app.gamelauncher.ui.AppFragment;
 import com.ireadygo.app.gamelauncher.ui.Config;
 import com.ireadygo.app.gamelauncher.ui.GameFragment;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
-import com.ireadygo.app.gamelauncher.ui.item.ImageItem.ImageItemHolder;
+import com.ireadygo.app.gamelauncher.ui.focus.FocusRelativeLayout;
 import com.ireadygo.app.gamelauncher.ui.settings.SettingsFragment;
 import com.ireadygo.app.gamelauncher.ui.store.StoreFragment;
 import com.ireadygo.app.gamelauncher.ui.user.UserFragmentA;
@@ -56,6 +54,10 @@ public class HomeMenuFragment extends BaseMenuFragment {
 	@Override
 	public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.menu_home, container, false);
+		FocusRelativeLayout focusView = (FocusRelativeLayout) view.findViewById(R.id.focus_container);
+		focusView.setBorderViewBg(R.drawable.menu_nav_focused_bg);
+		focusView.setViewGroup(container); // 控制焦点顺序.
+		focusView.setChildFocusChangeListener(mItemFocusChangeListener);
 		mUserMenu = (MenuItem) view.findViewById(R.id.menu_user);
 		mGameMenu = (MenuItem) view.findViewById(R.id.menu_game);
 		mStoreMenu = (MenuItem) view.findViewById(R.id.menu_store);
