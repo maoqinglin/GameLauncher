@@ -121,7 +121,7 @@ public class SettingsFragment extends BaseContentFragment {
 	};
 
 	public static class SettingsIntentAction {
-		public static final String NETWORK = "com.ireadygo.settings";
+		public static final String NETWORK = "com.ireadygo.settings.network";
 		public static final String SYSTEM_UPGRADE = "com.ireadygo.settings.ui.systemupgrade.start";
 		public static final String WX = "com.ireadygo.app.gamelauncher.WeiXinQRcodeActivity";
 		public static final String FAVORITE = "android.ireadygo.settings.PreferenceMenuActivity";
