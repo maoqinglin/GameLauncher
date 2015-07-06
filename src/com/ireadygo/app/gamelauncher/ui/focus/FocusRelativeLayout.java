@@ -86,7 +86,7 @@ public class FocusRelativeLayout extends RelativeLayout {
 	}
 
 	@Override
-	public boolean dispatchKeyEvent(KeyEvent event) {
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		int action = event.getAction();
 		if (action == KeyEvent.ACTION_DOWN && mViewGroupParent != null) {
 			int id = -1;
@@ -115,9 +115,8 @@ public class FocusRelativeLayout extends RelativeLayout {
 				}
 			}
 		}
-		return super.dispatchKeyEvent(event);
+		return super.onKeyDown(keyCode, event);
 	}
-
 	/**
 	 * �?查当前焦点的子控件的下一个焦点的父控件是否和�?�?.
 	 */
@@ -281,8 +280,8 @@ public class FocusRelativeLayout extends RelativeLayout {
 	private void findChildFocusWidget(ViewGroup vg) {
 		for (int i = 0; i < vg.getChildCount(); i++) {
 			View childView = vg.getChildAt(i);
-			if (childView instanceof ViewGroup
-					&& !(childView instanceof MenuItem)) {
+			int id = childView.getNextFocusRightId();
+			if (childView instanceof ViewGroup && !(childView instanceof MenuItem)) {
 				findChildFocusWidget((ViewGroup) childView); // 继续搜索子控件view.
 			} else if (checkReflectionRLay(childView)) { // 判断是否�??要显示移动边框的子控�??.
 				setChildViewEvent(childView); // 设置焦点控件的事�??.

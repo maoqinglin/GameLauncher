@@ -2,16 +2,15 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:gravity="right"
     android:layout_marginTop="@dimen/menu_category_detail_margin_top"
+    android:gravity="right"
     android:paddingBottom="@dimen/menu_category_detail_padding_bottom"
-    android:scrollbars="none" ><LinearLayout
-        android:id="@+id/store_menu"
+    android:scrollbars="none" >
+
+    <com.ireadygo.app.gamelauncher.ui.focus.FocusRelativeLayout
+        android:id="@+id/store_category_focus_container"
         android:layout_width="@dimen/menu_width"
-        android:layout_height="wrap_content"
-        android:gravity="right"
-        android:orientation="vertical"
-        android:paddingRight="@dimen/menu_padding_right" >
-    </LinearLayout>
+        android:layout_height="wrap_content" >
+    </com.ireadygo.app.gamelauncher.ui.focus.FocusRelativeLayout>
 
 </ScrollView>

@@ -24,7 +24,7 @@ public class StoreActivity extends BaseMenuActivity {
 			public void run() {
 				requestMenuFocusByIntent(getIntent());
 			}
-		}, 500);
+		}, 300);
 	}
 
 	@Override

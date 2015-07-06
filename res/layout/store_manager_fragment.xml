@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res/com.ireadygo.app.gamelauncher"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="@dimen/content_fragment_width"
     android:layout_height="match_parent"
     android:duplicateParentState="true" >
@@ -20,6 +20,8 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/store_manager_title_layout"
         android:layout_marginLeft="@dimen/store_manager_menu_margin_left"
+        android:layout_marginRight="@dimen/store_manager_menu_margin_right"
+        android:gravity="center_horizontal"
         android:orientation="vertical" >
 
         <com.ireadygo.app.gamelauncher.ui.menu.ImageTextMenu
@@ -29,7 +31,7 @@
             android:layout_marginTop="@dimen/store_manager_menu_margin_top"
             android:nextFocusDown="@+id/manager_upgrade"
             android:nextFocusLeft="@+id/store_menu_manager"
-            android:nextFocusRight="@+id/manager_viewpager"
+            android:nextFocusRight="@+id/upHList"
             android:nextFocusUp="@+id/manager_download"
             app:menu_icon="@drawable/store_manager_download_selector"
             app:menu_title="@string/store_manager_downloading" >
@@ -42,7 +44,7 @@
             android:layout_marginTop="@dimen/store_manager_menu_margin_top"
             android:nextFocusDown="@+id/manager_installed"
             android:nextFocusLeft="@+id/store_menu_manager"
-            android:nextFocusRight="@+id/manager_viewpager"
+            android:nextFocusRight="@+id/upHList"
             android:nextFocusUp="@+id/manager_download"
             app:menu_icon="@drawable/store_manager_upgrade_selector"
             app:menu_title="@string/store_manager_updatable" >
@@ -55,7 +57,7 @@
             android:layout_marginTop="@dimen/store_manager_menu_margin_top"
             android:nextFocusDown="@+id/manager_installed"
             android:nextFocusLeft="@+id/store_menu_manager"
-            android:nextFocusRight="@+id/manager_viewpager"
+            android:nextFocusRight="@+id/upHList"
             android:nextFocusUp="@+id/manager_upgrade"
             app:menu_icon="@drawable/store_manager_installed_selector"
             app:menu_title="@string/store_manager_launchable" >

@@ -7,6 +7,7 @@ import java.util.List;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 
 import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryInfo;
 import com.ireadygo.app.gamelauncher.ui.base.BaseMenuActivity;
@@ -21,8 +22,13 @@ public class CategoryDetailActivity extends BaseMenuActivity {
 		super.onCreate(savedInstanceState);
 		//
 		initView();
-		int position = getIntent().getIntExtra(EXTRA_FOCUS_POSITION, 0);
-		getMenuFragment().requestFocusByPosition(position);
+		final int position = getIntent().getIntExtra(EXTRA_FOCUS_POSITION, 0);
+		new Handler().postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				getMenuFragment().requestFocusByPosition(position);
+			}
+		}, 300);
 	}
 
 	@Override

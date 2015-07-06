@@ -444,6 +444,30 @@ public class StoreManagerContentFragment extends BaseContentFragment implements 
 		if (hasFocus) {
 			onClick(view);
 		} else {
+			
+		}
+		switch (view.getId()) {
+		case R.id.manager_download:
+			if (mDownloadApps.isEmpty()) {
+				view.setNextFocusRightId(R.id.manager_download);
+			} else {
+				view.setNextFocusRightId(R.id.upHList);
+			}
+			break;
+		case R.id.manager_upgrade:
+			if (mUpgradeApps.isEmpty()) {
+				view.setNextFocusRightId(R.id.manager_upgrade);
+			} else {
+				view.setNextFocusRightId(R.id.upHList);
+			}
+			break;
+		case R.id.manager_installed:
+			if (mInstalledApps.isEmpty()) {
+				view.setNextFocusRightId(R.id.manager_installed);
+			} else {
+				view.setNextFocusRightId(R.id.upHList);
+			}
+			break;
 		}
 	}
 
