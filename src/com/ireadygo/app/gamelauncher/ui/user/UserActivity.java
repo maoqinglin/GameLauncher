@@ -3,6 +3,7 @@ package com.ireadygo.app.gamelauncher.ui.user;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 
 import com.ireadygo.app.gamelauncher.ui.base.BaseMenuActivity;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
@@ -14,7 +15,12 @@ public class UserActivity extends BaseMenuActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		initView();
-		requestMenuFocusByIntent(getIntent());
+		new Handler().postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				requestMenuFocusByIntent(getIntent());
+			}
+		}, 300);
 	}
 
 	private void requestMenuFocusByIntent(Intent intent) {
