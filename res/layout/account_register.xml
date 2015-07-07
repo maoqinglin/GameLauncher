@@ -23,6 +23,7 @@
             style="@style/LoginEdittext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
             android:layout_marginTop="@dimen/register_margin_top_first"
             android:drawableLeft="@drawable/account_username_icon"
             android:hint="@string/account_register_username_hint" />
@@ -52,6 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
+            android:imeOptions="actionDone"
             android:layout_marginTop="@dimen/register_margin_top_normal"
             android:drawableLeft="@drawable/account_password_icon"
             android:hint="@string/account_register_password_repeat_hint" />
