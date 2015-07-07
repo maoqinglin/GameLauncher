@@ -10,78 +10,63 @@
     android:orientation="vertical"
     android:paddingTop="@dimen/menu_home_margin_top" >
 
-    <com.ireadygo.app.gamelauncher.ui.focus.FocusRelativeLayout
-        android:id="@+id/focus_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+    <com.ireadygo.app.gamelauncher.ui.menu.ImageMenu
+        android:id="@+id/menu_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:nextFocusDown="@+id/menu_store"
+        android:nextFocusLeft="@+id/menu_user"
+        android:nextFocusRight="@+id/user_center_layout"
+        android:nextFocusUp="@+id/menu_settings"
+        menuItem:menu_icon="@drawable/account_photo_default_circle" >
+    </com.ireadygo.app.gamelauncher.ui.menu.ImageMenu>
 
-        <com.ireadygo.app.gamelauncher.ui.menu.ImageMenu
-            android:id="@+id/menu_user"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:nextFocusDown="@+id/menu_store"
-            android:nextFocusLeft="@+id/menu_user"
-            android:nextFocusRight="@+id/user_center_layout"
-            android:nextFocusUp="@+id/menu_settings"
-            menuItem:menu_icon="@drawable/account_photo_default_circle" >
-        </com.ireadygo.app.gamelauncher.ui.menu.ImageMenu>
+    <com.ireadygo.app.gamelauncher.ui.menu.TextMenu
+        android:id="@+id/menu_store"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/menu_item_margin_top"
+        android:nextFocusDown="@+id/menu_game"
+        android:nextFocusLeft="@+id/menu_store"
+        android:nextFocusRight="@+id/upHList"
+        android:nextFocusUp="@+id/menu_user"
+        menuItem:menu_title="@string/menu_store" >
+    </com.ireadygo.app.gamelauncher.ui.menu.TextMenu>
 
-        <com.ireadygo.app.gamelauncher.ui.menu.TextMenu
-            android:id="@+id/menu_store"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/menu_user"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/menu_item_margin_top"
-            android:nextFocusDown="@+id/menu_game"
-            android:nextFocusLeft="@+id/menu_store"
-            android:nextFocusRight="@+id/upHList"
-            android:nextFocusUp="@+id/menu_user"
-            menuItem:menu_title="@string/menu_store" >
-        </com.ireadygo.app.gamelauncher.ui.menu.TextMenu>
+    <com.ireadygo.app.gamelauncher.ui.menu.TextMenu
+        android:id="@+id/menu_game"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/menu_item_margin_top"
+        android:nextFocusDown="@+id/menu_app"
+        android:nextFocusLeft="@+id/menu_game"
+        android:nextFocusRight="@+id/upHList"
+        android:nextFocusUp="@+id/menu_store"
+        menuItem:menu_title="@string/menu_game" >
+    </com.ireadygo.app.gamelauncher.ui.menu.TextMenu>
 
-        <com.ireadygo.app.gamelauncher.ui.menu.TextMenu
-            android:id="@+id/menu_game"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/menu_store"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/menu_item_margin_top"
-            android:nextFocusDown="@+id/menu_app"
-            android:nextFocusLeft="@+id/menu_game"
-            android:nextFocusRight="@+id/upHList"
-            android:nextFocusUp="@+id/menu_store"
-            menuItem:menu_title="@string/menu_game" >
-        </com.ireadygo.app.gamelauncher.ui.menu.TextMenu>
+    <com.ireadygo.app.gamelauncher.ui.menu.TextMenu
+        android:id="@+id/menu_app"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/menu_item_margin_top"
+        android:nextFocusDown="@+id/menu_settings"
+        android:nextFocusLeft="@+id/menu_app"
+        android:nextFocusRight="@+id/upHList"
+        android:nextFocusUp="@+id/menu_game"
+        menuItem:menu_title="@string/menu_app" >
+    </com.ireadygo.app.gamelauncher.ui.menu.TextMenu>
 
-        <com.ireadygo.app.gamelauncher.ui.menu.TextMenu
-            android:id="@+id/menu_app"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/menu_game"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/menu_item_margin_top"
-            android:nextFocusDown="@+id/menu_settings"
-            android:nextFocusLeft="@+id/menu_app"
-            android:nextFocusRight="@+id/upHList"
-            android:nextFocusUp="@+id/menu_game"
-            menuItem:menu_title="@string/menu_app" >
-        </com.ireadygo.app.gamelauncher.ui.menu.TextMenu>
-
-        <com.ireadygo.app.gamelauncher.ui.menu.TextMenu
-            android:id="@+id/menu_settings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/menu_app"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/menu_item_margin_top"
-            android:nextFocusDown="@+id/menu_user"
-            android:nextFocusLeft="@+id/menu_settings"
-            android:nextFocusRight="@+id/upHList"
-            android:nextFocusUp="@+id/menu_app"
-            menuItem:menu_title="@string/menu_settings" >
-        </com.ireadygo.app.gamelauncher.ui.menu.TextMenu>
-    </com.ireadygo.app.gamelauncher.ui.focus.FocusRelativeLayout>
+    <com.ireadygo.app.gamelauncher.ui.menu.TextMenu
+        android:id="@+id/menu_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/menu_item_margin_top"
+        android:nextFocusDown="@+id/menu_user"
+        android:nextFocusLeft="@+id/menu_settings"
+        android:nextFocusRight="@+id/upHList"
+        android:nextFocusUp="@+id/menu_app"
+        menuItem:menu_title="@string/menu_settings" >
+    </com.ireadygo.app.gamelauncher.ui.menu.TextMenu>
 
 </LinearLayout>

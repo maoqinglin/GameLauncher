@@ -12,13 +12,14 @@
         android:paddingLeft="@dimen/content_fragment_padding_left"
         app:stat_title="@string/app_title_prompt" />
 
-    <com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView
-        android:id="@+id/mutillist"
-        style="@style/MultiListNormal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/statistics_view"
-        android:nextFocusLeft="@+id/menu_app" >
-    </com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView>
+
+        <com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView
+            android:id="@+id/mutillist"
+            style="@style/MultiListNormal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/statistics_view"
+            android:nextFocusLeft="@+id/menu_app" >
+        </com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView>
 
 </RelativeLayout>

@@ -12,13 +12,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.ireadygo.app.gamelauncher.ui.Config;
 import com.ireadygo.app.gamelauncher.ui.OnChildFocusChangeListener;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.base.BaseFragment;
-import com.ireadygo.app.gamelauncher.ui.focus.FocusRelativeLayout.ChildFocusChangeListener;
 
 public abstract class BaseMenuFragment extends BaseFragment {
 	private static final int WHAT_CONTENT_OBTAIN_FOCUS = 1;
@@ -61,7 +61,7 @@ public abstract class BaseMenuFragment extends BaseFragment {
 	}
 
 	protected void addMenuItem(MenuItem menuItem, BaseContentFragment fragment) {
-//		menuItem.setOnFocusChangeListener(mItemFocusChangeListener);
+		menuItem.setOnFocusChangeListener(mItemFocusChangeListener);
 		menuItem.setContentFragment(fragment);
 		menuItem.setIndex(mMenuItemList.size());
 		mMenuItemList.add(menuItem);
@@ -83,7 +83,7 @@ public abstract class BaseMenuFragment extends BaseFragment {
 		return mStatus;
 	}
 
-	protected ChildFocusChangeListener mItemFocusChangeListener = new ChildFocusChangeListener() {
+	protected OnFocusChangeListener mItemFocusChangeListener = new OnFocusChangeListener() {
 
 		@Override
 		public void onFocusChange(View v, boolean hasFocus) {

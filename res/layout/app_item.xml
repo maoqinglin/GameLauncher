@@ -13,8 +13,8 @@
         android:id="@+id/background"
         android:layout_width="@dimen/mygame_app_width"
         android:layout_height="@dimen/mygame_app_bg_height"
-        android:duplicateParentState="true"
-        android:src="@drawable/item_background_rectangle_selector" />
+        android:src="@color/translucent"
+        android:duplicateParentState="true" />
 
     <LinearLayout
         android:layout_width="@dimen/mygame_app_width"

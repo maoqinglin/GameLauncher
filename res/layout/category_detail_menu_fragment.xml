@@ -7,10 +7,13 @@
     android:paddingBottom="@dimen/menu_category_detail_padding_bottom"
     android:scrollbars="none" >
 
-    <com.ireadygo.app.gamelauncher.ui.focus.FocusRelativeLayout
-        android:id="@+id/store_category_focus_container"
+    <LinearLayout
+        android:id="@+id/store_menu"
         android:layout_width="@dimen/menu_width"
-        android:layout_height="wrap_content" >
-    </com.ireadygo.app.gamelauncher.ui.focus.FocusRelativeLayout>
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingRight="@dimen/menu_padding_right" >
+    </LinearLayout>
 
 </ScrollView>

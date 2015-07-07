@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.ui.Config;
-import com.ireadygo.app.gamelauncher.ui.focus.FocusRelativeLayout;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.MenuItem;
 
@@ -22,10 +21,6 @@ public class UserMenuFragment extends BaseMenuFragment {
 	@Override
 	public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.account_menu_fragment, container, false);
-		FocusRelativeLayout focusView = (FocusRelativeLayout) view.findViewById(R.id.account_focus_container);
-		focusView.setBorderViewBg(R.drawable.menu_nav_focused_bg);
-		focusView.setViewGroup(container); // 控制焦点顺序.
-		focusView.setChildFocusChangeListener(mItemFocusChangeListener);
 		MenuItem personalCenterMenu = (MenuItem) view.findViewById(R.id.account_menu_personal);
 		MenuItem rechargeMenu = (MenuItem) view.findViewById(R.id.account_menu_recharge);
 

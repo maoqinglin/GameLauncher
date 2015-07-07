@@ -34,6 +34,7 @@ import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
 import android.os.Message;
 import android.support.v4.util.SparseArrayCompat;
 import android.util.AttributeSet;
@@ -3965,7 +3966,13 @@ public class HListView extends AbsHListView {
 				View selectedView = getSelectedView();
 				if(selectedView != null && selectedView instanceof BaseAdapterItem){
 					mSelectedItem = (BaseAdapterItem) selectedView;
-					animatorToSelected(mSelectedItem);
+					new Handler().postDelayed(new Runnable() {
+						
+						@Override
+						public void run() {
+							animatorToSelected(mSelectedItem);
+						}
+					}, 200);
 				}
 			} else {
 				if (!v.isInTouchMode()) {

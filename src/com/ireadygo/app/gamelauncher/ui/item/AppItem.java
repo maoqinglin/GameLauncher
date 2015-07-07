@@ -70,6 +70,7 @@ public class AppItem extends BaseAdapterItem {
 		if (mUnselectedAnimator != null && mUnselectedAnimator.isRunning()) {
 			mUnselectedAnimator.cancel();
 		}
+		mHolder.background.setImageResource(R.drawable.item_background_selected_rectangle);
 		mSelectedAnimator = AnimatorHelper.createSelectAnimator(listener, mHolder.background, mHolder.iconLayout, mHolder.title);
 		mSelectedAnimator.start();
 	}
@@ -79,6 +80,7 @@ public class AppItem extends BaseAdapterItem {
 		if (mSelectedAnimator != null && mSelectedAnimator.isRunning()) {
 			mSelectedAnimator.cancel();
 		}
+		mHolder.background.setImageResource(R.color.translucent);
 		mUnselectedAnimator = AnimatorHelper.createUnselectAnimator(listener, mHolder.background, mHolder.iconLayout, mHolder.title);
 		mUnselectedAnimator.start();
 	}
