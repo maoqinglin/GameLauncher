@@ -45,7 +45,6 @@
                     android:nextFocusRight="@+id/clear_input"
                     android:nextFocusUp="@+id/change_input"
                     app:key_background="@drawable/search_keyboard_textview_bg_selector"
-                    app:key_icon="@drawable/search_keyboard_textview_bg_selector"
                     app:key_title="123"
                     app:title_textsize="@dimen/search_keyboard_function_key_size" />
 
