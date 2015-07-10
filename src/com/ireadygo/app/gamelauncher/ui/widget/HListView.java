@@ -3996,7 +3996,9 @@ public class HListView extends AbsHListView {
 		// msg.what = WHAT_SELECTED_ANIMATOR;
 		// msg.obj = item;
 		// mHandler.sendMessageDelayed(msg, 20);
-		item.toSelected(null);
+		if(item != null){
+			item.toSelected(null);
+		}
 	}
 
 	private void animatorToUnselected(BaseAdapterItem item) {

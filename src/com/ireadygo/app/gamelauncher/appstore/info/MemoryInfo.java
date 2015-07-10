@@ -394,7 +394,7 @@ public class MemoryInfo implements IGameInfo {
 	}
 
 	@Override
-	public String[] uploadGeituiInfo(String clienId, String appId, String channelId, String phoneType)
+	public String[] uploadGeituiInfo(String clienId, String appId, String channelId, String phoneType, String nAppVersion)
 			throws InfoSourceException {
 		return null;
 	}

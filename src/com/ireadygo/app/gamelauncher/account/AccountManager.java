@@ -10,12 +10,10 @@ import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.Cursor;
 import android.net.Uri;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.igexin.sdk.PushManager;
@@ -218,7 +216,8 @@ public class AccountManager {
 							GameLauncherConfig.GETUI_CLIENTID,
 							GameLauncherConfig.GETUI_APPID,
 							GameLauncherConfig.getChennelId(),
-							GameLauncherConfig.PHONE_TYPE);
+							GameLauncherConfig.PHONE_TYPE,
+							getAppVersionCode(context));
 					//根据返回的tag，设置个推的tag
 					if (tags != null && tags.length > 0) {
 						Tag[] tagParam = new Tag[tags.length];
@@ -235,6 +234,18 @@ public class AccountManager {
 				}
 			}
 		});
+	}
+
+	private String getAppVersionCode(Context context) {
+		int versionCode = 0;
+		try {
+			PackageManager pm = context.getPackageManager();
+			PackageInfo pi = pm.getPackageInfo(context.getPackageName(), 0);
+			versionCode = pi.versionCode;
+		} catch (Exception e) {
+			Log.e("VersionInfo", "Exception", e);
+		}
+		return String.valueOf(versionCode);
 	}
 
 	public SnailPushMessage queryNotificationById(Context context, long id) {

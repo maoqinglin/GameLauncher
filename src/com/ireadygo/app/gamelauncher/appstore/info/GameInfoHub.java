@@ -409,9 +409,9 @@ public class GameInfoHub implements IGameInfo {
 	}
 
 	@Override
-	public String[] uploadGeituiInfo(String clientId, String appId, String channelId, String phoneType)
+	public String[] uploadGeituiInfo(String clientId, String appId, String channelId, String phoneType, String nAppVersion)
 			throws InfoSourceException {
-		return mRemoteInfo.uploadGeituiInfo(clientId, appId, channelId, phoneType);
+		return mRemoteInfo.uploadGeituiInfo(clientId, appId, channelId, phoneType, nAppVersion);
 	}
 
 	@Override

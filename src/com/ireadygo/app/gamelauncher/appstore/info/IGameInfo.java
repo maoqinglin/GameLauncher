@@ -126,7 +126,7 @@ public interface IGameInfo {
 	RechargePhoneItem rechargePhone(long id, String phoneNum, int feeNum) throws InfoSourceException;
 
 	//上报终端个推相关信息，返回需要设置的tags
-	String[] uploadGeituiInfo(String clienId, String appId, String channelId,String phoneType) throws InfoSourceException;
+	String[] uploadGeituiInfo(String clienId, String appId, String channelId,String phoneType, String nAppVersion) throws InfoSourceException;
 
 	//BSS账号验证
 	boolean checkBSSAccount(String phone);

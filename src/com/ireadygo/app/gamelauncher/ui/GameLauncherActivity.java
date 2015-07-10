@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.igexin.sdk.PushManager;
 import com.ireadygo.app.gamelauncher.GameLauncherApplication;
 import com.ireadygo.app.gamelauncher.GameLauncherConfig;
 import com.ireadygo.app.gamelauncher.R;
@@ -61,9 +62,9 @@ public class GameLauncherActivity extends BaseMenuActivity {
 			}, 500);
 		}
 		// // 初始化个推
-		// PushManager.getInstance().initialize(this);
+		 PushManager.getInstance().initialize(this);
 		// // 上报终端个推信息
-		// AccountManager.getInstance().uploadGetuiInfo(this);
+		 AccountManager.getInstance().uploadGetuiInfo(this);
 		// 上报应用启动时间
 		if (PreferenceUtils.hasDeviceActive()) {
 			mCreateTime = System.currentTimeMillis();

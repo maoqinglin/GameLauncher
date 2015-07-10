@@ -1399,11 +1399,11 @@ public class RemoteInfo implements IGameInfo {
 	}
 
 	@Override
-	public String[] uploadGeituiInfo(String clientId, String appId, String channelId, String phoneType)
+	public String[] uploadGeituiInfo(String clientId, String appId, String channelId, String phoneType, String nAppVersion)
 			throws InfoSourceException {
 		ResultVO resultVO;
 		try {
-			resultVO = mAppPlatFormService.uploadGetuiInfo(clientId, appId, channelId, phoneType);
+			resultVO = mAppPlatFormService.uploadGetuiInfo(clientId, appId, channelId, phoneType, nAppVersion);
 			if (resultVO.getCode() == RESULT_SUCCESS_CODE) {
 				if (resultVO.getValue() != null) {
 					String tags = (String)resultVO.getValue();

@@ -29,7 +29,7 @@ public class GameLauncherConfig {
 
 	public static final String PHONE_TYPE = "ANDROID";
 	public static final String GETUI_CLIENTID = PushManager.getInstance().getClientid(GameLauncherApplication.getApplication());
-	public static final String GETUI_APPID = "pBeBWRkaqE892HvalVEbj7";
+	public static final String GETUI_APPID = "VvqyjVd91V81t807kHMge5";
 	public static final int DEFAULT_SLOT_NUM = 20;
 	public static final String DEFAULT_REMOTE_REQUEST_DOMAIN = "http://api.app.snail.com";
 
