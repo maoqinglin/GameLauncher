@@ -33,7 +33,7 @@
     <item name="menu_item_no_selected_title_y" format="integer" type="dimen">-50</item>
     
     <!-- Content -->
-    <item name="content_init_x" format="integer" type="dimen">250</item>
+    <item name="content_init_x" format="integer" type="dimen">260</item>
     <item name="content_init_y" format="integer" type="dimen">0</item>
     <item name="content_focused_x" format="integer" type="dimen">250</item>
     <item name="content_focused_y" format="integer" type="dimen">0</item>

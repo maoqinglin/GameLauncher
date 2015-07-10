@@ -7,7 +7,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
@@ -134,7 +133,12 @@ public class CustomFrameLayout extends FrameLayout implements OnGlobalFocusChang
 			}
 			return;
 		}
+		boolean isFocusTranslate = false;
 		if (newFocus != null) {
+			if ((oldFocus instanceof MenuItem || oldFocus instanceof HListView)
+					&& (newFocus instanceof MenuItem || newFocus instanceof HListView)) {// 临时过滤方案
+				isFocusTranslate = true;
+			}
 			if (oldFocus instanceof HListView && newFocus instanceof HListView) {
 				return;
 			}
@@ -144,11 +148,11 @@ public class CustomFrameLayout extends FrameLayout implements OnGlobalFocusChang
 			if (newFocus instanceof HListView) {
 				newFocus = ((HListView) newFocus).getChildAt(0);
 			}
-			focusTranslate(oldFocus, newFocus);
+			focusTranslate(oldFocus, newFocus, isFocusTranslate);
 		}
 	}
 
-	private void focusTranslate(final View from, final View to) {
+	private void focusTranslate(final View from, final View to, final boolean isFocusTranslate) {
 		final int gap = dipToPixels(DEFAULT_STROKE_WIDTH);
 
 		int[] location = new int[2];
@@ -164,8 +168,10 @@ public class CustomFrameLayout extends FrameLayout implements OnGlobalFocusChang
 		final int currHeight = from.getHeight() + (gap << 1);
 
 		// 首次显示矩形焦点框(默认为原始图矩形框)，
-		setFocusWindowRect(currWidth, currHeight);
-		setFocusWindowBg(from, to,true,-1);
+		if(isFocusTranslate){
+			setFocusWindowRect(currWidth, currHeight);
+			setFocusWindowBg(from, to,true,-1);
+		}
 
 		final int toWidth = to.getWidth() + (gap << 1);
 		final int toHeight = to.getHeight() + (gap << 1);
@@ -198,7 +204,7 @@ public class CustomFrameLayout extends FrameLayout implements OnGlobalFocusChang
 			}
 		};
 
-		translate.setDuration(DEFAULT_DURATION);
+		translate.setDuration(isFocusTranslate ? DEFAULT_DURATION : 0);
 		translate.setFillAfter(false);
 		translate.setInterpolator(getContext(),
 				android.R.anim.accelerate_interpolator);

@@ -29,7 +29,7 @@
     <dimen name="menu_image_width">70dp</dimen>
     <dimen name="menu_item_margin_top">46dp</dimen>
     <dimen name="menu_item_margin_left">40dp</dimen>
-    <dimen name="menu_width">280dp</dimen>
+    <dimen name="menu_width">260dp</dimen>
     <dimen name="menu_home_margin_top">204dp</dimen>
     <dimen name="menu_store_margin_top">204dp</dimen>
     <dimen name="menu_category_detail_margin_top">204dp</dimen>
@@ -68,7 +68,7 @@
     <!-- 内容页面 -->
     <dimen name="content_fragment_height">780dp</dimen>
     <dimen name="content_padding_left_default">150dp</dimen>
-    <dimen name="content_fragment_width">1640dp</dimen>
+    <dimen name="content_fragment_width">1660dp</dimen>
     <dimen name="content_fragment_padding_left">100dp</dimen>
     <dimen name="content_fragment_padding_top">75dp</dimen>
     <dimen name="content_fragment_list_padding_right">60dp</dimen>
