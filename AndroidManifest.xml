@@ -279,6 +279,7 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.EXTERNAL_APPLICATIONS_AVAILABLE" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
         <receiver android:name="com.ireadygo.app.gamelauncher.ui.BootCompletedReceiver" >

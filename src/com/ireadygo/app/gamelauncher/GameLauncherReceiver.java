@@ -5,13 +5,17 @@ import java.util.HashMap;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.text.TextUtils;
 
 import com.ireadygo.app.gamelauncher.GameLauncher.InitComplete;
+import com.ireadygo.app.gamelauncher.account.AccountManager;
+import com.ireadygo.app.gamelauncher.appstore.download.Network;
 import com.ireadygo.app.gamelauncher.appstore.info.item.GameState;
 import com.ireadygo.app.gamelauncher.appstore.manager.GameManager;
 import com.ireadygo.app.gamelauncher.appstore.manager.GameStateManager;
 import com.ireadygo.app.gamelauncher.game.data.GameLauncherAppState;
+import com.ireadygo.app.gamelauncher.utils.NetworkUtils;
 import com.umeng.analytics.MobclickAgent;
 
 public class GameLauncherReceiver extends BroadcastReceiver {
@@ -40,6 +44,7 @@ public class GameLauncherReceiver extends BroadcastReceiver {
 			GameStateManager gsm = GameLauncher.instance().getGameManager().getGameStateManager();
 			GameManager gm = GameLauncher.instance().getGameManager();
 			String action = intent.getAction();
+			//外部存储设备挂载广播，重新开始图标加载
 			if (Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE.equals(action)) {
 				String pkgList[] = intent.getStringArrayExtra(Intent.EXTRA_CHANGED_PACKAGE_LIST);
 				if (pkgList == null || pkgList.length == 0) {
@@ -48,6 +53,14 @@ public class GameLauncherReceiver extends BroadcastReceiver {
 				GameLauncherAppState.getInstance(context).getModel().startLoader();
 				return;
 			}
+			//网络变化广播
+			if (ConnectivityManager.CONNECTIVITY_ACTION.equals(action)) {
+				if (NetworkUtils.isNetworkConnected(context)) {
+					AccountManager.getInstance().uploadGetuiInfo(context);
+				}
+				return;
+			}
+			//应用安装，卸载，更新广播
 			String packageName = intent.getDataString().split(":")[1];
 			if (TextUtils.isEmpty(packageName)) {
 				return;

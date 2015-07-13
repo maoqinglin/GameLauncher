@@ -38,6 +38,7 @@ public class AccountManager {
 	private boolean mIsInitSuccess = false;
 	private static AccountManager mAccountManager = new AccountManager();
 	private static final String TAG = "AccountManager";
+	private static boolean sHasGeTuiInfoUpload = false;
 
 	private AccountManager() {
 	}
@@ -207,6 +208,9 @@ public class AccountManager {
 	}
 
 	public void uploadGetuiInfo(final Context context) {
+		if (sHasGeTuiInfoUpload) {
+			return;
+		}
 		GameLauncherThreadPool.getCachedThreadPool().execute(new Runnable() {
 			@Override
 			public void run() {
@@ -227,6 +231,9 @@ public class AccountManager {
 							tagParam[i] = t;
 						}
 						int result = PushManager.getInstance().setTag(context, tagParam);
+						if (result == 0) {
+							sHasGeTuiInfoUpload = true;
+						}
 						Log.w(TAG, "PushManager setTag result:"+result);
 					}
 				} catch (InfoSourceException e) {
