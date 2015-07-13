@@ -17,6 +17,7 @@ public class GuideRegisterOrLoginActivity extends BaseAccountActivity {
 
 	private GuideTwoBtnLayout mGuideTwoBtnLayout;
 	private OperationTipsLayout mTipsLayout;
+	private int mMode = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

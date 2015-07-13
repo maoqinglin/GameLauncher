@@ -23,6 +23,7 @@ import com.ireadygo.app.gamelauncher.utils.StaticsUtils;
 import com.ireadygo.app.gamelauncher.utils.Utils;
 
 public class GameLauncherActivity extends BaseMenuActivity {
+	private static final String GUIDE_ACTIVITY_ACTION = "com.ireadygo.settings.guide";
 	private Dialog mLoadingProgress;
 	private long mCreateTime = 0;
 	private long mResumeTime = 0;
@@ -38,7 +39,8 @@ public class GameLauncherActivity extends BaseMenuActivity {
 				public void run() {
 					dimissLoadingProgress();
 					try {
-						Intent startIntent = new Intent(GameLauncherActivity.this, HandleDescriptionActivity.class);
+//						Intent startIntent = new Intent(GameLauncherActivity.this, HandleDescriptionActivity.class);
+						Intent startIntent = new Intent(GUIDE_ACTIVITY_ACTION);
 						startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 						startActivity(startIntent);
 						finish();

@@ -183,7 +183,13 @@
         <activity
             android:name="com.ireadygo.app.gamelauncher.ui.guide.GuideRegisterOrLoginActivity"
             android:screenOrientation="landscape"
-            android:theme="@style/CustomerTheme" />
+            android:theme="@style/CustomerTheme" >
+            <intent-filter>
+                <action android:name="com.ireadygo.app.gamelauncher.GuideRegisterOrLoginActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name="com.ireadygo.app.gamelauncher.ui.guide.GuideAlipayActivity"
             android:screenOrientation="landscape"
@@ -275,11 +281,11 @@
                 <action android:name="android.intent.action.EXTERNAL_APPLICATIONS_AVAILABLE" />
             </intent-filter>
         </receiver>
-        <receiver android:name="com.ireadygo.app.gamelauncher.ui.BootCompletedReceiver">    
-            <intent-filter>    
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>    
-            </intent-filter>    
-        </receiver>   
+        <receiver android:name="com.ireadygo.app.gamelauncher.ui.BootCompletedReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
         <!-- 蜗牛桌面 end -->
 
 
@@ -456,8 +462,8 @@
             android:exported="false"
             android:process="com.alipay.sdk" >
             <intent-filter android:priority="800" >
-            <category android:name="android.intent.category.DEFAULT" />
-        </intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </service>
 
         <activity android:name="com.alipay.android.app.sdk.WapPayActivity" >
@@ -500,8 +506,8 @@
             android:excludeFromRecents="true" >
         </activity>
 
-		<service android:name="com.snailgame.mobilesdk.SDKService" />
-		
+        <service android:name="com.snailgame.mobilesdk.SDKService" />
+
         <receiver android:name="com.snailgame.mobilesdk.PostSSOLoginReceiver" >
             <intent-filter>
                 <action android:name="com.snailgame.postssologin" >
