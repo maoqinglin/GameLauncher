@@ -41,10 +41,13 @@ public class GeTuiReceiver extends BroadcastReceiver {
 					}
 					//后台处理推送消息
 					PushMsgProcessor.getInstance().handlePushMsg(spMsg);
+					//发送boxmessage
+					PushMsgProcessor.getInstance().sendBoxMessageBroadcast(spMsg, data);
 					//添加本地消息通知
 					int id = mAccountManager.addSnailPushMessage(context, spMsg);
 					if(id > 0 && GameLauncher.hasInit()) {
-						GameLauncher.instance().getGameManager().getGameLauncherNotification().addMsgNotification(id,spMsg);
+//							GameLauncher.instance().getGameManager().getGameLauncherNotification()
+//									.addMsgNotification(id, spMsg); //屏蔽通知  modify by linmaoqing 2015-7-13 
 						Intent send = new Intent(ACTION_MSG_UPDATE);
 						send.putExtra("NOTIFICATION_ID", id);
 						LocalBroadcastManager.getInstance(context).sendBroadcast(send);

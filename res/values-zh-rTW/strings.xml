@@ -445,6 +445,7 @@
     <string name="error_unknown">未知錯誤</string>
     <string name="error_download">下載出錯</string>
     <string name="error_install">安裝出錯</string>
+    <string name="error_install_fail">安裝失敗</string>
     <string name="error_launch_unknown">啟動失敗：無法啟動應用，請重新下載！</string>
     <string name="error_launch_disable">啟動失敗：應用已禁止！</string>
     <string name="error_install_package_not_found">安裝失敗：檔不存在，請重新下載</string>

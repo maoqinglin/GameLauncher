@@ -37,7 +37,7 @@ public class BaseActivity extends KeyEventActivity {
 	}
 
 	protected void dimissLoadingProgress() {
-		if (mLoadingProgress != null && mLoadingProgress.isShowing()) {
+		if (!isDestroyed() && !isFinishing() && mLoadingProgress != null && mLoadingProgress.isShowing()) {
 			mLoadingProgress.dismiss();
 		}
 	}
@@ -64,14 +64,12 @@ public class BaseActivity extends KeyEventActivity {
 					mLoadingProgress = Utils.createLoadingDialog(BaseActivity.this);
 					mLoadingProgress.setCancelable(true);
 				}
-				if (!mLoadingProgress.isShowing()) {
+				if (!isDestroyed() && !isFinishing() && !mLoadingProgress.isShowing()) {
 					mLoadingProgress.show();
 				}
 				break;
 			case MSG_DISMISS_LOADING_DIALOG:
-				if (mLoadingProgress != null && mLoadingProgress.isShowing()) {
-					mLoadingProgress.dismiss();
-				}
+				dimissLoadingProgress();
 				break;
 			default:
 				break;

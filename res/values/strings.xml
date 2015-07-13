@@ -446,6 +446,7 @@
     <string name="error_unknown">Unknown Error!</string>
     <string name="error_download">Download Error!</string>
     <string name="error_install">Install Error!</string>
+    <string name="error_install_fail">Install Fail!</string>
     <string name="error_launch_unknown">Error:Application failed to start,Please download again!</string>
     <string name="error_launch_disable">Error:Application has been disabled!</string>
     <string name="error_install_package_not_found">Install Error：Invalid file</string>

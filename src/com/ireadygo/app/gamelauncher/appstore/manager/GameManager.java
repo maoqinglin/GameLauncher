@@ -37,6 +37,7 @@ import com.ireadygo.app.gamelauncher.game.data.GameLauncherAppState;
 import com.ireadygo.app.gamelauncher.utils.StaticsUtils;
 import com.ireadygo.app.gamelauncher.utils.ToastUtils;
 import com.ireadygo.app.gamelauncher.utils.Utils;
+import com.ireadygo.app.gamelauncher.widget.BoxMessage;
 import com.ireadygo.app.gamelauncher.widget.GameLauncherNotification;
 import com.ireadygo.app.gamelauncher.widget.GameLauncherThreadPool;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -64,7 +65,9 @@ public class GameManager {
 	private GameLauncherNotification mGameLauncherNotification;
 	private static final long MAP_GAME_DELAY = 60 * 1000;
 	private static final String ACTION_LOAD_DATA_COMPLETE = "com.ireadygo.app.gamelauncher.ACTION_LOAD_DATA_COMPLETE";
-
+	private static final int MESSAGE_TYPE_START_APP = 0;
+	private static final int MESSAGE_TYPE_SKIP_DETAIL = 1;
+	
 	public GameManager(Context context) {
 		mContext = context;
 		mInstaller = new InstallManager(mContext);
@@ -274,6 +277,22 @@ public class GameManager {
 				reportInstallStateChange(app);
 				//上报安装成功事件
 				StaticsUtils.installSuccess(app.getAppId());
+				//发送通知
+				sendInstallNotification(app, mContext.getString(R.string.extend_install_success),
+						MESSAGE_TYPE_START_APP, true);
+			}
+
+			private void sendInstallNotification(final AppEntity app, String title, int type, boolean isInstatllSuccess) {
+				if(AppEntity.IN_FREE_STORE == app.getIsComeFrmFreeStore()){
+					BoxMessage boxMessage = new BoxMessage();
+					boxMessage.setAppId(app.getAppId());
+					boxMessage.setPkgName(app.getPkgName());
+					String appName = app.getName();
+					boxMessage.setTitle(appName + title);
+					boxMessage.setContent(appName + title);
+					boxMessage.setSkipType(type);
+					mGameLauncherNotification.addInstallNotification(boxMessage, isInstatllSuccess);
+				}
 			}
 
 			@Override
@@ -297,6 +316,8 @@ public class GameManager {
 			@Override
 			public void onInstallFailed(InstallException ie) {
 //				Toast.makeText(mContext, app.getName() + "安装失败：" + ie.getMessage(), Toast.LENGTH_SHORT).show();
+				sendInstallNotification(app, mContext.getString(R.string.error_install_fail), MESSAGE_TYPE_SKIP_DETAIL,
+						false);
 				if (InstallMessage.INCONSISTENT_CERTIFICATES.equals(ie.getMessage())) {
 					// 同包名，签名不一致，卸载后再安装
 					reInstallApk(app.getPkgName(), app);
@@ -392,7 +413,7 @@ public class GameManager {
 //				// 下载完成则安装
 				install(app);
 //				//下载完成，发送通知
-				mGameLauncherNotification.addDownloadedNotification();
+//				mGameLauncherNotification.addDownloadedNotification();屏蔽下载通知  modify by linmaoqing 2015-7-13 
 				reportDownloadStateChange(app);
 				//上报下载完成通知
 				StaticsUtils.downloadResult(app.getAppId(), true);
@@ -405,7 +426,7 @@ public class GameManager {
 				reportDownloadStateChange(app);
 			}
 			//下载状态变化，更新通知
-			mGameLauncherNotification.addDownloadingNotification();
+//			mGameLauncherNotification.addDownloadingNotification();屏蔽通知  modify by linmaoqing 2015-7-13 
 		}
 
 		@Override
@@ -432,7 +453,7 @@ public class GameManager {
 			mGameStateManager.setGameState(app.getPkgName(), newState);
 			reportDownloadStateChange(app);
 			//下载状态变化，更新通知
-			mGameLauncherNotification.addDownloadingNotification();
+//			mGameLauncherNotification.addDownloadingNotification();屏蔽通知  modify by linmaoqing 2015-7-13 
 		}
 	};
 

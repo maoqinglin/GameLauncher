@@ -83,6 +83,31 @@ public class PushMsgProcessor {
 	}
 
 
+	public void sendBoxMessageBroadcast(SnailPushMessage msg, String data) {
+		int type = msg.getType();
+		String title = msg.getTitle();
+		switch (type) {
+		case TYPE_GAME_DETAIL:
+			sendBroadcastByType(title, TYPE_GAME_DETAIL, data);
+			break;
+		case TYPE_GAME_WEB:
+			sendBroadcastByType(title, TYPE_GAME_WEB, data);
+			break;
+		case TYPE_GAME_COLLECTION:
+			break;
+		default:
+			break;
+		}
+	}
+
+	private void sendBroadcastByType(String title, int type, String data) {
+		Intent intent = new Intent(GameLauncherConfig.BOX_MESSAGE_ACTION);
+		intent.putExtra(GameLauncherConfig.MESSAGE_TITLE, title);
+		intent.putExtra(GameLauncherConfig.MESSAGE_PKG_NAME, mContext.getPackageName());
+		intent.putExtra(GameLauncherConfig.MESSAGE_SKIP_TYPE, type);
+		intent.putExtra(GameLauncherConfig.MESSAGE_SKIP_FLAG, data);
+		mContext.sendBroadcast(intent);
+	}
 
 	private void skipToGameDetail(String appId) {
 		Intent intent = new Intent();

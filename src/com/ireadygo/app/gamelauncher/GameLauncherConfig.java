@@ -52,6 +52,13 @@ public class GameLauncherConfig {
 	public static final String KEY_CHANNEL_ID = "CChannel";
 	// 平台号字段
 	public static final String KEY_PLATFORM_ID = "IPlatformId";
+	
+	//个推数据
+	public static final String MESSAGE_TITLE = "title";
+	public static final String MESSAGE_PKG_NAME = "pkgName";
+	public static final String MESSAGE_SKIP_TYPE = "skip_type";
+	public static final String MESSAGE_SKIP_FLAG = "skip_flag";
+	public static final String BOX_MESSAGE_ACTION = "com.ireadygo.app.boxmessage";
 
 	
 	public static final String[] SLOT_WHITE_LIST = {

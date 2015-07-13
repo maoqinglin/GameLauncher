@@ -19,6 +19,7 @@ import com.ireadygo.app.gamelauncher.GameLauncherConfig;
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.account.pushmsg.SnailPushMessage;
 import com.ireadygo.app.gamelauncher.account.pushmsg.SnailPushMessage.Type;
+import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.appstore.info.item.GameState;
 import com.ireadygo.app.gamelauncher.appstore.manager.GameStateManager;
 import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
@@ -116,6 +117,22 @@ public class GameLauncherNotification {
 		Intent intent = new Intent(mContext, null);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
 		return PendingIntent.getActivity(mContext, type, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+	}
+
+	private PendingIntent setPendingIntentToStartApp(BoxMessage boxMsg) {
+		if(TextUtils.isEmpty(boxMsg.getPkgName())){
+			return null;
+		}
+		Intent intent = mContext.getPackageManager().getLaunchIntentForPackage(boxMsg.getPkgName());
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+		return PendingIntent.getActivity(mContext, boxMsg.getSkipType(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+	}
+
+	private PendingIntent setPendingIntentToDetail(BoxMessage boxMsg) {
+		Intent intent = new Intent();
+		intent.setClass(GameLauncherApplication.getApplication().getCurrentActivity(), DetailActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+		return PendingIntent.getActivity(mContext, boxMsg.getSkipType(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
 	}
 
 	private RemoteViews setRemoteViews() {
@@ -224,10 +241,26 @@ public class GameLauncherNotification {
 		notification.setLatestEventInfo(mContext, mContext.getString(R.string.notification_upgrade_big_title)
 				, count+mContext.getString(R.string.notification_upgrade_little_title), setPendingIntentUpgrade(TYPE_UPGRADE_NOTIFICATION));
 		mNotificationMap.put(TYPE_UPGRADE_NOTIFICATION, notification);
-		mManager.notify(TYPE_UPGRADE_NOTIFICATION, mNotificationMap.get(TYPE_UPGRADE_NOTIFICATION));
+		mManager.notify(BoxMessage.generateNewId(), mNotificationMap.get(TYPE_UPGRADE_NOTIFICATION));
 	}
 	
-
+	/**
+	 * 免商店应用安装成功
+	 * @param title
+	 * @param content
+	 */
+	public void addInstallNotification(BoxMessage boxMsg, boolean isInstallSuccess) {
+		Notification notification = notification = new Notification(R.drawable.push, boxMsg.getTitle(),
+				System.currentTimeMillis());
+		notification.defaults = Notification.DEFAULT_VIBRATE;
+		notification.flags = Notification.FLAG_AUTO_CANCEL;
+		PendingIntent pendIntent = isInstallSuccess ? setPendingIntentToStartApp(boxMsg)
+				: setPendingIntentToDetail(boxMsg);
+		notification.setLatestEventInfo(mContext, boxMsg.getTitle(), boxMsg.getContent(), pendIntent);
+		mNotificationMap.put(boxMsg.getMsgId(), notification);
+		mManager.notify(boxMsg.getMsgId(), notification);
+	}
+	
 	/*
 	 * 根据下载列表，生成通知语句
 	 */
