@@ -555,5 +555,9 @@
     <dimen name="statusbar_padding_right">20dp</dimen>
     <dimen name="statusbar_time_width">120dp</dimen>
     
-
+	<!-- 消息盒子 -->
+	<dimen name="boxmessage_global_message_width">256dp</dimen>
+	<dimen name="boxmessage_global_message_height">64dp</dimen>
+	<dimen name="boxmessage_global_message_text_size">18sp</dimen>
+	
 </resources>

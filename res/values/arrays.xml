@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="boxmessage_white_list">
+        <item>com.ireadygo.app.gamelauncher</item>
+        <item>com.android.settings</item>
+        <item>com.android.packageinstaller</item>
+        <item>com.ireadygo.app.devicemanager</item>
+        <item>com.ireadygo.app.systemupgrade</item>
+        <item>com.ireadygo.app.androidtest</item>
+    </string-array>
+</resources>

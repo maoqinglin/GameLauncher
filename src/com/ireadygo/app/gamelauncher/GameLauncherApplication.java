@@ -10,6 +10,7 @@ import com.ireadygo.app.gamelauncher.account.AccountManager;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserInfoItem;
 import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
 import com.ireadygo.app.gamelauncher.game.data.GameLauncherAppState;
+import com.ireadygo.app.gamelauncher.slidingmenu.BoxMessageController;
 import com.ireadygo.app.gamelauncher.statusbar.StatusBarService;
 import com.ireadygo.app.gamelauncher.ui.GameLauncherActivity;
 import com.ireadygo.app.gamelauncher.utils.Utils;
@@ -24,6 +25,7 @@ public class GameLauncherApplication extends Application {
 	private SoundPoolManager mSoundPoolManager;
 	private static final String RENT_FREE_STATISTIC_ACTION = "com.ireadygo.app.rentfree.playtimestatisticservice.start";
 	private Bitmap mUserPhoto;
+	private BoxMessageController mBoxMessageController;
 
 	@Override
 	public void onCreate() {
@@ -49,6 +51,13 @@ public class GameLauncherApplication extends Application {
 		startService(service);
 		
 		startRemoteStatisticService();
+		
+		initBoxMessageService();
+	}
+
+	private void initBoxMessageService() {
+		mBoxMessageController = BoxMessageController.getInstance(this);
+		mBoxMessageController.init();
 	}
 
 	private void startRemoteStatisticService() {
@@ -73,6 +82,7 @@ public class GameLauncherApplication extends Application {
 		AccountManager.getInstance().destory();
 		GameLauncherAppState.getInstance(getApplicationContext()).onTerminate();
 		stopService(new Intent(this, StatusBarService.class));
+		mBoxMessageController.shutdown();
 		super.onTerminate();
 	}
 

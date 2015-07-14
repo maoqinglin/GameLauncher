@@ -1,7 +1,5 @@
 package com.ireadygo.app.gamelauncher.ui.store.category;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -16,7 +14,8 @@ import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
 public class CategoryDetailActivity extends BaseMenuActivity {
 	public static final String EXTRA_CATEGORY_GAMES = "Games";
 	public static final String EXTRA_CATEGORYS = "Categorys";
-	public static List<CategoryInfo> mCategoryList;
+	public static List<CategoryInfo> sCategoryList;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -33,11 +32,11 @@ public class CategoryDetailActivity extends BaseMenuActivity {
 
 	@Override
 	public BaseMenuFragment createMenuFragment() {
-		return new CategoryDetailMenuFragment(this,mCategoryList);
+		return new CategoryDetailMenuFragment(this,sCategoryList);
 	}
 
 	public static void startSelf(Context context, int focusPosition,List<CategoryInfo> categoryList) {
-		mCategoryList = categoryList;
+		sCategoryList = categoryList;
 		Intent intent = new Intent(context, CategoryDetailActivity.class);
 		intent.putExtra(EXTRA_FOCUS_POSITION, focusPosition);
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

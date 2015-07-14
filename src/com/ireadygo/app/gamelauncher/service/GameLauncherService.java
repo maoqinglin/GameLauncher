@@ -58,6 +58,7 @@ public class GameLauncherService extends Service {
 		public GameLauncherAppState getGameLauncherAppState() {
             return mGameLauncherAppState;
         }
+		
 	}
 
 
