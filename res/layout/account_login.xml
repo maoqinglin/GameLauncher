@@ -45,7 +45,7 @@
             android:layout_width="@dimen/login_edittext_width"
             android:layout_height="@dimen/login_edittext_height"
             android:layout_marginTop="@dimen/login_margin_top_normal"
-            android:background="@drawable/guide_btn_selector"
+            android:background="@drawable/snail_guide_btn_orange_selector"
             android:text="@string/account_login_btn" />
 
         <TextView
@@ -60,7 +60,7 @@
             style="@style/LoginBtn"
             android:layout_width="@dimen/login_edittext_width"
             android:layout_height="@dimen/login_edittext_height"
-            android:background="@drawable/guide_btn_selector"
+            android:background="@drawable/snail_guide_btn_orange_selector"
             android:text="@string/account_register_btn" />
     </LinearLayout>
 
