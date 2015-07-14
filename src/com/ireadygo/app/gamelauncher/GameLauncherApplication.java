@@ -1,5 +1,7 @@
 package com.ireadygo.app.gamelauncher;
 
+import java.io.File;
+
 import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
@@ -13,11 +15,14 @@ import com.ireadygo.app.gamelauncher.game.data.GameLauncherAppState;
 import com.ireadygo.app.gamelauncher.slidingmenu.BoxMessageController;
 import com.ireadygo.app.gamelauncher.statusbar.StatusBarService;
 import com.ireadygo.app.gamelauncher.ui.GameLauncherActivity;
+import com.ireadygo.app.gamelauncher.utils.PictureUtil;
 import com.ireadygo.app.gamelauncher.utils.Utils;
 import com.umeng.analytics.MobclickAgent;
 
 public class GameLauncherApplication extends Application {
 
+	private static final String USER_PHOTO_SAVE_PATH = File.separator + "user_photo";
+	private static final String USER_PHOTO_NAME = "user_photo.png";
 	private static GameLauncherApplication sApp;
 	private Activity mCurrentActivity;
 	private GameLauncherActivity mGameLauncherActivity;
@@ -26,6 +31,7 @@ public class GameLauncherApplication extends Application {
 	private static final String RENT_FREE_STATISTIC_ACTION = "com.ireadygo.app.rentfree.playtimestatisticservice.start";
 	private Bitmap mUserPhoto;
 	private BoxMessageController mBoxMessageController;
+	private String mUserPhotoSavePath;
 
 	@Override
 	public void onCreate() {
@@ -49,10 +55,9 @@ public class GameLauncherApplication extends Application {
 
 		Intent service = new Intent(this, StatusBarService.class);
 		startService(service);
-		
 		startRemoteStatisticService();
-		
 		initBoxMessageService();
+		initUserPhotoSavePath();
 	}
 
 	private void initBoxMessageService() {
@@ -104,10 +109,22 @@ public class GameLauncherApplication extends Application {
 	}
 
 	public Bitmap getUserPhoto() {
+		if (mUserPhoto == null) {
+			mUserPhoto = PictureUtil.readBitmap(this, mUserPhotoSavePath + File.separator + USER_PHOTO_NAME);
+		}
 		return mUserPhoto;
 	}
 
 	public void setUserPhoto(Bitmap userPhoto) {
 		this.mUserPhoto = userPhoto;
+		PictureUtil.saveBitmap(this, userPhoto, mUserPhotoSavePath + File.separator + USER_PHOTO_NAME);
+	}
+
+	private void initUserPhotoSavePath() {
+		mUserPhotoSavePath = getFilesDir().getPath() + USER_PHOTO_SAVE_PATH;
+		File file = new File(mUserPhotoSavePath);
+		if (!file.exists()) {
+			file.mkdir();
+		}
 	}
 }

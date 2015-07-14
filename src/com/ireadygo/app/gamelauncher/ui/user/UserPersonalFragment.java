@@ -82,6 +82,7 @@ public class UserPersonalFragment extends BaseContentFragment implements OnClick
 	private PhotoAdapter mPhotoAdapter;
 	private List<UserHeaderImgItem> mUserPhotoLists = new ArrayList<UserHeaderImgItem>();
 	private boolean mShouldRequestOnDismiss = true;
+	private Bitmap mCurPhotoBitmap;
 
 	public UserPersonalFragment(Activity activity, BaseMenuFragment menuFragment) {
 		super(activity, menuFragment);
@@ -146,7 +147,7 @@ public class UserPersonalFragment extends BaseContentFragment implements OnClick
 			case SAVE_SUCCESS:
 				hideProgressDialog();
 				Toast.makeText(getRootActivity(), R.string.personal_save_success, Toast.LENGTH_SHORT).show();
-				GameLauncherApplication.getApplication().setUserPhoto(mPhotoView.getDrawingCache());
+				GameLauncherApplication.getApplication().setUserPhoto(mCurPhotoBitmap);
 				break;
 			case SAVE_FAILED:
 				hideProgressDialog();
@@ -218,6 +219,7 @@ public class UserPersonalFragment extends BaseContentFragment implements OnClick
 					if (holder != null) {
 						mPhotoView.setImageBitmap(holder.imgItem.getBitmap());
 						mPhotoView.setTag(holder.imgItem.getImgUrl());
+						mCurPhotoBitmap = holder.imgItem.getBitmap();
 					}
 					systemPhotoDialog.dismiss();
 				}
@@ -246,6 +248,7 @@ public class UserPersonalFragment extends BaseContentFragment implements OnClick
 						if (holder != null) {
 							mPhotoView.setImageBitmap(holder.imgItem.getBitmap());
 							mPhotoView.setTag(holder.imgItem.getImgUrl());
+							mCurPhotoBitmap = holder.imgItem.getBitmap();
 						}
 						systemPhotoDialog.dismiss();
 						break;
@@ -312,6 +315,10 @@ public class UserPersonalFragment extends BaseContentFragment implements OnClick
 
 		// 昵称
 		String nickName = "";
+		Bitmap userPhotoCache = GameLauncherApplication.getApplication().getUserPhoto();
+		if (userPhotoCache != null) {
+			mPhotoView.setImageBitmap(userPhotoCache);
+		}
 		if (userInfo != null) {
 			nickName = userInfo.getSNickname();
 			String photoUrl = userInfo.getCPhoto();
