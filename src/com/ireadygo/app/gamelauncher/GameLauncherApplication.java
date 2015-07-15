@@ -46,6 +46,7 @@ public class GameLauncherApplication extends Application {
 				GameLauncher.init(this, new InitComplete() {
 					@Override
 					public void onInitCompleted() {
+						initBoxMessageService();
 					}
 				});
 			}
@@ -56,7 +57,6 @@ public class GameLauncherApplication extends Application {
 		Intent service = new Intent(this, StatusBarService.class);
 		startService(service);
 		startRemoteStatisticService();
-		initBoxMessageService();
 		initUserPhotoSavePath();
 	}
 
