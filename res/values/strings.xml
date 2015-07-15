@@ -34,6 +34,7 @@
     <string name="settings_wx">WeChat</string>
     <string name="settings_language">Language</string>
     <string name="settings_help">Help</string>
+    <string name="settings_network">Network</string>
     <string name="settings_network_not_connect">(Not Connect Any Network)</string>
     <string name="settings_wallpaper">Wallpaper</string>
     <string name="settings_handle_battery">Handle</string>
@@ -41,7 +42,6 @@
     <string name="settings_time">Date Time</string>
     <string name="settings_bluetooth">Bluetooth</string>
     <string name="settings_keyboard">Keyboard</string>
-    <string name="settings_network">Network</string>
     <string name="settings_display">Wireless Display</string>
     <string name="settings_brightness">Brightness</string>
     <string name="settings_favorite">Preference</string>

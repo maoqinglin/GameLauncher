@@ -42,7 +42,6 @@
     <string name="settings_time">日期時間</string>
     <string name="settings_bluetooth">藍牙</string>
     <string name="settings_keyboard">鍵盤</string>
-    <string name="settings_network">以太網</string>
     <string name="settings_display">無線顯示</string>
     <string name="settings_brightness">亮度</string>
     <string name="settings_favorite">偏好設置</string>
