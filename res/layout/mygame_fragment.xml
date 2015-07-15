@@ -30,7 +30,8 @@
             style="@style/MultiListNormal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:nextFocusLeft="@+id/menu_game" >
+            android:nextFocusLeft="@+id/menu_game"
+            android:nextFocusUp="@+id/boxmessage_btn" >
         </com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView>
     </FrameLayout>
 

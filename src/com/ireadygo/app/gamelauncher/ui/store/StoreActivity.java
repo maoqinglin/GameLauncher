@@ -72,4 +72,9 @@ public class StoreActivity extends BaseMenuActivity {
 		SoundPoolManager.instance(context).play(SoundPoolManager.SOUND_ENTER);
 		context.startActivity(intent);
 	}
+
+	@Override
+	public boolean isShowBoxMessageLayout() {
+		return false;
+	}
 }

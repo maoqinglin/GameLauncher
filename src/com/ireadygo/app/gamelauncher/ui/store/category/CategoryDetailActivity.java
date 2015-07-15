@@ -48,4 +48,9 @@ public class CategoryDetailActivity extends BaseMenuActivity {
 		finish();
 		return true;
 	}
+
+	@Override
+	public boolean isShowBoxMessageLayout() {
+		return false;
+	}
 }

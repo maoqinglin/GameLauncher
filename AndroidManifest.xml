@@ -242,12 +242,12 @@
         
         <!-- 消息管理 -->
         <service
-            android:name="com.ireadygo.app.gamelauncher.slidingmenu.BoxMessageService"
+            android:name="com.ireadygo.app.gamelauncher.boxmessage.BoxMessageService"
             android:label="@string/app_name"
             android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE" >
             <intent-filter>
                 <action android:name="android.service.notification.NotificationListenerService" />
-                <action android:name="com.ireadygo.app.gamelauncher.slidingmenu.BoxMessageService"/>
+                <action android:name="com.ireadygo.app.gamelauncher.boxmessage.BoxMessageService"/>
                 <action android:name="com.ireadygo.app.boxmessage"/>
             </intent-filter>
         </service>

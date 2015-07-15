@@ -158,5 +158,10 @@ public class GameLauncherActivity extends BaseMenuActivity {
 		}
 	}
 
+	@Override
+	public boolean isShowBoxMessageLayout() {
+		return true;
+	}
+
 
 }

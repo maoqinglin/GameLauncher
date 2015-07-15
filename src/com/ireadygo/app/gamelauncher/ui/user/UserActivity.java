@@ -56,4 +56,9 @@ public class UserActivity extends BaseMenuActivity {
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		context.startActivity(intent);
 	}
+
+	@Override
+	public boolean isShowBoxMessageLayout() {
+		return false;
+	}
 }

@@ -1,13 +1,16 @@
-package com.ireadygo.app.gamelauncher.slidingmenu.data;
+package com.ireadygo.app.gamelauncher.boxmessage.data;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.ireadygo.app.gamelauncher.R;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.BitmapFactory;
 import android.provider.BaseColumns;
 
 public class DBManager {
@@ -36,9 +39,12 @@ public class DBManager {
 
 	private static DBManager sDBManager;
 	
+	private final Context mContext;
+	
 	private DBHelper mHelper;
 	
 	private DBManager(Context context) {
+		mContext = context;
 		mHelper = new DBHelper(context);
 	}
 
@@ -73,6 +79,7 @@ public class DBManager {
 				msg.time = cursor.getLong(cursor.getColumnIndex(MessageColumn.TIME));
 				msg.isRead = cursor.getInt(cursor.getColumnIndex(MessageColumn.IS_READ));
 				msg.skipType = cursor.getInt(cursor.getColumnIndex(MessageColumn.SKIP_TYPE));
+				msg.icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.ic_launcher);
 				broadcastMsgs.add(msg);
 			}
 		}

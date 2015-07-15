@@ -1,5 +1,6 @@
-package com.ireadygo.app.gamelauncher.slidingmenu;
+package com.ireadygo.app.gamelauncher.boxmessage;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -12,13 +13,13 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
 
-import com.ireadygo.app.gamelauncher.slidingmenu.BoxMessageService.BoxMessageLocalBinder;
-import com.ireadygo.app.gamelauncher.slidingmenu.data.BoxMessage;
+import com.ireadygo.app.gamelauncher.boxmessage.BoxMessageService.BoxMessageLocalBinder;
+import com.ireadygo.app.gamelauncher.boxmessage.data.BoxMessage;
 
 public class BoxMessageController {
 
 	private static final String CHANGE_ACTION_BOXMESSAGE = "com.ireadygo.app.boxmessage.change";
-	private static final String BIND_ACTION_BOXMESSAGE = "com.ireadygo.app.gamelauncher.slidingmenu.BoxMessageService";
+	private static final String BIND_ACTION_BOXMESSAGE = "com.ireadygo.app.gamelauncher.boxmessage.BoxMessageService";
 	private final Context mContext;
 	private final LocalBroadcastManager mLocalBroadcastManager;
 	private static BoxMessageController sBoxMessageController;
@@ -54,28 +55,36 @@ public class BoxMessageController {
 	}
 
 	public void init() {
-		if(!mIsInit) {
-			Intent intent = new Intent(BIND_ACTION_BOXMESSAGE);
-			mContext.startService(intent);
-			mIsInit = mContext.bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
-			mLocalBroadcastManager.registerReceiver(mReceiver, new IntentFilter(CHANGE_ACTION_BOXMESSAGE));
-		}
+		Intent intent = new Intent(mContext, BoxMessageService.class);
+		mContext.startService(intent);
+		mIsInit = mContext.bindService(new Intent(BIND_ACTION_BOXMESSAGE), mServiceConnection, Context.BIND_AUTO_CREATE);
+		mLocalBroadcastManager.registerReceiver(mReceiver, new IntentFilter(CHANGE_ACTION_BOXMESSAGE));
 	}
 	
 	public List<BoxMessage> getBoxMessages() {
-		return mService.getAllBoxMessage();
+		if(mService != null) {
+			return mService.getAllBoxMessage();
+		}
+		return new ArrayList<BoxMessage>();
 	}
 
-	public int getMsgCount() {
-		return mService.getMsgsCount();
+	public int getUnReadMsgCount() {
+		if(mService != null) {
+			return mService.getUnReadMsgCount();
+		}
+		return 0;
 	}
 
 	public void setMsgReadStatus(String pkgName, int id, boolean isRead) {
-		mService.setMsgReadStatus(pkgName, id, isRead);
+		if(mService != null) {
+			mService.setMsgReadStatus(pkgName, id, isRead);
+		}
 	}
 
 	public void removeBoxMessage(String pkgName, int id) {
-		mService.removeBoxMessage(pkgName, id);
+		if(mService != null) {
+			mService.removeBoxMessage(pkgName, id);
+		}
 	}
 
 	public void addBoxMessageUpdateListener(OnBoxMessageUpdateListener listener) {
@@ -95,12 +104,10 @@ public class BoxMessageController {
 	}
 
 	public void shutdown() {
-		if(mIsInit) {
-			mContext.unbindService(mServiceConnection);
-			mIsInit = false;
-			mLocalBroadcastManager.unregisterReceiver(mReceiver);
-			mListeners.clear();
-		}
+		mContext.unbindService(mServiceConnection);
+		mIsInit = false;
+		mLocalBroadcastManager.unregisterReceiver(mReceiver);
+		mListeners.clear();
 	}
 
 	private class BoxMessageServiceConnection implements ServiceConnection {

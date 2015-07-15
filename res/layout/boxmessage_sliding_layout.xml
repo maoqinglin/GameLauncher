@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/boxmessage_layout_width"
+    android:layout_height="match_parent"
+    >
+
+    <TextView
+        android:id="@+id/boxmessage_btn"
+        android:layout_width="@dimen/boxmessage_btn_width"
+        android:layout_height="@dimen/boxmessage_btn_height"
+        android:textColor="@color/boxmessage_text_color_selector"
+        android:textSize="@dimen/boxmessage_btn_text_size"
+        android:layout_marginTop="@dimen/boxmessage_btn_margin_top"
+        android:layout_marginRight="10dp"
+        android:singleLine="true"
+        android:gravity="center"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:clickable="true"
+        android:background="@drawable/boxmessage_no_msg_selector"
+        android:nextFocusRight="@+id/boxmessage_list" />
+
+    <RelativeLayout
+        android:id="@+id/boxmessage_msg_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/boxmessage_btn"
+        android:background="@android:color/black" >
+
+        <LinearLayout
+            android:id="@+id/boxmessage_tip_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/boxmessage_tip_layout_height"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_alignParentBottom="true" >
+
+            <TextView
+                android:id="@+id/boxmessage_tips_sun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/tips_sun"
+                android:drawablePadding="@dimen/tips_drawable_padding"
+                android:paddingLeft="@dimen/tips_padding_right"
+                android:paddingRight="@dimen/tips_padding_right"
+                android:text="@string/shortcut_confirm"
+                android:textSize="@dimen/tips_text_size"
+                android:gravity="center_vertical" />
+            
+            <TextView
+                android:id="@+id/boxmessage_tips_water"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/tips_water"
+                android:drawablePadding="@dimen/tips_drawable_padding"
+                android:paddingRight="@dimen/tips_padding_right"
+                android:text="@string/shortcut_uninstall"
+                android:textSize="@dimen/tips_text_size"
+                android:gravity="center_vertical" />
+            
+            <TextView
+                android:id="@+id/boxmessage_tips_moon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/tips_moon"
+                android:drawablePadding="@dimen/tips_drawable_padding"
+                android:paddingRight="@dimen/tips_padding_right"
+                android:text="@string/shortcut_back"
+                android:textSize="@dimen/tips_text_size"
+                android:gravity="center_vertical" />
+        </LinearLayout>
+        
+        <ListView 
+            android:id="@+id/boxmessage_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/boxmessage_tip_layout"
+            android:divider="@color/white_first_transparency"
+            android:dividerHeight="1dp"
+            android:cacheColorHint="@android:color/transparent"
+            android:paddingLeft="@dimen/boxmessage_list_padding_left"
+            android:paddingRight="@dimen/boxmessage_list_padding_right"
+            android:paddingTop="@dimen/boxmessage_list_padding_top"
+            android:nextFocusLeft="@id/boxmessage_btn"
+            android:nextFocusDown="@id/boxmessage_list"
+            android:nextFocusUp="@id/boxmessage_list"
+            android:nextFocusRight="@id/boxmessage_list"
+            android:focusable="false"
+            />
+
+    </RelativeLayout>
+
+</RelativeLayout>

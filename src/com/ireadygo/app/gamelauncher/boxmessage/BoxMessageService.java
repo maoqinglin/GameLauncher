@@ -1,4 +1,4 @@
-package com.ireadygo.app.gamelauncher.slidingmenu;
+package com.ireadygo.app.gamelauncher.boxmessage;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,7 +8,9 @@ import java.util.List;
 
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
@@ -16,15 +18,17 @@ import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 
 import com.ireadygo.app.gamelauncher.GameLauncherApplication;
 import com.ireadygo.app.gamelauncher.R;
-import com.ireadygo.app.gamelauncher.slidingmenu.data.BoxMessage;
-import com.ireadygo.app.gamelauncher.slidingmenu.data.BroadcastMsg;
-import com.ireadygo.app.gamelauncher.slidingmenu.data.DBManager;
-import com.ireadygo.app.gamelauncher.slidingmenu.data.DBManager.MessageColumn;
-import com.ireadygo.app.gamelauncher.slidingmenu.data.NotificationMsg;
-import com.ireadygo.app.gamelauncher.slidingmenu.ui.GlobalMessageView;
+import com.ireadygo.app.gamelauncher.boxmessage.data.BoxMessage;
+import com.ireadygo.app.gamelauncher.boxmessage.data.BroadcastMsg;
+import com.ireadygo.app.gamelauncher.boxmessage.data.DBManager;
+import com.ireadygo.app.gamelauncher.boxmessage.data.DBManager.MessageColumn;
+import com.ireadygo.app.gamelauncher.boxmessage.data.NotificationMsg;
+import com.ireadygo.app.gamelauncher.boxmessage.ui.GlobalMessageView;
+import com.ireadygo.app.gamelauncher.utils.PictureUtil;
 
 public class BoxMessageService extends NotificationListenerService {
 
@@ -33,8 +37,9 @@ public class BoxMessageService extends NotificationListenerService {
 	public static final int TYPE_CHANGE_UPDATE = 2;
 	private static final int MSG_GLOBAL_MESSAGE_SHOW = 3;
 	private static final int MSG_GLOBAL_MESSAGE_HIDE = 4;
+	private static final int DELAY_TIME = 5000;
 	private static final String CHANGE_ACTION_BOXMESSAGE = "com.ireadygo.app.boxmessage.change";
-	private static final String BIND_ACTION_BOXMESSAGE = "com.ireadygo.app.gamelauncher.slidingmenu.BoxMessageService";
+	private static final String BIND_ACTION_BOXMESSAGE = "com.ireadygo.app.gamelauncher.boxmessage.BoxMessageService";
 	private static final String ACTION_BOX_MESSAGE = "com.ireadygo.app.boxmessage";
 	
 	private static final List<String> sPkgList = new ArrayList<String>();
@@ -60,12 +65,8 @@ public class BoxMessageService extends NotificationListenerService {
 					return;
 				}
 				BoxMessage boxMsg = mBoxMessageList.get(0);
-				if(boxMsg.icon != null) {
-					mGlobalMessageView.show(boxMsg.icon, boxMsg.title);
-				} else {
-					mGlobalMessageView.show(getResources().getDrawable(R.drawable.ic_launcher), boxMsg.title);
-				}
-				mHandler.sendEmptyMessageDelayed(MSG_GLOBAL_MESSAGE_HIDE, 5000);
+				mGlobalMessageView.show(boxMsg.icon, boxMsg.title);
+				mHandler.sendEmptyMessageDelayed(MSG_GLOBAL_MESSAGE_HIDE, DELAY_TIME);
 				break;
 			default:
 				break;
@@ -99,6 +100,7 @@ public class BoxMessageService extends NotificationListenerService {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		Log.i("chenrui", "BoxMessageService ~~~ onCreate~~~");
 		mGlobalMessageView = GlobalMessageView.getInstance(this);
 		writeSecureNotificationSettings();
 		init();
@@ -106,13 +108,16 @@ public class BoxMessageService extends NotificationListenerService {
 
 	@Override
 	public IBinder onBind(Intent intent) {
+		Log.i("chenrui", "Action ~~~ " + intent.getAction());
 		if(BIND_ACTION_BOXMESSAGE.equals(intent.getAction())) {
+			Log.i("chenrui", "BindSuccess!!!!!!!!");
 			return mBoxMessageLocalBinder;
 		}
 		return super.onBind(intent);
 	}
 
 	private void init() {
+		Log.i("chenrui", "BoxMessageService ~~~ init~~~~");
 		mDBManager = DBManager.getInstance(this);
 		mBroadcastManager = LocalBroadcastManager.getInstance(this);
 
@@ -229,8 +234,13 @@ public class BoxMessageService extends NotificationListenerService {
 		if(sbn.getNotification().largeIcon != null) {
 			notificationMsg.icon = sbn.getNotification().largeIcon;
 		} else {
-			//TODO
-			notificationMsg.icon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+			try {
+				Drawable drawable = getPackageManager().getApplicationIcon(sbn.getPackageName());
+				notificationMsg.icon = PictureUtil.drawableToBitmap(drawable);
+			} catch (NameNotFoundException e) {
+				e.printStackTrace();
+				notificationMsg.icon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+			}
 		}
 		return notificationMsg;
 	}
@@ -260,8 +270,16 @@ public class BoxMessageService extends NotificationListenerService {
 
 	@Override
 	public void onDestroy() {
+		Log.i("chenrui", "BoxMessageService ~~~ onDestroy~~~~");
 		mBoxMessageList.clear();
+		cancelAllNotifications();
 		super.onDestroy();
+	}
+	
+	@Override
+	public boolean onUnbind(Intent intent) {
+		Log.i("chenrui", "BoxMessageService ~~~ onUnbind~~~~");
+		return super.onUnbind(intent);
 	}
 	
 	public final class BoxMessageLocalBinder extends Binder {
@@ -270,8 +288,14 @@ public class BoxMessageService extends NotificationListenerService {
 			return mBoxMessageList;
 		}
 
-		int getMsgsCount() {
-			return mBoxMessageList.size();
+		int getUnReadMsgCount() {
+			int count = 0;
+			for (BoxMessage msg : mBoxMessageList) {
+				if(msg.isRead == BoxMessage.HAS_NOT_READ) {
+					count++;
+				}
+			}
+			return count;
 		}
 
 		void removeBoxMessage(String pkgName, int id) {

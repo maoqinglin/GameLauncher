@@ -1,4 +1,4 @@
-package com.ireadygo.app.gamelauncher.slidingmenu.ui;
+package com.ireadygo.app.gamelauncher.boxmessage.ui;
 
 import com.ireadygo.app.gamelauncher.R;
 
@@ -174,7 +174,7 @@ public class GlobalMessageView {
 											// KitKat gradient
 		params.gravity = Gravity.TOP | Gravity.LEFT;
 		params.x = obtainnScreenSize().x;
-		params.y = obtainnScreenSize().y / 7;
+		params.y = mContext.getResources().getDimensionPixelOffset(R.dimen.boxmessage_btn_margin_top);
 		params.width = mContext.getResources().getDimensionPixelOffset(R.dimen.boxmessage_global_message_width);
 		params.height = mContext.getResources().getDimensionPixelOffset(R.dimen.boxmessage_global_message_height);
 		return params;

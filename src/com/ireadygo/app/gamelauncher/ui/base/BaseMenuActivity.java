@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ireadygo.app.gamelauncher.R;
+import com.ireadygo.app.gamelauncher.boxmessage.ui.BoxeMessageView;
 import com.ireadygo.app.gamelauncher.ui.CustomFragmentManager;
 import com.ireadygo.app.gamelauncher.ui.SnailKeyCode;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
@@ -32,6 +33,7 @@ public abstract class BaseMenuActivity extends BaseActivity {
 	private BaseMenuFragment mMenuFragment;
 
 	private OperationTipsLayout mTipsLayout;
+	private BoxeMessageView mBoxeMessageView;
 
 	private ObjectAnimator mLeftTranslateAnimator;
 	private ObjectAnimator mRightTranslateAnimator;
@@ -44,6 +46,12 @@ public abstract class BaseMenuActivity extends BaseActivity {
 
 	protected void initView() {
 		setContentView(R.layout.main);
+		mBoxeMessageView = (BoxeMessageView) findViewById(R.id.boxmessage_layout);
+		if(isShowBoxMessageLayout()) {
+			mBoxeMessageView.setVisibility(View.VISIBLE);
+		} else {
+			mBoxeMessageView.setVisibility(View.GONE);
+		}
 		mMainLayout = (CustomFrameLayout) findViewById(R.id.main_layout);
 		mFocusView = findViewById(R.id.focusView);
 		mTipsLayout = (OperationTipsLayout) findViewById(R.id.tips_layout);
@@ -114,6 +122,8 @@ public abstract class BaseMenuActivity extends BaseActivity {
 	}
 
 	public abstract BaseMenuFragment createMenuFragment();
+	
+	public abstract boolean isShowBoxMessageLayout();
 
 	public void translateToLeft() {
 		if (!mShouldTranslate) {
@@ -178,6 +188,13 @@ public abstract class BaseMenuActivity extends BaseActivity {
 		case SnailKeyCode.RIGHT_KEY:
 		case SnailKeyCode.UP_KEY:
 		case SnailKeyCode.DOWN_KEY:
+			if(keyCode == SnailKeyCode.BACK_KEY || keyCode == SnailKeyCode.MOON_KEY) {
+				if(mBoxeMessageView.isOpen()) {
+					mBoxeMessageView.close();
+					return true;
+				}
+			}
+
 			if (mFragmentManager.onKeyDown(keyCode, event)) {
 				return true;
 			}

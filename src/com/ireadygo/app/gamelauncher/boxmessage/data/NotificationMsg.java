@@ -1,4 +1,4 @@
-package com.ireadygo.app.gamelauncher.slidingmenu.data;
+package com.ireadygo.app.gamelauncher.boxmessage.data;
 
 import android.app.PendingIntent;
 
