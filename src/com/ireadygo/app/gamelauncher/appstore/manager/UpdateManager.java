@@ -108,8 +108,7 @@ public class UpdateManager implements LocalDataLoadCallback {
 		public void onReceive(Context context, Intent intent) {
 			String action = intent.getAction();
 			if (ConnectivityManager.CONNECTIVITY_ACTION.equals(action)) {
-				//如果当前不是WiFi网络，则不处理
-				if (!GameLauncherConfig.IGNORE_NETWORTYPE && !NetworkUtils.isWifiConnected(context)) {
+				if (!NetworkUtils.isNetworkConnected(mContext)) {
 					return;
 				}
 				postMsg(MSG_CHECK_UPGRADE, DELAY_CHECK_UPGRADE);

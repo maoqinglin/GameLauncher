@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -341,7 +340,7 @@ public class StoreManagerContentFragment extends BaseContentFragment implements 
 			case QUEUING:
 				int pos = updateDldAppEntity(app);
 				int pos2 = updateUpgradeAppEntity(app);
-				if (pos >= 0 && pos2 >= 0 && mManagerType == GameManagerType.DOWNLOAD || mManagerType == GameManagerType.UPGRADE) {
+				if ((pos >= 0 || pos2 >= 0) && mManagerType == GameManagerType.DOWNLOAD || mManagerType == GameManagerType.UPGRADE) {
 					mMultiListView.notifyDataSetChanged();
 				}
 				break;
