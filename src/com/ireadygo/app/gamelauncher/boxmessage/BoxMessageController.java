@@ -12,6 +12,7 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 
 import com.ireadygo.app.gamelauncher.boxmessage.BoxMessageService.BoxMessageLocalBinder;
 import com.ireadygo.app.gamelauncher.boxmessage.data.BoxMessage;
@@ -63,7 +64,10 @@ public class BoxMessageController {
 	
 	public List<BoxMessage> getBoxMessages() {
 		if(mService != null) {
+			Log.i("chenrui", "Service is not Null!!!");
 			return mService.getAllBoxMessage();
+		} else {
+			Log.i("chenrui", "Service is Null!!!");
 		}
 		return new ArrayList<BoxMessage>();
 	}

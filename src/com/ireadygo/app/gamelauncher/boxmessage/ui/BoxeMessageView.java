@@ -112,6 +112,7 @@ public class BoxeMessageView extends LinearLayout {
 	}
 
 	private void broadcastSkip(BroadcastMsg msg) {
+		mBoxMessageController.setMsgReadStatus(msg.pkgName, msg.id, true);
 		PushMsgProcessor.getInstance().handleBroadcastMsg(msg);
 	}
 

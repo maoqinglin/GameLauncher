@@ -12,6 +12,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.BitmapFactory;
 import android.provider.BaseColumns;
+import android.util.Log;
 
 public class DBManager {
 
@@ -69,13 +70,13 @@ public class DBManager {
 		List<BroadcastMsg> broadcastMsgs = new ArrayList<BroadcastMsg>();
 		SQLiteDatabase db = mHelper.getReadableDatabase();
 		Cursor cursor = db.query(TABLE_NAME, null, null, null, null, null, null);
-		if(cursor != null && cursor.moveToFirst()) {
+		if(cursor != null) {
 			while (cursor.moveToNext()) {
 				BroadcastMsg msg = new BroadcastMsg();
 				msg.id = cursor.getInt(cursor.getColumnIndex(MessageColumn._ID));
 				msg.title = cursor.getString(cursor.getColumnIndex(MessageColumn.TITLE));
 				msg.pkgName = cursor.getString(cursor.getColumnIndex(MessageColumn.PKG_NAME));
-				msg.skipFlag = cursor.getString(cursor.getColumnIndex(MessageColumn.TITLE));
+				msg.skipFlag = cursor.getString(cursor.getColumnIndex(MessageColumn.SKIP_FLAG));
 				msg.time = cursor.getLong(cursor.getColumnIndex(MessageColumn.TIME));
 				msg.isRead = cursor.getInt(cursor.getColumnIndex(MessageColumn.IS_READ));
 				msg.skipType = cursor.getInt(cursor.getColumnIndex(MessageColumn.SKIP_TYPE));
@@ -83,6 +84,7 @@ public class DBManager {
 				broadcastMsgs.add(msg);
 			}
 		}
+		Log.i("chenrui", "The database datas coount : " + broadcastMsgs.size());
 		return broadcastMsgs;
 	}
 	
