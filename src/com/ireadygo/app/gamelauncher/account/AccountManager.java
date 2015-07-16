@@ -361,7 +361,7 @@ public class AccountManager {
 		}
 	}
 
-	private interface MESSAGE_JSON_KEY {
+	public interface MESSAGE_JSON_KEY {
 		String title = "title";
 		String content = "content";
 		String expand_message = "expand_message";

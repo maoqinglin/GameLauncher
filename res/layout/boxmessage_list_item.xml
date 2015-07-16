@@ -28,7 +28,7 @@
         android:id="@+id/boxmessage_item_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/darker_gray"
+        android:textColor="@android:color/white"
         android:textSize="@dimen/boxmessage_btn_text_size"
         android:layout_toRightOf="@id/boxmessage_item_icon"
         android:layout_marginLeft="@dimen/boxmessage_list_item_title_margin_left"

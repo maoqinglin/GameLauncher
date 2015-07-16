@@ -1,39 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/boxmessage_layout_width"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent" >
 
     <TextView
         android:id="@+id/boxmessage_btn"
         android:layout_width="@dimen/boxmessage_btn_width"
         android:layout_height="@dimen/boxmessage_btn_height"
-        android:textColor="@color/boxmessage_text_color_selector"
-        android:textSize="@dimen/boxmessage_btn_text_size"
-        android:layout_marginTop="@dimen/boxmessage_btn_margin_top"
         android:layout_marginRight="10dp"
-        android:singleLine="true"
-        android:gravity="center"
+        android:layout_marginTop="@dimen/boxmessage_btn_margin_top"
+        android:background="@drawable/boxmessage_no_msg_selector"
+        android:clickable="true"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:clickable="true"
-        android:background="@drawable/boxmessage_no_msg_selector"
-        android:nextFocusRight="@+id/boxmessage_list" />
+        android:gravity="center"
+        android:nextFocusRight="@+id/boxmessage_list"
+        android:singleLine="true"
+        android:textColor="@color/boxmessage_text_color_selector"
+        android:textSize="@dimen/boxmessage_btn_text_size" />
 
     <RelativeLayout
         android:id="@+id/boxmessage_msg_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_toRightOf="@id/boxmessage_btn"
-        android:background="@android:color/black" >
+        android:background="@drawable/boxmessage_bg" >
 
         <LinearLayout
             android:id="@+id/boxmessage_tip_layout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/boxmessage_tip_layout_height"
-            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
             android:gravity="center_vertical"
-            android:layout_alignParentBottom="true" >
+            android:orientation="horizontal" >
 
             <TextView
                 android:id="@+id/boxmessage_tips_sun"
@@ -41,53 +40,51 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/tips_sun"
                 android:drawablePadding="@dimen/tips_drawable_padding"
+                android:gravity="center_vertical"
                 android:paddingLeft="@dimen/tips_padding_right"
                 android:paddingRight="@dimen/tips_padding_right"
                 android:text="@string/shortcut_confirm"
-                android:textSize="@dimen/tips_text_size"
-                android:gravity="center_vertical" />
-            
+                android:textSize="@dimen/tips_text_size" />
+
             <TextView
                 android:id="@+id/boxmessage_tips_water"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/tips_water"
                 android:drawablePadding="@dimen/tips_drawable_padding"
+                android:gravity="center_vertical"
                 android:paddingRight="@dimen/tips_padding_right"
                 android:text="@string/shortcut_uninstall"
-                android:textSize="@dimen/tips_text_size"
-                android:gravity="center_vertical" />
-            
+                android:textSize="@dimen/tips_text_size" />
+
             <TextView
                 android:id="@+id/boxmessage_tips_moon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/tips_moon"
                 android:drawablePadding="@dimen/tips_drawable_padding"
+                android:gravity="center_vertical"
                 android:paddingRight="@dimen/tips_padding_right"
                 android:text="@string/shortcut_back"
-                android:textSize="@dimen/tips_text_size"
-                android:gravity="center_vertical" />
+                android:textSize="@dimen/tips_text_size" />
         </LinearLayout>
-        
-        <ListView 
+
+        <ListView
             android:id="@+id/boxmessage_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@id/boxmessage_tip_layout"
+            android:cacheColorHint="@android:color/transparent"
             android:divider="@color/white_first_transparency"
             android:dividerHeight="1dp"
-            android:cacheColorHint="@android:color/transparent"
+            android:focusable="false"
+            android:nextFocusDown="@id/boxmessage_list"
+            android:nextFocusLeft="@id/boxmessage_btn"
+            android:nextFocusRight="@id/boxmessage_list"
+            android:nextFocusUp="@id/boxmessage_list"
             android:paddingLeft="@dimen/boxmessage_list_padding_left"
             android:paddingRight="@dimen/boxmessage_list_padding_right"
-            android:paddingTop="@dimen/boxmessage_list_padding_top"
-            android:nextFocusLeft="@id/boxmessage_btn"
-            android:nextFocusDown="@id/boxmessage_list"
-            android:nextFocusUp="@id/boxmessage_list"
-            android:nextFocusRight="@id/boxmessage_list"
-            android:focusable="false"
-            />
-
+            android:paddingTop="@dimen/boxmessage_list_padding_top" />
     </RelativeLayout>
 
 </RelativeLayout>

@@ -2,11 +2,13 @@ package com.ireadygo.app.gamelauncher.account;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.text.TextUtils;
 
 import com.ireadygo.app.gamelauncher.GameLauncher;
 import com.ireadygo.app.gamelauncher.GameLauncherApplication;
 import com.ireadygo.app.gamelauncher.GameLauncherConfig;
+import com.ireadygo.app.gamelauncher.account.AccountManager.MESSAGE_JSON_KEY;
 import com.ireadygo.app.gamelauncher.account.pushmsg.SnailPushMessage;
 import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
 import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
@@ -14,10 +16,13 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.appstore.info.item.GameState;
 import com.ireadygo.app.gamelauncher.appstore.manager.GameManager;
 import com.ireadygo.app.gamelauncher.appstore.manager.GameStateManager;
+import com.ireadygo.app.gamelauncher.boxmessage.data.BroadcastMsg;
 import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
 import com.ireadygo.app.gamelauncher.utils.NetworkUtils;
 import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
 import com.ireadygo.app.gamelauncher.widget.GameLauncherThreadPool;
+import com.snail.appstore.openapi.json.JSONException;
+import com.snail.appstore.openapi.json.JSONObject;
 
 /**
  * 
@@ -60,14 +65,19 @@ public class PushMsgProcessor {
 }
 
 	public void handlePushMsg(final SnailPushMessage msg) {
+		if (msg == null) {
+			return;
+		}
 		GameLauncherThreadPool.getCachedThreadPool().execute(new Runnable() {
 			@Override
 			public void run() {
 				int type = msg.getType();
 				switch (type) {
-				case TYPE_GAME_COLLECTION:
 				case TYPE_GAME_DETAIL:
+					skipToGameDetail(msg.getPageId());
+					break;
 				case TYPE_GAME_WEB:
+					skipWeb(msg.getUrl());
 					break;
 				case TYPE_DOWNLOAD_GAME:
 					doProcessDldMsg(msg.getPageId());
@@ -77,11 +87,36 @@ public class PushMsgProcessor {
 				}
 			}
 		});
-		if (msg == null) {
-			return;
-		}
 	}
 
+	public void handleBroadcastMsg(final BroadcastMsg msg) {
+		switch (msg.skipType) {
+		case TYPE_GAME_DETAIL:
+		case TYPE_GAME_WEB:
+			SnailPushMessage message = new SnailPushMessage();
+			try {
+				JSONObject jsonObject = new JSONObject(msg.skipFlag);
+				message.setTitle(jsonObject.optString(MESSAGE_JSON_KEY.title));
+				message.setContent(jsonObject.optString(MESSAGE_JSON_KEY.content));
+
+				JSONObject jsonMsgObj = jsonObject.getJSONObject(MESSAGE_JSON_KEY.expand_message);
+				message.setCreateDate(System.currentTimeMillis());
+				message.setUrl(jsonMsgObj.optString(MESSAGE_JSON_KEY.url));
+				message.setPageId(jsonMsgObj.optString(MESSAGE_JSON_KEY.pageId));
+				message.setPageTitle(jsonMsgObj.optString(MESSAGE_JSON_KEY.pageTitle));
+				message.setText(jsonMsgObj.optString(MESSAGE_JSON_KEY.text));
+				message.setType(jsonMsgObj.optInt(MESSAGE_JSON_KEY.type));
+				handlePushMsg(message);
+			} catch (JSONException e) {
+				e.printStackTrace();
+				return;
+			}
+			break;
+
+		default:
+			break;
+		}
+	}
 
 	public void sendBoxMessageBroadcast(SnailPushMessage msg, String data) {
 		int type = msg.getType();
@@ -117,6 +152,11 @@ public class PushMsgProcessor {
 		mContext.startActivity(intent);
 	}
 
+	private void skipWeb(String url) {
+		Intent intent = new Intent(Intent.ACTION_VIEW);
+		intent.setData(Uri.parse(url));
+		mContext.startActivity(intent);
+	}
 
 	private void doProcessDldMsg(String appId) {
 		if (!PreferenceUtils.isAppOnlineDownload() 

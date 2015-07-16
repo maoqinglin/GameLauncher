@@ -39,11 +39,12 @@
 
     <!-- 个推权限 配置开始 -->
     <uses-permission android:name="getui.permission.GetuiService.com.ireadygo.app.gamelauncher" />
+
     <permission
         android:name="getui.permission.GetuiService.com.ireadygo.app.gamelauncher"
         android:protectionLevel="normal" >
     </permission>
-	<!-- 个推权限 配置结束 -->
+    <!-- 个推权限 配置结束 -->
 
     <uses-sdk
         android:minSdkVersion="18"
@@ -239,7 +240,7 @@
                 <action android:name="com.ireadygo.app.gamelauncher.rentfree.RentFreeRemoteService" />
             </intent-filter>
         </service>
-        
+
         <!-- 消息管理 -->
         <service
             android:name="com.ireadygo.app.gamelauncher.boxmessage.BoxMessageService"
@@ -247,10 +248,15 @@
             android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE" >
             <intent-filter>
                 <action android:name="android.service.notification.NotificationListenerService" />
-                <action android:name="com.ireadygo.app.gamelauncher.boxmessage.BoxMessageService"/>
-                <action android:name="com.ireadygo.app.boxmessage"/>
+                <action android:name="com.ireadygo.app.gamelauncher.boxmessage.BoxMessageService" />
             </intent-filter>
         </service>
+
+        <receiver android:name="com.ireadygo.app.gamelauncher.boxmessage.BoxMessageReceiver" >
+            <intent-filter>
+                <action android:name="com.ireadygo.app.boxmessage" />
+            </intent-filter>
+        </receiver>
 
         <!-- provider -->
         <provider
@@ -294,15 +300,15 @@
         <meta-data
             android:name="PUSH_APPID"
             android:value="VvqyjVd91V81t807kHMge5" />
- 		<!-- 替换为第三方应用的APPID -->
+        <!-- 替换为第三方应用的APPID -->
         <meta-data
             android:name="PUSH_APPKEY"
             android:value="MZgjD3AiqA9s4fhQuKdLy7" />
- 		<!-- 替换为第三方应用的APPKEY -->
+        <!-- 替换为第三方应用的APPKEY -->
         <meta-data
             android:name="PUSH_APPSECRET"
             android:value="ktINtqIQNEAm3HndyPBZa9" />
- 		<!-- 替换为第三方应用的APPSECRET -->
+        <!-- 替换为第三方应用的APPSECRET -->
         <meta-data
             android:name="PUSH_GROUPID"
             android:value="" />
@@ -315,7 +321,7 @@
                 <action android:name="com.igexin.sdk.action.VvqyjVd91V81t807kHMge5" />
             </intent-filter>
         </receiver>
-                <receiver
+        <receiver
             android:name="com.igexin.sdk.PushManagerReceiver"
             android:exported="false" >
             <intent-filter>
@@ -363,30 +369,33 @@
                 <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
             </intent-filter>
         </receiver>
-        
         <receiver android:name="com.igexin.download.DownloadReceiver" >
             <intent-filter>
-                <!--这个com.igexin.sdk.action.7fjUl2Z3LH6xYy7NQK4ni4固定，不能修改-->
-                <action android:name="com.igexin.sdk.action.7fjUl2Z3LH6xYy7NQK4ni4" />
-                <!-- android:name="com.igexin.sdk.action.第三方的appId" -->
-                <action android:name="com.igexin.sdk.action.VvqyjVd91V81t807kHMge5"/>
-            </intent-filter>
-        </receiver>
-        <provider
-            android:name="com.igexin.download.DownloadProvider"
-            android:authorities="downloads.com.getui.demo"
-            android:process=":pushservice" />
-        
-        <receiver
-            android:name="com.igexin.getuiext.service.PayloadReceiver"
-            android:exported="false" >
-            <intent-filter>
+
                 <!-- 这个com.igexin.sdk.action.7fjUl2Z3LH6xYy7NQK4ni4固定，不能修改 -->
                 <action android:name="com.igexin.sdk.action.7fjUl2Z3LH6xYy7NQK4ni4" />
                 <!-- android:name="com.igexin.sdk.action.第三方的appId" -->
                 <action android:name="com.igexin.sdk.action.VvqyjVd91V81t807kHMge5" />
             </intent-filter>
         </receiver>
+
+        <provider
+            android:name="com.igexin.download.DownloadProvider"
+            android:authorities="downloads.com.getui.demo"
+            android:process=":pushservice" />
+
+        <receiver
+            android:name="com.igexin.getuiext.service.PayloadReceiver"
+            android:exported="false" >
+            <intent-filter>
+
+                <!-- 这个com.igexin.sdk.action.7fjUl2Z3LH6xYy7NQK4ni4固定，不能修改 -->
+                <action android:name="com.igexin.sdk.action.7fjUl2Z3LH6xYy7NQK4ni4" />
+                <!-- android:name="com.igexin.sdk.action.第三方的appId" -->
+                <action android:name="com.igexin.sdk.action.VvqyjVd91V81t807kHMge5" />
+            </intent-filter>
+        </receiver>
+
         <service
             android:name="com.igexin.getuiext.service.GetuiExtService"
             android:process=":pushservice" />

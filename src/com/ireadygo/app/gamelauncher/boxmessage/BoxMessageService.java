@@ -62,6 +62,7 @@ public class BoxMessageService extends NotificationListenerService {
 
 			case MSG_GLOBAL_MESSAGE_SHOW:
 				if(mGlobalMessageView.isActive() || mGlobalMessageView.isShow()) {
+					mHandler.sendEmptyMessage(MSG_GLOBAL_MESSAGE_SHOW);
 					return;
 				}
 				BoxMessage boxMsg = mBoxMessageList.get(0);
@@ -163,12 +164,20 @@ public class BoxMessageService extends NotificationListenerService {
 	public void onNotificationPosted(StatusBarNotification sbn) {
 		if(sbn != null) {
 			if(isWhiteList(sbn.getPackageName())) {
-				addNotificationMsgs(sbn);
+				NotificationMsg notificationMsg = toNotificationMsg(sbn);
+				addNotificationMsgs(notificationMsg);
 				updateBoxMessage();
 				sendBoxMessageChangeBroadcast(TYPE_CHANGE_ADD);
-				mHandler.sendEmptyMessage(MSG_GLOBAL_MESSAGE_SHOW);
+				sendHandlerAddMsg();
 			}
 		}
+	}
+
+	private void sendHandlerAddMsg() {
+		if(mHandler.hasMessages(MSG_GLOBAL_MESSAGE_SHOW)) {
+			mHandler.removeMessages(MSG_GLOBAL_MESSAGE_SHOW);
+		}
+		mHandler.sendEmptyMessage(MSG_GLOBAL_MESSAGE_SHOW);
 	}
 
 	@Override
@@ -179,6 +188,7 @@ public class BoxMessageService extends NotificationListenerService {
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		if(intent != null) {
+			Log.i("chenrui", "~~~~~~onStartCommand~~~ Action : " + intent.getAction());
 			processIntent(intent);
 		}
 		return START_STICKY;
@@ -186,10 +196,11 @@ public class BoxMessageService extends NotificationListenerService {
 
 	private void processIntent(Intent intent) {
 		if(ACTION_BOX_MESSAGE.equals(intent.getAction())) {
-			mBoxMessageList.add(0, toBroadcastMsg(intent));
+			BroadcastMsg broadcastMsg = toBroadcastMsg(intent);
+			mBoxMessageList.add(0, broadcastMsg);
 			updateBoxMessage();
 			sendBoxMessageChangeBroadcast(TYPE_CHANGE_ADD);
-			mHandler.sendEmptyMessage(MSG_GLOBAL_MESSAGE_SHOW);
+			sendHandlerAddMsg();
 		}
 	}
 
@@ -208,15 +219,15 @@ public class BoxMessageService extends NotificationListenerService {
 		}
 	}
 
-	private void addNotificationMsgs(StatusBarNotification sbn) {
+	private void addNotificationMsgs(NotificationMsg notificationMsg) {
 		for (BoxMessage msg : mBoxMessageList) {
-			if(msg.id == sbn.getId() && msg.pkgName.equals(sbn.getPackageName())) {
+			if(msg.id == notificationMsg.id && msg.pkgName.equals(notificationMsg.pkgName)) {
 				mBoxMessageList.remove(msg);
 				break;
 			}
 		}
 
-		mBoxMessageList.add(0, toNotificationMsg(sbn));
+		mBoxMessageList.add(0, notificationMsg);
 	}
 
 	private NotificationMsg toNotificationMsg(StatusBarNotification sbn) {

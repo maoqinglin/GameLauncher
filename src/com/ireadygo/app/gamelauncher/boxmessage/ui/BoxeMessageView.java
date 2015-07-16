@@ -25,6 +25,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.ireadygo.app.gamelauncher.R;
+import com.ireadygo.app.gamelauncher.account.PushMsgProcessor;
 import com.ireadygo.app.gamelauncher.boxmessage.BoxMessageController;
 import com.ireadygo.app.gamelauncher.boxmessage.BoxMessageController.OnBoxMessageUpdateListener;
 import com.ireadygo.app.gamelauncher.boxmessage.data.BoxMessage;
@@ -78,7 +79,6 @@ public class BoxeMessageView extends LinearLayout {
 		updateBtn();
 		mMsgBtn.setOnClickListener(mBtnOperatorListener);
 		mMsgBtn.setOnFocusChangeListener(mBtnOperatorListener);
-		mMsgBtn.setOnKeyListener(mBtnOperatorListener);
 
 		mBoxMsgListView = (ListView) findViewById(R.id.boxmessage_list);
 		mBoxMsgListView.setFocusable(false);
@@ -112,7 +112,7 @@ public class BoxeMessageView extends LinearLayout {
 	}
 
 	private void broadcastSkip(BroadcastMsg msg) {
-		//TODO
+		PushMsgProcessor.getInstance().handleBroadcastMsg(msg);
 	}
 
 	public boolean isOpen() {
@@ -238,7 +238,7 @@ public class BoxeMessageView extends LinearLayout {
 		}
 	}
 
-	private class InnerBtnOperatorListener implements OnClickListener, OnFocusChangeListener, OnKeyListener {
+	private class InnerBtnOperatorListener implements OnClickListener, OnFocusChangeListener  {
 
 		@Override
 		public void onFocusChange(View v, boolean hasFocus) {
@@ -258,18 +258,6 @@ public class BoxeMessageView extends LinearLayout {
 					animatorEnter();
 				}
 			}
-		}
-
-		@Override
-		public boolean onKey(View v, int keyCode, KeyEvent event) {
-			if(event.getAction() == KeyEvent.ACTION_DOWN) {
-				if(keyCode == SnailKeyCode.RIGHT_KEY) {
-					if(isOpen()) {
-						mBoxMsgListView.requestFocus();
-					}
-				}
-			}
-			return false;
 		}
 	}
 
