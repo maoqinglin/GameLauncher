@@ -20,6 +20,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.ireadygo.app.gamelauncher.R;
+import com.ireadygo.app.gamelauncher.ui.menu.ImageTextMenu;
 import com.ireadygo.app.gamelauncher.ui.menu.MenuItem;
 import com.ireadygo.app.gamelauncher.ui.menu.TextMenu;
 
@@ -138,6 +139,9 @@ public class CustomFrameLayout extends FrameLayout implements OnGlobalFocusChang
 			if ((oldFocus instanceof MenuItem || oldFocus instanceof HListView)
 					&& (newFocus instanceof MenuItem || newFocus instanceof HListView)) {// 临时过滤方案
 				isFocusTranslate = true;
+			}
+			if(oldFocus instanceof ImageTextMenu && newFocus instanceof ImageTextMenu){
+				return;
 			}
 			if (oldFocus instanceof HListView && newFocus instanceof HListView) {
 				return;
