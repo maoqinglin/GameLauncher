@@ -24,6 +24,7 @@ import com.ireadygo.app.gamelauncher.utils.Utils;
 
 public class GameLauncherActivity extends BaseMenuActivity {
 	private static final String GUIDE_ACTIVITY_ACTION = "com.ireadygo.settings.guide";
+	private static final String RENT_FREE_STATISTIC_ACTION = "com.ireadygo.app.rentfree.playtimestatisticservice.start";
 	private Dialog mLoadingProgress;
 	private long mCreateTime = 0;
 	private long mResumeTime = 0;
@@ -77,6 +78,12 @@ public class GameLauncherActivity extends BaseMenuActivity {
 		GameLauncherApplication.getApplication().setGameLauncherActivity(this);
 		new AccountInfoAsyncTask(this, null).execute();
 		openBluetooth();
+		//启动游戏市场统计
+		startRemoteStatisticService();
+	}
+
+	private void startRemoteStatisticService() {
+		sendBroadcast(new Intent(RENT_FREE_STATISTIC_ACTION));
 	}
 
 	protected void showLoadingProgress() {

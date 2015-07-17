@@ -189,7 +189,7 @@ public abstract class BaseMenuActivity extends BaseActivity {
 		case SnailKeyCode.UP_KEY:
 		case SnailKeyCode.DOWN_KEY:
 			if(keyCode == SnailKeyCode.BACK_KEY || keyCode == SnailKeyCode.MOON_KEY) {
-				if(mBoxeMessageView.isOpen()) {
+				if(mBoxeMessageView != null && mBoxeMessageView.isOpen()) {
 					mBoxeMessageView.close();
 					return true;
 				}
