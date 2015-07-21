@@ -6,10 +6,8 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 
 import android.content.ActivityNotFoundException;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -66,8 +64,7 @@ public class GameManager {
 	private Handler mHandler;
 	private ExecutorService mThreadPool = GameLauncherThreadPool.getFixedThreadPool();
 	private GameLauncherNotification mGameLauncherNotification;
-	private static final long MAP_GAME_DELAY = 60 * 1000;
-	private static final String ACTION_LOAD_DATA_COMPLETE = "com.ireadygo.app.gamelauncher.ACTION_LOAD_DATA_COMPLETE";
+	private static final long MAP_GAME_DELAY = 2 * 60 * 1000;
 	private static final int MESSAGE_TYPE_START_APP = 0;
 	private static final int MESSAGE_TYPE_SKIP_DETAIL = 1;
 
@@ -89,10 +86,7 @@ public class GameManager {
 
 		GameLauncherAppState.getInstance(mContext).getModel().startLoader();
 		mHandler = new Handler(context.getMainLooper());
-
-		IntentFilter intentFilter = new IntentFilter();
-		intentFilter.addAction(ACTION_LOAD_DATA_COMPLETE);
-		mContext.registerReceiver(mReceiver, intentFilter);
+		startMapGame();
 	}
 
 	public GameStateManager getGameStateManager() {
@@ -763,24 +757,18 @@ public class GameManager {
 		});
 	}
 
-	private BroadcastReceiver mReceiver = new BroadcastReceiver() {
 
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			String action = intent.getAction();
-			if (ACTION_LOAD_DATA_COMPLETE.equals(action)) {
-				new Handler().postDelayed(new Runnable() {
-					@Override
-					public void run() {
-						List<AppEntity> gameList = mGameData.getAllInstalledApp(true);
-						if (gameList != null && gameList.size() > 0) {
-							mMapGameManager.mapGameList(gameList);
-						}
-					}
-				}, MAP_GAME_DELAY);
+	private void startMapGame() {
+		new Handler().postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				List<AppEntity> gameList = mGameData.getAllInstalledApp(true);
+				if (gameList != null && gameList.size() > 0) {
+					mMapGameManager.mapGameList(gameList);
+				}
 			}
-		}
-	};
+		}, MAP_GAME_DELAY);
+	}
 
 	/*
 	 * 封装GameManager层次的出错信息，抛给界面处理

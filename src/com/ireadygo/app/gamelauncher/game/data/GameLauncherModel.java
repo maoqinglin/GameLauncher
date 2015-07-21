@@ -2,7 +2,6 @@ package com.ireadygo.app.gamelauncher.game.data;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -36,11 +35,9 @@ import android.os.Process;
 import android.os.RemoteException;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.data.GameData;
-import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.game.data.GameLauncherSettings.Favorites;
 import com.ireadygo.app.gamelauncher.game.info.FolderInfo;
 import com.ireadygo.app.gamelauncher.game.info.ItemInfo;
@@ -52,15 +49,11 @@ import com.ireadygo.app.gamelauncher.ui.AppFragment;
 import com.ireadygo.app.gamelauncher.ui.GameFragment;
 import com.ireadygo.app.gamelauncher.utils.PackageUtils;
 import com.ireadygo.app.gamelauncher.utils.PictureUtil;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 
 @SuppressLint("NewApi")
 
 public class GameLauncherModel{
     public static final String TAG = "AppDao";
-    private static final String ACTION_LOAD_DATA_COMPLETE = "com.ireadygo.app.gamelauncher.ACTION_LOAD_DATA_COMPLETE";
     private Context mContext;
     private PackageManager mPkgManager;
     private boolean mAppsCanBeOnRemoveableStorage;
@@ -175,7 +168,6 @@ public class GameLauncherModel{
                 mLocalAppInfoManager.initDatabase();
                 setInitFlag();
             }
-            sendLoadFinishBroadcast();
             loadWorkspace();
             checkEmptyFolders(appInfos);
             checkEmptyFolders(gameInfos);
@@ -221,10 +213,6 @@ public class GameLauncherModel{
             appList.addAll(onlyItemInFolders);
         }
 
-		private void sendLoadFinishBroadcast() {
-			Intent intent = new Intent(ACTION_LOAD_DATA_COMPLETE);
-			mContext.sendBroadcast(intent);
-		}
 
 		/** Returns whether this is an upgradge path */
 		private boolean loadWorkspace() {
