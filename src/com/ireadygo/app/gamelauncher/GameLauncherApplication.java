@@ -1,17 +1,21 @@
 package com.ireadygo.app.gamelauncher;
 
 import java.io.File;
+import java.util.HashSet;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.provider.Settings;
 
 import com.ireadygo.app.gamelauncher.GameLauncher.InitComplete;
 import com.ireadygo.app.gamelauncher.account.AccountManager;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserInfoItem;
 import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
 import com.ireadygo.app.gamelauncher.boxmessage.BoxMessageController;
+import com.ireadygo.app.gamelauncher.boxmessage.BoxMessageService;
 import com.ireadygo.app.gamelauncher.game.data.GameLauncherAppState;
 import com.ireadygo.app.gamelauncher.statusbar.StatusBarService;
 import com.ireadygo.app.gamelauncher.ui.GameLauncherActivity;
@@ -59,8 +63,41 @@ public class GameLauncherApplication extends Application {
 	}
 
 	private void initBoxMessageService() {
+		writeSecureNotificationSettings();
 		mBoxMessageController = BoxMessageController.getInstance(this);
 		mBoxMessageController.init();
+	}
+
+	private void writeSecureNotificationSettings() {
+		final HashSet<ComponentName> enabledListeners = new HashSet<ComponentName>();
+		final String flat = Settings.Secure.getString(getContentResolver(), "enabled_notification_listeners");
+		final ComponentName serviceCN = new ComponentName(getPackageName(), BoxMessageService.class.getName());
+        if (flat != null && !"".equals(flat)) {
+            final String[] names = flat.split(":");
+            for (int i = 0; i < names.length; i++) {
+                final ComponentName cn = ComponentName.unflattenFromString(names[i]);
+                if (cn != null) {
+                    enabledListeners.add(cn);
+                }
+            }
+        }
+        
+        if(!enabledListeners.contains(serviceCN)) {
+        	enabledListeners.add(serviceCN);
+        	
+        	StringBuilder sb = null;
+            for (ComponentName cn : enabledListeners) {
+                if (sb == null) {
+                    sb = new StringBuilder();
+                } else {
+                    sb.append(':');
+                }
+                sb.append(cn.flattenToString());
+            }
+            Settings.Secure.putString(getContentResolver(),
+                    "enabled_notification_listeners",
+                    sb != null ? sb.toString() : "");
+        }
 	}
 
 	public static GameLauncherApplication getApplication() {

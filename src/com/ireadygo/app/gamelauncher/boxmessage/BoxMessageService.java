@@ -3,10 +3,8 @@ package com.ireadygo.app.gamelauncher.boxmessage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
-import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.BitmapFactory;
@@ -14,7 +12,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
-import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.support.v4.content.LocalBroadcastManager;
@@ -103,7 +100,6 @@ public class BoxMessageService extends NotificationListenerService {
 		super.onCreate();
 		Log.i("chenrui", "BoxMessageService ~~~ onCreate~~~");
 		mGlobalMessageView = GlobalMessageView.getInstance(this);
-		writeSecureNotificationSettings();
 		init();
 	}
 
@@ -126,38 +122,6 @@ public class BoxMessageService extends NotificationListenerService {
 		mBoxMessageList.addAll(mDBManager.getAllBroadcastMsg());
 
 		Collections.sort(mBoxMessageList, comp);
-	}
-
-	private void writeSecureNotificationSettings() {
-		final HashSet<ComponentName> enabledListeners = new HashSet<ComponentName>();
-		final String flat = Settings.Secure.getString(getContentResolver(), "enabled_notification_listeners");
-		final ComponentName serviceCN = new ComponentName(getPackageName(), BoxMessageService.class.getName());
-        if (flat != null && !"".equals(flat)) {
-            final String[] names = flat.split(":");
-            for (int i = 0; i < names.length; i++) {
-                final ComponentName cn = ComponentName.unflattenFromString(names[i]);
-                if (cn != null) {
-                    enabledListeners.add(cn);
-                }
-            }
-        }
-        
-        if(!enabledListeners.contains(serviceCN)) {
-        	enabledListeners.add(serviceCN);
-        	
-        	StringBuilder sb = null;
-            for (ComponentName cn : enabledListeners) {
-                if (sb == null) {
-                    sb = new StringBuilder();
-                } else {
-                    sb.append(':');
-                }
-                sb.append(cn.flattenToString());
-            }
-            Settings.Secure.putString(getContentResolver(),
-                    "enabled_notification_listeners",
-                    sb != null ? sb.toString() : "");
-        }
 	}
 
 	@Override
