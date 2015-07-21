@@ -481,4 +481,9 @@
 
     <!-- 常用应用(FavoriteApps) -->
     <string name="favorite_apps_title_prompt">常用應用數量</string>
+
+    <!-- 手柄重连 -->
+    <string name="help_handle_connect_des1">1.請先打開OBox，再打開手柄，此時手柄會在15秒內自動識別連接OBox。</string>
+    <string name="help_handle_connect_des2">2.如果手柄無法連接OBox，請重新啟動手柄。</string>
+    <string name="handle_connect_btn">繼續</string>
 </resources>

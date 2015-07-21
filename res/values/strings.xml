@@ -484,4 +484,9 @@
 
     <string name="wx_title">WeChat two-dimensional code</string>
     <string name="wx_intro">Scanning WeChat two-dimensional code</string>
+
+    <!-- 手柄重连 -->
+    <string name="help_handle_connect_des1">1.Please open the OBox first, then open the controller,the connection will be completed in 15 seconds.</string>
+    <string name="help_handle_connect_des2">2.If automatic connection running failed, please reboot the controller and try again.</string>
+    <string name="handle_connect_btn">Continue</string>
 </resources>

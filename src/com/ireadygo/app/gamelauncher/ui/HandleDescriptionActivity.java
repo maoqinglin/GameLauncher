@@ -28,10 +28,10 @@ public class HandleDescriptionActivity extends BaseActivity implements OnClickLi
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.handle_connect_description);
 
-		mContinueBtn = (TextView) findViewById(R.id.continue_btn);
+		mContinueBtn = (TextView) findViewById(R.id.confirm);
 		mContinueBtn.setOnClickListener(this);
 
-		mTipsLayout = (OperationTipsLayout) findViewById(R.id.operationTipsLayout);
+		mTipsLayout = (OperationTipsLayout) findViewById(R.id.tips_layout);
 		mTipsLayout.setTipsVisible(View.INVISIBLE, TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_MOON);
 
 		IntentFilter intentFilter = new IntentFilter();
@@ -53,7 +53,7 @@ public class HandleDescriptionActivity extends BaseActivity implements OnClickLi
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.continue_btn:
+		case R.id.confirm:
 			next();
 			break;
 
