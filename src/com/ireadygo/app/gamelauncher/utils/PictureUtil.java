@@ -428,6 +428,23 @@ public class PictureUtil {
 		return contactIcon;
 	}
 
+	public static Bitmap markIconBottomRight(Resources resources, Bitmap icon, Bitmap markIcon) {
+		// 初始化画布
+		int appIconSize = icon.getWidth();
+		Bitmap contactIcon = Bitmap.createBitmap(appIconSize, appIconSize, Config.ARGB_8888);
+
+		Canvas canvas = new Canvas(contactIcon);
+		// 拷贝图片
+		Paint iconPaint = new Paint();
+		iconPaint.setDither(true);// 防抖动
+		iconPaint.setFilterBitmap(true);// 用来对Bitmap进行滤波处理，这样，当你选择Drawable时，会有抗锯齿的效果
+		Rect src = new Rect(0, 0, appIconSize, appIconSize);
+		Rect dst = new Rect(0, 0, appIconSize, appIconSize);
+		canvas.drawBitmap(icon, src, dst, iconPaint);
+		canvas.drawBitmap(markIcon, appIconSize - markIcon.getWidth(), appIconSize - markIcon.getHeight(), iconPaint);
+		return contactIcon;
+	}
+
 	/***
 	 * 图片的缩放方法
 	 * 

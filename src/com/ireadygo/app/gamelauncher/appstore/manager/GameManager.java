@@ -10,7 +10,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -34,6 +36,7 @@ import com.ireadygo.app.gamelauncher.appstore.install.IInstaller.InstallResponse
 import com.ireadygo.app.gamelauncher.appstore.install.InstallManager;
 import com.ireadygo.app.gamelauncher.appstore.install.InstallMessage;
 import com.ireadygo.app.gamelauncher.game.data.GameLauncherAppState;
+import com.ireadygo.app.gamelauncher.utils.PictureUtil;
 import com.ireadygo.app.gamelauncher.utils.StaticsUtils;
 import com.ireadygo.app.gamelauncher.utils.ToastUtils;
 import com.ireadygo.app.gamelauncher.utils.Utils;
@@ -55,7 +58,7 @@ public class GameManager {
 	private IDldOperator mDldOperator;
 	private GameStateManager mGameStateManager;
 	private GameData mGameData;
-//	private ARMManager mARMManager;
+	// private ARMManager mARMManager;
 	private ArrayList<DownloadListener> mDownloadListeners = new ArrayList<GameManager.DownloadListener>();
 	private ArrayList<InstallListener> mInstallListeners = new ArrayList<GameManager.InstallListener>();
 	private ArrayList<MoveListener> mMoveListeners = new ArrayList<GameManager.MoveListener>();
@@ -67,7 +70,7 @@ public class GameManager {
 	private static final String ACTION_LOAD_DATA_COMPLETE = "com.ireadygo.app.gamelauncher.ACTION_LOAD_DATA_COMPLETE";
 	private static final int MESSAGE_TYPE_START_APP = 0;
 	private static final int MESSAGE_TYPE_SKIP_DETAIL = 1;
-	
+
 	public GameManager(Context context) {
 		mContext = context;
 		mInstaller = new InstallManager(mContext);
@@ -77,8 +80,8 @@ public class GameManager {
 
 		mGameData = GameData.getInstance(context);
 		mGameStateManager = new GameStateManager(context, mGameData);
-		mGameLauncherNotification = new GameLauncherNotification(mContext,mGameStateManager);
-		mUpdateManager = new UpdateManager(mContext,mGameLauncherNotification);
+		mGameLauncherNotification = new GameLauncherNotification(mContext, mGameStateManager);
+		mUpdateManager = new UpdateManager(mContext, mGameLauncherNotification);
 		mMapGameManager = MapGameManager.getInstance(mContext);
 		mGameData.addDataLoadCallback(mGameStateManager);
 		mGameData.addDataLoadCallback(mUpdateManager);
@@ -100,7 +103,6 @@ public class GameManager {
 		return mGameLauncherNotification;
 	}
 
-
 	public void download(final AppEntity app) {
 		GameState state = mGameStateManager.getGameState(app.getPkgName());
 		if (null == state) {
@@ -113,7 +115,7 @@ public class GameManager {
 			if (!app.isDldPathEmpty(mContext)) {
 				mDldOperator.dispatchDldOperator(app);
 			} else {
-				//下载地址为空，获取应用详情填充数据
+				// 下载地址为空，获取应用详情填充数据
 				mThreadPool.execute(new Runnable() {
 					@Override
 					public void run() {
@@ -123,37 +125,40 @@ public class GameManager {
 								return;
 							}
 							mergeAppDetailToApp(app, detailApp);
-							if(app.isDldPathEmpty(mContext)){
-								Toast.makeText(mContext, mContext.getString(R.string.extend_install_error), Toast.LENGTH_SHORT).show();
+							if (app.isDldPathEmpty(mContext)) {
+								Toast.makeText(mContext, mContext.getString(R.string.extend_install_error),
+										Toast.LENGTH_SHORT).show();
 								return;
 							}
 							mDldOperator.dispatchDldOperator(app);
 						} catch (InfoSourceException e) {
-							//handle exception
+							// handle exception
 							e.printStackTrace();
 						}
 					}
 				});
 			}
-			//下载海报图标
+			// 下载海报图标
 			if (!TextUtils.isEmpty(app.getPosterIconUrl())) {
 				ImageLoader.getInstance().loadImage(app.getPosterIconUrl(), new ImageLoadingListener() {
 					@Override
 					public void onLoadingStarted(String arg0, View arg1) {
 					}
+
 					@Override
 					public void onLoadingFailed(String arg0, View arg1, FailReason arg2) {
 					}
-					
+
 					@Override
 					public void onLoadingComplete(String arg0, View arg1, Bitmap arg2) {
 						if (arg2 != null) {
 							mGameData.updatePosterIcon(app.getPkgName(), arg2);
 						}
 					}
+
 					@Override
 					public void onLoadingCancelled(String arg0, View arg1) {
-						
+
 					}
 				});
 			}
@@ -173,11 +178,11 @@ public class GameManager {
 
 	public void install(final AppEntity app) {
 		if (GameState.INSTALLABLE.equals(mGameStateManager.getGameState(app.getPkgName()))) {
-//			String existPkg = checkExistPkg(app);
-//			if (!TextUtils.isEmpty(existPkg)) {
-//				reInstallApk(existPkg, app);
-//				return;
-//			}
+			// String existPkg = checkExistPkg(app);
+			// if (!TextUtils.isEmpty(existPkg)) {
+			// reInstallApk(existPkg, app);
+			// return;
+			// }
 			doInstall(app);
 		}
 	}
@@ -203,11 +208,11 @@ public class GameManager {
 				Log.w(TAG, "onInstallFailed:" + ie.getMessage());
 				reportUninstallError(pkgName, new GameManagerException(GameManagerException.MSG_UNINSTALL_FAILED, ie));
 			}
-		}, pkgName); 
+		}, pkgName);
 	}
 
 	public boolean launch(String pkgName) {
-		if(TextUtils.isEmpty(pkgName)){
+		if (TextUtils.isEmpty(pkgName)) {
 			return false;
 		}
 		if (!GameStateManager.isLaunchableState(mGameStateManager.getGameState(pkgName))) {
@@ -216,8 +221,8 @@ public class GameManager {
 		PackageManager pm = mContext.getPackageManager();
 		Intent intent = pm.getLaunchIntentForPackage(pkgName);
 		if (intent == null) {
-			//无法找到对应apk，提示用户重新下载
-			Toast.makeText(mContext,mContext.getString(R.string.error_launch_unknown),Toast.LENGTH_SHORT).show();
+			// 无法找到对应apk，提示用户重新下载
+			Toast.makeText(mContext, mContext.getString(R.string.error_launch_unknown), Toast.LENGTH_SHORT).show();
 			AppEntity app = mGameData.getGameByPkgName(pkgName);
 			if (app != null) {
 				mGameStateManager.setGameState(pkgName, GameState.DEFAULT);
@@ -230,22 +235,22 @@ public class GameManager {
 		try {
 			mContext.startActivity(intent);
 			mGameData.updateLastLaunchTime(pkgName, System.currentTimeMillis());
-			GameLauncherAppState.getInstance(mContext).getModel().updateModifiedTime(pkgName, System.currentTimeMillis());
+			GameLauncherAppState.getInstance(mContext).getModel()
+					.updateModifiedTime(pkgName, System.currentTimeMillis());
 		} catch (ActivityNotFoundException anfe) {
 			// ignore
 			return false;
 		}
-//		HashMap<String, String> map = new HashMap<String, String>();
-//		map.put(EventID.KEY_APP_PACKAGE_NAME, pkgName);
-//		MobclickAgent.onEvent(mContext, EventID.LAUNCH_APP, map);
-		//上报免商店内启动游戏的事件
+		// HashMap<String, String> map = new HashMap<String, String>();
+		// map.put(EventID.KEY_APP_PACKAGE_NAME, pkgName);
+		// MobclickAgent.onEvent(mContext, EventID.LAUNCH_APP, map);
+		// 上报免商店内启动游戏的事件
 		AppEntity app = mGameData.getGameByPkgName(pkgName);
 		if (app != null && !TextUtils.isEmpty(app.getAppId())) {
 			StaticsUtils.openGameInFreeStore(app.getAppId());
 		}
 		return true;
 	}
-
 
 	public void checkUpgradeApps() {
 		mUpdateManager.checkUpgradeApps();
@@ -259,31 +264,32 @@ public class GameManager {
 		mMapGameManager.shutdown();
 	}
 
-
 	// -----------install-------------------------//
 
 	private void doInstall(final AppEntity app) {
-		if(TextUtils.isEmpty(app.getSavedPath())){
+		if (TextUtils.isEmpty(app.getSavedPath())) {
 			AppEntity otherApp = mGameData.getGameByPkgName(app.getPkgName());
 			app.copyFrom(otherApp);
 		}
 		mInstaller.install(new InstallResponse() {
 			@Override
 			public void onInstallSuccessfully(Object info) {
-				Toast.makeText(mContext, app.getName() + mContext.getString(R.string.extend_install_success), Toast.LENGTH_SHORT).show();
+				Toast.makeText(mContext, app.getName() + mContext.getString(R.string.extend_install_success),
+						Toast.LENGTH_SHORT).show();
 				// 安装成功，将状态改为Launchable
 				app.setGameState(GameState.LAUNCHABLE);
 				mGameStateManager.setGameState(app.getPkgName(), GameState.LAUNCHABLE);
 				reportInstallStateChange(app);
-				//上报安装成功事件
+				// 上报安装成功事件
 				StaticsUtils.installSuccess(app.getAppId());
-				//发送通知
+				// 发送通知
 				sendInstallNotification(app, mContext.getString(R.string.extend_install_success),
-						MESSAGE_TYPE_START_APP, true);
+						MESSAGE_TYPE_START_APP, getAppIcon(app.getPkgName()), true);
 			}
 
-			private void sendInstallNotification(final AppEntity app, String title, int type, boolean isInstatllSuccess) {
-				if(AppEntity.IN_FREE_STORE == app.getIsComeFrmFreeStore()){
+			private void sendInstallNotification(final AppEntity app, String title, int type, Bitmap icon,
+					boolean isInstatllSuccess) {
+				if (AppEntity.IN_FREE_STORE == app.getIsComeFrmFreeStore()) {
 					BoxMessage boxMessage = new BoxMessage();
 					boxMessage.setAppId(app.getAppId());
 					boxMessage.setPkgName(app.getPkgName());
@@ -291,7 +297,20 @@ public class GameManager {
 					boxMessage.setTitle(appName + title);
 					boxMessage.setContent(appName + title);
 					boxMessage.setSkipType(type);
-					mGameLauncherNotification.addInstallNotification(boxMessage, isInstatllSuccess);
+					if (icon == null) {
+						icon = PictureUtil.drawableToBitmap(mContext.getResources().getDrawable(R.drawable.push));
+					}
+					icon = PictureUtil.zoomImage(icon, 
+							mContext.getResources().getDimensionPixelOffset(R.dimen.boxmessage_icon_size),
+							mContext.getResources().getDimensionPixelOffset(R.dimen.boxmessage_icon_size));
+					if (isInstatllSuccess) {
+						icon = PictureUtil.markIconBottomRight(mContext.getResources(), icon, 
+								PictureUtil.drawableToBitmap(mContext.getResources().getDrawable(R.drawable.boxmessage_install_ok)));
+					} else {
+						icon = PictureUtil.markIconBottomRight(mContext.getResources(), icon, 
+								PictureUtil.drawableToBitmap(mContext.getResources().getDrawable(R.drawable.boxmessage_install_failed)));
+					}
+					mGameLauncherNotification.addInstallNotification(boxMessage, icon, isInstatllSuccess);
 				}
 			}
 
@@ -302,9 +321,10 @@ public class GameManager {
 					app.setGameState(GameState.INSTALLING);
 					reportInstallStateChange(app);
 				} else if (IInstaller.STEP_UNZIP.equals(step)) {
-//					mGameStateManager.setGameState(app.getPkgName(), GameState.UNZIPING);
-//					app.setGameState(GameState.UNZIPING);
-//					reportInstallStateChange(app);
+					// mGameStateManager.setGameState(app.getPkgName(),
+					// GameState.UNZIPING);
+					// app.setGameState(GameState.UNZIPING);
+					// reportInstallStateChange(app);
 				}
 			}
 
@@ -315,9 +335,10 @@ public class GameManager {
 
 			@Override
 			public void onInstallFailed(InstallException ie) {
-//				Toast.makeText(mContext, app.getName() + "安装失败：" + ie.getMessage(), Toast.LENGTH_SHORT).show();
+				// Toast.makeText(mContext, app.getName() + "安装失败：" +
+				// ie.getMessage(), Toast.LENGTH_SHORT).show();
 				sendInstallNotification(app, mContext.getString(R.string.error_install_fail), MESSAGE_TYPE_SKIP_DETAIL,
-						false);
+						getAppIcon(app.getPkgName()),false);
 				if (InstallMessage.INCONSISTENT_CERTIFICATES.equals(ie.getMessage())) {
 					// 同包名，签名不一致，卸载后再安装
 					reInstallApk(app.getPkgName(), app);
@@ -325,7 +346,7 @@ public class GameManager {
 						|| InstallMessage.PACKAGE_UNREADABLE.equals(ie.getMessage())
 						|| InstallMessage.INVALID_APK.equals(ie.getMessage())
 						|| InstallMessage.INSTALL_PARSE_FAILED_NO_CERTIFICATES.equals(ie.getMessage())) {
-					//文件不存在，修改为下载状态
+					// 文件不存在，修改为下载状态
 					app.setGameState(GameState.DEFAULT);
 					mGameStateManager.setGameState(app.getPkgName(), GameState.DEFAULT);
 					delete(app);
@@ -337,7 +358,21 @@ public class GameManager {
 					reportInstallError(app, new GameManagerException(GameManagerException.MSG_INSTALL_FAILED, ie));
 				}
 			}
-		}, generateFilePath(app.getSavedPath(), app.getFileName()),app.getPkgName());
+		}, generateFilePath(app.getSavedPath(), app.getFileName()), app.getPkgName());
+	}
+
+	private Bitmap getAppIcon(String packageName) {
+		try {
+			Bitmap posterIcon = GameData.getInstance(mContext).getPosterIconByPkgName(packageName);
+			if (posterIcon == null) {
+				ApplicationInfo info = mContext.getPackageManager().getApplicationInfo(packageName, 0);
+				posterIcon = PictureUtil.drawableToBitmap(info.loadIcon(mContext.getPackageManager()));
+			}
+			return posterIcon;
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	private void deleteCacheFile(final AppEntity app) {
@@ -390,11 +425,11 @@ public class GameManager {
 		if (null == existApp) {
 			return null;
 		}
-		//如果包名相同，则不处理，直接安装，有系统去检查签名
+		// 如果包名相同，则不处理，直接安装，有系统去检查签名
 		if (TextUtils.isEmpty(app.getPkgName()) || (app.getPkgName().equals(existApp.getPkgName()))) {
 			return null;
 		}
-		//如果包名不同，但是应用名相同，说明不是MUCH渠道的应用，返回其包名将其卸载
+		// 如果包名不同，但是应用名相同，说明不是MUCH渠道的应用，返回其包名将其卸载
 		return existApp.getPkgName();
 	}
 
@@ -410,23 +445,25 @@ public class GameManager {
 		public void onDldStateChange(AppEntity app, DldException e) {
 			mGameStateManager.setGameState(app.getPkgName(), app.getGameState());
 			if (GameState.INSTALLABLE.equals(app.getGameState())) {
-//				// 下载完成则安装
+				// // 下载完成则安装
 				install(app);
-//				//下载完成，发送通知
-//				mGameLauncherNotification.addDownloadedNotification();屏蔽下载通知  modify by linmaoqing 2015-7-13 
+				// //下载完成，发送通知
+				// mGameLauncherNotification.addDownloadedNotification();屏蔽下载通知
+				// modify by linmaoqing 2015-7-13
 				reportDownloadStateChange(app);
-				//上报下载完成通知
+				// 上报下载完成通知
 				StaticsUtils.downloadResult(app.getAppId(), true);
 			} else if (GameState.ERROR.equals(app.getGameState())) {
-					// 出错，则把出错信息回调出去
-					reportDownloadError(app, new GameManagerException(GameManagerException.MSG_DOWNLOAD_ERROR,e));
-					//上报下载出错
-					StaticsUtils.downloadResult(app.getAppId(), false);
+				// 出错，则把出错信息回调出去
+				reportDownloadError(app, new GameManagerException(GameManagerException.MSG_DOWNLOAD_ERROR, e));
+				// 上报下载出错
+				StaticsUtils.downloadResult(app.getAppId(), false);
 			} else {
 				reportDownloadStateChange(app);
 			}
-			//下载状态变化，更新通知
-//			mGameLauncherNotification.addDownloadingNotification();屏蔽通知  modify by linmaoqing 2015-7-13 
+			// 下载状态变化，更新通知
+			// mGameLauncherNotification.addDownloadingNotification();屏蔽通知
+			// modify by linmaoqing 2015-7-13
 		}
 
 		@Override
@@ -444,7 +481,7 @@ public class GameManager {
 			// 删除任务，修改状态
 			GameState newState = null;
 			if (AppEntity.CAN_UPGRADE == app.getIsUpdateable()) {
-				//删除更新任务，恢复更新状态
+				// 删除更新任务，恢复更新状态
 				newState = GameState.UPGRADEABLE;
 			} else {
 				newState = GameState.DEFAULT;
@@ -452,12 +489,13 @@ public class GameManager {
 			app.setGameState(newState);
 			mGameStateManager.setGameState(app.getPkgName(), newState);
 			reportDownloadStateChange(app);
-			//下载状态变化，更新通知
-//			mGameLauncherNotification.addDownloadingNotification();屏蔽通知  modify by linmaoqing 2015-7-13 
+			// 下载状态变化，更新通知
+			// mGameLauncherNotification.addDownloadingNotification();屏蔽通知
+			// modify by linmaoqing 2015-7-13
 		}
 	};
 
-	private void mergeAppDetailToApp(AppEntity app,AppEntity detail) {
+	private void mergeAppDetailToApp(AppEntity app, AppEntity detail) {
 		app.setAppId(detail.getAppId());
 		app.setPkgName(detail.getPkgName());
 		app.setTotalSize(detail.getTotalSize());
@@ -473,10 +511,10 @@ public class GameManager {
 		app.setFreeflowDldPath(detail.getFreeflowDldPath());
 	}
 
-	//--------------------uninstall----------------------------//
+	// --------------------uninstall----------------------------//
 
 	public void handleGameUninstallSuccessfully(String pkgName) {
-		if (hasInstallFile(pkgName)) {//如果卸载完成的应用在手机中有安装包，则变成可安装状态
+		if (hasInstallFile(pkgName)) {// 如果卸载完成的应用在手机中有安装包，则变成可安装状态
 			mGameStateManager.setGameState(pkgName, GameState.INSTALLABLE);
 		} else {
 			mGameStateManager.setGameState(pkgName, GameState.DEFAULT);
@@ -484,7 +522,7 @@ public class GameManager {
 		}
 	}
 
-	//检测指定报名的应用是否在手机中保存有安装包
+	// 检测指定报名的应用是否在手机中保存有安装包
 	private boolean hasInstallFile(String pkgName) {
 		if (TextUtils.isEmpty(pkgName)) {
 			return false;
@@ -696,8 +734,6 @@ public class GameManager {
 		});
 	}
 
-
-
 	private void reportUninstallComplete(final String pkgName) {
 		mHandler.post(new Runnable() {
 			@Override
@@ -728,7 +764,7 @@ public class GameManager {
 	}
 
 	private BroadcastReceiver mReceiver = new BroadcastReceiver() {
-		
+
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			String action = intent.getAction();

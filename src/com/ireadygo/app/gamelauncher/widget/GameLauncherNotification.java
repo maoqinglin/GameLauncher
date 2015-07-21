@@ -3,6 +3,7 @@ package com.ireadygo.app.gamelauncher.widget;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.R.integer;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -10,6 +11,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.widget.RemoteViews;
@@ -249,9 +251,12 @@ public class GameLauncherNotification {
 	 * @param title
 	 * @param content
 	 */
-	public void addInstallNotification(BoxMessage boxMsg, boolean isInstallSuccess) {
-		Notification notification = notification = new Notification(R.drawable.push, boxMsg.getTitle(),
-				System.currentTimeMillis());
+	public void addInstallNotification(BoxMessage boxMsg,Bitmap icon,boolean isInstallSuccess) {
+		Notification notification = new Notification.Builder(mContext)
+		.setLargeIcon(icon)
+		.setSmallIcon(R.drawable.push)
+		.setTicker(boxMsg.getTitle())
+		.build();
 		notification.defaults = Notification.DEFAULT_VIBRATE;
 		notification.flags = Notification.FLAG_AUTO_CANCEL;
 		PendingIntent pendIntent = isInstallSuccess ? setPendingIntentToStartApp(boxMsg)
