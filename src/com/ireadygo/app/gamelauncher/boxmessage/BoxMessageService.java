@@ -247,7 +247,7 @@ public class BoxMessageService extends NotificationListenerService {
 	public void onDestroy() {
 		Log.i("chenrui", "BoxMessageService ~~~ onDestroy~~~~");
 		mBoxMessageList.clear();
-		cancelAllNotifications();
+//		cancelAllNotifications();
 		super.onDestroy();
 	}
 	

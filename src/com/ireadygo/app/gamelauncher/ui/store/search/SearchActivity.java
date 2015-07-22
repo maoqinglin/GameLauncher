@@ -251,7 +251,7 @@ public class SearchActivity extends BaseActivity implements OnClickListener, Key
 			}
 			mKeyBoardGrid.addView(keyItem);
 		}
-		mChangeInput.setKeyText(getResources().getString(R.string.serach_keyboard_character));
+		mChangeInput.setKeyText(getResources().getString(R.string.serach_keyboard_number));
 		mCurrentKeyboard = KEYBOARD_TYPE.CHARACTER;
 	}
 
@@ -268,7 +268,7 @@ public class SearchActivity extends BaseActivity implements OnClickListener, Key
 			}
 			mKeyBoardGrid.addView(keyItem);
 		}
-		mChangeInput.setKeyText(getResources().getString(R.string.serach_keyboard_number));
+		mChangeInput.setKeyText(getResources().getString(R.string.serach_keyboard_character));
 		mCurrentKeyboard = KEYBOARD_TYPE.NUMBER;
 	}
 
