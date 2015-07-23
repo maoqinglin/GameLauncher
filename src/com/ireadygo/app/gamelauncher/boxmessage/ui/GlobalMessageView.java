@@ -154,7 +154,7 @@ public class GlobalMessageView {
 		msgText.setLayoutParams(lp);
 		msgText.setEllipsize(TruncateAt.END);
 		msgText.setSingleLine(true);
-		msgText.setPadding(10, 10, 10, 10);
+		msgText.setPadding(30, 10, 10, 10);
 		msgText.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
 		msgText.setCompoundDrawablePadding(10);
 		msgText.setBackgroundResource(R.drawable.boxmessage_global_bg);

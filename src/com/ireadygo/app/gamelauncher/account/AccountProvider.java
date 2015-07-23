@@ -16,12 +16,13 @@ public class AccountProvider extends ContentProvider {
 	}
 
 	@Override
-	public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-			MatrixCursor cursor = new MatrixCursor(COLOMN_NAMES);
-			String account = AccountManager.getInstance().getAccount(getContext());
-			String nickName = AccountManager.getInstance().getNickName(getContext());
-			cursor.addRow(new Object[] { account, nickName });
-			return cursor;
+	public Cursor query(Uri uri, String[] projection, String selection,
+			String[] selectionArgs, String sortOrder) {
+		MatrixCursor cursor = new MatrixCursor(COLOMN_NAMES);
+		String account = AccountManager.getInstance().getLoginUni(getContext());
+		String nickName = AccountManager.getInstance().getNickName(getContext());
+		cursor.addRow(new Object[] { account, nickName });
+		return cursor;
 	}
 
 	@Override
@@ -40,7 +41,8 @@ public class AccountProvider extends ContentProvider {
 	}
 
 	@Override
-	public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+	public int update(Uri uri, ContentValues values, String selection,
+			String[] selectionArgs) {
 		return 0;
 	}
 

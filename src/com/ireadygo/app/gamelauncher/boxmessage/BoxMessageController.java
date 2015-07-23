@@ -64,7 +64,6 @@ public class BoxMessageController {
 	
 	public List<BoxMessage> getBoxMessages() {
 		if(mService != null) {
-			Log.i("chenrui", "Service is not Null!!!");
 			return mService.getAllBoxMessage();
 		} else {
 			Log.i("chenrui", "Service is Null!!!");

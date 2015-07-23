@@ -231,12 +231,6 @@
             <intent-filter>
                 <action android:name="com.ireadygo.app.gamelauncher.aidl.keyadapter" />
                 <action android:name="com.ireadygo.app.gamelauncher.aidl.wx" />
-            </intent-filter>
-        </service>
-        <service
-            android:name="com.ireadygo.app.gamelauncher.aidl.rentfree.RentFreeRemoteService"
-            android:exported="true" >
-            <intent-filter>
                 <action android:name="com.ireadygo.app.gamelauncher.rentfree.RentFreeRemoteService" />
             </intent-filter>
         </service>

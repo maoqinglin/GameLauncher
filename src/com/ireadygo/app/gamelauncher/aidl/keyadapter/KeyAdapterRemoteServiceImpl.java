@@ -1,9 +1,6 @@
 package com.ireadygo.app.gamelauncher.aidl.keyadapter;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.text.TextUtils;
@@ -11,13 +8,11 @@ import android.text.TextUtils;
 import com.ireadygo.app.gamelauncher.account.AccountManager;
 import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
 import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
-import com.ireadygo.app.gamelauncher.ui.activity.BaseAccountActivity;
 import com.ireadygo.app.gamelauncher.widget.GameLauncherThreadPool;
 
 public class KeyAdapterRemoteServiceImpl extends IKeyAdapterAidlService.Stub {
 
 	private static final int MSG_NICKNAME_RESULT = 1;
-	private static final int MSG_LOGIN_ACCOUNT_CHANGE = 2;
 	private static final String DIVIDER = ",";
 	private static final String INNER_DIVIDER = "-";
 
@@ -26,10 +21,6 @@ public class KeyAdapterRemoteServiceImpl extends IKeyAdapterAidlService.Stub {
 
 	public KeyAdapterRemoteServiceImpl(Context context) {
 		mContext = context;
-		IntentFilter intentFilter = new IntentFilter();
-		intentFilter.addAction(BaseAccountActivity.ACTION_ACCOUNT_LOGIN);
-//		intentFilter.addAction(AccountDetailActivity.ACTION_ACCOUNT_LOGOUT);
-		mContext.registerReceiver(mReceiver, intentFilter);
 	}
 
 	//查询当前登录的账户UID
@@ -108,19 +99,6 @@ public class KeyAdapterRemoteServiceImpl extends IKeyAdapterAidlService.Stub {
 
 	public void onDestroy() {
 		mCallbackList.kill();
-		mContext.unregisterReceiver(mReceiver);
 	}
-
-	private BroadcastReceiver mReceiver = new BroadcastReceiver() {
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			String action = intent.getAction();
-//			if (BaseAccountActivity.ACTION_ACCOUNT_LOGIN.equals(action)) {
-//				callBack(MSG_LOGIN_ACCOUNT_CHANGE,AccountManager.getInstance().getLoginUni(mContext));
-//			} else if (AccountDetailActivity.ACTION_ACCOUNT_LOGOUT.equals(action)) {
-//				callBack(MSG_LOGIN_ACCOUNT_CHANGE, "");
-//			}
-		}
-	};
 
 }

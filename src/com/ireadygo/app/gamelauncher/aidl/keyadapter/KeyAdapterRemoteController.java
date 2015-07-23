@@ -6,11 +6,14 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.util.Log;
 
-public class KeyAdapterController {
+import com.ireadygo.app.gamelauncher.aidl.GameLauncherRemoteService;
+
+public class KeyAdapterRemoteController {
 
 	private static final String ACTION_REMOTE_SERVICE = "com.ireadygo.app.gamelauncher.aidl.keyadapter";
-	private static KeyAdapterController sKeyAdapterController;
+	private static KeyAdapterRemoteController sKeyAdapterController;
 	private final Context mContext;
 	private final InnerListener mInnerListener = new InnerListener();
 	private final InnerServiceConnection mConnection = new InnerServiceConnection();
@@ -18,22 +21,20 @@ public class KeyAdapterController {
 	private IKeyAdapterAidlService mService = null;
 	private OnHandlerEventListener mListener;
 	
-	private KeyAdapterController(Context context) {
+	private KeyAdapterRemoteController(Context context) {
 		mContext = context;
 	}
 
 	public void init() {
-		if(!isBind) {
-			Intent intent = new Intent(ACTION_REMOTE_SERVICE);
-			isBind = mContext.bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
-		}
+		Intent intent = new Intent(ACTION_REMOTE_SERVICE);
+		isBind = mContext.bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+		Log.i("chenrui", "init~~~ KeyAdapterRemoteController binder : " + isBind);
 	}
 
 	public void exit() {
-		if(isBind) {
-			mContext.unbindService(mConnection);
-			isBind = false;
-		}
+		mContext.unbindService(mConnection);
+		isBind = false;
+		Log.i("chenrui", "exit~~~ KeyAdapterRemoteController binder : " + isBind);
 	}
 
 	public boolean isBind() {
@@ -42,6 +43,10 @@ public class KeyAdapterController {
 
 	public void setOnHandlerEventListener(OnHandlerEventListener listener) {
 		if(listener != null) {
+			if(mService == null) {
+				Log.i("chenrui", "setOnHandlerEventListener~~~ KeyAdapterRemoteController binder is Null!!!");
+				return;
+			}
 			unregisterCallback();
 			mListener = listener;
 			registerCallback();
@@ -90,11 +95,11 @@ public class KeyAdapterController {
 		}
 	}
 
-	public static KeyAdapterController instance(Context context) {
+	public static KeyAdapterRemoteController instance(Context context) {
 		if(sKeyAdapterController == null) {
-			synchronized (KeyAdapterController.class) {
+			synchronized (KeyAdapterRemoteController.class) {
 				if (sKeyAdapterController == null) {
-					sKeyAdapterController = new KeyAdapterController(context);
+					sKeyAdapterController = new KeyAdapterRemoteController(context);
 				}
 			}
 		}

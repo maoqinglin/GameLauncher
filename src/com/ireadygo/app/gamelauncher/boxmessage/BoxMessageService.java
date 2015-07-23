@@ -105,16 +105,13 @@ public class BoxMessageService extends NotificationListenerService {
 
 	@Override
 	public IBinder onBind(Intent intent) {
-		Log.i("chenrui", "Action ~~~ " + intent.getAction());
 		if(BIND_ACTION_BOXMESSAGE.equals(intent.getAction())) {
-			Log.i("chenrui", "BindSuccess!!!!!!!!");
 			return mBoxMessageLocalBinder;
 		}
 		return super.onBind(intent);
 	}
 
 	private void init() {
-		Log.i("chenrui", "BoxMessageService ~~~ init~~~~");
 		mDBManager = DBManager.getInstance(this);
 		mBroadcastManager = LocalBroadcastManager.getInstance(this);
 
@@ -152,7 +149,6 @@ public class BoxMessageService extends NotificationListenerService {
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		if(intent != null) {
-			Log.i("chenrui", "~~~~~~onStartCommand~~~ Action : " + intent.getAction());
 			processIntent(intent);
 		}
 		return START_STICKY;

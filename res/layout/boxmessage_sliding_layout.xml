@@ -7,7 +7,6 @@
         android:id="@+id/boxmessage_btn"
         android:layout_width="@dimen/boxmessage_btn_width"
         android:layout_height="@dimen/boxmessage_btn_height"
-        android:layout_marginRight="10dp"
         android:layout_marginTop="@dimen/boxmessage_btn_margin_top"
         android:background="@drawable/boxmessage_no_msg_selector"
         android:clickable="true"
