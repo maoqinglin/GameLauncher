@@ -281,33 +281,6 @@ public class GameManager {
 						MESSAGE_TYPE_START_APP, getAppIcon(app.getPkgName()), true);
 			}
 
-			private void sendInstallNotification(final AppEntity app, String title, int type, Bitmap icon,
-					boolean isInstatllSuccess) {
-				if (AppEntity.IN_FREE_STORE == app.getIsComeFrmFreeStore()) {
-					BoxMessage boxMessage = new BoxMessage();
-					boxMessage.setAppId(app.getAppId());
-					boxMessage.setPkgName(app.getPkgName());
-					String appName = app.getName();
-					boxMessage.setTitle(appName + title);
-					boxMessage.setContent(appName + title);
-					boxMessage.setSkipType(type);
-					if (icon == null) {
-						icon = PictureUtil.drawableToBitmap(mContext.getResources().getDrawable(R.drawable.push));
-					}
-					icon = PictureUtil.zoomImage(icon, 
-							mContext.getResources().getDimensionPixelOffset(R.dimen.boxmessage_icon_size),
-							mContext.getResources().getDimensionPixelOffset(R.dimen.boxmessage_icon_size));
-					if (isInstatllSuccess) {
-						icon = PictureUtil.markIconBottomRight(mContext.getResources(), icon, 
-								PictureUtil.drawableToBitmap(mContext.getResources().getDrawable(R.drawable.boxmessage_install_ok)));
-					} else {
-						icon = PictureUtil.markIconBottomRight(mContext.getResources(), icon, 
-								PictureUtil.drawableToBitmap(mContext.getResources().getDrawable(R.drawable.boxmessage_install_failed)));
-					}
-					mGameLauncherNotification.addInstallNotification(boxMessage, icon, isInstatllSuccess);
-				}
-			}
-
 			@Override
 			public void onInstallStepStart(String step) {
 				if (IInstaller.STEP_INSTALL.equals(step)) {
@@ -353,6 +326,33 @@ public class GameManager {
 				}
 			}
 		}, generateFilePath(app.getSavedPath(), app.getFileName()), app.getPkgName());
+	}
+
+	private void sendInstallNotification(final AppEntity app, String title, int type, Bitmap icon,
+			boolean isInstatllSuccess) {
+		if (AppEntity.IN_FREE_STORE == app.getIsComeFrmFreeStore()) {
+			BoxMessage boxMessage = new BoxMessage();
+			boxMessage.setAppId(app.getAppId());
+			boxMessage.setPkgName(app.getPkgName());
+			String appName = app.getName();
+			boxMessage.setTitle(appName + title);
+			boxMessage.setContent(appName + title);
+			boxMessage.setSkipType(type);
+			if (icon == null) {
+				icon = PictureUtil.drawableToBitmap(mContext.getResources().getDrawable(R.drawable.push));
+			}
+			icon = PictureUtil.zoomImage(icon, 
+					mContext.getResources().getDimensionPixelOffset(R.dimen.boxmessage_icon_size),
+					mContext.getResources().getDimensionPixelOffset(R.dimen.boxmessage_icon_size));
+			if (isInstatllSuccess) {
+				icon = PictureUtil.markIconBottomRight(mContext.getResources(), icon, 
+						PictureUtil.drawableToBitmap(mContext.getResources().getDrawable(R.drawable.boxmessage_install_ok)));
+			} else {
+				icon = PictureUtil.markIconBottomRight(mContext.getResources(), icon, 
+						PictureUtil.drawableToBitmap(mContext.getResources().getDrawable(R.drawable.boxmessage_install_failed)));
+			}
+			mGameLauncherNotification.addInstallNotification(boxMessage, icon, isInstatllSuccess);
+		}
 	}
 
 	private Bitmap getAppIcon(String packageName) {
