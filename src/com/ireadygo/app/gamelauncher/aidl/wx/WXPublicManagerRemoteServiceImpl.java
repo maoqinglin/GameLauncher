@@ -1,6 +1,7 @@
 package com.ireadygo.app.gamelauncher.aidl.wx;
 
 import com.ireadygo.app.gamelauncher.GameLauncher;
+import com.ireadygo.app.gamelauncher.GameLauncher.InitComplete;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.appstore.info.item.GameState;
 import com.ireadygo.app.gamelauncher.appstore.manager.GameManager;
@@ -25,8 +26,6 @@ public class WXPublicManagerRemoteServiceImpl extends IWXPublicManagerAidlServic
 
 	public WXPublicManagerRemoteServiceImpl(Context context) {
 		mContext = context;
-		mGameManager = GameLauncher.instance().getGameManager();
-		mGameStateManager = mGameManager.getGameStateManager();
 	}
 
 	@Override
@@ -56,8 +55,22 @@ public class WXPublicManagerRemoteServiceImpl extends IWXPublicManagerAidlServic
 	}
 
 	public void init() {
-		mGameManager.addDownloadListener(mListener);
-		mGameManager.addInstallListener(mListener);
+		if (!GameLauncher.hasInit()) {
+			GameLauncher.init(mContext, new InitComplete() {
+				@Override
+				public void onInitCompleted() {
+					mGameManager = GameLauncher.instance().getGameManager();
+					mGameStateManager = mGameManager.getGameStateManager();
+					mGameManager.addDownloadListener(mListener);
+					mGameManager.addInstallListener(mListener);
+				}
+			});
+		} else {
+			mGameManager = GameLauncher.instance().getGameManager();
+			mGameStateManager = mGameManager.getGameStateManager();
+			mGameManager.addDownloadListener(mListener);
+			mGameManager.addInstallListener(mListener);
+		}
 	}
 
 	public void onDestory() {
