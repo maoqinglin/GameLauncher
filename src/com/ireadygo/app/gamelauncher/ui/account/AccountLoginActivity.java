@@ -1,9 +1,11 @@
 package com.ireadygo.app.gamelauncher.ui.account;
 
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.ireadygo.app.gamelauncher.R;
@@ -11,13 +13,15 @@ import com.ireadygo.app.gamelauncher.ui.activity.BaseAccountActivity;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
 
-public class AccountLoginActivity extends BaseAccountActivity {
+public class AccountLoginActivity extends BaseAccountActivity  {
 	private EditText mUsernameView;
 	private EditText mPasswordView;
 	private TextView mLoginBtn;
 	private TextView mRegisterBtn;
 	private TextView mErrorPromptView;
 	private OperationTipsLayout mTipsLayout;
+	private ImageButton mPasswordSee;
+	private boolean mPasswordSeeState;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,10 @@ public class AccountLoginActivity extends BaseAccountActivity {
 
 		mRegisterBtn = (TextView) findViewById(R.id.registerBtn);
 		mRegisterBtn.setOnClickListener(this);
+		
+		mPasswordSee = (ImageButton) findViewById(R.id.see_password);
+		mPasswordSeeState = false;
+		mPasswordSee.setOnClickListener(this);
 	}
 
 	@Override
@@ -63,6 +71,23 @@ public class AccountLoginActivity extends BaseAccountActivity {
 		case R.id.registerBtn:
 			startRegisterActivity();
 			break;
+		case R.id.see_password:
+			mPasswordSeeState = !mPasswordSeeState;
+			if(mPasswordSeeState) {
+			mPasswordSee.setBackground(getResources().getDrawable(R.drawable.password_see_selector));
+			}
+			else {
+			mPasswordSee.setBackground(getResources().getDrawable(R.drawable.password_nosee_selector));
+			}
+			int pos = mPasswordView.getSelectionEnd();
+			mPasswordView
+					.setInputType(InputType.TYPE_CLASS_TEXT
+							| (mPasswordSeeState ? InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+									: InputType.TYPE_TEXT_VARIATION_PASSWORD));
+			if (pos >= 0) {
+				((EditText) mPasswordView).setSelection(pos);
+			}
+		break;
 
 		default:
 			break;
@@ -88,4 +113,6 @@ public class AccountLoginActivity extends BaseAccountActivity {
 	public boolean onMoonKey() {
 		return onBackKey();
 	}
+	
+	
 }

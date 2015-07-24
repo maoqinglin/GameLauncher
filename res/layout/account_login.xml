@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,29 +15,48 @@
             android:id="@+id/loginErrorPrompt"
             style="@style/AccountErrorPrompt"
             android:layout_width="@dimen/login_edittext_width"
-            android:layout_marginTop="@dimen/login_error_prompt_margin_top"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/login_error_prompt_margin_top" />
 
         <com.ireadygo.app.gamelauncher.ui.widget.CustomerEditText
             android:id="@+id/username"
             style="@style/LoginEdittext"
-            android:inputType="textEmailAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/login_margin_top_first"
             android:drawableLeft="@drawable/account_username_icon"
-            android:hint="@string/account_login_username_hint" />
+            android:hint="@string/account_login_username_hint"
+            android:inputType="textEmailAddress" />
 
-        <com.ireadygo.app.gamelauncher.ui.widget.CustomerEditText
-            android:id="@+id/password"
-            style="@style/LoginEdittext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:imeOptions="actionDone"
+        <LinearLayout
+            android:layout_width="@dimen/login_edittext_width"
+            android:layout_height="@dimen/login_edittext_height"
             android:layout_marginTop="@dimen/login_margin_top_normal"
-            android:drawableLeft="@drawable/account_password_icon"
-            android:hint="@string/account_login_password_hint" />
+            android:addStatesFromChildren="true"
+            android:background="@drawable/login_edittext_bg_selector" >
+
+            <com.ireadygo.app.gamelauncher.ui.widget.CustomerEditText
+                android:id="@+id/password"
+                style="@style/TextLabelMiddleLight"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:drawableLeft="@drawable/account_password_icon"
+                android:drawablePadding="@dimen/login_edittext_drawable_padding"
+                android:hint="@string/account_login_password_hint"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:paddingLeft="@dimen/login_edittext_padding_left"
+                android:textColorHint="@color/white_first_transparency" />
+
+            <ImageButton
+                android:id="@+id/see_password"
+                android:layout_width="@dimen/login_passwordsee_icon_size"
+                android:layout_height="@dimen/login_passwordsee_icon_size"
+                android:layout_margin="@dimen/login_passwordsee_icon_margin"
+                android:background="@drawable/password_nosee_selector" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/loginBtn"
@@ -46,6 +65,7 @@
             android:layout_height="@dimen/login_edittext_height"
             android:layout_marginTop="@dimen/login_margin_top_normal"
             android:background="@drawable/snail_guide_btn_orange_selector"
+            android:nextFocusUp="@id/password"
             android:text="@string/account_login_btn" />
 
         <TextView

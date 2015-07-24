@@ -292,7 +292,7 @@
         <item name="android:paddingBottom">@dimen/login_edittext_padding_bottom</item>
         <item name="android:textColorHint">@color/white_first_transparency</item>
     </style>
-
+    
     <style name="LoginBtn">
         <item name="android:width">@dimen/login_edittext_width</item>
         <item name="android:height">@dimen/login_edittext_height</item>

@@ -1,9 +1,11 @@
 package com.ireadygo.app.gamelauncher.ui.account;
 
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.ireadygo.app.gamelauncher.R;
@@ -11,13 +13,18 @@ import com.ireadygo.app.gamelauncher.ui.activity.BaseAccountActivity;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
 
-public class AccountRegisterActivity extends BaseAccountActivity{
+public class AccountRegisterActivity extends BaseAccountActivity {
 	private TextView mErrorPromptView;
 	private EditText mUsernameView;
 	private EditText mPasswordView;
 	private EditText mPasswordRepeatView;
 	private TextView mRegisterBtn;
 	private OperationTipsLayout mTipsLayout;
+	private ImageButton mPasswordSee;
+	private ImageButton mPasswordSeeRepeat;
+	private boolean mPasswordSeeState;
+	private boolean mPasswordSeeStateRepeat;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +45,15 @@ public class AccountRegisterActivity extends BaseAccountActivity{
 		
 		mRegisterBtn = (TextView)findViewById(R.id.registerBtn);
 		mRegisterBtn.setOnClickListener(this);
+		
+		mPasswordSee = (ImageButton) findViewById(R.id.see_password);
+		mPasswordSeeRepeat = (ImageButton) findViewById(R.id.see_password_repeat);
+		mPasswordSeeState = false;
+		mPasswordSeeStateRepeat = false;
+		
+		mPasswordSee.setOnClickListener(this);
+		mPasswordSeeRepeat.setOnClickListener(this);
+		
 	}
 	
 	@Override
@@ -50,6 +66,40 @@ public class AccountRegisterActivity extends BaseAccountActivity{
 			String passwordRepeat = mPasswordRepeatView.getEditableText().toString();
 			if(checkUsernameAndPassword(username, password, passwordRepeat)){
 				generalRegister(username, password);
+			}
+			break;
+		case R.id.see_password :
+			mPasswordSeeState = !mPasswordSeeState;
+			if(mPasswordSeeState) {
+			mPasswordSee.setBackground(getResources().getDrawable(R.drawable.password_see_selector));
+			}
+			else {
+			mPasswordSee.setBackground(getResources().getDrawable(R.drawable.password_nosee_selector));
+			}
+			int pos = mPasswordView.getSelectionEnd();
+			mPasswordView
+					.setInputType(InputType.TYPE_CLASS_TEXT
+							| (mPasswordSeeState ? InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+									: InputType.TYPE_TEXT_VARIATION_PASSWORD));
+			if (pos >= 0) {
+				((EditText) mPasswordView).setSelection(pos);
+			}
+			break;
+		case R.id.see_password_repeat :
+			mPasswordSeeStateRepeat = !mPasswordSeeStateRepeat;
+			if(mPasswordSeeStateRepeat) {
+			mPasswordSeeRepeat.setBackground(getResources().getDrawable(R.drawable.password_see_selector));
+			}
+			else {
+			mPasswordSeeRepeat.setBackground(getResources().getDrawable(R.drawable.password_nosee_selector));
+			}
+			int posRepeat = mPasswordRepeatView.getSelectionEnd();
+			mPasswordRepeatView
+					.setInputType(InputType.TYPE_CLASS_TEXT
+							| (mPasswordSeeStateRepeat ? InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+									: InputType.TYPE_TEXT_VARIATION_PASSWORD));
+			if (posRepeat >= 0) {
+				((EditText) mPasswordRepeatView).setSelection(posRepeat);
 			}
 			break;
 
@@ -111,5 +161,9 @@ public class AccountRegisterActivity extends BaseAccountActivity{
 	public boolean onMoonKey() {
 		return super.onBackKey();
 	}
+
+	
+		
+	
 
 }

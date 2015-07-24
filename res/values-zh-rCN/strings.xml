@@ -419,6 +419,7 @@
     <string name="user_identity_overdue">用户身份过期，请重新登录！</string>
     <string name="shortcut_l1">上一页</string>
     <string name="shortcut_r1">下一页</string>
+    
 
     <!-- 按键提示层 -->
     <string name="key_sun">启动</string>

@@ -265,6 +265,8 @@
     <dimen name="login_edittext_padding_left">30dp</dimen>
     <dimen name="login_edittext_padding_top">20dp</dimen>
     <dimen name="login_edittext_padding_bottom">20dp</dimen>
+    <dimen name="login_passwordsee_icon_size">60dp</dimen>
+    <dimen name="login_passwordsee_icon_margin">10dp</dimen>
 
     <!-- 免账号-注册 -->
     <dimen name="register_password_prompt_height">150dp</dimen>
