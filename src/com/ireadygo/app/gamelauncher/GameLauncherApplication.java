@@ -148,7 +148,14 @@ public class GameLauncherApplication extends Application {
 
 	public void setUserPhoto(Bitmap userPhoto) {
 		this.mUserPhoto = userPhoto;
-		PictureUtil.saveBitmap(this, userPhoto, mUserPhotoSavePath + File.separator + USER_PHOTO_NAME);
+		if (mUserPhoto == null) {
+			File userPhotoFile = new File(mUserPhotoSavePath + File.separator + USER_PHOTO_NAME);
+			if (userPhotoFile.exists()) {
+				userPhotoFile.delete();
+			}
+		} else {
+			PictureUtil.saveBitmap(this, userPhoto, mUserPhotoSavePath + File.separator + USER_PHOTO_NAME);
+		}
 	}
 
 	private void initUserPhotoSavePath() {
