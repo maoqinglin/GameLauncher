@@ -105,8 +105,8 @@ public class BoxeMessageView extends LinearLayout {
 
 		Intent intent = getIntent(msg);
 		if(isActivity(msg) && intent != null) {
-			getContext().startActivity(intent);
 			mBoxMessageController.setMsgReadStatus(msg.pkgName, msg.id, true);
+			getContext().startActivity(intent);
 			mBoxMessageAdapter.notifyDataSetChanged();
 		}
 	}

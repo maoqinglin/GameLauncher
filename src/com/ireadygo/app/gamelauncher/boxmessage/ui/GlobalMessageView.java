@@ -10,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
@@ -52,12 +53,19 @@ public class GlobalMessageView {
 		return sGlobalMessageView;
 	}
 	
-	public void show(Bitmap bm, String msg) {
-		show(new BitmapDrawable(mContext.getResources(), bm), msg);
+	private Drawable bmToDrawable(Bitmap bm) {
+		int oldWidth = bm.getWidth();
+		int oldHeight = bm.getHeight();
+		int newWidth = mContext.getResources().getDimensionPixelOffset(R.dimen.boxmessage_global_message_icon_width);
+		float scale = (float)newWidth / oldWidth;
+		Matrix matrix = new Matrix();
+		matrix.postScale(scale, scale);
+		Bitmap newBmp = Bitmap.createBitmap(bm, 0, 0, oldWidth, oldHeight, matrix, true);
+		return new BitmapDrawable(mContext.getResources(), newBmp);
 	}
 
-	public void show(Drawable drawable, String msg) {
-		mMsgTextView.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
+	public void show(Bitmap bm, String msg) {
+		mMsgTextView.setCompoundDrawablesWithIntrinsicBounds(bmToDrawable(bm), null, null, null);
 		mMsgTextView.setText(msg);
 		final int X = mLayoutParams.x;
 		ValueAnimator moveAnimator = ValueAnimator.ofInt(mLayoutParams.width);
