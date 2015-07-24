@@ -174,7 +174,7 @@ public class GlobalMessageView {
 											// KitKat gradient
 		params.gravity = Gravity.TOP | Gravity.LEFT;
 		params.x = obtainnScreenSize().x;
-		params.y = mContext.getResources().getDimensionPixelOffset(R.dimen.boxmessage_btn_margin_top);
+		params.y = mContext.getResources().getDimensionPixelOffset(R.dimen.boxmessage_global_message_y);
 		params.width = mContext.getResources().getDimensionPixelOffset(R.dimen.boxmessage_global_message_width);
 		params.height = mContext.getResources().getDimensionPixelOffset(R.dimen.boxmessage_global_message_height);
 		return params;

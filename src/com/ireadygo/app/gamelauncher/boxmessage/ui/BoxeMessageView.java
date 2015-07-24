@@ -125,7 +125,7 @@ public class BoxeMessageView extends LinearLayout {
 	}
 
 	private void animatorEnter() {
-		Animator animatorX = ObjectAnimator.ofFloat(this, View.TRANSLATION_X, -mBoxMsgListView.getWidth());
+		Animator animatorX = ObjectAnimator.ofFloat(this, View.TRANSLATION_X, -(mBoxMsgListView.getWidth() - 1));
 		animatorX.setDuration(DURATION_TIME);
 		animatorX.addListener(new AnimatorListener() {
 
