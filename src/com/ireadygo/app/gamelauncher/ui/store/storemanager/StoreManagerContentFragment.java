@@ -107,16 +107,24 @@ public class StoreManagerContentFragment extends BaseContentFragment implements 
 				AppEntity app = null;
 				switch (mManagerType) {
 				case DOWNLOAD:
-					app = mDownloadApps.get(position);
+					if (position > 0 && position < mDownloadApps.size()) {
+						app = mDownloadApps.get(position);
+					}
 					break;
 				case UPGRADE:
-					app = mUpgradeApps.get(position);
+					if (position > 0 && position < mUpgradeApps.size()) {
+						app = mUpgradeApps.get(position);
+					}
 					break;
 				case INSTALLED:
-					app = mInstalledApps.get(position);
+					if (position > 0 && position < mInstalledApps.size()) {
+						app = mInstalledApps.get(position);
+					}
 					break;
 				}
-				operatorItem(app);
+				if (app != null) {
+					operatorItem(app);
+				}
 			}
 		});
 
