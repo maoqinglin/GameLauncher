@@ -502,10 +502,12 @@ public class UserPersonalFragment extends BaseContentFragment implements OnClick
 			}
 			viewHolder = (PhotoHolder) convertView.getTag();
 			viewHolder.photoView = (ImageView) convertView;
-			UserHeaderImgItem imgItem = mImgItemLists.get(position);
-			if (imgItem != null && imgItem.getBitmap() != null) {
-				viewHolder.imgItem = imgItem;
-				viewHolder.photoView.setImageBitmap(imgItem.getBitmap());
+			if (position < mImgItemLists.size()) {
+				UserHeaderImgItem imgItem = mImgItemLists.get(position);
+				if (imgItem != null && imgItem.getBitmap() != null) {
+					viewHolder.imgItem = imgItem;
+					viewHolder.photoView.setImageBitmap(imgItem.getBitmap());
+				}
 			}
 
 			return convertView;

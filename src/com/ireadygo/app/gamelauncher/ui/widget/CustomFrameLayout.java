@@ -129,9 +129,9 @@ public class CustomFrameLayout extends FrameLayout implements OnGlobalFocusChang
 		if (oldFocus == null) {
 			return;
 		} else if (oldFocus != null && oldFocus.getId() == R.id.focusView) {
-			if(newFocus instanceof TextMenu){
-				newFocus.setBackgroundResource(R.drawable.menu_nav_focused_bg);
-			}
+//			if(newFocus instanceof TextMenu){
+//				newFocus.setBackgroundResource(R.drawable.menu_nav_focused_bg);
+//			}
 			return;
 		}
 		boolean isFocusTranslate = false;
