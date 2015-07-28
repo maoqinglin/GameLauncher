@@ -444,7 +444,7 @@ public class SearchActivity extends BaseActivity implements OnClickListener, Key
 			mAppList.addAll(result);
 			mSearchAdapter.notifyDataSetChanged();
 			if (!TextUtils.isEmpty(getKeyword())) {
-				mSearchPrompt.setText(getString(R.string.search_recommend_result));
+				mSearchPrompt.setText(getResources().getString(R.string.search_recommend_result));
 			}
 		}
 

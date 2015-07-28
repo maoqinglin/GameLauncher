@@ -7,6 +7,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
@@ -129,9 +130,9 @@ public class CustomFrameLayout extends FrameLayout implements OnGlobalFocusChang
 		if (oldFocus == null) {
 			return;
 		} else if (oldFocus != null && oldFocus.getId() == R.id.focusView) {
-//			if(newFocus instanceof TextMenu){
-//				newFocus.setBackgroundResource(R.drawable.menu_nav_focused_bg);
-//			}
+			if(newFocus instanceof TextMenu){
+				newFocus.setBackgroundResource(R.drawable.menu_nav_focused_bg);
+			}
 			return;
 		}
 		boolean isFocusTranslate = false;
@@ -210,7 +211,6 @@ public class CustomFrameLayout extends FrameLayout implements OnGlobalFocusChang
 						currHeight + Math.round(interpolatedTime * deltaHeight));
 			}
 		};
-
 		translate.setDuration(isFocusTranslate ? DEFAULT_DURATION : 0);
 		translate.setFillAfter(false);
 		translate.setInterpolator(getContext(),
@@ -220,7 +220,7 @@ public class CustomFrameLayout extends FrameLayout implements OnGlobalFocusChang
 			@Override
 			public void onAnimationStart(Animation animation) {
 				if(from instanceof MenuItem){
-					from.setBackgroundDrawable(new BitmapDrawable());
+					from.setBackgroundResource(R.drawable.menu_nav_bg_normal_shape);
 				}
 			}
 
@@ -238,7 +238,6 @@ public class CustomFrameLayout extends FrameLayout implements OnGlobalFocusChang
 				hideFocusWindow();
 			}
 		});
-
 		mFocusWindow.startAnimation(translate);
 	}
 

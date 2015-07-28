@@ -60,6 +60,7 @@ public class TextMenu extends MenuItem {
 	public void toSelected(AnimatorListener listener) {
 		super.toSelected(listener);
 		mTextView.setTextColor(Color.WHITE);
+		setBackgroundResource(R.drawable.menu_nav_bg_normal_shape);
 		mMenuCircle.setVisibility(View.VISIBLE);
 	}
 
@@ -68,6 +69,7 @@ public class TextMenu extends MenuItem {
 		super.toUnfocused(listener);
 		mTextView.setTextColor(Color.WHITE);
 		mMenuCircle.setVisibility(View.INVISIBLE);
+		setBackgroundResource(R.drawable.menu_nav_bg_normal_shape);
 		mUnfocusedAnimator = createAnimator(listener, 150, 0.3f, TEXT_SCALE_DEFAULT);
 		mUnfocusedAnimator.start();
 	}
