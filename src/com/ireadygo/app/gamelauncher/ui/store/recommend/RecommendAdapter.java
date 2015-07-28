@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ireadygo.app.gamelauncher.R;
+import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.ui.BaseAnimatorAdapter;
 import com.ireadygo.app.gamelauncher.ui.Config;
@@ -26,6 +27,7 @@ public class RecommendAdapter extends BaseAnimatorAdapter {
 	private List<AppEntity> mAppList = new ArrayList<AppEntity>();
 	private Context mContext;
 	private View mCurrentItemView;
+	private ImageLoader mImageLoader;
 
 	public RecommendAdapter(List<AppEntity> appList, HListView hListView, Context context) {
 		super(hListView);
@@ -33,6 +35,7 @@ public class RecommendAdapter extends BaseAnimatorAdapter {
 			this.mAppList = appList;
 		}
 		this.mContext = context;
+		mImageLoader = GameInfoHub.instance(mContext).getImageLoader();
 	}
 
 	@Override
@@ -65,7 +68,7 @@ public class RecommendAdapter extends BaseAnimatorAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		AppEntity app = mAppList.get(position);
-		ImageLoader.getInstance().displayImage(app.getRemoteIconUrl(), holder.icon);
+		mImageLoader.displayImage(app.getRemoteIconUrl(), holder.icon);
 		holder.title.setText(app.getName());
 		holder.playNumbers.setText("6584545");
 		holder.nameLayout.setVisibility(View.INVISIBLE);

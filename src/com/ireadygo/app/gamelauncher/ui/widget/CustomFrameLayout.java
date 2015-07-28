@@ -157,6 +157,9 @@ public class CustomFrameLayout extends FrameLayout implements OnGlobalFocusChang
 	}
 
 	private void focusTranslate(final View from, final View to, final boolean isFocusTranslate) {
+		if (to == null) {
+			return;
+		}
 		final int gap = dipToPixels(DEFAULT_STROKE_WIDTH);
 
 		int[] location = new int[2];

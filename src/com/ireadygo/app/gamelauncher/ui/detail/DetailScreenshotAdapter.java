@@ -13,6 +13,7 @@ import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 
 import com.ireadygo.app.gamelauncher.R;
+import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.ui.SimpleImageLoadingListener;
 import com.ireadygo.app.gamelauncher.ui.item.ImageItem;
@@ -27,12 +28,14 @@ public class DetailScreenshotAdapter extends BaseAdapter {
 	private AppEntity mAppEntity;
 	private int mScreenshotMaxWidth;
 	private int mScreenshotMaxHeight;
+	private ImageLoader mImageLoader;
 
 	public DetailScreenshotAdapter(HListView listView, List<String> urlList, Context context) {
 		this.mUrlList = urlList;
 		this.mContext = context;
 		mScreenshotMaxWidth = context.getResources().getDimensionPixelOffset(R.dimen.detail_screenshot_width);
 		mScreenshotMaxHeight = context.getResources().getDimensionPixelOffset(R.dimen.detail_screenshot_height);
+		mImageLoader = GameInfoHub.instance(mContext).getImageLoader();
 	}
 
 	public void initParams(List<String> urlList, AppEntity appEntity) {
@@ -99,7 +102,7 @@ public class DetailScreenshotAdapter extends BaseAdapter {
 		}
 		if (!isDataEmpty()) {
 			ImageSize size = new ImageSize(mScreenshotMaxWidth / 2, mScreenshotMaxHeight / 2);
-			ImageLoader.getInstance().loadImage(mUrlList.get(position), size, new SimpleImageLoadingListener() {
+			mImageLoader.loadImage(mUrlList.get(position), size, new SimpleImageLoadingListener() {
 				@Override
 				public void onLoadingComplete(String url, View view, Bitmap bitmap) {
 					Log.d("DetailScreenshotAdapter", "width = " + bitmap.getWidth() +", height = " + bitmap.getHeight());

@@ -48,6 +48,9 @@ import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 public class GameManager {
 	private static final boolean DEBUG = true;
 	private static final String TAG = "GameManager";
+	private static final long MAP_GAME_DELAY = 2 * 60 * 1000;
+	private static final int MESSAGE_TYPE_START_APP = 0;
+	private static final int MESSAGE_TYPE_SKIP_DETAIL = 1;
 	private IInstaller mInstaller;
 	private GameInfoHub mGameInfoHub;
 	private UpdateManager mUpdateManager;
@@ -56,7 +59,6 @@ public class GameManager {
 	private IDldOperator mDldOperator;
 	private GameStateManager mGameStateManager;
 	private GameData mGameData;
-	// private ARMManager mARMManager;
 	private ArrayList<DownloadListener> mDownloadListeners = new ArrayList<GameManager.DownloadListener>();
 	private ArrayList<InstallListener> mInstallListeners = new ArrayList<GameManager.InstallListener>();
 	private ArrayList<MoveListener> mMoveListeners = new ArrayList<GameManager.MoveListener>();
@@ -64,9 +66,7 @@ public class GameManager {
 	private Handler mHandler;
 	private ExecutorService mThreadPool = GameLauncherThreadPool.getFixedThreadPool();
 	private GameLauncherNotification mGameLauncherNotification;
-	private static final long MAP_GAME_DELAY = 2 * 60 * 1000;
-	private static final int MESSAGE_TYPE_START_APP = 0;
-	private static final int MESSAGE_TYPE_SKIP_DETAIL = 1;
+	private ImageLoader mImageLoader;
 
 	public GameManager(Context context) {
 		mContext = context;
@@ -83,6 +83,7 @@ public class GameManager {
 		mGameData.addDataLoadCallback(mGameStateManager);
 		mGameData.addDataLoadCallback(mUpdateManager);
 		mGameData.initGameData(mContext);
+		mImageLoader = GameInfoHub.instance(mContext).getImageLoader();
 
 		GameLauncherAppState.getInstance(mContext).getModel().startLoader();
 		mHandler = new Handler(context.getMainLooper());
@@ -134,7 +135,7 @@ public class GameManager {
 			}
 			// 下载海报图标
 			if (!TextUtils.isEmpty(app.getPosterIconUrl())) {
-				ImageLoader.getInstance().loadImage(app.getPosterIconUrl(), new ImageLoadingListener() {
+				mImageLoader.loadImage(app.getPosterIconUrl(), new ImageLoadingListener() {
 					@Override
 					public void onLoadingStarted(String arg0, View arg1) {
 					}

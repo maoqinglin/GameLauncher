@@ -13,6 +13,7 @@ import android.widget.BaseAdapter;
 
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.appstore.data.GameData;
+import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.ui.store.storemanager.StoreManagerContentFragment.GameManagerType;
 import com.ireadygo.app.gamelauncher.ui.store.storemanager.StoreManagerItem.StoreManagerItemHolder;
@@ -27,12 +28,14 @@ public class StoreManagerAdapter implements HMultiBaseAdapter {
 	private GameManagerType mType = GameManagerType.DOWNLOAD;
 	private HMultiListView mMultiListView;
 	private List<AppEntity> mAppList = new ArrayList<AppEntity>();
+	private ImageLoader mImageLoader;
 
 	public StoreManagerAdapter(Context context, HMultiListView multiListView, List<AppEntity> apps, GameManagerType type) {
 		this.mContext = context;
 		this.mMultiListView = multiListView;
 		this.mAppList = apps;
 		this.mType = type;
+		mImageLoader = GameInfoHub.instance(mContext).getImageLoader();
 	}
 
 	@Override
@@ -71,7 +74,7 @@ public class StoreManagerAdapter implements HMultiBaseAdapter {
 				iconUrl = app.getRemoteIconUrl();
 			}
 			if (!TextUtils.isEmpty(iconUrl)) {
-				ImageLoader.getInstance().displayImage(iconUrl, holder.icon);
+				mImageLoader.displayImage(iconUrl, holder.icon);
 				return;
 			}
 			iconUrl = app.getLocalIconUrl();

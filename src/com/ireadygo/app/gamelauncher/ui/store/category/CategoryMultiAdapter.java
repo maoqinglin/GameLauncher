@@ -47,11 +47,13 @@ public class CategoryMultiAdapter implements HMultiBaseAdapter {
 	private Context mContext;
 	private HMultiListView mMultiListView;
 	private List<CategoryInfo> mCategoryDatas = new ArrayList<CategoryInfo>();
+	private ImageLoader mImageLoader;
 
 	public CategoryMultiAdapter(Context context, HMultiListView multiListView, List<CategoryInfo> categoryDatas) {
 		this.mContext = context;
 		this.mMultiListView = multiListView;
 		mCategoryDatas = categoryDatas;
+		mImageLoader = GameInfoHub.instance(mContext).getImageLoader();
 	}
 
 	@Override
@@ -68,7 +70,7 @@ public class CategoryMultiAdapter implements HMultiBaseAdapter {
 		CategoryItemHoder holder = ((CategoryItem) convertView).getHolder();
 		CategoryInfo info = mCategoryDatas.get(position);
 		if(!TextUtils.isEmpty(info.getPosterIconUrl())){
-			ImageLoader.getInstance().displayImage(info.getPosterIconUrl(), holder.icon);
+			mImageLoader.displayImage(info.getPosterIconUrl(), holder.icon);
 		}
 		holder.title.setText(info.getCatetoryName().trim());
 

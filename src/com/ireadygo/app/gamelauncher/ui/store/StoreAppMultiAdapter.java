@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.ireadygo.app.gamelauncher.R;
+import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.ui.item.AppItem;
 import com.ireadygo.app.gamelauncher.ui.item.AppItem.AppItemHolder;
@@ -25,12 +26,14 @@ public class StoreAppMultiAdapter implements HMultiBaseAdapter {
 	private HMultiListView mMultiListView;
 	private List<AppEntity> mAppEntities = new ArrayList<AppEntity>();
 	private Drawable mDefaultIcon;
+	private ImageLoader mImageLoader;
 
 	public StoreAppMultiAdapter(Context context, HMultiListView multiListView, List<AppEntity> appEntities) {
 		this.mContext = context;
 		this.mMultiListView = multiListView;
 		this.mAppEntities = appEntities;
 		mDefaultIcon = context.getResources().getDrawable(R.drawable.snail_icon_default);
+		mImageLoader = GameInfoHub.instance(mContext).getImageLoader();
 	}
 
 	@Override
@@ -51,7 +54,7 @@ public class StoreAppMultiAdapter implements HMultiBaseAdapter {
 		if (TextUtils.isEmpty(iconUrl)) {
 			iconUrl = app.getRemoteIconUrl();
 		}
-		ImageLoader.getInstance().displayImage(iconUrl, holder.icon);
+		mImageLoader.displayImage(iconUrl, holder.icon);
 		holder.title.setText(app.getName().trim());
 		return convertView;
 	}

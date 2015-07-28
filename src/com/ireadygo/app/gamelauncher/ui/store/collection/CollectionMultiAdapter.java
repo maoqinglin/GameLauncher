@@ -12,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView.ScaleType;
 
 import com.ireadygo.app.gamelauncher.R;
+import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
 import com.ireadygo.app.gamelauncher.appstore.info.item.CollectionInfo;
 import com.ireadygo.app.gamelauncher.ui.item.ImageItem;
 import com.ireadygo.app.gamelauncher.ui.item.ImageItem.ImageItemHolder;
@@ -25,11 +26,13 @@ public class CollectionMultiAdapter implements HMultiBaseAdapter {
 	private Context mContext;
 	private HMultiListView mMultiListView;
 	private List<CollectionInfo> mCollectionDatas = new ArrayList<CollectionInfo>();
+	private ImageLoader mImageLoader;
 
 	public CollectionMultiAdapter(Context mContext, HMultiListView mMultiListView, List<CollectionInfo> mCollectionDatas) {
 		this.mContext = mContext;
 		this.mMultiListView = mMultiListView;
 		this.mCollectionDatas = mCollectionDatas;
+		mImageLoader = GameInfoHub.instance(mContext).getImageLoader();
 	}
 
 	@Override
@@ -56,7 +59,7 @@ public class CollectionMultiAdapter implements HMultiBaseAdapter {
 //		}
 		holder.icon.setScaleType(ScaleType.FIT_XY);
 		String iconUrl = app.getIconUrl();
-		ImageLoader.getInstance().displayImage(iconUrl, holder.icon);
+		mImageLoader.displayImage(iconUrl, holder.icon);
 		return convertView;
 	}
 

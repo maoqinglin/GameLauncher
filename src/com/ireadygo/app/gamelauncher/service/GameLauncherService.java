@@ -42,8 +42,8 @@ public class GameLauncherService extends Service {
 		private GameLauncherAppState mGameLauncherAppState;
 		
 		public GameLauncherBinder(Context context) {
-			mGameManager = new GameManager(context);
 			mGameInfoHub = GameInfoHub.instance(context);
+			mGameManager = new GameManager(context);
 			mGameLauncherAppState = GameLauncherAppState.getInstance(context);
 		}
 

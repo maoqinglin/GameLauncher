@@ -35,6 +35,7 @@ import com.ireadygo.app.gamelauncher.ui.user.UserLoginFragment;
 import com.ireadygo.app.gamelauncher.utils.NetworkUtils;
 import com.ireadygo.app.gamelauncher.utils.PictureUtil;
 import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 
@@ -44,10 +45,12 @@ public class HomeMenuFragment extends BaseMenuFragment {
 	private MenuItem mGameMenu;
 	private MenuItem mAppMenu;
 	private MenuItem mSettingsMenu;
+	private ImageLoader mImageLoader;
 
 	public HomeMenuFragment(Activity activity) {
 		super(activity);
 		initCoordinateParams(Config.Menu.INIT_X, Config.Menu.INIT_Y);
+		mImageLoader = GameInfoHub.instance(activity).getImageLoader();
 	}
 
 	@Override
@@ -131,8 +134,7 @@ public class HomeMenuFragment extends BaseMenuFragment {
 	}
 
 	private void getRemotePhoto(String photoUrl) {
-		GameInfoHub.instance(getRootActivity()).getImageLoader()
-				.displayImage(photoUrl, ((ImageMenu) mUserMenu).getImageView(), new ImageLoadingListener() {
+		mImageLoader.displayImage(photoUrl, ((ImageMenu) mUserMenu).getImageView(), new ImageLoadingListener() {
 
 					@Override
 					public void onLoadingStarted(String arg0, View arg1) {

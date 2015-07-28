@@ -3,16 +3,14 @@ package com.ireadygo.app.gamelauncher.ui.store;
 import java.util.List;
 
 import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
+import android.animation.Animator.AnimatorListener;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
-import android.animation.Animator.AnimatorListener;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ireadygo.app.gamelauncher.R;
+import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.ui.BaseAnimatorAdapter;
 import com.ireadygo.app.gamelauncher.ui.Config;
@@ -33,6 +32,7 @@ public class StoreAppNormalAdapter extends BaseAnimatorAdapter {
 	private List<AppEntity> mAppList;
 	private Bitmap mDefaultBmp;
 	private Context mContext;
+	private ImageLoader mImageLoader;
 
 	public StoreAppNormalAdapter(Context context, HListView hListView, List<AppEntity> appList) {
 		super(hListView);
@@ -40,6 +40,7 @@ public class StoreAppNormalAdapter extends BaseAnimatorAdapter {
 		this.mAppList = appList;
 		mInflater = LayoutInflater.from(context);
 		mDefaultBmp = BitmapFactory.decodeResource(context.getResources(), R.drawable.snail_icon_default);
+		mImageLoader = GameInfoHub.instance(mContext).getImageLoader();
 	}
 
 	@Override
@@ -79,7 +80,7 @@ public class StoreAppNormalAdapter extends BaseAnimatorAdapter {
 		if (TextUtils.isEmpty(iconUrl)) {
 			iconUrl = app.getRemoteIconUrl();
 		}
-		ImageLoader.getInstance().displayImage(iconUrl, holder.icon);
+		mImageLoader.displayImage(iconUrl, holder.icon);
 		holder.title.setText(app.getName());
 		return convertView;
 	}

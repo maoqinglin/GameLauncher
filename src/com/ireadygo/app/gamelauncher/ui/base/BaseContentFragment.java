@@ -171,13 +171,14 @@ public abstract class BaseContentFragment extends BaseFragment {
 			mLoadingProgress = Utils.createLoadingDialog(getRootActivity());
 			mLoadingProgress.setCancelable(true);
 		}
-		if (!mLoadingProgress.isShowing()) {
+		if (!getRootActivity().isDestroyed() && !getRootActivity().isFinishing() && !mLoadingProgress.isShowing()) {
 			mLoadingProgress.show();
 		}
 	}
 
 	protected void dismissLoadingProgress() {
-		if (mLoadingProgress != null && mLoadingProgress.isShowing()) {
+		if (!getRootActivity().isDestroyed() && !getRootActivity().isFinishing() && mLoadingProgress != null
+				&& mLoadingProgress.isShowing()) {
 			mLoadingProgress.dismiss();
 		}
 	}

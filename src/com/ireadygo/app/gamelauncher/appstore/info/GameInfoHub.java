@@ -28,12 +28,16 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.SubscribeResultItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserHeaderImgItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserInfoItem;
 import com.ireadygo.app.gamelauncher.appstore.info.item.UserSlotInfoItem;
+import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
 import com.ireadygo.app.gamelauncher.utils.NetworkUtils;
 import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
+import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.snail.appstore.openapi.exception.HttpStatusCodeException;
 
@@ -45,6 +49,8 @@ public class GameInfoHub implements IGameInfo {
 	private ImageLoader mImageLoader;
 	private Context mContext;
 	private GameData mGameData;
+	private DisplayImageOptions mDisplayImageOptions;
+	private ImageLoaderConfiguration mImageLoaderConfiguration;
 
 	public static GameInfoHub instance(Context context) {
 		if (null == sInstance) {
@@ -61,21 +67,38 @@ public class GameInfoHub implements IGameInfo {
 		mContext = context;
 		mRemoteInfo = new RemoteInfo(context);
 		mMemoryInfo = new MemoryInfo(context);
-		mImageLoader = ImageLoader.getInstance();
 		mGameData = GameData.getInstance(mContext);
 		configImageLoader();
 	}
 
 	private void configImageLoader() {
-		ActivityManager am = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
-		DisplayImageOptions options = getDisplayImageOptions();
+		mDisplayImageOptions = new DisplayImageOptions.Builder()
+		.cacheInMemory(true)
+		.imageScaleType(ImageScaleType.EXACTLY)
+		.cacheOnDisc(true)
+		.bitmapConfig(Bitmap.Config.RGB_565)
+		.build();
 
-		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(mContext)
-				.memoryCacheSize(am.getMemoryClass() * 1024 * 1024 / 8).threadPoolSize(5)
-				.denyCacheImageMultipleSizesInMemory().discCacheFileNameGenerator(new Md5FileNameGenerator())
-				.tasksProcessingOrder(QueueProcessingType.LIFO).threadPriority(Thread.MIN_PRIORITY)
-				.defaultDisplayImageOptions(options).build();
-		mImageLoader.init(config);
+		mImageLoaderConfiguration = new ImageLoaderConfiguration.Builder(mContext)
+		.threadPoolSize(3)
+		// default
+		.threadPriority(Thread.NORM_PRIORITY - 2)
+		.denyCacheImageMultipleSizesInMemory()
+		.discCacheFileNameGenerator(new Md5FileNameGenerator())
+		.tasksProcessingOrder(QueueProcessingType.LIFO)
+		.denyCacheImageMultipleSizesInMemory()
+		.memoryCache(new WeakMemoryCache())
+		.memoryCacheSize((int) (2 * 1024 * 1024))
+		.memoryCacheSizePercentage(13)
+		// default
+//		.discCache(new UnlimitedDiscCache(cacheDir))
+		// default
+		.discCacheSize(50 * 1024 * 1024).discCacheFileCount(100)
+		.discCacheFileNameGenerator(new HashCodeFileNameGenerator())
+		.defaultDisplayImageOptions(mDisplayImageOptions).writeDebugLogs() // Remove
+		.build();
+		mImageLoader = ImageLoader.getInstance();
+		mImageLoader.init(mImageLoaderConfiguration);
 	}
 
 	public DisplayImageOptions getDisplayImageOptions() {

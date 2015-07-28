@@ -49,16 +49,9 @@ import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
 import com.ireadygo.app.gamelauncher.utils.StaticsUtils;
 import com.ireadygo.app.gamelauncher.utils.Utils;
-import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
-import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
-import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
 public class DetailActivity extends BaseActivity implements OnClickListener {
 	public static final String EXTRAS_APP_ENTITY = "EXTRAS_APP_ENTITY";
@@ -84,8 +77,6 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 	private AppStateListener mStateListener = new AppStateListener();
 	private View mDecorView;
 	private ProgressBar mProgressBar;
-	private DisplayImageOptions mDisplayImageOptions;
-	private ImageLoaderConfiguration mImageLoaderConfiguration;
 	private ImageLoader mImageLoader;
 
 	@Override
@@ -97,39 +88,10 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 		mGameManager.addInstallListener(mStateListener);
 		mGameManager.addUninstallListener(mStateListener);
 		mDecorView = getWindow().getDecorView();
-		configImageLoader();
+		mImageLoader = GameInfoHub.instance(this).getImageLoader();
 		initView();
 	}
 
-	private void configImageLoader() {
-		mDisplayImageOptions = new DisplayImageOptions.Builder()
-		.cacheInMemory(true)
-		.imageScaleType(ImageScaleType.EXACTLY)
-		.cacheOnDisc(true)
-		.bitmapConfig(Bitmap.Config.RGB_565)
-		.build();
-
-		mImageLoaderConfiguration = new ImageLoaderConfiguration.Builder(DetailActivity.this)
-		.threadPoolSize(3)
-		// default
-		.threadPriority(Thread.NORM_PRIORITY - 2)
-		.denyCacheImageMultipleSizesInMemory()
-		.discCacheFileNameGenerator(new Md5FileNameGenerator())
-		.tasksProcessingOrder(QueueProcessingType.LIFO)
-		.denyCacheImageMultipleSizesInMemory()
-		.memoryCache(new WeakMemoryCache())
-		.memoryCacheSize((int) (2 * 1024 * 1024))
-		.memoryCacheSizePercentage(13)
-		// default
-//		.discCache(new UnlimitedDiscCache(cacheDir))
-		// default
-		.discCacheSize(50 * 1024 * 1024).discCacheFileCount(100)
-		.discCacheFileNameGenerator(new HashCodeFileNameGenerator())
-		.defaultDisplayImageOptions(mDisplayImageOptions).writeDebugLogs() // Remove
-		.build();
-		mImageLoader = ImageLoader.getInstance();
-		mImageLoader.init(mImageLoaderConfiguration);
-	}
 
 	private void initView() {
 		mRootView = (ScrollView) findViewById(R.id.detailRootView);

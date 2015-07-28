@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ireadygo.app.gamelauncher.R;
+import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
 import com.ireadygo.app.gamelauncher.appstore.info.item.CategoryInfo;
 import com.ireadygo.app.gamelauncher.ui.BaseAnimatorAdapter;
 import com.ireadygo.app.gamelauncher.ui.Config;
@@ -28,6 +29,7 @@ public class CategoryAdapter extends BaseAnimatorAdapter {
 	private List<CategoryInfo> mAppList = new ArrayList<CategoryInfo>();
 	private Context mContext;
 	private View mCurrentItemView;
+	private ImageLoader mImageLoader;
 
 	public CategoryAdapter(List<CategoryInfo> appList, HListView mHListView, Context context) {
 		super(mHListView);
@@ -37,6 +39,7 @@ public class CategoryAdapter extends BaseAnimatorAdapter {
 		this.mContext = context;
 		setAnimatorDuration(Config.Animator.DURATION_SHORT * 3 / 2);
 		setAnimatorDelay(Config.Animator.DELAY_SHORT * 3 / 2);
+		mImageLoader = GameInfoHub.instance(mContext).getImageLoader();
 	}
 
 	@Override
@@ -71,7 +74,7 @@ public class CategoryAdapter extends BaseAnimatorAdapter {
 		}
 		CategoryInfo categoryItem = mAppList.get(position);
 		String iconUrl = categoryItem.getIconUrl();
-		ImageLoader.getInstance().displayImage(iconUrl, holder.icon);
+		mImageLoader.displayImage(iconUrl, holder.icon);
 		holder.title.setText(categoryItem.getCatetoryName());
 		holder.intro.setText(categoryItem.getCategoryDes());
 		return convertView;

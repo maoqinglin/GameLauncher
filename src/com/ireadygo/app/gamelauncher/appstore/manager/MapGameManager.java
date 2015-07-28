@@ -12,10 +12,7 @@ import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.text.TextUtils;
-import android.util.Log;
-import android.view.View;
 
-import com.ireadygo.app.gamelauncher.GameLauncherConfig;
 import com.ireadygo.app.gamelauncher.appstore.data.GameData;
 import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
 import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
@@ -27,8 +24,6 @@ import com.ireadygo.app.gamelauncher.utils.PackageUtils;
 import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
 import com.ireadygo.app.gamelauncher.widget.GameLauncherThreadPool;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.umeng.analytics.MobclickAgent;
 
 public class MapGameManager {
@@ -41,6 +36,7 @@ public class MapGameManager {
 	private static final String ACTION_MAP_GAME_COMPLETE = "com.ireadygo.app.gamelauncher.ACTION_MAP_GAME_COMPLETE";
 	private static volatile MapGameManager sInstance;
 	private HandlerThread mMapHandlerThread = new HandlerThread("map_game_thread");
+	private ImageLoader mImageLoader;
 
 	public static MapGameManager getInstance(Context context) {
 		if (sInstance == null) {
@@ -61,6 +57,7 @@ public class MapGameManager {
 		mContext = context;
 		mGameData = GameData.getInstance(context);
 		mGameInfoHub = GameInfoHub.instance(context);
+		mImageLoader = mGameInfoHub.getImageLoader();
 	}
 
 	public void mapGameList(final List<AppEntity> checkGameList) {
@@ -260,7 +257,7 @@ public class MapGameManager {
 
 	private void downloadPosterIcon(AppEntity app) {
 		if (!TextUtils.isEmpty(app.getPosterIconUrl())) {
-			Bitmap posterIcon = ImageLoader.getInstance().loadImageSync(app.getPosterIconUrl());
+			Bitmap posterIcon = mImageLoader.loadImageSync(app.getPosterIconUrl());
 			if (posterIcon != null) {
 				mGameData.updatePosterIcon(app.getPkgName(), posterIcon);
 				GameLauncherAppState.getInstance(mContext).getModel().updatePosterIcon(app.getPkgName(), posterIcon);
