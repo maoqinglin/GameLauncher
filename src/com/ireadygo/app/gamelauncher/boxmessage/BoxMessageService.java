@@ -3,8 +3,10 @@ package com.ireadygo.app.gamelauncher.boxmessage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.BitmapFactory;
@@ -12,6 +14,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
+import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.support.v4.content.LocalBroadcastManager;
@@ -29,9 +32,9 @@ import com.ireadygo.app.gamelauncher.utils.PictureUtil;
 
 public class BoxMessageService extends NotificationListenerService {
 
-	public static final int TYPE_CHANGE_ADD = 0;
-	public static final int TYPE_CHANGE_DEL = 1;
-	public static final int TYPE_CHANGE_UPDATE = 2;
+	private static final int TYPE_CHANGE_ADD = 0;
+	private static final int TYPE_CHANGE_DEL = 1;
+	private static final int TYPE_CHANGE_UPDATE = 2;
 	private static final int MSG_GLOBAL_MESSAGE_SHOW = 3;
 	private static final int MSG_GLOBAL_MESSAGE_HIDE = 4;
 	private static final int DELAY_TIME = 5000;
@@ -99,6 +102,7 @@ public class BoxMessageService extends NotificationListenerService {
 	public void onCreate() {
 		super.onCreate();
 		Log.i("chenrui", "BoxMessageService ~~~ onCreate~~~");
+		writeSecureNotificationSettings();
 		mGlobalMessageView = GlobalMessageView.getInstance(this);
 		init();
 	}
@@ -121,6 +125,38 @@ public class BoxMessageService extends NotificationListenerService {
 		Collections.sort(mBoxMessageList, comp);
 	}
 
+	private void writeSecureNotificationSettings() {
+		final HashSet<ComponentName> enabledListeners = new HashSet<ComponentName>();
+		final String flat = Settings.Secure.getString(getContentResolver(), "enabled_notification_listeners");
+		final ComponentName serviceCN = new ComponentName(getPackageName(), BoxMessageService.class.getName());
+        if (flat != null && !"".equals(flat)) {
+            final String[] names = flat.split(":");
+            for (int i = 0; i < names.length; i++) {
+                final ComponentName cn = ComponentName.unflattenFromString(names[i]);
+                if (cn != null) {
+                    enabledListeners.add(cn);
+                }
+            }
+        }
+        
+        if(!enabledListeners.contains(serviceCN)) {
+        	enabledListeners.add(serviceCN);
+        	
+        	StringBuilder sb = null;
+            for (ComponentName cn : enabledListeners) {
+                if (sb == null) {
+                    sb = new StringBuilder();
+                } else {
+                    sb.append(':');
+                }
+                sb.append(cn.flattenToString());
+            }
+            Settings.Secure.putString(getContentResolver(),
+                    "enabled_notification_listeners",
+                    sb != null ? sb.toString() : "");
+        }
+	}
+	
 	@Override
 	public void onNotificationPosted(StatusBarNotification sbn) {
 		if(sbn != null) {
@@ -243,7 +279,6 @@ public class BoxMessageService extends NotificationListenerService {
 	public void onDestroy() {
 		Log.i("chenrui", "BoxMessageService ~~~ onDestroy~~~~");
 		mBoxMessageList.clear();
-//		cancelAllNotifications();
 		super.onDestroy();
 	}
 	

@@ -1,13 +1,12 @@
 package com.ireadygo.app.gamelauncher.boxmessage.ui;
 
-import com.ireadygo.app.gamelauncher.R;
-
 import android.animation.Animator;
-import android.animation.ValueAnimator;
 import android.animation.Animator.AnimatorListener;
+import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -16,15 +15,21 @@ import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils.TruncateAt;
 import android.view.Gravity;
 import android.view.ViewGroup.LayoutParams;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.WindowManager;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.TextView;
+
+import com.ireadygo.app.gamelauncher.R;
+import com.ireadygo.app.gamelauncher.boxmessage.BoxMessageController;
+import com.ireadygo.app.gamelauncher.boxmessage.BoxMessageService;
 
 public class GlobalMessageView {
 
+	private static final String CHANGE_ACTION_BOXMESSAGE = "com.ireadygo.app.boxmessage.change";
 	private static final int DURATION_TIME = 800;
 	private final Context mContext;
 	private boolean isShow = false;
@@ -33,6 +38,7 @@ public class GlobalMessageView {
 	private final WindowManager mWindowManager;
 	private final WindowManager.LayoutParams mLayoutParams;
 	private static GlobalMessageView sGlobalMessageView;
+	private final LocalBroadcastManager mLocalBroadcastManager;
 
 	private GlobalMessageView(Context context) {
 		mContext = context;
@@ -40,6 +46,7 @@ public class GlobalMessageView {
 		mLayoutParams = getWindowManagerParams();
 		mMsgTextView = getTextMsgView();
 		mWindowManager.addView(mMsgTextView, mLayoutParams);
+		mLocalBroadcastManager = LocalBroadcastManager.getInstance(mContext);
 	}
 
 	public static GlobalMessageView getInstance(Context context) {
@@ -84,6 +91,7 @@ public class GlobalMessageView {
 			@Override
 			public void onAnimationStart(Animator animation) {
 				isActive = true;
+				sendBoxMessageChangeBroadcast(BoxMessageController.TYPE_CHANGE_BTN_DISMISS);
 			}
 			
 			@Override
@@ -137,6 +145,7 @@ public class GlobalMessageView {
 			public void onAnimationEnd(Animator animation) {
 				isShow = false;
 				isActive = false;
+				sendBoxMessageChangeBroadcast(BoxMessageController.TYPE_CHANGE_BTN_SHOW);
 			}
 			
 			@Override
@@ -190,6 +199,12 @@ public class GlobalMessageView {
 	
 	private void updateView() {
 		mWindowManager.updateViewLayout(mMsgTextView, mLayoutParams);
+	}
+	
+	private void sendBoxMessageChangeBroadcast(int type) {
+		Intent intent = new Intent(CHANGE_ACTION_BOXMESSAGE);
+		intent.putExtra("type", type);
+		mLocalBroadcastManager.sendBroadcast(intent);
 	}
 	
 	@SuppressLint("NewApi")

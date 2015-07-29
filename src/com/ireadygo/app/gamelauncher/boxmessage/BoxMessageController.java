@@ -19,6 +19,11 @@ import com.ireadygo.app.gamelauncher.boxmessage.data.BoxMessage;
 
 public class BoxMessageController {
 
+	public static final int TYPE_CHANGE_ADD = 0;
+	public static final int TYPE_CHANGE_DEL = 1;
+	public static final int TYPE_CHANGE_UPDATE = 2;
+	public static final int TYPE_CHANGE_BTN_DISMISS = 3;
+	public static final int TYPE_CHANGE_BTN_SHOW = 4;
 	private static final String CHANGE_ACTION_BOXMESSAGE = "com.ireadygo.app.boxmessage.change";
 	private static final String BIND_ACTION_BOXMESSAGE = "com.ireadygo.app.gamelauncher.boxmessage.BoxMessageService";
 	private final Context mContext;

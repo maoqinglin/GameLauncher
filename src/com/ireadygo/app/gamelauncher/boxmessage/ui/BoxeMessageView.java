@@ -28,6 +28,7 @@ import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.account.PushMsgProcessor;
 import com.ireadygo.app.gamelauncher.boxmessage.BoxMessageController;
 import com.ireadygo.app.gamelauncher.boxmessage.BoxMessageController.OnBoxMessageUpdateListener;
+import com.ireadygo.app.gamelauncher.boxmessage.BoxMessageService;
 import com.ireadygo.app.gamelauncher.boxmessage.data.BoxMessage;
 import com.ireadygo.app.gamelauncher.boxmessage.data.BroadcastMsg;
 import com.ireadygo.app.gamelauncher.boxmessage.data.NotificationMsg;
@@ -38,7 +39,7 @@ public class BoxeMessageView extends LinearLayout {
 	private static final int DURATION_TIME = 800;
 	private TextView mMsgBtn;
 	private ListView mBoxMsgListView;
-	
+
 	private BoxMessageController mBoxMessageController;
 	private InnerBoxMessageChangeListener mBoxMsgChangeListener = new InnerBoxMessageChangeListener();
 	private InnerBtnOperatorListener mBtnOperatorListener = new InnerBtnOperatorListener();
@@ -69,12 +70,14 @@ public class BoxeMessageView extends LinearLayout {
 	private void init() {
 		mBoxMessageController = BoxMessageController.getInstance(getContext());
 		mBoxMessageController.init();
-		mBoxMessageController.addBoxMessageUpdateListener(mBoxMsgChangeListener);
+		mBoxMessageController
+				.addBoxMessageUpdateListener(mBoxMsgChangeListener);
 		mBoxMessageAdapter = new BoxMessageAdapter();
 	}
 
 	private void initUI() {
-		LayoutInflater.from(getContext()).inflate(R.layout.boxmessage_sliding_layout, this, true);
+		LayoutInflater.from(getContext()).inflate(
+				R.layout.boxmessage_sliding_layout, this, true);
 		mMsgBtn = (TextView) findViewById(R.id.boxmessage_btn);
 		updateBtn();
 		mMsgBtn.setOnClickListener(mBtnOperatorListener);
@@ -85,26 +88,27 @@ public class BoxeMessageView extends LinearLayout {
 		mBoxMsgListView.setOnItemClickListener(mListViewOperatorListener);
 		mBoxMsgListView.setOnKeyListener(mListViewOperatorListener);
 		mBoxMsgListView.setAdapter(mBoxMessageAdapter);
-		
+
 	}
 
 	private void updateBtn() {
-		if(mBoxMessageController.getUnReadMsgCount() == 0) {
+		if (mBoxMessageController.getUnReadMsgCount() == 0) {
 			mMsgBtn.setBackgroundResource(R.drawable.boxmessage_no_msg_selector);
 			mMsgBtn.setText(null);
 		} else {
 			mMsgBtn.setBackgroundResource(R.drawable.boxmessage_text_bg_selector);
-			mMsgBtn.setText(String.valueOf(mBoxMessageController.getUnReadMsgCount()));
+			mMsgBtn.setText(String.valueOf(mBoxMessageController
+					.getUnReadMsgCount()));
 		}
 	}
 
 	private void notificationSkip(NotificationMsg msg) {
-		if(msg.contentIntent == null) {
+		if (msg.contentIntent == null) {
 			return;
 		}
 
 		Intent intent = getIntent(msg);
-		if(isActivity(msg) && intent != null) {
+		if (isActivity(msg) && intent != null) {
 			mBoxMessageController.setMsgReadStatus(msg.pkgName, msg.id, true);
 			getContext().startActivity(intent);
 			mBoxMessageAdapter.notifyDataSetChanged();
@@ -125,7 +129,8 @@ public class BoxeMessageView extends LinearLayout {
 	}
 
 	private void animatorEnter() {
-		Animator animatorX = ObjectAnimator.ofFloat(this, View.TRANSLATION_X, -(mBoxMsgListView.getWidth() - 1));
+		Animator animatorX = ObjectAnimator.ofFloat(this, View.TRANSLATION_X,
+				-(mBoxMsgListView.getWidth() - 1));
 		animatorX.setDuration(DURATION_TIME);
 		animatorX.addListener(new AnimatorListener() {
 
@@ -153,9 +158,10 @@ public class BoxeMessageView extends LinearLayout {
 		});
 		animatorX.start();
 	}
-	
+
 	private void animatorExit() {
-		Animator animatorX = ObjectAnimator.ofFloat(this, View.TRANSLATION_X, 0);
+		Animator animatorX = ObjectAnimator
+				.ofFloat(this, View.TRANSLATION_X, 0);
 		animatorX.setDuration(DURATION_TIME);
 		animatorX.addListener(new AnimatorListener() {
 
@@ -183,13 +189,13 @@ public class BoxeMessageView extends LinearLayout {
 		});
 		animatorX.start();
 	}
-	
+
 	private Intent getIntent(NotificationMsg msg) {
 		PendingIntent pendingIntent = msg.contentIntent;
-		if(pendingIntent == null) {
+		if (pendingIntent == null) {
 			return null;
 		}
-		
+
 		try {
 			Method method = pendingIntent.getClass().getDeclaredMethod("getIntent");
 			return (Intent) method.invoke(pendingIntent);
@@ -207,10 +213,10 @@ public class BoxeMessageView extends LinearLayout {
 
 	private boolean isActivity(NotificationMsg msg) {
 		PendingIntent pendingIntent = msg.contentIntent;
-		if(pendingIntent == null) {
+		if (pendingIntent == null) {
 			return false;
 		}
-		
+
 		try {
 			Method method = pendingIntent.getClass().getDeclaredMethod("isActivity");
 			return (Boolean) method.invoke(pendingIntent);
@@ -231,20 +237,37 @@ public class BoxeMessageView extends LinearLayout {
 		mBoxMessages.addAll(mBoxMessageController.getBoxMessages());
 	}
 
-	private class InnerBoxMessageChangeListener implements OnBoxMessageUpdateListener {
+	private class InnerBoxMessageChangeListener implements
+			OnBoxMessageUpdateListener {
 
 		@Override
 		public void onChange(int type) {
-			mBoxMessageAdapter.notifyDataSetChanged();
+			switch (type) {
+			case BoxMessageController.TYPE_CHANGE_BTN_DISMISS:
+				if (!isEnter && !isActive) {
+					mMsgBtn.setVisibility(View.INVISIBLE);
+					return;
+				}
+				break;
+
+			case BoxMessageController.TYPE_CHANGE_BTN_SHOW:
+				mMsgBtn.setVisibility(View.VISIBLE);
+				return;
+
+			default:
+				mBoxMessageAdapter.notifyDataSetChanged();
+				break;
+			}
 		}
 	}
 
-	private class InnerBtnOperatorListener implements OnClickListener, OnFocusChangeListener  {
+	private class InnerBtnOperatorListener implements OnClickListener,
+			OnFocusChangeListener {
 
 		@Override
 		public void onFocusChange(View v, boolean hasFocus) {
-			if(!hasFocus && isOpen()) {
-				if(!mBoxMsgListView.isFocused()) {
+			if (!hasFocus && isOpen()) {
+				if (!mBoxMsgListView.isFocused()) {
 					animatorExit();
 				}
 			}
@@ -252,8 +275,8 @@ public class BoxeMessageView extends LinearLayout {
 
 		@Override
 		public void onClick(View v) {
-			if(!isActive) {
-				if(isEnter) {
+			if (!isActive) {
+				if (isEnter) {
 					animatorExit();
 				} else {
 					animatorEnter();
@@ -262,38 +285,39 @@ public class BoxeMessageView extends LinearLayout {
 		}
 	}
 
-	private class InnerListViewOperatorListener implements OnItemClickListener, OnKeyListener {
+	private class InnerListViewOperatorListener implements OnItemClickListener,
+			OnKeyListener {
 
 		@Override
 		public boolean onKey(View v, int keyCode, KeyEvent event) {
-			if(event.getAction() == KeyEvent.ACTION_DOWN) {
+			if (event.getAction() == KeyEvent.ACTION_DOWN) {
 				int pos = mBoxMsgListView.getSelectedItemPosition();
-				if(pos < 0) {
+				if (pos < 0) {
 					return false;
 				}
 
 				BoxMessage msg = mBoxMessages.get(pos);
 				switch (keyCode) {
 				case SnailKeyCode.SUN_KEY:
-					if(msg instanceof NotificationMsg) {
-						notificationSkip((NotificationMsg)msg);
+					if (msg instanceof NotificationMsg) {
+						notificationSkip((NotificationMsg) msg);
 						return true;
 					}
-					
-					if(msg instanceof BroadcastMsg) {
-						broadcastSkip((BroadcastMsg)msg);
+
+					if (msg instanceof BroadcastMsg) {
+						broadcastSkip((BroadcastMsg) msg);
 						return true;
 					}
 					break;
-					
+
 				case SnailKeyCode.WATER_KEY:
 					mBoxMessageController.removeBoxMessage(msg.pkgName, msg.id);
 					mBoxMessageAdapter.notifyDataSetChanged();
 					return true;
-					
+
 				case SnailKeyCode.MOON_KEY:
 				case SnailKeyCode.BACK_KEY:
-					if(!isActive && isEnter) {
+					if (!isActive && isEnter) {
 						mMsgBtn.requestFocus();
 						animatorExit();
 						return true;
@@ -308,15 +332,16 @@ public class BoxeMessageView extends LinearLayout {
 		}
 
 		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+				long id) {
 			BoxMessage msg = mBoxMessages.get(position);
-			if(msg instanceof NotificationMsg) {
-				notificationSkip((NotificationMsg)msg);
+			if (msg instanceof NotificationMsg) {
+				notificationSkip((NotificationMsg) msg);
 				return;
 			}
-			
-			if(msg instanceof BroadcastMsg) {
-				broadcastSkip((BroadcastMsg)msg);
+
+			if (msg instanceof BroadcastMsg) {
+				broadcastSkip((BroadcastMsg) msg);
 				return;
 			}
 		}
@@ -346,38 +371,42 @@ public class BoxeMessageView extends LinearLayout {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			ViewHolder holder;
-			if(convertView == null) {
+			if (convertView == null) {
 				holder = new ViewHolder();
-				convertView = LayoutInflater.from(getContext()).inflate(R.layout.boxmessage_list_item, null);
-				holder.icon = (ImageView) convertView.findViewById(R.id.boxmessage_item_icon);
-				holder.status = (ImageView) convertView.findViewById(R.id.boxmessage_item_status);
-				holder.title = (TextView) convertView.findViewById(R.id.boxmessage_item_title);
+				convertView = LayoutInflater.from(getContext()).inflate(
+						R.layout.boxmessage_list_item, null);
+				holder.icon = (ImageView) convertView
+						.findViewById(R.id.boxmessage_item_icon);
+				holder.status = (ImageView) convertView
+						.findViewById(R.id.boxmessage_item_status);
+				holder.title = (TextView) convertView
+						.findViewById(R.id.boxmessage_item_title);
 				convertView.setTag(holder);
 			} else {
-				holder = (ViewHolder)convertView.getTag();
+				holder = (ViewHolder) convertView.getTag();
 			}
 			makeItem(position, holder);
 			return convertView;
 		}
-		
+
 		private void makeItem(int position, ViewHolder holder) {
 			BoxMessage msg = mBoxMessages.get(position);
 			holder.title.setText(msg.title);
 			holder.icon.setImageBitmap(msg.icon);
-			if(msg.isRead == BoxMessage.HAS_READ) {
+			if (msg.isRead == BoxMessage.HAS_READ) {
 				holder.status.setVisibility(View.GONE);
 			} else {
 				holder.status.setVisibility(View.VISIBLE);
 			}
 		}
-		
+
 		@Override
 		public void notifyDataSetChanged() {
 			updateBoxMessageList();
 			updateBtn();
 			super.notifyDataSetChanged();
 		}
-		
+
 		private class ViewHolder {
 			ImageView icon;
 			ImageView status;

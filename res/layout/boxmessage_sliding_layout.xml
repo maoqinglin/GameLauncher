@@ -79,6 +79,7 @@
             android:divider="@color/white_first_transparency"
             android:dividerHeight="1dp"
             android:focusable="false"
+            android:listSelector="@drawable/boxmessage_list_item_selector"
             android:nextFocusDown="@id/boxmessage_list"
             android:nextFocusLeft="@id/boxmessage_btn"
             android:nextFocusRight="@id/boxmessage_list"

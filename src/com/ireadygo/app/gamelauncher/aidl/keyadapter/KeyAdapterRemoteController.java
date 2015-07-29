@@ -8,8 +8,6 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
 
-import com.ireadygo.app.gamelauncher.aidl.GameLauncherRemoteService;
-
 public class KeyAdapterRemoteController {
 
 	private static final String ACTION_REMOTE_SERVICE = "com.ireadygo.app.gamelauncher.aidl.keyadapter";
