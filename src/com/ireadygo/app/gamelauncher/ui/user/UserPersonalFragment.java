@@ -83,6 +83,7 @@ public class UserPersonalFragment extends BaseContentFragment implements OnClick
 	private List<UserHeaderImgItem> mUserPhotoLists = new ArrayList<UserHeaderImgItem>();
 	private boolean mShouldRequestOnDismiss = true;
 	private Bitmap mCurPhotoBitmap;
+	private String mOriginPhotoUrl;
 
 	public UserPersonalFragment(Activity activity, BaseMenuFragment menuFragment) {
 		super(activity, menuFragment);
@@ -147,7 +148,9 @@ public class UserPersonalFragment extends BaseContentFragment implements OnClick
 			case SAVE_SUCCESS:
 				hideProgressDialog();
 				Toast.makeText(getRootActivity(), R.string.personal_save_success, Toast.LENGTH_SHORT).show();
-				GameLauncherApplication.getApplication().setUserPhoto(mCurPhotoBitmap);
+				if(isNotSameUserPhoto()){
+					GameLauncherApplication.getApplication().setUserPhoto(mCurPhotoBitmap);
+				}
 				break;
 			case SAVE_FAILED:
 				hideProgressDialog();
@@ -318,12 +321,14 @@ public class UserPersonalFragment extends BaseContentFragment implements OnClick
 		Bitmap userPhotoCache = GameLauncherApplication.getApplication().getUserPhoto();
 		if (userPhotoCache != null) {
 			mPhotoView.setImageBitmap(userPhotoCache);
+			mCurPhotoBitmap = userPhotoCache;
 		}
 		if (userInfo != null) {
 			nickName = userInfo.getSNickname();
 			String photoUrl = userInfo.getCPhoto();
 			if (!TextUtils.isEmpty(photoUrl)) {
 				mPhotoView.setTag(photoUrl);
+				mOriginPhotoUrl = photoUrl;
 				GameInfoHub.instance(getRootActivity()).getImageLoader().displayImage(photoUrl, mPhotoView);
 			}
 		} else {
@@ -574,5 +579,12 @@ public class UserPersonalFragment extends BaseContentFragment implements OnClick
 	private void sendLogoutBroadcast() {
 		Intent intent = new Intent(ACTION_ACCOUNT_LOGOUT);
 		getRootActivity().sendBroadcast(intent);
+	}
+
+	private boolean isNotSameUserPhoto() {
+		if (!TextUtils.isEmpty(mOriginPhotoUrl) && !mOriginPhotoUrl.equals(mPhotoView.getTag())) {
+			return true;
+		}
+		return false;
 	}
 }
