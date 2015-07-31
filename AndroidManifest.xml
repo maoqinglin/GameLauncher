@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.ireadygo.app.gamelauncher"
-    android:versionCode="200016"
-    android:versionName="2.0.16"
+    android:versionCode="200017"
+    android:versionName="2.0.17"
     tools:ignore="OldTargetApi" >
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
@@ -398,19 +398,6 @@
 
         <!-- 蜗牛SDK start -->
         <activity
-            android:name="com.snailgame.mobilesdk.aas.ui.UserCenterActivity"
-            android:screenOrientation="landscape" >
-        </activity>
-        <activity
-            android:name="com.snail.pay.Payment"
-            android:launchMode="singleTask"
-            android:theme="@style/SnailPayActivity" >
-        </activity>
-        <activity
-            android:name="com.snail.pay.NetworkHallPayment"
-            android:launchMode="singleTask" >
-        </activity>
-        <activity
             android:name="com.snailgame.mobilesdk.GetAccountActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" >
@@ -421,10 +408,34 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="com.snailgame.mobilesdk.aas.ui.UserCenterActivity"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="com.snailgame.mobilesdk.OboxPayActivity"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Translucent" >
+            <intent-filter>
+                <action android:name="com.snailgame.obox.OBOX_APP_PAY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 游戏、obox版 -->
+        <activity
+            android:name="com.snail.pay.fragment.game.GamePayment"
+            android:hardwareAccelerated="false"
+            android:launchMode="singleTask"
+            android:theme="@style/SnailPayActivity" >
+        </activity>
+
+        <!-- alipay sdk begin -->
+        <activity
             android:name="com.alipay.android.mini.window.sdk.MiniPayActivity"
             android:configChanges="orientation"
             android:excludeFromRecents="true"
             android:exported="false"
+            android:hardwareAccelerated="false"
             android:label="@string/msp_app_name"
             android:launchMode="singleTop"
             android:process="com.alipay.sdk"
@@ -437,20 +448,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.snailgame.mobilesdk.OboxPayActivity"
-            android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.Translucent" >
-            <intent-filter>
-                <action android:name="com.snailgame.obox.OBOX_APP_PAY" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name="com.alipay.android.mini.window.sdk.MiniWebActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:excludeFromRecents="true"
             android:exported="false"
+            android:hardwareAccelerated="false"
             android:launchMode="singleTop"
             android:process="com.alipay.sdk"
             android:theme="@style/MspAppTheme" >
@@ -465,50 +467,57 @@
             android:name="com.alipay.android.app.MspService"
             android:exported="false"
             android:process="com.alipay.sdk" >
-            <intent-filter android:priority="800" >
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+            <intent-filter android:priority="800" />
         </service>
+        <!-- alipay sdk end -->
 
-        <activity android:name="com.alipay.android.app.sdk.WapPayActivity" >
-        </activity>
+
+        <!-- umpay -->
         <activity
             android:name="com.umpay.creditcard.android.UmpayActivity"
             android:configChanges="orientation|keyboard|keyboardHidden"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity android:name="com.unionpay.upomp.lthj.plugin.ui.SplashActivity" >
+
+        <!-- upomp -->
+        <activity
+            android:name="com.unionpay.upomp.lthj.plugin.ui.SplashActivity"
+            android:hardwareAccelerated="false" >
             <intent-filter>
                 <action android:name="com.unionpay.upomp.lthj.android.plugin.init.test" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="com.unionpay.upomp.lthj.plugin.ui.IndexActivityGroup" >
+        <activity
+            android:name="com.unionpay.upomp.lthj.plugin.ui.IndexActivityGroup"
+            android:hardwareAccelerated="false" >
             <intent-filter>
                 <action android:name="com.unionpay.upomp.lthj.android.plugin.index.test" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="com.unionpay.upomp.lthj.plugin.ui.HomeActivity" >
-        </activity>
-        <activity android:name="com.unionpay.upomp.lthj.plugin.ui.PayActivity" >
-        </activity>
-        <activity android:name="com.unionpay.upomp.lthj.plugin.ui.AccountActivity" >
-        </activity>
-        <activity android:name="com.unionpay.upomp.lthj.plugin.ui.BankCardInfoActivity" >
-        </activity>
-        <activity android:name="com.unionpay.upomp.lthj.plugin.ui.SupportCardActivity" >
-        </activity>
-        <activity android:name="com.unionpay.upomp.lthj.plugin.ui.UserProtocolActivity" >
-        </activity>
-        <activity android:name="com.unionpay.upomp.lthj.plugin.ui.AboutActivity" >
-        </activity>
         <activity
-            android:name="com.umpay.huafubao.ui.BillingActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:excludeFromRecents="true" >
-        </activity>
+            android:name="com.unionpay.upomp.lthj.plugin.ui.HomeActivity"
+            android:hardwareAccelerated="false" />
+        <activity
+            android:name="com.unionpay.upomp.lthj.plugin.ui.PayActivity"
+            android:hardwareAccelerated="false" />
+        <activity
+            android:name="com.unionpay.upomp.lthj.plugin.ui.AccountActivity"
+            android:hardwareAccelerated="false" />
+        <activity
+            android:name="com.unionpay.upomp.lthj.plugin.ui.BankCardInfoActivity"
+            android:hardwareAccelerated="false" />
+        <activity
+            android:name="com.unionpay.upomp.lthj.plugin.ui.SupportCardActivity"
+            android:hardwareAccelerated="false" />
+        <activity
+            android:name="com.unionpay.upomp.lthj.plugin.ui.UserProtocolActivity"
+            android:hardwareAccelerated="false" />
+        <activity
+            android:name="com.unionpay.upomp.lthj.plugin.ui.AboutActivity"
+            android:hardwareAccelerated="false" />
 
         <service android:name="com.snailgame.mobilesdk.SDKService" />
 
@@ -524,9 +533,6 @@
             android:authorities="com.snailgame.mobilesdk.provider"
             android:exported="true" >
         </provider>
-
-        <service android:name="com.umpay.huafubao.service.AppUpgradeService" />
-        <service android:name="com.snail.statistics.SdkTimingService" />
 
         <!-- 蜗牛SDK end -->
 
