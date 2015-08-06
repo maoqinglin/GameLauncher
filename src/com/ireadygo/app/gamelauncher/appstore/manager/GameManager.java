@@ -33,6 +33,7 @@ import com.ireadygo.app.gamelauncher.appstore.install.IInstaller.InstallExceptio
 import com.ireadygo.app.gamelauncher.appstore.install.IInstaller.InstallResponse;
 import com.ireadygo.app.gamelauncher.appstore.install.InstallManager;
 import com.ireadygo.app.gamelauncher.appstore.install.InstallMessage;
+import com.ireadygo.app.gamelauncher.appstore.install.InstallType;
 import com.ireadygo.app.gamelauncher.game.data.GameLauncherAppState;
 import com.ireadygo.app.gamelauncher.utils.PictureUtil;
 import com.ireadygo.app.gamelauncher.utils.StaticsUtils;
@@ -289,10 +290,10 @@ public class GameManager {
 					app.setGameState(GameState.INSTALLING);
 					reportInstallStateChange(app);
 				} else if (IInstaller.STEP_UNZIP.equals(step)) {
-					// mGameStateManager.setGameState(app.getPkgName(),
-					// GameState.UNZIPING);
-					// app.setGameState(GameState.UNZIPING);
-					// reportInstallStateChange(app);
+					 mGameStateManager.setGameState(app.getPkgName(),
+					 GameState.UNZIPING);
+					 app.setGameState(GameState.UNZIPING);
+					 reportInstallStateChange(app);
 				}
 			}
 
@@ -326,7 +327,14 @@ public class GameManager {
 					reportInstallError(app, new GameManagerException(GameManagerException.MSG_INSTALL_FAILED, ie));
 				}
 			}
-		}, generateFilePath(app.getSavedPath(), app.getFileName()), app.getPkgName());
+		}, generateFilePath(app.getSavedPath(), app.getFileName()), resType2InstallType(app.getResType()),app.getPkgName());
+	}
+
+	private String resType2InstallType(String resType) {
+		if (AppEntity.TYPE_ZIP.equals(resType)) {
+			return InstallType.INSTALL_TYPE_APK_WITH_DATA;
+		}
+		return InstallType.INSTALL_TYPE_APK;
 	}
 
 	private void sendInstallNotification(final AppEntity app, String title, int type, Bitmap icon,
@@ -504,6 +512,10 @@ public class GameManager {
 		app.setScreenshotUrl(detail.getScreenshotUrl());
 		app.setFreeFlag(detail.getFreeFlag());
 		app.setFreeflowDldPath(detail.getFreeflowDldPath());
+		app.setResType(detail.getResType());
+		app.setResUrl(detail.getResUrl());
+		app.setResMd5(detail.getResMd5());
+		app.setResSize(detail.getResSize());
 	}
 
 	// --------------------uninstall----------------------------//

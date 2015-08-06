@@ -36,6 +36,11 @@ public interface GameAppStatusColumns extends BaseColumns {
 	String COLUMN_POSTER_ICON_URL = "poster_icon_url";
 	String COLUMN_POSTER_BG_URL = "poster_bg_url";
 	String COLUMN_POSTER_ICON = "poster_icon";
+	String COLUMN_RES_TYPE = "res_type";
+	String COLUMN_RES_URL = "res_url";
+	String COLUMN_RES_MD5 = "res_md5";
+	String COLUMN_RES_SIZE = "res_size";
+
 	String COLUMN_EXTEND = "extend";
 
 	static final String TABLE_NAME = "download_info";

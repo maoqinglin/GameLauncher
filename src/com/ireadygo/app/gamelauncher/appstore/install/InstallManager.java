@@ -23,18 +23,18 @@ public class InstallManager implements IInstaller {
 	//Other Installer -- String pkgName 
 	@Override
 	public void install(InstallResponse response, String file, Object... params) {
-//		String installType = (String)params[0];
-//		if (InstallType.INSTALL_TYPE_APK.equals(installType)) {
-//			mApkInstaller.install(response, file, shiftParams(params));
-//		} else if (InstallType.INSTALL_TYPE_APK_WITH_DATA.equals(installType)) {
-//			mApkWithDataInstaller.install(response, file, shiftParams(params));
-//		} else if (InstallType.INSTALL_TYPE_APK_PATCH.equals(installType)) {
-//			//暂时没有安装增量升级包的需求
-//		} else {
-//			throw new IllegalArgumentException("Unsupported install type!");
-//		}
-		//免商店只有APK类型，因此目前只有apk安装
-		mApkInstaller.install(response, file, (String)params[0]);
+		String installType = (String)params[0];
+		if (InstallType.INSTALL_TYPE_APK.equals(installType)) {
+			mApkInstaller.install(response, file, shiftParams(params));
+		} else if (InstallType.INSTALL_TYPE_APK_WITH_DATA.equals(installType)) {
+			mApkWithDataInstaller.install(response, file, shiftParams(params));
+		} else if (InstallType.INSTALL_TYPE_APK_PATCH.equals(installType)) {
+			//暂时没有安装增量升级包的需求
+		} else {
+			throw new IllegalArgumentException("Unsupported install type!");
+		}
+//		免商店只有APK类型，因此目前只有apk安装
+//		mApkInstaller.install(response, file, (String)params[0]);
 	}
 
 	public void shutdown() {

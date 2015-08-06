@@ -62,7 +62,11 @@ public class StoreManagerAdapter implements HMultiBaseAdapter {
 		StoreManagerItemHolder holder = item.getHolder();
 		holder.title.setText(app.getName());
 		displayIcon(holder, app);
-		item.updateProgress(app.getDownloadSize(), app.getTotalSize(), app.getDownloadSpeed());
+		if (AppEntity.TYPE_ZIP.equals(app.getResType())) {
+			item.updateProgress(app.getDownloadSize(), app.getResSize(), app.getDownloadSpeed());
+		} else {
+			item.updateProgress(app.getDownloadSize(), app.getTotalSize(), app.getDownloadSpeed());
+		}
 		item.updateByStateChange(app.getGameState());
 	}
 

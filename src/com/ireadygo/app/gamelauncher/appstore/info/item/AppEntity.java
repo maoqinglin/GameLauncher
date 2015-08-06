@@ -37,6 +37,9 @@ public class AppEntity implements Parcelable, Serializable {
 	public static final int FLAG_DLD_UPDATE_PLAY_FREE 	= 6;
 	public static final int FLAG_OTHER 					= 10;
 
+	public static final String TYPE_APK = "0";
+	public static final String TYPE_ZIP = "1";
+
 	private String appId;
 
 	private String deviceType = Build.MODEL;
@@ -71,11 +74,15 @@ public class AppEntity implements Parcelable, Serializable {
 	private String freeflowDldPath;
 	private String posterIconUrl;//海报图标地址
 	private String posterBgUrl;//海报背景地址
-//	private GameManagerException mException;
+
+	private String resType;//资源类型 0 apk包 1 apk包+数据包
+	private String resUrl;//资源MD5
+	private String resMd5;//资源地址
+	private long resSize;//资源大小
 
 	private int iCommentTimes;
 	private int iShareTimes;
-    private long nScore;
+	private long nScore;
 
 	public static final Parcelable.Creator<AppEntity> CREATOR = new Parcelable.Creator<AppEntity>() {
 		public AppEntity createFromParcel(Parcel src) {
@@ -128,6 +135,9 @@ public class AppEntity implements Parcelable, Serializable {
 	}
 
 	public String getDownloadPath() {
+		if (AppEntity.TYPE_ZIP.equals(resType)) {
+			return resUrl;
+		}
 		return downloadPath;
 	}
 
@@ -271,6 +281,10 @@ public class AppEntity implements Parcelable, Serializable {
 		this.iCommentTimes = app.getiCommentTimes();
 		this.iShareTimes = app.getiShareTimes();
 		this.nScore = app.getnScore();
+		this.resType = app.getResType();
+		this.resUrl = app.getResUrl();
+		this.resMd5 = app.getResMd5();
+		this.resSize = app.getResSize();
 	}
 
 	@Override
@@ -313,6 +327,10 @@ public class AppEntity implements Parcelable, Serializable {
 		dest.writeInt(iCommentTimes);
 		dest.writeInt(iShareTimes);
 		dest.writeLong(nScore);
+		dest.writeString(resType);
+		dest.writeString(resUrl);
+		dest.writeString(resMd5);
+		dest.writeLong(resSize);
 	}
 
 	public void readFromParcel(Parcel src) {
@@ -349,6 +367,10 @@ public class AppEntity implements Parcelable, Serializable {
 		iCommentTimes = src.readInt();
 		iShareTimes = src.readInt();
 		nScore = src.readLong();
+		resType = src.readString();
+		resUrl = src.readString();
+		resMd5 = src.readString();
+		resSize = src.readLong();
 	}
 
 	public long getNewVersionCode() {
@@ -504,6 +526,9 @@ public class AppEntity implements Parcelable, Serializable {
 	}
 
 	public String getActualDldPath(Context context) {
+		if (AppEntity.TYPE_ZIP.equals(resType)) {
+			return resUrl;
+		}
 		return downloadPath;
 	}
 
@@ -545,5 +570,37 @@ public class AppEntity implements Parcelable, Serializable {
 
 	public void setnScore(long nScore) {
 		this.nScore = nScore;
+	}
+
+	public String getResType() {
+		return resType;
+	}
+
+	public void setResType(String resType) {
+		this.resType = resType;
+	}
+
+	public String getResUrl() {
+		return resUrl;
+	}
+
+	public void setResUrl(String resUrl) {
+		this.resUrl = resUrl;
+	}
+
+	public String getResMd5() {
+		return resMd5;
+	}
+
+	public void setResMd5(String resMd5) {
+		this.resMd5 = resMd5;
+	}
+
+	public long getResSize() {
+		return resSize;
+	}
+
+	public void setResSize(long resSize) {
+		this.resSize = resSize;
 	}
 }

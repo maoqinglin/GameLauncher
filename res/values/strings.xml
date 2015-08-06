@@ -209,6 +209,7 @@
     <string name="detail_continue">Continue</string>
     <string name="detail_pause">Pause</string>
     <string name="detail_queue">Waiting</string>
+    <string name="detail_unzip">Unzip</string>
     <string name="detail_install">Install</string>
     <string name="detail_installing">Installing</string>
     <string name="detail_error">Error</string>

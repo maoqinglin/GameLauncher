@@ -1,12 +1,7 @@
 package com.ireadygo.app.gamelauncher.ui.store.storemanager;
 
-import java.text.DecimalFormat;
-
 import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
-import android.animation.PropertyValuesHolder;
 import android.content.Context;
 import android.text.format.Formatter;
 import android.util.AttributeSet;
@@ -97,6 +92,11 @@ public class StoreManagerItem extends BaseAdapterItem {
 			mHolder.status.setVisibility(View.VISIBLE);
 			mHolder.speedSizeLayout.setVisibility(View.INVISIBLE);
 			break;
+		case UNZIPING:
+			mHolder.status.setImageResource(R.drawable.store_manager_status_unzip);
+			mHolder.status.setVisibility(View.VISIBLE);
+			mHolder.speedSizeLayout.setVisibility(View.INVISIBLE);
+			break;
 		case INSTALLABLE:
 		case INSTALLING:
 			mHolder.status.setImageResource(R.drawable.store_manager_status_install);
@@ -135,6 +135,10 @@ public class StoreManagerItem extends BaseAdapterItem {
 
 		String speedString = Utils.formatSpeedText(speed);
 		mHolder.speed.setText(speedString);
+	}
+
+	public void updateUnzipProgress(int progress) {
+		mHolder.progressBar.setProgress(progress);
 	}
 
 	public static class StoreManagerItemHolder {

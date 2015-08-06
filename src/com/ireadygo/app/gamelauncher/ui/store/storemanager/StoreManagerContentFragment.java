@@ -361,11 +361,15 @@ public class StoreManagerContentFragment extends BaseContentFragment implements 
 		@Override
 		public void onDownloadProgressChange(AppEntity app) {
 			int pos = updateDldAppEntity(app);
-			if (pos >= 0 && mManagerType == GameManagerType.DOWNLOAD || mManagerType == GameManagerType.UPGRADE) {
+			if (pos >= 0 && (mManagerType == GameManagerType.DOWNLOAD || mManagerType == GameManagerType.UPGRADE)) {
 				View view = mMultiListView.getItemView(pos);
 				if (view != null && view instanceof StoreManagerItem) {
 					StoreManagerItem item = (StoreManagerItem) view;
-					item.updateProgress(app.getDownloadSize(), app.getTotalSize(), app.getDownloadSpeed());
+					if (AppEntity.TYPE_ZIP.equals(app.getResType())) {
+						item.updateProgress(app.getDownloadSize(), app.getResSize(), app.getDownloadSpeed());
+					} else {
+						item.updateProgress(app.getDownloadSize(), app.getTotalSize(), app.getDownloadSpeed());
+					}
 				}
 			}
 		}
@@ -378,7 +382,7 @@ public class StoreManagerContentFragment extends BaseContentFragment implements 
 		@Override
 		public void onDownloadError(AppEntity app, GameManagerException de) {
 			int pos = updateDldAppEntity(app);
-			if (pos >= 0 && mManagerType == GameManagerType.DOWNLOAD || mManagerType == GameManagerType.UPGRADE) {
+			if (pos >= 0 && (mManagerType == GameManagerType.DOWNLOAD || mManagerType == GameManagerType.UPGRADE)) {
 				mMultiListView.notifyDataSetChanged();
 			}
 		}
@@ -393,7 +397,14 @@ public class StoreManagerContentFragment extends BaseContentFragment implements 
 
 		@Override
 		public void onInstallProgressChange(AppEntity app, int progress) {
-
+			int pos = updateDldAppEntity(app);
+			if (pos >= 0 && (mManagerType == GameManagerType.DOWNLOAD || mManagerType == GameManagerType.UPGRADE)) {
+				View view = mMultiListView.getItemView(pos);
+				if (view != null && view instanceof StoreManagerItem) {
+					StoreManagerItem item = (StoreManagerItem) view;
+					item.updateUnzipProgress(progress);
+				}
+			}
 		}
 
 		@Override

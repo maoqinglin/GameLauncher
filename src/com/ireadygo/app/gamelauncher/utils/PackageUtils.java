@@ -264,8 +264,11 @@ public class PackageUtils {
 				|| ((app.flags & android.content.pm.ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0);
 	}
 
-	public static void unInstallApp(Context context, String pkgName) {
+	public static boolean unInstallApp(Context context, String pkgName) {
 		if (!TextUtils.isEmpty(pkgName)) {
+			if (!checkPkgExist(context, pkgName)) {
+				return false;
+			}
 			HashMap<String, String> map = new HashMap<String, String>();
 			map.put("PkgName", pkgName);
 			MobclickAgent.onEvent(context, "uninstall_app", map);
@@ -276,6 +279,21 @@ public class PackageUtils {
 			deleteIntent.setData(packageUri);
 			deleteIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			context.startActivity(deleteIntent);
+			return true;
 		}
+		return false;
+	}
+
+	private static boolean checkPkgExist(Context context,String pkgName) {
+		if (!TextUtils.isEmpty(pkgName)) {
+			try {
+				context.getPackageManager().getApplicationInfo(pkgName, PackageManager.GET_UNINSTALLED_PACKAGES);
+				return true;
+			} catch (NameNotFoundException e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
+		return false;
 	}
 }

@@ -40,7 +40,8 @@ public class DownloadTask {
 	private final ExecutorService mTransferPool = Executors.newSingleThreadExecutor();
 	private final ExecutorService mReportPool = Executors.newSingleThreadExecutor();
 	private final ProgressReporter mProgressReporter = new ProgressReporter();
-	private static final String DOWNLOAD_CONTENT_TYPE = "application/vnd.android.package-archive";
+	private static final String DOWNLOAD_CONTENT_TYPE_APK = "application/vnd.android.package-archive";
+	private static final String DOWNLOAD_CONTENT_TYPE_ZIP = "application/zip";
 
 	private static final int SIZE_BUFFER = 4096;
 
@@ -66,7 +67,11 @@ public class DownloadTask {
 	}
 
 	public void updateDownloadPath(String originPath, String freeflowPath) {
-		mAppEntity.setDownloadPath(originPath);
+		if (AppEntity.TYPE_ZIP.equals(mAppEntity.getResType())) {
+			mAppEntity.setResUrl(originPath);
+		} else {
+			mAppEntity.setDownloadPath(originPath);
+		}
 		mAppEntity.setFreeflowDldPath(freeflowPath);
 	}
 
@@ -126,7 +131,8 @@ public class DownloadTask {
 			filename = filename.substring(0,filename.indexOf("?"));
 		}
 		String contentType = HttpURLConnection.guessContentTypeFromName(filename);
-		if (!DOWNLOAD_CONTENT_TYPE.equals(contentType)) {
+		if (!DOWNLOAD_CONTENT_TYPE_APK.equals(contentType)
+				&& !DOWNLOAD_CONTENT_TYPE_ZIP.equals(contentType)) {
 			throw new DownloadException(DownloadException.MSG_UNMATCH_CONTENT_TYPE);
 		}
 		return filename;

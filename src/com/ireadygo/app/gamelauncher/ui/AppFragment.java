@@ -180,7 +180,10 @@ public class AppFragment extends BaseContentFragment implements Callbacks {
 		// 卸载游戏
 		ItemInfo item = getCurrentSelectedItem();
 		if (item != null) {
-			PackageUtils.unInstallApp(getRootActivity(), item.packageName);
+			boolean uninstallResult = PackageUtils.unInstallApp(getRootActivity(), item.packageName);
+			if (!uninstallResult) {
+				notifyDataSetChanged();
+			}
 			return true;
 		}
 		return false;

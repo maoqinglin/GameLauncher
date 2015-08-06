@@ -212,6 +212,7 @@
     <string name="detail_pause">暂&#160;&#160;停</string>
     <string name="detail_queue">等 &#160;&#160;待</string>
     <string name="detail_install">安&#160;&#160;装</string>
+    <string name="detail_unzip">解压中</string>
     <string name="detail_installing">安装中</string>
     <string name="detail_error">出 &#160;&#160;错</string>
     <string name="detail_launch">启&#160;&#160;动</string>

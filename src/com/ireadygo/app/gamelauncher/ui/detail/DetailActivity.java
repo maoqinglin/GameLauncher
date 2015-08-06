@@ -3,6 +3,7 @@ package com.ireadygo.app.gamelauncher.ui.detail;
 import java.text.DecimalFormat;
 import java.util.Random;
 
+import android.R.integer;
 import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
 import android.animation.AnimatorListenerAdapter;
@@ -199,7 +200,11 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 		} else {
 			mNameView.setText(app.getName());
 			setVersionName(app.getVersionName());
-			setSizeText(app.getTotalSize());
+			if (AppEntity.TYPE_ZIP.equals(app.getResType())) {
+				setSizeText(app.getResSize());
+			} else {
+				setSizeText(app.getTotalSize());
+			}
 			mIntroView.setText("　　" + app.getDescription());
 //			mPlayNumbersView.setText("" + app.getDownloadCounts());
 			mPlayNumbersView.setText("" + getRandomPlayNumber());
@@ -267,6 +272,9 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 		case QUEUING:
 			textId = R.string.detail_pause;
 			break;
+		case UNZIPING:
+			textId = R.string.detail_unzip;
+			break;
 		case TRANSFERING:
 			break;
 		case UPGRADEABLE:
@@ -275,13 +283,17 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 		case MOVING:
 			break;
 		}
-		if (state != GameState.TRANSFERING) {
+		if (state == GameState.TRANSFERING) {
+			mProgressBar.setVisibility(View.VISIBLE);
+			initProgressBar();
+		} else if (state == GameState.UNZIPING) {
+			mProgressBar.setVisibility(View.VISIBLE);
+			mProgressBar.setProgress(0);
+			mDownloadBtn.setText(R.string.detail_unzip);
+		} else {
 			mDownloadBtn.setText(textId);
 			mProgressBar.setProgress(0);
 			mProgressBar.setVisibility(View.GONE);
-		} else {
-			mProgressBar.setVisibility(View.VISIBLE);
-			initProgressBar();
 		}
 
 		if (mDownloadBtn.isFocused()) {
@@ -338,10 +350,33 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 		}
 		GameState state = mGameManager.getGameStateManager().getGameState(app.getPkgName());
 		if (state == GameState.TRANSFERING) {
-			int progress = (int) (app.getDownloadSize() * 100 / app.getTotalSize());
+			int progress = 0;
+			if (AppEntity.TYPE_ZIP.equals(app.getResType())) {
+				progress = (int) (app.getDownloadSize() * 100 / app.getResSize());
+			} else {
+				progress = (int) (app.getDownloadSize() * 100 / app.getTotalSize());
+			}
 			if (progress <= 100 && progress >= 0) {
 				mProgressBar.setProgress(progress);
 				mDownloadBtn.setText(progress + "%");
+			} else {
+				mProgressBar.setProgress(0);
+				mProgressBar.setVisibility(View.GONE);
+			}
+		} else {
+			mProgressBar.setVisibility(View.GONE);
+		}
+	}
+
+	private void updateUnzipProgressBar(AppEntity app, int progress) {
+		if (app == null) {
+			return;
+		}
+		GameState state = mGameManager.getGameStateManager().getGameState(app.getPkgName());
+		if (state == GameState.UNZIPING) {
+			if (progress <= 100 && progress >= 0) {
+				mProgressBar.setProgress(progress);
+//				mDownloadBtn.setText(progress + "%");
 			} else {
 				mProgressBar.setProgress(0);
 				mProgressBar.setVisibility(View.GONE);
@@ -482,7 +517,7 @@ public class DetailActivity extends BaseActivity implements OnClickListener {
 
 		@Override
 		public void onInstallProgressChange(AppEntity app, int progress) {
-
+			updateUnzipProgressBar(app, progress);
 		}
 
 		@Override

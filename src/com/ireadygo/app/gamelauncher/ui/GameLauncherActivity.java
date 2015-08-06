@@ -40,7 +40,6 @@ public class GameLauncherActivity extends BaseMenuActivity {
 				public void run() {
 					dimissLoadingProgress();
 					try {
-//						Intent startIntent = new Intent(GameLauncherActivity.this, HandleDescriptionActivity.class);
 						Intent startIntent = new Intent(GUIDE_ACTIVITY_ACTION);
 						startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 						startActivity(startIntent);

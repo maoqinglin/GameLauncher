@@ -13,7 +13,7 @@ public class GameStatusDBHelper extends SQLiteOpenHelper {
 
 	private static final String DB_NAME = "download_manager_db";
 
-	private static final int DB_VERSION = 6;//合入免流量的数据库版本后，需要修改
+	private static final int DB_VERSION = 7;
 
 	private static final String SQL_CREATE_TABLE_DOWNLOAD_INFO = "CREATE TABLE " + GameAppStatusColumns.TABLE_NAME
 			+ "(" 
@@ -50,6 +50,10 @@ public class GameStatusDBHelper extends SQLiteOpenHelper {
 			+ GameAppStatusColumns.COLUMN_POSTER_ICON_URL + " TEXT, "
 			+ GameAppStatusColumns.COLUMN_POSTER_BG_URL + " TEXT, "
 			+ GameAppStatusColumns.COLUMN_POSTER_ICON + " BLOB, "
+			+ GameAppStatusColumns.COLUMN_RES_TYPE + " TEXT, "
+			+ GameAppStatusColumns.COLUMN_RES_URL + " TEXT, "
+			+ GameAppStatusColumns.COLUMN_RES_MD5 + " TEXT, "
+			+ GameAppStatusColumns.COLUMN_RES_SIZE + " LONG, "
 			+ GameAppStatusColumns.COLUMN_EXTEND + " TEXT"
 			+ ")";
 
@@ -85,6 +89,22 @@ public class GameStatusDBHelper extends SQLiteOpenHelper {
 
 	private static final String SQL_ADD_POSTER_ICON_COLUMN = "ALTER TABLE " + GameAppStatusColumns.TABLE_NAME
 			+ " ADD COLUMN " + GameAppStatusColumns.COLUMN_POSTER_ICON + " BLOB";
+
+	//新增资源类型
+	private static final String SQL_ADD_RES_TYPE_COLUMN = "ALTER TABLE " + GameAppStatusColumns.TABLE_NAME
+			+ " ADD COLUMN " + GameAppStatusColumns.COLUMN_RES_TYPE + " TEXT";
+
+	//新增资源下载地址
+	private static final String SQL_ADD_RES_URL_COLUMN = "ALTER TABLE " + GameAppStatusColumns.TABLE_NAME
+			+ " ADD COLUMN " + GameAppStatusColumns.COLUMN_RES_URL + " TEXT";
+
+	//新增资源MD5
+	private static final String SQL_ADD_RES_MD5_COLUMN = "ALTER TABLE " + GameAppStatusColumns.TABLE_NAME
+			+ " ADD COLUMN " + GameAppStatusColumns.COLUMN_RES_MD5 + " TEXT";
+
+	//新增资源大小
+	private static final String SQL_ADD_RES_SIZE_COLUMN = "ALTER TABLE " + GameAppStatusColumns.TABLE_NAME
+			+ " ADD COLUMN " + GameAppStatusColumns.COLUMN_RES_SIZE + " LONG";
 
 	public GameStatusDBHelper(Context context) {
 		super(context, DB_NAME, null, DB_VERSION);
@@ -157,6 +177,16 @@ public class GameStatusDBHelper extends SQLiteOpenHelper {
 			db.setTransactionSuccessful();
 			db.endTransaction();
 			upgradeVersion = 6;
+		}
+		if (upgradeVersion == 6) {
+			db.beginTransaction();
+			db.execSQL(SQL_ADD_RES_TYPE_COLUMN);
+			db.execSQL(SQL_ADD_RES_URL_COLUMN);
+			db.execSQL(SQL_ADD_RES_MD5_COLUMN);
+			db.execSQL(SQL_ADD_RES_SIZE_COLUMN);
+			db.setTransactionSuccessful();
+			db.endTransaction();
+			upgradeVersion = 7;
 		}
 	}
 }

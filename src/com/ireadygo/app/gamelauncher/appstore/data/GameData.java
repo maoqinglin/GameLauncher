@@ -405,6 +405,10 @@ public class GameData implements IDownloadData, IInstallData, Closeable {
 		item.setScreenshotDirection(cursor.getString(cursor.getColumnIndex(GameAppStatusColumns.COLUMN_SCREENSHOT_DIRECTION)));
 		item.setPosterIconUrl(cursor.getString(cursor.getColumnIndex(GameAppStatusColumns.COLUMN_POSTER_ICON_URL)));
 		item.setPosterBgUrl(cursor.getString(cursor.getColumnIndex(GameAppStatusColumns.COLUMN_POSTER_BG_URL)));
+		item.setResType(cursor.getString(cursor.getColumnIndex(GameAppStatusColumns.COLUMN_RES_TYPE)));
+		item.setResUrl(cursor.getString(cursor.getColumnIndex(GameAppStatusColumns.COLUMN_RES_URL)));
+		item.setResMd5(cursor.getString(cursor.getColumnIndex(GameAppStatusColumns.COLUMN_RES_MD5)));
+		item.setResSize(cursor.getLong(cursor.getColumnIndex(GameAppStatusColumns.COLUMN_RES_SIZE)));
 		return item;
 	}
 
@@ -439,6 +443,10 @@ public class GameData implements IDownloadData, IInstallData, Closeable {
 		values.put(GameAppStatusColumns.COLUMN_SCREENSHOT_DIRECTION, appEntity.getScreenshotDirection());
 		values.put(GameAppStatusColumns.COLUMN_POSTER_ICON_URL, appEntity.getPosterIconUrl());
 		values.put(GameAppStatusColumns.COLUMN_POSTER_BG_URL, appEntity.getPosterBgUrl());
+		values.put(GameAppStatusColumns.COLUMN_RES_TYPE, appEntity.getResType());
+		values.put(GameAppStatusColumns.COLUMN_RES_URL, appEntity.getResUrl());
+		values.put(GameAppStatusColumns.COLUMN_RES_MD5, appEntity.getResMd5());
+		values.put(GameAppStatusColumns.COLUMN_RES_SIZE, appEntity.getResSize());
 		return values;
 	}
 
@@ -456,6 +464,10 @@ public class GameData implements IDownloadData, IInstallData, Closeable {
 		values.put(GameAppStatusColumns.COLUMN_REMOTE_ICON_URL, appEntity.getRemoteIconUrl());
 		values.put(GameAppStatusColumns.COLUMN_IS_UPDATEABLE, appEntity.getIsUpdateable());
 		values.put(GameAppStatusColumns.COLUMN_IN_FREESTORE, appEntity.getIsInFreeStore());
+		values.put(GameAppStatusColumns.COLUMN_RES_TYPE, appEntity.getResType());
+		values.put(GameAppStatusColumns.COLUMN_RES_URL, appEntity.getResUrl());
+		values.put(GameAppStatusColumns.COLUMN_RES_MD5, appEntity.getResMd5());
+		values.put(GameAppStatusColumns.COLUMN_RES_SIZE, appEntity.getResSize());
 		return values;
 	}
 
@@ -481,6 +493,10 @@ public class GameData implements IDownloadData, IInstallData, Closeable {
 			values.put(GameAppStatusColumns.COLUMN_LOCAL_ICON_URL, 
 					PackageUtils.getIconUrl(PackageUtils.getPkgInfo(mContext, appEntity.getPkgName()), mContext));
 		}
+		values.put(GameAppStatusColumns.COLUMN_RES_TYPE, appEntity.getResType());
+		values.put(GameAppStatusColumns.COLUMN_RES_URL, appEntity.getResUrl());
+		values.put(GameAppStatusColumns.COLUMN_RES_MD5, appEntity.getResMd5());
+		values.put(GameAppStatusColumns.COLUMN_RES_SIZE, appEntity.getResSize());
 		return values;
 	}
 

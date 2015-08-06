@@ -209,6 +209,7 @@
     <string name="detail_continue">繼&#160;&#160;續</string>
     <string name="detail_pause">暫&#160;&#160;停</string>
     <string name="detail_queue">等 &#160;&#160;待</string>
+    <string name="detail_unzip">解壓中</string>
     <string name="detail_install">安&#160;&#160;裝</string>
     <string name="detail_installing">安裝中</string>
     <string name="detail_error">出 &#160;&#160;錯</string>

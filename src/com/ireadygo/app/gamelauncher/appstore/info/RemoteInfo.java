@@ -1289,6 +1289,10 @@ public class RemoteInfo implements IGameInfo {
 		} else {
 			app.setIsInFreeStore(AppEntity.NOT_IN_FREE_STORE);
 		}
+		app.setResType(item.getCResType());
+		app.setResUrl(item.getCResUrl());
+		app.setResMd5(item.getCResMd5());
+		app.setResSize(item.getIResSize());
 		return app;
 	}
 
