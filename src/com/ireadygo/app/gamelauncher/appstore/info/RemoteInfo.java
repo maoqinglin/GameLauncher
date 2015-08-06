@@ -1292,7 +1292,9 @@ public class RemoteInfo implements IGameInfo {
 		app.setResType(item.getCResType());
 		app.setResUrl(item.getCResUrl());
 		app.setResMd5(item.getCResMd5());
-		app.setResSize(item.getIResSize());
+		if (item.getIResSize() != null) {
+			app.setResSize(item.getIResSize());
+		}
 		return app;
 	}
 
