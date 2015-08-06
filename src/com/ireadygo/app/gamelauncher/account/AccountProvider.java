@@ -8,7 +8,7 @@ import android.net.Uri;
 
 public class AccountProvider extends ContentProvider {
 
-	private static final String[] COLOMN_NAMES = new String[] { "Account", "NickName" };
+	private static final String[] COLOMN_NAMES = new String[] { "AccountUid", "NickName" };
 
 	@Override
 	public boolean onCreate() {
@@ -19,9 +19,9 @@ public class AccountProvider extends ContentProvider {
 	public Cursor query(Uri uri, String[] projection, String selection,
 			String[] selectionArgs, String sortOrder) {
 		MatrixCursor cursor = new MatrixCursor(COLOMN_NAMES);
-		String account = AccountManager.getInstance().getLoginUni(getContext());
+		String accountUid = AccountManager.getInstance().getLoginUni(getContext());
 		String nickName = AccountManager.getInstance().getNickName(getContext());
-		cursor.addRow(new Object[] { account, nickName });
+		cursor.addRow(new Object[] { accountUid, nickName });
 		return cursor;
 	}
 

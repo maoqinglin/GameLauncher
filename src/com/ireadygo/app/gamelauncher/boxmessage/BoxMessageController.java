@@ -12,7 +12,6 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 
 import com.ireadygo.app.gamelauncher.boxmessage.BoxMessageService.BoxMessageLocalBinder;
 import com.ireadygo.app.gamelauncher.boxmessage.data.BoxMessage;
@@ -61,17 +60,17 @@ public class BoxMessageController {
 	}
 
 	public void init() {
-		Intent intent = new Intent(mContext, BoxMessageService.class);
-		mContext.startService(intent);
-		mIsInit = mContext.bindService(new Intent(BIND_ACTION_BOXMESSAGE), mServiceConnection, Context.BIND_AUTO_CREATE);
-		mLocalBroadcastManager.registerReceiver(mReceiver, new IntentFilter(CHANGE_ACTION_BOXMESSAGE));
+		if(!mIsInit) {
+			Intent intent = new Intent(BIND_ACTION_BOXMESSAGE);
+			mContext.startService(intent);
+			mIsInit = mContext.bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
+			mLocalBroadcastManager.registerReceiver(mReceiver, new IntentFilter(CHANGE_ACTION_BOXMESSAGE));
+		}
 	}
 	
 	public List<BoxMessage> getBoxMessages() {
 		if(mService != null) {
 			return mService.getAllBoxMessage();
-		} else {
-			Log.i("chenrui", "Service is Null!!!");
 		}
 		return new ArrayList<BoxMessage>();
 	}
@@ -112,10 +111,12 @@ public class BoxMessageController {
 	}
 
 	public void shutdown() {
-		mContext.unbindService(mServiceConnection);
-		mIsInit = false;
-		mLocalBroadcastManager.unregisterReceiver(mReceiver);
-		mListeners.clear();
+		if(mIsInit) {
+			mContext.unbindService(mServiceConnection);
+			mIsInit = false;
+			mLocalBroadcastManager.unregisterReceiver(mReceiver);
+			mListeners.clear();
+		}
 	}
 
 	private class BoxMessageServiceConnection implements ServiceConnection {

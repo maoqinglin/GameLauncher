@@ -5,7 +5,6 @@ import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.text.TextUtils;
 
-import com.ireadygo.app.gamelauncher.account.AccountManager;
 import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
 import com.ireadygo.app.gamelauncher.appstore.info.IGameInfo.InfoSourceException;
 import com.ireadygo.app.gamelauncher.widget.GameLauncherThreadPool;
@@ -21,18 +20,6 @@ public class KeyAdapterRemoteServiceImpl extends IKeyAdapterAidlService.Stub {
 
 	public KeyAdapterRemoteServiceImpl(Context context) {
 		mContext = context;
-	}
-
-	//查询当前登录的账户UID
-	@Override
-	public String getLoginAccount() throws RemoteException {
-		return AccountManager.getInstance().getLoginUni(mContext);
-	}
-
-	//查询当前登录账户的昵称
-	@Override
-	public String getLoginNickname() throws RemoteException {
-		return AccountManager.getInstance().getNickName(mContext);
 	}
 
 	//输入帐号UID，查询对应的昵称。

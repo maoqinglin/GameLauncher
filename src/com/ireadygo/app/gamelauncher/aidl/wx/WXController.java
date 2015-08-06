@@ -34,6 +34,7 @@ public final class WXController {
 	public void init() {
 		if(!isBind) {
 			Intent intent = new Intent(ACTION_REMOTE_SERVICE);
+			mContext.startService(intent);
 			isBind = mContext.bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
 		}
 	}
@@ -50,10 +51,12 @@ public final class WXController {
 	}
 
 	public void operator(AppInfo appInfo) {
-		try {
-			mService.operator(appInfo);
-		} catch (RemoteException e) {
-			e.printStackTrace();
+		if(mService != null) {
+			try {
+				mService.operator(appInfo);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

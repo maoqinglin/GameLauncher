@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.util.Log;
 
 public class KeyAdapterRemoteController {
 
@@ -24,15 +23,18 @@ public class KeyAdapterRemoteController {
 	}
 
 	public void init() {
-		Intent intent = new Intent(ACTION_REMOTE_SERVICE);
-		isBind = mContext.bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
-		Log.i("chenrui", "init~~~ KeyAdapterRemoteController binder : " + isBind);
+		if(!isBind) {
+			Intent intent = new Intent(ACTION_REMOTE_SERVICE);
+			mContext.startService(intent);
+			isBind = mContext.bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+		}
 	}
 
 	public void exit() {
-		mContext.unbindService(mConnection);
-		isBind = false;
-		Log.i("chenrui", "exit~~~ KeyAdapterRemoteController binder : " + isBind);
+		if(isBind) {
+			mContext.unbindService(mConnection);
+			isBind = false;
+		}
 	}
 
 	public boolean isBind() {
@@ -40,56 +42,40 @@ public class KeyAdapterRemoteController {
 	}
 
 	public void setOnHandlerEventListener(OnHandlerEventListener listener) {
-		if(listener != null) {
-			if(mService == null) {
-				Log.i("chenrui", "setOnHandlerEventListener~~~ KeyAdapterRemoteController binder is Null!!!");
-				return;
-			}
+		if(listener != null && mService != null) {
 			unregisterCallback();
 			mListener = listener;
 			registerCallback();
 		}
 	}
 
-	public String getLoginAccount() {
-		try {
-			return mService.getLoginAccount();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-
-	public String getLoginNickname() {
-		try {
-			return mService.getLoginNickname();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-
 	public void queryNicknames(String accounts) {
-		try {
-			mService.queryNicknames(accounts);
-		} catch (RemoteException e) {
-			e.printStackTrace();
+		if(mService != null) {
+			try {
+				mService.queryNicknames(accounts);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	private void registerCallback() {
-		try {
-			mService.registerCallback(mInnerListener);
-		} catch (RemoteException e) {
-			e.printStackTrace();
+		if(mService != null) {
+			try {
+				mService.registerCallback(mInnerListener);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	private void unregisterCallback() {
-		try {
-			mService.unregisterCallback(mInnerListener);
-		} catch (RemoteException e) {
-			e.printStackTrace();
+		if(mService != null) {
+			try {
+				mService.unregisterCallback(mInnerListener);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -120,6 +106,7 @@ public class KeyAdapterRemoteController {
 		@Override
 		public void onServiceConnected(ComponentName name, IBinder service) {
 			mService = IKeyAdapterAidlService.Stub.asInterface(service);
+			registerCallback();
 		}
 
 		@Override
