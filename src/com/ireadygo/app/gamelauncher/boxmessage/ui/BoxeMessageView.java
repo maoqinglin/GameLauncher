@@ -28,7 +28,6 @@ import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.account.PushMsgProcessor;
 import com.ireadygo.app.gamelauncher.boxmessage.BoxMessageController;
 import com.ireadygo.app.gamelauncher.boxmessage.BoxMessageController.OnBoxMessageUpdateListener;
-import com.ireadygo.app.gamelauncher.boxmessage.BoxMessageService;
 import com.ireadygo.app.gamelauncher.boxmessage.data.BoxMessage;
 import com.ireadygo.app.gamelauncher.boxmessage.data.BroadcastMsg;
 import com.ireadygo.app.gamelauncher.boxmessage.data.NotificationMsg;
@@ -69,9 +68,10 @@ public class BoxeMessageView extends LinearLayout {
 
 	private void init() {
 		mBoxMessageController = BoxMessageController.getInstance(getContext());
-		mBoxMessageController.init();
-		mBoxMessageController
-				.addBoxMessageUpdateListener(mBoxMsgChangeListener);
+		if(!mBoxMessageController.isInit()) {
+			mBoxMessageController.init();
+		}
+		mBoxMessageController.addBoxMessageUpdateListener(mBoxMsgChangeListener);
 		mBoxMessageAdapter = new BoxMessageAdapter();
 	}
 
@@ -344,6 +344,12 @@ public class BoxeMessageView extends LinearLayout {
 				broadcastSkip((BroadcastMsg) msg);
 				return;
 			}
+		}
+	}
+
+	public void destory() {
+		if(mBoxMessageController.isInit()) {
+			mBoxMessageController.shutdown();
 		}
 	}
 

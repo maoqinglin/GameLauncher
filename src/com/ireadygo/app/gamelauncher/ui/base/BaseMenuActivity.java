@@ -81,6 +81,14 @@ public abstract class BaseMenuActivity extends BaseActivity {
 		super.onPause();
 	}
 
+	@Override
+	protected void onDestroy() {
+		if(mBoxeMessageView != null) {
+			mBoxeMessageView.destory();
+		}
+		super.onDestroy();
+	}
+
 	public OperationTipsLayout getTipsLayout() {
 		return mTipsLayout;
 	}

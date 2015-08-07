@@ -72,20 +72,24 @@ public class KeyAdapterRemoteServiceImpl extends IKeyAdapterAidlService.Stub {
 	}
 
 	private void callBack(int cmd, String param) {
-		int N = mCallbackList.beginBroadcast();
-		try {
-			for (int i = 0; i < N; i++) {
-				mCallbackList.getBroadcastItem(i).handlerCommEvent(cmd, param);
+		synchronized (mCallbackList) {
+			int N = mCallbackList.beginBroadcast();
+			try {
+				for (int i = 0; i < N; i++) {
+					mCallbackList.getBroadcastItem(i).handlerCommEvent(cmd, param);
+				}
+			} catch (RemoteException e) {
+				e.printStackTrace();
 			}
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
 
-		mCallbackList.finishBroadcast();
+			mCallbackList.finishBroadcast();
+		}
 	}
 
 	public void onDestroy() {
-		mCallbackList.kill();
+		synchronized (mCallbackList) {
+			mCallbackList.kill();
+		}
 	}
 
 }

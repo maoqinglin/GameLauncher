@@ -25,7 +25,6 @@ import android.widget.TextView;
 
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.boxmessage.BoxMessageController;
-import com.ireadygo.app.gamelauncher.boxmessage.BoxMessageService;
 
 public class GlobalMessageView {
 
