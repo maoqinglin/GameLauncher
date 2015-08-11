@@ -44,7 +44,6 @@ public class StatisticsTitleView extends FrameLayout {
 
 		mCountView = (TextView) findViewById(R.id.count);
 		mCountView.getPaint().setFakeBoldText(true);
-		Utils.setCustomTypeface(getContext(), "fonts/din_pro_regular.otf", mCountView);
 	}
 
 	public void setCount(int count) {
