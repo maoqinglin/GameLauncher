@@ -1464,6 +1464,7 @@ public class GameLauncherModel{
 //							return;
 						} else {
 							updateAppTitle(cursor,title);
+							updateMemoryAppTitle(pkgName, title);
 						}
 					} finally {
 						if (null != cursor) {
@@ -1492,6 +1493,21 @@ public class GameLauncherModel{
 		ContentValues values = new ContentValues();
 		values.put(Favorites.TITLE, title);
 		cr.update(uri, values, null, null);
+	}
+
+	private synchronized void updateMemoryAppTitle(String pkgName, String title){
+		if(!appInfos.isEmpty() && !TextUtils.isEmpty(pkgName)){
+			for(ItemInfo info : appInfos){
+				if(info != null && pkgName.equals(info.packageName)){
+					info.title = title;
+				}
+			}
+			for(ItemInfo info : gameInfos){
+				if(info != null && pkgName.equals(info.packageName)){
+					info.title = title;
+				}
+			}
+		}
 	}
 
 	private Cursor updateCursorByPkgName(String pkgName) {
