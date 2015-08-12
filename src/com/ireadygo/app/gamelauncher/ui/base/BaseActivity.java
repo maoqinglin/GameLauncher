@@ -8,6 +8,7 @@ import android.os.Message;
 import com.ireadygo.app.gamelauncher.GameLauncherApplication;
 import com.ireadygo.app.gamelauncher.statusbar.StatusBarService;
 import com.ireadygo.app.gamelauncher.utils.Utils;
+import com.umeng.analytics.MobclickAgent;
 
 public class BaseActivity extends KeyEventActivity {
 
@@ -22,6 +23,8 @@ public class BaseActivity extends KeyEventActivity {
 		Intent unDisplayIntent = new Intent(StatusBarService.ACTION_UNDISPLAY);
 		sendBroadcast(unDisplayIntent);
 		super.onPause();
+		MobclickAgent.onPageEnd("Page End");
+		MobclickAgent.onPause(this);
 	}
 
 	@Override
@@ -30,6 +33,8 @@ public class BaseActivity extends KeyEventActivity {
 		GameLauncherApplication.getApplication().setCurrentActivity(this);
 		Intent displayIntent = new Intent(StatusBarService.ACTION_DISPLAY);
 		sendBroadcast(displayIntent);
+		MobclickAgent.onPageStart("Page Start");
+		MobclickAgent.onResume(this);
 	}
 
 	protected void showLoadingProgress() {

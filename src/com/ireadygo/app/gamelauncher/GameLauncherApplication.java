@@ -51,6 +51,8 @@ public class GameLauncherApplication extends Application {
 			}
 			// 启动消息推送服务
 			MobclickAgent.openActivityDurationTrack(false);
+			// 发送策略
+			MobclickAgent.updateOnlineConfig(this);
 		}
 
 		Intent service = new Intent(this, StatusBarService.class);
