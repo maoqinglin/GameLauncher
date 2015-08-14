@@ -112,7 +112,11 @@ public class BoxMessageController {
 
 	public void shutdown() {
 		if(mIsInit) {
-			mContext.unbindService(mServiceConnection);
+			try {
+				mContext.unbindService(mServiceConnection);
+			} catch (Exception e) {
+				//ignore
+			}
 			mIsInit = false;
 			mLocalBroadcastManager.unregisterReceiver(mReceiver);
 			mListeners.clear();
