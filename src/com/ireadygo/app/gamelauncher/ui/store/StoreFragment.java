@@ -175,7 +175,6 @@ public class StoreFragment extends BaseContentFragment {
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 				getRootActivity().startActivity(intent);
 				SoundPoolManager.instance(getRootActivity()).play(SoundPoolManager.SOUND_ENTER);
-
 			}
 		}
 	};
@@ -219,7 +218,6 @@ public class StoreFragment extends BaseContentFragment {
 					case BannerItem.TYPE_WEBPAGE:
 						anchor = new Anchor(Destination.WEBPAGE);
 						if (!TextUtils.isEmpty(item.getCHtmlUrl())) {
-							// Uri uri = Uri.parse(item.getCHtmlUrl());
 							anchor.getIntent().putExtra(CustomWebviewActivity.EXTRA_URL, item.getCHtmlUrl());
 						}
 						break;

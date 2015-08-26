@@ -82,6 +82,10 @@ public class WebViewLayout extends FrameLayout {
 		}
 	}
 
+	public WebSettings getSettings() {
+		return mWebView.getSettings();
+	}
+
 	public String getCacheUrl() {
 		return mCacheUrl;
 	}

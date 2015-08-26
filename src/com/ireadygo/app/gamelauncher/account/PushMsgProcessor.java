@@ -1,13 +1,16 @@
 package com.ireadygo.app.gamelauncher.account;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 import com.ireadygo.app.gamelauncher.GameLauncher;
 import com.ireadygo.app.gamelauncher.GameLauncherApplication;
 import com.ireadygo.app.gamelauncher.GameLauncherConfig;
+import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.account.AccountManager.MESSAGE_JSON_KEY;
 import com.ireadygo.app.gamelauncher.account.pushmsg.SnailPushMessage;
 import com.ireadygo.app.gamelauncher.appstore.info.GameInfoHub;
@@ -17,6 +20,7 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.GameState;
 import com.ireadygo.app.gamelauncher.appstore.manager.GameManager;
 import com.ireadygo.app.gamelauncher.appstore.manager.GameStateManager;
 import com.ireadygo.app.gamelauncher.boxmessage.data.BroadcastMsg;
+import com.ireadygo.app.gamelauncher.ui.activity.CustomWebviewActivity;
 import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
 import com.ireadygo.app.gamelauncher.utils.NetworkUtils;
 import com.ireadygo.app.gamelauncher.utils.PreferenceUtils;
@@ -77,7 +81,7 @@ public class PushMsgProcessor {
 					skipToGameDetail(msg.getPageId());
 					break;
 				case TYPE_GAME_WEB:
-					skipWeb(msg.getUrl());
+					skipWebsite(msg.getUrl());
 					break;
 				case TYPE_DOWNLOAD_GAME:
 					doProcessDldMsg(msg.getPageId());
@@ -152,10 +156,16 @@ public class PushMsgProcessor {
 		mContext.startActivity(intent);
 	}
 
-	private void skipWeb(String url) {
-		Intent intent = new Intent(Intent.ACTION_VIEW);
-		intent.setData(Uri.parse(url));
-		mContext.startActivity(intent);
+
+	private void skipWebsite(String url) {
+		Uri uri = Uri.parse(url);
+		Intent intent = new Intent(mContext,CustomWebviewActivity.class);
+		intent.putExtra(CustomWebviewActivity.EXTRA_URL, url);
+		try {
+			mContext.startActivity(intent);
+		} catch (ActivityNotFoundException e) {
+//			Toast.makeText(getBaseActivity(),getString(R.string.notification_url_error), Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	private void doProcessDldMsg(String appId) {
