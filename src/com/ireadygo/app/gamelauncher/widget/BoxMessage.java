@@ -2,8 +2,6 @@ package com.ireadygo.app.gamelauncher.widget;
 
 import java.io.Serializable;
 
-import android.graphics.Bitmap;
-
 public class BoxMessage implements Serializable {
 
 	/**

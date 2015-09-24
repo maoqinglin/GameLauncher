@@ -3,7 +3,6 @@ package com.ireadygo.app.gamelauncher.widget;
 import java.util.HashMap;
 import java.util.Map;
 
-import android.R.integer;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -21,7 +20,6 @@ import com.ireadygo.app.gamelauncher.GameLauncherConfig;
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.account.pushmsg.SnailPushMessage;
 import com.ireadygo.app.gamelauncher.account.pushmsg.SnailPushMessage.Type;
-import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.appstore.info.item.GameState;
 import com.ireadygo.app.gamelauncher.appstore.manager.GameStateManager;
 import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;

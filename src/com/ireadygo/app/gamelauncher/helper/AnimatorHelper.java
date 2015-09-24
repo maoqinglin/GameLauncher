@@ -5,7 +5,6 @@ import android.animation.Animator.AnimatorListener;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
-import android.util.Log;
 import android.view.View;
 
 public class AnimatorHelper {

@@ -16,7 +16,6 @@
 
 package com.ireadygo.app.gamelauncher.utils;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -31,12 +30,10 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Typeface;
-import android.hardware.input.InputManager;
 import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.InputEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +52,6 @@ import com.ireadygo.app.gamelauncher.appstore.download.DownloadException;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.appstore.install.InstallMessage;
 import com.ireadygo.app.gamelauncher.appstore.manager.GameManager.GameManagerException;
-import com.ireadygo.app.gamelauncher.ui.GameLauncherActivity;
 import com.ireadygo.app.gamelauncher.ui.widget.HListView;
 import com.snail.appstore.openapi.json.JSONObject;
 
@@ -63,25 +59,6 @@ import com.snail.appstore.openapi.json.JSONObject;
  * Class containing some static utility methods.
  */
 public class Utils {
-
-	// @TargetApi(11)
-	// public static void enableStrictMode() {
-	// if (Utils.hasGingerbread()) {
-	// StrictMode.ThreadPolicy.Builder threadPolicyBuilder = new
-	// StrictMode.ThreadPolicy.Builder()
-	// .detectAll().penaltyLog();
-	// StrictMode.VmPolicy.Builder vmPolicyBuilder = new
-	// StrictMode.VmPolicy.Builder()
-	// .detectAll().penaltyLog();
-	//
-	// if (Utils.hasHoneycomb()) {
-	// threadPolicyBuilder.penaltyFlashScreen();
-	// vmPolicyBuilder.setClassInstanceLimit(TvPlayRealActivity.class, 1);
-	// }
-	// StrictMode.setThreadPolicy(threadPolicyBuilder.build());
-	// StrictMode.setVmPolicy(vmPolicyBuilder.build());
-	// }
-	// }
 
 	public static boolean hasFroyo() {
 		// Can use static final constants like FROYO, declared in later versions

@@ -5,16 +5,11 @@ import java.util.List;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView.ScaleType;
 
-import com.ireadygo.app.gamelauncher.R;
-import com.ireadygo.app.gamelauncher.appstore.data.GameData;
-import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.game.info.ItemInfo;
 import com.ireadygo.app.gamelauncher.game.info.ShortcutInfo;
 import com.ireadygo.app.gamelauncher.ui.item.AppItem;
@@ -24,7 +19,6 @@ import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemLongClickListen
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiBaseAdapter;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 import com.ireadygo.app.gamelauncher.utils.PackageUtils;
-import com.ireadygo.app.gamelauncher.utils.PictureUtil;
 
 public class AppAdapter implements HMultiBaseAdapter {
 
