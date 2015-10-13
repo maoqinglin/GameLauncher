@@ -10,7 +10,6 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
@@ -21,7 +20,6 @@ import com.ireadygo.app.gamelauncher.ui.Config;
 import com.ireadygo.app.gamelauncher.ui.OnChildFocusChangeListener;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
 import com.ireadygo.app.gamelauncher.ui.base.BaseFragment;
-import com.ireadygo.app.gamelauncher.ui.widget.CustomFrameLayout;
 
 public abstract class BaseMenuFragment extends BaseFragment {
 	private static final int WHAT_CONTENT_OBTAIN_FOCUS = 1;

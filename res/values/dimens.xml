@@ -480,6 +480,7 @@
     <dimen name="store_manager_progress_margin_bottom">30dp</dimen>
     <dimen name="store_manager_progress_width">230dp</dimen>
     <dimen name="store_manager_progress_height">5dp</dimen>
+    <dimen name="store_manager_upgrade_tip_margin_left">70dp</dimen>
 
     <!-- 免账号-卡槽购买 -->
     <dimen name="slot_padding_top">0dp</dimen>

@@ -71,8 +71,8 @@
     <string name="notification_failed_apps">\t个失败</string>
     <string name="notification_downloaded_big_title">免商店下载完成</string>
     <string name="notification_downloaded_little_title">\t个应用下载完成</string>
-    <string name="notification_upgrade_big_title">应用升级提示</string>
-    <string name="notification_upgrade_little_title">\t个应用可进行更新</string>
+    <string name="notification_upgrade_big_title">新版本发布</string>
+    <string name="notification_upgrade_little_title">应用可进行更新</string>
 
     <!-- 免商店(store) -->
     <string name="store_detail_title_prompt">游戏数量</string>

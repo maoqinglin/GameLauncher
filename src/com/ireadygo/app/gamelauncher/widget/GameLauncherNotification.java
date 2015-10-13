@@ -10,6 +10,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.text.TextUtils;
@@ -20,11 +22,14 @@ import com.ireadygo.app.gamelauncher.GameLauncherConfig;
 import com.ireadygo.app.gamelauncher.R;
 import com.ireadygo.app.gamelauncher.account.pushmsg.SnailPushMessage;
 import com.ireadygo.app.gamelauncher.account.pushmsg.SnailPushMessage.Type;
+import com.ireadygo.app.gamelauncher.appstore.data.GameData;
+import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.appstore.info.item.GameState;
 import com.ireadygo.app.gamelauncher.appstore.manager.GameStateManager;
 import com.ireadygo.app.gamelauncher.ui.detail.DetailActivity;
 import com.ireadygo.app.gamelauncher.ui.redirect.Anchor;
 import com.ireadygo.app.gamelauncher.ui.redirect.Anchor.Destination;
+import com.ireadygo.app.gamelauncher.utils.PictureUtil;
 
 public class GameLauncherNotification {
 	private static final int TYPE_DOWNLOADING_NOTIFICATION = 0;
@@ -104,6 +109,7 @@ public class GameLauncherNotification {
 	private PendingIntent setPendingIntentUpgrade(int type) {
 		Anchor anchor = new Anchor(Destination.STORE_GAME_MANAGE);
 		Intent intent = anchor.getIntent();
+		intent.putExtra("manager", "upgrade");
 		return PendingIntent.getActivity(mContext, type, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 	}
 
@@ -239,9 +245,40 @@ public class GameLauncherNotification {
 		notification.defaults = Notification.DEFAULT_VIBRATE;
 		notification.flags = Notification.FLAG_AUTO_CANCEL;
 		notification.setLatestEventInfo(mContext, mContext.getString(R.string.notification_upgrade_big_title)
-				, count+mContext.getString(R.string.notification_upgrade_little_title), setPendingIntentUpgrade(TYPE_UPGRADE_NOTIFICATION));
+				, count + mContext.getString(R.string.notification_upgrade_little_title), setPendingIntentUpgrade(TYPE_UPGRADE_NOTIFICATION));
 		mNotificationMap.put(TYPE_UPGRADE_NOTIFICATION, notification);
 		mManager.notify(BoxMessage.generateNewId(), mNotificationMap.get(TYPE_UPGRADE_NOTIFICATION));
+	}
+	
+	public void addUpgradeNotification(AppEntity app) {
+		String title = app.getName() + mContext.getString(R.string.notification_upgrade_little_title);
+		Notification notification = new Notification.Builder(mContext)
+			.setLargeIcon(getAppIcon(app.getPkgName()))
+			.setSmallIcon(R.drawable.notification_upgrade_logo)
+			.setTicker(title)
+			.build();
+		notification.defaults = Notification.DEFAULT_VIBRATE;
+		notification.flags = Notification.FLAG_AUTO_CANCEL;
+		notification.defaults = Notification.DEFAULT_VIBRATE;
+		notification.flags = Notification.FLAG_AUTO_CANCEL;
+		notification.setLatestEventInfo(mContext, title, title, setPendingIntentUpgrade(TYPE_UPGRADE_NOTIFICATION));
+		mManager.notify(Integer.valueOf(app.getAppId()), notification);
+	}
+	
+	private Bitmap getAppIcon(String packageName) {
+		try {
+			Bitmap posterIcon = GameData.getInstance(mContext).getPosterIconByPkgName(packageName);
+			if (posterIcon == null) {
+				ApplicationInfo info = mContext.getPackageManager().getApplicationInfo(packageName, 0);
+				posterIcon = PictureUtil.drawableToBitmap(info.loadIcon(mContext.getPackageManager()));
+			}
+			return PictureUtil.zoomImage(posterIcon, 
+					mContext.getResources().getDimensionPixelOffset(R.dimen.boxmessage_icon_size),
+					mContext.getResources().getDimensionPixelOffset(R.dimen.boxmessage_icon_size));
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	/**
@@ -249,7 +286,7 @@ public class GameLauncherNotification {
 	 * @param title
 	 * @param content
 	 */
-	public void addInstallNotification(BoxMessage boxMsg,Bitmap icon,boolean isInstallSuccess) {
+	public void addInstallNotification(BoxMessage boxMsg, Bitmap icon, boolean isInstallSuccess) {
 		Notification notification = new Notification.Builder(mContext)
 		.setLargeIcon(icon)
 		.setSmallIcon(R.drawable.push)

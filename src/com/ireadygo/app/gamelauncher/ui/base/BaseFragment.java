@@ -6,12 +6,10 @@ import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ireadygo.app.gamelauncher.ui.GameLauncherActivity;
 import com.ireadygo.app.gamelauncher.ui.widget.WidgetController;
 
 public abstract class BaseFragment extends KeyEventFragment {

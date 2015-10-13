@@ -13,7 +13,7 @@
         android:paddingTop="@dimen/content_fragment_padding_top" >
     </com.ireadygo.app.gamelauncher.ui.widget.StatisticsTitleView>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/store_manager_option_layout"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -21,7 +21,6 @@
         android:layout_below="@+id/store_manager_title_layout"
         android:layout_marginLeft="@dimen/store_manager_menu_margin_left"
         android:layout_marginRight="@dimen/store_manager_menu_margin_right"
-        android:gravity="center_horizontal"
         android:orientation="vertical" >
 
         <com.ireadygo.app.gamelauncher.ui.menu.ImageTextMenu
@@ -42,6 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/store_manager_menu_margin_top"
+            android:layout_below="@id/manager_download"
             android:nextFocusDown="@+id/manager_installed"
             android:nextFocusLeft="@+id/store_menu_manager"
             android:nextFocusRight="@+id/upHList"
@@ -49,11 +49,24 @@
             app:menu_icon="@drawable/store_manager_upgrade_selector"
             app:menu_title="@string/store_manager_updatable" >
         </com.ireadygo.app.gamelauncher.ui.menu.ImageTextMenu>
+        
+        <TextView 
+            android:id="@+id/manager_upgrade_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/store_manager_upgrade_tip"
+            android:layout_marginTop="@dimen/store_manager_menu_margin_top"
+            android:layout_below="@id/manager_download"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/store_manager_upgrade_tip_margin_left"
+            style="@style/MenuTitle"
+            />
 
         <com.ireadygo.app.gamelauncher.ui.menu.ImageTextMenu
             android:id="@+id/manager_installed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/manager_upgrade"
             android:layout_marginTop="@dimen/store_manager_menu_margin_top"
             android:nextFocusDown="@+id/manager_installed"
             android:nextFocusLeft="@+id/store_menu_manager"
@@ -62,7 +75,7 @@
             app:menu_icon="@drawable/store_manager_installed_selector"
             app:menu_title="@string/store_manager_launchable" >
         </com.ireadygo.app.gamelauncher.ui.menu.ImageTextMenu>
-    </LinearLayout>
+    </RelativeLayout>
 
     <com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView
         android:id="@+id/manager_viewpager"

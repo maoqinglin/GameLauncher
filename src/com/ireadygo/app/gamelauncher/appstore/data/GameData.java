@@ -3,7 +3,6 @@ package com.ireadygo.app.gamelauncher.appstore.data;
 import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -29,7 +28,6 @@ import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity;
 import com.ireadygo.app.gamelauncher.appstore.info.item.AppEntity.PkgType;
 import com.ireadygo.app.gamelauncher.appstore.info.item.GameState;
 import com.ireadygo.app.gamelauncher.appstore.install.IInstallData;
-import com.ireadygo.app.gamelauncher.game.data.GameLauncherSettings;
 import com.ireadygo.app.gamelauncher.game.utils.Utilities;
 import com.ireadygo.app.gamelauncher.utils.PackageUtils;
 import com.ireadygo.app.gamelauncher.utils.PictureUtil;
@@ -40,7 +38,7 @@ public class GameData implements IDownloadData, IInstallData, Closeable {
 
 	private static final String TAG = "GameData";
 
-	private static GameData mGameData;
+	private static GameData sGameData;
 
 	private final GameStatusDBHelper mGameStatusDBHelper;
 
@@ -73,14 +71,14 @@ public class GameData implements IDownloadData, IInstallData, Closeable {
 	}
 
 	public static GameData getInstance(Context context) {
-		if (mGameData == null) {
+		if (sGameData == null) {
 			synchronized (GameData.class) {
-				if (mGameData == null) {
-					mGameData = new GameData(context.getApplicationContext());
+				if (sGameData == null) {
+					sGameData = new GameData(context.getApplicationContext());
 				}
 			}
 		}
-		return mGameData;
+		return sGameData;
 	}
 
 	public GameStatusDBHelper getGameStatusDBHelper() {
@@ -131,14 +129,15 @@ public class GameData implements IDownloadData, IInstallData, Closeable {
 		}
 	}
 
-	public synchronized void updateUpgradeAppData(AppEntity appEntity) {
-		ContentValues values = transferUpgradeItemToContentValues(appEntity);
+	public synchronized void updateUpgradeAppData(AppEntity newAppEntity, AppEntity upgradeAppEntity) {
+		ContentValues values = transferDldItemToContentValues(newAppEntity);
+		transferUpgradeItemToContentValues(values, upgradeAppEntity);
 		try {
 			mDB.beginTransaction();
-			String pkgName = appEntity.getPkgName();
+			String pkgName = upgradeAppEntity.getPkgName();
 			if (!TextUtils.isEmpty(pkgName)) {
 				mDB.update(GameAppStatusColumns.TABLE_NAME, values, GameAppStatusColumns.COLUMN_PACKAGE_NAME + " =? ",
-						new String[] { appEntity.getPkgName() });
+						new String[] { upgradeAppEntity.getPkgName() });
 			}
 			mDB.setTransactionSuccessful();
 		} catch (Exception e) {
@@ -355,9 +354,9 @@ public class GameData implements IDownloadData, IInstallData, Closeable {
 
 	@Override
 	public void close() throws IOException {
-		if (null != mGameData) {
-			synchronized (mGameData) {
-				if (null != mGameData) {
+		if (null != sGameData) {
+			synchronized (sGameData) {
+				if (null != sGameData) {
 					mGameStatusDBHelper.close();
 				}
 			}
@@ -450,8 +449,7 @@ public class GameData implements IDownloadData, IInstallData, Closeable {
 		return values;
 	}
 
-	private ContentValues transferUpgradeItemToContentValues(AppEntity appEntity) {
-		ContentValues values = new ContentValues();
+	private ContentValues transferUpgradeItemToContentValues(ContentValues values, AppEntity appEntity) {
 		values.put(GameAppStatusColumns.COLUMN_APP_ID, appEntity.getAppId());
 		values.put(GameAppStatusColumns.COLUMN_APP_NAME, appEntity.getName());
 		values.put(GameAppStatusColumns.COLUMN_PACKAGE_NAME, appEntity.getPkgName());

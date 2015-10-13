@@ -1348,6 +1348,8 @@ public class RemoteInfo implements IGameInfo {
 		app.setName(item.getSGameName());
 		app.setRemoteIconUrl(item.getCIcon());
 		app.setNewVersionCode(item.getIVersionCode());
+		app.setVersionCode(item.getIVersionCode());
+		app.setVersionName(item.getSVersionName());
 		app.setPkgName(item.getCPackage());
 		app.setFreeFlag(item.getIFlowFree());
 		app.setTotalSize(item.getISize());

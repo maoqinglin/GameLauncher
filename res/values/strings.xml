@@ -69,7 +69,7 @@
     <string name="notification_downloaded_big_title">Free Store download completed</string>
     <string name="notification_downloaded_little_title">\tapps are download completed</string>
     <string name="notification_upgrade_big_title">Apps upgrade promotion</string>
-    <string name="notification_upgrade_little_title">\tapps have new version to be upgraded</string>
+    <string name="notification_upgrade_little_title"> have new version to be upgraded</string>
 
     <!-- 免商店(store) -->
     <string name="store_detail_title_prompt">Games</string>

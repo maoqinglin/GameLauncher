@@ -1,7 +1,9 @@
 package com.ireadygo.app.gamelauncher.ui.store.storemanager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -17,6 +19,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.ireadygo.app.gamelauncher.GameLauncher;
 import com.ireadygo.app.gamelauncher.R;
@@ -34,8 +37,8 @@ import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
 import com.ireadygo.app.gamelauncher.ui.menu.ImageTextMenu;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView;
 import com.ireadygo.app.gamelauncher.ui.widget.AdapterView.OnItemClickListener;
-import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
 import com.ireadygo.app.gamelauncher.ui.widget.ConfirmDialog;
+import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
 import com.ireadygo.app.gamelauncher.ui.widget.StatisticsTitleView;
 import com.ireadygo.app.gamelauncher.ui.widget.mutillistview.HMultiListView;
 import com.ireadygo.app.gamelauncher.utils.PackageUtils;
@@ -46,6 +49,7 @@ public class StoreManagerContentFragment extends BaseContentFragment implements 
 	private ImageTextMenu mDldMenuItem;
 	private ImageTextMenu mUpgradeMenuItem;
 	private ImageTextMenu mInstalledMenuItem;
+	private TextView mUpgradeTipView;
 
 	private GameManager mGameManager;
 	private GameManagerType mManagerType = GameManagerType.DOWNLOAD;
@@ -93,11 +97,28 @@ public class StoreManagerContentFragment extends BaseContentFragment implements 
 		mManagerType = GameManagerType.DOWNLOAD;
 	}
 
+	private int getUpgradeAppCount() {
+		HashMap<String, GameState> gameStateMaps = new HashMap<String, GameState>();
+		for (Map.Entry<String, GameState> entry : mGameManager.getGameStateManager().getAllGameState().entrySet()) {
+			if(entry.getValue() == GameState.UPGRADEABLE) {
+				gameStateMaps.put(entry.getKey(), entry.getValue());
+			}
+		}
+		return gameStateMaps.size();
+	}
+
 	@Override
 	protected void initView(View view) {
 		super.initView(view);
 		getOperationTipsLayout().setTipsVisible(TipFlag.FLAG_TIPS_SUN, TipFlag.FLAG_TIPS_WATER, TipFlag.FLAG_TIPS_MOON);
 		mTitleLayout = (StatisticsTitleView) view.findViewById(R.id.store_manager_title_layout);
+		mUpgradeTipView = (TextView) view.findViewById(R.id.manager_upgrade_tip);
+		if(getUpgradeAppCount() != 0) {
+			mUpgradeTipView.setVisibility(View.VISIBLE);
+			mUpgradeTipView.setText(String.valueOf(getUpgradeAppCount()));
+		} else {
+			mUpgradeTipView.setVisibility(View.GONE);
+		}
 
 		mMultiListView = (HMultiListView) view.findViewById(R.id.manager_viewpager);
 		mMultiListView.setOnItemClickListener(new OnItemClickListener() {
@@ -180,6 +201,13 @@ public class StoreManagerContentFragment extends BaseContentFragment implements 
 		mDldMenuItem.setSelected(false);
 		mUpgradeMenuItem.setSelected(false);
 		mInstalledMenuItem.setSelected(false);
+		if(getUpgradeAppCount() != 0) {
+			mUpgradeTipView.setVisibility(View.VISIBLE);
+			mUpgradeTipView.setText(String.valueOf(getUpgradeAppCount()));
+		} else {
+			mUpgradeTipView.setVisibility(View.GONE);
+		}
+
 		switch (type) {
 		case DOWNLOAD:
 			mTitleLayout.setCount(mDownloadApps.size());

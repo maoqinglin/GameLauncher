@@ -69,7 +69,7 @@
     <string name="notification_downloaded_big_title">免商店下載完成</string>
     <string name="notification_downloaded_little_title">\t個應用下載完成</string>
     <string name="notification_upgrade_big_title">應用升級提示</string>
-    <string name="notification_upgrade_little_title">\t個應用可進行更新</string>
+    <string name="notification_upgrade_little_title">應用可進行更新</string>
 
     <!-- 免商店(store) -->
     <string name="store_detail_title_prompt">遊戲數量</string>

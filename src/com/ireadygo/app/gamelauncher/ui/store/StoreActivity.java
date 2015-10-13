@@ -56,9 +56,14 @@ public class StoreActivity extends BaseMenuActivity {
 			case STORE_GAME_MANAGE:
 				position = 4;
 				break;
+			default:
+				break;
 			}
 		}
 		getMenuFragment().requestFocusByPosition(position);
+		if(position == 4 && "upgrade".equals(intent.getStringExtra("manager"))) {
+			this.findViewById(R.id.manager_upgrade).requestFocus();
+		}
 	}
 
 	@Override
