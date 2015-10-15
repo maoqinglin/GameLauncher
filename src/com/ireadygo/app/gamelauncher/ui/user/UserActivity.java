@@ -27,7 +27,8 @@ public class UserActivity extends BaseMenuActivity {
 		if (intent == null) {
 			return;
 		}
-		Destination destination = (Destination) intent.getSerializableExtra(Anchor.EXTRA_DESTINATION);
+		Destination destination = (Destination) intent
+				.getSerializableExtra(Anchor.EXTRA_DESTINATION);
 		int position = 0;
 		if (destination != null) {
 			switch (destination) {
@@ -39,6 +40,8 @@ public class UserActivity extends BaseMenuActivity {
 			// break;
 			case ACCOUNT_RECHARGE:
 				position = 1;
+				break;
+			default:
 				break;
 			}
 		}

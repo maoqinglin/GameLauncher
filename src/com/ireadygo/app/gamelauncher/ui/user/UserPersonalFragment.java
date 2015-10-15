@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.view.View.OnKeyListener;
+import android.view.inputmethod.InputMethodManager;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
@@ -49,10 +50,7 @@ import com.ireadygo.app.gamelauncher.appstore.manager.SoundPoolManager;
 import com.ireadygo.app.gamelauncher.ui.GameLauncherActivity;
 import com.ireadygo.app.gamelauncher.ui.SnailKeyCode;
 import com.ireadygo.app.gamelauncher.ui.base.BaseContentFragment;
-import com.ireadygo.app.gamelauncher.ui.guide.GuideRegisterOrLoginActivity;
 import com.ireadygo.app.gamelauncher.ui.menu.BaseMenuFragment;
-import com.ireadygo.app.gamelauncher.ui.redirect.Anchor;
-import com.ireadygo.app.gamelauncher.ui.redirect.Anchor.Destination;
 import com.ireadygo.app.gamelauncher.ui.widget.ConfirmDialog;
 import com.ireadygo.app.gamelauncher.ui.widget.CustomerEditText;
 import com.ireadygo.app.gamelauncher.ui.widget.OperationTipsLayout.TipFlag;
@@ -165,6 +163,20 @@ public class UserPersonalFragment extends BaseContentFragment implements OnClick
 		}
 
 	};
+
+	@Override
+	public boolean onBackKey() {
+		InputMethodManager imm = (InputMethodManager) getRootActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+		if(imm.isActive()) {
+			imm.hideSoftInputFromWindow(mNicknameView.getWindowToken(), 0);
+		}
+		return super.onBackKey();
+	}
+	
+	@Override
+	public boolean onMoonKey() {
+		return onBackKey();
+	}
 
 	@Override
 	protected boolean isCurrentFocus() {
