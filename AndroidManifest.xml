@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.ireadygo.app.gamelauncher"
-    android:versionCode="200021"
-    android:versionName="2.0.21"
+    android:versionCode="200022"
+    android:versionName="2.0.22"
     tools:ignore="OldTargetApi" >
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
@@ -397,6 +397,8 @@
 
 
         <!-- 蜗牛SDK start -->
+        <activity android:name="com.snailgame.snail_demo_obox.SelectPayWayActivity" >
+        </activity>
         <activity
             android:name="com.snailgame.mobilesdk.GetAccountActivity"
             android:screenOrientation="portrait"
@@ -471,54 +473,12 @@
         </service>
         <!-- alipay sdk end -->
 
-
-        <!-- umpay -->
-        <activity
-            android:name="com.umpay.creditcard.android.UmpayActivity"
-            android:configChanges="orientation|keyboard|keyboardHidden"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
-
         <!-- upomp -->
         <activity
-            android:name="com.unionpay.upomp.lthj.plugin.ui.SplashActivity"
-            android:hardwareAccelerated="false" >
-            <intent-filter>
-                <action android:name="com.unionpay.upomp.lthj.android.plugin.init.test" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="com.unionpay.upomp.lthj.plugin.ui.IndexActivityGroup"
-            android:hardwareAccelerated="false" >
-            <intent-filter>
-                <action android:name="com.unionpay.upomp.lthj.android.plugin.index.test" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="com.unionpay.upomp.lthj.plugin.ui.HomeActivity"
-            android:hardwareAccelerated="false" />
-        <activity
-            android:name="com.unionpay.upomp.lthj.plugin.ui.PayActivity"
-            android:hardwareAccelerated="false" />
-        <activity
-            android:name="com.unionpay.upomp.lthj.plugin.ui.AccountActivity"
-            android:hardwareAccelerated="false" />
-        <activity
-            android:name="com.unionpay.upomp.lthj.plugin.ui.BankCardInfoActivity"
-            android:hardwareAccelerated="false" />
-        <activity
-            android:name="com.unionpay.upomp.lthj.plugin.ui.SupportCardActivity"
-            android:hardwareAccelerated="false" />
-        <activity
-            android:name="com.unionpay.upomp.lthj.plugin.ui.UserProtocolActivity"
-            android:hardwareAccelerated="false" />
-        <activity
-            android:name="com.unionpay.upomp.lthj.plugin.ui.AboutActivity"
-            android:hardwareAccelerated="false" />
-
+            android:name="com.unionpay.uppay.PayActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:excludeFromRecents="true"
+            android:windowSoftInputMode="adjustResize" />
         <service android:name="com.snailgame.mobilesdk.SDKService" />
 
         <receiver android:name="com.snailgame.mobilesdk.PostSSOLoginReceiver" >
@@ -527,12 +487,6 @@
                 </action>
             </intent-filter>
         </receiver>
-
-        <provider
-            android:name="com.snailgame.mobilesdk.DataProvider"
-            android:authorities="com.snailgame.mobilesdk.provider"
-            android:exported="true" >
-        </provider>
 
         <!-- 蜗牛SDK end -->
 
